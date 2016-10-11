@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {ObDayPickerComponent} from './ob-day-picker/ob-day-picker.component';
-import {IDayPickerConfig} from './ob-day-picker/config-service/day-picker-config.model';
+import {IDayPickerConfig} from './ob-day-picker/service/day-picker-config.model';
 
 @Component({
   selector: 'app-root',

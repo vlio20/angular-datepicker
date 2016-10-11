@@ -1,17 +1,16 @@
 import {Injectable} from '@angular/core';
 import {IDayPickerConfig} from './day-picker-config.model';
 import * as moment from 'moment';
+import {UtilsService} from '../../common/services/utils/utils.service';
+import {ICalendarConfig} from '../../ob-calendar/config/calendar-config.model';
 
 @Injectable()
-export class ConfigService {
+export class DayPickerService {
   private config: IDayPickerConfig = {
     selected: moment(),
     firstDayOfWeek: 'su',
     calendarsAmount: 1
   };
-
-  constructor() {
-  }
 
   setConfig(config: IDayPickerConfig) {
     this.config = Object.assign({}, this.config, config);
@@ -20,5 +19,12 @@ export class ConfigService {
 
   getConfig(): IDayPickerConfig {
     return Object.freeze(this.config);
+  }
+
+  generateCalendars(): ICalendarConfig[] {
+    return UtilsService.createArray(this.config.calendarsAmount).map((n: number, i: number) => ({
+      month: moment().add(1, 'month'),
+      firstDayOfWeek: this.config.firstDayOfWeek
+    }));
   }
 }

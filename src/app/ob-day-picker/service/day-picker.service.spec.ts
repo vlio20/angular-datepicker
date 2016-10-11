@@ -1,16 +1,16 @@
 /* tslint:disable:no-unused-variable */
 
 import { TestBed, async, inject } from '@angular/core/testing';
-import { ConfigService } from './config.service';
+import { DayPickerService } from './day-picker.service';
 
 describe('Service: ConfigService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [ConfigService]
+      providers: [DayPickerService]
     });
   });
 
-  it('should ...', inject([ConfigService], (service: ConfigService) => {
+  it('should ...', inject([DayPickerService], (service: DayPickerService) => {
     expect(service).toBeTruthy();
   }));
 });

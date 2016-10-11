@@ -1,4 +1,6 @@
 <div>
   <input type="text" (focus)="showCalendars$.next($event)"/>
-  <div class="test" *ngIf="(isCalendarsShown | async)"></div>
+  <div class="test" *ngIf="(isCalendarsShown | async)">
+    <ob-calendar *ngFor="let calendar of calendars" [config]="calendar"></ob-calendar>
+  </div>
 </div>
