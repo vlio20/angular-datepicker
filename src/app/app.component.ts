@@ -10,6 +10,7 @@ import {IDayPickerConfig} from './ob-day-picker/service/day-picker-config.model'
 
 export class AppComponent {
   dayPickerConfig: IDayPickerConfig = {
-    firstDayOfWeek: 'mo'
+    firstDayOfWeek: 'mo',
+    calendarsAmount: 2
   };
 }

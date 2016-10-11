@@ -9,7 +9,16 @@ export class DayPickerService {
   private config: IDayPickerConfig = {
     selected: moment(),
     firstDayOfWeek: 'su',
-    calendarsAmount: 1
+    calendarsAmount: 1,
+    weekdayNames: {
+      su: 'sun',
+      mo: 'mon',
+      tu: 'tue',
+      we: 'wed',
+      th: 'thu',
+      fr: 'fri',
+      sa: 'sat'
+    }
   };
 
   setConfig(config: IDayPickerConfig) {
@@ -23,8 +32,9 @@ export class DayPickerService {
 
   generateCalendars(): ICalendarConfig[] {
     return UtilsService.createArray(this.config.calendarsAmount).map((n: number, i: number) => ({
-      month: moment().add(1, 'month'),
-      firstDayOfWeek: this.config.firstDayOfWeek
+      month: moment().add(i, 'month'),
+      firstDayOfWeek: this.config.firstDayOfWeek,
+      weekdayNames: this.config.weekdayNames
     }));
   }
 }

@@ -1,7 +1,7 @@
 import {Component, OnInit, Input} from '@angular/core';
-import {Moment} from 'moment';
 import {CalendarService} from './service/calendar.service';
 import {ICalendarConfig} from './config/calendar-config.model';
+import {ICalendarDay} from './config/day.model';
 
 @Component({
   selector: 'ob-calendar',
@@ -11,11 +11,13 @@ import {ICalendarConfig} from './config/calendar-config.model';
 })
 export class ObCalendarComponent implements OnInit {
   @Input() config: ICalendarConfig;
-  monthWeeks: Moment[][];
+  weeks: ICalendarDay[][];
+  weekdays: string[];
 
   constructor(private calendarService: CalendarService) { }
 
   ngOnInit() {
-    this.calendarService.generateMonthArray(this.config.firstDayOfWeek, this.config.month);
+    this.weeks = this.calendarService.generateMonthArray(this.config.firstDayOfWeek, this.config.month);
+    this.weekdays = this.calendarService.generateWeekdays(this.config.firstDayOfWeek, this.config.weekdayNames);
   }
 }

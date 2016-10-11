@@ -12,18 +12,65 @@ describe('Service: Calendar', () => {
   });
 
   it('should check the generateDaysMap method', inject([CalendarService], (service: CalendarService) => {
-    expect(service.generateDaysMap('su')).toEqual({ 0: 'su', 1: 'mo', 2: 'tu', 3: 'we', 4: 'th', 5: 'fr', 6: 'sa' });
-    expect(service.generateDaysMap('mo')).toEqual({ 0: 'mo', 1: 'tu', 2: 'we', 3: 'th', 4: 'fr', 5: 'sa', 6: 'su' });
-    expect(service.generateDaysMap('we')).toEqual({ 0: 'we', 1: 'th', 2: 'fr', 3: 'sa', 4: 'su', 5: 'mo', 6: 'tu' });
+    expect(service.generateDaysIndexMap('su')).toEqual({0: 'su', 1: 'mo', 2: 'tu', 3: 'we', 4: 'th', 5: 'fr', 6: 'sa'});
+    expect(service.generateDaysIndexMap('mo')).toEqual({0: 'mo', 1: 'tu', 2: 'we', 3: 'th', 4: 'fr', 5: 'sa', 6: 'su'});
+    expect(service.generateDaysIndexMap('we')).toEqual({0: 'we', 1: 'th', 2: 'fr', 3: 'sa', 4: 'su', 5: 'mo', 6: 'tu'});
+  }));
+
+  it('should check the generateDaysMap method', inject([CalendarService], (service: CalendarService) => {
+    expect(service.generateDaysMap('su')).toEqual({'su': 0, 'mo': 1, 'tu': 2, 'we': 3, 'th': 4, 'fr': 5, 'sa': 6});
+    expect(service.generateDaysMap('mo')).toEqual({'mo': 0, 'tu': 1, 'we': 2, 'th': 3, 'fr': 4, 'sa': 5, 'su': 6});
+    expect(service.generateDaysMap('we')).toEqual({'we': 0, 'th': 1, 'fr': 2, 'sa': 3, 'su': 4, 'mo': 5, 'tu': 6});
   }));
 
   it('should check the generateMonthArray method', inject([CalendarService], (service: CalendarService) => {
     let monthWeeks = service.generateMonthArray('su', moment('11-10-2016', 'DD-MM-YYYY'));
-    expect(monthWeeks[0][0].format('DD-MM-YYYY')).toBe('25-09-2016');
-    expect(monthWeeks[5][6].format('DD-MM-YYYY')).toBe('05-11-2016');
+    expect(monthWeeks[0][0].date.format('DD-MM-YYYY')).toBe('25-09-2016');
+    expect(monthWeeks[0][0].prevMonth).toBe(true);
+    expect(monthWeeks[0][0].currentMonth).toBe(false);
+    expect(monthWeeks[0][0].nextMonth).toBe(false);
+
+    expect(monthWeeks[5][6].date.format('DD-MM-YYYY')).toBe('05-11-2016');
+    expect(monthWeeks[5][6].prevMonth).toBe(false);
+    expect(monthWeeks[5][6].currentMonth).toBe(false);
+    expect(monthWeeks[5][6].nextMonth).toBe(true);
 
     monthWeeks = service.generateMonthArray('mo', moment('11-10-2016', 'DD-MM-YYYY'));
-    expect(monthWeeks[0][0].format('DD-MM-YYYY')).toBe('26-09-2016');
-    expect(monthWeeks[5][6].format('DD-MM-YYYY')).toBe('06-11-2016');
+    expect(monthWeeks[0][0].date.format('DD-MM-YYYY')).toBe('26-09-2016');
+    expect(monthWeeks[5][6].date.format('DD-MM-YYYY')).toBe('06-11-2016');
+  }));
+
+
+  it('should check the generateWeekdays method', inject([CalendarService], (service: CalendarService) => {
+    expect(service.generateWeekdays('su', {
+      su: 'sun',
+      mo: 'mon',
+      tu: 'tue',
+      we: 'wed',
+      th: 'thu',
+      fr: 'fri',
+      sa: 'sat'
+    })).toEqual(['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat']);
+
+    expect(service.generateWeekdays('mo', {
+      su: 'sun',
+      mo: 'mon',
+      tu: 'tue',
+      we: 'wed',
+      th: 'thu',
+      fr: 'fri',
+      sa: 'sat'
+    })).toEqual(['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun']);
+
+    expect(service.generateWeekdays('mo', {
+      su: '1',
+      mo: '2',
+      tu: '3',
+      we: '4',
+      th: '5',
+      fr: '6',
+      sa: '7'
+    })).toEqual(['2', '3', '4', '5', '6', '7', '1']);
+
   }));
 });

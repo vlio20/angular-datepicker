@@ -7,4 +7,5 @@ export interface IDayPickerConfig {
   calendarsAmount?: number;
   min?: Moment;
   max?: Moment;
+  weekdayNames?: {[key: string]: string};
 }

@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {Moment} from 'moment';
 import {WeekDays} from '../../common/types/week-days.type';
 import {UtilsService} from '../../common/services/utils/utils.service';
+import {ICalendarDay} from '../config/day.model';
 
 @Injectable()
 export class CalendarService {
@@ -10,7 +11,7 @@ export class CalendarService {
   constructor() {
   }
 
-  generateDaysMap(firstDayOfWeek: WeekDays) {
+  generateDaysIndexMap(firstDayOfWeek: WeekDays) {
     const firstDayIndex = this.DAYS.indexOf(firstDayOfWeek);
     const daysArr = this.DAYS.slice(firstDayIndex, 7).concat(this.DAYS.slice(0, firstDayIndex));
     return daysArr.reduce((map, day, index) => {
@@ -19,8 +20,17 @@ export class CalendarService {
     }, <{[key: number]: string}>{});
   }
 
-  generateMonthArray(firstDayOfWeek: WeekDays, dayInMonth: Moment): Moment[][] {
-    const monthArray: Moment[][] = [];
+  generateDaysMap(firstDayOfWeek: WeekDays) {
+    const firstDayIndex = this.DAYS.indexOf(firstDayOfWeek);
+    const daysArr = this.DAYS.slice(firstDayIndex, 7).concat(this.DAYS.slice(0, firstDayIndex));
+    return daysArr.reduce((map, day, index) => {
+      map[day] = index;
+      return map;
+    }, <{[key: number]: string}>{});
+  }
+
+  generateMonthArray(firstDayOfWeek: WeekDays, dayInMonth: Moment): ICalendarDay[][] {
+    const monthArray: ICalendarDay[][] = [];
     const firstDayOfMonth = dayInMonth.clone().startOf('month');
     const firstDayOfWeekIndex = this.DAYS.indexOf(firstDayOfWeek);
 
@@ -30,8 +40,14 @@ export class CalendarService {
     }
 
     const current = firstDayOfBoard.clone();
-    const daysOfCalendar: Moment[] = UtilsService.createArray(42).reduce((array: Moment[]) => {
-      array.push(current.clone());
+    const daysOfCalendar: ICalendarDay[] = UtilsService.createArray(42).reduce((array: ICalendarDay[]) => {
+      array.push({
+        date: current.clone(),
+        selected: current.isSame(dayInMonth, 'day'),
+        currentMonth: current.isSame(dayInMonth, 'month'),
+        prevMonth: current.isSame(dayInMonth.clone().subtract(1, 'month'), 'month'),
+        nextMonth: current.isSame(dayInMonth.clone().add(1, 'month'), 'month')
+      });
       current.add(1, 'd');
       return array;
     }, []);
@@ -47,5 +63,18 @@ export class CalendarService {
     });
 
     return monthArray;
+  }
+
+  generateWeekdays(firstDayOfWeek: WeekDays, weekdayNames: {[key: string]: string}): string[] {
+    const weekdays: string[] = [];
+    const daysMap = this.generateDaysMap(firstDayOfWeek);
+
+    for (let dayKey in daysMap) {
+      if (daysMap.hasOwnProperty(dayKey)) {
+        weekdays[daysMap[dayKey]] = weekdayNames[dayKey];
+      }
+    }
+
+    return weekdays;
   }
 }

@@ -1,0 +1,33 @@
+@import '../common/styles/variables';
+
+& {
+  @button-size: 30px;
+
+  :host {
+    display: inline-block;
+  }
+
+  .ob-calendar-wrapper {
+    border: 1px solid @black;
+
+    .ob-calendar-weekday:first-child {
+      border-left: none;
+    }
+  }
+
+  .ob-calendar-weekday {
+    box-sizing: border-box;
+    display: inline-block;
+    width: @button-size;
+    text-align: center;
+    border-left: 1px solid @black;
+  }
+
+  .ob-calendar-day {
+    box-sizing: border-box;
+    width: @button-size;
+    height: @button-size;
+    cursor: pointer;
+  }
+}
+
