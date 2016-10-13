@@ -1,10 +1,12 @@
-import {Component,
+import {
+  Component,
   OnInit,
   Input,
   HostListener,
   forwardRef,
   SimpleChanges,
-  OnChanges} from '@angular/core';
+  OnChanges
+} from '@angular/core';
 import {ObCalendarComponent} from '../ob-calendar/ob-calendar.component';
 import * as moment from 'moment';
 import {Moment} from 'moment';
@@ -27,6 +29,9 @@ import {IObDayPickerApi} from './ob-day-picker.api';
   }]
 })
 export class ObDayPickerComponent implements OnInit, OnChanges, ControlValueAccessor {
+  @Input('config') private userConfig: IDayPickerConfig;
+  @Input('value') private userValue: Moment | string;
+
   private areCalendarsShown: boolean = false;
   private hideStateHelper: boolean = false;
   private pickerConfig: IDayPickerConfig;
@@ -40,60 +45,59 @@ export class ObDayPickerComponent implements OnInit, OnChanges, ControlValueAcce
     this._viewValue = val;
     this.propagateChange(val);
   }
-  public api: IObDayPickerApi = <IObDayPickerApi>{};
-
-  @Input('config') private userConfig: IDayPickerConfig;
-  @Input('value') private userValue: Moment | string;
-
-  @HostListener('click', ['$event']) private onClick(e: Event) {
-    this.hideStateHelper = false;
-    e.stopPropagation();
-  }
-
-  @HostListener('document:click') private onBodyClick() {
-    if(!this.hideStateHelper) {
-      this.hideCalendars();
-    }
-    this.hideStateHelper = false;
-  }
+  api: IObDayPickerApi = <IObDayPickerApi>{};
 
   constructor(private dayPickerService: DayPickerService) {
     this.initListeners();
   }
 
-  public ngOnInit(): void {
+  @HostListener('click', ['$event'])
+  onClick(e: Event) {
+    this.hideStateHelper = false;
+    e.stopPropagation();
+  }
+
+  @HostListener('document:click')
+  onBodyClick() {
+    if (!this.hideStateHelper) {
+      this.hideCalendars();
+    }
+    this.hideStateHelper = false;
+  }
+
+  ngOnInit(): void {
     this.init();
   }
 
-  public ngOnChanges(changes: SimpleChanges) {
+  ngOnChanges(changes: SimpleChanges) {
     const {userValue} = changes;
     if (userValue && !userValue.isFirstChange()) {
       this.init();
     }
   }
 
-  public writeValue(value: Moment): void {
+  writeValue(value: Moment): void {
     this.viewValue = value.format(this.pickerConfig.format);
   }
 
-  private propagateChange(_: any) {
+  propagateChange(_: any) {
   };
 
-  public registerOnChange(fn: any): void {
+  registerOnChange(fn: any): void {
     this.propagateChange = fn;
   }
 
-  public registerOnTouched(fn: any): void {
+  registerOnTouched(fn: any): void {
   }
 
-  private isDateValid(value: string) {
+  isDateValid(value: string) {
     if (this.dayPickerService.isDateValid(value, this.pickerConfig.format)) {
       this.value = moment(value, this.pickerConfig.format);
     }
   }
 
   // start
-  private init() {
+  init() {
     this.pickerConfig = this.dayPickerService.getConfig(this.userConfig, this.userValue);
     this.value = UtilsService.convertToMoment(this.userValue, this.pickerConfig.format);
     this.viewValue = this.value ? this.value.format(this.pickerConfig.format) : '';
@@ -101,22 +105,27 @@ export class ObDayPickerComponent implements OnInit, OnChanges, ControlValueAcce
     this.initApi();
   }
 
-  private initListeners() {
+  initListeners() {
   }
 
   initApi() {
     this.api = {
       open: this.showCalendars.bind(this),
       close: this.hideCalendars.bind(this)
-    }
+    };
   }
 
-  public showCalendars() {
+  daySelected({date}) {
+    this.value = date.date;
+    this.viewValue = this.value.format(this.pickerConfig.format);
+  }
+
+  showCalendars() {
     this.hideStateHelper = true;
     this.areCalendarsShown = true;
   }
 
-  public hideCalendars() {
+  hideCalendars() {
     this.areCalendarsShown = false;
   }
 }

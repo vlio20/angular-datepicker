@@ -4,6 +4,10 @@
          (ngModelChange)="onViewDateChange($event)"
          (focus)="showCalendars()"/>
   <div class="ob-calendars-container" *ngIf="areCalendarsShown">
-    <ob-calendar *ngFor="let calendar of calendars" [config]="calendar"></ob-calendar>
+    <ob-calendar *ngFor="let calendar of calendars"
+                 [selected]="value"
+                 [config]="calendar"
+                 (on-change)="daySelected($event)">
+    </ob-calendar>
   </div>
 </div>

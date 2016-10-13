@@ -5,6 +5,7 @@
   <div class="ob-calendar-week" *ngFor="let week of weeks">
     <button class="ob-calendar-day"
             *ngFor="let day of week"
+            (click)="dateClick(day)"
             [ngClass]="{
               'ob-selected': day.selected,
               'ob-current-month': day.currentMonth,
