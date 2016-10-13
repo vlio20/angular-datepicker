@@ -14,10 +14,12 @@ export class ObCalendarComponent implements OnInit {
   weeks: ICalendarDay[][];
   weekdays: string[];
 
-  constructor(private calendarService: CalendarService) { }
+  constructor(private calendarService: CalendarService) {
+  }
 
   ngOnInit() {
-    this.weeks = this.calendarService.generateMonthArray(this.config.firstDayOfWeek, this.config.month);
+    this.weeks = this.calendarService.generateMonthArray(this.config.firstDayOfWeek, this.config.month,
+      this.config.selected);
     this.weekdays = this.calendarService.generateWeekdays(this.config.firstDayOfWeek, this.config.weekdayNames);
   }
 }

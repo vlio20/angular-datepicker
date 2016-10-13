@@ -8,9 +8,6 @@ import {ICalendarDay} from '../config/day.model';
 export class CalendarService {
   readonly DAYS = ['su', 'mo', 'tu', 'we', 'th', 'fr', 'sa'];
 
-  constructor() {
-  }
-
   generateDaysIndexMap(firstDayOfWeek: WeekDays) {
     const firstDayIndex = this.DAYS.indexOf(firstDayOfWeek);
     const daysArr = this.DAYS.slice(firstDayIndex, 7).concat(this.DAYS.slice(0, firstDayIndex));
@@ -29,7 +26,7 @@ export class CalendarService {
     }, <{[key: number]: string}>{});
   }
 
-  generateMonthArray(firstDayOfWeek: WeekDays, dayInMonth: Moment): ICalendarDay[][] {
+  generateMonthArray(firstDayOfWeek: WeekDays, dayInMonth: Moment, selectedDay: Moment): ICalendarDay[][] {
     const monthArray: ICalendarDay[][] = [];
     const firstDayOfMonth = dayInMonth.clone().startOf('month');
     const firstDayOfWeekIndex = this.DAYS.indexOf(firstDayOfWeek);
@@ -43,7 +40,7 @@ export class CalendarService {
     const daysOfCalendar: ICalendarDay[] = UtilsService.createArray(42).reduce((array: ICalendarDay[]) => {
       array.push({
         date: current.clone(),
-        selected: current.isSame(dayInMonth, 'day'),
+        selected: current.isSame(selectedDay, 'day'),
         currentMonth: current.isSame(dayInMonth, 'month'),
         prevMonth: current.isSame(dayInMonth.clone().subtract(1, 'month'), 'month'),
         nextMonth: current.isSame(dayInMonth.clone().add(1, 'month'), 'month')

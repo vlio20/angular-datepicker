@@ -3,13 +3,14 @@ import {IDayPickerConfig} from './day-picker-config.model';
 import * as moment from 'moment';
 import {UtilsService} from '../../common/services/utils/utils.service';
 import {ICalendarConfig} from '../../ob-calendar/config/calendar-config.model';
+import {Moment} from 'moment';
 
 @Injectable()
 export class DayPickerService {
-  private config: IDayPickerConfig = {
-    selected: moment(),
+  private defaultConfig: IDayPickerConfig = {
     firstDayOfWeek: 'su',
     calendarsAmount: 1,
+    format: 'DD-MM-YYYY',
     weekdayNames: {
       su: 'sun',
       mo: 'mon',
@@ -21,20 +22,26 @@ export class DayPickerService {
     }
   };
 
-  setConfig(config: IDayPickerConfig) {
-    this.config = Object.assign({}, this.config, config);
-    return this.getConfig();
+  // private formatValues(config: IDayPickerConfig): void {
+  //   const {selected, format} = config;
+  // }
+
+  getConfig(config: IDayPickerConfig, selected: Moment | string) {
+    const _config = Object.assign({}, this.defaultConfig, config);
+    // this.formatValues(config);
+    return _config;
   }
 
-  getConfig(): IDayPickerConfig {
-    return Object.freeze(this.config);
-  }
-
-  generateCalendars(): ICalendarConfig[] {
-    return UtilsService.createArray(this.config.calendarsAmount).map((n: number, i: number) => ({
+  generateCalendars(config: IDayPickerConfig, selected: Moment): ICalendarConfig[] {
+    return UtilsService.createArray(config.calendarsAmount).map((n: number, i: number) => ({
       month: moment().add(i, 'month'),
-      firstDayOfWeek: this.config.firstDayOfWeek,
-      weekdayNames: this.config.weekdayNames
+      selected: selected,
+      firstDayOfWeek: config.firstDayOfWeek,
+      weekdayNames: config.weekdayNames
     }));
+  }
+
+  isDateValid(date: string, format: string): boolean {
+    return moment(date, format, true).isValid();
   }
 }
