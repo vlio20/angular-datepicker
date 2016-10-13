@@ -8,18 +8,12 @@ import {Component,
 import {ObCalendarComponent} from '../ob-calendar/ob-calendar.component';
 import * as moment from 'moment';
 import {Moment} from 'moment';
-import {Subject} from 'rxjs/Subject';
-import {Observable} from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/observable/merge';
-import 'rxjs/add/operator/startWith';
-import 'rxjs/add/operator/mapTo';
-import 'rxjs/add/operator/do';
 import {DayPickerService} from './service/day-picker.service';
 import {IDayPickerConfig} from './service/day-picker-config.model';
 import {ICalendarConfig} from '../ob-calendar/config/calendar-config.model';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {UtilsService} from '../common/services/utils/utils.service';
+import {IObDayPickerApi} from './ob-day-picker.api';
 
 @Component({
   selector: 'ob-day-picker',
@@ -33,85 +27,96 @@ import {UtilsService} from '../common/services/utils/utils.service';
   }]
 })
 export class ObDayPickerComponent implements OnInit, OnChanges, ControlValueAccessor {
-  moment = moment;
-  isCalendarsShown: Observable<boolean>;
-  showCalendars$ = new Subject();
-  hideCalendars$ = new Subject();
-  pickerConfig: IDayPickerConfig;
-  calendars: ICalendarConfig[];
-  value: Moment;
-  _viewValue: string;
-  get viewValue() {
+  private isCalendarsShown: boolean = false;
+  private hideStateHelper: boolean = false;
+  private pickerConfig: IDayPickerConfig;
+  private calendars: ICalendarConfig[];
+  private value: Moment;
+  private _viewValue: string;
+  private get viewValue() {
     return this._viewValue;
   }
-
-  set viewValue(val) {
+  private set viewValue(val) {
     this._viewValue = val;
     this.propagateChange(val);
   }
+  public api: IObDayPickerApi = <IObDayPickerApi>{};
 
-  @Input('config') userConfig: IDayPickerConfig;
-  @Input('value') userValue: Moment | string;
+  @Input('config') private userConfig: IDayPickerConfig;
+  @Input('value') private userValue: Moment | string;
 
-  @HostListener('click', ['$event']) onClick(e: Event) {
+  @HostListener('click', ['$event']) private onClick(e: Event) {
     e.stopPropagation();
   }
 
-  @HostListener('document:click', ['$event']) onBodyClick(e: Event) {
-    this.hideCalendars$.next(e);
+  @HostListener('document:click') private onBodyClick() {
+    if(!this.hideStateHelper) {
+      this.hideCalendars();
+    }
+    this.hideStateHelper = false;
   }
 
   constructor(private dayPickerService: DayPickerService) {
     this.initListeners();
   }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.init();
   }
 
-  ngOnChanges(changes: SimpleChanges) {
+  public ngOnChanges(changes: SimpleChanges) {
     const {userValue} = changes;
     if (userValue && !userValue.isFirstChange()) {
       this.init();
     }
   }
 
-  writeValue(value: Moment): void {
+  public writeValue(value: Moment): void {
     this.viewValue = value.format(this.pickerConfig.format);
   }
 
-  propagateChange(_: any) {
+  private propagateChange(_: any) {
   };
 
-  registerOnChange(fn: any): void {
+  public registerOnChange(fn: any): void {
     this.propagateChange = fn;
   }
 
-  registerOnTouched(fn: any): void {
+  public registerOnTouched(fn: any): void {
+  }
+
+  private isDateValid(value: string) {
+    if (this.dayPickerService.isDateValid(value, this.pickerConfig.format)) {
+      this.value = moment(value, this.pickerConfig.format);
+    }
   }
 
   // start
-
-  init() {
+  private init() {
     this.pickerConfig = this.dayPickerService.getConfig(this.userConfig, this.userValue);
     this.value = UtilsService.convertToMoment(this.userValue, this.pickerConfig.format);
     this.viewValue = this.value ? this.value.format(this.pickerConfig.format) : '';
     this.calendars = this.dayPickerService.generateCalendars(this.pickerConfig, this.value);
+    this.initApi();
   }
 
-  initListeners() {
-    this.initCalendarsViability();
+  private initListeners() {
+
   }
 
-  initCalendarsViability() {
-    this.isCalendarsShown = Observable
-      .merge(this.showCalendars$.mapTo(true), this.hideCalendars$.mapTo(false))
-      .startWith(false);
-  }
-
-  isDateValid(value: string) {
-    if (this.dayPickerService.isDateValid(value, this.pickerConfig.format)) {
-      this.value = moment(value, this.pickerConfig.format);
+  initApi() {
+    this.api = {
+      open: this.showCalendars.bind(this),
+      close: this.hideCalendars.bind(this)
     }
+  }
+
+  public showCalendars() {
+    this.hideStateHelper = true;
+    this.isCalendarsShown = true;
+  }
+
+  public hideCalendars() {
+    this.isCalendarsShown = false;
   }
 }

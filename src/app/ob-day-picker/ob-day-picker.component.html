@@ -2,8 +2,8 @@
   <input type="text"
          [ngModel]="viewValue"
          (ngModelChange)="onViewDateChange($event)"
-         (focus)="showCalendars$.next($event)"/>
-  <div class="ob-calendars-container" *ngIf="(isCalendarsShown | async)">
+         (focus)="showCalendars()"/>
+  <div class="ob-calendars-container" *ngIf="isCalendarsShown">
     <ob-calendar *ngFor="let calendar of calendars" [config]="calendar"></ob-calendar>
   </div>
 </div>

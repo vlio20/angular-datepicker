@@ -71,6 +71,5 @@ describe('Service: Calendar', () => {
       fr: '6',
       sa: '7'
     })).toEqual(['2', '3', '4', '5', '6', '7', '1']);
-
   }));
 });

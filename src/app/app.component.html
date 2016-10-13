@@ -1,2 +1,4 @@
-<ob-day-picker [value]="date" [config]="dayPickerConfig"></ob-day-picker>
+<ob-day-picker #dayPicker [value]="date" [config]="dayPickerConfig"></ob-day-picker>
 <button (click)="changeDate()">Change Date</button>
+<button (click)="togglePicker(true)">Open Picker</button>
+<button (click)="togglePicker(false)">Close Picker</button>
