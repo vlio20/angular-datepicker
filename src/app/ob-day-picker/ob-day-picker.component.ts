@@ -41,10 +41,12 @@ export class ObDayPickerComponent implements OnInit, OnChanges, ControlValueAcce
   private get viewValue() {
     return this._viewValue;
   }
+
   private set viewValue(val) {
     this._viewValue = val;
     this.propagateChange(val);
   }
+
   api: IObDayPickerApi = <IObDayPickerApi>{};
 
   constructor(private dayPickerService: DayPickerService) {
@@ -118,6 +120,10 @@ export class ObDayPickerComponent implements OnInit, OnChanges, ControlValueAcce
   daySelected({date}) {
     this.value = date.date;
     this.viewValue = this.value.format(this.pickerConfig.format);
+
+    if (this.pickerConfig.closeOnSelect) {
+      setTimeout(this.hideCalendars.bind(this), this.pickerConfig.closeOnSelectDelay);
+    }
   }
 
   showCalendars() {

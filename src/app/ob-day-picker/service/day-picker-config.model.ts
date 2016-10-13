@@ -7,5 +7,7 @@ export interface IDayPickerConfig {
   format?: string;
   min?: Moment;
   max?: Moment;
+  closeOnSelect?: boolean;
+  closeOnSelectDelay?: number;
   weekdayNames?: {[key: string]: string};
 }

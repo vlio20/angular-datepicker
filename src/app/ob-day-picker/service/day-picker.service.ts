@@ -11,6 +11,8 @@ export class DayPickerService {
     firstDayOfWeek: 'su',
     calendarsAmount: 1,
     format: 'DD-MM-YYYY',
+    closeOnSelect: true,
+    closeOnSelectDelay: 100,
     weekdayNames: {
       su: 'sun',
       mo: 'mon',
