@@ -27,7 +27,7 @@ import {IObDayPickerApi} from './ob-day-picker.api';
   }]
 })
 export class ObDayPickerComponent implements OnInit, OnChanges, ControlValueAccessor {
-  private isCalendarsShown: boolean = false;
+  private areCalendarsShown: boolean = false;
   private hideStateHelper: boolean = false;
   private pickerConfig: IDayPickerConfig;
   private calendars: ICalendarConfig[];
@@ -46,6 +46,7 @@ export class ObDayPickerComponent implements OnInit, OnChanges, ControlValueAcce
   @Input('value') private userValue: Moment | string;
 
   @HostListener('click', ['$event']) private onClick(e: Event) {
+    this.hideStateHelper = false;
     e.stopPropagation();
   }
 
@@ -101,7 +102,6 @@ export class ObDayPickerComponent implements OnInit, OnChanges, ControlValueAcce
   }
 
   private initListeners() {
-
   }
 
   initApi() {
@@ -113,10 +113,10 @@ export class ObDayPickerComponent implements OnInit, OnChanges, ControlValueAcce
 
   public showCalendars() {
     this.hideStateHelper = true;
-    this.isCalendarsShown = true;
+    this.areCalendarsShown = true;
   }
 
   public hideCalendars() {
-    this.isCalendarsShown = false;
+    this.areCalendarsShown = false;
   }
 }
