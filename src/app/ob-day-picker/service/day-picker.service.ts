@@ -39,7 +39,9 @@ export class DayPickerService {
       month: moment().add(i, 'month'),
       selected: selected,
       firstDayOfWeek: config.firstDayOfWeek,
-      weekdayNames: config.weekdayNames
+      weekdayNames: config.weekdayNames,
+      min: config.min,
+      max: config.max
     }));
   }
 

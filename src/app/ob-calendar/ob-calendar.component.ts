@@ -34,7 +34,11 @@ export class ObCalendarComponent implements OnInit, OnChanges {
     }
   }
 
-  dateClick(date: ICalendarDay) {
-    this.dateClicked.emit({date});
+  isDisabledDay(day: ICalendarDay) {
+    return this.calendarService.isDateDisabled(day, this.config);
+  }
+
+  dateClick(day: ICalendarDay) {
+    this.dateClicked.emit({day});
   }
 }

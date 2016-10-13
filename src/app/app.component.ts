@@ -15,7 +15,9 @@ export class AppComponent {
   date = moment();
   dayPickerConfig: IDayPickerConfig = {
     firstDayOfWeek: 'mo',
-    calendarsAmount: 2
+    calendarsAmount: 2,
+    min: moment().subtract(1, 'd'),
+    max: moment().add(1, 'd')
   };
 
   changeDate() {

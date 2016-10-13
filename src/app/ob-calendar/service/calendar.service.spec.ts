@@ -3,6 +3,7 @@
 import {TestBed, async, inject} from '@angular/core/testing';
 import {CalendarService} from './calendar.service';
 import * as moment from 'moment';
+import {ICalendarConfig} from '../config/calendar-config.model';
 
 describe('Service: Calendar', () => {
   beforeEach(() => {
@@ -71,5 +72,21 @@ describe('Service: Calendar', () => {
       fr: '6',
       sa: '7'
     })).toEqual(['2', '3', '4', '5', '6', '7', '1']);
+  }));
+
+  it('should check isDateDisabled method', inject([CalendarService], (service: CalendarService) => {
+    const config: ICalendarConfig = {
+      month: moment('13-10-2016', 'DD-MM-YYYY'),
+      selected: moment('13-10-2016', 'DD-MM-YYYY'),
+      firstDayOfWeek: 'su',
+      min: moment('13-10-2016', 'DD-MM-YYYY').subtract(1, 'd'),
+      max: moment('13-10-2016', 'DD-MM-YYYY').add(1, 'd')
+    };
+
+    expect(service.isDateDisabled({date: moment('11-10-2016', 'DD-MM-YYYY')}, config)).toBe(true);
+    expect(service.isDateDisabled({date: moment('12-10-2016', 'DD-MM-YYYY')}, config)).toBe(false);
+    expect(service.isDateDisabled({date: moment('13-10-2016', 'DD-MM-YYYY')}, config)).toBe(false);
+    expect(service.isDateDisabled({date: moment('14-10-2016', 'DD-MM-YYYY')}, config)).toBe(false);
+    expect(service.isDateDisabled({date: moment('15-10-2016', 'DD-MM-YYYY')}, config)).toBe(true);
   }));
 });

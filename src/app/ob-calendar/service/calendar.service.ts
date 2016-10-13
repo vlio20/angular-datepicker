@@ -3,6 +3,7 @@ import {Moment} from 'moment';
 import {WeekDays} from '../../common/types/week-days.type';
 import {UtilsService} from '../../common/services/utils/utils.service';
 import {ICalendarDay} from '../config/day.model';
+import {ICalendarConfig} from '../config/calendar-config.model';
 
 @Injectable()
 export class CalendarService {
@@ -73,5 +74,21 @@ export class CalendarService {
     }
 
     return weekdays;
+  }
+
+  isDateDisabled(day: ICalendarDay, config: ICalendarConfig): boolean {
+    if (config.isDisabledCallback) {
+      return config.isDisabledCallback(day.date);
+    }
+
+    if (config.min && day.date.isBefore(config.min, 'd')) {
+      return true;
+    }
+
+    if (config.max && day.date.isAfter(config.max, 'd')) {
+      return true;
+    }
+
+    return false;
   }
 }

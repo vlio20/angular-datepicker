@@ -117,8 +117,8 @@ export class ObDayPickerComponent implements OnInit, OnChanges, ControlValueAcce
     };
   }
 
-  daySelected({date}) {
-    this.value = date.date;
+  daySelected({day}) {
+    this.value = day.date;
     this.viewValue = this.value.format(this.pickerConfig.format);
 
     if (this.pickerConfig.closeOnSelect) {
