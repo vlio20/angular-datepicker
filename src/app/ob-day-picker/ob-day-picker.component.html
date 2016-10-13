@@ -1,5 +1,7 @@
 <div>
   <input type="text"
+         class="ob-daypicker-input"
+         [placeholder]="pickerConfig.placeholder"
          [ngModel]="viewValue"
          (ngModelChange)="onViewDateChange($event)"
          (focus)="showCalendars()"/>

@@ -10,4 +10,5 @@ export interface IDayPickerConfig {
   closeOnSelect?: boolean;
   closeOnSelectDelay?: number;
   weekdayNames?: {[key: string]: string};
+  placeholder?: string;
 }

@@ -53,10 +53,10 @@ export class ObDayPickerComponent implements OnInit, OnChanges, ControlValueAcce
     this.initListeners();
   }
 
-  @HostListener('click', ['$event'])
-  onClick(e: Event) {
+  @HostListener('click')
+  onClick() {
     this.hideStateHelper = false;
-    e.stopPropagation();
+    this.hideStateHelper = true;
   }
 
   @HostListener('document:click')
