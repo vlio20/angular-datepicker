@@ -1,7 +1,43 @@
+@import '../common/styles/variables';
+
 :host {
   display: inline-block;
 }
 
 .ob-calendars-container {
   position: absolute;
+}
+
+.ob-calendar-container {
+  display: inline-block;
+}
+
+.ob-calendar-nav-container {
+  position: relative;
+  box-sizing: border-box;
+  height: 25px;
+  border: 1px solid @black;
+  border-bottom: none;
+}
+
+.ob-calendar-nav-left, .ob-calendar-nav-right {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.ob-calendar-nav-left {
+  left: 0;
+}
+
+.ob-calendar-nav-right {
+  right: 0;
+}
+
+.ob-calendar-month {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }

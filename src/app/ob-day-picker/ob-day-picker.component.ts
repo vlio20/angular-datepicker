@@ -134,4 +134,16 @@ export class ObDayPickerComponent implements OnInit, OnChanges, ControlValueAcce
   hideCalendars() {
     this.areCalendarsShown = false;
   }
+
+  moveCalendars(base: Moment, months: number) {
+    this.calendars = this.dayPickerService.moveCalendars(this.pickerConfig, this.value, base, months);
+  }
+
+  isLeftNavDisabled(month: Moment): boolean {
+    return this.dayPickerService.isMinMonth(this.pickerConfig.min, month);
+  }
+
+  isRightNavDisabled(month: Moment): boolean {
+    return this.dayPickerService.isMaxMonth(this.pickerConfig.max, month);
+  }
 }

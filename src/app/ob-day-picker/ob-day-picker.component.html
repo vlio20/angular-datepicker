@@ -4,10 +4,25 @@
          (ngModelChange)="onViewDateChange($event)"
          (focus)="showCalendars()"/>
   <div class="ob-calendars-container" *ngIf="areCalendarsShown">
-    <ob-calendar *ngFor="let calendar of calendars"
-                 [selected]="value"
-                 [config]="calendar"
-                 (on-change)="daySelected($event)">
-    </ob-calendar>
+    <div class="ob-calendar-container"
+         *ngFor="let calendar of calendars; let start = first; let end = last">
+      <div class="ob-calendar-nav-container">
+        <button class="ob-calendar-nav-left"
+                *ngIf="start"
+                [disabled]="isLeftNavDisabled(calendar.month)"
+                (click)="moveCalendars(calendar.month, -1)"> <
+        </button>
+        <span class="ob-calendar-month">{{calendar.month.format('MMM, YYYY')}}</span>
+        <button class="ob-calendar-nav-right"
+                *ngIf="end"
+                [disabled]="isRightNavDisabled(calendar.month)"
+                (click)="moveCalendars(calendar.month, 1)"> >
+        </button>
+      </div>
+      <ob-calendar [selected]="value"
+                   [config]="calendar"
+                   (on-change)="daySelected($event)">
+      </ob-calendar>
+    </div>
   </div>
 </div>

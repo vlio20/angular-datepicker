@@ -16,12 +16,12 @@ export class AppComponent {
   dayPickerConfig: IDayPickerConfig = {
     firstDayOfWeek: 'mo',
     calendarsAmount: 2,
-    min: moment().subtract(1, 'd'),
-    max: moment().add(1, 'd')
+    min: moment().subtract(1, 'month'),
+    max: moment().add(1, 'month')
   };
 
   changeDate() {
-    this.date = moment().add(1, 'd');
+    this.date = moment().add(1, 'day');
   }
 
   togglePicker(state: boolean) {
