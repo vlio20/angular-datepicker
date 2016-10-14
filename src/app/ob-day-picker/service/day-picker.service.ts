@@ -21,7 +21,8 @@ export class DayPickerService {
       th: 'thu',
       fr: 'fri',
       sa: 'sat'
-    }
+    },
+    disabled: false
   };
 
   // private formatValues(config: IDayPickerConfig): void {
