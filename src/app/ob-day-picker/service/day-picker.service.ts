@@ -28,14 +28,14 @@ export class DayPickerService {
   //   const {selected, format} = config;
   // }
 
-  getConfig(config: IDayPickerConfig, selected: Moment | string) {
+  getConfig(config: IDayPickerConfig) {
     const _config = Object.assign({}, this.defaultConfig, config);
     // this.formatValues(config);
     return _config;
   }
 
   generateCalendars(config: IDayPickerConfig, selected: Moment, month?: Moment): ICalendarConfig[] {
-    const base = month || selected || moment();
+    const base = (month && month.clone()) || (selected && selected.clone()) || moment();
     return UtilsService.createArray(config.calendarsAmount).map((n: number, i: number) => ({
       month: base.add(i, 'month').clone(),
       selected: selected,

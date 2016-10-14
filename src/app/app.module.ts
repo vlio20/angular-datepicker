@@ -15,8 +15,7 @@ import {ObCalendarComponent} from './ob-calendar/ob-calendar.component';
   ],
   imports: [
     BrowserModule,
-    FormsModule,
-    HttpModule
+    FormsModule
   ],
   bootstrap: [AppComponent]
 })

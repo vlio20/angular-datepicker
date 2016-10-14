@@ -30,32 +30,29 @@ import {IObDayPickerApi} from './ob-day-picker.api';
 })
 export class ObDayPickerComponent implements OnInit, OnChanges, ControlValueAccessor {
   @Input('config') private userConfig: IDayPickerConfig;
-  @Input('value') private userValue: Moment | string;
 
   private areCalendarsShown: boolean = false;
   private hideStateHelper: boolean = false;
   private pickerConfig: IDayPickerConfig;
   private calendars: ICalendarConfig[];
   private value: Moment;
-  private _viewValue: string;
+  private userValue;
+
   private get viewValue() {
-    return this._viewValue;
+    return this.value ? this.value.format(this.pickerConfig.format) : ''
   }
 
   private set viewValue(val) {
-    this._viewValue = val;
-    this.propagateChange(val);
+    this.onChangeCallback(val);
   }
 
   api: IObDayPickerApi = <IObDayPickerApi>{};
 
   constructor(private dayPickerService: DayPickerService) {
-    this.initListeners();
   }
 
   @HostListener('click')
   onClick() {
-    this.hideStateHelper = false;
     this.hideStateHelper = true;
   }
 
@@ -72,21 +69,24 @@ export class ObDayPickerComponent implements OnInit, OnChanges, ControlValueAcce
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    const {userValue} = changes;
-    if (userValue && !userValue.isFirstChange()) {
+    const {userConfig} = changes;
+    if (userConfig && !userConfig.isFirstChange()) {
       this.init();
     }
   }
 
   writeValue(value: Moment): void {
-    this.viewValue = value.format(this.pickerConfig.format);
+    if (value) {
+      this.userValue = value;
+      this.init();
+    }
   }
 
-  propagateChange(_: any) {
+  onChangeCallback(_: any) {
   };
 
   registerOnChange(fn: any): void {
-    this.propagateChange = fn;
+    this.onChangeCallback = fn;
   }
 
   registerOnTouched(fn: any): void {
@@ -100,14 +100,11 @@ export class ObDayPickerComponent implements OnInit, OnChanges, ControlValueAcce
 
   // start
   init() {
-    this.pickerConfig = this.dayPickerService.getConfig(this.userConfig, this.userValue);
+    this.pickerConfig = this.dayPickerService.getConfig(this.userConfig);
     this.value = UtilsService.convertToMoment(this.userValue, this.pickerConfig.format);
     this.viewValue = this.value ? this.value.format(this.pickerConfig.format) : '';
     this.calendars = this.dayPickerService.generateCalendars(this.pickerConfig, this.value);
     this.initApi();
-  }
-
-  initListeners() {
   }
 
   initApi() {
@@ -124,6 +121,11 @@ export class ObDayPickerComponent implements OnInit, OnChanges, ControlValueAcce
     if (this.pickerConfig.closeOnSelect) {
       setTimeout(this.hideCalendars.bind(this), this.pickerConfig.closeOnSelectDelay);
     }
+  }
+
+  inputFocused() {
+    this.hideStateHelper = false;
+    this.areCalendarsShown = true;
   }
 
   showCalendars() {
@@ -145,5 +147,11 @@ export class ObDayPickerComponent implements OnInit, OnChanges, ControlValueAcce
 
   isRightNavDisabled(month: Moment): boolean {
     return this.dayPickerService.isMaxMonth(this.pickerConfig.max, month);
+  }
+
+  onViewDateChange(date: string) {
+    if (this.dayPickerService.isDateValid(date, this.pickerConfig.format)) {
+      this.value = moment(date, this.pickerConfig.format);
+    }
   }
 }

@@ -4,7 +4,7 @@
          [placeholder]="pickerConfig.placeholder"
          [ngModel]="viewValue"
          (ngModelChange)="onViewDateChange($event)"
-         (focus)="showCalendars()"/>
+         (focus)="inputFocused()"/>
   <div class="ob-calendars-container" *ngIf="areCalendarsShown">
     <div class="ob-calendar-container"
          *ngFor="let calendar of calendars; let start = first; let end = last">
