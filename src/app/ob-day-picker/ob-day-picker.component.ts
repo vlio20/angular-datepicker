@@ -154,4 +154,10 @@ export class ObDayPickerComponent implements OnInit, OnChanges, ControlValueAcce
       this.value = moment(date, this.pickerConfig.format);
     }
   }
+
+  onKeydown(e: Event) {
+    if (this.pickerConfig.disableKeypress) {
+      e.preventDefault();
+    }
+  }
 }

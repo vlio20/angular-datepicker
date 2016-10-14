@@ -5,6 +5,7 @@
          [ngModel]="viewValue"
          (ngModelChange)="onViewDateChange($event)"
          (focus)="inputFocused()"
+         (keydown)="onKeydown($event)"
          [disabled]="pickerConfig.disabled"/>
   <div class="ob-calendars-container" *ngIf="areCalendarsShown">
     <div class="ob-calendar-container"

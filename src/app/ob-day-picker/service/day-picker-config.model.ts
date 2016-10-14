@@ -12,4 +12,5 @@ export interface IDayPickerConfig {
   weekdayNames?: {[key: string]: string};
   placeholder?: string;
   disabled?: boolean;
+  disableKeypress?: boolean;
 }
