@@ -44,17 +44,20 @@ export class ObDayPickerComponent implements OnChanges, ControlValueAccessor, Va
   private hideStateHelper: boolean = false;
   private pickerConfig: IDayPickerConfig;
   private calendars: ICalendarConfig[];
-  private value: Moment;
+  private _value: Moment;
   private userValue;
+  private viewValue: string;
   private userValueType: string = 'object';
   validateFn: Function;
 
-  private get viewValue(): string {
-    return this.value ? this.value.format(this.pickerConfig.format) : '';
+  private get value(): Moment {
+    return this._value;
   }
 
-  private set viewValue(value: string) {
-    const val = this.userValueType === 'string' ? value : moment(value, this.pickerConfig.format);
+  private set value(value: Moment) {
+    this._value = value;
+    this.viewValue = value ? value.format(this.pickerConfig.format) : '';
+    const val = this.userValueType === 'string' ? this.viewValue  : value;
     this.onChangeCallback(val);
   }
 
@@ -125,7 +128,6 @@ export class ObDayPickerComponent implements OnChanges, ControlValueAccessor, Va
   init() {
     this.pickerConfig = this.dayPickerService.getConfig(this.userConfig);
     this.value = UtilsService.convertToMoment(this.userValue, this.pickerConfig.format);
-    this.viewValue = this.value ? this.value.format(this.pickerConfig.format) : '';
     this.calendars = this.dayPickerService.generateCalendars(this.pickerConfig, this.value);
     this.initApi();
   }
@@ -149,7 +151,6 @@ export class ObDayPickerComponent implements OnChanges, ControlValueAccessor, Va
 
   daySelected({day}) {
     this.value = day.date;
-    this.viewValue = this.value.format(this.pickerConfig.format);
 
     if (this.pickerConfig.closeOnSelect) {
       setTimeout(this.hideCalendars.bind(this), this.pickerConfig.closeOnSelectDelay);
@@ -185,7 +186,6 @@ export class ObDayPickerComponent implements OnChanges, ControlValueAccessor, Va
   onViewDateChange(date: string) {
     if (this.dayPickerService.isDateValid(date, this.pickerConfig.format)) {
       this.value = date !== '' ? moment(date, this.pickerConfig.format) : null;
-      this.viewValue = date;
     } else {
       this.onChangeCallback(undefined);
     }
