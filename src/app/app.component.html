@@ -1,9 +1,25 @@
-<ob-day-picker name="test"
-               #dayPicker
-               [(ngModel)]="date"
-               [config]="dayPickerConfig">
-</ob-day-picker>
-<button (click)="changeDate()">Change Date</button>
-<button (click)="togglePicker(true)">Open Picker</button>
-<button (click)="togglePicker(false)">Close Picker</button>
-<span>{{date}}</span>
+<form #form="ngForm">
+  <ob-day-picker name="test"
+                 #test="ngModel"
+                 #dayPicker
+                 [(ngModel)]="date"
+                 [config]="dayPickerConfig"
+                 required
+                 [minDate]="minDate">
+  </ob-day-picker>
+
+  <button (click)="changeDate()">Change Date</button>
+  <button (click)="togglePicker(true)">Open Picker</button>
+  <button (click)="togglePicker(false)">Close Picker</button>
+  <ob-day-picker name="min"
+                 #min="ngModel"
+                 [(ngModel)]="minDate"
+                 [config]="minConf">
+  </ob-day-picker>
+
+
+  <div *ngIf="test.errors && test.errors.required">required</div>
+  <div *ngIf="test.errors && test.errors.format">format invalid</div>
+  <div *ngIf="test.errors && test.errors.minDate">minDate invalid</div>
+  <div *ngIf="test.errors && test.errors.maxDate">maxDate invalid</div>
+</form>

@@ -1,6 +1,5 @@
 import {
   Component,
-  OnInit,
   Input,
   HostListener,
   forwardRef,
@@ -13,7 +12,7 @@ import {Moment} from 'moment';
 import {DayPickerService} from './service/day-picker.service';
 import {IDayPickerConfig} from './service/day-picker-config.model';
 import {ICalendarConfig} from '../ob-calendar/config/calendar-config.model';
-import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
+import {ControlValueAccessor, NG_VALUE_ACCESSOR, FormControl, NG_VALIDATORS, Validator} from '@angular/forms';
 import {UtilsService} from '../common/services/utils/utils.service';
 import {IObDayPickerApi} from './ob-day-picker.api';
 
@@ -22,14 +21,24 @@ import {IObDayPickerApi} from './ob-day-picker.api';
   templateUrl: './ob-day-picker.component.html',
   styleUrls: ['./ob-day-picker.component.less'],
   entryComponents: [ObCalendarComponent],
-  providers: [DayPickerService, {
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => ObDayPickerComponent),
-    multi: true
-  }]
+  providers: [
+    DayPickerService,
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => ObDayPickerComponent),
+      multi: true
+    },
+    {
+      provide: NG_VALIDATORS,
+      useExisting: forwardRef(() => ObDayPickerComponent),
+      multi: true
+    }
+  ]
 })
-export class ObDayPickerComponent implements OnInit, OnChanges, ControlValueAccessor {
+export class ObDayPickerComponent implements OnChanges, ControlValueAccessor, Validator {
   @Input('config') private userConfig: IDayPickerConfig;
+  @Input() private minDate: Moment | string;
+  @Input() private maxDate: Moment | string;
 
   private areCalendarsShown: boolean = false;
   private hideStateHelper: boolean = false;
@@ -37,6 +46,7 @@ export class ObDayPickerComponent implements OnInit, OnChanges, ControlValueAcce
   private calendars: ICalendarConfig[];
   private value: Moment;
   private userValue;
+  validateFn: Function;
 
   private get viewValue() {
     return this.value ? this.value.format(this.pickerConfig.format) : ''
@@ -64,14 +74,14 @@ export class ObDayPickerComponent implements OnInit, OnChanges, ControlValueAcce
     this.hideStateHelper = false;
   }
 
-  ngOnInit(): void {
-    this.init();
-  }
-
   ngOnChanges(changes: SimpleChanges) {
-    const {userConfig} = changes;
-    if (userConfig && !userConfig.isFirstChange()) {
+    const {userConfig, minDate, maxDate} = changes;
+    if (userConfig) {
       this.init();
+    }
+
+    if (minDate || maxDate) {
+      this.initValidators();
     }
   }
 
@@ -92,9 +102,19 @@ export class ObDayPickerComponent implements OnInit, OnChanges, ControlValueAcce
   registerOnTouched(fn: any): void {
   }
 
+  validate(c: FormControl) {
+    if (this.minDate || this.maxDate) {
+      return this.validateFn(c);
+    } else {
+      return () => null;
+    }
+  }
+
   isDateValid(value: string) {
     if (this.dayPickerService.isDateValid(value, this.pickerConfig.format)) {
       this.value = moment(value, this.pickerConfig.format);
+    } else {
+      this.value = null;
     }
   }
 
@@ -105,6 +125,16 @@ export class ObDayPickerComponent implements OnInit, OnChanges, ControlValueAcce
     this.viewValue = this.value ? this.value.format(this.pickerConfig.format) : '';
     this.calendars = this.dayPickerService.generateCalendars(this.pickerConfig, this.value);
     this.initApi();
+  }
+
+  initValidators() {
+    this.validateFn = this.dayPickerService.createValidator({
+      minDate: typeof this.minDate === 'string' ?
+        moment(<string>this.minDate, this.pickerConfig.format) : <Moment>this.minDate,
+      maxDate: typeof this.maxDate === 'string' ?
+        moment(<string>this.maxDate, this.pickerConfig.format) : <Moment>this.maxDate
+    }, this.pickerConfig.format);
+    this.onChangeCallback(this.viewValue);
   }
 
   initApi() {
@@ -152,10 +182,23 @@ export class ObDayPickerComponent implements OnInit, OnChanges, ControlValueAcce
   onViewDateChange(date: string) {
     if (this.dayPickerService.isDateValid(date, this.pickerConfig.format)) {
       this.value = moment(date, this.pickerConfig.format);
+      this.viewValue = date;
+    } else {
+      this.onChangeCallback(undefined);
     }
   }
 
-  onKeydown(e: Event) {
+  onKeydown(e: KeyboardEvent) {
+    if (e.keyCode === 13) {
+      this.areCalendarsShown = !this.areCalendarsShown;
+      e.preventDefault();
+    }
+
+    if (e.keyCode === 27) {
+      this.areCalendarsShown = false;
+      e.preventDefault();
+    }
+
     if (this.pickerConfig.disableKeypress) {
       e.preventDefault();
     }

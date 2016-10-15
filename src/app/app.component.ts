@@ -12,12 +12,14 @@ import * as moment from 'moment';
 export class AppComponent {
   @ViewChild('dayPicker') dayPicker: ObDayPickerComponent;
 
-  date = moment();
+  date = null;
+  minDate = moment().subtract(10, 'day');
+  minConf = {};
   dayPickerConfig: IDayPickerConfig = {
     firstDayOfWeek: 'mo',
     calendarsAmount: 2,
-    min: moment().subtract(1, 'month'),
-    max: moment().add(1, 'month'),
+    // min: moment().subtract(1, 'month'),
+    // max: moment().add(1, 'month'),
     placeholder: 'Set a date'
   };
 

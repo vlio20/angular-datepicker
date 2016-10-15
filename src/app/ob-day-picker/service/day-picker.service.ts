@@ -4,6 +4,7 @@ import * as moment from 'moment';
 import {UtilsService} from '../../common/services/utils/utils.service';
 import {ICalendarConfig} from '../../ob-calendar/config/calendar-config.model';
 import {Moment} from 'moment';
+import {FormControl} from '@angular/forms';
 
 @Injectable()
 export class DayPickerService {
@@ -49,6 +50,9 @@ export class DayPickerService {
   }
 
   isDateValid(date: string, format: string): boolean {
+    if (date === '') {
+      return true;
+    }
     return moment(date, format, true).isValid();
   }
 
@@ -64,4 +68,68 @@ export class DayPickerService {
   isMaxMonth(max: Moment, month): boolean {
     return month.clone().add(1, 'month').isAfter(max, 'month');
   }
+
+  createValidator({minDate, maxDate}: IValidators, dateFormat: string) {
+    let isValid: boolean;
+    let value: Moment;
+    const validators = [];
+
+    if (minDate) {
+      console.log(minDate);
+      validators.push({
+        key: 'minDate',
+        isValid: () => {
+          const _isValid = value.isSameOrAfter(minDate, 'day');
+          isValid = isValid ? _isValid : false;
+          return _isValid;
+        }
+      });
+    }
+
+    if (maxDate) {
+      validators.push({
+        key: 'maxDate',
+        isValid: () => {
+          const _isValid = value.isSameOrBefore(maxDate, 'day');
+          isValid = isValid ? _isValid : false;
+          return _isValid;
+        }
+      });
+    }
+
+    return function validateInput(c: FormControl) {
+      isValid = true;
+
+      if (c.value) {
+        value = typeof c.value === 'string' ? moment(c.value, dateFormat) : c.value;
+      } else {
+        return null;
+      }
+
+      if (!value.isValid()) {
+        return {
+          format: {
+            given: c.value
+          }
+        }
+      }
+
+      const errors = validators.reduce((map, err) => {
+        if (!err.isValid()) {
+          map[err.key] = {
+            given: value
+          };
+        }
+
+        return map;
+      }, <any>{});
+
+      return !isValid ? errors : null;
+    }
+  }
+}
+
+interface IValidators {
+  minDate?: Moment;
+  maxDate?: Moment;
 }

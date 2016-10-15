@@ -35,6 +35,7 @@ describe('Service: DayPicker', () => {
   it('should check isDateValid method', inject([DayPickerService], (service: DayPickerService) => {
     expect(service.isDateValid('13-10-2015', 'DD-MM-YYYY')).toBe(true);
     expect(service.isDateValid('13-10-2015', 'DD-MM-YY')).toBe(false);
+    expect(service.isDateValid('', 'DD-MM-YY')).toBe(true);
   }));
 
   it('should check moveCalendars method', inject([DayPickerService], (service: DayPickerService) => {
