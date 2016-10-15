@@ -46,13 +46,15 @@ export class ObDayPickerComponent implements OnChanges, ControlValueAccessor, Va
   private calendars: ICalendarConfig[];
   private value: Moment;
   private userValue;
+  private userValueType: string = 'object';
   validateFn: Function;
 
-  private get viewValue() {
-    return this.value ? this.value.format(this.pickerConfig.format) : ''
+  private get viewValue(): string {
+    return this.value ? this.value.format(this.pickerConfig.format) : '';
   }
 
-  private set viewValue(val) {
+  private set viewValue(value: string) {
+    const val = this.userValueType === 'string' ? value : moment(value, this.pickerConfig.format);
     this.onChangeCallback(val);
   }
 
@@ -87,6 +89,7 @@ export class ObDayPickerComponent implements OnChanges, ControlValueAccessor, Va
 
   writeValue(value: Moment): void {
     if (value) {
+      this.userValueType = typeof value;
       this.userValue = value;
       this.init();
     }
@@ -181,7 +184,7 @@ export class ObDayPickerComponent implements OnChanges, ControlValueAccessor, Va
 
   onViewDateChange(date: string) {
     if (this.dayPickerService.isDateValid(date, this.pickerConfig.format)) {
-      this.value = moment(date, this.pickerConfig.format);
+      this.value = date !== '' ? moment(date, this.pickerConfig.format) : null;
       this.viewValue = date;
     } else {
       this.onChangeCallback(undefined);

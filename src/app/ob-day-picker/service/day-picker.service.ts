@@ -75,7 +75,6 @@ export class DayPickerService {
     const validators = [];
 
     if (minDate) {
-      console.log(minDate);
       validators.push({
         key: 'minDate',
         isValid: () => {

@@ -11,12 +11,14 @@
   <button (click)="changeDate()">Change Date</button>
   <button (click)="togglePicker(true)">Open Picker</button>
   <button (click)="togglePicker(false)">Close Picker</button>
+
   <ob-day-picker name="min"
                  #min="ngModel"
                  [(ngModel)]="minDate"
                  [config]="minConf">
   </ob-day-picker>
 
+  <span>{{date}}</span>
 
   <div *ngIf="test.errors && test.errors.required">required</div>
   <div *ngIf="test.errors && test.errors.format">format invalid</div>
