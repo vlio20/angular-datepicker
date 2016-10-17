@@ -3,14 +3,14 @@
   "version": "0.0.0",
   "license": "MIT",
   "angular-cli": {},
-  "main": "./dist/out-tsc/app/app.module.js",
+  "main": "./dist/app/app.module.js",
   "scripts": {
     "start": "ng serve",
     "lint": "tslint \"src/**/*.ts\"",
     "test": "ng test",
     "pree2e": "webdriver-manager update",
     "e2e": "protractor",
-    "postinstall": "tsc ./src/**/* -d -m commonjs"
+    "postinstall": "tsc"
   },
   "files": [
     "src",
