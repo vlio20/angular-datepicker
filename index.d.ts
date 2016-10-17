@@ -1,1 +1,1 @@
-export * from './dist/ng2-pagination';
+export * from './dist/app.module';
