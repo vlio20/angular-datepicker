@@ -69,7 +69,7 @@ export class DayPickerService {
     return month.clone().add(1, 'month').isAfter(max, 'month');
   }
 
-  createValidator({minDate, maxDate}: IValidators, dateFormat: string) {
+  createValidator({minDate, maxDate}, dateFormat: string) {
     let isValid: boolean;
     let value: Moment;
     const validators = [];
@@ -126,9 +126,4 @@ export class DayPickerService {
       return !isValid ? errors : null;
     }
   }
-}
-
-interface IValidators {
-  minDate?: Moment;
-  maxDate?: Moment;
 }
