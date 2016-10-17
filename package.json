@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "angular-cli": {},
-  "main": "dist/app.module.js",
+  "main": "index.js",
   "scripts": {
     "start": "ng serve",
     "lint": "tslint \"src/**/*.ts\"",
