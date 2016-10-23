@@ -16,7 +16,8 @@
     "index.js",
     "index.d.ts",
     "tsconfig.json",
-    "!*.spec.ts"
+    "!*.spec.ts",
+    "gulpfile"
   ],
   "private": true,
   "dependencies": {
