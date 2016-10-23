@@ -5,6 +5,7 @@ import {AppComponent} from './app.component';
 import {ObDayPickerComponent} from './ob-day-picker/ob-day-picker.component';
 import {ObCalendarComponent} from './ob-calendar/ob-calendar.component';
 
+export {ObDayPickerComponent} from './ob-day-picker/ob-day-picker.component'
 
 @NgModule({
   declarations: [

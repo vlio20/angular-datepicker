@@ -14,6 +14,8 @@ var forms_1 = require('@angular/forms');
 var app_component_1 = require('./app.component');
 var ob_day_picker_component_1 = require('./ob-day-picker/ob-day-picker.component');
 var ob_calendar_component_1 = require('./ob-calendar/ob-calendar.component');
+var ob_day_picker_component_2 = require('./ob-day-picker/ob-day-picker.component');
+exports.ObDayPickerComponent = ob_day_picker_component_2.ObDayPickerComponent;
 var ObDatePickerModule = (function () {
     function ObDatePickerModule() {
     }

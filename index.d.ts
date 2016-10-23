@@ -1,2 +1,1 @@
-export * from './dist/app.module';
-export * from './dist/ob-day-picker';
+export * from './dist/app/app.module';
