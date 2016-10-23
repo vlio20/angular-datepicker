@@ -17,6 +17,7 @@ export {ObDayPickerComponent} from './ob-day-picker/ob-day-picker.component'
     BrowserModule,
     FormsModule
   ],
+  exports:[ObDayPickerComponent],
   bootstrap: [AppComponent]
 })
 

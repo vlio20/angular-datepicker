@@ -30,6 +30,7 @@ var ObDatePickerModule = (function () {
                 platform_browser_1.BrowserModule,
                 forms_1.FormsModule
             ],
+            exports: [ob_day_picker_component_1.ObDayPickerComponent],
             bootstrap: [app_component_1.AppComponent]
         }), 
         __metadata('design:paramtypes', [])
