@@ -1,44 +1,47 @@
-@import '../common/styles/variables';
+& {
+  @black: #000000;
+  @white: #FFFFFF;
 
-:host {
-  display: inline-block;
-}
+  :host {
+    display: inline-block;
+  }
 
-.ob-calendars-container {
-  position: absolute;
-  background: @white;
-}
+  .ob-calendars-container {
+    position: absolute;
+    background: @white;
+  }
 
-.ob-calendar-container {
-  display: inline-block;
-}
+  .ob-calendar-container {
+    display: inline-block;
+  }
 
-.ob-calendar-nav-container {
-  position: relative;
-  box-sizing: border-box;
-  height: 25px;
-  border: 1px solid @black;
-  border-bottom: none;
-}
+  .ob-calendar-nav-container {
+    position: relative;
+    box-sizing: border-box;
+    height: 25px;
+    border: 1px solid @black;
+    border-bottom: none;
+  }
 
-.ob-calendar-nav-left, .ob-calendar-nav-right {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  cursor: pointer;
-}
+  .ob-calendar-nav-left, .ob-calendar-nav-right {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
 
-.ob-calendar-nav-left {
-  left: 0;
-}
+  .ob-calendar-nav-left {
+    left: 0;
+  }
 
-.ob-calendar-nav-right {
-  right: 0;
-}
+  .ob-calendar-nav-right {
+    right: 0;
+  }
 
-.ob-calendar-month {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  .ob-calendar-month {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 }
