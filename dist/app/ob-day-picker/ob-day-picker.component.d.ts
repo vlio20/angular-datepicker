@@ -1,0 +1,46 @@
+import { SimpleChanges, OnChanges } from '@angular/core';
+import { Moment } from 'moment';
+import { DayPickerService } from './service/day-picker.service';
+import { ControlValueAccessor, FormControl, Validator } from '@angular/forms';
+import { IObDayPickerApi } from './ob-day-picker.api';
+export declare class ObDayPickerComponent implements OnChanges, ControlValueAccessor, Validator {
+    private dayPickerService;
+    private userConfig;
+    private minDate;
+    private maxDate;
+    private areCalendarsShown;
+    private hideStateHelper;
+    private pickerConfig;
+    private calendars;
+    private _value;
+    private userValue;
+    private viewValue;
+    private userValueType;
+    validateFn: Function;
+    private value;
+    api: IObDayPickerApi;
+    constructor(dayPickerService: DayPickerService);
+    onClick(): void;
+    onBodyClick(): void;
+    ngOnChanges(changes: SimpleChanges): void;
+    writeValue(value: Moment): void;
+    onChangeCallback(_: any): void;
+    registerOnChange(fn: any): void;
+    registerOnTouched(fn: any): void;
+    validate(c: FormControl): any;
+    isDateValid(value: string): void;
+    init(): void;
+    initValidators(): void;
+    initApi(): void;
+    daySelected({day}: {
+        day: any;
+    }): void;
+    inputFocused(): void;
+    showCalendars(): void;
+    hideCalendars(): void;
+    moveCalendars(base: Moment, months: number): void;
+    isLeftNavDisabled(month: Moment): boolean;
+    isRightNavDisabled(month: Moment): boolean;
+    onViewDateChange(date: string): void;
+    onKeydown(e: KeyboardEvent): void;
+}

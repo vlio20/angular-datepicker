@@ -1,0 +1,1 @@
+{"version":3,"names":[],"mappings":"","sources":["app/index.d.ts"],"sourcesContent":["export * from './app.component';\nexport * from './app.module';\n"],"file":"index.d.ts"}

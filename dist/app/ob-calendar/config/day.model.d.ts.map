@@ -1,0 +1,1 @@
+{"version":3,"names":[],"mappings":"","sources":["app/ob-calendar/config/day.model.d.ts"],"sourcesContent":["import { Moment } from 'moment';\nexport interface ICalendarDay {\n    date: Moment;\n    selected?: boolean;\n    currentMonth?: boolean;\n    prevMonth?: boolean;\n    nextMonth?: boolean;\n}\n"],"file":"day.model.d.ts"}

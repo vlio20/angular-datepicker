@@ -1,0 +1,1 @@
+{"version":3,"names":[],"mappings":"","sources":["app/app-routing.module.d.ts"],"sourcesContent":["export declare class Ng2DateRangePickerRoutingModule {\n}\n"],"file":"app-routing.module.d.ts"}

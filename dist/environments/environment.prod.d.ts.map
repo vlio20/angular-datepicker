@@ -1,0 +1,1 @@
+{"version":3,"names":[],"mappings":"","sources":["environments/environment.prod.d.ts"],"sourcesContent":["export declare const environment: {\n    production: boolean;\n};\n"],"file":"environment.prod.d.ts"}

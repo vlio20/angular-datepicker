@@ -13,6 +13,7 @@
   },
   "files": [
     "src",
+    "dist",
     "index.js",
     "index.d.ts",
     "tsconfig.json",

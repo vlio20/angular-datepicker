@@ -1,0 +1,1 @@
+{"version":3,"names":[],"mappings":"","sources":["app/ob-day-picker/ob-day-picker.api.d.ts"],"sourcesContent":["export interface IObDayPickerApi {\n    open: () => void;\n    close: () => void;\n}\n"],"file":"ob-day-picker.api.d.ts"}
