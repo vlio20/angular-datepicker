@@ -14,13 +14,13 @@
         <button class="ob-calendar-nav-left"
                 *ngIf="start"
                 [disabled]="isLeftNavDisabled(calendar.month)"
-                (click)="moveCalendars(calendar.month, -1)"> <
+                (click)="moveCalendars(calendars[0].month, -1)"> <
         </button>
         <span class="ob-calendar-month">{{calendar.month.format('MMM, YYYY')}}</span>
         <button class="ob-calendar-nav-right"
                 *ngIf="end"
                 [disabled]="isRightNavDisabled(calendar.month)"
-                (click)="moveCalendars(calendar.month, 1)"> >
+                (click)="moveCalendars(calendars[0].month, 1)"> >
         </button>
       </div>
       <ob-calendar [selected]="value"

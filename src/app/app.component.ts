@@ -17,7 +17,7 @@ export class AppComponent {
   minConf = {};
   dayPickerConfig: IDayPickerConfig = {
     firstDayOfWeek: 'mo',
-    calendarsAmount: 2,
+    calendarsAmount: 3,
     // min: moment().subtract(1, 'month'),
     // max: moment().add(1, 'month'),
     placeholder: 'Set a date'
