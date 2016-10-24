@@ -57,10 +57,12 @@ describe('Service: DayPicker', () => {
   it('should check isMinMonth method', inject([DayPickerService], (service: DayPickerService) => {
     expect(service.isMinMonth(moment(), moment())).toBe(true);
     expect(service.isMinMonth(moment().subtract(1, 'month'), moment())).toBe(false);
+    expect(service.isMinMonth(undefined, moment())).toBe(false);
   }));
 
   it('should check isMaxMonth method', inject([DayPickerService], (service: DayPickerService) => {
     expect(service.isMaxMonth(moment(), moment())).toBe(true);
     expect(service.isMaxMonth(moment().add(1, 'month'), moment())).toBe(false);
+    expect(service.isMinMonth(undefined, moment())).toBe(false);
   }));
 });

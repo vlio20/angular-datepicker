@@ -24,7 +24,8 @@ export class DayPickerService {
       sa: 'sat'
     },
     disabled: false,
-    disableKeypress: false
+    disableKeypress: false,
+    placeholder: ''
   };
 
   // private formatValues(config: IDayPickerConfig): void {
@@ -62,11 +63,11 @@ export class DayPickerService {
   }
 
   isMinMonth(min: Moment, month): boolean {
-    return month.clone().subtract(1, 'month').isBefore(min, 'month');
+    return min ? month.clone().subtract(1, 'month').isBefore(min, 'month') : false;
   }
 
   isMaxMonth(max: Moment, month): boolean {
-    return month.clone().add(1, 'month').isAfter(max, 'month');
+    return max ? month.clone().add(1, 'month').isAfter(max, 'month') : false;
   }
 
   createValidator({minDate, maxDate}, dateFormat: string) {
@@ -110,7 +111,7 @@ export class DayPickerService {
           format: {
             given: c.value
           }
-        }
+        };
       }
 
       const errors = validators.reduce((map, err) => {
@@ -124,6 +125,6 @@ export class DayPickerService {
       }, <any>{});
 
       return !isValid ? errors : null;
-    }
+    };
   }
 }

@@ -57,7 +57,7 @@ export class ObDayPickerComponent implements OnChanges, ControlValueAccessor, Va
   private set value(value: Moment) {
     this._value = value;
     this.viewValue = value ? value.format(this.pickerConfig.format) : '';
-    const val = this.userValueType === 'string' ? this.viewValue  : value;
+    const val = this.userValueType === 'string' ? this.viewValue : value;
     this.onChangeCallback(val);
   }
 
@@ -80,10 +80,8 @@ export class ObDayPickerComponent implements OnChanges, ControlValueAccessor, Va
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    const {userConfig, minDate, maxDate} = changes;
-    if (userConfig) {
-      this.init();
-    }
+    const {minDate, maxDate} = changes;
+    this.init();
 
     if (minDate || maxDate) {
       this.initValidators();
