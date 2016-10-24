@@ -38,7 +38,7 @@ export class DayPickerService {
     return _config;
   }
 
-  generateCalendars(config: IDayPickerConfig, selected: Moment, month?: Moment): ICalendarConfig[] {
+  generateCalendars(config: IDayPickerConfig, selected?: Moment, month?: Moment): ICalendarConfig[] {
     const base = (month && month.clone()) || (selected && selected.clone()) || moment();
     return UtilsService.createArray(config.calendarsAmount).map((n: number, i: number) => ({
       month: base.clone().add(i, 'month'),
