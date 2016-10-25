@@ -1,12 +1,12 @@
 <div>
   <input type="text"
          class="ob-daypicker-input"
-         [placeholder]="pickerConfig.placeholder"
+         [placeholder]="placeholder"
          [ngModel]="viewValue"
          (ngModelChange)="onViewDateChange($event)"
          (focus)="inputFocused()"
          (keydown)="onKeydown($event)"
-         [disabled]="pickerConfig.disabled"/>
+         [disabled]="disabled"/>
   <div class="ob-calendars-container" *ngIf="areCalendarsShown">
     <div class="ob-calendar-container"
          *ngFor="let calendar of calendars; let start = first; let end = last">

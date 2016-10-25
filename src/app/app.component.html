@@ -4,6 +4,8 @@
                  #dayPicker
                  [(ngModel)]="date"
                  [config]="dayPickerConfig"
+                 [placeholder]="'placeholder'"
+                 [disabled]="disabled"
                  required
                  [minDate]="minDate">
   </ob-day-picker>
@@ -11,6 +13,7 @@
   <button (click)="changeDate()">Change Date</button>
   <button (click)="togglePicker(true)">Open Picker</button>
   <button (click)="togglePicker(false)">Close Picker</button>
+  <button (click)="toggleDisabled()">Toggle Disabled</button>
 
   <ob-day-picker name="min"
                  #min="ngModel"

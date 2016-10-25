@@ -14,13 +14,12 @@ export class AppComponent {
 
   date = null;
   minDate = moment().subtract(10, 'day');
-  minConf = {};
+  disabled = false;
   dayPickerConfig: IDayPickerConfig = {
     firstDayOfWeek: 'mo',
     calendarsAmount: 3,
     // min: moment().subtract(1, 'month'),
     // max: moment().add(1, 'month'),
-    placeholder: 'Set a date'
   };
 
   changeDate() {
@@ -29,5 +28,9 @@ export class AppComponent {
 
   togglePicker(state: boolean) {
     state ? this.dayPicker.api.open() : this.dayPicker.api.close();
+  }
+
+  toggleDisabled() {
+    this.disabled = !this.disabled;
   }
 }

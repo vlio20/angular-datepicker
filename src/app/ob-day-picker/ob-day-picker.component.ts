@@ -37,6 +37,12 @@ import {IObDayPickerApi} from './ob-day-picker.api';
 })
 export class ObDayPickerComponent implements OnChanges, ControlValueAccessor, Validator {
   @Input('config') private userConfig: IDayPickerConfig;
+
+  // attributes
+  @Input() private placeholder: string = '';
+  @Input() private disabled: boolean = false;
+
+  // validations
   @Input() private minDate: Moment | string;
   @Input() private maxDate: Moment | string;
 
