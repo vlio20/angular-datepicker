@@ -180,11 +180,11 @@ export class ObDayPickerComponent implements OnChanges, ControlValueAccessor, Va
   }
 
   isLeftNavDisabled(month: Moment): boolean {
-    return this.dayPickerService.isMinMonth(this.pickerConfig.min, month);
+    return this.dayPickerService.isMinMonth(<Moment>this.pickerConfig.min, month);
   }
 
   isRightNavDisabled(month: Moment): boolean {
-    return this.dayPickerService.isMaxMonth(this.pickerConfig.max, month);
+    return this.dayPickerService.isMaxMonth(<Moment>this.pickerConfig.max, month);
   }
 
   onViewDateChange(date: string) {

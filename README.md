@@ -29,3 +29,39 @@ Here are the available configurations:
 | disableKeypress      | `Boolean`       | `false`                                                                   | Disables the possibility to change the date value by typing it - changing the date would be possible only from the picker                                                                                                  |
 | min                  | `Moment|String` | `undefined`                                                               | Disables all dates (on the date-picker) that are set to before the `min`, note that if invalid date would be set by the input then the date picker value would be the min date but the input will show the user typed date |
 | max                  | `Moment|String` | `undefined`                                                               | Disables all dates (on the date-picker) that are set to after the `max`, note that if invalid date would be set by the input then the date picker value would be the max date but the input will show the user typed date  |
+
+### API:
+In order to use the date-picker api user the `@ViewChild` annotation in the date-picker containing component class, take at the example bellow:  
+Container component:
+```
+import {Component, ViewChild} from '@angular/core';
+import {ObDayPickerComponent} from 'ng2-date-picker';
+
+@Component({
+  selector: 'my-container',
+  template: `
+    <div>
+        <h1>Container</h1>
+        <ob-day-picker #dayPicker></ob-day-picker>
+        <button (click)="open()"></button>
+        <button (click)="close()"></button>
+    </div>
+  `
+});
+class MyContainer {
+    @ViewChild('dayPicker') dayPicker: ObDayPickerComponent;
+    
+    open() {
+        this.dayPicker.api.open();
+    }
+     
+    close() {
+         this.dayPicker.api.close();
+    } 
+}
+```
+Here is the list of APIs:
+| Name                 | Signature       | description            |
+|----------------------|:---------------:|------------------------|
+| open                 | `() => void`    | Opens the date picker  |
+| close                | `() => void`    | Closes the date picker |

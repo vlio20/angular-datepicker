@@ -26,13 +26,21 @@ export class DayPickerService {
     disableKeypress: false,
   };
 
-  // private formatValues(config: IDayPickerConfig): void {
-  //   const {selected, format} = config;
-  // }
+  private formatValues(config: IDayPickerConfig): void {
+    const {format, min, max} = config;
+
+    if (min && typeof min === 'string') {
+      config.min = moment(min, format);
+    }
+
+    if (max && typeof max === 'string') {
+      config.max = moment(max, format);
+    }
+  }
 
   getConfig(config: IDayPickerConfig) {
     const _config = Object.assign({}, this.defaultConfig, config);
-    // this.formatValues(config);
+    this.formatValues(_config);
     return _config;
   }
 
@@ -43,8 +51,8 @@ export class DayPickerService {
       selected: selected,
       firstDayOfWeek: config.firstDayOfWeek,
       weekdayNames: config.weekdayNames,
-      min: config.min,
-      max: config.max
+      min: <Moment>config.min,
+      max: <Moment>config.max
     }));
   }
 

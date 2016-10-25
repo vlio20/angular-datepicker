@@ -5,8 +5,8 @@ export interface IDayPickerConfig {
   firstDayOfWeek?: WeekDays;
   calendarsAmount?: number;
   format?: string;
-  min?: Moment;
-  max?: Moment;
+  min?: Moment | string;
+  max?: Moment | string;
   closeOnSelect?: boolean;
   closeOnSelectDelay?: number;
   weekdayNames?: {[key: string]: string};

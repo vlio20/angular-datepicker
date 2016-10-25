@@ -3,6 +3,7 @@
 import {TestBed, async, inject} from '@angular/core/testing';
 import {DayPickerService} from './day-picker.service';
 import * as moment from 'moment';
+import {Moment} from 'moment';
 
 describe('Service: DayPicker', () => {
   beforeEach(() => {
@@ -64,5 +65,24 @@ describe('Service: DayPicker', () => {
     expect(service.isMaxMonth(moment(), moment())).toBe(true);
     expect(service.isMaxMonth(moment().add(1, 'month'), moment())).toBe(false);
     expect(service.isMinMonth(undefined, moment())).toBe(false);
+  }));
+
+  it('should check getConfig method for dates format aspect', inject([DayPickerService], (service: DayPickerService) => {
+    const config1 = service.getConfig({
+      min: '2016-10-25',
+      max: '2017-10-25',
+      format: 'YYYY-MM-DD'
+    });
+
+    expect((<Moment>config1.min).isSame(moment('2016-10-25', 'YYYY-MM-DD'), 'day')).toBe(true);
+    expect((<Moment>config1.max).isSame(moment('2017-10-25', 'YYYY-MM-DD'), 'day')).toBe(true);
+
+    const config2 = service.getConfig({
+      min: moment('2016-10-25', 'YYYY-MM-DD'),
+      max: moment('2017-10-25', 'YYYY-MM-DD')
+    });
+
+    expect((<Moment>config2.min).isSame(moment('2016-10-25', 'YYYY-MM-DD'), 'day')).toBe(true);
+    expect((<Moment>config2.max).isSame(moment('2017-10-25', 'YYYY-MM-DD'), 'day')).toBe(true);
   }));
 });
