@@ -1,13 +1,21 @@
 # Date Picker
 This is a configurable date-picker build for Angular2 applications and uses MomentJS as a dependency.  
 
+### Attributes:  
+
+| Name                 | Type       | Default                                                                   | description                                                                                                               |
+|----------------------|:----------:|:------------------------------------------------------------------------:|---------------------------------------------------------------------------------------------------------------------------|
+| disabled             | `Boolean`  | `false`                                                                  | If set to true the input would be disabled                                                                                |
+| placeholder          | `String`  | `""`                                                                      | The date-picker input placeholder                                                                                |
+
+
 ### Configuration:  
 In order to provide configurations to the date-picker you need to pass it to the `ob-date-picker` component:  
 ```
 <ob-day-picker [config]="datePikerConfig"></ob-day-picker>
 ```
 Here are the available configurations:
-| Option               | Type      | Default                                                                   | description                                                                                                               |
+| Name                 | Type      | Default                                                                   | description                                                                                                               |
 |----------------------|:---------:|:-------------------------------------------------------------------------:|---------------------------------------------------------------------------------------------------------------------------|
 | firstDayOfWeek       | `String`  | `"su"`                                                                    | The first day of the calendar's week. Should be one of: `"su", "mo", "tu", "we", "th", "fr", "sa"`                        |
 | calendarsAmount      | `Number`  | `1`                                                                       | The amount of calenders shown when the date-picker open                                                                   |
