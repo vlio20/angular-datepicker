@@ -3,10 +3,12 @@ This is a configurable date-picker build for Angular2 applications and uses Mome
 
 ### Attributes:  
 
-| Name                 | Type       | Default                                                                   | description                                                                                                               |
-|----------------------|:----------:|:------------------------------------------------------------------------:|---------------------------------------------------------------------------------------------------------------------------|
-| disabled             | `Boolean`  | `false`                                                                  | If set to true the input would be disabled                                                                                |
-| placeholder          | `String`  | `""`                                                                      | The date-picker input placeholder                                                                                |
+| Name                 | Type             | Default                                                                   | description                                                                                                                                                                                                        |
+|----------------------|:----------------:|:------------------------------------------------------------------------:|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| disabled             | `Boolean`        | `false`                                                                  | If set to true the input would be disabled                                                                                                                                                                          |
+| placeholder          | `String`         | `""`                                                                     | The date-picker input placeholder                                                                                                                                                                                   |
+| minDate              | `Moment|String`  | `undefined`                                                              | This is a validation rule, if the selected date will be before `minDate` the containing form will be invalid. Note: if provided as string format configuration should be provided in the config object              |
+| MaxDate              | `Moment|String`  | `undefined`                                                              | This is a validation rule, if the selected date will be after `MaxDate` the containing form will be invalid. Note: if provided as string format configuration should be provided in the config object               | 
 
 
 ### Configuration:  
