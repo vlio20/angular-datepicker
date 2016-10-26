@@ -66,6 +66,9 @@ export class ObDayPickerComponent implements OnChanges, OnInit, ControlValueAcce
     this._value = value;
     this.viewValue = value ? value.format(this.pickerConfig.format) : '';
     const val = this.userValueType === 'string' ? this.viewValue : value;
+    if (this.value) {
+      this.calendars = this.dayPickerService.moveCalendars(this.pickerConfig, this.value, this.value, 0);
+    }
     this.onChangeCallback(val);
   }
 
@@ -166,7 +169,12 @@ export class ObDayPickerComponent implements OnChanges, OnInit, ControlValueAcce
     this.value = day.date;
 
     if (this.pickerConfig.closeOnSelect) {
-      setTimeout(this.hideCalendars.bind(this), this.pickerConfig.closeOnSelectDelay);
+      setTimeout(() => {
+        this.hideCalendars();
+        // this.calendars = this.dayPickerService.moveCalendars(this.pickerConfig, this.value, day.date, 0);
+      }, this.pickerConfig.closeOnSelectDelay);
+    } else {
+      // this.calendars = this.dayPickerService.moveCalendars(this.pickerConfig, this.value, day.date, 0);
     }
   }
 
@@ -199,6 +207,7 @@ export class ObDayPickerComponent implements OnChanges, OnInit, ControlValueAcce
   onViewDateChange(date: string) {
     if (this.dayPickerService.isDateValid(date, this.pickerConfig.format)) {
       this.value = date !== '' ? moment(date, this.pickerConfig.format) : null;
+
     } else {
       this.onChangeCallback(undefined);
     }

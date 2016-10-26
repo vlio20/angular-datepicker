@@ -23,7 +23,7 @@ export class AppComponent {
   };
 
   materialConf: IDayPickerConfig = {
-    calendarsAmount: 2,
+    calendarsAmount: 1
   };
 
   changeDate() {
