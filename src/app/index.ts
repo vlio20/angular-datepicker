@@ -1,2 +1,2 @@
-export * from './app.component';
-export * from './app.module';
+export * from './demo/demo.component';
+export * from './ob-date-picker.module';

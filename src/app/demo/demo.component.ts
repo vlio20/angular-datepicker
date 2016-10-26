@@ -1,15 +1,15 @@
 import {Component, ViewChild} from '@angular/core';
-import {ObDayPickerComponent} from './ob-day-picker/ob-day-picker.component';
-import {IDayPickerConfig} from './ob-day-picker/service/day-picker-config.model';
 import * as moment from 'moment';
+import {ObDayPickerComponent} from '../ob-day-picker/ob-day-picker.component';
+import {IDayPickerConfig} from '../ob-day-picker/service/day-picker-config.model';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
+  selector: 'ob-demo-root',
+  templateUrl: './demo.component.html',
   entryComponents: [ObDayPickerComponent]
 })
 
-export class AppComponent {
+export class DemoComponent {
   @ViewChild('dayPicker') dayPicker: ObDayPickerComponent;
 
   date = null;

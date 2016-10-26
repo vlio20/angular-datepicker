@@ -6,6 +6,6 @@ export class Ng2DatePickerPage {
   }
 
   getParagraphText() {
-    return element(by.css('app-root h1')).getText();
+    return element(by.css('ob-demo-root h1')).getText();
   }
 }
