@@ -22,6 +22,10 @@ export class AppComponent {
     // max: moment().add(1, 'month'),
   };
 
+  materialConf: IDayPickerConfig = {
+    calendarsAmount: 2,
+  };
+
   changeDate() {
     this.date = moment().add(1, 'day');
   }

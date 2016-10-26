@@ -4,7 +4,8 @@ import {
   HostListener,
   forwardRef,
   SimpleChanges,
-  OnChanges
+  OnChanges,
+  OnInit
 } from '@angular/core';
 import {ObCalendarComponent} from '../ob-calendar/ob-calendar.component';
 import * as moment from 'moment';
@@ -35,7 +36,8 @@ import {IObDayPickerApi} from './ob-day-picker.api';
     }
   ]
 })
-export class ObDayPickerComponent implements OnChanges, ControlValueAccessor, Validator {
+export class ObDayPickerComponent implements OnChanges, OnInit, ControlValueAccessor, Validator {
+  private shouldNgInit: boolean = true;
   @Input('config') private userConfig: IDayPickerConfig;
 
   // attributes
@@ -85,7 +87,14 @@ export class ObDayPickerComponent implements OnChanges, ControlValueAccessor, Va
     this.hideStateHelper = false;
   }
 
+  ngOnInit() {
+    if (this.shouldNgInit) {
+      this.init();
+    }
+  }
+
   ngOnChanges(changes: SimpleChanges) {
+    this.shouldNgInit = false;
     const {minDate, maxDate} = changes;
     this.init();
 

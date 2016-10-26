@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Moment} from 'moment';
+import * as moment from 'moment';
 import {WeekDays} from '../../common/types/week-days.type';
 import {UtilsService} from '../../common/services/utils/utils.service';
 import {ICalendarDay} from '../config/day.model';
@@ -44,7 +45,8 @@ export class CalendarService {
         selected: current.isSame(selectedDay, 'day'),
         currentMonth: current.isSame(dayInMonth, 'month'),
         prevMonth: current.isSame(dayInMonth.clone().subtract(1, 'month'), 'month'),
-        nextMonth: current.isSame(dayInMonth.clone().add(1, 'month'), 'month')
+        nextMonth: current.isSame(dayInMonth.clone().add(1, 'month'), 'month'),
+        currentDay: current.isSame(moment(), 'day')
       });
       current.add(1, 'd');
       return array;

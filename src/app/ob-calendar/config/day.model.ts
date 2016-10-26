@@ -6,4 +6,5 @@ export interface ICalendarDay {
   currentMonth?: boolean;
   prevMonth?: boolean;
   nextMonth?: boolean;
+  currentDay?: boolean;
 }
