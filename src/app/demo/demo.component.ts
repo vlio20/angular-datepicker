@@ -1,40 +1,56 @@
 import {Component, ViewChild} from '@angular/core';
 import * as moment from 'moment';
 import {ObDayPickerComponent} from '../ob-day-picker/ob-day-picker.component';
-import {IDayPickerConfig} from '../ob-day-picker/service/day-picker-config.model';
 
 @Component({
   selector: 'ob-demo-root',
   templateUrl: './demo.component.html',
-  entryComponents: [ObDayPickerComponent]
+  entryComponents: [ObDayPickerComponent],
+  styleUrls: ['./demo.component.less']
 })
-
 export class DemoComponent {
   @ViewChild('dayPicker') dayPicker: ObDayPickerComponent;
 
-  date = null;
-  minDate = moment().subtract(10, 'day');
-  disabled = false;
-  dayPickerConfig: IDayPickerConfig = {
-    firstDayOfWeek: 'mo',
-    calendarsAmount: 3,
-    // min: moment().subtract(1, 'month'),
-    // max: moment().add(1, 'month'),
-  };
+  ngModelOnly =
+    `
+<ob-day-picker [(ngModel)]="date"></ob-day-picker>
 
-  materialConf: IDayPickerConfig = {
-    calendarsAmount: 1
-  };
+`;
 
-  changeDate() {
-    this.date = moment().add(1, 'day');
-  }
+  disabled =
+    `
+<ob-day-picker [(ngModel)]="date" 
+               [disabled]="disabled">
+</ob-day-picker>
 
-  togglePicker(state: boolean) {
-    state ? this.dayPicker.api.open() : this.dayPicker.api.close();
-  }
+`;
 
-  toggleDisabled() {
-    this.disabled = !this.disabled;
-  }
+  demos = [
+    {
+      header: 'Basic Usage',
+      date: undefined,
+      config: undefined,
+      template: this.ngModelOnly,
+      ts: `
+export class DemoComponent {
+  date;
+}
+
+`
+    },
+    {
+      header: 'Disabled',
+      date: undefined,
+      config: undefined,
+      disabled: true,
+      template: this.disabled,
+      ts: `
+export class DemoComponent {
+  date;
+  disabled: boolean = true;
+}
+
+`
+    },
+  ];
 }

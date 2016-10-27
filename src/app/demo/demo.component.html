@@ -1,3 +1,33 @@
+<div>
+  <div class="ob-demo-item" *ngFor="let demo of demos">
+    <h3>{{demo.header}}:</h3>
+    <div class="ob-demo-panel">
+      <div>
+        <div class="ob-demo-section-header">Result</div>
+        <div class="ob-demo-section">
+          <ob-day-picker [(ngModel)]="demo.date" [config]="demo.config" [disabled]="demo.disabled"></ob-day-picker>
+          <span>{{demo.date}}</span>
+        </div>
+      </div>
+
+      <div>
+        <div class="ob-demo-section-header">Template</div>
+        <div class="ob-demo-section">
+          <pre><code class="typescript">{{demo.template}}</code></pre>
+        </div>
+      </div>
+
+      <div>
+        <div class="ob-demo-section-header">TypeScript</div>
+        <div class="ob-demo-section">
+          <pre><code class="typescript">{{demo.ts}}</code></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <form #form="ngForm">
   <ob-day-picker name="test"
                  #test="ngModel"
@@ -28,22 +58,4 @@
   <div *ngIf="test.errors && test.errors.minDate">minDate invalid</div>
   <div *ngIf="test.errors && test.errors.maxDate">maxDate invalid</div>
 </form>
-
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <ob-day-picker class="ob-material" [(ngModel)]="date" [config]="materialConf"></ob-day-picker>
