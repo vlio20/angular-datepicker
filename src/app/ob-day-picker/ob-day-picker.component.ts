@@ -142,8 +142,9 @@ export class ObDayPickerComponent implements OnChanges, OnInit, ControlValueAcce
 
   // start
   init() {
+    console.log(this.value);
     this.pickerConfig = this.dayPickerService.getConfig(this.userConfig);
-    this.value = UtilsService.convertToMoment(this.userValue, this.pickerConfig.format);
+    this.value = this.userValue ? UtilsService.convertToMoment(this.userValue, this.pickerConfig.format) : this.value;
     this.calendars = this.dayPickerService.generateCalendars(this.pickerConfig, this.value);
     this.initApi();
   }

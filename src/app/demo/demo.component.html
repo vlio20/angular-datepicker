@@ -1,61 +1,166 @@
-<div>
-  <div class="ob-demo-item" *ngFor="let demo of demos">
-    <h3>{{demo.header}}:</h3>
-    <div class="ob-demo-panel">
-      <div>
-        <div class="ob-demo-section-header">Result</div>
-        <div class="ob-demo-section">
-          <ob-day-picker [(ngModel)]="demo.date" [config]="demo.config" [disabled]="demo.disabled"></ob-day-picker>
-          <span>{{demo.date}}</span>
-        </div>
-      </div>
+<div class="ob-attributes">
+  <h4 class="ob-options-section">Attribute options</h4>
+  <div class="ob-option">
+    <span class="option">
+      Material Styling ("ob-material" class):
+    </span>
+    <div class="ob-option-playground">
+      <label>Material
+        <input type="radio" [(ngModel)]="material" name="style" [value]="true">
+      </label>
+      <label>No Styling
+        <input type="radio" [(ngModel)]="material" name="style" [value]="false">
+      </label>
+    </div>
+  </div>
 
-      <div>
-        <div class="ob-demo-section-header">Template</div>
-        <div class="ob-demo-section">
-          <pre><code class="typescript">{{demo.template}}</code></pre>
-        </div>
-      </div>
+  <div class="ob-option">
+    <span class="option">
+      Disabled (disabled):
+    </span>
+    <div class="ob-option-playground">
+      <label>Enabled
+        <input type="radio" [(ngModel)]="disabled" name="disabled" [value]="false">
+      </label>
+      <label>Disabled
+        <input type="radio" [(ngModel)]="disabled" name="disabled" [value]="true">
+      </label>
+    </div>
+  </div>
 
-      <div>
-        <div class="ob-demo-section-header">TypeScript</div>
-        <div class="ob-demo-section">
-          <pre><code class="typescript">{{demo.ts}}</code></pre>
-        </div>
-      </div>
+  <div class="ob-option">
+    <span class="option">
+      Required Validation (required):
+    </span>
+    <div class="ob-option-playground">
+      <label>Required
+        <input type="radio" [(ngModel)]="required" name="required" [value]="true">
+      </label>
+      <label>Not Required
+        <input type="radio" [(ngModel)]="required" name="required" [value]="false">
+      </label>
+    </div>
+  </div>
+
+  <div class="ob-option">
+    <span class="option">
+      Min-Date Validation (minDate):
+    </span>
+    <div class="ob-option-playground">
+      <ob-day-picker class="ob-material"
+                     [(ngModel)]="validationMinDate"
+                     placeholder="Select a min date">
+      </ob-day-picker>
+    </div>
+  </div>
+
+  <div class="ob-option">
+    <span class="option">
+      Max-Date Validation (maxDate):
+    </span>
+    <div class="ob-option-playground">
+      <ob-day-picker class="ob-material"
+                     [(ngModel)]="validationMaxDate"
+                     placeholder="Select a max date">
+      </ob-day-picker>
+    </div>
+  </div>
+
+  <div class="ob-option">
+    <span class="option">
+      Placeholder (placeholder):
+    </span>
+    <div class="ob-option-playground">
+      <input type="text" placeholder="Put a placeholder" [(ngModel)]="placeholder"/>
+    </div>
+  </div>
+
+</div>
+
+<div class="ob-attributes">
+  <h4 class="ob-options-section">Config options</h4>
+
+  <div class="ob-option">
+    <span class="option">
+      First Day of The week (firstDayOfWeek):
+    </span>
+    <div class="ob-option-playground">
+      <select [(ngModel)]="config.firstDayOfWeek" (change)="configChanged()">
+        <option *ngFor="let day of DAYS" [value]="day"> {{day}}</option>
+      </select>
     </div>
   </div>
 </div>
 
 
-<form #form="ngForm">
-  <ob-day-picker name="test"
-                 #test="ngModel"
-                 #dayPicker
-                 [(ngModel)]="date"
-                 [config]="dayPickerConfig"
-                 [placeholder]="'placeholder'"
-                 [disabled]="disabled"
-                 required
-                 [minDate]="minDate">
-  </ob-day-picker>
+<div class="ob-picker-container">
+  <form #form="ngForm">
+    <ob-day-picker name="dateItem"
+                   #dateItem="ngModel"
+                   #dayPicker
+                   [class.ob-material]="material"
+                   [(ngModel)]="date"
+                   [disabled]="disabled"
+                   [minDate]="validationMinDate"
+                   [maxDate]="validationMaxDate"
+                   [required]="required"
+                   [placeholder]="placeholder"
+                   [config]="config">
+    </ob-day-picker>
+    <div *ngIf="dateItem.errors && dateItem.errors.required">required</div>
+    <div *ngIf="dateItem.errors && dateItem.errors.format">format invalid</div>
+    <div *ngIf="dateItem.errors && dateItem.errors.minDate">minDate invalid</div>
+    <div *ngIf="dateItem.errors && dateItem.errors.maxDate">maxDate invalid</div>
+  </form>
 
-  <button (click)="changeDate()">Change Date</button>
-  <button (click)="togglePicker(true)">Open Picker</button>
-  <button (click)="togglePicker(false)">Close Picker</button>
-  <button (click)="toggleDisabled()">Toggle Disabled</button>
+  <div class="ob-configs-container">
+    <div class="ob-attribute-options">
+      <pre>
+        <code class="html">
+[class.ob-material]="{{material}}"
+[disabled]="{{disabled}}"
+[required]="{{required}}"
+[minDate]="{{validationMinDate && validationMinDate.format(demoFormat)}}"
+[maxDate]="{{validationMaxDate && validationMaxDate.format(demoFormat)}}"
+[placeholder]="{{placeholder}}"
+        </code>
+      </pre>
+    </div>
+    <div class="ob-config-object">
+      <pre><code class="typescript">{{config | json}}</code></pre>
+    </div>
+  </div>
+</div>
 
-  <ob-day-picker name="min"
-                 #min="ngModel"
-                 [(ngModel)]="minDate"
-                 [config]="minConf">
-  </ob-day-picker>
 
-  <span>{{date}}</span>
+<!--<form #form="ngForm">-->
+  <!--<ob-day-picker name="test"-->
+                 <!--#test="ngModel"-->
+                 <!--#dayPicker-->
+                 <!--[(ngModel)]="date"-->
+                 <!--[config]="dayPickerConfig"-->
+                 <!--[placeholder]="'placeholder'"-->
+                 <!--[disabled]="disabled"-->
+                 <!--required-->
+                 <!--[minDate]="minDate">-->
+  <!--</ob-day-picker>-->
 
-  <div *ngIf="test.errors && test.errors.required">required</div>
-  <div *ngIf="test.errors && test.errors.format">format invalid</div>
-  <div *ngIf="test.errors && test.errors.minDate">minDate invalid</div>
-  <div *ngIf="test.errors && test.errors.maxDate">maxDate invalid</div>
-</form>
-<ob-day-picker class="ob-material" [(ngModel)]="date" [config]="materialConf"></ob-day-picker>
+  <!--<button (click)="changeDate()">Change Date</button>-->
+  <!--<button (click)="togglePicker(true)">Open Picker</button>-->
+  <!--<button (click)="togglePicker(false)">Close Picker</button>-->
+  <!--<button (click)="toggleDisabled()">Toggle Disabled</button>-->
+
+  <!--<ob-day-picker name="min"-->
+                 <!--#min="ngModel"-->
+                 <!--[(ngModel)]="minDate"-->
+                 <!--[config]="minConf">-->
+  <!--</ob-day-picker>-->
+
+  <!--<span>{{date}}</span>-->
+
+  <!--<div *ngIf="test.errors && test.errors.required">required</div>-->
+  <!--<div *ngIf="test.errors && test.errors.format">format invalid</div>-->
+  <!--<div *ngIf="test.errors && test.errors.minDate">minDate invalid</div>-->
+  <!--<div *ngIf="test.errors && test.errors.maxDate">maxDate invalid</div>-->
+<!--</form>-->
+<!--<ob-day-picker class="ob-material" [(ngModel)]="date" [config]="materialConf"></ob-day-picker>-->

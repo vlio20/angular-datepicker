@@ -1,6 +1,8 @@
 import {Component, ViewChild} from '@angular/core';
 import * as moment from 'moment';
 import {ObDayPickerComponent} from '../ob-day-picker/ob-day-picker.component';
+import {Moment} from 'moment'
+import {IDayPickerConfig} from '../ob-day-picker/service/day-picker-config.model';
 
 @Component({
   selector: 'ob-demo-root',
@@ -10,47 +12,19 @@ import {ObDayPickerComponent} from '../ob-day-picker/ob-day-picker.component';
 })
 export class DemoComponent {
   @ViewChild('dayPicker') dayPicker: ObDayPickerComponent;
+  demoFormat = 'DD-MM-YYYY';
+  readonly DAYS = ['su', 'mo', 'tu', 'we', 'th', 'fr', 'sa'];
 
-  ngModelOnly =
-    `
-<ob-day-picker [(ngModel)]="date"></ob-day-picker>
+  material: boolean = true;
+  required: boolean = false;
+  disabled: boolean = false;
+  validationMinDate: Moment;
+  validationMaxDate: Moment;
+  placeholder: string = '';
 
-`;
+  config: IDayPickerConfig = {};
 
-  disabled =
-    `
-<ob-day-picker [(ngModel)]="date" 
-               [disabled]="disabled">
-</ob-day-picker>
-
-`;
-
-  demos = [
-    {
-      header: 'Basic Usage',
-      date: undefined,
-      config: undefined,
-      template: this.ngModelOnly,
-      ts: `
-export class DemoComponent {
-  date;
-}
-
-`
-    },
-    {
-      header: 'Disabled',
-      date: undefined,
-      config: undefined,
-      disabled: true,
-      template: this.disabled,
-      ts: `
-export class DemoComponent {
-  date;
-  disabled: boolean = true;
-}
-
-`
-    },
-  ];
+  configChanged() {
+    this.config = Object.assign({}, this.config);
+  };
 }
