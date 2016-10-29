@@ -17,7 +17,8 @@ In order to provide configurations to the date-picker you need to pass it to the
 ```
 <ob-day-picker [config]="datePikerConfig"></ob-day-picker>
 ```
-Here are the available configurations:
+Here are the available configurations:  
+
 | Name                 | Type            | Default                                                                   | description                                                                                                                                                                                                                |
 |----------------------|:---------------:|:-------------------------------------------------------------------------:|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | firstDayOfWeek       | `String`        | `"su"`                                                                    | The first day of the calendar's week. Should be one of: `"su", "mo", "tu", "we", "th", "fr", "sa"`                                                                                                                         |
@@ -60,7 +61,8 @@ class MyContainer {
     } 
 }
 ```
-Here is the list of APIs:
+Here is the list of APIs:  
+
 | Name                 | Signature       | description            |
 |----------------------|:---------------:|------------------------|
 | open                 | `() => void`    | Opens the date picker  |
