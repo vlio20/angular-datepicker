@@ -1,7 +1,7 @@
 <div class="ob-attributes">
-  <h4 class="ob-options-section">Attribute options</h4>
+  <h3 class="ob-options-section">Attribute options</h3>
   <div class="ob-option">
-    <span class="option">
+    <span class="ob-option-header">
       Material Styling ("ob-material" class):
     </span>
     <div class="ob-option-playground">
@@ -15,7 +15,7 @@
   </div>
 
   <div class="ob-option">
-    <span class="option">
+    <span class="ob-option-header">
       Disabled (disabled):
     </span>
     <div class="ob-option-playground">
@@ -29,7 +29,7 @@
   </div>
 
   <div class="ob-option">
-    <span class="option">
+    <span class="ob-option-header">
       Required Validation (required):
     </span>
     <div class="ob-option-playground">
@@ -43,7 +43,7 @@
   </div>
 
   <div class="ob-option">
-    <span class="option">
+    <span class="ob-option-header">
       Min-Date Validation (minDate):
     </span>
     <div class="ob-option-playground">
@@ -55,7 +55,7 @@
   </div>
 
   <div class="ob-option">
-    <span class="option">
+    <span class="ob-option-header">
       Max-Date Validation (maxDate):
     </span>
     <div class="ob-option-playground">
@@ -67,7 +67,7 @@
   </div>
 
   <div class="ob-option">
-    <span class="option">
+    <span class="ob-option-header">
       Placeholder (placeholder):
     </span>
     <div class="ob-option-playground">
@@ -78,10 +78,10 @@
 </div>
 
 <div class="ob-configs">
-  <h4 class="ob-options-section">Config options</h4>
+  <h3 class="ob-options-section">Config options</h3>
 
   <div class="ob-option">
-    <span class="option">
+    <span class="ob-option-header">
       First Day of The week (firstDayOfWeek):
     </span>
     <div class="ob-option-playground">
@@ -92,7 +92,7 @@
   </div>
 
   <div class="ob-option">
-    <span class="option">
+    <span class="ob-option-header">
       Amount of Calendars (calendarsAmount):
     </span>
     <div class="ob-option-playground">
@@ -101,7 +101,7 @@
   </div>
 
   <div class="ob-option">
-    <span class="option">
+    <span class="ob-option-header">
       Date Format (format):
     </span>
     <div class="ob-option-playground">
@@ -110,7 +110,7 @@
   </div>
 
   <div class="ob-option">
-    <span class="option">
+    <span class="ob-option-header">
       Min Selectable Date (min):
     </span>
     <div class="ob-option-playground">
@@ -123,7 +123,7 @@
   </div>
 
   <div class="ob-option">
-    <span class="option">
+    <span class="ob-option-header">
       Max Selectable Date (max):
     </span>
     <div class="ob-option-playground">
@@ -134,6 +134,59 @@
       </ob-day-picker>
     </div>
   </div>
+
+  <div class="ob-option">
+    <span class="ob-option-header">
+      Close after selection (closeOnSelect):
+    </span>
+    <div class="ob-option-playground">
+      <label>Close
+        <input type="radio" [(ngModel)]="config.closeOnSelect" name="closeOnSelect" [value]="true" (ngModelChange)="configChanged()">
+      </label>
+      <label>Don't Close
+        <input type="radio" [(ngModel)]="config.closeOnSelect" name="closeOnSelect" [value]="false" (ngModelChange)="configChanged()">
+      </label>
+    </div>
+  </div>
+
+  <div class="ob-option">
+    <span class="ob-option-header">
+      Closing Delay in ms (closeOnSelectDelay):
+    </span>
+    <div class="ob-option-playground">
+      <input type="number" [(ngModel)]="config.closeOnSelectDelay" (change)="configChanged()">
+    </div>
+  </div>
+
+  <div class="ob-option">
+    <span class="ob-option-header">
+      Weekday Names (weekdayNames):
+    </span>
+    <div class="ob-option-playground ob-week-days">
+      <input type="text" [(ngModel)]="config.weekdayNames.su" (change)="configChanged()">
+      <input type="text" [(ngModel)]="config.weekdayNames.mo" (change)="configChanged()">
+      <input type="text" [(ngModel)]="config.weekdayNames.tu" (change)="configChanged()">
+      <input type="text" [(ngModel)]="config.weekdayNames.we" (change)="configChanged()">
+      <input type="text" [(ngModel)]="config.weekdayNames.th" (change)="configChanged()">
+      <input type="text" [(ngModel)]="config.weekdayNames.fr" (change)="configChanged()">
+      <input type="text" [(ngModel)]="config.weekdayNames.sa" (change)="configChanged()">
+    </div>
+  </div>
+
+  <div class="ob-option">
+    <span class="ob-option-header">
+      Disable keyboard on input (disableKeypress):
+    </span>
+    <div class="ob-option-playground">
+      <label>Disable
+        <input type="radio" [(ngModel)]="config.disableKeypress" name="disableKeypress" [value]="true" (ngModelChange)="configChanged()">
+      </label>
+      <label>Enable
+        <input type="radio" [(ngModel)]="config.disableKeypress" name="disableKeypress" [value]="false" (ngModelChange)="configChanged()">
+      </label>
+    </div>
+  </div>
+
 </div>
 
 
@@ -171,7 +224,8 @@
       </pre>
     </div>
     <div class="ob-config-object">
-      <pre><code class="typescript">{{config | json}}</code></pre>
+      <pre><code>{{config | json}}</code></pre>
+      {{example | json}}
     </div>
   </div>
 </div>

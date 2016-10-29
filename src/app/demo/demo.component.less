@@ -1,16 +1,50 @@
 & {
-  .ob-option:nth-child(odd) {
-    background: fade(#CCCCCC, 20);
+
+  .ob-options-section {
+    text-decoration: underline;
   }
 
   .ob-picker-container {
     position: fixed;
-    top: 0;
-    right: 0;
+    top: 10px;
+    right: 10px;
     width: 600px;
   }
 
-  .ob-attribute-options, .ob-configs {
-    width: 300px;
+  .ob-attributes, .ob-configs {
+    width: 350px;
   }
+
+  .ob-configs-container {
+    width: 350px;
+    display: inline-block;
+
+    pre {
+      text-align: left;
+    }
+  }
+
+  .ob-option {
+    padding: 10px;
+
+    &:nth-child(odd) {
+      background: fade(#CCCCCC, 20);
+    }
+  }
+
+  .ob-week-days {
+    input {
+      width: 37px;
+    }
+  }
+
+  pre code {
+    display: block;
+    background: #EFF0F1;
+  }
+
+  .ob-option-header {
+    font-weight: 600;
+  }
+
 }

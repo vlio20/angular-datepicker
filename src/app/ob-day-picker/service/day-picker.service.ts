@@ -23,7 +23,7 @@ export class DayPickerService {
       fr: 'fri',
       sa: 'sat'
     },
-    disableKeypress: false,
+    disableKeypress: false
   };
 
   private formatValues(config: IDayPickerConfig): void {
