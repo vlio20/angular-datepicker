@@ -11,4 +11,5 @@ export interface IDayPickerConfig {
   closeOnSelectDelay?: number;
   weekdayNames?: {[key: string]: string};
   disableKeypress?: boolean;
+  isDisabledCallback?: (day: Moment) => boolean;
 }
