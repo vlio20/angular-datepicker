@@ -142,7 +142,6 @@ export class ObDayPickerComponent implements OnChanges, OnInit, ControlValueAcce
 
   // start
   init() {
-    console.log(this.value);
     this.pickerConfig = this.dayPickerService.getConfig(this.userConfig);
     this.value = this.userValue ? UtilsService.convertToMoment(this.userValue, this.pickerConfig.format) : this.value;
     this.calendars = this.dayPickerService.generateCalendars(this.pickerConfig, this.value);
@@ -170,12 +169,7 @@ export class ObDayPickerComponent implements OnChanges, OnInit, ControlValueAcce
     this.value = day.date;
 
     if (this.pickerConfig.closeOnSelect) {
-      setTimeout(() => {
-        this.hideCalendars();
-        // this.calendars = this.dayPickerService.moveCalendars(this.pickerConfig, this.value, day.date, 0);
-      }, this.pickerConfig.closeOnSelectDelay);
-    } else {
-      // this.calendars = this.dayPickerService.moveCalendars(this.pickerConfig, this.value, day.date, 0);
+      setTimeout(this.hideCalendars, this.pickerConfig.closeOnSelectDelay);
     }
   }
 

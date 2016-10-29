@@ -28,7 +28,7 @@ export class CalendarService {
     }, <{[key: number]: string}>{});
   }
 
-  generateMonthArray(firstDayOfWeek: WeekDays, dayInMonth: Moment, selectedDay: Moment): ICalendarDay[][] {
+  generateMonthArray(firstDayOfWeek: WeekDays, dayInMonth: Moment, selectedDay: Moment = null): ICalendarDay[][] {
     const monthArray: ICalendarDay[][] = [];
     const firstDayOfMonth = dayInMonth.clone().startOf('month');
     const firstDayOfWeekIndex = this.DAYS.indexOf(firstDayOfWeek);
