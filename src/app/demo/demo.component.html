@@ -1,219 +1,223 @@
-<div class="ob-attributes">
-  <h3 class="ob-options-section">Attribute options</h3>
-  <div class="ob-option">
+<div>
+  <div class="ob-attributes">
+    <h3 class="ob-options-section">Attribute options</h3>
+    <div class="ob-option">
     <span class="ob-option-header">
       Material Styling ("ob-material" class):
     </span>
-    <div class="ob-option-playground">
-      <label>Material
-        <input type="radio" [(ngModel)]="material" name="style" [value]="true">
-      </label>
-      <label>No Styling
-        <input type="radio" [(ngModel)]="material" name="style" [value]="false">
-      </label>
+      <div class="ob-option-playground">
+        <label>Material
+          <input type="radio" [(ngModel)]="material" name="style" [value]="true">
+        </label>
+        <label>No Styling
+          <input type="radio" [(ngModel)]="material" name="style" [value]="false">
+        </label>
+      </div>
     </div>
-  </div>
 
-  <div class="ob-option">
+    <div class="ob-option">
     <span class="ob-option-header">
       Disabled (disabled):
     </span>
-    <div class="ob-option-playground">
-      <label>Enabled
-        <input type="radio" [(ngModel)]="disabled" name="disabled" [value]="false">
-      </label>
-      <label>Disabled
-        <input type="radio" [(ngModel)]="disabled" name="disabled" [value]="true">
-      </label>
+      <div class="ob-option-playground">
+        <label>Enabled
+          <input type="radio" [(ngModel)]="disabled" name="disabled" [value]="false">
+        </label>
+        <label>Disabled
+          <input type="radio" [(ngModel)]="disabled" name="disabled" [value]="true">
+        </label>
+      </div>
     </div>
-  </div>
 
-  <div class="ob-option">
+    <div class="ob-option">
     <span class="ob-option-header">
       Required Validation (required):
     </span>
-    <div class="ob-option-playground">
-      <label>Required
-        <input type="radio" [(ngModel)]="required" name="required" [value]="true">
-      </label>
-      <label>Not Required
-        <input type="radio" [(ngModel)]="required" name="required" [value]="false">
-      </label>
+      <div class="ob-option-playground">
+        <label>Required
+          <input type="radio" [(ngModel)]="required" name="required" [value]="true">
+        </label>
+        <label>Not Required
+          <input type="radio" [(ngModel)]="required" name="required" [value]="false">
+        </label>
+      </div>
     </div>
-  </div>
 
-  <div class="ob-option">
+    <div class="ob-option">
     <span class="ob-option-header">
       Min-Date Validation (minDate):
     </span>
-    <div class="ob-option-playground">
-      <ob-day-picker class="ob-material"
-                     [(ngModel)]="validationMinDate"
-                     placeholder="Select a min date">
-      </ob-day-picker>
+      <div class="ob-option-playground">
+        <ob-day-picker class="ob-material"
+                       [(ngModel)]="validationMinDate"
+                       placeholder="Select a min date">
+        </ob-day-picker>
+      </div>
     </div>
-  </div>
 
-  <div class="ob-option">
+    <div class="ob-option">
     <span class="ob-option-header">
       Max-Date Validation (maxDate):
     </span>
-    <div class="ob-option-playground">
-      <ob-day-picker class="ob-material"
-                     [(ngModel)]="validationMaxDate"
-                     placeholder="Select a max date">
-      </ob-day-picker>
+      <div class="ob-option-playground">
+        <ob-day-picker class="ob-material"
+                       [(ngModel)]="validationMaxDate"
+                       placeholder="Select a max date">
+        </ob-day-picker>
+      </div>
     </div>
-  </div>
 
-  <div class="ob-option">
+    <div class="ob-option">
     <span class="ob-option-header">
       Placeholder (placeholder):
     </span>
-    <div class="ob-option-playground">
-      <input type="text" placeholder="Put a placeholder" [(ngModel)]="placeholder"/>
+      <div class="ob-option-playground">
+        <input type="text" placeholder="Put a placeholder" [(ngModel)]="placeholder"/>
+      </div>
     </div>
+
   </div>
 
-</div>
+  <div class="ob-configs">
+    <h3 class="ob-options-section">Config options</h3>
 
-<div class="ob-configs">
-  <h3 class="ob-options-section">Config options</h3>
-
-  <div class="ob-option">
+    <div class="ob-option">
     <span class="ob-option-header">
       First Day of The week (firstDayOfWeek):
     </span>
-    <div class="ob-option-playground">
-      <select [(ngModel)]="config.firstDayOfWeek" (change)="configChanged()">
-        <option *ngFor="let day of DAYS" [value]="day"> {{day}}</option>
-      </select>
+      <div class="ob-option-playground">
+        <select [(ngModel)]="config.firstDayOfWeek" (change)="configChanged()">
+          <option *ngFor="let day of DAYS" [value]="day"> {{day}}</option>
+        </select>
+      </div>
     </div>
-  </div>
 
-  <div class="ob-option">
+    <div class="ob-option">
     <span class="ob-option-header">
       Amount of Calendars (calendarsAmount):
     </span>
-    <div class="ob-option-playground">
-      <input type="number" [(ngModel)]="config.calendarsAmount" (change)="configChanged()">
+      <div class="ob-option-playground">
+        <input type="number" [(ngModel)]="config.calendarsAmount" (change)="configChanged()">
+      </div>
     </div>
-  </div>
 
-  <div class="ob-option">
+    <div class="ob-option">
     <span class="ob-option-header">
       Date Format (format):
     </span>
-    <div class="ob-option-playground">
-      <input type="text" [(ngModel)]="config.format" (change)="configChanged()">
+      <div class="ob-option-playground">
+        <input type="text" [(ngModel)]="config.format" (change)="configChanged()">
+      </div>
     </div>
-  </div>
 
-  <div class="ob-option">
+    <div class="ob-option">
     <span class="ob-option-header">
       Min Selectable Date (min):
     </span>
-    <div class="ob-option-playground">
-      <ob-day-picker class="ob-material"
-                     [(ngModel)]="config.min"
-                     (ngModelChange)="configChanged()"
-                     placeholder="Select a min date">
-      </ob-day-picker>
+      <div class="ob-option-playground">
+        <ob-day-picker class="ob-material"
+                       [(ngModel)]="config.min"
+                       (ngModelChange)="configChanged()"
+                       placeholder="Select a min date">
+        </ob-day-picker>
+      </div>
     </div>
-  </div>
 
-  <div class="ob-option">
+    <div class="ob-option">
     <span class="ob-option-header">
       Max Selectable Date (max):
     </span>
-    <div class="ob-option-playground">
-      <ob-day-picker class="ob-material"
-                     [(ngModel)]="config.max"
-                     (ngModelChange)="configChanged()"
-                     placeholder="Select a max date">
-      </ob-day-picker>
+      <div class="ob-option-playground">
+        <ob-day-picker class="ob-material"
+                       [(ngModel)]="config.max"
+                       (ngModelChange)="configChanged()"
+                       placeholder="Select a max date">
+        </ob-day-picker>
+      </div>
     </div>
-  </div>
 
-  <div class="ob-option">
+    <div class="ob-option">
     <span class="ob-option-header">
       Close after selection (closeOnSelect):
     </span>
-    <div class="ob-option-playground">
-      <label>Close
-        <input type="radio" [(ngModel)]="config.closeOnSelect" name="closeOnSelect" [value]="true" (ngModelChange)="configChanged()">
-      </label>
-      <label>Don't Close
-        <input type="radio" [(ngModel)]="config.closeOnSelect" name="closeOnSelect" [value]="false" (ngModelChange)="configChanged()">
-      </label>
+      <div class="ob-option-playground">
+        <label>Close
+          <input type="radio" [(ngModel)]="config.closeOnSelect" name="closeOnSelect" [value]="true" (ngModelChange)="configChanged()">
+        </label>
+        <label>Don't Close
+          <input type="radio" [(ngModel)]="config.closeOnSelect" name="closeOnSelect" [value]="false" (ngModelChange)="configChanged()">
+        </label>
+      </div>
     </div>
-  </div>
 
-  <div class="ob-option">
+    <div class="ob-option">
     <span class="ob-option-header">
       Closing Delay in ms (closeOnSelectDelay):
     </span>
-    <div class="ob-option-playground">
-      <input type="number" [(ngModel)]="config.closeOnSelectDelay" (change)="configChanged()">
+      <div class="ob-option-playground">
+        <input type="number" [(ngModel)]="config.closeOnSelectDelay" (change)="configChanged()">
+      </div>
     </div>
-  </div>
 
-  <div class="ob-option">
+    <div class="ob-option">
     <span class="ob-option-header">
       Weekday Names (weekdayNames):
     </span>
-    <div class="ob-option-playground ob-week-days">
-      <input type="text" [(ngModel)]="config.weekdayNames.su" (change)="configChanged()">
-      <input type="text" [(ngModel)]="config.weekdayNames.mo" (change)="configChanged()">
-      <input type="text" [(ngModel)]="config.weekdayNames.tu" (change)="configChanged()">
-      <input type="text" [(ngModel)]="config.weekdayNames.we" (change)="configChanged()">
-      <input type="text" [(ngModel)]="config.weekdayNames.th" (change)="configChanged()">
-      <input type="text" [(ngModel)]="config.weekdayNames.fr" (change)="configChanged()">
-      <input type="text" [(ngModel)]="config.weekdayNames.sa" (change)="configChanged()">
+      <div class="ob-option-playground ob-week-days">
+        <input type="text" [(ngModel)]="config.weekdayNames.su" (change)="configChanged()">
+        <input type="text" [(ngModel)]="config.weekdayNames.mo" (change)="configChanged()">
+        <input type="text" [(ngModel)]="config.weekdayNames.tu" (change)="configChanged()">
+        <input type="text" [(ngModel)]="config.weekdayNames.we" (change)="configChanged()">
+        <input type="text" [(ngModel)]="config.weekdayNames.th" (change)="configChanged()">
+        <input type="text" [(ngModel)]="config.weekdayNames.fr" (change)="configChanged()">
+        <input type="text" [(ngModel)]="config.weekdayNames.sa" (change)="configChanged()">
+      </div>
     </div>
-  </div>
 
-  <div class="ob-option">
+    <div class="ob-option">
     <span class="ob-option-header">
       Disable keyboard on input (disableKeypress):
     </span>
-    <div class="ob-option-playground">
-      <label>Disable
-        <input type="radio" [(ngModel)]="config.disableKeypress" name="disableKeypress" [value]="true" (ngModelChange)="configChanged()">
-      </label>
-      <label>Enable
-        <input type="radio" [(ngModel)]="config.disableKeypress" name="disableKeypress" [value]="false" (ngModelChange)="configChanged()">
-      </label>
+      <div class="ob-option-playground">
+        <label>Disable
+          <input type="radio" [(ngModel)]="config.disableKeypress" name="disableKeypress" [value]="true" (ngModelChange)="configChanged()">
+        </label>
+        <label>Enable
+          <input type="radio" [(ngModel)]="config.disableKeypress" name="disableKeypress" [value]="false" (ngModelChange)="configChanged()">
+        </label>
+      </div>
     </div>
-  </div>
 
+  </div>
 </div>
 
+<div>
+  <div class="ob-picker-container">
+    <form #form="ngForm">
+      <ob-day-picker name="dateItem"
+                     #dateItem="ngModel"
+                     #dayPicker
+                     [class.ob-material]="material"
+                     [(ngModel)]="date"
+                     [disabled]="disabled"
+                     [minDate]="validationMinDate"
+                     [maxDate]="validationMaxDate"
+                     [required]="required"
+                     [placeholder]="placeholder"
+                     [config]="config">
+      </ob-day-picker>
+      <div *ngIf="dateItem.errors && dateItem.errors.required">required</div>
+      <div *ngIf="dateItem.errors && dateItem.errors.format">format invalid</div>
+      <div *ngIf="dateItem.errors && dateItem.errors.minDate">minDate invalid</div>
+      <div *ngIf="dateItem.errors && dateItem.errors.maxDate">maxDate invalid</div>
+    </form>
+  </div>
+</div>
 
-<div class="ob-picker-container">
-  <form #form="ngForm">
-    <ob-day-picker name="dateItem"
-                   #dateItem="ngModel"
-                   #dayPicker
-                   [class.ob-material]="material"
-                   [(ngModel)]="date"
-                   [disabled]="disabled"
-                   [minDate]="validationMinDate"
-                   [maxDate]="validationMaxDate"
-                   [required]="required"
-                   [placeholder]="placeholder"
-                   [config]="config">
-    </ob-day-picker>
-    <div *ngIf="dateItem.errors && dateItem.errors.required">required</div>
-    <div *ngIf="dateItem.errors && dateItem.errors.format">format invalid</div>
-    <div *ngIf="dateItem.errors && dateItem.errors.minDate">minDate invalid</div>
-    <div *ngIf="dateItem.errors && dateItem.errors.maxDate">maxDate invalid</div>
-  </form>
-
-  <div class="ob-configs-container">
-    <div class="ob-attribute-options">
-      <pre>
-        <code class="html">
+<div class="ob-configs-container">
+  <h3>Attributes Values</h3>
+  <div class="ob-attribute-options">
+      <pre><code class="html">
 [class.ob-material]="{{material}}"
 [disabled]="{{disabled}}"
 [required]="{{required}}"
@@ -222,43 +226,10 @@
 [placeholder]="{{placeholder}}"
         </code>
       </pre>
-    </div>
-    <div class="ob-config-object">
-      <pre><code>{{config | json}}</code></pre>
-      {{example | json}}
-    </div>
+  </div>
+  <h3>Configuration Object Values</h3>
+  <div class="ob-config-object">
+    <pre><code>{{config | json}}</code></pre>
+    {{example | json}}
   </div>
 </div>
-
-
-<!--<form #form="ngForm">-->
-  <!--<ob-day-picker name="test"-->
-                 <!--#test="ngModel"-->
-                 <!--#dayPicker-->
-                 <!--[(ngModel)]="date"-->
-                 <!--[config]="dayPickerConfig"-->
-                 <!--[placeholder]="'placeholder'"-->
-                 <!--[disabled]="disabled"-->
-                 <!--required-->
-                 <!--[minDate]="minDate">-->
-  <!--</ob-day-picker>-->
-
-  <!--<button (click)="changeDate()">Change Date</button>-->
-  <!--<button (click)="togglePicker(true)">Open Picker</button>-->
-  <!--<button (click)="togglePicker(false)">Close Picker</button>-->
-  <!--<button (click)="toggleDisabled()">Toggle Disabled</button>-->
-
-  <!--<ob-day-picker name="min"-->
-                 <!--#min="ngModel"-->
-                 <!--[(ngModel)]="minDate"-->
-                 <!--[config]="minConf">-->
-  <!--</ob-day-picker>-->
-
-  <!--<span>{{date}}</span>-->
-
-  <!--<div *ngIf="test.errors && test.errors.required">required</div>-->
-  <!--<div *ngIf="test.errors && test.errors.format">format invalid</div>-->
-  <!--<div *ngIf="test.errors && test.errors.minDate">minDate invalid</div>-->
-  <!--<div *ngIf="test.errors && test.errors.maxDate">maxDate invalid</div>-->
-<!--</form>-->
-<!--<ob-day-picker class="ob-material" [(ngModel)]="date" [config]="materialConf"></ob-day-picker>-->
