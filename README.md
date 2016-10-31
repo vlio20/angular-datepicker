@@ -1,5 +1,25 @@
 # Date Picker
-This is a configurable date-picker build for Angular2 applications and uses MomentJS as a dependency.  
+This is a configurable date-picker build for Angular2 applications and uses MomentJS as its dependency.  
+
+## Installation:
+1. Download from npm:
+`npm install ob-dat3e-picker --save`  
+2. import the `ObDatePickerModule` module:  
+ `import {OBDatePickerModule} from 'ob-date-picker';`  
+ 3. Add `ObDatePickerModule` to your module imports:  
+ ```
+ @NgModule({
+   ...
+   imports: [
+     ...
+     ObDatePickerModule
+   ]
+ })
+```
+`
+## Usage
+Put the ob-date-picker component wherever you need it.
+
 
 ### Attributes:  
 
@@ -39,26 +59,26 @@ import {Component, ViewChild} from '@angular/core';
 import {ObDayPickerComponent} from 'ng2-date-picker';
 
 @Component({
-  selector: 'my-container',
-  template: `
-    <div>
-        <h1>Container</h1>
-        <ob-day-picker #dayPicker></ob-day-picker>
-        <button (click)="open()"></button>
-        <button (click)="close()"></button>
-    </div>
-  `
+selector: 'my-container',
+template: `
+<div>
+    <h1>Container</h1>
+    <ob-day-picker #dayPicker></ob-day-picker>
+    <button (click)="open()"></button>
+    <button (click)="close()"></button>
+</div>
+`
 });
 class MyContainer {
-    @ViewChild('dayPicker') dayPicker: ObDayPickerComponent;
-    
-    open() {
-        this.dayPicker.api.open();
-    }
-     
-    close() {
-         this.dayPicker.api.close();
-    } 
+@ViewChild('dayPicker') dayPicker: ObDayPickerComponent;
+
+open() {
+    this.dayPicker.api.open();
+}
+ 
+close() {
+     this.dayPicker.api.close();
+} 
 }
 ```
 Here is the list of APIs:  

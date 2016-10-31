@@ -14,8 +14,7 @@ export {ObDayPickerComponent} from './ob-day-picker/ob-day-picker.component'
     CommonModule,
     FormsModule
   ],
-  exports: [ObDayPickerComponent],
-
+  exports: [ObDayPickerComponent]
 })
 
 export class ObDatePickerModule {
