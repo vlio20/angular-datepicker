@@ -112,6 +112,15 @@
 
     <div class="ob-option">
     <span class="ob-option-header">
+      Month Format (monthFormat):
+    </span>
+      <div class="ob-option-playground">
+        <input type="text" [(ngModel)]="config.monthFormat" (change)="configChanged()">
+      </div>
+    </div>
+
+    <div class="ob-option">
+    <span class="ob-option-header">
       Min Selectable Date (min):
     </span>
       <div class="ob-option-playground">

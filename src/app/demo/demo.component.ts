@@ -28,6 +28,7 @@ export class DemoComponent {
     firstDayOfWeek: 'su',
     calendarsAmount: 1,
     format: 'DD-MM-YYYY',
+    monthFormat: 'MMM, YYYY',
     closeOnSelect: true,
     closeOnSelectDelay: 100,
     weekdayNames: {

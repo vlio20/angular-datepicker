@@ -12,4 +12,5 @@ export interface IDayPickerConfig {
   weekdayNames?: {[key: string]: string};
   disableKeypress?: boolean;
   isDisabledCallback?: (day: Moment) => boolean;
+  monthFormat?: string;
 }
