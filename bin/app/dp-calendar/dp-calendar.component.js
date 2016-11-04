@@ -46,8 +46,8 @@ var ObCalendarComponent = (function () {
     ObCalendarComponent = __decorate([
         core_1.Component({
             selector: 'dp-calendar',
-            template: "\n    <div class=\"dp-calendar-wrapper\">\n      <div class=\"dp-weekdays\">\n        <span class=\"dp-calendar-weekday\" *ngFor=\"let weekday of weekdays\">{{weekday}}</span>\n      </div>\n      <div class=\"dp-calendar-week\" *ngFor=\"let week of weeks\">\n        <button class=\"dp-calendar-day\"\n                *ngFor=\"let day of week\"\n                (click)=\"dateClick(day)\"\n                [disabled]=\"isDisabledDay(day)\"\n                [ngClass]=\"{\n                  'dp-selected': day.selected,\n                  'dp-current-month': day.currentMonth,\n                  'dp-prev-month': day.prevMonth,\n                  'dp-next-month': day.nextMonth,\n                  'dp-current-day': day.currentDay\n                }\">\n          {{day.date.format('DD')}}\n        </button>\n      </div>\n    </div>\n  ",
-            styles: ["\n    :host {\n      display: inline-block;\n    }\n    .dp-calendar-wrapper {\n      box-sizing: border-box;\n      border: 1px solid #000000;\n    }\n    .dp-calendar-wrapper .dp-calendar-weekday:first-child {\n      border-left: none;\n    }\n    .dp-calendar-weekday {\n      box-sizing: border-box;\n      display: inline-block;\n      width: 30px;\n      text-align: center;\n      border-left: 1px solid #000000;\n      border-bottom: 1px solid #000000;\n    }\n    .dp-calendar-day {\n      box-sizing: border-box;\n      width: 30px;\n      height: 30px;\n      cursor: pointer;\n    }\n    .dp-selected {\n      background: blue;\n    }\n    .dp-prev-month,\n    .dp-next-month {\n      opacity: 0.5;\n    }\n  "],
+            templateUrl: './dp-calendar.component.html',
+            styleUrls: ['./dp-calendar.component.less'],
             providers: [calendar_service_1.CalendarService]
         }), 
         __metadata('design:paramtypes', [calendar_service_1.CalendarService])

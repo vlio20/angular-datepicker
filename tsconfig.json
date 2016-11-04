@@ -6,7 +6,7 @@
     "lib": ["es6", "dom"],
     "module": "commonjs",
     "moduleResolution": "node",
-    "outDir": "./dist",
+    "outDir": "./bin",
     "target": "es5",
     "typeRoots": [
       "../node_modules/@types"
