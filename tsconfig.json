@@ -13,7 +13,7 @@
     ]
   },
   "include": [
-    "src/app/ob-date-picker.module.ts"
+    "src/app/dp-date-picker.module.ts"
   ],
   "exclude": [
     "node_modules",

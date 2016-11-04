@@ -3,9 +3,9 @@ This is a configurable date-picker build for Angular2 applications and uses Mome
 
 ## Installation:
 1. Download from npm:
-`npm install ob-dat3e-picker --save`  
+`npm install dp-dat3e-picker --save`  
 2. import the `ObDatePickerModule` module:  
- `import {OBDatePickerModule} from 'ob-date-picker';`  
+ `import {OBDatePickerModule} from 'dp-date-picker';`  
  3. Add `ObDatePickerModule` to your module imports:  
  ```
  @NgModule({
@@ -18,7 +18,7 @@ This is a configurable date-picker build for Angular2 applications and uses Mome
 ```
 `
 ## Usage
-Put the ob-date-picker component wherever you need it.
+Put the dp-date-picker component wherever you need it.
 
 
 ### Attributes:  
@@ -33,9 +33,9 @@ Put the ob-date-picker component wherever you need it.
 
 
 ### Configuration:  
-In order to provide configurations to the date-picker you need to pass it to the `ob-date-picker` component:  
+In order to provide configurations to the date-picker you need to pass it to the `dp-date-picker` component:  
 ```
-<ob-day-picker [config]="datePikerConfig"></ob-day-picker>
+<dp-day-picker [config]="datePikerConfig"></dp-day-picker>
 ```
 Here are the available configurations:  
 
@@ -64,7 +64,7 @@ selector: 'my-container',
 template: `
 <div>
     <h1>Container</h1>
-    <ob-day-picker #dayPicker></ob-day-picker>
+    <dp-day-picker #dayPicker></dp-day-picker>
     <button (click)="open()"></button>
     <button (click)="close()"></button>
 </div>

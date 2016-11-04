@@ -1,32 +1,32 @@
 <div>
   <input type="text"
-         class="ob-daypicker-input"
+         class="dp-daypicker-input"
          [placeholder]="placeholder"
          [ngModel]="viewValue"
          (ngModelChange)="onViewDateChange($event)"
          (focus)="inputFocused()"
          (keydown)="onKeydown($event)"
          [disabled]="disabled"/>
-  <div class="ob-calendars-container" *ngIf="areCalendarsShown">
-    <div class="ob-calendar-container"
+  <div class="dp-calendars-container" *ngIf="areCalendarsShown">
+    <div class="dp-calendar-container"
          *ngFor="let calendar of calendars; let start = first; let end = last">
-      <div class="ob-calendar-nav-container">
-        <button class="ob-calendar-nav-left"
+      <div class="dp-calendar-nav-container">
+        <button class="dp-calendar-nav-left"
                 *ngIf="start"
                 [disabled]="isLeftNavDisabled(calendar.month)"
                 (click)="moveCalendars(calendars[0].month, -1)"> <
         </button>
-        <span class="ob-calendar-month">{{calendar.month.format(pickerConfig.monthFormat)}}</span>
-        <button class="ob-calendar-nav-right"
+        <span class="dp-calendar-month">{{calendar.month.format(pickerConfig.monthFormat)}}</span>
+        <button class="dp-calendar-nav-right"
                 *ngIf="end"
                 [disabled]="isRightNavDisabled(calendar.month)"
                 (click)="moveCalendars(calendars[0].month, 1)"> >
         </button>
       </div>
-      <ob-calendar [selected]="value"
+      <dp-calendar [selected]="value"
                    [config]="calendar"
                    (on-change)="daySelected($event)">
-      </ob-calendar>
+      </dp-calendar>
     </div>
   </div>
 </div>

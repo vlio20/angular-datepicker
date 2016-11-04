@@ -6,7 +6,7 @@
     display: inline-block;
   }
 
-  .ob-calendars-container {
+  .dp-calendars-container {
     position: absolute;
     background: @white;
     box-shadow: 1px 1px 5px 0 rgba(0, 0, 0, 0.1);
@@ -15,11 +15,11 @@
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   }
 
-  .ob-calendar-container {
+  .dp-calendar-container {
     display: inline-block;
   }
 
-  .ob-calendar-nav-container {
+  .dp-calendar-nav-container {
     position: relative;
     box-sizing: border-box;
     height: 25px;
@@ -27,22 +27,22 @@
     border-bottom: none;
   }
 
-  .ob-calendar-nav-left, .ob-calendar-nav-right {
+  .dp-calendar-nav-left, .dp-calendar-nav-right {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
     cursor: pointer;
   }
 
-  .ob-calendar-nav-left {
+  .dp-calendar-nav-left {
     left: 0;
   }
 
-  .ob-calendar-nav-right {
+  .dp-calendar-nav-right {
     right: 0;
   }
 
-  .ob-calendar-month {
+  .dp-calendar-month {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -54,9 +54,9 @@
   @deep: ~">>>";
   @basic-height: 30px;
 
-  :host(.ob-material) {
+  :host(.dp-material) {
 
-    .ob-calendar-container {
+    .dp-calendar-container {
       background: white;
 
       &:not(:first-of-type) {
@@ -64,19 +64,19 @@
       }
     }
 
-    .ob-calendar-nav-container {
+    .dp-calendar-nav-container {
       height: @basic-height;
       border: none;
     }
 
-    .ob-calendar-nav-left, .ob-calendar-nav-right {
+    .dp-calendar-nav-left, .dp-calendar-nav-right {
       border: none;
       background: white;
       outline: none;
       font-size: 16px;
     }
 
-    .ob-daypicker-input {
+    .dp-daypicker-input {
       box-sizing: border-box;
       height: @basic-height;
       width: (@basic-height * 7) + 2px;
@@ -84,8 +84,8 @@
       outline: none;
     }
 
-    & @{deep} ob-calendar {
-      .ob-calendar-weekday {
+    & @{deep} dp-calendar {
+      .dp-calendar-weekday {
         height: @basic-height - 5px;
         width: @basic-height;
         line-height: @basic-height - 5px;
@@ -93,11 +93,11 @@
         border: none;
       }
 
-      .ob-calendar-wrapper {
+      .dp-calendar-wrapper {
         border: none;
       }
 
-      .ob-calendar-day {
+      .dp-calendar-day {
         box-sizing: border-box;
         height: @basic-height;
         width: @basic-height;
@@ -111,7 +111,7 @@
         }
       }
 
-      .ob-selected {
+      .dp-selected {
         background: #106CC8;
         color: white;
 
@@ -120,7 +120,7 @@
         }
       }
 
-      .ob-current-day {
+      .dp-current-day {
         border: 1px solid #106CC8;
       }
     }

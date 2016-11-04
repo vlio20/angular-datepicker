@@ -7,20 +7,20 @@ import {
   OnChanges,
   OnInit
 } from '@angular/core';
-import {ObCalendarComponent} from '../ob-calendar/ob-calendar.component';
+import {ObCalendarComponent} from '../dp-calendar/dp-calendar.component';
 import * as moment from 'moment';
 import {Moment} from 'moment';
 import {DayPickerService} from './service/day-picker.service';
 import {IDayPickerConfig} from './service/day-picker-config.model';
-import {ICalendarConfig} from '../ob-calendar/config/calendar-config.model';
+import {ICalendarConfig} from '../dp-calendar/config/calendar-config.model';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR, FormControl, NG_VALIDATORS, Validator} from '@angular/forms';
 import {UtilsService} from '../common/services/utils/utils.service';
-import {IObDayPickerApi} from './ob-day-picker.api';
+import {IObDayPickerApi} from './dp-day-picker.api';
 
 @Component({
-  selector: 'ob-day-picker',
-  templateUrl: './ob-day-picker.component.html',
-  styleUrls: ['./ob-day-picker.component.less'],
+  selector: 'dp-day-picker',
+  templateUrl: './dp-day-picker.component.html',
+  styleUrls: ['./dp-day-picker.component.less'],
   entryComponents: [ObCalendarComponent],
   providers: [
     DayPickerService,

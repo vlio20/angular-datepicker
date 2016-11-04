@@ -1,11 +1,11 @@
 import { browser, element, by } from 'protractor';
 
 export class Ng2DatePickerPage {
-  navigateTo() {
-    return browser.get('/');
-  }
+  ui = {
+    datePicker: 'dp-date-picker'
+  };
 
   getParagraphText() {
-    return element(by.css('ob-demo-root h1')).getText();
+    return element(by.css('dp-demo-root h1')).getText();
   }
 }

@@ -1,6 +1,6 @@
 /* tslint:disable:no-unused-variable */
 
-import {ObDayPickerComponent} from './ob-day-picker.component';
+import {ObDayPickerComponent} from './dp-day-picker.component';
 import {DayPickerService} from './service/day-picker.service';
 
 describe('Component: ObDayPicker', () => {

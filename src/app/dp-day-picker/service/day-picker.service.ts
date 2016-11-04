@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {IDayPickerConfig} from './day-picker-config.model';
 import * as moment from 'moment';
 import {UtilsService} from '../../common/services/utils/utils.service';
-import {ICalendarConfig} from '../../ob-calendar/config/calendar-config.model';
+import {ICalendarConfig} from '../../dp-calendar/config/calendar-config.model';
 import {Moment} from 'moment';
 import {FormControl} from '@angular/forms';
 

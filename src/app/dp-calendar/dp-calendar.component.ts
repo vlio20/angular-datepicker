@@ -5,9 +5,9 @@ import {ICalendarDay} from './config/day.model';
 import {Moment} from 'moment';
 
 @Component({
-  selector: 'ob-calendar',
-  templateUrl: './ob-calendar.component.html',
-  styleUrls: ['./ob-calendar.component.less'],
+  selector: 'dp-calendar',
+  templateUrl: './dp-calendar.component.html',
+  styleUrls: ['./dp-calendar.component.less'],
   providers: [CalendarService]
 })
 export class ObCalendarComponent implements OnInit, OnChanges {
