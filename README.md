@@ -55,7 +55,7 @@ Here are the available configurations:
 ### API:
 In order to use the date-picker api user the `@ViewChild` annotation in the date-picker containing component class, take at the example bellow:  
 Container component:
-```
+```  
 import {Component, ViewChild} from '@angular/core';
 import {ObDayPickerComponent} from 'ng2-date-picker';
 
@@ -71,16 +71,16 @@ template: `
 `
 });
 class MyContainer {
-@ViewChild('dayPicker') dayPicker: ObDayPickerComponent;
-
-open() {
-    this.dayPicker.api.open();
-}
- 
-close() {
-     this.dayPicker.api.close();
-} 
-}
+    @ViewChild('dayPicker') dayPicker: ObDayPickerComponent;
+    
+    open() {
+        this.dayPicker.api.open();
+    }
+     
+    close() {
+         this.dayPicker.api.close();
+    } 
+}  
 ```
 Here is the list of APIs:  
 
