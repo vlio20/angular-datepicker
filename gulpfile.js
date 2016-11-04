@@ -22,7 +22,7 @@ const pluginOptions = {
 
 gulp.task('build', () => {
   const src = gulp.src(['!./src/**/*.spec.ts', './src/**/*.ts']);
-  const dst = gulp.dest('./dist');
+  const dst = gulp.dest('./bin');
 
   const jsMap = src
     .pipe(inlineTemplate(pluginOptions))
