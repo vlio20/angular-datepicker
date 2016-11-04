@@ -1,5 +1,7 @@
 # Date Picker
-This is a configurable date-picker build for Angular2 applications and uses MomentJS as its dependency.  
+This is a configurable date-picker build for Angular2 applications and uses MomentJS as its dependency.   
+[DEMO](https://vlio20.github.io/ng2-date-picker/)
+
 
 ## Installation:
 1. Download from npm:
