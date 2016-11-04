@@ -1,1 +1,1 @@
-export * from './dist/app/app.module';
+export * from './bin/app/dp-date-picker.module';
