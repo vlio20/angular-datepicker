@@ -5,9 +5,9 @@ This is a configurable date-picker build for Angular2 applications and uses Mome
 
 ## Installation:
 1. Download from npm:
-`npm install dp-dat3e-picker --save`  
+`npm install ng2-date-picker --save`  
 2. import the `DpDatePickerModule` module:  
- `import {OBDatePickerModule} from 'dp-date-picker';`  
+ `import {DpDatePickerModule} from 'dp-date-picker';`  
  3. Add `DpDatePickerModule` to your module imports:  
  ```
  @NgModule({
