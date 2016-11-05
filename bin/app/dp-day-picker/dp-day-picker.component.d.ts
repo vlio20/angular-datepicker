@@ -3,7 +3,7 @@ import { Moment } from 'moment';
 import { DayPickerService } from './service/day-picker.service';
 import { ControlValueAccessor, FormControl, Validator } from '@angular/forms';
 import { IObDayPickerApi } from './dp-day-picker.api';
-export declare class ObDayPickerComponent implements OnChanges, OnInit, ControlValueAccessor, Validator {
+export declare class DpDayPickerComponent implements OnChanges, OnInit, ControlValueAccessor, Validator {
     private dayPickerService;
     private shouldNgInit;
     private userConfig;

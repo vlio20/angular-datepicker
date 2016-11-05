@@ -14,26 +14,26 @@ var common_1 = require('@angular/common');
 var dp_day_picker_component_1 = require('./dp-day-picker/dp-day-picker.component');
 var dp_calendar_component_1 = require('./dp-calendar/dp-calendar.component');
 var dp_day_picker_component_2 = require('./dp-day-picker/dp-day-picker.component');
-exports.ObDayPickerComponent = dp_day_picker_component_2.ObDayPickerComponent;
-var ObDatePickerModule = (function () {
-    function ObDatePickerModule() {
+exports.DpDayPickerComponent = dp_day_picker_component_2.DpDayPickerComponent;
+var DpDatePickerModule = (function () {
+    function DpDatePickerModule() {
     }
-    ObDatePickerModule = __decorate([
+    DpDatePickerModule = __decorate([
         core_1.NgModule({
             declarations: [
-                dp_day_picker_component_1.ObDayPickerComponent,
+                dp_day_picker_component_1.DpDayPickerComponent,
                 dp_calendar_component_1.ObCalendarComponent
             ],
             imports: [
                 common_1.CommonModule,
                 forms_1.FormsModule
             ],
-            exports: [dp_day_picker_component_1.ObDayPickerComponent]
+            exports: [dp_day_picker_component_1.DpDayPickerComponent]
         }), 
         __metadata('design:paramtypes', [])
-    ], ObDatePickerModule);
-    return ObDatePickerModule;
+    ], DpDatePickerModule);
+    return DpDatePickerModule;
 }());
-exports.ObDatePickerModule = ObDatePickerModule;
+exports.DpDatePickerModule = DpDatePickerModule;
 
 //# sourceMappingURL=dp-date-picker.module.js.map

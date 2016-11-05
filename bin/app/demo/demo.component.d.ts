@@ -1,8 +1,8 @@
-import { ObDayPickerComponent } from '../dp-day-picker/dp-day-picker.component';
+import { DpDayPickerComponent } from '../dp-day-picker/dp-day-picker.component';
 import { Moment } from 'moment';
 import { IDayPickerConfig } from '../dp-day-picker/service/day-picker-config.model';
 export declare class DemoComponent {
-    dayPicker: ObDayPickerComponent;
+    dayPicker: DpDayPickerComponent;
     demoFormat: string;
     readonly DAYS: string[];
     date: Moment;

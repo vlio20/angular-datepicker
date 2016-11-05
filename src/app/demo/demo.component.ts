@@ -1,17 +1,17 @@
 import {Component, ViewChild, ElementRef} from '@angular/core';
 import * as moment from 'moment';
-import {ObDayPickerComponent} from '../dp-day-picker/dp-day-picker.component';
+import {DpDayPickerComponent} from '../dp-day-picker/dp-day-picker.component';
 import {Moment} from 'moment'
 import {IDayPickerConfig} from '../dp-day-picker/service/day-picker-config.model';
 
 @Component({
   selector: 'dp-demo-root',
   templateUrl: './demo.component.html',
-  entryComponents: [ObDayPickerComponent],
+  entryComponents: [DpDayPickerComponent],
   styleUrls: ['./demo.component.less']
 })
 export class DemoComponent {
-  @ViewChild('dayPicker') dayPicker: ObDayPickerComponent;
+  @ViewChild('dayPicker') dayPicker: DpDayPickerComponent;
   demoFormat = 'DD-MM-YYYY';
   readonly DAYS = ['su', 'mo', 'tu', 'we', 'th', 'fr', 'sa'];
 

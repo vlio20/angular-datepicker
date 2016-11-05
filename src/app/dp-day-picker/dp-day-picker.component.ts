@@ -26,17 +26,17 @@ import {IObDayPickerApi} from './dp-day-picker.api';
     DayPickerService,
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => ObDayPickerComponent),
+      useExisting: forwardRef(() => DpDayPickerComponent),
       multi: true
     },
     {
       provide: NG_VALIDATORS,
-      useExisting: forwardRef(() => ObDayPickerComponent),
+      useExisting: forwardRef(() => DpDayPickerComponent),
       multi: true
     }
   ]
 })
-export class ObDayPickerComponent implements OnChanges, OnInit, ControlValueAccessor, Validator {
+export class DpDayPickerComponent implements OnChanges, OnInit, ControlValueAccessor, Validator {
   private shouldNgInit: boolean = true;
   @Input('config') private userConfig: IDayPickerConfig;
 

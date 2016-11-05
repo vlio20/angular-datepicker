@@ -21,7 +21,7 @@ var DemoModule = (function () {
             imports: [
                 platform_browser_1.BrowserModule,
                 forms_1.FormsModule,
-                dp_date_picker_module_1.ObDatePickerModule
+                dp_date_picker_module_1.DpDatePickerModule
             ],
             declarations: [
                 demo_component_1.DemoComponent

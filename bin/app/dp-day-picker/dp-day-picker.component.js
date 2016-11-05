@@ -14,8 +14,8 @@ var moment = require('moment');
 var day_picker_service_1 = require('./service/day-picker.service');
 var forms_1 = require('@angular/forms');
 var utils_service_1 = require('../common/services/utils/utils.service');
-var ObDayPickerComponent = (function () {
-    function ObDayPickerComponent(dayPickerService) {
+var DpDayPickerComponent = (function () {
+    function DpDayPickerComponent(dayPickerService) {
         var _this = this;
         this.dayPickerService = dayPickerService;
         this.shouldNgInit = true;
@@ -34,7 +34,7 @@ var ObDayPickerComponent = (function () {
             _this.areCalendarsShown = false;
         };
     }
-    Object.defineProperty(ObDayPickerComponent.prototype, "value", {
+    Object.defineProperty(DpDayPickerComponent.prototype, "value", {
         get: function () {
             return this._value;
         },
@@ -50,21 +50,21 @@ var ObDayPickerComponent = (function () {
         enumerable: true,
         configurable: true
     });
-    ObDayPickerComponent.prototype.onClick = function () {
+    DpDayPickerComponent.prototype.onClick = function () {
         this.hideStateHelper = true;
     };
-    ObDayPickerComponent.prototype.onBodyClick = function () {
+    DpDayPickerComponent.prototype.onBodyClick = function () {
         if (!this.hideStateHelper) {
             this.hideCalendars();
         }
         this.hideStateHelper = false;
     };
-    ObDayPickerComponent.prototype.ngOnInit = function () {
+    DpDayPickerComponent.prototype.ngOnInit = function () {
         if (this.shouldNgInit) {
             this.init();
         }
     };
-    ObDayPickerComponent.prototype.ngOnChanges = function (changes) {
+    DpDayPickerComponent.prototype.ngOnChanges = function (changes) {
         this.shouldNgInit = false;
         var minDate = changes.minDate, maxDate = changes.maxDate;
         this.init();
@@ -72,22 +72,22 @@ var ObDayPickerComponent = (function () {
             this.initValidators();
         }
     };
-    ObDayPickerComponent.prototype.writeValue = function (value) {
+    DpDayPickerComponent.prototype.writeValue = function (value) {
         if (value) {
             this.userValueType = typeof value;
             this.userValue = value;
             this.init();
         }
     };
-    ObDayPickerComponent.prototype.onChangeCallback = function (_) {
+    DpDayPickerComponent.prototype.onChangeCallback = function (_) {
     };
     ;
-    ObDayPickerComponent.prototype.registerOnChange = function (fn) {
+    DpDayPickerComponent.prototype.registerOnChange = function (fn) {
         this.onChangeCallback = fn;
     };
-    ObDayPickerComponent.prototype.registerOnTouched = function (fn) {
+    DpDayPickerComponent.prototype.registerOnTouched = function (fn) {
     };
-    ObDayPickerComponent.prototype.validate = function (c) {
+    DpDayPickerComponent.prototype.validate = function (c) {
         if (this.minDate || this.maxDate) {
             return this.validateFn(c);
         }
@@ -95,7 +95,7 @@ var ObDayPickerComponent = (function () {
             return function () { return null; };
         }
     };
-    ObDayPickerComponent.prototype.isDateValid = function (value) {
+    DpDayPickerComponent.prototype.isDateValid = function (value) {
         if (this.dayPickerService.isDateValid(value, this.pickerConfig.format)) {
             this.value = moment(value, this.pickerConfig.format);
         }
@@ -104,13 +104,13 @@ var ObDayPickerComponent = (function () {
         }
     };
     // start
-    ObDayPickerComponent.prototype.init = function () {
+    DpDayPickerComponent.prototype.init = function () {
         this.pickerConfig = this.dayPickerService.getConfig(this.userConfig);
         this.value = this.userValue ? utils_service_1.UtilsService.convertToMoment(this.userValue, this.pickerConfig.format) : this.value;
         this.calendars = this.dayPickerService.generateCalendars(this.pickerConfig, this.value);
         this.initApi();
     };
-    ObDayPickerComponent.prototype.initValidators = function () {
+    DpDayPickerComponent.prototype.initValidators = function () {
         this.validateFn = this.dayPickerService.createValidator({
             minDate: typeof this.minDate === 'string' ?
                 moment(this.minDate, this.pickerConfig.format) : this.minDate,
@@ -119,33 +119,33 @@ var ObDayPickerComponent = (function () {
         }, this.pickerConfig.format);
         this.onChangeCallback(this.viewValue);
     };
-    ObDayPickerComponent.prototype.initApi = function () {
+    DpDayPickerComponent.prototype.initApi = function () {
         this.api = {
             open: this.showCalendars.bind(this),
             close: this.hideCalendars.bind(this)
         };
     };
-    ObDayPickerComponent.prototype.daySelected = function (_a) {
+    DpDayPickerComponent.prototype.daySelected = function (_a) {
         var day = _a.day;
         this.value = day.date;
         if (this.pickerConfig.closeOnSelect) {
             setTimeout(this.hideCalendars, this.pickerConfig.closeOnSelectDelay);
         }
     };
-    ObDayPickerComponent.prototype.inputFocused = function () {
+    DpDayPickerComponent.prototype.inputFocused = function () {
         this.hideStateHelper = false;
         this.areCalendarsShown = true;
     };
-    ObDayPickerComponent.prototype.moveCalendars = function (base, months) {
+    DpDayPickerComponent.prototype.moveCalendars = function (base, months) {
         this.calendars = this.dayPickerService.moveCalendars(this.pickerConfig, this.value, base, months);
     };
-    ObDayPickerComponent.prototype.isLeftNavDisabled = function (month) {
+    DpDayPickerComponent.prototype.isLeftNavDisabled = function (month) {
         return this.dayPickerService.isMinMonth(this.pickerConfig.min, month);
     };
-    ObDayPickerComponent.prototype.isRightNavDisabled = function (month) {
+    DpDayPickerComponent.prototype.isRightNavDisabled = function (month) {
         return this.dayPickerService.isMaxMonth(this.pickerConfig.max, month);
     };
-    ObDayPickerComponent.prototype.onViewDateChange = function (date) {
+    DpDayPickerComponent.prototype.onViewDateChange = function (date) {
         if (this.dayPickerService.isDateValid(date, this.pickerConfig.format)) {
             this.value = date !== '' ? moment(date, this.pickerConfig.format) : null;
         }
@@ -153,7 +153,7 @@ var ObDayPickerComponent = (function () {
             this.onChangeCallback(undefined);
         }
     };
-    ObDayPickerComponent.prototype.onKeydown = function (e) {
+    DpDayPickerComponent.prototype.onKeydown = function (e) {
         if (e.keyCode === 13) {
             this.areCalendarsShown = !this.areCalendarsShown;
             e.preventDefault();
@@ -169,36 +169,36 @@ var ObDayPickerComponent = (function () {
     __decorate([
         core_1.Input('config'), 
         __metadata('design:type', Object)
-    ], ObDayPickerComponent.prototype, "userConfig", void 0);
+    ], DpDayPickerComponent.prototype, "userConfig", void 0);
     __decorate([
         core_1.Input(), 
         __metadata('design:type', String)
-    ], ObDayPickerComponent.prototype, "placeholder", void 0);
+    ], DpDayPickerComponent.prototype, "placeholder", void 0);
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Boolean)
-    ], ObDayPickerComponent.prototype, "disabled", void 0);
+    ], DpDayPickerComponent.prototype, "disabled", void 0);
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Object)
-    ], ObDayPickerComponent.prototype, "minDate", void 0);
+    ], DpDayPickerComponent.prototype, "minDate", void 0);
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Object)
-    ], ObDayPickerComponent.prototype, "maxDate", void 0);
+    ], DpDayPickerComponent.prototype, "maxDate", void 0);
     __decorate([
         core_1.HostListener('click'), 
         __metadata('design:type', Function), 
         __metadata('design:paramtypes', []), 
         __metadata('design:returntype', void 0)
-    ], ObDayPickerComponent.prototype, "onClick", null);
+    ], DpDayPickerComponent.prototype, "onClick", null);
     __decorate([
         core_1.HostListener('document:click'), 
         __metadata('design:type', Function), 
         __metadata('design:paramtypes', []), 
         __metadata('design:returntype', void 0)
-    ], ObDayPickerComponent.prototype, "onBodyClick", null);
-    ObDayPickerComponent = __decorate([
+    ], DpDayPickerComponent.prototype, "onBodyClick", null);
+    DpDayPickerComponent = __decorate([
         core_1.Component({
             selector: 'dp-day-picker',
             template: "\n    <div>\n      <input type=\"text\"\n             class=\"dp-daypicker-input\"\n             [placeholder]=\"placeholder\"\n             [ngModel]=\"viewValue\"\n             (ngModelChange)=\"onViewDateChange($event)\"\n             (focus)=\"inputFocused()\"\n             (keydown)=\"onKeydown($event)\"\n             [disabled]=\"disabled\"/>\n      <div class=\"dp-calendars-container\" *ngIf=\"areCalendarsShown\">\n        <div class=\"dp-calendar-container\"\n             *ngFor=\"let calendar of calendars; let start = first; let end = last\">\n          <div class=\"dp-calendar-nav-container\">\n            <button class=\"dp-calendar-nav-left\"\n                    *ngIf=\"start\"\n                    [disabled]=\"isLeftNavDisabled(calendar.month)\"\n                    (click)=\"moveCalendars(calendars[0].month, -1)\"> <\n            </button>\n            <span class=\"dp-calendar-month\">{{calendar.month.format(pickerConfig.monthFormat)}}</span>\n            <button class=\"dp-calendar-nav-right\"\n                    *ngIf=\"end\"\n                    [disabled]=\"isRightNavDisabled(calendar.month)\"\n                    (click)=\"moveCalendars(calendars[0].month, 1)\"> >\n            </button>\n          </div>\n          <dp-calendar [selected]=\"value\"\n                       [config]=\"calendar\"\n                       (on-change)=\"daySelected($event)\">\n          </dp-calendar>\n        </div>\n      </div>\n    </div>\n  ",
@@ -208,20 +208,20 @@ var ObDayPickerComponent = (function () {
                 day_picker_service_1.DayPickerService,
                 {
                     provide: forms_1.NG_VALUE_ACCESSOR,
-                    useExisting: core_1.forwardRef(function () { return ObDayPickerComponent; }),
+                    useExisting: core_1.forwardRef(function () { return DpDayPickerComponent; }),
                     multi: true
                 },
                 {
                     provide: forms_1.NG_VALIDATORS,
-                    useExisting: core_1.forwardRef(function () { return ObDayPickerComponent; }),
+                    useExisting: core_1.forwardRef(function () { return DpDayPickerComponent; }),
                     multi: true
                 }
             ]
         }), 
         __metadata('design:paramtypes', [day_picker_service_1.DayPickerService])
-    ], ObDayPickerComponent);
-    return ObDayPickerComponent;
+    ], DpDayPickerComponent);
+    return DpDayPickerComponent;
 }());
-exports.ObDayPickerComponent = ObDayPickerComponent;
+exports.DpDayPickerComponent = DpDayPickerComponent;
 
 //# sourceMappingURL=dp-day-picker.component.js.map
