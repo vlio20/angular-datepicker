@@ -28419,7 +28419,7 @@ var UtilsService = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__service_day_picker_config_model___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__service_day_picker_config_model__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_forms__ = __webpack_require__(163);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__common_services_utils_utils_service__ = __webpack_require__(177);
-/* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return ObDayPickerComponent; });
+/* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return DpDayPickerComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -28436,8 +28436,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-var ObDayPickerComponent = (function () {
-    function ObDayPickerComponent(dayPickerService) {
+var DpDayPickerComponent = (function () {
+    function DpDayPickerComponent(dayPickerService) {
         var _this = this;
         this.dayPickerService = dayPickerService;
         this.shouldNgInit = true;
@@ -28456,7 +28456,7 @@ var ObDayPickerComponent = (function () {
             _this.areCalendarsShown = false;
         };
     }
-    Object.defineProperty(ObDayPickerComponent.prototype, "value", {
+    Object.defineProperty(DpDayPickerComponent.prototype, "value", {
         get: function () {
             return this._value;
         },
@@ -28472,21 +28472,21 @@ var ObDayPickerComponent = (function () {
         enumerable: true,
         configurable: true
     });
-    ObDayPickerComponent.prototype.onClick = function () {
+    DpDayPickerComponent.prototype.onClick = function () {
         this.hideStateHelper = true;
     };
-    ObDayPickerComponent.prototype.onBodyClick = function () {
+    DpDayPickerComponent.prototype.onBodyClick = function () {
         if (!this.hideStateHelper) {
             this.hideCalendars();
         }
         this.hideStateHelper = false;
     };
-    ObDayPickerComponent.prototype.ngOnInit = function () {
+    DpDayPickerComponent.prototype.ngOnInit = function () {
         if (this.shouldNgInit) {
             this.init();
         }
     };
-    ObDayPickerComponent.prototype.ngOnChanges = function (changes) {
+    DpDayPickerComponent.prototype.ngOnChanges = function (changes) {
         this.shouldNgInit = false;
         var minDate = changes.minDate, maxDate = changes.maxDate;
         this.init();
@@ -28494,22 +28494,22 @@ var ObDayPickerComponent = (function () {
             this.initValidators();
         }
     };
-    ObDayPickerComponent.prototype.writeValue = function (value) {
+    DpDayPickerComponent.prototype.writeValue = function (value) {
         if (value) {
             this.userValueType = typeof value;
             this.userValue = value;
             this.init();
         }
     };
-    ObDayPickerComponent.prototype.onChangeCallback = function (_) {
+    DpDayPickerComponent.prototype.onChangeCallback = function (_) {
     };
     ;
-    ObDayPickerComponent.prototype.registerOnChange = function (fn) {
+    DpDayPickerComponent.prototype.registerOnChange = function (fn) {
         this.onChangeCallback = fn;
     };
-    ObDayPickerComponent.prototype.registerOnTouched = function (fn) {
+    DpDayPickerComponent.prototype.registerOnTouched = function (fn) {
     };
-    ObDayPickerComponent.prototype.validate = function (c) {
+    DpDayPickerComponent.prototype.validate = function (c) {
         if (this.minDate || this.maxDate) {
             return this.validateFn(c);
         }
@@ -28517,7 +28517,7 @@ var ObDayPickerComponent = (function () {
             return function () { return null; };
         }
     };
-    ObDayPickerComponent.prototype.isDateValid = function (value) {
+    DpDayPickerComponent.prototype.isDateValid = function (value) {
         if (this.dayPickerService.isDateValid(value, this.pickerConfig.format)) {
             this.value = __WEBPACK_IMPORTED_MODULE_2_moment__(value, this.pickerConfig.format);
         }
@@ -28526,13 +28526,13 @@ var ObDayPickerComponent = (function () {
         }
     };
     // start
-    ObDayPickerComponent.prototype.init = function () {
+    DpDayPickerComponent.prototype.init = function () {
         this.pickerConfig = this.dayPickerService.getConfig(this.userConfig);
         this.value = this.userValue ? __WEBPACK_IMPORTED_MODULE_6__common_services_utils_utils_service__["a" /* UtilsService */].convertToMoment(this.userValue, this.pickerConfig.format) : this.value;
         this.calendars = this.dayPickerService.generateCalendars(this.pickerConfig, this.value);
         this.initApi();
     };
-    ObDayPickerComponent.prototype.initValidators = function () {
+    DpDayPickerComponent.prototype.initValidators = function () {
         this.validateFn = this.dayPickerService.createValidator({
             minDate: typeof this.minDate === 'string' ?
                 __WEBPACK_IMPORTED_MODULE_2_moment__(this.minDate, this.pickerConfig.format) : this.minDate,
@@ -28541,33 +28541,33 @@ var ObDayPickerComponent = (function () {
         }, this.pickerConfig.format);
         this.onChangeCallback(this.viewValue);
     };
-    ObDayPickerComponent.prototype.initApi = function () {
+    DpDayPickerComponent.prototype.initApi = function () {
         this.api = {
             open: this.showCalendars.bind(this),
             close: this.hideCalendars.bind(this)
         };
     };
-    ObDayPickerComponent.prototype.daySelected = function (_a) {
+    DpDayPickerComponent.prototype.daySelected = function (_a) {
         var day = _a.day;
         this.value = day.date;
         if (this.pickerConfig.closeOnSelect) {
             setTimeout(this.hideCalendars, this.pickerConfig.closeOnSelectDelay);
         }
     };
-    ObDayPickerComponent.prototype.inputFocused = function () {
+    DpDayPickerComponent.prototype.inputFocused = function () {
         this.hideStateHelper = false;
         this.areCalendarsShown = true;
     };
-    ObDayPickerComponent.prototype.moveCalendars = function (base, months) {
+    DpDayPickerComponent.prototype.moveCalendars = function (base, months) {
         this.calendars = this.dayPickerService.moveCalendars(this.pickerConfig, this.value, base, months);
     };
-    ObDayPickerComponent.prototype.isLeftNavDisabled = function (month) {
+    DpDayPickerComponent.prototype.isLeftNavDisabled = function (month) {
         return this.dayPickerService.isMinMonth(this.pickerConfig.min, month);
     };
-    ObDayPickerComponent.prototype.isRightNavDisabled = function (month) {
+    DpDayPickerComponent.prototype.isRightNavDisabled = function (month) {
         return this.dayPickerService.isMaxMonth(this.pickerConfig.max, month);
     };
-    ObDayPickerComponent.prototype.onViewDateChange = function (date) {
+    DpDayPickerComponent.prototype.onViewDateChange = function (date) {
         if (this.dayPickerService.isDateValid(date, this.pickerConfig.format)) {
             this.value = date !== '' ? __WEBPACK_IMPORTED_MODULE_2_moment__(date, this.pickerConfig.format) : null;
         }
@@ -28575,7 +28575,7 @@ var ObDayPickerComponent = (function () {
             this.onChangeCallback(undefined);
         }
     };
-    ObDayPickerComponent.prototype.onKeydown = function (e) {
+    DpDayPickerComponent.prototype.onKeydown = function (e) {
         if (e.keyCode === 13) {
             this.areCalendarsShown = !this.areCalendarsShown;
             e.preventDefault();
@@ -28591,36 +28591,36 @@ var ObDayPickerComponent = (function () {
     __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Input */])('config'), 
         __metadata('design:type', (typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_4__service_day_picker_config_model__["IDayPickerConfig"] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_4__service_day_picker_config_model__["IDayPickerConfig"]) === 'function' && _a) || Object)
-    ], ObDayPickerComponent.prototype, "userConfig", void 0);
+    ], DpDayPickerComponent.prototype, "userConfig", void 0);
     __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Input */])(), 
         __metadata('design:type', String)
-    ], ObDayPickerComponent.prototype, "placeholder", void 0);
+    ], DpDayPickerComponent.prototype, "placeholder", void 0);
     __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Input */])(), 
         __metadata('design:type', Boolean)
-    ], ObDayPickerComponent.prototype, "disabled", void 0);
+    ], DpDayPickerComponent.prototype, "disabled", void 0);
     __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Input */])(), 
         __metadata('design:type', Object)
-    ], ObDayPickerComponent.prototype, "minDate", void 0);
+    ], DpDayPickerComponent.prototype, "minDate", void 0);
     __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Input */])(), 
         __metadata('design:type', Object)
-    ], ObDayPickerComponent.prototype, "maxDate", void 0);
+    ], DpDayPickerComponent.prototype, "maxDate", void 0);
     __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* HostListener */])('click'), 
         __metadata('design:type', Function), 
         __metadata('design:paramtypes', []), 
         __metadata('design:returntype', void 0)
-    ], ObDayPickerComponent.prototype, "onClick", null);
+    ], DpDayPickerComponent.prototype, "onClick", null);
     __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* HostListener */])('document:click'), 
         __metadata('design:type', Function), 
         __metadata('design:paramtypes', []), 
         __metadata('design:returntype', void 0)
-    ], ObDayPickerComponent.prototype, "onBodyClick", null);
-    ObDayPickerComponent = __decorate([
+    ], DpDayPickerComponent.prototype, "onBodyClick", null);
+    DpDayPickerComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* Component */])({
             selector: 'dp-day-picker',
             template: __webpack_require__(581),
@@ -28630,19 +28630,19 @@ var ObDayPickerComponent = (function () {
                 __WEBPACK_IMPORTED_MODULE_3__service_day_picker_service__["a" /* DayPickerService */],
                 {
                     provide: __WEBPACK_IMPORTED_MODULE_5__angular_forms__["a" /* NG_VALUE_ACCESSOR */],
-                    useExisting: __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_20" /* forwardRef */])(function () { return ObDayPickerComponent; }),
+                    useExisting: __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_20" /* forwardRef */])(function () { return DpDayPickerComponent; }),
                     multi: true
                 },
                 {
                     provide: __WEBPACK_IMPORTED_MODULE_5__angular_forms__["b" /* NG_VALIDATORS */],
-                    useExisting: __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_20" /* forwardRef */])(function () { return ObDayPickerComponent; }),
+                    useExisting: __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_20" /* forwardRef */])(function () { return DpDayPickerComponent; }),
                     multi: true
                 }
             ]
         }), 
         __metadata('design:paramtypes', [(typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__service_day_picker_service__["a" /* DayPickerService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_3__service_day_picker_service__["a" /* DayPickerService */]) === 'function' && _b) || Object])
-    ], ObDayPickerComponent);
-    return ObDayPickerComponent;
+    ], DpDayPickerComponent);
+    return DpDayPickerComponent;
     var _a, _b;
 }());
 
@@ -53122,13 +53122,13 @@ var DemoComponent = (function () {
     };
     __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_21" /* ViewChild */])('dayPicker'), 
-        __metadata('design:type', (typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__dp_day_picker_dp_day_picker_component__["a" /* ObDayPickerComponent */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__dp_day_picker_dp_day_picker_component__["a" /* ObDayPickerComponent */]) === 'function' && _a) || Object)
+        __metadata('design:type', (typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__dp_day_picker_dp_day_picker_component__["a" /* DpDayPickerComponent */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__dp_day_picker_dp_day_picker_component__["a" /* DpDayPickerComponent */]) === 'function' && _a) || Object)
     ], DemoComponent.prototype, "dayPicker", void 0);
     DemoComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* Component */])({
             selector: 'dp-demo-root',
             template: __webpack_require__(579),
-            entryComponents: [__WEBPACK_IMPORTED_MODULE_1__dp_day_picker_dp_day_picker_component__["a" /* ObDayPickerComponent */]],
+            entryComponents: [__WEBPACK_IMPORTED_MODULE_1__dp_day_picker_dp_day_picker_component__["a" /* DpDayPickerComponent */]],
             styles: [__webpack_require__(576)]
         }), 
         __metadata('design:paramtypes', [])
@@ -53171,7 +53171,7 @@ var DemoModule = (function () {
             imports: [
                 __WEBPACK_IMPORTED_MODULE_2__angular_platform_browser__["b" /* BrowserModule */],
                 __WEBPACK_IMPORTED_MODULE_3__angular_forms__["c" /* FormsModule */],
-                __WEBPACK_IMPORTED_MODULE_4__dp_date_picker_module__["a" /* ObDatePickerModule */]
+                __WEBPACK_IMPORTED_MODULE_4__dp_date_picker_module__["a" /* DpDatePickerModule */]
             ],
             declarations: [
                 __WEBPACK_IMPORTED_MODULE_1__demo_component__["a" /* DemoComponent */]
@@ -53303,8 +53303,8 @@ var CalendarService = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common__ = __webpack_require__(125);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__dp_day_picker_dp_day_picker_component__ = __webpack_require__(178);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__dp_calendar_dp_calendar_component__ = __webpack_require__(277);
-/* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return ObDatePickerModule; });
-/* unused harmony reexport ObDayPickerComponent */
+/* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return DpDatePickerModule; });
+/* unused harmony reexport DpDayPickerComponent */
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -53320,24 +53320,24 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-var ObDatePickerModule = (function () {
-    function ObDatePickerModule() {
+var DpDatePickerModule = (function () {
+    function DpDatePickerModule() {
     }
-    ObDatePickerModule = __decorate([
+    DpDatePickerModule = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["H" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_3__dp_day_picker_dp_day_picker_component__["a" /* ObDayPickerComponent */],
+                __WEBPACK_IMPORTED_MODULE_3__dp_day_picker_dp_day_picker_component__["a" /* DpDayPickerComponent */],
                 __WEBPACK_IMPORTED_MODULE_4__dp_calendar_dp_calendar_component__["a" /* ObCalendarComponent */]
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_2__angular_common__["b" /* CommonModule */],
                 __WEBPACK_IMPORTED_MODULE_1__angular_forms__["c" /* FormsModule */]
             ],
-            exports: [__WEBPACK_IMPORTED_MODULE_3__dp_day_picker_dp_day_picker_component__["a" /* ObDayPickerComponent */]]
+            exports: [__WEBPACK_IMPORTED_MODULE_3__dp_day_picker_dp_day_picker_component__["a" /* DpDayPickerComponent */]]
         }), 
         __metadata('design:paramtypes', [])
-    ], ObDatePickerModule);
-    return ObDatePickerModule;
+    ], DpDatePickerModule);
+    return DpDatePickerModule;
 }());
 
 
