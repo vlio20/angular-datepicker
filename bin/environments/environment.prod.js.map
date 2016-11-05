@@ -1,1 +1,1 @@
-{"version":3,"names":[],"mappings":"","sources":["environments/environment.prod.js"],"sourcesContent":["\"use strict\";\nexports.environment = {\n    production: true\n};\n"],"file":"environment.prod.js"}
+{"version":3,"sources":["../src/environments/environment.prod.ts"],"names":[],"mappings":";AAAa,mBAAW,GAAG;IACzB,UAAU,EAAE,IAAI;CACjB,CAAC","file":"environment.prod.js","sourcesContent":["export const environment = {\n  production: true\n};\n"]}

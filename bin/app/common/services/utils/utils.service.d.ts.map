@@ -1,1 +1,0 @@
-{"version":3,"names":[],"mappings":"","sources":["app/common/services/utils/utils.service.d.ts"],"sourcesContent":["import { Moment } from 'moment';\nexport declare class UtilsService {\n    static createArray(size: number): number[];\n    static convertToMoment(date: Moment | string, format: string): Moment | null;\n}\n"],"file":"utils.service.d.ts"}
