@@ -9,7 +9,7 @@ This is a configurable date-picker build for Angular2 applications and uses Mome
 2. import the `DpDatePickerModule` module:  
  `import {DpDatePickerModule} from 'dp-date-picker';`  
 3. Add `DpDatePickerModule` to your module imports:  
- ```
+```
  @NgModule({
    ...
    imports: [
