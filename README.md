@@ -18,7 +18,6 @@ This is a configurable date-picker build for Angular2 applications and uses Mome
    ]
  })
 ```
-`
 ## Usage
 Put the dp-date-picker component wherever you need it.
 
