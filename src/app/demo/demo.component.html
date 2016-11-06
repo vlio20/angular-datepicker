@@ -10,6 +10,30 @@
       Fill free to open issues, suggest improvements and submit PRs.
     </p>
   </div>
+
+  <div>
+    <div class="dp-picker-container">
+      <form #form="ngForm">
+        <dp-day-picker name="dateItem"
+                       #dateItem="ngModel"
+                       #dayPicker
+                       [class.dp-material]="material"
+                       [(ngModel)]="date"
+                       [disabled]="disabled"
+                       [minDate]="validationMinDate"
+                       [maxDate]="validationMaxDate"
+                       [required]="required"
+                       [placeholder]="placeholder"
+                       [config]="config">
+        </dp-day-picker>
+        <div *ngIf="dateItem.errors && dateItem.errors.required">required</div>
+        <div *ngIf="dateItem.errors && dateItem.errors.format">format invalid</div>
+        <div *ngIf="dateItem.errors && dateItem.errors.minDate">minDate invalid</div>
+        <div *ngIf="dateItem.errors && dateItem.errors.maxDate">maxDate invalid</div>
+      </form>
+    </div>
+  </div>
+
   <div class="dp-attributes">
     <h3 class="dp-options-section">Attribute options</h3>
     <div class="dp-option">
@@ -208,29 +232,6 @@
       </div>
     </div>
 
-  </div>
-</div>
-
-<div>
-  <div class="dp-picker-container">
-    <form #form="ngForm">
-      <dp-day-picker name="dateItem"
-                     #dateItem="ngModel"
-                     #dayPicker
-                     [class.dp-material]="material"
-                     [(ngModel)]="date"
-                     [disabled]="disabled"
-                     [minDate]="validationMinDate"
-                     [maxDate]="validationMaxDate"
-                     [required]="required"
-                     [placeholder]="placeholder"
-                     [config]="config">
-      </dp-day-picker>
-      <div *ngIf="dateItem.errors && dateItem.errors.required">required</div>
-      <div *ngIf="dateItem.errors && dateItem.errors.format">format invalid</div>
-      <div *ngIf="dateItem.errors && dateItem.errors.minDate">minDate invalid</div>
-      <div *ngIf="dateItem.errors && dateItem.errors.maxDate">maxDate invalid</div>
-    </form>
   </div>
 </div>
 

@@ -1,5 +1,4 @@
-import {Component, ViewChild, ElementRef} from '@angular/core';
-import * as moment from 'moment';
+import {Component, ViewChild} from '@angular/core';
 import {DpDayPickerComponent} from '../dp-day-picker/dp-day-picker.component';
 import {Moment} from 'moment'
 import {IDayPickerConfig} from '../dp-day-picker/service/day-picker-config.model';
@@ -22,7 +21,7 @@ export class DemoComponent {
   disabled: boolean = false;
   validationMinDate: Moment;
   validationMaxDate: Moment;
-  placeholder: string = '';
+  placeholder: string = 'Choose a date...';
 
   config: IDayPickerConfig = {
     firstDayOfWeek: 'su',
