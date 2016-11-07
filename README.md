@@ -30,13 +30,13 @@ Put the dp-date-picker component wherever you need it.
 | placeholder          | `String`         | `""`                                                                     | The date-picker input placeholder                                                                                                                                                                      |
 | required             | `Boolean`        | `undefined`                                                              | This is a validation rule, if there won't be any selected date then the containing form will be invalid.                                                                                               |
 | minDate              | `Moment|String`  | `undefined`                                                              | This is a validation rule, if the selected date will be before `minDate` the containing form will be invalid. Note: if provided as string format configuration should be provided in the config object |
-| MaxDate              | `Moment|String`  | `undefined`                                                              | This is a validation rule, if the selected date will be after `MaxDate` the containing form will be invalid. Note: if provided as string format configuration should be provided in the config object  | 
+| maxDate              | `Moment|String`  | `undefined`                                                              | This is a validation rule, if the selected date will be after `maxDate` the containing form will be invalid. Note: if provided as string format configuration should be provided in the config object  | 
 
 
 ### Configuration:  
 In order to provide configurations to the date-picker you need to pass it to the `dp-date-picker` component:  
 ```
-<dp-day-picker [config]="datePikerConfig"></dp-day-picker>
+<dp-day-picker [(ngModel)]="selectedDate" [config]="datePikerConfig"></dp-day-picker>
 ```
 Here are the available configurations:  
 
