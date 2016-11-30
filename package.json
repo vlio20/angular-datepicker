@@ -51,7 +51,6 @@
   },
   "main": "bin/app/index.js",
   "files": [
-    "index.js",
     "index.d.ts",
     "bin"
   ]
