@@ -10,7 +10,7 @@ import {Moment} from 'moment';
   styleUrls: ['./dp-calendar.component.less'],
   providers: [CalendarService]
 })
-export class ObCalendarComponent implements OnInit, OnChanges {
+export class DpCalendarComponent implements OnInit, OnChanges {
   @Input() config: ICalendarConfig;
   @Input() selected: Moment;
   @Output('on-change') dateClicked = new EventEmitter();

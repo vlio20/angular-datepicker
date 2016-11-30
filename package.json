@@ -49,7 +49,7 @@
     "typescript": "~2.0.3",
     "webdriver-manager": "10.2.5"
   },
-  "main": "index.js",
+  "main": "bin/app/index.js",
   "files": [
     "index.js",
     "index.d.ts",

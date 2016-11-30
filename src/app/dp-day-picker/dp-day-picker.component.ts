@@ -7,7 +7,7 @@ import {
   OnChanges,
   OnInit
 } from '@angular/core';
-import {ObCalendarComponent} from '../dp-calendar/dp-calendar.component';
+import {DpCalendarComponent} from '../dp-calendar/dp-calendar.component';
 import * as moment from 'moment';
 import {Moment} from 'moment';
 import {DayPickerService} from './service/day-picker.service';
@@ -21,7 +21,7 @@ import {IObDayPickerApi} from './dp-day-picker.api';
   selector: 'dp-day-picker',
   templateUrl: './dp-day-picker.component.html',
   styleUrls: ['./dp-day-picker.component.less'],
-  entryComponents: [ObCalendarComponent],
+  entryComponents: [DpCalendarComponent],
   providers: [
     DayPickerService,
     {

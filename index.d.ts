@@ -1,1 +1,0 @@
-export * from './bin/app/dp-date-picker.module';
