@@ -2,6 +2,7 @@
 
 # compiled output
 /tmp
+/bin
 
 # dependencies
 /node_modules
