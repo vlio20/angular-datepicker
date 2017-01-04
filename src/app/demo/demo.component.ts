@@ -49,4 +49,12 @@ export class DemoComponent {
   createCustomWeekDays() {
     this.config.weekdayNames = this.config.weekdayNames || {};
   }
+
+  openCalendar() {
+    this.dayPicker.api.open();
+  }
+
+  closeCalendar() {
+    this.dayPicker.api.close();
+  }
 }
