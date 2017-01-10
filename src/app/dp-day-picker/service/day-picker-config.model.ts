@@ -13,4 +13,5 @@ export interface IDayPickerConfig {
   disableKeypress?: boolean;
   isDisabledCallback?: (day: Moment) => boolean;
   monthFormat?: string;
+  monthFormatter?: (date: Moment) => string;
 }

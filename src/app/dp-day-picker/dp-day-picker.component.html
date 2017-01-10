@@ -16,7 +16,7 @@
                 [disabled]="isLeftNavDisabled(calendar.month)"
                 (click)="moveCalendars(calendars[0].month, -1)"> <
         </button>
-        <span class="dp-calendar-month">{{calendar.month.format(pickerConfig.monthFormat)}}</span>
+        <span class="dp-calendar-month">{{getMonthToDisplay(calendar.month)}}</span>
         <button class="dp-calendar-nav-right"
                 *ngIf="end"
                 [disabled]="isRightNavDisabled(calendar.month)"

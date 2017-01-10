@@ -178,6 +178,14 @@ export class DpDayPickerComponent implements OnChanges, OnInit, ControlValueAcce
     this.areCalendarsShown = true;
   }
 
+  getMonthToDisplay(month: Moment): string {
+    if (typeof this.pickerConfig.monthFormatter === 'function') {
+      return this.pickerConfig.monthFormatter(month);
+    }
+
+    return month.format(this.pickerConfig.monthFormat);
+  }
+
   showCalendars = () => {
     this.hideStateHelper = true;
     this.areCalendarsShown = true;
