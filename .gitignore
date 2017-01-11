@@ -35,3 +35,5 @@ Thumbs.db
 
 # dist
 /dist/*.gz
+
+npm-debug.log
