@@ -7,6 +7,7 @@ export interface IDayPickerConfig {
   format?: string;
   min?: Moment | string;
   max?: Moment | string;
+  allowMultiSelect?: boolean;
   closeOnSelect?: boolean;
   closeOnSelectDelay?: number;
   weekdayNames?: {[key: string]: string};
@@ -14,4 +15,5 @@ export interface IDayPickerConfig {
   isDisabledCallback?: (day: Moment) => boolean;
   monthFormat?: string;
   monthFormatter?: (date: Moment) => string;
+  userValueType?: 'string' | 'object';
 }

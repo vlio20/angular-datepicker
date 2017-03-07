@@ -1,10 +1,10 @@
 import {Component, ViewChild} from '@angular/core';
-import {DpDayPickerComponent} from '../dp-day-picker/dp-day-picker.component';
-import {Moment} from 'moment'
-import {IDayPickerConfig} from '../dp-day-picker/service/day-picker-config.model';
+import {DpDayPickerComponent} from '../../dp-day-picker/dp-day-picker.component';
+import {Moment} from 'moment';
+import {IDayPickerConfig} from '../../dp-day-picker/service/day-picker-config.model';
 
 @Component({
-  selector: 'dp-demo-root',
+  selector: 'dp-demo',
   templateUrl: './demo.component.html',
   entryComponents: [DpDayPickerComponent],
   styleUrls: ['./demo.component.less']
@@ -28,8 +28,10 @@ export class DemoComponent {
     calendarsAmount: 1,
     format: 'DD-MM-YYYY',
     monthFormat: 'MMM, YYYY',
+    allowMultiSelect: false,
     closeOnSelect: true,
     closeOnSelectDelay: 100,
+    userValueType: 'string',
     weekdayNames: {
       su: 'sun',
       mo: 'mon',
@@ -39,7 +41,6 @@ export class DemoComponent {
       fr: 'fri',
       sa: 'sat'
     },
-    disableKeypress: false
   };
 
   configChanged() {
@@ -56,5 +57,9 @@ export class DemoComponent {
 
   closeCalendar() {
     this.dayPicker.api.close();
+  }
+
+  log(item) {
+    console.log(item);
   }
 }

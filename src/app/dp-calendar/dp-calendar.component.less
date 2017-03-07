@@ -41,3 +41,47 @@
   }
 }
 
+& {
+  @basic-height: 30px;
+
+  :host(.dp-material) {
+    .dp-calendar-weekday {
+      height: @basic-height - 5px;
+      width: @basic-height;
+      line-height: @basic-height - 5px;
+      background: #E0E0E0;
+      border: none;
+    }
+
+    .dp-calendar-wrapper {
+      border: none;
+    }
+
+    .dp-calendar-day {
+      box-sizing: border-box;
+      height: @basic-height;
+      width: @basic-height;
+      background: white;
+      border-radius: 50%;
+      border: none;
+      outline: none;
+
+      &:hover {
+        background: #E0E0E0;
+      }
+    }
+
+    .dp-selected {
+      background: #106CC8;
+      color: white;
+
+      &:hover {
+        background: #106CC8;
+      }
+    }
+
+    .dp-current-day {
+      border: 1px solid #106CC8;
+    }
+  }
+}
