@@ -22,12 +22,25 @@ describe('Service: DayPicker', () => {
     expect(calendars2[0].month.isSame(moment(), 'month')).toBe(true);
     expect(calendars2[1].month.isSame(moment().add(1, 'month'), 'month')).toBe(true);
 
-    const calendars3 = service.generateCalendars({calendarsAmount: 2}, moment('13-10-2015', 'DD-MM-YYYY'));
+    const calendars2_1 = service.generateCalendars({calendarsAmount: 2}, []);
+    expect(calendars2_1.length).toBe(2);
+    expect(calendars2_1[0].month.isSame(moment(), 'month')).toBe(true);
+    expect(calendars2_1[1].month.isSame(moment().add(1, 'month'), 'month')).toBe(true);
+
+    const calendars3 = service.generateCalendars({calendarsAmount: 2}, [moment('13-10-2015', 'DD-MM-YYYY')]);
     expect(calendars3.length).toBe(2);
     expect(calendars3[0].month.isSame(moment('13-10-2015', 'DD-MM-YYYY'), 'month')).toBe(true);
     expect(calendars3[1].month.isSame(moment('13-11-2015', 'DD-MM-YYYY'), 'month')).toBe(true);
 
-    const calendars4 = service.generateCalendars({calendarsAmount: 2}, moment(), moment('13-10-2015', 'DD-MM-YYYY'));
+    const calendars3_1 = service.generateCalendars(
+      {calendarsAmount: 2},
+      [moment('13-10-2015', 'DD-MM-YYYY'), moment('13-11-2015', 'DD-MM-YYYY')]
+    );
+    expect(calendars3_1.length).toBe(2);
+    expect(calendars3_1[0].month.isSame(moment('13-10-2015', 'DD-MM-YYYY'), 'month')).toBe(true);
+    expect(calendars3_1[1].month.isSame(moment('13-11-2015', 'DD-MM-YYYY'), 'month')).toBe(true);
+
+    const calendars4 = service.generateCalendars({calendarsAmount: 2}, [moment()], moment('13-10-2015', 'DD-MM-YYYY'));
     expect(calendars4.length).toBe(2);
     expect(calendars4[0].month.isSame(moment('13-10-2015', 'DD-MM-YYYY'), 'month')).toBe(true);
     expect(calendars4[1].month.isSame(moment('13-11-2015', 'DD-MM-YYYY'), 'month')).toBe(true);
@@ -58,13 +71,13 @@ describe('Service: DayPicker', () => {
   it('should check isMinMonth method', inject([DayPickerService], (service: DayPickerService) => {
     expect(service.isMinMonth(moment(), moment())).toBe(true);
     expect(service.isMinMonth(moment().subtract(1, 'month'), moment())).toBe(false);
-    expect(service.isMinMonth(undefined, moment())).toBe(false);
+    expect(service.isMinMonth(null, moment())).toBe(false);
   }));
 
   it('should check isMaxMonth method', inject([DayPickerService], (service: DayPickerService) => {
     expect(service.isMaxMonth(moment(), moment())).toBe(true);
     expect(service.isMaxMonth(moment().add(1, 'month'), moment())).toBe(false);
-    expect(service.isMinMonth(undefined, moment())).toBe(false);
+    expect(service.isMinMonth(null, moment())).toBe(false);
   }));
 
   it('should check getConfig method for dates format aspect', inject([DayPickerService], (service: DayPickerService) => {

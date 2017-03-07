@@ -14,7 +14,7 @@ export {DpDayPickerComponent} from './dp-day-picker/dp-day-picker.component'
     CommonModule,
     FormsModule
   ],
-  exports: [DpDayPickerComponent]
+  exports: [DpDayPickerComponent, DpCalendarComponent]
 })
 
 export class DpDatePickerModule {

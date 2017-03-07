@@ -7,7 +7,7 @@
       Installation guide can be found in the repo README.md file.
     </p>
     <p>
-      Fill free to open issues, suggest improvements and submit PRs.
+      Feel free to open issues, suggest improvements and submit PRs.
     </p>
   </div>
 
@@ -19,6 +19,7 @@
                        #dayPicker
                        [class.dp-material]="material"
                        [(ngModel)]="date"
+                       (ngModelChange)="log($event)"
                        [disabled]="disabled"
                        [minDate]="validationMinDate"
                        [maxDate]="validationMaxDate"
@@ -182,6 +183,20 @@
 
     <div class="dp-option">
     <span class="dp-option-header">
+      Allow Multiple Selection (allowMultiSelect):
+    </span>
+      <div class="dp-option-playground">
+        <label>Single
+          <input type="radio" [(ngModel)]="config.allowMultiSelect" name="allowMultiSelect" [value]="false" (ngModelChange)="configChanged()">
+        </label>
+        <label>Multiple
+          <input type="radio" [(ngModel)]="config.allowMultiSelect" name="allowMultiSelect" [value]="true" (ngModelChange)="configChanged()">
+        </label>
+      </div>
+    </div>
+
+    <div class="dp-option">
+    <span class="dp-option-header">
       Close after selection (closeOnSelect):
     </span>
       <div class="dp-option-playground">
@@ -232,6 +247,20 @@
       </div>
     </div>
 
+    <div class="dp-option">
+    <span class="dp-option-header">
+      User Value Type (userValueType):
+    </span>
+      <div class="dp-option-playground">
+        <label>Moment <code>'object'</code>
+          <input type="radio" [(ngModel)]="config.userValueType" name="userValueType" value="object" (ngModelChange)="configChanged()">
+        </label>
+        <label>String <code>'string'</code>
+          <input type="radio" [(ngModel)]="config.userValueType" name="userValueType" value="string" (ngModelChange)="configChanged()">
+        </label>
+      </div>
+    </div>
+
   </div>
 
   <div class="dp-api">
@@ -276,3 +305,6 @@
     {{example | json}}
   </div>
 </div>
+<p>
+  <a routerLink="multiselect-test">Multiselect Test Page</a>
+</p>

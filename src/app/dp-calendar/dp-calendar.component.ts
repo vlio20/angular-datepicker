@@ -12,7 +12,7 @@ import {Moment} from 'moment';
 })
 export class DpCalendarComponent implements OnInit, OnChanges {
   @Input() config: ICalendarConfig;
-  @Input() selected: Moment;
+  @Input() selected: Moment[];
   @Output('on-change') dateClicked = new EventEmitter();
   weeks: ICalendarDay[][];
   weekdays: string[];

@@ -9,7 +9,7 @@ This is a configurable date-picker build for Angular2 applications and uses Mome
 2. import the `DpDatePickerModule` module:  
  `import {DpDatePickerModule} from 'ng2-date-picker';`  
 3. Add `DpDatePickerModule` to your module imports:  
-```
+```ts
  @NgModule({
    ...
    imports: [
@@ -35,8 +35,8 @@ Put the dp-date-picker component wherever you need it.
 
 ### Configuration:  
 In order to provide configurations to the date-picker you need to pass it to the `dp-date-picker` component:  
-```
-<dp-day-picker [(ngModel)]="selectedDate" [config]="datePikerConfig"></dp-day-picker>
+```html
+<dp-day-picker [(ngModel)]="selectedDate" [config]="datePickerConfig"></dp-day-picker>
 ```
 Here are the available configurations:  
 
@@ -47,17 +47,19 @@ Here are the available configurations:
 | format               | `String`             | `"DD-MM-YYYY"`                                                            | If ngModel provided as `String` the format is required, this format also will be used as the input format style                                                                                                            |
 | monthFormat          | `String`             | `"MMM-YYYY"`                                                              | The date format of the month calendar, the one that seen above the calendar days. Will be overwritten if `monthFormatter` provided.                                                                                                                                         |
 | monthFormatter       | `(Moment) => String` | `undefined`                                                               | The date formatter (callback function) of the month calendar, the one that seen above the calendar days.                                                                                                                                          |
+| allowMultiSelect     | `Boolean`            | `undefined`                                                               | If set to `true` will allow for choosing multiple dates. `false` will force a single selection. If `undefined`, the picker will attempt to guess based on the type of the input value                                         |
 | closeOnSelect        | `Boolean`            | `true`                                                                    | If set to `true` will close the date-picker after choosing a date from the calender, otherwise, won't                                                                                                                      |
 | closeOnSelectDelay   | `Number`             | `100`                                                                     | The delay (in ms) between the date selection and the date-picker collapse                                                                                                                                                  |
 | weekdayNames         | `Object`             | `{su: 'sun',mo: 'mon',tu: 'tue',we: 'wed',th: 'thu',fr: 'fri',sa: 'sat'}` | The weekday names as they are shown above the calendar days. The keys should be the same as seen in the default example.                                                                                                   |
 | disableKeypress      | `Boolean`            | `false`                                                                   | Disables the possibility to change the date value by typing it - changing the date would be possible only from the picker                                                                                                  |
 | min                  | `Moment|String`      | `undefined`                                                               | Disables all dates (on the date-picker) that are set to before the `min`, note that if invalid date would be set by the input then the date picker value would be the min date but the input will show the user typed date |
 | max                  | `Moment|String`      | `undefined`                                                               | Disables all dates (on the date-picker) that are set to after the `max`, note that if invalid date would be set by the input then the date picker value would be the max date but the input will show the user typed date  |
+| userValueType        | `String`             | `undefined`                                                              | The type of the value being passed out in `ngModelChange`. `"string"` passes values back as `string` or `string[]`. `"object"` passes values back as `Moment` or `Moment[]`. If `undefined`, the picker will attempt to guess based on the type of the input value   |
 
 ### API:
 In order to use the date-picker api user the `@ViewChild` annotation in the date-picker containing component class, take at the example bellow:  
 Container component:
-```  
+```ts  
 import {Component, ViewChild} from '@angular/core';
 import {DpDayPickerComponent} from 'ng2-date-picker';
 

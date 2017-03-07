@@ -40,13 +40,17 @@ export class DayPickerService {
   }
 
   getConfig(config: IDayPickerConfig) {
+    if (config && config.allowMultiSelect && config.closeOnSelect === undefined) {
+      // Default to not closing if multi select enabled
+      config.closeOnSelect = false;
+    }
     const _config = Object.assign({}, this.defaultConfig, config);
     this.formatValues(_config);
     return _config;
   }
 
-  generateCalendars(config: IDayPickerConfig, selected: Moment, month?: Moment): ICalendarConfig[] {
-    const base = (month && month.clone()) || (selected && selected.clone()) || moment();
+  generateCalendars(config: IDayPickerConfig, selected: Moment[], month?: Moment): ICalendarConfig[] {
+    const base = (month && month.clone()) || (selected && selected[0] && selected[0].clone()) || moment();
     return UtilsService.createArray(config.calendarsAmount).map((n: number, i: number) => ({
       month: base.clone().add(i, 'month'),
       selected: selected,
@@ -64,7 +68,7 @@ export class DayPickerService {
     return moment(date, format, true).isValid();
   }
 
-  moveCalendars(config: IDayPickerConfig, selected: Moment, base: Moment, months: number): ICalendarConfig[] {
+  moveCalendars(config: IDayPickerConfig, selected: Moment[], base: Moment, months: number): ICalendarConfig[] {
     const month = base.clone().add(months, 'month');
     return this.generateCalendars(config, selected, month);
   }
@@ -79,14 +83,14 @@ export class DayPickerService {
 
   createValidator({minDate, maxDate}, dateFormat: string) {
     let isValid: boolean;
-    let value: Moment;
+    let value: Moment[];
     const validators = [];
 
     if (minDate) {
       validators.push({
         key: 'minDate',
         isValid: () => {
-          const _isValid = value.isSameOrAfter(minDate, 'day');
+          const _isValid = value.every(val => val.isSameOrAfter(minDate, 'day'));
           isValid = isValid ? _isValid : false;
           return _isValid;
         }
@@ -97,7 +101,7 @@ export class DayPickerService {
       validators.push({
         key: 'maxDate',
         isValid: () => {
-          const _isValid = value.isSameOrBefore(maxDate, 'day');
+          const _isValid = value.every(val => val.isSameOrBefore(maxDate, 'day'));
           isValid = isValid ? _isValid : false;
           return _isValid;
         }
@@ -108,12 +112,20 @@ export class DayPickerService {
       isValid = true;
 
       if (c.value) {
-        value = typeof c.value === 'string' ? moment(c.value, dateFormat) : c.value;
+        if (typeof c.value === 'string') {
+          const dateStrings = c.value.split(',').map(date => date.trim());
+          const validDateStrings = dateStrings.filter(date => this.dayPickerService.isDateValid(date, this.pickerConfig.format));
+          value = validDateStrings.map(dateString => moment(dateString, dateFormat));
+        } else if (!Array.isArray(c.value)) {
+          value = [c.value];
+        } else {
+          value = c.value.map(val => UtilsService.convertToMoment(val, dateFormat));
+        }
       } else {
         return null;
       }
 
-      if (!value.isValid()) {
+      if (!value.every(val => val.isValid())) {
         return {
           format: {
             given: c.value

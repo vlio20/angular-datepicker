@@ -26,7 +26,7 @@ describe('Service: Calendar', () => {
   }));
 
   it('should check the generateMonthArray method', inject([CalendarService], (service: CalendarService) => {
-    let monthWeeks = service.generateMonthArray('su', moment('11-10-2016', 'DD-MM-YYYY'), moment('11-10-2016', 'DD-MM-YYYY'));
+    let monthWeeks = service.generateMonthArray('su', moment('11-10-2016', 'DD-MM-YYYY'), [moment('11-10-2016', 'DD-MM-YYYY')]);
     expect(monthWeeks[0][0].date.format('DD-MM-YYYY')).toBe('25-09-2016');
     expect(monthWeeks[0][0].prevMonth).toBe(true);
     expect(monthWeeks[0][0].currentMonth).toBe(false);
@@ -37,9 +37,33 @@ describe('Service: Calendar', () => {
     expect(monthWeeks[5][6].currentMonth).toBe(false);
     expect(monthWeeks[5][6].nextMonth).toBe(true);
 
-    monthWeeks = service.generateMonthArray('mo', moment('11-10-2016', 'DD-MM-YYYY'), moment('11-10-2016', 'DD-MM-YYYY'));
+    monthWeeks = service.generateMonthArray(
+      'mo',
+      moment('11-10-2016', 'DD-MM-YYYY'),
+      [moment('11-10-2016', 'DD-MM-YYYY'), moment('13-10-2016', 'DD-MM-YYYY')]
+    );
     expect(monthWeeks[0][0].date.format('DD-MM-YYYY')).toBe('26-09-2016');
     expect(monthWeeks[5][6].date.format('DD-MM-YYYY')).toBe('06-11-2016');
+    expect(monthWeeks[2][1].selected).toBe(true);
+    expect(monthWeeks[2][3].selected).toBe(true);
+
+    monthWeeks = service.generateMonthArray('mo', moment('11-10-2016', 'DD-MM-YYYY'), [moment('11-10-2016', 'DD-MM-YYYY')]);
+    expect(monthWeeks[0][0].date.format('DD-MM-YYYY')).toBe('26-09-2016');
+    expect(monthWeeks[5][6].date.format('DD-MM-YYYY')).toBe('06-11-2016');
+    expect(monthWeeks[2][1].selected).toBe(true);
+    expect(monthWeeks[2][3].selected).toBe(false);
+
+    monthWeeks = service.generateMonthArray('mo', moment('11-10-2016', 'DD-MM-YYYY'), []);
+    expect(monthWeeks[0][0].date.format('DD-MM-YYYY')).toBe('26-09-2016');
+    expect(monthWeeks[5][6].date.format('DD-MM-YYYY')).toBe('06-11-2016');
+    expect(monthWeeks[2][1].selected).toBe(false);
+    expect(monthWeeks[2][3].selected).toBe(false);
+
+    monthWeeks = service.generateMonthArray('mo', moment('11-10-2016', 'DD-MM-YYYY'), null);
+    expect(monthWeeks[0][0].date.format('DD-MM-YYYY')).toBe('26-09-2016');
+    expect(monthWeeks[5][6].date.format('DD-MM-YYYY')).toBe('06-11-2016');
+    expect(monthWeeks[2][1].selected).toBe(false);
+    expect(monthWeeks[2][3].selected).toBe(false);
   }));
 
 
@@ -78,7 +102,7 @@ describe('Service: Calendar', () => {
   it('should check isDateDisabled method', inject([CalendarService], (service: CalendarService) => {
     const config: ICalendarConfig = {
       month: moment('13-10-2016', 'DD-MM-YYYY'),
-      selected: moment('13-10-2016', 'DD-MM-YYYY'),
+      selected: [moment('13-10-2016', 'DD-MM-YYYY')],
       firstDayOfWeek: 'su',
       min: moment('13-10-2016', 'DD-MM-YYYY').subtract(1, 'day'),
       max: moment('13-10-2016', 'DD-MM-YYYY').add(1, 'day')

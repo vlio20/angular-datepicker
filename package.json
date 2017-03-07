@@ -28,7 +28,7 @@
     "zone.js": "^0.6.23"
   },
   "devDependencies": {
-    "@types/jasmine": "^2.2.30",
+    "@types/jasmine": "2.2.30",
     "angular-cli": "1.0.0-beta.19-3",
     "codelyzer": "1.0.0-beta.1",
     "gulp": "^3.9.1",

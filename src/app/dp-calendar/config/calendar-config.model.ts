@@ -3,7 +3,7 @@ import {WeekDays} from '../../common/types/week-days.type';
 
 export interface ICalendarConfig {
   month: Moment;
-  selected: Moment;
+  selected: Moment[];
   firstDayOfWeek: WeekDays;
   min?: Moment;
   max?: Moment;
