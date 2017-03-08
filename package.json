@@ -17,7 +17,7 @@
     "build-demo": "rm -rf dist/ && ng build --prod --bh /ng2-date-picker/",
     "build-prod": "rm -rf bin && gulp build"
   },
-  "private": true,
+  "private": false,
   "dependencies": {
     "@angular/common": "^2.4.0",
     "@angular/compiler": "^2.4.0",
