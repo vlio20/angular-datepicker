@@ -1,6 +1,6 @@
 import { Ng2DatePickerPage } from './app.po';
 
-describe('ng2-date-picker App', function() {
+describe('ng2-date-picker App', () => {
   let page: Ng2DatePickerPage;
 
   beforeEach(() => {

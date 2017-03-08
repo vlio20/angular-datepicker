@@ -1,1 +1,1 @@
-export * from './bin/app';
+export * from './bin/app/index';
