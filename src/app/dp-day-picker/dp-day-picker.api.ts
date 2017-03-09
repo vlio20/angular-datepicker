@@ -1,4 +1,4 @@
-export interface IObDayPickerApi {
+export interface IDpDayPickerApi {
   open: () => void;
   close: () => void;
 }

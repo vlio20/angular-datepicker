@@ -6,7 +6,7 @@
     display: inline-block;
   }
 
-  .dp-calendars-container {
+  .dp-popup {
     position: absolute;
     background: @white;
     box-shadow: 1px 1px 5px 0 rgba(0, 0, 0, 0.1);
@@ -14,40 +14,6 @@
     border-right: 1px solid rgba(0, 0, 0, 0.1);
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     z-index: 9999;
-  }
-
-  .dp-calendar-container {
-    display: inline-block;
-  }
-
-  .dp-calendar-nav-container {
-    position: relative;
-    box-sizing: border-box;
-    height: 25px;
-    border: 1px solid @black;
-    border-bottom: none;
-  }
-
-  .dp-calendar-nav-left, .dp-calendar-nav-right {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    cursor: pointer;
-  }
-
-  .dp-calendar-nav-left {
-    left: 0;
-  }
-
-  .dp-calendar-nav-right {
-    right: 0;
-  }
-
-  .dp-calendar-month {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
   }
 }
 
@@ -85,7 +51,7 @@
       outline: none;
     }
 
-    & @{deep} dp-calendar {
+    & @{deep} dp-calendar-month {
       .dp-calendar-weekday {
         height: @basic-height - 5px;
         width: @basic-height;

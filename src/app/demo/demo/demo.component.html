@@ -11,9 +11,10 @@
     </p>
   </div>
 
-  <div>
+  <div class="dp-demo-container">
     <div class="dp-picker-container">
       <form #form="ngForm">
+        <label>Date picker (<code>&lt;dp-day-picker&gt;</code>)</label><br>
         <dp-day-picker name="dateItem"
                        #dateItem="ngModel"
                        #dayPicker
@@ -32,6 +33,16 @@
         <div *ngIf="dateItem.errors && dateItem.errors.minDate">minDate invalid</div>
         <div *ngIf="dateItem.errors && dateItem.errors.maxDate">maxDate invalid</div>
       </form>
+    </div>
+
+    <div class="dp-inline">
+      <label>Inline Calendar (<code>&lt;dp-calendar&gt;</code>)</label><br>
+      <dp-calendar
+        [class.dp-material]="material"
+        [(selected)]="dates"
+        (selectedChange)="log($event)"
+        [config]="config">
+      </dp-calendar>
     </div>
   </div>
 
@@ -305,6 +316,9 @@
     {{example | json}}
   </div>
 </div>
-<p>
-  <a routerLink="multiselect-test">Multiselect Test Page</a>
-</p>
+
+<ul>
+  <li>
+    <a routerLink="multiselect-test">Multiselect Test</a>
+  </li>
+</ul>

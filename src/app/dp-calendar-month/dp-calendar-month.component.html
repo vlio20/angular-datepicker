@@ -1,0 +1,20 @@
+<div class="dp-calendar-wrapper">
+  <div class="dp-weekdays">
+    <span class="dp-calendar-weekday" *ngFor="let weekday of weekdays">{{weekday}}</span>
+  </div>
+  <div class="dp-calendar-week" *ngFor="let week of weeks">
+    <button class="dp-calendar-day"
+            *ngFor="let day of week"
+            (click)="dayClick.emit({day: day, event: $event})"
+            [disabled]="isDisabledDay(day)"
+            [ngClass]="{
+              'dp-selected': day.selected,
+              'dp-current-month': day.currentMonth,
+              'dp-prev-month': day.prevMonth,
+              'dp-next-month': day.nextMonth,
+              'dp-current-day': day.currentDay
+            }">
+      {{day.date.format('DD')}}
+    </button>
+  </div>
+</div>

@@ -15,6 +15,7 @@ export class DemoComponent {
   readonly DAYS = ['su', 'mo', 'tu', 'we', 'th', 'fr', 'sa'];
 
   date: Moment;
+  dates: Moment[] = [];
 
   material: boolean = true;
   required: boolean = false;

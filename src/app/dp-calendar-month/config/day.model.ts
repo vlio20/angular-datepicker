@@ -8,3 +8,8 @@ export interface ICalendarDay {
   nextMonth?: boolean;
   currentDay?: boolean;
 }
+
+export interface IDayEvent {
+  day: ICalendarDay;
+  event: MouseEvent;
+}

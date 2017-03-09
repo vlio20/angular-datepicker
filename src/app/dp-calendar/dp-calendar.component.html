@@ -1,20 +1,22 @@
-<div class="dp-calendar-wrapper">
-  <div class="dp-weekdays">
-    <span class="dp-calendar-weekday" *ngFor="let weekday of weekdays">{{weekday}}</span>
-  </div>
-  <div class="dp-calendar-week" *ngFor="let week of weeks">
-    <button class="dp-calendar-day"
-            *ngFor="let day of week"
-            (click)="dateClick(day)"
-            [disabled]="isDisabledDay(day)"
-            [ngClass]="{
-              'dp-selected': day.selected,
-              'dp-current-month': day.currentMonth,
-              'dp-prev-month': day.prevMonth,
-              'dp-next-month': day.nextMonth,
-              'dp-current-day': day.currentDay
-            }">
-      {{day.date.format('DD')}}
+<div class="dp-calendar-container"
+     *ngFor="let calendar of calendars; let start = first; let end = last">
+  <div class="dp-calendar-nav-container">
+    <button class="dp-calendar-nav-left"
+            *ngIf="start"
+            [disabled]="isLeftNavDisabled(calendar.month)"
+            (click)="moveCalendars(calendars[0].month, -1)"> <
+    </button>
+    <span class="dp-calendar-month">{{getMonthToDisplay(calendar.month)}}</span>
+    <button class="dp-calendar-nav-right"
+            *ngIf="end"
+            [disabled]="isRightNavDisabled(calendar.month)"
+            (click)="moveCalendars(calendars[0].month, 1)"> >
     </button>
   </div>
+  <dp-calendar-month
+    [selected]="selected"
+    [config]="calendar"
+    (dayContextmenu)="dayContextmenu.emit($event)"
+    (dayClick)="daySelected($event)">
+  </dp-calendar-month>
 </div>

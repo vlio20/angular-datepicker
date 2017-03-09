@@ -4,10 +4,10 @@ import * as moment from 'moment';
 import {WeekDays} from '../../common/types/week-days.type';
 import {UtilsService} from '../../common/services/utils/utils.service';
 import {ICalendarDay} from '../config/day.model';
-import {ICalendarConfig} from '../config/calendar-config.model';
+import {ICalendarMonthConfig} from '../config/calendar-month-config.model';
 
 @Injectable()
-export class CalendarService {
+export class CalendarMonthService {
   readonly DAYS = ['su', 'mo', 'tu', 'we', 'th', 'fr', 'sa'];
 
   generateDaysIndexMap(firstDayOfWeek: WeekDays) {
@@ -78,7 +78,7 @@ export class CalendarService {
     return weekdays;
   }
 
-  isDateDisabled(day: ICalendarDay, config: ICalendarConfig): boolean {
+  isDateDisabled(day: ICalendarDay, config: ICalendarMonthConfig): boolean {
     if (config.isDisabledCallback) {
       return config.isDisabledCallback(day.date);
     }

@@ -1,14 +1,13 @@
-import {ICalendarDay} from '../dp-calendar/config/day.model';
+import {CalendarService} from './../dp-calendar/config/calendar.service';
 import {Component, forwardRef, HostListener, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {DpCalendarComponent} from '../dp-calendar/dp-calendar.component';
 import * as moment from 'moment';
 import {Moment} from 'moment';
 import {DayPickerService} from './service/day-picker.service';
 import {IDayPickerConfig} from './service/day-picker-config.model';
-import {ICalendarConfig} from '../dp-calendar/config/calendar-config.model';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR, FormControl, NG_VALIDATORS, Validator} from '@angular/forms';
 import {UtilsService} from '../common/services/utils/utils.service';
-import {IObDayPickerApi} from './dp-day-picker.api';
+import {IDpDayPickerApi} from './dp-day-picker.api';
 
 export type CalendarValue = string | string[] | Moment | Moment[];
 
@@ -18,6 +17,7 @@ export type CalendarValue = string | string[] | Moment | Moment[];
   styleUrls: ['./dp-day-picker.component.less'],
   entryComponents: [DpCalendarComponent],
   providers: [
+    CalendarService,
     DayPickerService,
     {
       provide: NG_VALUE_ACCESSOR,
@@ -46,7 +46,6 @@ export class DpDayPickerComponent implements OnChanges, OnInit, ControlValueAcce
   private areCalendarsShown: boolean = false;
   private hideStateHelper: boolean = false;
   private pickerConfig: IDayPickerConfig;
-  private calendars: ICalendarConfig[];
   private _value: Moment[] = [];
   private userValue;
   private viewValue: string;
@@ -59,13 +58,10 @@ export class DpDayPickerComponent implements OnChanges, OnInit, ControlValueAcce
   private set value(value: Moment[]) {
     this._value = value;
     this.viewValue = this._value ? this._value.map(val => val.format(this.pickerConfig.format)).join(', ') : '';
-    if (this._value && this._value.length > 0) {
-      this.calendars = this.dayPickerService.moveCalendars(this.pickerConfig, this._value, this._value[0], 0);
-    }
     this.onChangeCallback(this.processOnChangeCallback(value));
   }
 
-  api: IObDayPickerApi = <IObDayPickerApi>{};
+  api: IDpDayPickerApi = <IDpDayPickerApi>{};
 
   constructor(private dayPickerService: DayPickerService) {
   }
@@ -173,7 +169,6 @@ export class DpDayPickerComponent implements OnChanges, OnInit, ControlValueAcce
         this.value = [UtilsService.convertToMoment(this.userValue, this.pickerConfig.format)];
       }
     }
-    this.calendars = this.dayPickerService.generateCalendars(this.pickerConfig, this.value);
     this.initApi();
   }
 
@@ -194,18 +189,7 @@ export class DpDayPickerComponent implements OnChanges, OnInit, ControlValueAcce
     };
   }
 
-  daySelected({day}: { day: ICalendarDay}) {
-    if (!this.pickerConfig.allowMultiSelect) {
-      // Single selection
-      this.value = [day.date];
-    } else if (day.selected && this.value) {
-      // Unselecting a day
-      this.value = this.value.filter(val => !val.isSame(day.date, 'day'));
-    } else if (this.pickerConfig.allowMultiSelect) {
-      // Multi selection
-      this.value = this.value ? this.value.concat(day.date) : [day.date];
-    }
-
+  daySelected() {
     if (this.pickerConfig.closeOnSelect) {
       setTimeout(this.hideCalendars, this.pickerConfig.closeOnSelectDelay);
     }
@@ -216,14 +200,6 @@ export class DpDayPickerComponent implements OnChanges, OnInit, ControlValueAcce
     this.areCalendarsShown = true;
   }
 
-  getMonthToDisplay(month: Moment): string {
-    if (typeof this.pickerConfig.monthFormatter === 'function') {
-      return this.pickerConfig.monthFormatter(month);
-    }
-
-    return month.format(this.pickerConfig.monthFormat);
-  }
-
   showCalendars = () => {
     this.hideStateHelper = true;
     this.areCalendarsShown = true;
@@ -232,18 +208,6 @@ export class DpDayPickerComponent implements OnChanges, OnInit, ControlValueAcce
   hideCalendars = () => {
     this.areCalendarsShown = false;
   };
-
-  moveCalendars(base: Moment, months: number) {
-    this.calendars = this.dayPickerService.moveCalendars(this.pickerConfig, this.value, base, months);
-  }
-
-  isLeftNavDisabled(month: Moment): boolean {
-    return this.dayPickerService.isMinMonth(<Moment>this.pickerConfig.min, month);
-  }
-
-  isRightNavDisabled(month: Moment): boolean {
-    return this.dayPickerService.isMaxMonth(<Moment>this.pickerConfig.max, month);
-  }
 
   onViewDateChange(dates: string) {
     const dateStrings = dates.split(',').map(date => date.trim());

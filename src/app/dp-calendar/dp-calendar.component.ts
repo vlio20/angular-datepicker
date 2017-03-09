@@ -1,44 +1,72 @@
-import {Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges} from '@angular/core';
-import {CalendarService} from './service/calendar.service';
+import {ICalendarMonthConfig} from '../dp-calendar-month/config/calendar-month-config.model';
+import {IDayEvent} from './../dp-calendar-month/config/day.model';
 import {ICalendarConfig} from './config/calendar-config.model';
-import {ICalendarDay} from './config/day.model';
+import {CalendarService} from './config/calendar.service';
+import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from '@angular/core';
 import {Moment} from 'moment';
 
 @Component({
   selector: 'dp-calendar',
   templateUrl: './dp-calendar.component.html',
   styleUrls: ['./dp-calendar.component.less'],
-  providers: [CalendarService]
+  providers: [CalendarService],
 })
-export class DpCalendarComponent implements OnInit, OnChanges {
-  @Input() config: ICalendarConfig;
+export class DpCalendarComponent implements OnChanges {
   @Input() selected: Moment[];
-  @Output('on-change') dateClicked = new EventEmitter();
-  weeks: ICalendarDay[][];
-  weekdays: string[];
+  @Input() config: ICalendarConfig;
 
-  constructor(private calendarService: CalendarService) {
-  }
+  @Output() selectedChange: EventEmitter<Moment[]> = new EventEmitter();
+  @Output() dayClick: EventEmitter<IDayEvent> = new EventEmitter();
+  @Output() dayContextmenu: EventEmitter<IDayEvent> = new EventEmitter();
+  @Output() calendarMove: EventEmitter<Moment> = new EventEmitter();
 
-  ngOnInit() {
-    this.weeks = this.calendarService.generateMonthArray(this.config.firstDayOfWeek, this.config.month,
-      this.selected);
-    this.weekdays = this.calendarService.generateWeekdays(this.config.firstDayOfWeek, this.config.weekdayNames);
-  }
+  calendars: ICalendarMonthConfig[];
+
+  constructor(private calendarContainerService: CalendarService) { }
 
   ngOnChanges(changes: SimpleChanges) {
-    const {selected} = changes;
-    if (selected && !selected.isFirstChange()) {
-      this.weeks = this.calendarService.generateMonthArray(this.config.firstDayOfWeek, this.config.month,
-        this.selected);
+    this.config = this.calendarContainerService.getConfig(this.config);
+    this.calendars = this.calendarContainerService.generateCalendars(
+      this.config,
+      this.selected,
+      this.calendars && this.calendars[0] && this.calendars[0].month
+    );
+  }
+
+  daySelected({day, event}: IDayEvent) {
+    if (!this.config.allowMultiSelect) {
+      // Single selection
+      this.selected = [day.date];
+    } else if (day.selected && this.selected) {
+      // Unselecting a day
+      this.selected = this.selected.filter(val => !val.isSame(day.date, 'day'));
+    } else if (this.config.allowMultiSelect) {
+      // Multi selection
+      this.selected = this.selected ? this.selected.concat(day.date) : [day.date];
     }
+
+    this.dayClick.emit({day, event});
+    this.selectedChange.emit(this.selected);
   }
 
-  isDisabledDay(day: ICalendarDay) {
-    return this.calendarService.isDateDisabled(day, this.config);
+  getMonthToDisplay(month: Moment): string {
+    if (typeof this.config.monthFormatter === 'function') {
+      return this.config.monthFormatter(month);
+    }
+
+    return month.format(this.config.monthFormat);
   }
 
-  dateClick(day: ICalendarDay) {
-    this.dateClicked.emit({day});
+  moveCalendars(base: Moment, months: number) {
+    this.calendars = this.calendarContainerService.moveCalendars(this.config, this.selected, base, months);
+    this.calendarMove.emit(this.calendars[0].month);
+  }
+
+  isLeftNavDisabled(month: Moment): boolean {
+    return this.calendarContainerService.isMinMonth(<Moment>this.config.min, month);
+  }
+
+  isRightNavDisabled(month: Moment): boolean {
+    return this.calendarContainerService.isMaxMonth(<Moment>this.config.max, month);
   }
 }
