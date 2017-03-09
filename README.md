@@ -88,7 +88,33 @@ class MyContainer {
 ```
 Here is the list of APIs:  
 
-| Name                 | Signature       | description            |
+| Name                 | Signature       | Description            |
 |----------------------|:---------------:|------------------------|
 | open                 | `() => void`    | Opens the date picker  |
 | close                | `() => void`    | Closes the date picker |
+
+
+## Inline
+
+You can use the `<dp-calendar>` component to display the calendar widget without an associated input box.
+
+i.e.
+```html
+<dp-calendar [(selected)]="dates" [config]="calendarConfig"></dp-calendar>
+```
+
+### Inputs
+
+| Name                 | Type              | Description            |
+|----------------------|:-----------------:|------------------------|
+| selected             | `Moment[]`        | Opens the date picker  |
+| config               | `ICalendarConfig` | A subset of the `IDayPickerConfig`.<br>Properties include: `firstDayOfWeek`, `calendarsAmount`, `min`, `max`, `allowMultiSelect`, `format`, `monthFormat`, and `monthFormatter`.<br>These properties behave as described in the `Configuration` section above. |
+
+### Outputs
+
+| Name                 | Type                      | Description                                                        |
+|----------------------|:-------------------------:|--------------------------------------------------------------------|
+| selectedChange       | `EventEmitter<Moment[]>`  | Emits the currently selected days every time the selection changes |
+| dayClick             | `EventEmitter<IDayEvent>` | Emits every time a day is clicked on the calendar                  |
+| dayContextmenu       | `EventEmitter<IDayEvent>` | Emits every time a day is right-clicked on the calendar            |
+| calendarMove         | `EventEmitter<Moment>`    | Emits every time the calendar moves to a different set of months. The date emitted is the first month displayed. |

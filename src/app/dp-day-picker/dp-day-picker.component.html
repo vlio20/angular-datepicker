@@ -7,26 +7,7 @@
          (focus)="inputFocused()"
          (keydown)="onKeydown($event)"
          [disabled]="disabled"/>
-  <div class="dp-calendars-container" *ngIf="areCalendarsShown">
-    <div class="dp-calendar-container"
-         *ngFor="let calendar of calendars; let start = first; let end = last">
-      <div class="dp-calendar-nav-container">
-        <button class="dp-calendar-nav-left"
-                *ngIf="start"
-                [disabled]="isLeftNavDisabled(calendar.month)"
-                (click)="moveCalendars(calendars[0].month, -1)"> <
-        </button>
-        <span class="dp-calendar-month">{{getMonthToDisplay(calendar.month)}}</span>
-        <button class="dp-calendar-nav-right"
-                *ngIf="end"
-                [disabled]="isRightNavDisabled(calendar.month)"
-                (click)="moveCalendars(calendars[0].month, 1)"> >
-        </button>
-      </div>
-      <dp-calendar [selected]="value"
-                   [config]="calendar"
-                   (on-change)="daySelected($event)">
-      </dp-calendar>
-    </div>
+  <div class="dp-popup" *ngIf="areCalendarsShown">
+    <dp-calendar class="dp-material" [(selected)]="value" [config]="pickerConfig"></dp-calendar>
   </div>
 </div>
