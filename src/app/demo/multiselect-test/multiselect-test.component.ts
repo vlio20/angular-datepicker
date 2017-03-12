@@ -13,6 +13,10 @@ export class MultiselectTestComponent implements OnInit {
   @ViewChild('dayPicker') dayPicker: DpDayPickerComponent;
   demoFormat = 'DD-MM-YYYY';
   readonly DAYS = ['su', 'mo', 'tu', 'we', 'th', 'fr', 'sa'];
+  stringDateBlank: string;
+  stringCsvDateBlank: string;
+  momentDateBlank: Moment;
+  momentArrayDateBlank: Moment[];
 
   stringDate: string = '06-06-2017';
   stringCsvDate: string = '06-06-2017, 03-02-2017';

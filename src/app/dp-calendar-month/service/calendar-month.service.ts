@@ -72,7 +72,7 @@ export class CalendarMonthService {
     const weekdays: string[] = [];
     const daysMap = this.generateDaysMap(firstDayOfWeek);
 
-    for (let dayKey in daysMap) {
+    for (const dayKey in daysMap) {
       if (daysMap.hasOwnProperty(dayKey)) {
         weekdays[daysMap[dayKey]] = weekdayNames[dayKey];
       }

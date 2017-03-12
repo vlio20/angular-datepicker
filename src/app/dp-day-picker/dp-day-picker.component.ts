@@ -207,11 +207,11 @@ export class DpDayPickerComponent implements OnChanges, OnInit, ControlValueAcce
   showCalendars = () => {
     this.hideStateHelper = true;
     this.areCalendarsShown = true;
-  };
+  }
 
   hideCalendars = () => {
     this.areCalendarsShown = false;
-  };
+  }
 
   onViewDateChange(dates: string) {
     const dateStrings = dates.split(',').map(date => date.trim());
