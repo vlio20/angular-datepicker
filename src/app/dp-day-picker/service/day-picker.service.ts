@@ -2,8 +2,8 @@ import {CalendarService} from './../../dp-calendar/config/calendar.service';
 import {Injectable} from '@angular/core';
 import {IDayPickerConfig} from './day-picker-config.model';
 import * as moment from 'moment';
-import {UtilsService} from '../../common/services/utils/utils.service';
 import {Moment} from 'moment';
+import {UtilsService} from '../../common/services/utils/utils.service';
 import {FormControl} from '@angular/forms';
 import {ICalendarConfig} from '../../dp-calendar/config/calendar-config.model';
 
@@ -15,7 +15,8 @@ export class DayPickerService {
     disableKeypress: false
   };
 
-  constructor(private calendarContainerService: CalendarService) {}
+  constructor(private calendarContainerService: CalendarService) {
+  }
 
   getConfig(config: IDayPickerConfig): ICalendarConfig {
     if (config && config.allowMultiSelect && config.closeOnSelect === undefined) {

@@ -1,7 +1,6 @@
-import { DpCalendarMonthComponent } from './../dp-calendar-month/dp-calendar-month.component';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { DpCalendarComponent } from './dp-calendar.component';
+import {DpCalendarMonthComponent} from './../dp-calendar-month/dp-calendar-month.component';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {DpCalendarComponent} from './dp-calendar.component';
 
 describe('DpCalendarComponent', () => {
   let component: DpCalendarComponent;
@@ -9,9 +8,9 @@ describe('DpCalendarComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DpCalendarComponent, DpCalendarMonthComponent ]
+      declarations: [DpCalendarComponent, DpCalendarMonthComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

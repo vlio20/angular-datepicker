@@ -22,7 +22,8 @@ export class DpCalendarComponent implements OnChanges {
 
   calendars: ICalendarMonthConfig[];
 
-  constructor(private calendarContainerService: CalendarService) { }
+  constructor(private calendarContainerService: CalendarService) {
+  }
 
   ngOnChanges(changes: SimpleChanges) {
     this.config = this.calendarContainerService.getConfig(this.config);

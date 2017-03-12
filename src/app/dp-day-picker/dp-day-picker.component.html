@@ -8,6 +8,9 @@
          (keydown)="onKeydown($event)"
          [disabled]="disabled"/>
   <div class="dp-popup" *ngIf="areCalendarsShown">
-    <dp-calendar class="dp-material" [(selected)]="value" [config]="pickerConfig"></dp-calendar>
+    <dp-calendar class="dp-material"
+                 [(selected)]="value"
+                 [config]="pickerConfig">
+    </dp-calendar>
   </div>
 </div>

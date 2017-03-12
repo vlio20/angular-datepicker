@@ -1,6 +1,4 @@
-/* tslint:disable:no-unused-variable */
-
-import {TestBed, async, inject} from '@angular/core/testing';
+import {TestBed, inject} from '@angular/core/testing';
 import {CalendarService} from '../../dp-calendar/config/calendar.service';
 import {DayPickerService} from './day-picker.service';
 import * as moment from 'moment';
@@ -19,22 +17,23 @@ describe('Service: DayPicker', () => {
     expect(service.isDateValid('', 'DD-MM-YY')).toBe(true);
   }));
 
-  it('should check getConfig method for dates format aspect', inject([DayPickerService], (service: DayPickerService) => {
-    const config1 = service.getConfig({
-      min: '2016-10-25',
-      max: '2017-10-25',
-      format: 'YYYY-MM-DD'
-    });
+  it('should check getConfig method for dates format aspect', inject([DayPickerService],
+    (service: DayPickerService) => {
+      const config1 = service.getConfig({
+        min: '2016-10-25',
+        max: '2017-10-25',
+        format: 'YYYY-MM-DD'
+      });
 
-    expect((<Moment>config1.min).isSame(moment('2016-10-25', 'YYYY-MM-DD'), 'day')).toBe(true);
-    expect((<Moment>config1.max).isSame(moment('2017-10-25', 'YYYY-MM-DD'), 'day')).toBe(true);
+      expect((<Moment>config1.min).isSame(moment('2016-10-25', 'YYYY-MM-DD'), 'day')).toBe(true);
+      expect((<Moment>config1.max).isSame(moment('2017-10-25', 'YYYY-MM-DD'), 'day')).toBe(true);
 
-    const config2 = service.getConfig({
-      min: moment('2016-10-25', 'YYYY-MM-DD'),
-      max: moment('2017-10-25', 'YYYY-MM-DD')
-    });
+      const config2 = service.getConfig({
+        min: moment('2016-10-25', 'YYYY-MM-DD'),
+        max: moment('2017-10-25', 'YYYY-MM-DD')
+      });
 
-    expect((<Moment>config2.min).isSame(moment('2016-10-25', 'YYYY-MM-DD'), 'day')).toBe(true);
-    expect((<Moment>config2.max).isSame(moment('2017-10-25', 'YYYY-MM-DD'), 'day')).toBe(true);
-  }));
+      expect((<Moment>config2.min).isSame(moment('2016-10-25', 'YYYY-MM-DD'), 'day')).toBe(true);
+      expect((<Moment>config2.max).isSame(moment('2017-10-25', 'YYYY-MM-DD'), 'day')).toBe(true);
+    }));
 });

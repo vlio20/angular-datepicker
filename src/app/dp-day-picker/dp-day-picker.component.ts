@@ -97,7 +97,8 @@ export class DpDayPickerComponent implements OnChanges, OnInit, ControlValueAcce
 
   writeValue(value: Moment): void {
     if (value) {
-      this.pickerConfig.userValueType = this.pickerConfig.userValueType || (typeof value === 'string' ? 'string' : 'object');
+      this.pickerConfig.userValueType =
+        this.pickerConfig.userValueType || (typeof value === 'string' ? 'string' : 'object');
       this.userValue = value;
       this.init();
     }
@@ -107,9 +108,11 @@ export class DpDayPickerComponent implements OnChanges, OnInit, ControlValueAcce
     if (!value || value.length === 0) {
       return null;
     }
+
     if (value.length > 0 && !this.pickerConfig.allowMultiSelect) {
       return this.pickerConfig.userValueType === 'string' ? this.viewValue : value[0];
     }
+
     return this.pickerConfig.userValueType === 'string' ? this.viewValue.split(', ') : value;
   }
 
@@ -161,7 +164,8 @@ export class DpDayPickerComponent implements OnChanges, OnInit, ControlValueAcce
           this.pickerConfig.allowMultiSelect = true;
         }
         if (this.pickerConfig.allowMultiSelect) {
-          this.value = this.userValue.split(',').map(val => UtilsService.convertToMoment(val.trim(), this.pickerConfig.format));
+          this.value = this.userValue.split(',')
+            .map(val => UtilsService.convertToMoment(val.trim(), this.pickerConfig.format));
         } else {
           this.value = [UtilsService.convertToMoment(this.userValue, this.pickerConfig.format)];
         }

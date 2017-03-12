@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
-import {Moment} from 'moment';
 import * as moment from 'moment';
+import {Moment} from 'moment';
 import {WeekDays} from '../../common/types/week-days.type';
 import {UtilsService} from '../../common/services/utils/utils.service';
 import {ICalendarDay} from '../config/day.model';
@@ -28,7 +28,9 @@ export class CalendarMonthService {
     }, <{[key: number]: string}>{});
   }
 
-  generateMonthArray(firstDayOfWeek: WeekDays, dayInMonth: Moment, selectedDays: Moment[] = null): ICalendarDay[][] {
+  generateMonthArray(firstDayOfWeek: WeekDays,
+                     dayInMonth: Moment,
+                     selectedDays: Moment[] = null): ICalendarDay[][] {
     const monthArray: ICalendarDay[][] = [];
     const firstDayOfMonth = dayInMonth.clone().startOf('month');
     const firstDayOfWeekIndex = this.DAYS.indexOf(firstDayOfWeek);
@@ -42,7 +44,8 @@ export class CalendarMonthService {
     const daysOfCalendar: ICalendarDay[] = UtilsService.createArray(42).reduce((array: ICalendarDay[]) => {
       array.push({
         date: current.clone(),
-        selected: (selectedDays ? selectedDays.find(selectedDay => current.isSame(selectedDay, 'day')) : undefined) !== undefined,
+        selected: (selectedDays ? selectedDays
+            .find(selectedDay => current.isSame(selectedDay, 'day')) : undefined) !== undefined,
         currentMonth: current.isSame(dayInMonth, 'month'),
         prevMonth: current.isSame(dayInMonth.clone().subtract(1, 'month'), 'month'),
         nextMonth: current.isSame(dayInMonth.clone().add(1, 'month'), 'month'),
@@ -87,10 +90,6 @@ export class CalendarMonthService {
       return true;
     }
 
-    if (config.max && day.date.isAfter(config.max, 'd')) {
-      return true;
-    }
-
-    return false;
+    return !!(config.max && day.date.isAfter(config.max, 'd'));
   }
 }
