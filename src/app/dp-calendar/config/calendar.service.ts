@@ -34,9 +34,10 @@ export class CalendarService {
     }
   }
 
-  getConfig(config: ICalendarConfig) {
+  getConfig(config: ICalendarConfig): ICalendarConfig {
     const _config = Object.assign({}, this.defaultConfig, config);
     this.formatValues(_config);
+
     return _config;
   }
 

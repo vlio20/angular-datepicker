@@ -5,6 +5,7 @@ import * as moment from 'moment';
 import {UtilsService} from '../../common/services/utils/utils.service';
 import {Moment} from 'moment';
 import {FormControl} from '@angular/forms';
+import {ICalendarConfig} from '../../dp-calendar/config/calendar-config.model';
 
 @Injectable()
 export class DayPickerService {
@@ -16,12 +17,13 @@ export class DayPickerService {
 
   constructor(private calendarContainerService: CalendarService) {}
 
-  getConfig(config: IDayPickerConfig) {
+  getConfig(config: IDayPickerConfig): ICalendarConfig {
     if (config && config.allowMultiSelect && config.closeOnSelect === undefined) {
       // Default to not closing if multi select enabled
       config.closeOnSelect = false;
     }
     const _config = Object.assign({}, this.defaultConfig, config);
+
     return this.calendarContainerService.getConfig(_config);
   }
 
@@ -29,6 +31,7 @@ export class DayPickerService {
     if (date === '') {
       return true;
     }
+
     return moment(date, format, true).isValid();
   }
 
