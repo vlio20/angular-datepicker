@@ -1,4 +1,4 @@
-import {CalendarService} from './../dp-calendar/config/calendar.service';
+import {CalendarService} from '../dp-calendar/config/calendar.service';
 import {Component, forwardRef, HostListener, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {DpCalendarComponent} from '../dp-calendar/dp-calendar.component';
 import * as moment from 'moment';
@@ -74,7 +74,7 @@ export class DpDayPickerComponent implements OnChanges, OnInit, ControlValueAcce
   @HostListener('document:click')
   onBodyClick() {
     if (!this.hideStateHelper) {
-      this.hideCalendars();
+      this.hideCalendar();
     }
     this.hideStateHelper = false;
   }
@@ -189,13 +189,13 @@ export class DpDayPickerComponent implements OnChanges, OnInit, ControlValueAcce
   initApi() {
     this.api = {
       open: this.showCalendars.bind(this),
-      close: this.hideCalendars.bind(this)
+      close: this.hideCalendar.bind(this)
     };
   }
 
   daySelected() {
     if (this.pickerConfig.closeOnSelect) {
-      setTimeout(this.hideCalendars, this.pickerConfig.closeOnSelectDelay);
+      setTimeout(this.hideCalendar, this.pickerConfig.closeOnSelectDelay);
     }
   }
 
@@ -204,12 +204,12 @@ export class DpDayPickerComponent implements OnChanges, OnInit, ControlValueAcce
     this.areCalendarsShown = true;
   }
 
-  showCalendars = () => {
+  showCalendars() {
     this.hideStateHelper = true;
     this.areCalendarsShown = true;
   }
 
-  hideCalendars = () => {
+  hideCalendar() {
     this.areCalendarsShown = false;
   }
 
