@@ -116,5 +116,5 @@ i.e.
 |----------------------|:-------------------------:|--------------------------------------------------------------------|
 | selectedChange       | `EventEmitter<Moment[]>`  | Emits the currently selected days every time the selection changes |
 | dayClick             | `EventEmitter<IDayEvent>` | Emits every time a day is clicked on the calendar                  |
-| dayContextmenu       | `EventEmitter<IDayEvent>` | Emits every time a day is right-clicked on the calendar            |
+| dayContextMenu       | `EventEmitter<IDayEvent>` | Emits every time a day is right-clicked on the calendar            |
 | calendarMove         | `EventEmitter<Moment>`    | Emits every time the calendar moves to a different set of months. The date emitted is the first month displayed. |

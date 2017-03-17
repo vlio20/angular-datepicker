@@ -17,7 +17,7 @@ export class DpCalendarComponent implements OnChanges {
 
   @Output() selectedChange: EventEmitter<Moment[]> = new EventEmitter();
   @Output() dayClick: EventEmitter<IDayEvent> = new EventEmitter();
-  @Output() dayContextmenu: EventEmitter<IDayEvent> = new EventEmitter();
+  @Output() dayContextMenu: EventEmitter<IDayEvent> = new EventEmitter();
   @Output() calendarMove: EventEmitter<Moment> = new EventEmitter();
 
   calendars: ICalendarMonthConfig[];
