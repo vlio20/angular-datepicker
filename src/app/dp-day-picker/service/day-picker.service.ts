@@ -96,7 +96,7 @@ export class DayPickerService {
         }
 
         return map;
-      }, <any>{});
+      }, {});
 
       return !isValid ? errors : null;
     };

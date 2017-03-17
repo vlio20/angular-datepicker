@@ -1,5 +1,16 @@
 import {CalendarService} from '../dp-calendar/config/calendar.service';
-import {Component, forwardRef, HostListener, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {
+  Component,
+  forwardRef,
+  HostListener,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+  ElementRef,
+  ViewChild,
+  AfterViewInit
+} from '@angular/core';
 import {DpCalendarComponent} from '../dp-calendar/dp-calendar.component';
 import * as moment from 'moment';
 import {Moment} from 'moment';
@@ -31,7 +42,7 @@ export type CalendarValue = string | string[] | Moment | Moment[];
     }
   ]
 })
-export class DpDayPickerComponent implements OnChanges, OnInit, ControlValueAccessor, Validator {
+export class DpDayPickerComponent implements OnChanges, OnInit, AfterViewInit, ControlValueAccessor, Validator {
   private shouldNgInit: boolean = true;
   @Input('config') private userConfig: IDayPickerConfig;
 
@@ -43,12 +54,15 @@ export class DpDayPickerComponent implements OnChanges, OnInit, ControlValueAcce
   @Input() private minDate: Moment | string;
   @Input() private maxDate: Moment | string;
 
+  @ViewChild('container') containerViewChild: ElementRef;
+
   private areCalendarsShown: boolean = false;
   private hideStateHelper: boolean = false;
   private pickerConfig: IDayPickerConfig;
   private _value: Moment[] = [];
   private userValue;
   private viewValue: string;
+  private container: HTMLDivElement;
   validateFn: Function;
 
   private get value(): Moment[] {
@@ -92,6 +106,15 @@ export class DpDayPickerComponent implements OnChanges, OnInit, ControlValueAcce
 
     if (minDate || maxDate) {
       this.initValidators();
+    }
+  }
+
+  ngAfterViewInit() {
+    this.container = <HTMLDivElement> this.containerViewChild.nativeElement;
+
+    if (this.pickerConfig.appendTo) {
+      const container = document.querySelector(this.pickerConfig.appendTo);
+      container.appendChild(this.container);
     }
   }
 
