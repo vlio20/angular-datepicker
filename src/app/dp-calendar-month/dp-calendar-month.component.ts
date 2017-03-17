@@ -14,7 +14,7 @@ export class DpCalendarMonthComponent implements OnInit, OnChanges {
   @Input() config: ICalendarMonthConfig;
   @Input() selected: Moment[];
   @Output() dayClick: EventEmitter<IDayEvent> = new EventEmitter();
-  @Output() dayContextmenu: EventEmitter<IDayEvent> = new EventEmitter();
+  @Output() dayContextMenu: EventEmitter<IDayEvent> = new EventEmitter();
   weeks: ICalendarDay[][];
   weekdays: string[];
 

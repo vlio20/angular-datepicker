@@ -140,7 +140,6 @@ export class DpDayPickerComponent implements OnChanges, OnInit, ControlValueAcce
     }
   }
 
-  // start
   init() {
     this.pickerConfig = this.dayPickerService.getConfig(this.userConfig);
     if (this.userValue) {
@@ -195,7 +194,7 @@ export class DpDayPickerComponent implements OnChanges, OnInit, ControlValueAcce
 
   daySelected() {
     if (this.pickerConfig.closeOnSelect) {
-      setTimeout(this.hideCalendar, this.pickerConfig.closeOnSelectDelay);
+      setTimeout(this.hideCalendar.bind(this), this.pickerConfig.closeOnSelectDelay);
     }
   }
 

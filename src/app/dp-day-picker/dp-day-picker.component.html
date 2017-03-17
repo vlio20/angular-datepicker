@@ -10,7 +10,8 @@
   <div class="dp-popup" *ngIf="areCalendarsShown">
     <dp-calendar class="dp-material"
                  [(selected)]="value"
-                 [config]="pickerConfig">
+                 [config]="pickerConfig"
+                 (dayClick)="daySelected($event)">
     </dp-calendar>
   </div>
 </div>
