@@ -5,5 +5,5 @@ export interface IDayPickerConfig extends ICalendarConfig {
   closeOnSelectDelay?: number;
   disableKeypress?: boolean;
   userValueType?: 'string' | 'object';
-  appendTo?: string;
+  appendTo?: string|HTMLElement;
 }

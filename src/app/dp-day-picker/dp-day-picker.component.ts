@@ -132,9 +132,17 @@ export class DpDayPickerComponent implements OnChanges, OnInit, AfterViewInit, C
 
   ngAfterViewInit() {
     this.calendarWrapper = <HTMLElement> this.calendarContainer.nativeElement;
-    this.appendToElement = <HTMLElement>(this.pickerConfig.appendTo ?
-      document.querySelector(this.pickerConfig.appendTo) : this.elemRef.nativeElement);
     this.inputElement = this.elemRef.nativeElement.querySelector('input');
+
+    if (this.pickerConfig.appendTo) {
+      if (typeof this.pickerConfig.appendTo === 'string') {
+        this.appendToElement = <HTMLElement>document.querySelector(this.pickerConfig.appendTo);
+      } else {
+        this.appendToElement = this.pickerConfig.appendTo;
+      }
+    } else {
+      this.appendToElement = this.elemRef.nativeElement;
+    }
 
     const container = this.appendToElement;
     container.appendChild(this.calendarWrapper);

@@ -42,7 +42,7 @@ export class DemoComponent {
       fr: 'fri',
       sa: 'sat'
     },
-    appendTo: 'body'
+    appendTo: document.body
   };
 
   configChanged() {
