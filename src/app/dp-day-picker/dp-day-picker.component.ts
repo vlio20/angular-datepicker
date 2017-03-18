@@ -19,6 +19,7 @@ import {IDayPickerConfig} from './service/day-picker-config.model';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR, FormControl, NG_VALIDATORS, Validator} from '@angular/forms';
 import {UtilsService} from '../common/services/utils/utils.service';
 import {IDpDayPickerApi} from './dp-day-picker.api';
+import {DomHelper} from '../common/services/dom-appender/dom-appender.service';
 
 export type CalendarValue = string | string[] | Moment | Moment[];
 
@@ -28,6 +29,7 @@ export type CalendarValue = string | string[] | Moment | Moment[];
   styleUrls: ['./dp-day-picker.component.less'],
   entryComponents: [DpCalendarComponent],
   providers: [
+    DomHelper,
     CalendarService,
     DayPickerService,
     {
@@ -54,15 +56,17 @@ export class DpDayPickerComponent implements OnChanges, OnInit, AfterViewInit, C
   @Input() private minDate: Moment | string;
   @Input() private maxDate: Moment | string;
 
-  @ViewChild('container') containerViewChild: ElementRef;
+  @ViewChild('container') calendarContainer: ElementRef;
 
-  private areCalendarsShown: boolean = false;
+  private _areCalendarsShown: boolean = false;
   private hideStateHelper: boolean = false;
   private pickerConfig: IDayPickerConfig;
   private _value: Moment[] = [];
   private userValue;
   private viewValue: string;
-  private container: HTMLDivElement;
+  private calendarWrapper: HTMLElement;
+  private appendToElement: HTMLElement;
+  private inputElement: HTMLElement;
   validateFn: Function;
 
   private get value(): Moment[] {
@@ -75,9 +79,26 @@ export class DpDayPickerComponent implements OnChanges, OnInit, AfterViewInit, C
     this.onChangeCallback(this.processOnChangeCallback(value));
   }
 
+  private get areCalendarsShown(): boolean {
+    return this._areCalendarsShown;
+  }
+
+  private set areCalendarsShown(value: boolean) {
+    if (value) {
+      this.domHelper.setElementPosition({
+        container: this.appendToElement,
+        element: this.calendarWrapper,
+        anchor: this.inputElement
+      });
+    }
+    this._areCalendarsShown = value;
+  }
+
   api: IDpDayPickerApi = <IDpDayPickerApi>{};
 
-  constructor(private dayPickerService: DayPickerService) {
+  constructor(private dayPickerService: DayPickerService,
+              private domHelper: DomHelper,
+              private elemRef: ElementRef) {
   }
 
   @HostListener('click')
@@ -110,12 +131,13 @@ export class DpDayPickerComponent implements OnChanges, OnInit, AfterViewInit, C
   }
 
   ngAfterViewInit() {
-    this.container = <HTMLDivElement> this.containerViewChild.nativeElement;
+    this.calendarWrapper = <HTMLElement> this.calendarContainer.nativeElement;
+    this.appendToElement = <HTMLElement>(this.pickerConfig.appendTo ?
+      document.querySelector(this.pickerConfig.appendTo) : this.elemRef.nativeElement);
+    this.inputElement = this.elemRef.nativeElement.querySelector('input');
 
-    if (this.pickerConfig.appendTo) {
-      const container = document.querySelector(this.pickerConfig.appendTo);
-      container.appendChild(this.container);
-    }
+    const container = this.appendToElement;
+    container.appendChild(this.calendarWrapper);
   }
 
   writeValue(value: Moment): void {

@@ -38,10 +38,10 @@
     <div class="dp-inline">
       <label>Inline Calendar (<code>&lt;dp-calendar&gt;</code>)</label><br>
       <dp-calendar
-        [class.dp-material]="material"
-        [(selected)]="dates"
-        (selectedChange)="log($event)"
-        [config]="config">
+          [class.dp-material]="material"
+          [(selected)]="dates"
+          (selectedChange)="log($event)"
+          [config]="config">
       </dp-calendar>
     </div>
   </div>
@@ -198,10 +198,12 @@
     </span>
       <div class="dp-option-playground">
         <label>Single
-          <input type="radio" [(ngModel)]="config.allowMultiSelect" name="allowMultiSelect" [value]="false" (ngModelChange)="configChanged()">
+          <input type="radio" [(ngModel)]="config.allowMultiSelect" name="allowMultiSelect" [value]="false"
+                 (ngModelChange)="configChanged()">
         </label>
         <label>Multiple
-          <input type="radio" [(ngModel)]="config.allowMultiSelect" name="allowMultiSelect" [value]="true" (ngModelChange)="configChanged()">
+          <input type="radio" [(ngModel)]="config.allowMultiSelect" name="allowMultiSelect" [value]="true"
+                 (ngModelChange)="configChanged()">
         </label>
       </div>
     </div>
@@ -212,10 +214,12 @@
     </span>
       <div class="dp-option-playground">
         <label>Close
-          <input type="radio" [(ngModel)]="config.closeOnSelect" name="closeOnSelect" [value]="true" (ngModelChange)="configChanged()">
+          <input type="radio" [(ngModel)]="config.closeOnSelect" name="closeOnSelect" [value]="true"
+                 (ngModelChange)="configChanged()">
         </label>
         <label>Don't Close
-          <input type="radio" [(ngModel)]="config.closeOnSelect" name="closeOnSelect" [value]="false" (ngModelChange)="configChanged()">
+          <input type="radio" [(ngModel)]="config.closeOnSelect" name="closeOnSelect" [value]="false"
+                 (ngModelChange)="configChanged()">
         </label>
       </div>
     </div>
@@ -250,10 +254,12 @@
     </span>
       <div class="dp-option-playground">
         <label>Disable
-          <input type="radio" [(ngModel)]="config.disableKeypress" name="disableKeypress" [value]="true" (ngModelChange)="configChanged()">
+          <input type="radio" [(ngModel)]="config.disableKeypress" name="disableKeypress" [value]="true"
+                 (ngModelChange)="configChanged()">
         </label>
         <label>Enable
-          <input type="radio" [(ngModel)]="config.disableKeypress" name="disableKeypress" [value]="false" (ngModelChange)="configChanged()">
+          <input type="radio" [(ngModel)]="config.disableKeypress" name="disableKeypress" [value]="false"
+                 (ngModelChange)="configChanged()">
         </label>
       </div>
     </div>
@@ -264,10 +270,12 @@
     </span>
       <div class="dp-option-playground">
         <label>Moment <code>'object'</code>
-          <input type="radio" [(ngModel)]="config.userValueType" name="userValueType" value="object" (ngModelChange)="configChanged()">
+          <input type="radio" [(ngModel)]="config.userValueType" name="userValueType" value="object"
+                 (ngModelChange)="configChanged()">
         </label>
         <label>String <code>'string'</code>
-          <input type="radio" [(ngModel)]="config.userValueType" name="userValueType" value="string" (ngModelChange)="configChanged()">
+          <input type="radio" [(ngModel)]="config.userValueType" name="userValueType" value="string"
+                 (ngModelChange)="configChanged()">
         </label>
       </div>
     </div>
