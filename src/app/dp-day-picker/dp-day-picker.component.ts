@@ -139,7 +139,6 @@ export class DpDayPickerComponent implements OnChanges, OnInit, AfterViewInit, C
     this.inputElement = this.elemRef.nativeElement.querySelector('input');
     this.popupElem = this.elemRef.nativeElement.querySelector('.dp-popup');
 
-    // todo: move to service
     if (this.pickerConfig.appendTo) {
       if (typeof this.pickerConfig.appendTo === 'string') {
         this.appendToElement = <HTMLElement>document.querySelector(this.pickerConfig.appendTo);

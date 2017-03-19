@@ -44,7 +44,8 @@ export class DemoComponent {
       sa: 'sat'
     },
     appendTo: document.body,
-    opens: 'left'
+    drops: 'down',
+    opens: 'right'
   };
 
   configChanged() {

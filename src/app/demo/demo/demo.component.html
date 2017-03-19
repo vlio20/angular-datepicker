@@ -60,9 +60,9 @@
   <div class="dp-attributes">
     <h3 class="dp-options-section">Attribute options</h3>
     <div class="dp-option">
-    <span class="dp-option-header">
-      Material Styling ("dp-material" class):
-    </span>
+      <span class="dp-option-header">
+        Material Styling ("dp-material" class):
+      </span>
       <div class="dp-option-playground">
         <label>Material
           <input type="radio" [(ngModel)]="material" name="style" [value]="true">
@@ -74,9 +74,9 @@
     </div>
 
     <div class="dp-option">
-    <span class="dp-option-header">
-      Disabled (disabled):
-    </span>
+      <span class="dp-option-header">
+        Disabled (disabled):
+      </span>
       <div class="dp-option-playground">
         <label>Enabled
           <input type="radio" [(ngModel)]="disabled" name="disabled" [value]="false">
@@ -88,9 +88,9 @@
     </div>
 
     <div class="dp-option">
-    <span class="dp-option-header">
-      Required Validation (required):
-    </span>
+      <span class="dp-option-header">
+        Required Validation (required):
+      </span>
       <div class="dp-option-playground">
         <label>Required
           <input type="radio" [(ngModel)]="required" name="required" [value]="true">
@@ -102,9 +102,9 @@
     </div>
 
     <div class="dp-option">
-    <span class="dp-option-header">
-      Min-Date Validation (minDate):
-    </span>
+      <span class="dp-option-header">
+        Min-Date Validation (minDate):
+      </span>
       <div class="dp-option-playground">
         <dp-day-picker class="dp-material"
                        [(ngModel)]="validationMinDate"
@@ -114,9 +114,9 @@
     </div>
 
     <div class="dp-option">
-    <span class="dp-option-header">
-      Max-Date Validation (maxDate):
-    </span>
+      <span class="dp-option-header">
+        Max-Date Validation (maxDate):
+      </span>
       <div class="dp-option-playground">
         <dp-day-picker class="dp-material"
                        [(ngModel)]="validationMaxDate"
@@ -126,9 +126,9 @@
     </div>
 
     <div class="dp-option">
-    <span class="dp-option-header">
-      Placeholder (placeholder):
-    </span>
+      <span class="dp-option-header">
+        Placeholder (placeholder):
+      </span>
       <div class="dp-option-playground">
         <input type="text" placeholder="Put a placeholder" [(ngModel)]="placeholder"/>
       </div>
@@ -140,9 +140,9 @@
     <h3 class="dp-options-section">Config options</h3>
 
     <div class="dp-option">
-    <span class="dp-option-header">
-      First Day of The week (firstDayOfWeek):
-    </span>
+      <span class="dp-option-header">
+        First Day of The week (firstDayOfWeek):
+      </span>
       <div class="dp-option-playground">
         <select [(ngModel)]="config.firstDayOfWeek" (change)="configChanged()">
           <option *ngFor="let day of DAYS" [value]="day"> {{day}}</option>
@@ -151,36 +151,36 @@
     </div>
 
     <div class="dp-option">
-    <span class="dp-option-header">
-      Amount of Calendars (calendarsAmount):
-    </span>
+      <span class="dp-option-header">
+        Amount of Calendars (calendarsAmount):
+      </span>
       <div class="dp-option-playground">
         <input type="number" [(ngModel)]="config.calendarsAmount" (change)="configChanged()">
       </div>
     </div>
 
     <div class="dp-option">
-    <span class="dp-option-header">
-      Date Format (format):
-    </span>
+      <span class="dp-option-header">
+        Date Format (format):
+      </span>
       <div class="dp-option-playground">
         <input type="text" [(ngModel)]="config.format" (change)="configChanged()">
       </div>
     </div>
 
     <div class="dp-option">
-    <span class="dp-option-header">
-      Month Format (monthFormat):
-    </span>
+      <span class="dp-option-header">
+        Month Format (monthFormat):
+      </span>
       <div class="dp-option-playground">
         <input type="text" [(ngModel)]="config.monthFormat" (change)="configChanged()">
       </div>
     </div>
 
     <div class="dp-option">
-    <span class="dp-option-header">
-      Min Selectable Date (min):
-    </span>
+      <span class="dp-option-header">
+        Min Selectable Date (min):
+      </span>
       <div class="dp-option-playground">
         <dp-day-picker class="dp-material"
                        [(ngModel)]="config.min"
@@ -191,9 +191,9 @@
     </div>
 
     <div class="dp-option">
-    <span class="dp-option-header">
-      Max Selectable Date (max):
-    </span>
+      <span class="dp-option-header">
+        Max Selectable Date (max):
+      </span>
       <div class="dp-option-playground">
         <dp-day-picker class="dp-material"
                        [(ngModel)]="config.max"
@@ -204,9 +204,9 @@
     </div>
 
     <div class="dp-option">
-    <span class="dp-option-header">
-      Allow Multiple Selection (allowMultiSelect):
-    </span>
+      <span class="dp-option-header">
+        Allow Multiple Selection (allowMultiSelect):
+      </span>
       <div class="dp-option-playground">
         <label>Single
           <input type="radio" [(ngModel)]="config.allowMultiSelect" name="allowMultiSelect" [value]="false"
@@ -220,9 +220,9 @@
     </div>
 
     <div class="dp-option">
-    <span class="dp-option-header">
-      Close after selection (closeOnSelect):
-    </span>
+      <span class="dp-option-header">
+        Close after selection (closeOnSelect):
+      </span>
       <div class="dp-option-playground">
         <label>Close
           <input type="radio" [(ngModel)]="config.closeOnSelect" name="closeOnSelect" [value]="true"
@@ -236,18 +236,18 @@
     </div>
 
     <div class="dp-option">
-    <span class="dp-option-header">
-      Closing Delay in ms (closeOnSelectDelay):
-    </span>
+      <span class="dp-option-header">
+        Closing Delay in ms (closeOnSelectDelay):
+      </span>
       <div class="dp-option-playground">
         <input type="number" [(ngModel)]="config.closeOnSelectDelay" (change)="configChanged()">
       </div>
     </div>
 
     <div class="dp-option">
-    <span class="dp-option-header">
-      Weekday Names (weekdayNames):
-    </span>
+      <span class="dp-option-header">
+        Weekday Names (weekdayNames):
+      </span>
       <div class="dp-option-playground dp-week-days">
         <input type="text" [(ngModel)]="config.weekdayNames.su" (change)="configChanged()">
         <input type="text" [(ngModel)]="config.weekdayNames.mo" (change)="configChanged()">
@@ -260,9 +260,9 @@
     </div>
 
     <div class="dp-option">
-    <span class="dp-option-header">
-      Disable keyboard on input (disableKeypress):
-    </span>
+      <span class="dp-option-header">
+        Disable keyboard on input (disableKeypress):
+      </span>
       <div class="dp-option-playground">
         <label>Disable
           <input type="radio" [(ngModel)]="config.disableKeypress" name="disableKeypress" [value]="true"
@@ -276,9 +276,9 @@
     </div>
 
     <div class="dp-option">
-    <span class="dp-option-header">
-      User Value Type (userValueType):
-    </span>
+      <span class="dp-option-header">
+        User Value Type (userValueType):
+      </span>
       <div class="dp-option-playground">
         <label>Moment <code>'object'</code>
           <input type="radio" [(ngModel)]="config.userValueType" name="userValueType" value="object"
@@ -286,6 +286,38 @@
         </label>
         <label>String <code>'string'</code>
           <input type="radio" [(ngModel)]="config.userValueType" name="userValueType" value="string"
+                 (ngModelChange)="configChanged()">
+        </label>
+      </div>
+    </div>
+
+    <div class="dp-option">
+      <span class="dp-option-header">
+        Drops (drops):
+      </span>
+      <div class="dp-option-playground">
+        <label>Down
+          <input type="radio" [(ngModel)]="config.drops" name="drops" value="down"
+                 (ngModelChange)="configChanged()">
+        </label>
+        <label>Up
+          <input type="radio" [(ngModel)]="config.drops" name="drops" value="up"
+                 (ngModelChange)="configChanged()">
+        </label>
+      </div>
+    </div>
+
+    <div class="dp-option">
+      <span class="dp-option-header">
+        Opens (opens):
+      </span>
+      <div class="dp-option-playground">
+        <label>Right
+          <input type="radio" [(ngModel)]="config.opens" name="opens" value="right"
+                 (ngModelChange)="configChanged()">
+        </label>
+        <label>Left
+          <input type="radio" [(ngModel)]="config.opens" name="opens" value="left"
                  (ngModelChange)="configChanged()">
         </label>
       </div>

@@ -14,18 +14,18 @@ export class DayPickerService {
     closeOnSelectDelay: 100,
     disableKeypress: false,
     drops: 'down',
-    opens: 'right'
+    opens: 'rig'
   };
 
   constructor(private calendarContainerService: CalendarService) {
   }
 
   getConfig(config: IDayPickerConfig): ICalendarConfig {
-    if (config && config.allowMultiSelect && config.closeOnSelect === undefined) {
-      config.closeOnSelect = false;
-    }
-
     const _config = Object.assign({}, this.defaultConfig, config);
+
+    if (config && config.allowMultiSelect && config.closeOnSelect === undefined) {
+      _config.closeOnSelect = false;
+    }
 
     return this.calendarContainerService.getConfig(_config);
   }
