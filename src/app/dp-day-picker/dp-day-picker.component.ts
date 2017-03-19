@@ -67,6 +67,7 @@ export class DpDayPickerComponent implements OnChanges, OnInit, AfterViewInit, C
   private calendarWrapper: HTMLElement;
   private appendToElement: HTMLElement;
   private inputElement: HTMLElement;
+  private popupElem: HTMLElement;
   validateFn: Function;
 
   private get value(): Moment[] {
@@ -89,6 +90,7 @@ export class DpDayPickerComponent implements OnChanges, OnInit, AfterViewInit, C
         container: this.appendToElement,
         element: this.calendarWrapper,
         anchor: this.inputElement,
+        dimElem: this.popupElem,
         drops: this.pickerConfig.drops,
         opens: this.pickerConfig.opens
       });
@@ -135,6 +137,7 @@ export class DpDayPickerComponent implements OnChanges, OnInit, AfterViewInit, C
   ngAfterViewInit() {
     this.calendarWrapper = <HTMLElement> this.calendarContainer.nativeElement;
     this.inputElement = this.elemRef.nativeElement.querySelector('input');
+    this.popupElem = this.elemRef.nativeElement.querySelector('.dp-popup');
 
     // todo: move to service
     if (this.pickerConfig.appendTo) {

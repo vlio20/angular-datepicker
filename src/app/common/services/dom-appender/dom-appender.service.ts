@@ -4,9 +4,7 @@ import {TDrops, TOpens} from '../../types/poistions.type';
 @Injectable()
 export class DomHelper {
 
-  setElementPosition(args: IAppendToArgs): void {
-    const {container, element, anchor, drops, opens} = args;
-    const popupElem = <HTMLElement>element.querySelector('.dp-popup');
+  setElementPosition({container, element, anchor, dimElem, drops, opens}: IAppendToArgs): void {
 
     if (container.style.position === 'static') {
       container.style.position = 'relative';
@@ -20,14 +18,22 @@ export class DomHelper {
 
     setTimeout(() => {
       DomHelper.setYAxisPosition(element, anchor, drops);
-      DomHelper.setXAxisPosition(element, anchor, opens);
+      DomHelper.setXAxisPosition(element, anchor, dimElem, opens);
 
-      if (drops === 'down' && !DomHelper.isBottomInView(popupElem)) {
+      if (drops === 'down' && !DomHelper.isBottomInView(dimElem)) {
         DomHelper.setYAxisPosition(element, anchor, 'up');
       }
 
-      if (drops === 'up' && !DomHelper.isTopInView(popupElem)) {
+      if (drops === 'up' && !DomHelper.isTopInView(dimElem)) {
         DomHelper.setYAxisPosition(element, anchor, 'down');
+      }
+
+      if (opens === 'right' && !DomHelper.isRightInView(dimElem)) {
+        DomHelper.setXAxisPosition(element, anchor, dimElem, 'left');
+      }
+
+      if (opens === 'left' && !DomHelper.isLeftInView(dimElem)) {
+        DomHelper.setXAxisPosition(element, anchor, dimElem, 'right');
       }
 
       element.style.visibility = 'visible';
@@ -35,35 +41,43 @@ export class DomHelper {
   }
 
   private static setYAxisPosition(element: HTMLElement, anchor: HTMLElement, drops: TDrops) {
-    const anchorPosition = anchor.getBoundingClientRect();
+    const {top, bottom} = anchor.getBoundingClientRect();
 
     if (drops === 'down') {
-      element.style.top = anchorPosition.bottom + document.body.scrollTop + 'px';
+      element.style.top = bottom + document.body.scrollTop + 'px';
     } else {
-      element.style.top = (anchorPosition.top + document.body.scrollTop - element.scrollHeight) + 'px';
+      element.style.top = (top + document.body.scrollTop - element.scrollHeight) + 'px';
     }
   }
 
-  private static setXAxisPosition(element: HTMLElement, anchor: HTMLElement, opens: TOpens) {
-    const anchorPosition = anchor.getBoundingClientRect();
+  private static setXAxisPosition(element: HTMLElement, anchor: HTMLElement, dimElem: HTMLElement, opens: TOpens) {
+    const {left, right} = anchor.getBoundingClientRect();
 
     if (opens === 'right') {
-      element.style.left = anchorPosition.left + 'px';
+      element.style.left = left + 'px';
     } else {
-      element.style.right = anchorPosition.right + 'px';
+      element.style.left = left - dimElem.offsetWidth + anchor.offsetWidth + 'px';
     }
   }
 
   private static isTopInView(el: HTMLElement): boolean {
-    const elemTop = el.getBoundingClientRect().top;
-
-    return (elemTop >= 0);
+    const {top} = el.getBoundingClientRect();
+    return (top >= 0);
   }
 
   private static isBottomInView(el: HTMLElement): boolean {
-    const elemBottom = el.getBoundingClientRect().bottom;
+    const {bottom} = el.getBoundingClientRect();
+    return (bottom <= window.innerHeight);
+  }
 
-    return (elemBottom <= window.innerHeight);
+  private static isLeftInView(el: HTMLElement): boolean {
+    const {left} = el.getBoundingClientRect();
+    return (left >= 0);
+  }
+
+  private static isRightInView(el: HTMLElement): boolean {
+    const {right} = el.getBoundingClientRect();
+    return (right <= window.innerWidth);
   }
 }
 
@@ -71,6 +85,7 @@ export interface IAppendToArgs {
   container: HTMLElement;
   element: HTMLElement;
   anchor: HTMLElement;
+  dimElem: HTMLElement;
   drops: TDrops;
   opens: TOpens;
 }
