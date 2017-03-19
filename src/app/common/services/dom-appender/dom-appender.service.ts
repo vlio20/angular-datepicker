@@ -4,42 +4,6 @@ import {TDrops, TOpens} from '../../types/poistions.type';
 @Injectable()
 export class DomHelper {
 
-  setElementPosition({container, element, anchor, dimElem, drops, opens}: IAppendToArgs): void {
-
-    if (container.style.position === 'static') {
-      container.style.position = 'relative';
-    }
-
-    if (element.style.position !== 'absolute') {
-      element.style.position = 'absolute'
-    }
-
-    element.style.visibility = 'hidden';
-
-    setTimeout(() => {
-      DomHelper.setYAxisPosition(element, anchor, drops);
-      DomHelper.setXAxisPosition(element, anchor, dimElem, opens);
-
-      if (drops === 'down' && !DomHelper.isBottomInView(dimElem)) {
-        DomHelper.setYAxisPosition(element, anchor, 'up');
-      }
-
-      if (drops === 'up' && !DomHelper.isTopInView(dimElem)) {
-        DomHelper.setYAxisPosition(element, anchor, 'down');
-      }
-
-      if (opens === 'right' && !DomHelper.isRightInView(dimElem)) {
-        DomHelper.setXAxisPosition(element, anchor, dimElem, 'left');
-      }
-
-      if (opens === 'left' && !DomHelper.isLeftInView(dimElem)) {
-        DomHelper.setXAxisPosition(element, anchor, dimElem, 'right');
-      }
-
-      element.style.visibility = 'visible';
-    });
-  }
-
   private static setYAxisPosition(element: HTMLElement, anchor: HTMLElement, drops: TDrops) {
     const {top, bottom} = anchor.getBoundingClientRect();
 
@@ -78,6 +42,42 @@ export class DomHelper {
   private static isRightInView(el: HTMLElement): boolean {
     const {right} = el.getBoundingClientRect();
     return (right <= window.innerWidth);
+  }
+
+  setElementPosition({container, element, anchor, dimElem, drops, opens}: IAppendToArgs): void {
+
+    if (container.style.position === 'static') {
+      container.style.position = 'relative';
+    }
+
+    if (element.style.position !== 'absolute') {
+      element.style.position = 'absolute';
+    }
+
+    element.style.visibility = 'hidden';
+
+    setTimeout(() => {
+      DomHelper.setYAxisPosition(element, anchor, drops);
+      DomHelper.setXAxisPosition(element, anchor, dimElem, opens);
+
+      if (drops === 'down' && !DomHelper.isBottomInView(dimElem)) {
+        DomHelper.setYAxisPosition(element, anchor, 'up');
+      }
+
+      if (drops === 'up' && !DomHelper.isTopInView(dimElem)) {
+        DomHelper.setYAxisPosition(element, anchor, 'down');
+      }
+
+      if (opens === 'right' && !DomHelper.isRightInView(dimElem)) {
+        DomHelper.setXAxisPosition(element, anchor, dimElem, 'left');
+      }
+
+      if (opens === 'left' && !DomHelper.isLeftInView(dimElem)) {
+        DomHelper.setXAxisPosition(element, anchor, dimElem, 'right');
+      }
+
+      element.style.visibility = 'visible';
+    });
   }
 }
 
