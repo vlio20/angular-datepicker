@@ -34,4 +34,4 @@ testem.log
 Thumbs.db
 
 # dist
-/dist/*.gz
+dist
