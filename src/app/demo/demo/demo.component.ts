@@ -13,6 +13,7 @@ export class DemoComponent {
   @ViewChild('dayPicker') dayPicker: DpDayPickerComponent;
   demoFormat = 'DD-MM-YYYY';
   readonly DAYS = ['su', 'mo', 'tu', 'we', 'th', 'fr', 'sa'];
+  pickerMode = 'popup';
 
   date: Moment;
   dates: Moment[] = [];
@@ -42,7 +43,8 @@ export class DemoComponent {
       fr: 'fri',
       sa: 'sat'
     },
-    appendTo: document.body
+    appendTo: document.body,
+    drops: 'up'
   };
 
   configChanged() {

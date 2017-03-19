@@ -88,7 +88,9 @@ export class DpDayPickerComponent implements OnChanges, OnInit, AfterViewInit, C
       this.domHelper.setElementPosition({
         container: this.appendToElement,
         element: this.calendarWrapper,
-        anchor: this.inputElement
+        anchor: this.inputElement,
+        drops: this.pickerConfig.drops,
+        opens: this.pickerConfig.opens
       });
     }
     this._areCalendarsShown = value;
@@ -134,6 +136,7 @@ export class DpDayPickerComponent implements OnChanges, OnInit, AfterViewInit, C
     this.calendarWrapper = <HTMLElement> this.calendarContainer.nativeElement;
     this.inputElement = this.elemRef.nativeElement.querySelector('input');
 
+    // todo: move to service
     if (this.pickerConfig.appendTo) {
       if (typeof this.pickerConfig.appendTo === 'string') {
         this.appendToElement = <HTMLElement>document.querySelector(this.pickerConfig.appendTo);

@@ -12,7 +12,9 @@ export class DayPickerService {
   private defaultConfig: IDayPickerConfig = {
     closeOnSelect: true,
     closeOnSelectDelay: 100,
-    disableKeypress: false
+    disableKeypress: false,
+    drops: 'down',
+    opens: 'right'
   };
 
   constructor(private calendarContainerService: CalendarService) {
@@ -20,9 +22,9 @@ export class DayPickerService {
 
   getConfig(config: IDayPickerConfig): ICalendarConfig {
     if (config && config.allowMultiSelect && config.closeOnSelect === undefined) {
-      // Default to not closing if multi select enabled
       config.closeOnSelect = false;
     }
+
     const _config = Object.assign({}, this.defaultConfig, config);
 
     return this.calendarContainerService.getConfig(_config);

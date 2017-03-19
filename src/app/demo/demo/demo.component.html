@@ -11,8 +11,16 @@
     </p>
   </div>
 
+  <div>
+    <label>Mode:</label>
+    <select [(ngModel)]="pickerMode">
+      <option value="popup">Popup</option>
+      <option value="inline">Inline</option>
+    </select>
+  </div>
+
   <div class="dp-demo-container">
-    <div class="dp-picker-container">
+    <div class="dp-picker-container" *ngIf="pickerMode === 'popup'">
       <form #form="ngForm">
         <label>Date picker (<code>&lt;dp-day-picker&gt;</code>)</label><br>
         <dp-day-picker name="dateItem"
@@ -35,7 +43,7 @@
       </form>
     </div>
 
-    <div class="dp-inline">
+    <div class="dp-inline" *ngIf="pickerMode === 'inline'">
       <label>Inline Calendar (<code>&lt;dp-calendar&gt;</code>)</label><br>
       <dp-calendar
           [class.dp-material]="material"
