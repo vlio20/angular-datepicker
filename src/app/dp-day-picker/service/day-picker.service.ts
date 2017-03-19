@@ -14,7 +14,7 @@ export class DayPickerService {
     closeOnSelectDelay: 100,
     disableKeypress: false,
     drops: 'down',
-    opens: 'rig'
+    opens: 'right'
   };
 
   constructor(private calendarContainerService: CalendarService) {
