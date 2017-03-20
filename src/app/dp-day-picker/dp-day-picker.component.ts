@@ -9,7 +9,8 @@ import {
   SimpleChanges,
   ElementRef,
   ViewChild,
-  AfterViewInit
+  AfterViewInit,
+  Renderer
 } from '@angular/core';
 import {DpCalendarComponent} from '../dp-calendar/dp-calendar.component';
 import * as moment from 'moment';
@@ -102,7 +103,8 @@ export class DpDayPickerComponent implements OnChanges, OnInit, AfterViewInit, C
 
   constructor(private dayPickerService: DayPickerService,
               private domHelper: DomHelper,
-              private elemRef: ElementRef) {
+              private elemRef: ElementRef,
+              private renderer: Renderer) {
   }
 
   @HostListener('click')
@@ -138,6 +140,7 @@ export class DpDayPickerComponent implements OnChanges, OnInit, AfterViewInit, C
     this.calendarWrapper = <HTMLElement> this.calendarContainer.nativeElement;
     this.inputElement = this.elemRef.nativeElement.querySelector('input');
     this.popupElem = this.elemRef.nativeElement.querySelector('.dp-popup');
+    this.handleInnerElementClick(this.popupElem);
 
     if (this.pickerConfig.appendTo) {
       if (typeof this.pickerConfig.appendTo === 'string') {
@@ -151,6 +154,12 @@ export class DpDayPickerComponent implements OnChanges, OnInit, AfterViewInit, C
 
     const container = this.appendToElement;
     container.appendChild(this.calendarWrapper);
+  }
+
+  handleInnerElementClick(element: HTMLElement) {
+    this.renderer.listen(element, 'click', () => {
+      this.hideStateHelper = true;
+    });
   }
 
   writeValue(value: Moment): void {
@@ -251,7 +260,7 @@ export class DpDayPickerComponent implements OnChanges, OnInit, AfterViewInit, C
   }
 
   daySelected() {
-    if (this.pickerConfig.closeOnSelect) {
+    if (this.pickerConfig.closeOnSelect && !this.pickerConfig.allowMultiSelect) {
       setTimeout(this.hideCalendar.bind(this), this.pickerConfig.closeOnSelectDelay);
     }
   }
