@@ -10,7 +10,8 @@ import {
   ElementRef,
   ViewChild,
   AfterViewInit,
-  Renderer
+  Renderer,
+  OnDestroy
 } from '@angular/core';
 import {DpCalendarComponent} from '../dp-calendar/dp-calendar.component';
 import * as moment from 'moment';
@@ -45,7 +46,12 @@ export type CalendarValue = string | string[] | Moment | Moment[];
     }
   ]
 })
-export class DpDayPickerComponent implements OnChanges, OnInit, AfterViewInit, ControlValueAccessor, Validator {
+export class DpDayPickerComponent implements OnChanges,
+                                             OnInit,
+                                             AfterViewInit,
+                                             OnDestroy,
+                                             ControlValueAccessor,
+                                             Validator {
   private shouldNgInit: boolean = true;
   @Input('config') private userConfig: IDayPickerConfig;
 
@@ -69,6 +75,7 @@ export class DpDayPickerComponent implements OnChanges, OnInit, AfterViewInit, C
   private appendToElement: HTMLElement;
   private inputElement: HTMLElement;
   private popupElem: HTMLElement;
+  private handleInnerElementClickUnlisteners: Function[] = [];
   validateFn: Function;
 
   private get value(): Moment[] {
@@ -152,14 +159,15 @@ export class DpDayPickerComponent implements OnChanges, OnInit, AfterViewInit, C
       this.appendToElement = this.elemRef.nativeElement;
     }
 
-    const container = this.appendToElement;
-    container.appendChild(this.calendarWrapper);
+    this.appendToElement.appendChild(this.calendarWrapper);
   }
 
   handleInnerElementClick(element: HTMLElement) {
-    this.renderer.listen(element, 'click', () => {
-      this.hideStateHelper = true;
-    });
+    this.handleInnerElementClickUnlisteners.push(
+      this.renderer.listen(element, 'click', () => {
+        this.hideStateHelper = true;
+      })
+    );
   }
 
   writeValue(value: Moment): void {
@@ -307,5 +315,10 @@ export class DpDayPickerComponent implements OnChanges, OnInit, AfterViewInit, C
     if (this.pickerConfig.disableKeypress) {
       e.preventDefault();
     }
+  }
+
+  ngOnDestroy() {
+    this.handleInnerElementClickUnlisteners.forEach(ul => ul())
+    this.appendToElement.removeChild(this.calendarWrapper);
   }
 }
