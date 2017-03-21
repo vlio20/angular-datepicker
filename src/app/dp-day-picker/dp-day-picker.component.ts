@@ -139,7 +139,7 @@ export class DpDayPickerComponent implements OnChanges,
         dimElem: this.popupElem,
         drops: this.pickerConfig.drops,
         opens: this.pickerConfig.opens
-      })
+      });
     }
   }
 
@@ -334,7 +334,7 @@ export class DpDayPickerComponent implements OnChanges,
   }
 
   ngOnDestroy() {
-    this.handleInnerElementClickUnlisteners.forEach(ul => ul())
+    this.handleInnerElementClickUnlisteners.forEach(ul => ul());
     this.appendToElement.removeChild(this.calendarWrapper);
   }
 }

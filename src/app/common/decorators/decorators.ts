@@ -15,6 +15,6 @@ export default function debounce(ms: number = DEFAULT_DEBOUNCE_MS) {
 
         return this[propertyKey];
       }
-    }
-  }
+    };
+  };
 }

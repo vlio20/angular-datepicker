@@ -53,7 +53,7 @@ export class DemoComponent {
   @HostListener('document:scroll')
   @debounce(100)
   updateIsAtTop() {
-    this.isAtTop = document.body.scrollTop === 0
+    this.isAtTop = document.body.scrollTop === 0;
   }
 
   configChanged() {
