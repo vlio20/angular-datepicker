@@ -1,14 +1,17 @@
-import {Ng2DatePickerPage} from './app.po';
+import {DemoPage} from './app.po';
 
 describe('ng2-date-picker App', () => {
-  let page: Ng2DatePickerPage;
+  let page: DemoPage;
 
   beforeEach(() => {
-    page = new Ng2DatePickerPage();
+    page = new DemoPage();
+    page.navigateTo();
   });
 
-  it('should display message saying app works', () => {
-    page.navigateTo();
-    expect(true).toEqual(true);
+  it('should check that the popup upended to body', () => {
+    page.datePicker.click();
+    expect(page.datePickerPopup.isDisplayed()).toBe(true);
+    page.clickOnBody();
+    expect(page.datePickerPopup.isDisplayed()).toBe(false);
   });
 });

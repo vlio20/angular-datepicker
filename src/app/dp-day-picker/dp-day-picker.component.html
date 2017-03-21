@@ -1,4 +1,4 @@
-<div>
+<div class="{{theme}}">
   <input type="text"
          class="dp-daypicker-input"
          [placeholder]="placeholder"
@@ -8,9 +8,8 @@
          (keydown)="onKeydown($event)"
          [disabled]="disabled"/>
   <div #container>
-    <div class="dp-popup" [hidden]="!_areCalendarsShown">
-      <dp-calendar class="dp-material"
-                   [(selected)]="value"
+    <div class="dp-popup {{theme}}" [hidden]="!_areCalendarsShown">
+      <dp-calendar [(selected)]="value"
                    [config]="pickerConfig"
                    (dayClick)="daySelected($event)">
       </dp-calendar>

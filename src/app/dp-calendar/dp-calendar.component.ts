@@ -2,7 +2,7 @@ import {ICalendarMonthConfig} from '../dp-calendar-month/config/calendar-month-c
 import {IDayEvent} from './../dp-calendar-month/config/day.model';
 import {ICalendarConfig} from './config/calendar-config.model';
 import {CalendarService} from './config/calendar.service';
-import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, HostBinding} from '@angular/core';
 import {Moment} from 'moment';
 
 @Component({
@@ -14,6 +14,9 @@ import {Moment} from 'moment';
 export class DpCalendarComponent implements OnChanges {
   @Input() selected: Moment[];
   @Input() config: ICalendarConfig;
+  @Input() theme: string;
+
+  @HostBinding('class') themeClass;
 
   @Output() selectedChange: EventEmitter<Moment[]> = new EventEmitter();
   @Output() dayClick: EventEmitter<IDayEvent> = new EventEmitter();
@@ -32,6 +35,7 @@ export class DpCalendarComponent implements OnChanges {
       this.selected,
       this.calendars && this.calendars[0] && this.calendars[0].month
     );
+    this.themeClass = this.theme;
   }
 
   daySelected({day, event}: IDayEvent) {

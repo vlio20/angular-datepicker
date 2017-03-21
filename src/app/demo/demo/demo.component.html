@@ -26,10 +26,10 @@
     <div class="dp-picker-container" *ngIf="pickerMode === 'popup'">
       <form #form="ngForm">
         <label>Date picker (<code>&lt;dp-day-picker&gt;</code>)</label><br>
-        <dp-day-picker name="dateItem"
+        <dp-day-picker id="datePicker"
+                       name="dateItem"
                        #dateItem="ngModel"
                        #dayPicker
-                       [class.dp-material]="material"
                        [(ngModel)]="date"
                        (ngModelChange)="log($event)"
                        [disabled]="disabled"
@@ -37,7 +37,8 @@
                        [maxDate]="validationMaxDate"
                        [required]="required"
                        [placeholder]="placeholder"
-                       [config]="config">
+                       [config]="config"
+                       [theme]="material ? 'dp-material' : ''">
         </dp-day-picker>
         <div *ngIf="dateItem.errors && dateItem.errors.required">required</div>
         <div *ngIf="dateItem.errors && dateItem.errors.format">format invalid</div>
@@ -49,7 +50,7 @@
     <div class="dp-inline" *ngIf="pickerMode === 'inline'">
       <label>Inline Calendar (<code>&lt;dp-calendar&gt;</code>)</label><br>
       <dp-calendar
-          [class.dp-material]="material"
+          [theme]="material ? 'dp-material' : ''"
           [(selected)]="dates"
           (selectedChange)="log($event)"
           [config]="config">
@@ -61,14 +62,14 @@
     <h3 class="dp-options-section">Attribute options</h3>
     <div class="dp-option">
       <span class="dp-option-header">
-        Material Styling ("dp-material" class):
+        Theme (theme | for example the built in material theme - dp-material):
       </span>
       <div class="dp-option-playground">
-        <label>Material
-          <input type="radio" [(ngModel)]="material" name="style" [value]="true">
+        <label>Material Theme
+          <input id="themeOn" type="radio" [(ngModel)]="material" name="style" [value]="true">
         </label>
-        <label>No Styling
-          <input type="radio" [(ngModel)]="material" name="style" [value]="false">
+        <label>No Theme
+          <input id="themeOf" type="radio" [(ngModel)]="material" name="style" [value]="false">
         </label>
       </div>
     </div>
@@ -106,7 +107,7 @@
         Min-Date Validation (minDate):
       </span>
       <div class="dp-option-playground">
-        <dp-day-picker class="dp-material"
+        <dp-day-picker theme="dp-material"
                        [(ngModel)]="validationMinDate"
                        placeholder="Select a min date">
         </dp-day-picker>
@@ -118,7 +119,7 @@
         Max-Date Validation (maxDate):
       </span>
       <div class="dp-option-playground">
-        <dp-day-picker class="dp-material"
+        <dp-day-picker theme="dp-material"
                        [(ngModel)]="validationMaxDate"
                        placeholder="Select a max date">
         </dp-day-picker>
@@ -182,7 +183,7 @@
         Min Selectable Date (min):
       </span>
       <div class="dp-option-playground">
-        <dp-day-picker class="dp-material"
+        <dp-day-picker theme="dp-material"
                        [(ngModel)]="config.min"
                        (ngModelChange)="configChanged()"
                        placeholder="Select a min date">
@@ -195,7 +196,7 @@
         Max Selectable Date (max):
       </span>
       <div class="dp-option-playground">
-        <dp-day-picker class="dp-material"
+        <dp-day-picker theme="dp-material"
                        [(ngModel)]="config.max"
                        (ngModelChange)="configChanged()"
                        placeholder="Select a max date">

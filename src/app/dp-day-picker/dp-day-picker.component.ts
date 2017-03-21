@@ -58,6 +58,7 @@ export class DpDayPickerComponent implements OnChanges,
   // attributes
   @Input() private placeholder: string = '';
   @Input() private disabled: boolean = false;
+  @Input() private theme: string;
 
   // validations
   @Input() private minDate: Moment | string;

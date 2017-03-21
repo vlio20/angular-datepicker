@@ -24,13 +24,15 @@ Put the dp-date-picker component wherever you need it.
 
 ### Attributes:  
 
-| Name                 | Type             | Default                                                                   | description                                                                                                                                                                                           |
-|----------------------|:----------------:|:------------------------------------------------------------------------:|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| disabled             | `Boolean`        | `false`                                                                  | If set to true the input would be disabled                                                                                                                                                             |
-| placeholder          | `String`         | `""`                                                                     | The date-picker input placeholder                                                                                                                                                                      |
-| required             | `Boolean`        | `undefined`                                                              | This is a validation rule, if there won't be any selected date then the containing form will be invalid.                                                                                               |
-| minDate              | `Moment|String`  | `undefined`                                                              | This is a validation rule, if the selected date will be before `minDate` the containing form will be invalid. Note: if provided as string format configuration should be provided in the config object |
-| maxDate              | `Moment|String`  | `undefined`                                                              | This is a validation rule, if the selected date will be after `maxDate` the containing form will be invalid. Note: if provided as string format configuration should be provided in the config object  | 
+| Name                 | Type               | Default                                                                   | description                                                                                                                                                                                                                  |
+|----------------------|:------------------:|:------------------------------------------------------------------------:|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| disabled             | `Boolean`          | `false`                                                                  | If set to true the input would be disabled                                                                                                                                                                                    |
+| placeholder          | `String`           | `""`                                                                     | The date-picker input placeholder                                                                                                                                                                                             |
+| required             | `Boolean`          | `undefined`                                                              | This is a validation rule, if there won't be any selected date then the containing form will be invalid.                                                                                                                      |
+| minDate              | `Moment|String`    | `undefined`                                                              | This is a validation rule, if the selected date will be before `minDate` the containing form will be invalid. Note: if provided as string format configuration should be provided in the config object.                       |
+| maxDate              | `Moment|String`    | `undefined`                                                              | This is a validation rule, if the selected date will be after `maxDate` the containing form will be invalid. Note: if provided as string format configuration should be provided in the config object.                        | 
+| theme                | `string       `    | `''`                                                                     | Theme is a class added to the popup container - this will allow styling of the calendar when it's appended to outer element (for example - body). There is a built in theme named dp-material, you can find it in the demo.   | 
+| config               | `IDayPickerConfig` | See Below                                                                | Configuration object - see description below.                                                                                                                                                                                 | 
 
 
 ### Configuration:  
@@ -108,9 +110,10 @@ i.e.
 
 ### Inputs
 
-| Name                 | Type              | Description            |
-|----------------------|:-----------------:|------------------------|
-| selected             | `Moment[]`        | Opens the date picker  |
+| Name                 | Type              | Description                                                                                                                                                                                                                                                    |
+|----------------------|:-----------------:|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| selected             | `Moment[]`        | Opens the date picker                                                                                                                                                                                                                                          |
+| theme                | `string`          | Same as putting a class on the element                                                                                                                                                                                                                                           |
 | config               | `ICalendarConfig` | A subset of the `IDayPickerConfig`.<br>Properties include: `firstDayOfWeek`, `calendarsAmount`, `min`, `max`, `allowMultiSelect`, `format`, `monthFormat`, and `monthFormatter`.<br>These properties behave as described in the `Configuration` section above. |
 
 ### Outputs
