@@ -1,5 +1,12 @@
 & {
 
+  @stickyHeight: 80px;
+
+  .dp-demo-page {
+    margin-top: @stickyHeight;
+    padding: 5px;
+  }
+
   h3 {
     margin-bottom: 0;
   }
@@ -9,7 +16,17 @@
   }
 
   .dp-demo-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: @stickyHeight;
     text-align: center;
+    background: #FFFFFF;
+
+    &.dp-not-top {
+      box-shadow: 0 2px 6px 1px #e3e3e3;
+    }
   }
 
   .dp-picker-container {

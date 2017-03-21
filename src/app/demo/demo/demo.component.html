@@ -1,4 +1,4 @@
-<div>
+<div class="dp-demo-page">
   <div class="dp-description">
     <h2>Angular 2 Date Picker</h2>
     <p>
@@ -22,7 +22,7 @@
     </select>
   </div>
 
-  <div class="dp-demo-container">
+  <div class="dp-demo-container" [ngClass]="{'dp-not-top': !isAtTop}">
     <div class="dp-picker-container" *ngIf="pickerMode === 'popup'">
       <form #form="ngForm">
         <label>Date picker (<code>&lt;dp-day-picker&gt;</code>)</label><br>
