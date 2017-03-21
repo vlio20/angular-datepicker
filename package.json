@@ -1,6 +1,6 @@
 {
   "name": "ng2-date-picker",
-  "version": "0.6.1",
+  "version": "0.6.2",
   "license": "MIT",
   "main": "bin/app/index.js",
   "files": [
