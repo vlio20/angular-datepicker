@@ -18,6 +18,16 @@
     "build-prod": "rm -rf bin && gulp build"
   },
   "private": false,
+  "keywords": [
+    "angular2",
+    "date",
+    "datepicker",
+    "date-picker",
+    "ng2-datepicker",
+    "ng-datepicker",
+    "angular",
+    "picker"
+  ],
   "dependencies": {
     "moment": "^2.17.1"
   },
