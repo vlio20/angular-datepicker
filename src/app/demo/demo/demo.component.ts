@@ -1,7 +1,8 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, ViewChild, HostListener} from '@angular/core';
 import {DpDayPickerComponent} from '../../dp-day-picker/dp-day-picker.component';
 import {Moment} from 'moment';
 import {IDayPickerConfig} from '../../dp-day-picker/service/day-picker-config.model';
+import debounce from '../../common/decorators/decorators';
 
 @Component({
   selector: 'dp-demo',
@@ -47,6 +48,13 @@ export class DemoComponent {
     drops: 'down',
     opens: 'right'
   };
+  isAtTop: boolean = true;
+
+  @HostListener('document:scroll')
+  @debounce(100)
+  updateIsAtTop() {
+    this.isAtTop = document.body.scrollTop === 0
+  }
 
   configChanged() {
     this.config = Object.assign({}, this.config);
