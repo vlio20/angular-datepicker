@@ -22,6 +22,7 @@ import {ControlValueAccessor, NG_VALUE_ACCESSOR, FormControl, NG_VALIDATORS, Val
 import {UtilsService} from '../common/services/utils/utils.service';
 import {IDpDayPickerApi} from './dp-day-picker.api';
 import {DomHelper} from '../common/services/dom-appender/dom-appender.service';
+import debounce from '../common/decorators/decorators';
 
 export type CalendarValue = string | string[] | Moment | Moment[];
 
@@ -94,7 +95,7 @@ export class DpDayPickerComponent implements OnChanges,
 
   private set areCalendarsShown(value: boolean) {
     if (value) {
-      this.domHelper.setElementPosition({
+      this.domHelper.appendElementToPosition({
         container: this.appendToElement,
         element: this.calendarWrapper,
         anchor: this.inputElement,
@@ -125,6 +126,21 @@ export class DpDayPickerComponent implements OnChanges,
       this.hideCalendar();
     }
     this.hideStateHelper = false;
+  }
+
+  @HostListener('document:scroll')
+  @HostListener('window:resize')
+  onScroll() {
+    if (this.areCalendarsShown) {
+      this.domHelper.setElementPosition({
+        container: this.appendToElement,
+        element: this.calendarWrapper,
+        anchor: this.inputElement,
+        dimElem: this.popupElem,
+        drops: this.pickerConfig.drops,
+        opens: this.pickerConfig.opens
+      })
+    }
   }
 
   ngOnInit() {

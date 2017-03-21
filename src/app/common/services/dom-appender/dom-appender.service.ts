@@ -44,7 +44,8 @@ export class DomHelper {
     return (right <= window.innerWidth);
   }
 
-  setElementPosition({container, element, anchor, dimElem, drops, opens}: IAppendToArgs): void {
+  appendElementToPosition(config: IAppendToArgs): void {
+    const {container, element} = config;
 
     if (container.style.position === 'static') {
       container.style.position = 'relative';
@@ -57,27 +58,31 @@ export class DomHelper {
     element.style.visibility = 'hidden';
 
     setTimeout(() => {
-      DomHelper.setYAxisPosition(element, anchor, drops);
-      DomHelper.setXAxisPosition(element, anchor, dimElem, opens);
-
-      if (drops === 'down' && !DomHelper.isBottomInView(dimElem)) {
-        DomHelper.setYAxisPosition(element, anchor, 'up');
-      }
-
-      if (drops === 'up' && !DomHelper.isTopInView(dimElem)) {
-        DomHelper.setYAxisPosition(element, anchor, 'down');
-      }
-
-      if (opens === 'right' && !DomHelper.isRightInView(dimElem)) {
-        DomHelper.setXAxisPosition(element, anchor, dimElem, 'left');
-      }
-
-      if (opens === 'left' && !DomHelper.isLeftInView(dimElem)) {
-        DomHelper.setXAxisPosition(element, anchor, dimElem, 'right');
-      }
+      this.setElementPosition(config);
 
       element.style.visibility = 'visible';
     });
+  }
+
+  setElementPosition({element, anchor, dimElem, drops, opens}: IAppendToArgs) {
+    DomHelper.setYAxisPosition(element, anchor, drops);
+    DomHelper.setXAxisPosition(element, anchor, dimElem, opens);
+
+    if (drops === 'down' && !DomHelper.isBottomInView(dimElem)) {
+      DomHelper.setYAxisPosition(element, anchor, 'up');
+    }
+
+    if (drops === 'up' && !DomHelper.isTopInView(dimElem)) {
+      DomHelper.setYAxisPosition(element, anchor, 'down');
+    }
+
+    if (opens === 'right' && !DomHelper.isRightInView(dimElem)) {
+      DomHelper.setXAxisPosition(element, anchor, dimElem, 'left');
+    }
+
+    if (opens === 'left' && !DomHelper.isLeftInView(dimElem)) {
+      DomHelper.setXAxisPosition(element, anchor, dimElem, 'right');
+    }
   }
 }
 

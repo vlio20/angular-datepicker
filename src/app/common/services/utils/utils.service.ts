@@ -21,4 +21,15 @@ export class UtilsService {
 
     return retVal;
   }
+
+  static debounce(func: Function, wait: number) {
+    let timeout;
+    return function () {
+      const context = this, args = arguments;
+      timeout = clearTimeout(timeout);
+      setTimeout(() => {
+        func.apply(context, args);
+      }, wait);
+    };
+  };
 }
