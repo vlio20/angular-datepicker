@@ -11,6 +11,7 @@ const pluginOptions = {
   useRelativePaths: true,
   styleProcessor: (path, ext, file, cb) => {
     less.render(file, (e, out) => {
+      console.error(e);
       cb(null, out.css);
     });
   }
