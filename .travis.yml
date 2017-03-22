@@ -23,9 +23,9 @@ before_script:
 - npm install -g @angular/cli
 - npm install -g karma
 - npm run lint
-- ng build
+- npm run build
 - npm run build-demo
 - npm run build-prod
-- ng run e2e
+- npm run e2e
 
 script: ng test --watch=false
