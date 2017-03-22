@@ -12,6 +12,7 @@ const pluginOptions = {
   styleProcessor: (path, ext, file, cb) => {
     less.render(file, (e, out) => {
       console.error(e);
+      process.exit(1);
       cb(null, out.css);
     });
   }
