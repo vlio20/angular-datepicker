@@ -14,4 +14,13 @@ describe('ng2-date-picker App', () => {
     page.clickOnBody();
     expect(page.datePickerPopup.isDisplayed()).toBe(false);
   });
+
+  it('should check that the theme is added and removed', () => {
+    page.themeOnRadio.click();
+    expect(page.datePickerPopup.getAttribute('class')).toContain('dp-material');
+    page.themeOffRadio.click();
+    expect(page.datePickerPopup.getAttribute('class')).not.toContain('dp-material');
+    page.themeOnRadio.click();
+    expect(page.datePickerPopup.getAttribute('class')).toContain('dp-material');
+  });
 });

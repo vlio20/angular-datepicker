@@ -5,7 +5,7 @@ export class DemoPage {
   datePicker = $('#datePicker input');
   datePickerPopup = $('body > div .dp-popup');
   themeOnRadio = $('#themeOn');
-  themeOfRadio = $('#themeOff');
+  themeOffRadio = $('#themeOff');
 
   navigateTo() {
     return browser.get('/');
