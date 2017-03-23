@@ -34,6 +34,7 @@ export class DemoComponent {
     allowMultiSelect: false,
     closeOnSelect: true,
     closeOnSelectDelay: 100,
+    onOpenDelay: 0,
     userValueType: 'string',
     weekdayNames: {
       su: 'sun',

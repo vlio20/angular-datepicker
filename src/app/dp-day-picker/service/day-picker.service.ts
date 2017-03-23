@@ -12,6 +12,7 @@ export class DayPickerService {
   private defaultConfig: IDayPickerConfig = {
     closeOnSelect: true,
     closeOnSelectDelay: 100,
+    onOpenDelay: 0,
     disableKeypress: false,
     drops: 'down',
     opens: 'right'
