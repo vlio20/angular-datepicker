@@ -247,6 +247,15 @@
 
     <div class="dp-option">
       <span class="dp-option-header">
+        Open Delay in ms (onOpenDelay):
+      </span>
+      <div class="dp-option-playground">
+        <input id="onOpenDelay" type="number" [(ngModel)]="config.onOpenDelay" (change)="configChanged()">
+      </div>
+    </div>
+
+    <div class="dp-option">
+      <span class="dp-option-header">
         Weekday Names (weekdayNames):
       </span>
       <div class="dp-option-playground dp-week-days">
@@ -334,7 +343,7 @@
         Open (api.open()):
       </span>
       <div class="dp-option-playground">
-        <button (click)="openCalendar()">Open</button>
+        <button id="openBtn" (click)="openCalendar()">Open</button>
       </div>
     </div>
 

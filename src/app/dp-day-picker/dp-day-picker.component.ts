@@ -104,6 +104,7 @@ export class DpDayPickerComponent implements OnChanges,
         opens: this.pickerConfig.opens
       });
     }
+
     this._areCalendarsShown = value;
   }
 
@@ -291,7 +292,9 @@ export class DpDayPickerComponent implements OnChanges,
 
   inputFocused() {
     this.hideStateHelper = false;
-    this.areCalendarsShown = true;
+    setTimeout(() => {
+      this.areCalendarsShown = true;
+    }, this.pickerConfig.onOpenDelay);
   }
 
   showCalendars() {

@@ -7,6 +7,10 @@ export class DemoPage {
   themeOnRadio = $('#themeOn');
   themeOffRadio = $('#themeOff');
 
+  openBtn = $('#openBtn');
+
+  onOpenDelayInput = $('#onOpenDelay');
+
   navigateTo() {
     return browser.get('/');
   }
