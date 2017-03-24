@@ -28,12 +28,12 @@ export class CalendarMonthService {
     }, <{[key: number]: string}>{});
   }
 
-  generateMonthArray(firstDayOfWeek: WeekDays,
-                     dayInMonth: Moment,
+  generateMonthArray(config: ICalendarMonthConfig,
                      selectedDays: Moment[] = null): ICalendarDay[][] {
-    const monthArray: ICalendarDay[][] = [];
+    const dayInMonth = config.month;
+    let monthArray: ICalendarDay[][] = [];
     const firstDayOfMonth = dayInMonth.clone().startOf('month');
-    const firstDayOfWeekIndex = this.DAYS.indexOf(firstDayOfWeek);
+    const firstDayOfWeekIndex = this.DAYS.indexOf(config.firstDayOfWeek);
 
     const firstDayOfBoard = firstDayOfMonth;
     while (firstDayOfBoard.day() !== firstDayOfWeekIndex) {
@@ -65,7 +65,19 @@ export class CalendarMonthService {
       monthArray[weekIndex].push(day);
     });
 
+    if (!config.showNearMonthDays) {
+      monthArray = this.removeNearMonthWeeks(dayInMonth, monthArray);
+    }
+
     return monthArray;
+  }
+
+  private removeNearMonthWeeks(currentMonth: Moment, monthArray: ICalendarDay[][]): ICalendarDay[][] {
+    if (monthArray[monthArray.length - 1].find((day) => day.date.isSame(currentMonth, 'month'))) {
+      return monthArray;
+    } else {
+      return monthArray.slice(0, -1);
+    }
   }
 
   generateWeekdays(firstDayOfWeek: WeekDays, weekdayNames: {[key: string]: string}): string[] {

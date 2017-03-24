@@ -11,6 +11,7 @@ export class CalendarService {
     firstDayOfWeek: 'su',
     calendarsAmount: 1,
     monthFormat: 'MMM, YYYY',
+    showNearMonthDays: true,
     weekdayNames: {
       su: 'sun',
       mo: 'mon',
@@ -43,14 +44,16 @@ export class CalendarService {
 
   generateCalendars(config: ICalendarConfig, selected: Moment[], month?: Moment): ICalendarMonthConfig[] {
     const base = (month && month.clone()) || (selected && selected[0] && selected[0].clone()) || moment();
-    return UtilsService.createArray(config.calendarsAmount).map((n: number, i: number) => ({
-      month: base.clone().add(i, 'month'),
-      selected: selected,
-      firstDayOfWeek: config.firstDayOfWeek,
-      weekdayNames: config.weekdayNames,
-      min: <Moment>config.min,
-      max: <Moment>config.max
-    }));
+    return UtilsService.createArray(config.calendarsAmount)
+      .map((n: number, i: number) => ({
+        month: base.clone().add(i, 'month'),
+        selected: selected,
+        firstDayOfWeek: config.firstDayOfWeek,
+        weekdayNames: config.weekdayNames,
+        min: <Moment>config.min,
+        max: <Moment>config.max,
+        showNearMonthDays: config.showNearMonthDays
+      }));
   }
 
   isDateValid(date: string, format: string): boolean {

@@ -25,5 +25,5 @@ export {DpCalendarComponent} from './dp-calendar/dp-calendar.component';
   exports: [DpDayPickerComponent, DpCalendarMonthComponent, DpCalendarComponent]
 })
 
-export class DpDatePickerModule {
+export declare class DpDatePickerModule {
 }
