@@ -3,6 +3,7 @@
 # compiled output
 /tmp
 /bin
+/prebuild
 
 # dependencies
 /node_modules

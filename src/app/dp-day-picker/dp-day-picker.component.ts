@@ -56,9 +56,9 @@ export class DpDayPickerComponent implements OnChanges,
   @Input('config') private userConfig: IDayPickerConfig;
 
   // attributes
-  @Input() private placeholder: string = '';
-  @Input() private disabled: boolean = false;
-  @Input() private theme: string;
+  @Input() public placeholder: string = '';
+  @Input() public disabled: boolean = false;
+  @Input() public theme: string;
 
   // validations
   @Input() private minDate: Moment | string;
@@ -66,12 +66,12 @@ export class DpDayPickerComponent implements OnChanges,
 
   @ViewChild('container') calendarContainer: ElementRef;
 
-  private _areCalendarsShown: boolean = false;
+  public _areCalendarsShown: boolean = false;
   private hideStateHelper: boolean = false;
-  private pickerConfig: IDayPickerConfig;
+  public pickerConfig: IDayPickerConfig;
   private _value: Moment[] = [];
   private userValue;
-  private viewValue: string;
+  public viewValue: string;
   private calendarWrapper: HTMLElement;
   private appendToElement: HTMLElement;
   private inputElement: HTMLElement;
@@ -79,11 +79,11 @@ export class DpDayPickerComponent implements OnChanges,
   private handleInnerElementClickUnlisteners: Function[] = [];
   validateFn: Function;
 
-  private get value(): Moment[] {
+  public get value(): Moment[] {
     return this._value;
   }
 
-  private set value(value: Moment[]) {
+  public set value(value: Moment[]) {
     this._value = value;
     this.viewValue = this._value ? this._value.map(val => val.format(this.pickerConfig.format)).join(', ') : '';
     this.onChangeCallback(this.processOnChangeCallback(value));
