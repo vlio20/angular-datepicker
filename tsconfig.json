@@ -15,10 +15,14 @@
     ]
   },
   "include": [
-    "src/app/dp-date-picker.module.ts"
+    "src/app/index.ts"
   ],
   "exclude": [
     "node_modules",
     "**/*.spec.ts"
-  ]
+  ],
+  "angularCompilerOptions": {
+    "skipTemplateCodegen": true,
+    "strictMetadataEmit": true
+  }
 }

@@ -2,11 +2,7 @@
   "name": "ng2-date-picker",
   "version": "0.6.2",
   "license": "MIT",
-  "main": "bin/app/index.js",
-  "files": [
-    "index.d.ts",
-    "bin"
-  ],
+  "main": "index.js",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -15,7 +11,9 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "build-demo": "rm -rf dist/ && ng build --prod --bh /ng2-date-picker/",
-    "build-prod": "rm -rf bin && gulp build"
+    "build-prod": "ngc && cp package.json bin",
+    "pub:local": "cd bin && npm pack && cd ..",
+    "pub:lib": "npm publish bin"
   },
   "private": false,
   "keywords": [
