@@ -5,31 +5,6 @@ const rimraf = require('rimraf');
 const less = require('less');
 const ng2Inline = require('./build-helpers/inliner');
 
-const compileLess = (dir) => {
-  let files = fs.readdirSync(dir);
-
-  files.forEach((file) => {
-    const src = path.join(dir, file);
-
-    if (fs.statSync(src).isDirectory()) {
-      compileLess(src);
-    }
-    else if (src.endsWith('.less')) {
-      less.render(fs.readFileSync(src).toString(), {
-        filename: path.resolve(src)
-      }, (e, out) => {
-        if (e) {
-          console.error(e);
-          process.exit(1);
-        }
-
-        fs.writeFileSync(src.replace('.less', '.css'), out.css);
-        console.log(src + ' was compiled by less');
-      });
-    }
-  });
-};
-
 const inline = (dir) => {
   let files = fs.readdirSync(dir);
 
@@ -50,13 +25,13 @@ const inline = (dir) => {
 };
 
 console.log('cleaning...');
-rimraf.sync('prebuild', fs, (error) => {
+rimraf.sync('prebuild', fs, (err) => {
   if (err) {
     return console.error(err);
   }
 });
 
-rimraf.sync('aot', fs, (error) => {
+rimraf.sync('aot', fs, (err) => {
   if (err) {
     return console.error(err);
   }
@@ -64,14 +39,17 @@ rimraf.sync('aot', fs, (error) => {
 
 console.log('done cleaning!');
 
-console.log('coping src...');
+console.log('cloning src...');
 ncp('src', 'prebuild', (err) => {
   if (err) {
     return console.error(err);
   }
 
-  console.log('done coping src!');
+  console.log('done cloning src!');
 
-  // compileLess(path.resolve('./prebuild/'));
+  console.log('inlining...');
   inline(path.resolve('./prebuild/'));
+  console.log('done inlining!');
+
+  console.log('ready for ngc!');
 });

@@ -2,15 +2,14 @@
 
 const fs = require('fs');
 const path = require('path');
-const minify = require('html-minifier').minify;
-const CleanCSS = require('clean-css');
 const less = require('less');
 
 module.exports = function (content, options, targetDir) {
   options = options || {};
   options.base = options.base || './';
 
-  return processStyleUrls(content, options, targetDir).then((r) => processTemplateUrl(r, options, targetDir));
+  return processStyleUrls(content, options, targetDir).then(
+    (r) => processTemplateUrl(r, options, targetDir));
 };
 
 function processStyleUrls(content, options, targetDir) {
@@ -30,7 +29,8 @@ function processStyleUrls(content, options, targetDir) {
     urls = JSON.parse(urls);
 
     return Promise.all(urls.map(function (url) {
-      let file = fs.readFileSync(getAbsoluteUrl(url, options, targetDir), 'utf-8');
+      let file = fs.readFileSync(getAbsoluteUrl(url, options, targetDir),
+        'utf-8');
 
       let fileNamePartsRe = /^[\./]*([^]*)\.(css|less)$/g;
       let fileNamePartsMatches = url.match(fileNamePartsRe);
@@ -61,11 +61,7 @@ function processStyleUrls(content, options, targetDir) {
       }
 
       return promise.then((processed) => {
-        if (options.compress) {
-          processed = new CleanCSS().minify(processed).styles;
-        } else {
-          processed = processed.replace(/[\r\n]/g, '');
-        }
+        processed = processed.replace(/[\r\n]/g, '');
 
         // escape quote chars
         processed = processed.replace(new RegExp('\'', 'g'), '\\\'');
@@ -83,15 +79,6 @@ function processTemplateUrl(content, options, targetDir) {
   let closure = content;
   let re = /templateUrl\s*:\s*(?:"([^"]+)"|'([^']+)')/g;
   let matches = closure.match(re);
-  let htmlMinifyConfig = {
-    caseSensitive: true,
-    collapseWhitespace: true,
-    /*
-     ng2 bindings break the parser for html-minifer, so the
-     following blocks the processing of ()="" and []="" attributes
-     */
-    ignoreCustomFragments: [/\s\[.*\]=\"[^\"]*\"/, /\s\([^)"]+\)=\"[^\"]*\"/]
-  };
 
   if (matches === null || matches.length <= 0) {
     return Promise.resolve(closure);
@@ -111,22 +98,21 @@ function processTemplateUrl(content, options, targetDir) {
       quote = '\'';
     }
 
-    let file = fs.readFileSync(getAbsoluteUrl(url, options, targetDir), 'utf-8');
-    if (options.compress) {
-      file = minify(file, Object.assign({}, htmlMinifyConfig, {removeComments: true}));
-    } else {
-      file = file;
-    }
+    let file = fs.readFileSync(getAbsoluteUrl(url, options, targetDir),
+      'utf-8');
+
+    file = file.replace(/\n|\t/g, ' ');
 
     // escape quote chars
     file = file.replace(new RegExp(quote, 'g'), '\\' + quote);
 
-    closure = closure.replace(template, 'template: ' + '`' + file + '`');
+    closure = closure.replace(template, 'template: ' + quote + file + quote);
   });
 
   return Promise.resolve(closure);
 }
 
 function getAbsoluteUrl(url, options, targetDir) {
-  return options.relative ? path.join(targetDir, url) : path.join(options.base, url);
+  return options.relative ? path.join(targetDir, url) : path.join(options.base,
+      url);
 }
