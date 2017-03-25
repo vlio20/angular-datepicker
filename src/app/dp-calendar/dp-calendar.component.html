@@ -4,13 +4,13 @@
     <button class="dp-calendar-nav-left"
             *ngIf="start"
             [disabled]="isLeftNavDisabled(calendar.month)"
-            (click)="moveCalendars(calendars[0].month, -1)"> <
+            (click)="moveCalendars(calendars[0].month, -1)"> 	&lt;
     </button>
     <span class="dp-calendar-month">{{getMonthToDisplay(calendar.month)}}</span>
     <button class="dp-calendar-nav-right"
             *ngIf="end"
             [disabled]="isRightNavDisabled(calendar.month)"
-            (click)="moveCalendars(calendars[0].month, 1)"> >
+            (click)="moveCalendars(calendars[0].month, 1)"> 	&gt;
     </button>
   </div>
   <dp-calendar-month

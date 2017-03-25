@@ -11,7 +11,8 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "build-demo": "rm -rf dist/ && ng build --prod --bh /ng2-date-picker/",
-    "build-prod": "sh build.sh"
+    "build-prod": "node build.js && ngc && cp package.json bin",
+    "pack": "cd bin && npm pack"
   },
   "private": false,
   "keywords": [
@@ -40,6 +41,7 @@
     "@angular/router": "^3.4.0",
     "@types/jasmine": "2.5.38",
     "@types/node": "~6.0.60",
+    "angular2-inline-template-style": "^1.0.2",
     "codelyzer": "~2.0.0",
     "core-js": "^2.4.1",
     "gulp": "^3.9.1",
@@ -55,7 +57,9 @@
     "karma-jasmine-html-reporter": "^0.2.2",
     "less": "^2.7.2",
     "merge2": "^1.0.3",
+    "ncp": "^2.0.0",
     "protractor": "~5.1.0",
+    "rimraf": "^2.6.1",
     "rxjs": "^5.1.0",
     "ts-node": "~2.0.0",
     "tslint": "~4.4.2",
