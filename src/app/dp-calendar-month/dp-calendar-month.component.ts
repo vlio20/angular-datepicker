@@ -22,16 +22,15 @@ export class DpCalendarMonthComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    this.weeks = this.calendarService.generateMonthArray(this.config.firstDayOfWeek, this.config.month,
-      this.selected);
+    this.weeks = this.calendarService.generateMonthArray(this.config, this.selected);
     this.weekdays = this.calendarService.generateWeekdays(this.config.firstDayOfWeek, this.config.weekdayNames);
   }
 
   ngOnChanges(changes: SimpleChanges) {
     const {selected} = changes;
     if (selected && !selected.isFirstChange()) {
-      this.weeks = this.calendarService.generateMonthArray(this.config.firstDayOfWeek, this.config.month,
-        this.selected);
+      this.weeks = this.calendarService
+        .generateMonthArray(this.config, this.selected);
     }
   }
 

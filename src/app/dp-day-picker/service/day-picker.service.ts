@@ -14,6 +14,7 @@ export class DayPickerService {
     closeOnSelectDelay: 100,
     onOpenDelay: 0,
     disableKeypress: false,
+    showNearMonthDays: true,
     drops: 'down',
     opens: 'right'
   };
