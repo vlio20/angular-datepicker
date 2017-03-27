@@ -1,4 +1,4 @@
-<div class="dp-calendar-wrapper">
+<div class="dp-calendar-wrapper" [ngClass]="{'dp-hide-near-month': !config.showNearMonthDays}">
   <div class="dp-weekdays">
     <span class="dp-calendar-weekday" *ngFor="let weekday of weekdays">{{weekday}}</span>
   </div>

@@ -132,25 +132,51 @@ describe('Service: Calendar', () => {
       })).toEqual(['2', '3', '4', '5', '6', '7', '1']);
     }));
 
-  it('should check isDateDisabled method', inject([CalendarMonthService], (service: CalendarMonthService) => {
-    const config: ICalendarMonthConfig = {
-      month: moment('13-10-2016', 'DD-MM-YYYY'),
-      firstDayOfWeek: 'su',
-      min: moment('13-10-2016', 'DD-MM-YYYY').subtract(1, 'day'),
-      max: moment('13-10-2016', 'DD-MM-YYYY').add(1, 'day')
-    };
+  it('should check isDateDisabled method', inject([CalendarMonthService],
+    (service: CalendarMonthService) => {
+      const config: ICalendarMonthConfig = {
+        month: moment('13-10-2016', 'DD-MM-YYYY'),
+        firstDayOfWeek: 'su',
+        min: moment('13-10-2016', 'DD-MM-YYYY').subtract(1, 'day'),
+        max: moment('13-10-2016', 'DD-MM-YYYY').add(1, 'day')
+      };
 
-    expect(service.isDateDisabled({date: moment('11-10-2016', 'DD-MM-YYYY')}, config)).toBe(true);
-    expect(service.isDateDisabled({date: moment('12-10-2016', 'DD-MM-YYYY')}, config)).toBe(false);
-    expect(service.isDateDisabled({date: moment('13-10-2016', 'DD-MM-YYYY')}, config)).toBe(false);
-    expect(service.isDateDisabled({date: moment('14-10-2016', 'DD-MM-YYYY')}, config)).toBe(false);
-    expect(service.isDateDisabled({date: moment('15-10-2016', 'DD-MM-YYYY')}, config)).toBe(true);
+      expect(service.isDateDisabled({date: moment('11-10-2016', 'DD-MM-YYYY')}, config)).toBe(true);
+      expect(service.isDateDisabled({date: moment('12-10-2016', 'DD-MM-YYYY')}, config)).toBe(false);
+      expect(service.isDateDisabled({date: moment('13-10-2016', 'DD-MM-YYYY')}, config)).toBe(false);
+      expect(service.isDateDisabled({date: moment('14-10-2016', 'DD-MM-YYYY')}, config)).toBe(false);
+      expect(service.isDateDisabled({date: moment('15-10-2016', 'DD-MM-YYYY')}, config)).toBe(true);
 
-    config.isDisabledCallback = (date: Moment) => {
-      return date.isSame(moment('13-10-2016', 'DD-MM-YYYY'), 'day');
-    };
+      config.isDisabledCallback = (date: Moment) => {
+        return date.isSame(moment('13-10-2016', 'DD-MM-YYYY'), 'day');
+      };
 
-    expect(service.isDateDisabled({date: moment('13-10-2016', 'DD-MM-YYYY')}, config)).toBe(true);
-    expect(service.isDateDisabled({date: moment('11-10-2016', 'DD-MM-YYYY')}, config)).toBe(false);
-  }));
+      expect(service.isDateDisabled({date: moment('13-10-2016', 'DD-MM-YYYY')}, config)).toBe(true);
+      expect(service.isDateDisabled({date: moment('11-10-2016', 'DD-MM-YYYY')}, config)).toBe(false);
+    }));
+
+  it('should show/hide near month according to showNearMonthDays configuration', inject([CalendarMonthService],
+    (service: CalendarMonthService) => {
+      const config: ICalendarMonthConfig = {
+        month: moment('27-03-2017', 'DD-MM-YYYY'),
+        firstDayOfWeek: 'su',
+        showNearMonthDays: true
+      };
+
+      expect(service.generateMonthArray(config).length).toBe(6);
+      config.showNearMonthDays = false;
+      expect(service.generateMonthArray(config).length).toBe(5);
+    }));
+
+  it('should not effect the calendar when no full near weeks even if showNearMonthDays is false',
+    inject([CalendarMonthService],
+      (service: CalendarMonthService) => {
+        const config: ICalendarMonthConfig = {
+          month: moment('27-04-2017', 'DD-MM-YYYY'),
+          firstDayOfWeek: 'su',
+          showNearMonthDays: false
+        };
+
+        expect(service.generateMonthArray(config).length).toBe(6);
+      }));
 });

@@ -1,15 +1,18 @@
-import {browser, element, by, $} from 'protractor';
+import {browser, $, $$} from 'protractor';
 
 export class DemoPage {
+  private popupSelector = 'body > div .dp-popup';
   body = $('body');
-  datePicker = $('#datePicker input');
-  datePickerPopup = $('body > div .dp-popup');
+  datePickerInput = $('#datePicker input');
+  datePickerPopup = $(this.popupSelector);
+  monthWeeks = $$(`${this.popupSelector} .dp-calendar-week`);
   themeOnRadio = $('#themeOn');
   themeOffRadio = $('#themeOff');
+  onOpenDelayInput = $('#onOpenDelay');
+  showNearMonthDaysRadio = $('#showNearMonthDaysRadio');
+  hideNearMonthDaysRadio = $('#hideNearMonthDaysRadio');
 
   openBtn = $('#openBtn');
-
-  onOpenDelayInput = $('#onOpenDelay');
 
   navigateTo() {
     return browser.get('/');

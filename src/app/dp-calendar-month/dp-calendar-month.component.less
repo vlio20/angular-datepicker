@@ -1,5 +1,5 @@
 & {
-  @button-size: 30px;
+  @basic-height: 30px;
   @black: #000000;
   @white: #FFFFFF;
 
@@ -19,7 +19,7 @@
   .dp-calendar-weekday {
     box-sizing: border-box;
     display: inline-block;
-    width: @button-size;
+    width: @basic-height;
     text-align: center;
     border-left: 1px solid @black;
     border-bottom: 1px solid @black;
@@ -27,8 +27,8 @@
 
   .dp-calendar-day {
     box-sizing: border-box;
-    width: @button-size;
-    height: @button-size;
+    width: @basic-height;
+    height: @basic-height;
     cursor: pointer;
   }
 
@@ -39,10 +39,12 @@
   .dp-prev-month, .dp-next-month {
     opacity: 0.5;
   }
-}
 
-& {
-  @basic-height: 30px;
+  .dp-hide-near-month {
+    .dp-prev-month, .dp-next-month {
+      visibility: hidden;
+    }
+  }
 
   :host(.dp-material) {
     .dp-calendar-weekday {

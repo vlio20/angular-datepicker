@@ -47,7 +47,8 @@ export class DemoComponent {
     },
     appendTo: document.body,
     drops: 'down',
-    opens: 'right'
+    opens: 'right',
+    showNearMonthDays: true
   };
   isAtTop: boolean = true;
 

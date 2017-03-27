@@ -11,6 +11,7 @@
     <div class="dp-popup {{theme}}" [hidden]="!_areCalendarsShown">
       <dp-calendar [(selected)]="value"
                    [config]="pickerConfig"
+                   [openOn]="openOn"
                    (dayClick)="daySelected($event)">
       </dp-calendar>
     </div>

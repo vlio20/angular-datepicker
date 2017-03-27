@@ -44,6 +44,7 @@ export class CalendarService {
 
   generateCalendars(config: ICalendarConfig, selected: Moment[], month?: Moment): ICalendarMonthConfig[] {
     const base = (month && month.clone()) || (selected && selected[0] && selected[0].clone()) || moment();
+    console.log(base);
     return UtilsService.createArray(config.calendarsAmount)
       .map((n: number, i: number) => ({
         month: base.clone().add(i, 'month'),

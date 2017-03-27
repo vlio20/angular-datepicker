@@ -333,6 +333,22 @@
       </div>
     </div>
 
+    <div class="dp-option">
+      <span class="dp-option-header">
+        Show near month days (showNearMonthDays):
+      </span>
+      <div class="dp-option-playground">
+        <label>Show
+          <input id="showNearMonthDaysRadio" type="radio" [(ngModel)]="config.showNearMonthDays" name="showNearMonthDays" [value]="true"
+                 (ngModelChange)="configChanged()">
+        </label>
+        <label>Hide
+          <input id="hideNearMonthDaysRadio" type="radio" [(ngModel)]="config.showNearMonthDays" name="showNearMonthDays" [value]="false"
+                 (ngModelChange)="configChanged()">
+        </label>
+      </div>
+    </div>
+
   </div>
 
   <div class="dp-api">

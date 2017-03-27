@@ -77,6 +77,7 @@ export class DpDayPickerComponent implements OnChanges,
   private inputElement: HTMLElement;
   private popupElem: HTMLElement;
   private handleInnerElementClickUnlisteners: Function[] = [];
+  public openOn: Moment[];
   validateFn: Function;
 
   public get value(): Moment[] {
@@ -264,6 +265,8 @@ export class DpDayPickerComponent implements OnChanges,
         this.value = [UtilsService.convertToMoment(this.userValue, this.pickerConfig.format)];
       }
     }
+
+    this.openOn = this.value;
     this.initApi();
   }
 
@@ -308,22 +311,25 @@ export class DpDayPickerComponent implements OnChanges,
 
   onViewDateChange(dates: string) {
     const dateStrings = dates.split(',').map(date => date.trim());
-    const validDateStrings = dateStrings.filter(date => this.dayPickerService.isDateValid(date, this.pickerConfig.format));
+    const validDateStrings =
+      dateStrings.filter((date) => this.dayPickerService.isDateValid(date, this.pickerConfig.format));
     if (!this.pickerConfig.allowMultiSelect && validDateStrings.length > 0) {
       // Single selection
       this.value = validDateStrings[0] !== '' ? [moment(validDateStrings[0], this.pickerConfig.format)] : [];
     } else if (validDateStrings.length === dateStrings.length && this.pickerConfig.allowMultiSelect) {
       // Multi selection
       this.value = validDateStrings
-        .map(date => date !== '' ? moment(date, this.pickerConfig.format) : null)
+        .map((date) => date !== '' ? moment(date, this.pickerConfig.format) : null)
         .filter(date => date !== null);
     }
   }
 
   onKeydown(e: KeyboardEvent) {
     if (e.keyCode === 13) {
-      this.areCalendarsShown = !this.areCalendarsShown;
-      e.preventDefault();
+      if (!this.pickerConfig.allowMultiSelect &&
+        this.dayPickerService.isDateValid(this.viewValue, this.pickerConfig.format)) {
+        this.openOn = this.value;
+      }
     }
 
     if (e.keyCode === 27) {
