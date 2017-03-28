@@ -48,7 +48,8 @@ export class DemoComponent {
     appendTo: document.body,
     drops: 'down',
     opens: 'right',
-    showNearMonthDays: true
+    showNearMonthDays: true,
+    showWeekNumbers: false
   };
   isAtTop: boolean = true;
 

@@ -62,4 +62,14 @@ describe('ng2-date-picker App', () => {
     page.datePickerInput.click();
     expect(page.monthWeeks.count()).toBe(6);
   });
+
+  it('should show/hide week number according to configuration', () => {
+    page.datePickerInput.sendKeys('28-03-2017');
+    page.datePickerInput.click();
+    expect(page.weekNumbers.count()).toBe(0);
+    page.showWeekNumbersRadio.click();
+    page.datePickerInput.click();
+    expect(page.weekNumbers.count()).toBe(6);
+    expect(page.weekNumbers.getText()).toEqual(['8', '9', '10', '11', '12', '13']);
+  });
 });

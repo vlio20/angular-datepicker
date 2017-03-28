@@ -5,6 +5,7 @@ export interface IBaseCalendarConfig {
   isDisabledCallback?: (date: Moment) => boolean;
   weekdayNames?: {[key: string]: string};
   showNearMonthDays?: boolean;
+  showWeekNumbers?: boolean;
 }
 
 export interface ICalendarMonthConfig extends IBaseCalendarConfig {

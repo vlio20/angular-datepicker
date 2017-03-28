@@ -11,6 +11,9 @@ export class DemoPage {
   onOpenDelayInput = $('#onOpenDelay');
   showNearMonthDaysRadio = $('#showNearMonthDaysRadio');
   hideNearMonthDaysRadio = $('#hideNearMonthDaysRadio');
+  showWeekNumbersRadio = $('#showWeekNumbersRadio');
+  hideWeekNumbersRadio = $('#hideWeekNumbersRadio');
+  weekNumbers = $$(`${this.popupSelector} .dp-week-number`);
 
   openBtn = $('#openBtn');
 
