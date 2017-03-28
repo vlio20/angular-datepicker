@@ -35,7 +35,7 @@ export class DpCalendarComponent implements OnChanges {
     this.calendars = this.calendarContainerService.generateCalendars(
       this.config,
       this.selected,
-      this.openOn && this.openOn[this.openOn.length -1] || this.calendars && this.calendars[0] && this.calendars[0].month
+      this.openOn && this.openOn[this.openOn.length - 1] || this.calendars && this.calendars[0] && this.calendars[0].month
     );
     this.themeClass = this.theme;
   }
