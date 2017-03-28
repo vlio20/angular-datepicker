@@ -349,6 +349,22 @@
       </div>
     </div>
 
+    <div class="dp-option">
+      <span class="dp-option-header">
+        Show week numbers (showWeekNumbers):
+      </span>
+      <div class="dp-option-playground">
+        <label>Show
+          <input id="showWeekNumbersRadio" type="radio" [(ngModel)]="config.showWeekNumbers" name="showWeekNumbers" [value]="true"
+                 (ngModelChange)="configChanged()">
+        </label>
+        <label>Hide
+          <input id="hideWeekNumbersRadio" type="radio" [(ngModel)]="config.showWeekNumbers" name="showWeekNumbers" [value]="false"
+                 (ngModelChange)="configChanged()">
+        </label>
+      </div>
+    </div>
+
   </div>
 
   <div class="dp-api">

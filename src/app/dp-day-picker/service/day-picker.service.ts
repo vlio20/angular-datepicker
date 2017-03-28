@@ -16,7 +16,8 @@ export class DayPickerService {
     disableKeypress: false,
     showNearMonthDays: true,
     drops: 'down',
-    opens: 'right'
+    opens: 'right',
+    showWeekNumbers: false
   };
 
   constructor(private calendarContainerService: CalendarService) {
@@ -73,7 +74,8 @@ export class DayPickerService {
       if (c.value) {
         if (typeof c.value === 'string') {
           const dateStrings = c.value.split(',').map(date => date.trim());
-          const validDateStrings = dateStrings.filter(date => this.dayPickerService.isDateValid(date, this.pickerConfig.format));
+          const validDateStrings = dateStrings
+            .filter(date => this.dayPickerService.isDateValid(date, this.pickerConfig.format));
           value = validDateStrings.map(dateString => moment(dateString, dateFormat));
         } else if (!Array.isArray(c.value)) {
           value = [c.value];

@@ -1,5 +1,5 @@
 import {ICalendarMonthConfig} from '../dp-calendar-month/config/calendar-month-config.model';
-import {IDayEvent} from './../dp-calendar-month/config/day.model';
+import {IDayEvent} from '../dp-calendar-month/config/day.model';
 import {ICalendarConfig} from './config/calendar-config.model';
 import {CalendarService} from './config/calendar.service';
 import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, HostBinding} from '@angular/core';
@@ -30,7 +30,6 @@ export class DpCalendarComponent implements OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log('s:', this.openOn);
     this.config = this.calendarContainerService.getConfig(this.config);
     this.calendars = this.calendarContainerService.generateCalendars(
       this.config,

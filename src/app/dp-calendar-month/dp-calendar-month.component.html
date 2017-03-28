@@ -3,6 +3,7 @@
     <span class="dp-calendar-weekday" *ngFor="let weekday of weekdays">{{weekday}}</span>
   </div>
   <div class="dp-calendar-week" *ngFor="let week of weeks">
+    <span *ngIf="config.showWeekNumbers" class="dp-week-number">{{week[0].date.isoWeek()}}</span>
     <button class="dp-calendar-day"
             *ngFor="let day of week"
             (click)="dayClick.emit({day: day, event: $event})"
