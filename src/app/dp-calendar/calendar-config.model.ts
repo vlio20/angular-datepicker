@@ -3,7 +3,6 @@ import {Moment} from 'moment';
 import {WeekDays} from '../common/types/week-days.type';
 
 export interface ICalendarConfig extends IBaseCalendarConfig {
-  firstDayOfWeek?: WeekDays;
   calendarsAmount?: number;
   min?: Moment | string;
   max?: Moment | string;

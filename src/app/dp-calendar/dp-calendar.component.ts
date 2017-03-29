@@ -41,12 +41,15 @@ export class DpCalendarComponent implements OnChanges {
 
   daySelected({day, event}: IDayEvent) {
     if (!this.config.allowMultiSelect) {
+
       // Single selection
       this.selected = [day.date];
     } else if (day.selected && this.selected) {
+
       // Unselecting a day
       this.selected = this.selected.filter(val => !val.isSame(day.date, 'day'));
     } else if (this.config.allowMultiSelect) {
+
       // Multi selection
       this.selected = this.selected ? this.selected.concat(day.date) : [day.date];
     }

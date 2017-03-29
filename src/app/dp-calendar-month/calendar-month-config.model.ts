@@ -6,11 +6,11 @@ export interface IBaseCalendarConfig {
   weekdayNames?: {[key: string]: string};
   showNearMonthDays?: boolean;
   showWeekNumbers?: boolean;
+  firstDayOfWeek: WeekDays;
 }
 
 export interface ICalendarMonthConfig extends IBaseCalendarConfig {
   month: Moment;
-  firstDayOfWeek: WeekDays;
   min?: Moment;
   max?: Moment;
 }
