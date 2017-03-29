@@ -1,5 +1,5 @@
 import {Moment} from 'moment';
-import {WeekDays} from '../../common/types/week-days.type';
+import {WeekDays} from '../common/types/week-days.type';
 
 export interface IBaseCalendarConfig {
   isDisabledCallback?: (date: Moment) => boolean;

@@ -1,5 +1,5 @@
-import {ICalendarConfig} from './../../dp-calendar/config/calendar-config.model';
-import {TDrops, TOpens} from '../../common/types/poistions.type';
+import {ICalendarConfig} from '../dp-calendar/calendar-config.model';
+import {TDrops, TOpens} from '../common/types/poistions.type';
 
 export interface IDayPickerConfig extends ICalendarConfig {
   closeOnSelect?: boolean;

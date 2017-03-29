@@ -1,4 +1,4 @@
-import {CalendarService} from '../dp-calendar/config/calendar.service';
+import {CalendarService} from '../dp-calendar/calendar.service';
 import {
   Component,
   forwardRef,
@@ -16,8 +16,8 @@ import {
 import {DpCalendarComponent} from '../dp-calendar/dp-calendar.component';
 import * as moment from 'moment';
 import {Moment} from 'moment';
-import {DayPickerService} from './service/day-picker.service';
-import {IDayPickerConfig} from './service/day-picker-config.model';
+import {DayPickerService} from './day-picker.service';
+import {IDayPickerConfig} from './day-picker-config.model';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR, FormControl, NG_VALIDATORS, Validator} from '@angular/forms';
 import {UtilsService} from '../common/services/utils/utils.service';
 import {IDpDayPickerApi} from './dp-day-picker.api';

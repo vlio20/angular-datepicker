@@ -1,5 +1,5 @@
 import {TestBed, inject} from '@angular/core/testing';
-import {CalendarService} from '../../dp-calendar/config/calendar.service';
+import {CalendarService} from '../dp-calendar/calendar.service';
 import {DayPickerService} from './day-picker.service';
 import * as moment from 'moment';
 import {Moment} from 'moment';
