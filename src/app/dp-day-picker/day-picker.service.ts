@@ -6,6 +6,7 @@ import {Moment} from 'moment';
 import {UtilsService} from '../common/services/utils/utils.service';
 import {FormControl} from '@angular/forms';
 import {ICalendarConfig} from '../dp-calendar/calendar-config.model';
+import {DpDayPickerComponent} from './dp-day-picker.component';
 
 @Injectable()
 export class DayPickerService {
@@ -33,7 +34,7 @@ export class DayPickerService {
     return this.calendarContainerService.getConfig(_config);
   }
 
-  isDateValid(date: string, format: string): boolean {
+  static isDateValid(date: string, format: string): boolean {
     if (date === '') {
       return true;
     }
@@ -41,7 +42,7 @@ export class DayPickerService {
     return moment(date, format, true).isValid();
   }
 
-  createValidator({minDate, maxDate}, dateFormat: string) {
+  createValidator({minDate, maxDate}, dateFormat: string): (FormControl, string) => {[key: string]: any} {
     let isValid: boolean;
     let value: Moment[];
     const validators = [];
@@ -68,19 +69,19 @@ export class DayPickerService {
       });
     }
 
-    return function validateInput(c: FormControl) {
+    return function validateInput(formControl: FormControl, format: string) {
       isValid = true;
 
-      if (c.value) {
-        if (typeof c.value === 'string') {
-          const dateStrings = c.value.split(',').map(date => date.trim());
+      if (formControl.value) {
+        if (typeof formControl.value === 'string') {
+          const dateStrings = formControl.value.split(',').map(date => date.trim());
           const validDateStrings = dateStrings
-            .filter(date => this.dayPickerService.isDateValid(date, this.pickerConfig.format));
+            .filter(date => DayPickerService.isDateValid(date, format));
           value = validDateStrings.map(dateString => moment(dateString, dateFormat));
-        } else if (!Array.isArray(c.value)) {
-          value = [c.value];
+        } else if (!Array.isArray(formControl.value)) {
+          value = [formControl.value];
         } else {
-          value = c.value.map(val => UtilsService.convertToMoment(val, dateFormat));
+          value = formControl.value.map(val => UtilsService.convertToMoment(val, dateFormat));
         }
       } else {
         return null;
@@ -89,7 +90,7 @@ export class DayPickerService {
       if (!value.every(val => val.isValid())) {
         return {
           format: {
-            given: c.value
+            given: formControl.value
           }
         };
       }
