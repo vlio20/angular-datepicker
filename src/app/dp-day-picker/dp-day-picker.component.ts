@@ -1,4 +1,4 @@
-import {CalendarService} from '../dp-calendar/config/calendar.service';
+import {CalendarService} from '../dp-calendar/calendar.service';
 import {
   Component,
   forwardRef,
@@ -16,8 +16,8 @@ import {
 import {DpCalendarComponent} from '../dp-calendar/dp-calendar.component';
 import * as moment from 'moment';
 import {Moment} from 'moment';
-import {DayPickerService} from './service/day-picker.service';
-import {IDayPickerConfig} from './service/day-picker-config.model';
+import {DayPickerService} from './day-picker.service';
+import {IDayPickerConfig} from './day-picker-config.model';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR, FormControl, NG_VALIDATORS, Validator} from '@angular/forms';
 import {UtilsService} from '../common/services/utils/utils.service';
 import {IDpDayPickerApi} from './dp-day-picker.api';
@@ -78,7 +78,7 @@ export class DpDayPickerComponent implements OnChanges,
   private popupElem: HTMLElement;
   private handleInnerElementClickUnlisteners: Function[] = [];
   public openOn: Moment[];
-  validateFn: Function;
+  validateFn: (FormControl, string) => {[key: string]: any};
 
   public get value(): Moment[] {
     return this._value;
@@ -111,7 +111,7 @@ export class DpDayPickerComponent implements OnChanges,
 
   api: IDpDayPickerApi = <IDpDayPickerApi>{};
 
-  constructor(private dayPickerService: DayPickerService,
+  constructor(public dayPickerService: DayPickerService,
               private domHelper: DomHelper,
               private elemRef: ElementRef,
               private renderer: Renderer) {
@@ -171,7 +171,7 @@ export class DpDayPickerComponent implements OnChanges,
       if (typeof this.pickerConfig.appendTo === 'string') {
         this.appendToElement = <HTMLElement>document.querySelector(this.pickerConfig.appendTo);
       } else {
-        this.appendToElement = this.pickerConfig.appendTo;
+        this.appendToElement = <HTMLElement>this.pickerConfig.appendTo;
       }
     } else {
       this.appendToElement = this.elemRef.nativeElement;
@@ -219,16 +219,16 @@ export class DpDayPickerComponent implements OnChanges,
   registerOnTouched(fn: any): void {
   }
 
-  validate(c: FormControl) {
+  validate(formControl: FormControl): {[key: string]: any} {
     if (this.minDate || this.maxDate) {
-      return this.validateFn(c);
+      return this.validateFn(formControl, this.pickerConfig.format);
     } else {
       return () => null;
     }
   }
 
   isDateValid(value: string) {
-    if (this.dayPickerService.isDateValid(value, this.pickerConfig.format)) {
+    if (DayPickerService.isDateValid(value, this.pickerConfig.format)) {
       this.value = this.value.concat(moment(value, this.pickerConfig.format));
     }
   }
@@ -238,6 +238,7 @@ export class DpDayPickerComponent implements OnChanges,
     if (this.userValue) {
       if (Array.isArray(this.userValue)) {
         if (this.userConfig.allowMultiSelect === undefined) {
+
           // set allowMultiSelect to true unless explicitly set by user
           this.pickerConfig.allowMultiSelect = true;
         }
@@ -248,10 +249,12 @@ export class DpDayPickerComponent implements OnChanges,
         }
       } else if (typeof this.userValue === 'string') {
         if (this.userConfig.userValueType === undefined) {
+
           // set userValueType to 'string' unless explicitly set by user
           this.pickerConfig.userValueType = 'string';
         }
         if (this.userValue.includes(',') && this.userConfig.allowMultiSelect === undefined) {
+
           // set allowMultiSelect to true unless explicitly set by user
           this.pickerConfig.allowMultiSelect = true;
         }
@@ -312,7 +315,7 @@ export class DpDayPickerComponent implements OnChanges,
   onViewDateChange(dates: string) {
     const dateStrings = dates.split(',').map(date => date.trim());
     const validDateStrings =
-      dateStrings.filter((date) => this.dayPickerService.isDateValid(date, this.pickerConfig.format));
+      dateStrings.filter((date) => DayPickerService.isDateValid(date, this.pickerConfig.format));
     if (!this.pickerConfig.allowMultiSelect && validDateStrings.length > 0) {
       // Single selection
       this.value = validDateStrings[0] !== '' ? [moment(validDateStrings[0], this.pickerConfig.format)] : [];
@@ -327,7 +330,7 @@ export class DpDayPickerComponent implements OnChanges,
   onKeydown(e: KeyboardEvent) {
     if (e.keyCode === 13) {
       if (!this.pickerConfig.allowMultiSelect &&
-        this.dayPickerService.isDateValid(this.viewValue, this.pickerConfig.format)) {
+        DayPickerService.isDateValid(this.viewValue, this.pickerConfig.format)) {
         this.openOn = this.value;
       }
     }

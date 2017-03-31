@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
 import * as moment from 'moment';
 import {Moment} from 'moment';
-import {WeekDays} from '../../common/types/week-days.type';
-import {UtilsService} from '../../common/services/utils/utils.service';
-import {ICalendarDay} from '../config/day.model';
-import {ICalendarMonthConfig} from '../config/calendar-month-config.model';
+import {WeekDays} from '../common/types/week-days.type';
+import {UtilsService} from '../common/services/utils/utils.service';
+import {ICalendarDay} from './day.model';
+import {ICalendarMonthConfig} from './calendar-month-config.model';
 
 @Injectable()
 export class CalendarMonthService {

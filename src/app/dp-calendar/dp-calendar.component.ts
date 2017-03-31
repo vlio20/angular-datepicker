@@ -1,7 +1,7 @@
-import {ICalendarMonthConfig} from '../dp-calendar-month/config/calendar-month-config.model';
-import {IDayEvent} from '../dp-calendar-month/config/day.model';
-import {ICalendarConfig} from './config/calendar-config.model';
-import {CalendarService} from './config/calendar.service';
+import {ICalendarMonthConfig} from '../dp-calendar-month/calendar-month-config.model';
+import {IDayEvent} from '../dp-calendar-month/day.model';
+import {ICalendarConfig} from './calendar-config.model';
+import {CalendarService} from './calendar.service';
 import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, HostBinding} from '@angular/core';
 import {Moment} from 'moment';
 
@@ -41,12 +41,15 @@ export class DpCalendarComponent implements OnChanges {
 
   daySelected({day, event}: IDayEvent) {
     if (!this.config.allowMultiSelect) {
+
       // Single selection
       this.selected = [day.date];
     } else if (day.selected && this.selected) {
+
       // Unselecting a day
       this.selected = this.selected.filter(val => !val.isSame(day.date, 'day'));
     } else if (this.config.allowMultiSelect) {
+
       // Multi selection
       this.selected = this.selected ? this.selected.concat(day.date) : [day.date];
     }

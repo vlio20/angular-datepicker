@@ -1,7 +1,7 @@
 import {Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges} from '@angular/core';
-import {CalendarMonthService} from './service/calendar-month.service';
-import {ICalendarMonthConfig} from './config/calendar-month-config.model';
-import {ICalendarDay, IDayEvent} from './config/day.model';
+import {CalendarMonthService} from './calendar-month.service';
+import {ICalendarMonthConfig} from './calendar-month-config.model';
+import {ICalendarDay, IDayEvent} from './day.model';
 import {Moment} from 'moment';
 
 @Component({
