@@ -21,6 +21,14 @@ export class DayPickerService {
     showWeekNumbers: false
   };
 
+  static isDateValid(date: string, format: string): boolean {
+    if (date === '') {
+      return true;
+    }
+
+    return moment(date, format, true).isValid();
+  }
+
   constructor(private calendarContainerService: CalendarService) {
   }
 
@@ -32,14 +40,6 @@ export class DayPickerService {
     }
 
     return this.calendarContainerService.getConfig(_config);
-  }
-
-  static isDateValid(date: string, format: string): boolean {
-    if (date === '') {
-      return true;
-    }
-
-    return moment(date, format, true).isValid();
   }
 
   createValidator({minDate, maxDate}, dateFormat: string): (FormControl, string) => {[key: string]: any} {
