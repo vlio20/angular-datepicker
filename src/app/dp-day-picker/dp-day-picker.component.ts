@@ -328,16 +328,20 @@ export class DpDayPickerComponent implements OnChanges,
   }
 
   onKeydown(e: KeyboardEvent) {
-    if (e.keyCode === 13) {
-      if (!this.pickerConfig.allowMultiSelect &&
-        DayPickerService.isDateValid(this.viewValue, this.pickerConfig.format)) {
-        this.openOn = this.value;
-      }
-    }
-
-    if (e.keyCode === 27) {
-      this.areCalendarsShown = false;
-      e.preventDefault();
+    switch (e.keyCode) {
+      case 13:
+        if (!this.pickerConfig.allowMultiSelect &&
+          DayPickerService.isDateValid(this.viewValue, this.pickerConfig.format)) {
+          this.openOn = this.value;
+        }
+        break;
+      case 27:
+        this.areCalendarsShown = false;
+        e.preventDefault();
+        break;
+      case 9:
+        this.areCalendarsShown = false;
+        break;
     }
 
     if (this.pickerConfig.disableKeypress) {
