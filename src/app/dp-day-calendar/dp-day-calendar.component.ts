@@ -5,7 +5,7 @@ import {ICalendarDay, IDayEvent} from './day.model';
 import {Moment} from 'moment';
 
 @Component({
-  selector: 'dp-calendar-month',
+  selector: 'dp-day-calendar',
   templateUrl: 'dp-day-calendar.component.html',
   styleUrls: ['dp-day-calendar.component.less'],
   providers: [CalendarMonthService]
