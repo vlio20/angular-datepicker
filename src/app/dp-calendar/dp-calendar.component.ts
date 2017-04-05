@@ -25,6 +25,7 @@ export class DpCalendarComponent implements OnChanges {
   @Output() calendarMove: EventEmitter<Moment> = new EventEmitter();
 
   calendars: ICalendarMonthConfig[];
+  showMonthCalendar: boolean = false;
 
   constructor(private calendarContainerService: CalendarService) {
   }

@@ -6,7 +6,6 @@ import {Moment} from 'moment';
 import {UtilsService} from '../common/services/utils/utils.service';
 import {FormControl} from '@angular/forms';
 import {ICalendarConfig} from '../dp-calendar/calendar-config.model';
-import {DpDayPickerComponent} from './dp-day-picker.component';
 
 @Injectable()
 export class DayPickerService {
@@ -29,7 +28,8 @@ export class DayPickerService {
     return moment(date, format, true).isValid();
   }
 
-  constructor(private calendarContainerService: CalendarService) {
+  constructor(private calendarContainerService: CalendarService,
+              private utilsService: UtilsService) {
   }
 
   getConfig(config: IDayPickerConfig): ICalendarConfig {
@@ -81,7 +81,7 @@ export class DayPickerService {
         } else if (!Array.isArray(formControl.value)) {
           value = [formControl.value];
         } else {
-          value = formControl.value.map(val => UtilsService.convertToMoment(val, dateFormat));
+          value = formControl.value.map(val => this.utilsService.convertToMoment(val, dateFormat));
         }
       } else {
         return null;

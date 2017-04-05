@@ -19,7 +19,7 @@ export class DemoComponent {
   date: Moment;
   dates: Moment[] = [];
 
-  material: boolean = true;
+  material: boolean = false;
   required: boolean = false;
   disabled: boolean = false;
   validationMinDate: Moment;

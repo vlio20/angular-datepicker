@@ -7,6 +7,10 @@ import {Moment} from 'moment';
 
 @Injectable()
 export class CalendarService {
+
+  constructor(private utilsService: UtilsService) {
+  }
+
   private defaultConfig: ICalendarConfig = {
     firstDayOfWeek: 'su',
     calendarsAmount: 1,
@@ -44,7 +48,7 @@ export class CalendarService {
 
   generateCalendars(config: ICalendarConfig, selected: Moment[], month?: Moment): ICalendarMonthConfig[] {
     const base = (month && month.clone()) || (selected && selected[0] && selected[0].clone()) || moment();
-    return UtilsService.createArray(config.calendarsAmount)
+    return this.utilsService.createArray(config.calendarsAmount)
       .map((n: number, i: number) => ({
         month: base.clone().add(i, 'month'),
         selected: selected,

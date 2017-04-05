@@ -10,6 +10,9 @@ import {ICalendarMonthConfig} from './day-calendar-config.model';
 export class CalendarMonthService {
   readonly DAYS = ['su', 'mo', 'tu', 'we', 'th', 'fr', 'sa'];
 
+  constructor(private utilsService: UtilsService) {
+  }
+
   generateDaysIndexMap(firstDayOfWeek: WeekDays) {
     const firstDayIndex = this.DAYS.indexOf(firstDayOfWeek);
     const daysArr = this.DAYS.slice(firstDayIndex, 7).concat(this.DAYS.slice(0, firstDayIndex));
@@ -41,7 +44,7 @@ export class CalendarMonthService {
     }
 
     const current = firstDayOfBoard.clone();
-    const daysOfCalendar: ICalendarDay[] = UtilsService.createArray(42).reduce((array: ICalendarDay[]) => {
+    const daysOfCalendar: ICalendarDay[] = this.utilsService.createArray(42).reduce((array: ICalendarDay[]) => {
       array.push({
         date: current.clone(),
         selected: (selectedDays ? selectedDays

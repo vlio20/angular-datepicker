@@ -5,11 +5,11 @@ import {Moment} from 'moment';
 @Injectable()
 export class UtilsService {
 
-  static createArray(size: number): number[] {
+  public createArray(size: number): number[] {
     return new Array(size).fill(1);
   }
 
-  static convertToMoment(date: Moment | string, format: string): Moment | null {
+  convertToMoment(date: Moment | string, format: string): Moment | null {
     let retVal: Moment;
     if (!date) {
       return null;

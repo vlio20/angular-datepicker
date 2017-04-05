@@ -29,9 +29,7 @@ export type CalendarValue = string | string[] | Moment | Moment[];
   selector: 'dp-day-picker',
   templateUrl: './dp-day-picker.component.html',
   styleUrls: ['./dp-day-picker.component.less'],
-  entryComponents: [DpCalendarComponent],
   providers: [
-    DomHelper,
     CalendarService,
     DayPickerService,
     {
@@ -114,7 +112,8 @@ export class DpDayPickerComponent implements OnChanges,
   constructor(public dayPickerService: DayPickerService,
               private domHelper: DomHelper,
               private elemRef: ElementRef,
-              private renderer: Renderer) {
+              private renderer: Renderer,
+              private utilsService: UtilsService) {
   }
 
   @HostListener('click')
@@ -243,9 +242,9 @@ export class DpDayPickerComponent implements OnChanges,
           this.pickerConfig.allowMultiSelect = true;
         }
         if (this.pickerConfig.allowMultiSelect) {
-          this.value = this.userValue.map(val => UtilsService.convertToMoment(val, this.pickerConfig.format));
+          this.value = this.userValue.map(val => this.utilsService.convertToMoment(val, this.pickerConfig.format));
         } else {
-          this.value = [UtilsService.convertToMoment(this.userValue[0], this.pickerConfig.format)];
+          this.value = [this.utilsService.convertToMoment(this.userValue[0], this.pickerConfig.format)];
         }
       } else if (typeof this.userValue === 'string') {
         if (this.userConfig.userValueType === undefined) {
@@ -260,12 +259,12 @@ export class DpDayPickerComponent implements OnChanges,
         }
         if (this.pickerConfig.allowMultiSelect) {
           this.value = this.userValue.split(',')
-            .map(val => UtilsService.convertToMoment(val.trim(), this.pickerConfig.format));
+            .map(val => this.utilsService.convertToMoment(val.trim(), this.pickerConfig.format));
         } else {
-          this.value = [UtilsService.convertToMoment(this.userValue, this.pickerConfig.format)];
+          this.value = [this.utilsService.convertToMoment(this.userValue, this.pickerConfig.format)];
         }
       } else {
-        this.value = [UtilsService.convertToMoment(this.userValue, this.pickerConfig.format)];
+        this.value = [this.utilsService.convertToMoment(this.userValue, this.pickerConfig.format)];
       }
     }
 

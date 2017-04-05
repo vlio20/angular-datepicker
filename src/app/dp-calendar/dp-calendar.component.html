@@ -4,19 +4,27 @@
     <button class="dp-calendar-nav-left"
             *ngIf="start"
             [disabled]="isLeftNavDisabled(calendar.month)"
-            (click)="moveCalendars(calendars[0].month, -1)"> 	&lt;
+            (click)="moveCalendars(calendars[0].month, -1)">  &lt;
     </button>
-    <span class="dp-day-calendar">{{getMonthToDisplay(calendar.month)}}</span>
+    <button class="dp-day-calendar" (click)="showMonthCalendar = !showMonthCalendar">
+      {{getMonthToDisplay(calendar.month)}}
+    </button>
     <button class="dp-calendar-nav-right"
             *ngIf="end"
             [disabled]="isRightNavDisabled(calendar.month)"
-            (click)="moveCalendars(calendars[0].month, 1)"> 	&gt;
+            (click)="moveCalendars(calendars[0].month, 1)">  &gt;
     </button>
   </div>
   <dp-day-calendar
       [selected]="selected"
       [config]="calendar"
       (dayContextMenu)="dayContextMenu.emit($event)"
-      (dayClick)="daySelected($event)">
+      (dayClick)="daySelected($event)"
+      *ngIf="!showMonthCalendar">
   </dp-day-calendar>
+
+  <dp-month-calendar *ngIf="showMonthCalendar"
+                     [config]="calendar"
+                     [selected]="selected">
+  </dp-month-calendar>
 </div>
