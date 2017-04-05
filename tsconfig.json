@@ -5,8 +5,8 @@
     "sourceMap": true,
     "declaration": true,
     "moduleResolution": "node",
-    "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
     "skipLibCheck": true,
     "lib": [
       "es2015",

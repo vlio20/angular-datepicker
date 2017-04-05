@@ -1,5 +1,5 @@
-import {ICalendarMonthConfig} from '../dp-calendar-month/calendar-month-config.model';
-import {IDayEvent} from '../dp-calendar-month/day.model';
+import {ICalendarMonthConfig} from '../dp-day-calendar/day-calendar-config.model';
+import {IDayEvent} from '../dp-day-calendar/day.model';
 import {ICalendarConfig} from './calendar-config.model';
 import {CalendarService} from './calendar.service';
 import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, HostBinding} from '@angular/core';

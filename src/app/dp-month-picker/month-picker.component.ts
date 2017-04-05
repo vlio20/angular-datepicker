@@ -5,7 +5,7 @@ import {Component, OnInit} from '@angular/core';
   templateUrl: './month-picker.component.html',
   styleUrls: ['./month-picker.component.less']
 })
-export class DpMonthPickerComponent implements OnInit {
+export class MonthPickerComponent implements OnInit {
 
   constructor() {
   }

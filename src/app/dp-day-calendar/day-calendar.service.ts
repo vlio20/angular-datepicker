@@ -4,7 +4,7 @@ import {Moment} from 'moment';
 import {WeekDays} from '../common/types/week-days.type';
 import {UtilsService} from '../common/services/utils/utils.service';
 import {ICalendarDay} from './day.model';
-import {ICalendarMonthConfig} from './calendar-month-config.model';
+import {ICalendarMonthConfig} from './day-calendar-config.model';
 
 @Injectable()
 export class CalendarMonthService {

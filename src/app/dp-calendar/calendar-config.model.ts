@@ -1,4 +1,4 @@
-import {IBaseCalendarConfig} from '../dp-calendar-month/calendar-month-config.model';
+import {IBaseCalendarConfig} from '../dp-day-calendar/day-calendar-config.model';
 import {Moment} from 'moment';
 import {WeekDays} from '../common/types/week-days.type';
 

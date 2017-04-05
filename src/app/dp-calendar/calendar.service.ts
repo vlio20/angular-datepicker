@@ -1,5 +1,5 @@
 import {UtilsService} from '../common/services/utils/utils.service';
-import {ICalendarMonthConfig} from '../dp-calendar-month/calendar-month-config.model';
+import {ICalendarMonthConfig} from '../dp-day-calendar/day-calendar-config.model';
 import {ICalendarConfig} from './calendar-config.model';
 import {Injectable} from '@angular/core';
 import * as moment from 'moment';

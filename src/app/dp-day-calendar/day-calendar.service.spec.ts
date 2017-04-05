@@ -1,8 +1,8 @@
 import {TestBed, inject} from '@angular/core/testing';
-import {CalendarMonthService} from './calendar-month.service';
+import {CalendarMonthService} from './day-calendar.service';
 import * as moment from 'moment';
 import {Moment} from 'moment';
-import {ICalendarMonthConfig} from './calendar-month-config.model';
+import {ICalendarMonthConfig} from './day-calendar-config.model';
 
 describe('Service: Calendar', () => {
   beforeEach(() => {
