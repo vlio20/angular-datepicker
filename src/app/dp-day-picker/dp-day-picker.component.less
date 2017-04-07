@@ -17,11 +17,11 @@
 
   .dp-popup {
     position: relative;
-    background: @white;
-    box-shadow: 1px 1px 5px 0 fade(@black, 10);
-    border-left: 1px solid fade(@black, 10);
-    border-right: 1px solid fade(@black, 10);
-    border-bottom: 1px solid fade(@black, 10);
+    background: @c-white;
+    box-shadow: 1px 1px 5px 0 fade(@c-black, 10);
+    border-left: 1px solid fade(@c-black, 10);
+    border-right: 1px solid fade(@c-black, 10);
+    border-bottom: 1px solid fade(@c-black, 10);
     z-index: 9999;
     white-space: nowrap;
 
@@ -30,5 +30,10 @@
         .materialTheme();
       }
     }
+  }
+  
+  .dp-selected {
+    background: @c-primary;
+    color: @c-white;
   }
 }

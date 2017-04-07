@@ -67,6 +67,21 @@ export class DpCalendarComponent implements OnChanges {
     return month.format(this.config.monthFormat);
   }
 
+  getYearToDisplay(year: Moment): string {
+    if (typeof this.config.yearFormatter === 'function') {
+      return this.config.yearFormatter(year);
+    }
+
+    return year.format(this.config.yearFormat);
+  }
+
+  monthSelected(index: number, month: Moment) {
+    const form = this.calendars[0].month.clone().startOf('month');
+    const to = month.clone().startOf('month');
+    this.moveCalendars(form, to.diff(form, 'month'));
+    this.showMonthCalendar = false;
+  }
+
   moveCalendars(base: Moment, months: number) {
     this.calendars = this.calendarContainerService.moveCalendars(this.config, this.selected, base, months);
     this.calendarMove.emit(this.calendars[0].month);

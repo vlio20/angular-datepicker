@@ -15,6 +15,7 @@ export class CalendarService {
     firstDayOfWeek: 'su',
     calendarsAmount: 1,
     monthFormat: 'MMM, YYYY',
+    yearFormat: 'YYYY',
     showNearMonthDays: true,
     weekdayNames: {
       su: 'sun',

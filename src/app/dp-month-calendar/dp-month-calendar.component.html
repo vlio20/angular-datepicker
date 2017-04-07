@@ -1,0 +1,11 @@
+<div class="dp-calendar-wrapper">
+  <div class="dp-months-row" *ngFor="let monthRow of yearMonths">
+    <button class="dp-calendar-month"
+            *ngFor="let month of monthRow"
+            [disabled]="isDisabledDay(month)"
+            [ngClass]="{'dp-selected': month.selected,'dp-current-month': month.currentMonth}"
+            (click)="monthSelected(month)">
+      {{month.date.format('MMM')}}
+    </button>
+  </div>
+</div>

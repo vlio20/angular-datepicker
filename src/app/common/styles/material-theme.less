@@ -38,7 +38,7 @@
       box-sizing: border-box;
       height: @basic-height;
       width: @basic-height;
-      background: white;
+      background: @c-white;
       border-radius: 50%;
       border: none;
       outline: none;
@@ -49,16 +49,16 @@
     }
 
     .dp-selected {
-      background: #106CC8;
+      background: @c-primary;
       color: white;
 
       &:hover {
-        background: #106CC8;
+        background: @c-primary;
       }
     }
 
     .dp-current-day {
-      border: 1px solid #106CC8;
+      border: 1px solid @c-primary;
     }
   }
 }

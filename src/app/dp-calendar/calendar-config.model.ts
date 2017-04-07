@@ -10,4 +10,6 @@ export interface ICalendarConfig extends IBaseCalendarConfig {
   format?: string;
   monthFormat?: string;
   monthFormatter?: (date: Moment) => string;
+  yearFormat?: string;
+  yearFormatter?: (date: Moment) => string;
 }

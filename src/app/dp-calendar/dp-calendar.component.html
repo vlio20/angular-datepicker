@@ -1,18 +1,21 @@
 <div class="dp-calendar-container {{theme}}"
-     *ngFor="let calendar of calendars; let start = first; let end = last">
+     *ngFor="let calendar of calendars;
+        let index = index;
+        let start = first;
+        let end = last">
   <div class="dp-calendar-nav-container">
     <button class="dp-calendar-nav-left"
             *ngIf="start"
             [disabled]="isLeftNavDisabled(calendar.month)"
-            (click)="moveCalendars(calendars[0].month, -1)">  &lt;
+            (click)="moveCalendars(calendars[0].month, showMonthCalendar ? -12 : -1)">  &lt;
     </button>
     <button class="dp-day-calendar" (click)="showMonthCalendar = !showMonthCalendar">
-      {{getMonthToDisplay(calendar.month)}}
+      {{showMonthCalendar ? getYearToDisplay(calendar.month) : getMonthToDisplay(calendar.month)}}
     </button>
     <button class="dp-calendar-nav-right"
             *ngIf="end"
             [disabled]="isRightNavDisabled(calendar.month)"
-            (click)="moveCalendars(calendars[0].month, 1)">  &gt;
+            (click)="moveCalendars(calendars[0].month, showMonthCalendar ? 12 : 1)">  &gt;
     </button>
   </div>
   <dp-day-calendar
@@ -20,11 +23,12 @@
       [config]="calendar"
       (dayContextMenu)="dayContextMenu.emit($event)"
       (dayClick)="daySelected($event)"
-      *ngIf="!showMonthCalendar">
+      *ngIf="!showMonthCalendar || (config.calendarsAmount > 2 && !(start || end))">
   </dp-day-calendar>
 
-  <dp-month-calendar *ngIf="showMonthCalendar"
+  <dp-month-calendar *ngIf="showMonthCalendar && (start || end)"
                      [config]="calendar"
-                     [selected]="selected">
+                     [selected]="selected"
+                     (monthClick)="monthSelected(index, $event)">
   </dp-month-calendar>
 </div>
