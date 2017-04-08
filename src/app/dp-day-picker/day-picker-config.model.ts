@@ -8,6 +8,7 @@ export interface IDayPickerConfig extends ICalendarConfig {
   disableKeypress?: boolean;
   userValueType?: 'string' | 'object';
   appendTo?: string|HTMLElement;
+  showGoToCurrent?: boolean;
   drops?: TDrops;
   opens?: TOpens;
 }

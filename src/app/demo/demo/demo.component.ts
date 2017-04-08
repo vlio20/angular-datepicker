@@ -52,7 +52,8 @@ export class DemoComponent {
     showNearMonthDays: true,
     showWeekNumbers: false,
     enableMonthSelector: true,
-    yearFormat: 'YYYY'
+    yearFormat: 'YYYY',
+    showGoToCurrent: true
   };
   isAtTop: boolean = true;
 
