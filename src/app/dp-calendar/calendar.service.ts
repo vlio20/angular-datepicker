@@ -86,7 +86,7 @@ export class CalendarService {
     if (!config.enableMonthSelector) {
       return false;
     } else {
-      return index === 0 || index === (config.calendarsAmount -1);
+      return index === 0 || index === (config.calendarsAmount - 1);
     }
   }
 }

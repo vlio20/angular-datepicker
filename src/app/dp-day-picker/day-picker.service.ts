@@ -1,5 +1,5 @@
 import {CalendarService} from '../dp-calendar/calendar.service';
-import {Injectable} from '@angular/core';
+import {Injectable, EventEmitter} from '@angular/core';
 import {IDayPickerConfig} from './day-picker-config.model';
 import * as moment from 'moment';
 import {Moment} from 'moment';
@@ -9,6 +9,7 @@ import {ICalendarConfig} from '../dp-calendar/calendar-config.model';
 
 @Injectable()
 export class DayPickerService {
+  readonly onPickerClosed: EventEmitter<null> = new EventEmitter();
   private defaultConfig: IDayPickerConfig = {
     closeOnSelect: true,
     closeOnSelectDelay: 100,
@@ -108,5 +109,9 @@ export class DayPickerService {
 
       return !isValid ? errors : null;
     };
+  }
+
+  pickerClosed() {
+    this.onPickerClosed.emit();
   }
 }

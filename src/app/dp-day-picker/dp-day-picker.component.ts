@@ -102,6 +102,8 @@ export class DpDayPickerComponent implements OnChanges,
         drops: this.pickerConfig.drops,
         opens: this.pickerConfig.opens
       });
+    } else {
+      this.dayPickerService.pickerClosed();
     }
 
     this._areCalendarsShown = value;

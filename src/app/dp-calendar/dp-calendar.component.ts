@@ -2,8 +2,9 @@ import {ICalendarMonthConfig} from '../dp-day-calendar/day-calendar-config.model
 import {IDayEvent} from '../dp-day-calendar/day.model';
 import {ICalendarConfig} from './calendar-config.model';
 import {CalendarService} from './calendar.service';
-import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, HostBinding} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, HostBinding, OnInit} from '@angular/core';
 import {Moment} from 'moment';
+import {DayPickerService} from '../dp-day-picker/day-picker.service';
 
 @Component({
   selector: 'dp-calendar',
@@ -11,7 +12,7 @@ import {Moment} from 'moment';
   styleUrls: ['./dp-calendar.component.less'],
   providers: [CalendarService],
 })
-export class CalendarComponent implements OnChanges {
+export class CalendarComponent implements OnInit, OnChanges {
   @Input() selected: Moment[];
   @Input() config: ICalendarConfig;
   @Input() theme: string;
@@ -27,7 +28,14 @@ export class CalendarComponent implements OnChanges {
   calendars: ICalendarMonthConfig[];
   showMonthCalendar: boolean = false;
 
-  constructor(private calendarService: CalendarService) {
+  constructor(private dayPickerService: DayPickerService,
+              private calendarService: CalendarService) {
+  }
+
+  ngOnInit() {
+    this.dayPickerService.onPickerClosed.subscribe(() => {
+      this.showMonthCalendar = false;
+    });
   }
 
   ngOnChanges(changes: SimpleChanges) {
