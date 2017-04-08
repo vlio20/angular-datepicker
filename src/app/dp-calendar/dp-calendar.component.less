@@ -15,6 +15,13 @@
     border-bottom: none;
   }
 
+  .dp-nav-date-btn {
+    box-sizing: border-box;
+    height: 25px;
+    border: 1px solid @c-black;
+    border-bottom: none;
+  }
+
   .dp-calendar-nav-left, .dp-calendar-nav-right {
     position: absolute;
     top: 50%;
@@ -30,11 +37,15 @@
     right: 0;
   }
 
-  .dp-day-calendar {
+  .dp-nav-header {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+  }
+
+  .dp-nav-header-btn {
+    cursor: pointer;
   }
 
   :host(.dp-material) {

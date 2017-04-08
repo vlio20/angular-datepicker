@@ -16,11 +16,28 @@
 
   .dp-calendar-nav-left, .dp-calendar-nav-right {
     border: none;
-    background: white;
+    background: @c-white;
     outline: none;
     font-size: 16px;
   }
 
+  .dp-nav-header-btn {
+    height: 20px;
+    width: 80px;
+    border: none;
+    background: @c-white;
+    outline: none;
+
+    &:hover {
+      background: fade(@c-black, 5);
+    }
+
+    &:active {
+      background: fade(@c-black, 10);
+    }
+  }
+
+  & @{deep} dp-month-calendar,
   & @{deep} dp-day-calendar {
     .dp-calendar-weekday {
       height: @basic-height - 5px;
@@ -34,10 +51,9 @@
       border: none;
     }
 
+    .dp-calendar-month,
     .dp-calendar-day {
       box-sizing: border-box;
-      height: @basic-height;
-      width: @basic-height;
       background: @c-white;
       border-radius: 50%;
       border: none;
@@ -50,7 +66,7 @@
 
     .dp-selected {
       background: @c-primary;
-      color: white;
+      color: @c-white;
 
       &:hover {
         background: @c-primary;
@@ -58,6 +74,12 @@
     }
 
     .dp-current-day {
+      border: 1px solid @c-primary;
+    }
+  }
+
+  & @{deep} dp-month-calendar {
+    .dp-current-month {
       border: 1px solid @c-primary;
     }
   }
