@@ -41,7 +41,7 @@
     "@angular/router": "^4.0.1",
     "@types/jasmine": "2.5.38",
     "@types/node": "~6.0.60",
-    "codelyzer": "~2.0.0",
+    "codelyzer": "~2.1.1",
     "core-js": "^2.4.1",
     "jasmine-core": "~2.5.2",
     "jasmine-spec-reporter": "~3.2.0",
