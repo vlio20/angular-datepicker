@@ -5,15 +5,17 @@ import {MonthCalendarComponent} from '../dp-month-calendar/dp-month-calendar.com
 import {UtilsService} from '../common/services/utils/utils.service';
 import * as moment from 'moment';
 import {Moment} from 'moment';
+import {DayPickerService} from '../dp-day-picker/day-picker.service';
+import {CalendarService} from './calendar.service';
 
-describe('CalendarComponent', () => {
+describe('Component: CalendarComponent', () => {
   let component: CalendarComponent;
   let fixture: ComponentFixture<CalendarComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [CalendarComponent, DayCalendarComponent, MonthCalendarComponent],
-      providers: [UtilsService]
+      providers: [UtilsService, CalendarService, DayPickerService]
     }).compileComponents();
   }));
 
