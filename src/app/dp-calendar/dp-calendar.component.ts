@@ -11,7 +11,7 @@ import {Moment} from 'moment';
   styleUrls: ['./dp-calendar.component.less'],
   providers: [CalendarService],
 })
-export class DpCalendarComponent implements OnChanges {
+export class CalendarComponent implements OnChanges {
   @Input() selected: Moment[];
   @Input() config: ICalendarConfig;
   @Input() theme: string;

@@ -1,21 +1,26 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {MonthCalendarComponent} from './dp-month-calendar.component';
+import {UtilsService} from '../common/services/utils/utils.service';
+import {MonthCalendarService} from './month-calendar.service';
+import * as moment from 'moment';
 
-import { MonthCalendarComponent } from './dp-month-calendar.component';
-
-describe('MonthCalendarComponent', () => {
+describe('Component: MonthCalendarComponent', () => {
   let component: MonthCalendarComponent;
   let fixture: ComponentFixture<MonthCalendarComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MonthCalendarComponent ]
-    })
-    .compileComponents();
+      declarations: [MonthCalendarComponent],
+      providers: [MonthCalendarService, UtilsService]
+    }).compileComponents();
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(MonthCalendarComponent);
     component = fixture.componentInstance;
+    component.config = {
+      month: moment()
+    };
     fixture.detectChanges();
   });
 

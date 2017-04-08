@@ -10,7 +10,7 @@ import {Moment} from 'moment';
   styleUrls: ['dp-day-calendar.component.less'],
   providers: [CalendarMonthService]
 })
-export class DpCalendarMonthComponent implements OnInit, OnChanges {
+export class DayCalendarComponent implements OnInit, OnChanges {
   @Input() config: ICalendarMonthConfig;
   @Input() selected: Moment[];
   @Output() dayClick: EventEmitter<IDayEvent> = new EventEmitter();

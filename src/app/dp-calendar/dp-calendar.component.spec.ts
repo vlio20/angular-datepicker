@@ -1,20 +1,22 @@
-import {DpCalendarMonthComponent} from '../dp-day-calendar/dp-day-calendar.component';
+import {DayCalendarComponent} from '../dp-day-calendar/dp-day-calendar.component';
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
-import {DpCalendarComponent} from './dp-calendar.component';
+import {CalendarComponent} from './dp-calendar.component';
+import {MonthCalendarComponent} from '../dp-month-calendar/dp-month-calendar.component';
+import {UtilsService} from '../common/services/utils/utils.service';
 
-describe('DpCalendarComponent', () => {
-  let component: DpCalendarComponent;
-  let fixture: ComponentFixture<DpCalendarComponent>;
+describe('CalendarComponent', () => {
+  let component: CalendarComponent;
+  let fixture: ComponentFixture<CalendarComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [DpCalendarComponent, DpCalendarMonthComponent]
-    })
-      .compileComponents();
+      declarations: [CalendarComponent, DayCalendarComponent, MonthCalendarComponent],
+      providers: [UtilsService]
+    }).compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DpCalendarComponent);
+    fixture = TestBed.createComponent(CalendarComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -3,11 +3,12 @@ import {CalendarMonthService} from './day-calendar.service';
 import * as moment from 'moment';
 import {Moment} from 'moment';
 import {ICalendarMonthConfig} from './day-calendar-config.model';
+import {UtilsService} from '../common/services/utils/utils.service';
 
 describe('Service: Calendar', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [CalendarMonthService]
+      providers: [CalendarMonthService, UtilsService]
     });
   });
 

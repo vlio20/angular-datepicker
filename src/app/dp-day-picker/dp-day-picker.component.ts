@@ -13,7 +13,7 @@ import {
   Renderer,
   OnDestroy
 } from '@angular/core';
-import {DpCalendarComponent} from '../dp-calendar/dp-calendar.component';
+import {CalendarComponent} from '../dp-calendar/dp-calendar.component';
 import * as moment from 'moment';
 import {Moment} from 'moment';
 import {DayPickerService} from './day-picker.service';
