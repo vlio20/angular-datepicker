@@ -73,7 +73,7 @@ describe('ng2-date-picker App', () => {
     expect(page.weekNumbers.getText()).toEqual(['8', '9', '10', '11', '12', '13']);
   });
 
-  fit('should disable/enable month selection', () => {
+  it('should disable/enable month selection', () => {
     page.datePickerInput.sendKeys('08-04-2017');
     page.datePickerInput.click();
     expect(page.navHeaderBtn.isPresent()).toBe(true);
