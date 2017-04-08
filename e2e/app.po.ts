@@ -11,6 +11,7 @@ export class DemoPage {
   calendarDays = $$(`${this.popupSelector} .dp-calendar-day`);
   navLeftBtn = $(`${this.popupSelector} .dp-calendar-nav-left`);
   navRightBtn = $(`${this.popupSelector} .dp-calendar-nav-right`);
+  currentLocationBtn = $(`#datePicker .dp-current-location-btn`);
   themeOnRadio = $('#themeOn');
   themeOffRadio = $('#themeOff');
   onOpenDelayInput = $('#onOpenDelay');
@@ -24,6 +25,7 @@ export class DemoPage {
   currentMonthCalendarBtn = $(`${this.popupSelector} .dp-current-month`);
   disableMonthSelector = $('#disableMonthSelector');
   yearFormat = $('#yearFormat');
+  hideGoToCurrentRadio = $('#hideGoToCurrent');
 
   openBtn = $('#openBtn');
 
