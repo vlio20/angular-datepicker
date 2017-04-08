@@ -7,10 +7,6 @@ import {Moment} from 'moment';
 
 @Injectable()
 export class CalendarService {
-
-  constructor(private utilsService: UtilsService) {
-  }
-
   private defaultConfig: ICalendarConfig = {
     firstDayOfWeek: 'su',
     calendarsAmount: 1,
@@ -27,6 +23,9 @@ export class CalendarService {
       sa: 'sat'
     },
   };
+
+  constructor(private utilsService: UtilsService) {
+  }
 
   private formatValues(config: ICalendarConfig): void {
     const {format, min, max} = config;

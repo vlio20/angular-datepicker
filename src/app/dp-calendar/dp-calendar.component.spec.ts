@@ -42,7 +42,7 @@ describe('CalendarComponent', () => {
     component.config = {
       monthFormat: 'MM',
       monthFormatter: (date: Moment) => {
-        return date.format('MMM')
+        return date.format('MMM');
       }
     };
 
@@ -64,7 +64,7 @@ describe('CalendarComponent', () => {
     component.config = {
       yearFormat: 'YY',
       yearFormatter: (date: Moment) => {
-        return date.format('YYYY')
+        return date.format('YYYY');
       }
     };
 
