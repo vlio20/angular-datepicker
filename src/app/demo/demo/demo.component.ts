@@ -31,6 +31,7 @@ export class DemoComponent {
     calendarsAmount: 1,
     format: 'DD-MM-YYYY',
     monthFormat: 'MMM, YYYY',
+    disableKeypress: false,
     allowMultiSelect: false,
     closeOnSelect: true,
     closeOnSelectDelay: 100,

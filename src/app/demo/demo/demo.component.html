@@ -274,11 +274,11 @@
         Disable keyboard on input (disableKeypress):
       </span>
       <div class="dp-option-playground">
-        <label>Disable
+        <label>Disabled
           <input type="radio" [(ngModel)]="config.disableKeypress" name="disableKeypress" [value]="true"
                  (ngModelChange)="configChanged()">
         </label>
-        <label>Enable
+        <label>Enabled
           <input type="radio" [(ngModel)]="config.disableKeypress" name="disableKeypress" [value]="false"
                  (ngModelChange)="configChanged()">
         </label>
@@ -386,7 +386,7 @@
         Year Format (yearFormat):
       </span>
       <div class="dp-option-playground">
-        <input type="text" [(ngModel)]="config.yearFormat" (change)="configChanged()">
+        <input id="yearFormat" type="text" [(ngModel)]="config.yearFormat" (change)="configChanged()">
       </div>
     </div>
 
