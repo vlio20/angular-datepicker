@@ -13,7 +13,6 @@ import {
   Renderer,
   OnDestroy
 } from '@angular/core';
-import {CalendarComponent} from '../dp-calendar/dp-calendar.component';
 import * as moment from 'moment';
 import {Moment} from 'moment';
 import {DayPickerService} from './day-picker.service';
@@ -52,13 +51,9 @@ export class DpDayPickerComponent implements OnChanges,
                                              Validator {
   private shouldNgInit: boolean = true;
   @Input('config') private userConfig: IDayPickerConfig;
-
-  // attributes
   @Input() public placeholder: string = '';
   @Input() public disabled: boolean = false;
   @Input() public theme: string;
-
-  // validations
   @Input() private minDate: Moment | string;
   @Input() private maxDate: Moment | string;
 
@@ -348,6 +343,10 @@ export class DpDayPickerComponent implements OnChanges,
     if (this.pickerConfig.disableKeypress) {
       e.preventDefault();
     }
+  }
+
+  moveToCurrent() {
+    this.openOn = [moment()];
   }
 
   ngOnDestroy() {

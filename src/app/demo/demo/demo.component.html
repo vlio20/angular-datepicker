@@ -390,6 +390,22 @@
       </div>
     </div>
 
+    <div class="dp-option">
+      <span class="dp-option-header">
+        Show go to current button (showGoToCurrent):
+      </span>
+      <div class="dp-option-playground">
+        <label>Enabled
+          <input id="showGoToCurrent" type="radio" [(ngModel)]="config.showGoToCurrent" name="showGoToCurrent" [value]="true"
+                 (ngModelChange)="configChanged()">
+        </label>
+        <label>Disabled
+          <input id="hideGoToCurrent" type="radio" [(ngModel)]="config.showGoToCurrent" name="showGoToCurrent" [value]="false"
+                 (ngModelChange)="configChanged()">
+        </label>
+      </div>
+    </div>
+
   </div>
 
   <div class="dp-api">

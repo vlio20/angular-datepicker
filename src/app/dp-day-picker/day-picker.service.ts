@@ -19,7 +19,8 @@ export class DayPickerService {
     drops: 'down',
     opens: 'right',
     showWeekNumbers: false,
-    enableMonthSelector: true
+    enableMonthSelector: true,
+    showGoToCurrent: true
   };
 
   static isDateValid(date: string, format: string): boolean {
