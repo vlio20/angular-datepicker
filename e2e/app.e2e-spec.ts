@@ -92,9 +92,13 @@ describe('ng2-date-picker App', () => {
     expect(page.navHeaderBtn.getText()).toEqual('2017');
     expect(page.currentMonthCalendarBtn.getText()).toEqual('Apr');
 
-    page.datePickerInput.clear();
-    page.navRightBtn.click();
-    expect(page.currentMonthCalendarBtn.isPresent()).toBe(false);
+    page.clickOnBody();
+    page.datePickerInput.click();
+    expect(page.dayCalendar.isPresent()).toBe(true);
+    expect(page.monthCalendar.isPresent()).toBe(false);
+    page.navHeaderBtn.click();
+    expect(page.dayCalendar.isPresent()).toBe(false);
+    expect(page.monthCalendar.isPresent()).toBe(true);
 
     page.navHeaderBtn.click();
     expect(page.dayCalendar.isPresent()).toBe(true);
