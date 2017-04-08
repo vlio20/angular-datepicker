@@ -27,12 +27,12 @@ export class DpCalendarComponent implements OnChanges {
   calendars: ICalendarMonthConfig[];
   showMonthCalendar: boolean = false;
 
-  constructor(private calendarContainerService: CalendarService) {
+  constructor(private calendarService: CalendarService) {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    this.config = this.calendarContainerService.getConfig(this.config);
-    this.calendars = this.calendarContainerService.generateCalendars(
+    this.config = this.calendarService.getConfig(this.config);
+    this.calendars = this.calendarService.generateCalendars(
       this.config,
       this.selected,
       this.openOn && this.openOn[this.openOn.length - 1] || this.calendars && this.calendars[0] && this.calendars[0].month
@@ -83,15 +83,19 @@ export class DpCalendarComponent implements OnChanges {
   }
 
   moveCalendars(base: Moment, months: number) {
-    this.calendars = this.calendarContainerService.moveCalendars(this.config, this.selected, base, months);
+    this.calendars = this.calendarService.moveCalendars(this.config, this.selected, base, months);
     this.calendarMove.emit(this.calendars[0].month);
   }
 
   isLeftNavDisabled(month: Moment): boolean {
-    return this.calendarContainerService.isMinMonth(<Moment>this.config.min, month);
+    return this.calendarService.isMinMonth(<Moment>this.config.min, month);
   }
 
   isRightNavDisabled(month: Moment): boolean {
-    return this.calendarContainerService.isMaxMonth(<Moment>this.config.max, month);
+    return this.calendarService.isMaxMonth(<Moment>this.config.max, month);
+  }
+
+  shouldShowMonthSelector(index: number): boolean {
+    return this.calendarService.shouldShowMonthSelector(index, this.config);
   }
 }

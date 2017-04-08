@@ -3,11 +3,12 @@ import {TestBed, inject} from '@angular/core/testing';
 import {CalendarService} from './calendar.service';
 import * as moment from 'moment';
 import {Moment} from 'moment';
+import {UtilsService} from '../common/services/utils/utils.service';
 
-describe('Service: DayPicker', () => {
+describe('Service: CalendarService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [CalendarService]
+      providers: [CalendarService, UtilsService]
     });
   });
 
@@ -97,4 +98,27 @@ describe('Service: DayPicker', () => {
     expect((<Moment>config2.min).isSame(moment('2016-10-25', 'YYYY-MM-DD'), 'day')).toBe(true);
     expect((<Moment>config2.max).isSame(moment('2017-10-25', 'YYYY-MM-DD'), 'day')).toBe(true);
   }));
+
+  it('should check shouldShowMonthSelector method is working when enableMonthSelector is set to false',
+    inject([CalendarService], (service: CalendarService) => {
+      const config1 = service.getConfig({
+        enableMonthSelector: false,
+        calendarsAmount: 3
+      });
+
+      expect(service.shouldShowMonthSelector(0, config1)).toBe(false);
+      expect(service.shouldShowMonthSelector(1, config1)).toBe(false);
+    }));
+
+  it('should check shouldShowMonthSelector method is working when enableMonthSelector is set to true',
+    inject([CalendarService], (service: CalendarService) => {
+      const config1 = service.getConfig({
+        enableMonthSelector: true,
+        calendarsAmount: 3
+      });
+
+      expect(service.shouldShowMonthSelector(0, config1)).toBe(true);
+      expect(service.shouldShowMonthSelector(1, config1)).toBe(false);
+      expect(service.shouldShowMonthSelector(2, config1)).toBe(true);
+    }));
 });

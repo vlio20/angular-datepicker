@@ -12,4 +12,5 @@ export interface ICalendarConfig extends IBaseCalendarConfig {
   monthFormatter?: (date: Moment) => string;
   yearFormat?: string;
   yearFormatter?: (date: Moment) => string;
+  enableMonthSelector?: boolean;
 }

@@ -81,4 +81,12 @@ export class CalendarService {
   isMaxMonth(max: Moment, month): boolean {
     return max ? month.clone().add(1, 'month').isAfter(max, 'month') : false;
   }
+
+  shouldShowMonthSelector(index: number, config: ICalendarConfig): boolean {
+    if (!config.enableMonthSelector) {
+      return false;
+    } else {
+      return index === 0 || index === (config.calendarsAmount -1);
+    }
+  }
 }

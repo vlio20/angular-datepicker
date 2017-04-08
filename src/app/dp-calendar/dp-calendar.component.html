@@ -9,7 +9,12 @@
             [disabled]="isLeftNavDisabled(calendar.month)"
             (click)="moveCalendars(calendars[0].month, showMonthCalendar ? -12 : -1)">  &lt;
     </button>
-    <button class="dp-day-calendar" (click)="showMonthCalendar = !showMonthCalendar">
+    <span class="dp-day-calendar" *ngIf="!shouldShowMonthSelector(index)">
+      {{getMonthToDisplay(calendar.month)}}
+    </span>
+    <button class="dp-day-calendar"
+            *ngIf="shouldShowMonthSelector(index)"
+            (click)="showMonthCalendar = !showMonthCalendar">
       {{showMonthCalendar ? getYearToDisplay(calendar.month) : getMonthToDisplay(calendar.month)}}
     </button>
     <button class="dp-calendar-nav-right"
