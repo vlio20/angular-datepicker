@@ -365,6 +365,31 @@
       </div>
     </div>
 
+    <div class="dp-option">
+      <span class="dp-option-header">
+        Enable month selector (enableMonthSelector):
+      </span>
+      <div class="dp-option-playground">
+        <label>Enabled
+          <input id="enableMonthSelector" type="radio" [(ngModel)]="config.enableMonthSelector" name="enableMonthSelector" [value]="true"
+                 (ngModelChange)="configChanged()">
+        </label>
+        <label>Disabled
+          <input id="disableMonthSelector" type="radio" [(ngModel)]="config.enableMonthSelector" name="enableMonthSelector" [value]="false"
+                 (ngModelChange)="configChanged()">
+        </label>
+      </div>
+    </div>
+
+    <div class="dp-option">
+      <span class="dp-option-header">
+        Year Format (yearFormat):
+      </span>
+      <div class="dp-option-playground">
+        <input type="text" [(ngModel)]="config.yearFormat" (change)="configChanged()">
+      </div>
+    </div>
+
   </div>
 
   <div class="dp-api">

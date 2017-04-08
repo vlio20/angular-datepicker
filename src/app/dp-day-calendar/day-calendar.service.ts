@@ -101,10 +101,10 @@ export class CalendarMonthService {
       return config.isDisabledCallback(day.date);
     }
 
-    if (config.min && day.date.isBefore(config.min, 'd')) {
+    if (config.min && day.date.isBefore(config.min, 'day')) {
       return true;
     }
 
-    return !!(config.max && day.date.isAfter(config.max, 'd'));
+    return !!(config.max && day.date.isAfter(config.max, 'day'));
   }
 }

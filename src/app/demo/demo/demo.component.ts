@@ -49,7 +49,9 @@ export class DemoComponent {
     drops: 'down',
     opens: 'right',
     showNearMonthDays: true,
-    showWeekNumbers: false
+    showWeekNumbers: false,
+    enableMonthSelector: true,
+    yearFormat: 'YYYY'
   };
   isAtTop: boolean = true;
 
