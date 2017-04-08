@@ -17,7 +17,7 @@ export class MonthCalendarService {
         const month = {
           date: index.clone(),
           selected: index.isSame(selected, 'month'),
-          currentMonth: index.isSame(moment(), 'year')
+          currentMonth: index.isSame(moment(), 'month')
         };
 
         index.add(1, 'month');

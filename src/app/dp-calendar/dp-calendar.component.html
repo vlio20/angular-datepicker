@@ -28,7 +28,7 @@
 
   <dp-month-calendar *ngIf="showMonthCalendar && (start || end)"
                      [config]="calendar"
-                     [selected]="selected"
+                     [selected]="selected[0]"
                      (monthClick)="monthSelected(index, $event)">
   </dp-month-calendar>
 </div>
