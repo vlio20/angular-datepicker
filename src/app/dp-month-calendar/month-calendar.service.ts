@@ -3,6 +3,7 @@ import * as moment from 'moment';
 import {Moment} from 'moment';
 import {UtilsService} from '../common/services/utils/utils.service';
 import {IMonth} from './month.model';
+import {ICalendarMonthConfig} from '../dp-day-calendar/day-calendar-config.model';
 
 @Injectable()
 export class MonthCalendarService {
@@ -24,5 +25,13 @@ export class MonthCalendarService {
         return month;
       });
     });
+  }
+
+  isDateDisabled(month: IMonth, config: ICalendarMonthConfig) {
+    if (config.min && month.date.isBefore(config.min, 'month')) {
+      return true;
+    }
+
+    return !!(config.max && month.date.isAfter(config.max, 'month'));
   }
 }

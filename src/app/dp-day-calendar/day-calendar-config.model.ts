@@ -10,7 +10,7 @@ export interface IBaseCalendarConfig {
 }
 
 export interface ICalendarMonthConfig extends IBaseCalendarConfig {
-  month: Moment;
+  month?: Moment;
   min?: Moment;
   max?: Moment;
 }

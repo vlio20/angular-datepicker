@@ -24,8 +24,8 @@ export class MonthCalendarComponent implements OnInit {
     this.yearMonths = this.monthCalendarService.generateYear(this.config.month, this.selected);
   }
 
-  isDisabledDay(month: IMonth): boolean {
-    return false;
+  isDisabledMonth(month: IMonth): boolean {
+    return this.monthCalendarService.isDateDisabled(month, this.config);
   }
 
   monthSelected(month: IMonth) {

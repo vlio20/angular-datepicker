@@ -31,8 +31,7 @@ describe('Service: Calendar', () => {
       expect(service.generateDaysMap('we'))
         .toEqual({'we': 0, 'th': 1, 'fr': 2, 'sa': 3, 'su': 4, 'mo': 5, 'tu': 6});
     }
-  ))
-  ;
+  ));
 
   it('should check the generateMonthArray method', inject([CalendarMonthService],
     (service: CalendarMonthService) => {
