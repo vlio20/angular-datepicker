@@ -1,5 +1,6 @@
 import {DemoPage} from './app.po';
 import {protractor, browser} from 'protractor';
+import moment = require('moment');
 
 describe('ng2-date-picker App', () => {
   let page: DemoPage;
@@ -129,5 +130,18 @@ describe('ng2-date-picker App', () => {
     page.datePickerInput.click();
     page.navHeaderBtn.click();
     expect(page.navHeaderBtn.getText()).toEqual('17');
+  });
+
+  it('should check if go to current location btn is working as expected', () => {
+    expect(page.currentLocationBtn.isDisplayed()).toBe(false);
+    page.datePickerInput.sendKeys('08-04-2017');
+    expect(page.navHeaderBtn.getText()).toEqual(moment('08-04-2017', 'DD-MM-YYYY').format('MMM, YYYY'));
+    page.datePickerInput.click();
+    expect(page.currentLocationBtn.isDisplayed()).toBe(true);
+    page.currentLocationBtn.click();
+    expect(page.navHeaderBtn.getText()).toEqual(moment().format('MMM, YYYY'));
+
+    page.hideGoToCurrentRadio.click();
+    expect(page.currentLocationBtn.isPresent()).toBe(false);
   });
 });
