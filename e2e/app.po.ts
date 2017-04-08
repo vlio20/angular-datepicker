@@ -23,6 +23,7 @@ export class DemoPage {
   navHeaderBtn = $(`${this.popupSelector} .dp-nav-header-btn`);
   currentMonthCalendarBtn = $(`${this.popupSelector} .dp-current-month`);
   disableMonthSelector = $('#disableMonthSelector');
+  yearFormat = $('#yearFormat');
 
   openBtn = $('#openBtn');
 

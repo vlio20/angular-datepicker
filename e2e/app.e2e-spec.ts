@@ -107,4 +107,20 @@ describe('ng2-date-picker App', () => {
     page.disableMonthSelector.click();
     expect(page.navHeaderBtn.isPresent()).toBe(false);
   });
+
+  it('should change year format', () => {
+    page.datePickerInput.sendKeys('08-04-2017');
+    page.datePickerInput.click();
+    page.navHeaderBtn.click();
+    expect(page.navHeaderBtn.getText()).toEqual('2017');
+
+    page.clickOnBody();
+
+    page.yearFormat.clear();
+    page.yearFormat.sendKeys('YY');
+
+    page.datePickerInput.click();
+    page.navHeaderBtn.click();
+    expect(page.navHeaderBtn.getText()).toEqual('17');
+  });
 });
