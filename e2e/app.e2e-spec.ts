@@ -73,6 +73,13 @@ describe('ng2-date-picker App', () => {
     expect(page.weekNumbers.getText()).toEqual(['8', '9', '10', '11', '12', '13']);
   });
 
+  it('should hide calendar on tab (blur)', () => {
+    page.datePickerInput.click();
+    expect(page.datePickerPopup.isDisplayed()).toBe(true);
+    page.datePickerInput.sendKeys(protractor.Key.TAB);
+    expect(page.datePickerPopup.isDisplayed()).toBe(false);
+  });
+
   it('should disable/enable month selection', () => {
     page.datePickerInput.sendKeys('08-04-2017');
     page.datePickerInput.click();
