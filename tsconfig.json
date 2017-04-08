@@ -1,24 +1,27 @@
 {
-  "compileOnSave": false,
   "compilerOptions": {
-    "outDir": "./bin",
+    "target": "es5",
+    "outDir": "bin",
     "sourceMap": true,
     "declaration": true,
     "moduleResolution": "node",
-    "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
     "skipLibCheck": true,
-    "target": "es5",
     "lib": [
-      "es2016",
+      "es2015",
       "dom"
     ]
   },
   "include": [
-    "src/app/dp-date-picker.module.ts"
+    "prebuild/app/index.ts"
   ],
   "exclude": [
     "node_modules",
     "**/*.spec.ts"
-  ]
+  ],
+  "angularCompilerOptions": {
+    "genDir": "aot",
+    "strictMetadataEmit": true
+  }
 }

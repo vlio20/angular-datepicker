@@ -1,20 +1,21 @@
 import {TestBed, inject} from '@angular/core/testing';
-import {CalendarService} from '../../dp-calendar/config/calendar.service';
+import {CalendarService} from '../dp-calendar/calendar.service';
 import {DayPickerService} from './day-picker.service';
 import * as moment from 'moment';
 import {Moment} from 'moment';
+import {UtilsService} from '../common/services/utils/utils.service';
 
 describe('Service: DayPicker', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [DayPickerService, CalendarService]
+      providers: [DayPickerService, CalendarService, UtilsService]
     });
   });
 
   it('should check isDateValid method', inject([DayPickerService], (service: DayPickerService) => {
-    expect(service.isDateValid('13-10-2015', 'DD-MM-YYYY')).toBe(true);
-    expect(service.isDateValid('13-10-2015', 'DD-MM-YY')).toBe(false);
-    expect(service.isDateValid('', 'DD-MM-YY')).toBe(true);
+    expect(DayPickerService.isDateValid('13-10-2015', 'DD-MM-YYYY')).toBe(true);
+    expect(DayPickerService.isDateValid('13-10-2015', 'DD-MM-YY')).toBe(false);
+    expect(DayPickerService.isDateValid('', 'DD-MM-YY')).toBe(true);
   }));
 
   it('should check getConfig method for dates format aspect', inject([DayPickerService],

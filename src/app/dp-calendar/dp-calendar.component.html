@@ -1,22 +1,39 @@
-<div class="dp-calendar-container"
-     *ngFor="let calendar of calendars; let start = first; let end = last">
+<div class="dp-calendar-container {{theme}}"
+     *ngFor="let calendar of calendars;
+        let index = index;
+        let start = first;
+        let end = last">
   <div class="dp-calendar-nav-container">
     <button class="dp-calendar-nav-left"
             *ngIf="start"
             [disabled]="isLeftNavDisabled(calendar.month)"
-            (click)="moveCalendars(calendars[0].month, -1)"> <
+            (click)="moveCalendars(calendars[0].month, showMonthCalendar ? -12 : -1)">  &lt;
     </button>
-    <span class="dp-calendar-month">{{getMonthToDisplay(calendar.month)}}</span>
+    <span class="dp-nav-header" *ngIf="!shouldShowMonthSelector(index)">
+      {{getMonthToDisplay(calendar.month)}}
+    </span>
+    <button class="dp-nav-header dp-nav-header-btn"
+            *ngIf="shouldShowMonthSelector(index)"
+            (click)="showMonthCalendar = !showMonthCalendar">
+      {{showMonthCalendar ? getYearToDisplay(calendar.month) : getMonthToDisplay(calendar.month)}}
+    </button>
     <button class="dp-calendar-nav-right"
             *ngIf="end"
             [disabled]="isRightNavDisabled(calendar.month)"
-            (click)="moveCalendars(calendars[0].month, 1)"> >
+            (click)="moveCalendars(calendars[0].month, showMonthCalendar ? 12 : 1)">  &gt;
     </button>
   </div>
-  <dp-calendar-month
+  <dp-day-calendar
       [selected]="selected"
       [config]="calendar"
       (dayContextMenu)="dayContextMenu.emit($event)"
-      (dayClick)="daySelected($event)">
-  </dp-calendar-month>
+      (dayClick)="daySelected($event)"
+      *ngIf="!showMonthCalendar || (config.calendarsAmount > 2 && !(start || end))">
+  </dp-day-calendar>
+
+  <dp-month-calendar *ngIf="showMonthCalendar && (start || end)"
+                     [config]="calendar"
+                     [selected]="selected[0]"
+                     (monthClick)="monthSelected(index, $event)">
+  </dp-month-calendar>
 </div>

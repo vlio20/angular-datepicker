@@ -1,16 +1,24 @@
-& {
-  @black: #000000;
-  @white: #FFFFFF;
+@import '../common/styles/variables';
+@import '../common/styles/material-theme';
 
+& {
   .dp-calendar-container {
     display: inline-block;
+    vertical-align: top;
   }
 
   .dp-calendar-nav-container {
     position: relative;
     box-sizing: border-box;
     height: 25px;
-    border: 1px solid @black;
+    border: 1px solid @c-black;
+    border-bottom: none;
+  }
+
+  .dp-nav-date-btn {
+    box-sizing: border-box;
+    height: 25px;
+    border: 1px solid @c-black;
     border-bottom: none;
   }
 
@@ -29,87 +37,19 @@
     right: 0;
   }
 
-  .dp-calendar-month {
+  .dp-nav-header {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    font-size: 13px;
   }
-}
 
-& {
-  @deep: ~">>>";
-  @basic-height: 30px;
+  .dp-nav-header-btn {
+    cursor: pointer;
+  }
 
   :host(.dp-material) {
-
-    .dp-calendar-container {
-      background: white;
-
-      &:not(:first-of-type) {
-        border-left: 1px solid #B0AFAF;
-      }
-    }
-
-    .dp-calendar-nav-container {
-      height: @basic-height;
-      border: none;
-    }
-
-    .dp-calendar-nav-left, .dp-calendar-nav-right {
-      border: none;
-      background: white;
-      outline: none;
-      font-size: 16px;
-    }
-
-    .dp-daypicker-input {
-      box-sizing: border-box;
-      height: @basic-height;
-      width: (@basic-height * 7) + 2px;
-      font-size: 13px;
-      outline: none;
-    }
-
-    & @{deep} dp-calendar-month {
-      .dp-calendar-weekday {
-        height: @basic-height - 5px;
-        width: @basic-height;
-        line-height: @basic-height - 5px;
-        background: #E0E0E0;
-        border: none;
-      }
-
-      .dp-calendar-wrapper {
-        border: none;
-      }
-
-      .dp-calendar-day {
-        box-sizing: border-box;
-        height: @basic-height;
-        width: @basic-height;
-        background: white;
-        border-radius: 50%;
-        border: none;
-        outline: none;
-
-        &:hover {
-          background: #E0E0E0;
-        }
-      }
-
-      .dp-selected {
-        background: #106CC8;
-        color: white;
-
-        &:hover {
-          background: #106CC8;
-        }
-      }
-
-      .dp-current-day {
-        border: 1px solid #106CC8;
-      }
-    }
+    .materialTheme();
   }
 }

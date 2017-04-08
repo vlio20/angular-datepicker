@@ -1,5 +1,5 @@
-import {UtilsService} from '../../common/services/utils/utils.service';
-import {ICalendarMonthConfig} from '../../dp-calendar-month/config/calendar-month-config.model';
+import {UtilsService} from '../common/services/utils/utils.service';
+import {ICalendarMonthConfig} from '../dp-day-calendar/day-calendar-config.model';
 import {ICalendarConfig} from './calendar-config.model';
 import {Injectable} from '@angular/core';
 import * as moment from 'moment';
@@ -11,6 +11,8 @@ export class CalendarService {
     firstDayOfWeek: 'su',
     calendarsAmount: 1,
     monthFormat: 'MMM, YYYY',
+    yearFormat: 'YYYY',
+    showNearMonthDays: true,
     weekdayNames: {
       su: 'sun',
       mo: 'mon',
@@ -21,6 +23,9 @@ export class CalendarService {
       sa: 'sat'
     },
   };
+
+  constructor(private utilsService: UtilsService) {
+  }
 
   private formatValues(config: ICalendarConfig): void {
     const {format, min, max} = config;
@@ -43,14 +48,17 @@ export class CalendarService {
 
   generateCalendars(config: ICalendarConfig, selected: Moment[], month?: Moment): ICalendarMonthConfig[] {
     const base = (month && month.clone()) || (selected && selected[0] && selected[0].clone()) || moment();
-    return UtilsService.createArray(config.calendarsAmount).map((n: number, i: number) => ({
-      month: base.clone().add(i, 'month'),
-      selected: selected,
-      firstDayOfWeek: config.firstDayOfWeek,
-      weekdayNames: config.weekdayNames,
-      min: <Moment>config.min,
-      max: <Moment>config.max
-    }));
+    return this.utilsService.createArray(config.calendarsAmount)
+      .map((n: number, i: number) => ({
+        month: base.clone().add(i, 'month'),
+        selected: selected,
+        firstDayOfWeek: config.firstDayOfWeek,
+        weekdayNames: config.weekdayNames,
+        min: <Moment>config.min,
+        max: <Moment>config.max,
+        showNearMonthDays: config.showNearMonthDays,
+        showWeekNumbers: config.showWeekNumbers
+      }));
   }
 
   isDateValid(date: string, format: string): boolean {
@@ -71,5 +79,13 @@ export class CalendarService {
 
   isMaxMonth(max: Moment, month): boolean {
     return max ? month.clone().add(1, 'month').isAfter(max, 'month') : false;
+  }
+
+  shouldShowMonthSelector(index: number, config: ICalendarConfig): boolean {
+    if (!config.enableMonthSelector) {
+      return false;
+    } else {
+      return index === 0 || index === (config.calendarsAmount - 1);
+    }
   }
 }

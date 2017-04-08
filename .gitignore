@@ -3,6 +3,8 @@
 # compiled output
 /tmp
 /bin
+/prebuild
+/aot
 
 # dependencies
 /node_modules

@@ -3,11 +3,12 @@ import {TestBed, inject} from '@angular/core/testing';
 import {CalendarService} from './calendar.service';
 import * as moment from 'moment';
 import {Moment} from 'moment';
+import {UtilsService} from '../common/services/utils/utils.service';
 
-describe('Service: DayPicker', () => {
+describe('Service: CalendarService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [CalendarService]
+      providers: [CalendarService, UtilsService]
     });
   });
 
@@ -39,7 +40,8 @@ describe('Service: DayPicker', () => {
     expect(calendars3_1[0].month.isSame(moment('13-10-2015', 'DD-MM-YYYY'), 'month')).toBe(true);
     expect(calendars3_1[1].month.isSame(moment('13-11-2015', 'DD-MM-YYYY'), 'month')).toBe(true);
 
-    const calendars4 = service.generateCalendars({calendarsAmount: 2}, [moment()], moment('13-10-2015', 'DD-MM-YYYY'));
+    const calendars4 = service
+      .generateCalendars({calendarsAmount: 2}, [moment()], moment('13-10-2015', 'DD-MM-YYYY'));
     expect(calendars4.length).toBe(2);
     expect(calendars4[0].month.isSame(moment('13-10-2015', 'DD-MM-YYYY'), 'month')).toBe(true);
     expect(calendars4[1].month.isSame(moment('13-11-2015', 'DD-MM-YYYY'), 'month')).toBe(true);
@@ -79,22 +81,46 @@ describe('Service: DayPicker', () => {
     expect(service.isMinMonth(null, moment())).toBe(false);
   }));
 
-  it('should check getConfig method for dates format aspect', inject([CalendarService], (service: CalendarService) => {
-    const config1 = service.getConfig({
-      min: '2016-10-25',
-      max: '2017-10-25',
-      format: 'YYYY-MM-DD'
-    });
+  it('should check getConfig method for dates format aspect',
+    inject([CalendarService], (service: CalendarService) => {
+      const config1 = service.getConfig({
+        min: '2016-10-25',
+        max: '2017-10-25',
+        format: 'YYYY-MM-DD'
+      });
 
-    expect((<Moment>config1.min).isSame(moment('2016-10-25', 'YYYY-MM-DD'), 'day')).toBe(true);
-    expect((<Moment>config1.max).isSame(moment('2017-10-25', 'YYYY-MM-DD'), 'day')).toBe(true);
+      expect((<Moment>config1.min).isSame(moment('2016-10-25', 'YYYY-MM-DD'), 'day')).toBe(true);
+      expect((<Moment>config1.max).isSame(moment('2017-10-25', 'YYYY-MM-DD'), 'day')).toBe(true);
 
-    const config2 = service.getConfig({
-      min: moment('2016-10-25', 'YYYY-MM-DD'),
-      max: moment('2017-10-25', 'YYYY-MM-DD')
-    });
+      const config2 = service.getConfig({
+        min: moment('2016-10-25', 'YYYY-MM-DD'),
+        max: moment('2017-10-25', 'YYYY-MM-DD')
+      });
 
-    expect((<Moment>config2.min).isSame(moment('2016-10-25', 'YYYY-MM-DD'), 'day')).toBe(true);
-    expect((<Moment>config2.max).isSame(moment('2017-10-25', 'YYYY-MM-DD'), 'day')).toBe(true);
-  }));
+      expect((<Moment>config2.min).isSame(moment('2016-10-25', 'YYYY-MM-DD'), 'day')).toBe(true);
+      expect((<Moment>config2.max).isSame(moment('2017-10-25', 'YYYY-MM-DD'), 'day')).toBe(true);
+    }));
+
+  it('should check shouldShowMonthSelector method is working when enableMonthSelector is set to false',
+    inject([CalendarService], (service: CalendarService) => {
+      const config1 = service.getConfig({
+        enableMonthSelector: false,
+        calendarsAmount: 3
+      });
+
+      expect(service.shouldShowMonthSelector(0, config1)).toBe(false);
+      expect(service.shouldShowMonthSelector(1, config1)).toBe(false);
+    }));
+
+  it('should check shouldShowMonthSelector method is working when enableMonthSelector is set to true',
+    inject([CalendarService], (service: CalendarService) => {
+      const config1 = service.getConfig({
+        enableMonthSelector: true,
+        calendarsAmount: 3
+      });
+
+      expect(service.shouldShowMonthSelector(0, config1)).toBe(true);
+      expect(service.shouldShowMonthSelector(1, config1)).toBe(false);
+      expect(service.shouldShowMonthSelector(2, config1)).toBe(true);
+    }));
 });

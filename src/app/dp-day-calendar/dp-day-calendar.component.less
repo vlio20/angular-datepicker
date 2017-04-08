@@ -1,0 +1,52 @@
+@import '../common/styles/variables';
+
+& {
+  :host {
+    display: inline-block;
+  }
+
+  .dp-calendar-wrapper {
+    box-sizing: border-box;
+    border: 1px solid @c-black;
+
+    .dp-calendar-weekday:first-child {
+      border-left: none;
+    }
+  }
+
+  .dp-calendar-weekday {
+    box-sizing: border-box;
+    display: inline-block;
+    width: @basic-height;
+    text-align: center;
+    border-left: 1px solid @c-black;
+    border-bottom: 1px solid @c-black;
+  }
+
+  .dp-calendar-day {
+    box-sizing: border-box;
+    width: @basic-height;
+    height: @basic-height;
+    cursor: pointer;
+  }
+
+  .dp-selected {
+    background: @c-primary;
+    color: @c-white;
+  }
+
+  .dp-prev-month, .dp-next-month {
+    opacity: 0.5;
+  }
+
+  .dp-hide-near-month {
+    .dp-prev-month, .dp-next-month {
+      visibility: hidden;
+    }
+  }
+
+  .dp-week-number {
+    position: absolute;
+    font-size: 9px;
+  }
+}

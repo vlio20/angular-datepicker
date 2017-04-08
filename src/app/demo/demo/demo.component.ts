@@ -1,7 +1,7 @@
 import {Component, ViewChild, HostListener} from '@angular/core';
 import {DpDayPickerComponent} from '../../dp-day-picker/dp-day-picker.component';
 import {Moment} from 'moment';
-import {IDayPickerConfig} from '../../dp-day-picker/service/day-picker-config.model';
+import {IDayPickerConfig} from '../../dp-day-picker/day-picker-config.model';
 import debounce from '../../common/decorators/decorators';
 
 @Component({
@@ -31,9 +31,11 @@ export class DemoComponent {
     calendarsAmount: 1,
     format: 'DD-MM-YYYY',
     monthFormat: 'MMM, YYYY',
+    disableKeypress: false,
     allowMultiSelect: false,
     closeOnSelect: true,
     closeOnSelectDelay: 100,
+    onOpenDelay: 0,
     userValueType: 'string',
     weekdayNames: {
       su: 'sun',
@@ -46,7 +48,12 @@ export class DemoComponent {
     },
     appendTo: document.body,
     drops: 'down',
-    opens: 'right'
+    opens: 'right',
+    showNearMonthDays: true,
+    showWeekNumbers: false,
+    enableMonthSelector: true,
+    yearFormat: 'YYYY',
+    showGoToCurrent: true
   };
   isAtTop: boolean = true;
 

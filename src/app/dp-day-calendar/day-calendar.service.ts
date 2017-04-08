@@ -1,14 +1,17 @@
 import {Injectable} from '@angular/core';
 import * as moment from 'moment';
 import {Moment} from 'moment';
-import {WeekDays} from '../../common/types/week-days.type';
-import {UtilsService} from '../../common/services/utils/utils.service';
-import {ICalendarDay} from '../config/day.model';
-import {ICalendarMonthConfig} from '../config/calendar-month-config.model';
+import {WeekDays} from '../common/types/week-days.type';
+import {UtilsService} from '../common/services/utils/utils.service';
+import {ICalendarDay} from './day.model';
+import {ICalendarMonthConfig} from './day-calendar-config.model';
 
 @Injectable()
 export class CalendarMonthService {
   readonly DAYS = ['su', 'mo', 'tu', 'we', 'th', 'fr', 'sa'];
+
+  constructor(private utilsService: UtilsService) {
+  }
 
   generateDaysIndexMap(firstDayOfWeek: WeekDays) {
     const firstDayIndex = this.DAYS.indexOf(firstDayOfWeek);
@@ -28,12 +31,12 @@ export class CalendarMonthService {
     }, <{[key: number]: string}>{});
   }
 
-  generateMonthArray(firstDayOfWeek: WeekDays,
-                     dayInMonth: Moment,
+  generateMonthArray(config: ICalendarMonthConfig,
                      selectedDays: Moment[] = null): ICalendarDay[][] {
-    const monthArray: ICalendarDay[][] = [];
+    const dayInMonth = config.month;
+    let monthArray: ICalendarDay[][] = [];
     const firstDayOfMonth = dayInMonth.clone().startOf('month');
-    const firstDayOfWeekIndex = this.DAYS.indexOf(firstDayOfWeek);
+    const firstDayOfWeekIndex = this.DAYS.indexOf(config.firstDayOfWeek);
 
     const firstDayOfBoard = firstDayOfMonth;
     while (firstDayOfBoard.day() !== firstDayOfWeekIndex) {
@@ -41,7 +44,7 @@ export class CalendarMonthService {
     }
 
     const current = firstDayOfBoard.clone();
-    const daysOfCalendar: ICalendarDay[] = UtilsService.createArray(42).reduce((array: ICalendarDay[]) => {
+    const daysOfCalendar: ICalendarDay[] = this.utilsService.createArray(42).reduce((array: ICalendarDay[]) => {
       array.push({
         date: current.clone(),
         selected: (selectedDays ? selectedDays
@@ -65,7 +68,19 @@ export class CalendarMonthService {
       monthArray[weekIndex].push(day);
     });
 
+    if (!config.showNearMonthDays) {
+      monthArray = this.removeNearMonthWeeks(dayInMonth, monthArray);
+    }
+
     return monthArray;
+  }
+
+  private removeNearMonthWeeks(currentMonth: Moment, monthArray: ICalendarDay[][]): ICalendarDay[][] {
+    if (monthArray[monthArray.length - 1].find((day) => day.date.isSame(currentMonth, 'month'))) {
+      return monthArray;
+    } else {
+      return monthArray.slice(0, -1);
+    }
   }
 
   generateWeekdays(firstDayOfWeek: WeekDays, weekdayNames: {[key: string]: string}): string[] {
@@ -86,10 +101,10 @@ export class CalendarMonthService {
       return config.isDisabledCallback(day.date);
     }
 
-    if (config.min && day.date.isBefore(config.min, 'd')) {
+    if (config.min && day.date.isBefore(config.min, 'day')) {
       return true;
     }
 
-    return !!(config.max && day.date.isAfter(config.max, 'd'));
+    return !!(config.max && day.date.isAfter(config.max, 'day'));
   }
 }

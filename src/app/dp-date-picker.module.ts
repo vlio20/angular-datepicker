@@ -2,28 +2,31 @@ import {NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {CommonModule} from '@angular/common';
 import {DpDayPickerComponent} from './dp-day-picker/dp-day-picker.component';
-import {DpCalendarMonthComponent} from './dp-calendar-month/dp-calendar-month.component';
-import {DpCalendarComponent} from './dp-calendar/dp-calendar.component';
+import {DayCalendarComponent} from './dp-day-calendar/dp-day-calendar.component';
+import {CalendarComponent} from './dp-calendar/dp-calendar.component';
 import {DomHelper} from './common/services/dom-appender/dom-appender.service';
+import { MonthCalendarComponent } from './dp-month-calendar/dp-month-calendar.component';
+import {UtilsService} from './common/services/utils/utils.service';
 export {DpDayPickerComponent} from './dp-day-picker/dp-day-picker.component'
-export {DpCalendarMonthComponent} from './dp-calendar-month/dp-calendar-month.component';
-export {DpCalendarComponent} from './dp-calendar/dp-calendar.component';
+export {DayCalendarComponent} from './dp-day-calendar/dp-day-calendar.component';
+export {CalendarComponent} from './dp-calendar/dp-calendar.component';
 
 @NgModule({
   providers: [
-    DomHelper
+    DomHelper,
+    UtilsService
   ],
   declarations: [
     DpDayPickerComponent,
-    DpCalendarMonthComponent,
-    DpCalendarComponent
+    DayCalendarComponent,
+    CalendarComponent,
+    MonthCalendarComponent
   ],
   imports: [
     CommonModule,
     FormsModule
   ],
-  exports: [DpDayPickerComponent, DpCalendarMonthComponent, DpCalendarComponent]
+  exports: [DpDayPickerComponent, DayCalendarComponent, CalendarComponent]
 })
-
 export class DpDatePickerModule {
 }
