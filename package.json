@@ -10,7 +10,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "build-demo": "rm -rf dist/ && ng build --prod --bh /ng2-date-picker/",
+    "build-demo": "rm -rf dist/ && ng build --prod --bh /angular-datepicker/",
     "build-prod": "node build.js && ngc && cp package.json bin",
     "pack": "cd bin && npm pack"
   },
