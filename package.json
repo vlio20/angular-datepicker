@@ -13,7 +13,7 @@
     "e2e": "ng e2e",
     "build:demo": "rm -rf dist/ && ng build --prod --bh /angular-datepicker/",
     "build:prod": "node build.js && ngc && cp package.json bin",
-    "release": "npm run build:prod && cd bin && npm publish",
+    "release": "npm run build:prod && npm publish bin",
     "pack": "cd bin && npm pack"
   },
   "repository": {
