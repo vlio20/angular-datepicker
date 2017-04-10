@@ -1,7 +1,7 @@
 {
   "name": "ng2-date-picker",
   "author": "Vlad Ioffe",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "license": "MIT",
   "main": "index.js",
   "scripts": {
@@ -11,8 +11,9 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "build-demo": "rm -rf dist/ && ng build --prod --bh /angular-datepicker/",
-    "build-prod": "node build.js && ngc && cp package.json bin",
+    "build:demo": "rm -rf dist/ && ng build --prod --bh /angular-datepicker/",
+    "build:prod": "node build.js && ngc && cp package.json bin",
+    "release": "npm run build:prod && cd bin && npm publish",
     "pack": "cd bin && npm pack"
   },
   "repository": {
