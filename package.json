@@ -1,5 +1,6 @@
 {
   "name": "ng2-date-picker",
+  "author": "Vlad Ioffe",
   "version": "1.0.0",
   "license": "MIT",
   "main": "index.js",
@@ -14,6 +15,10 @@
     "build-prod": "node build.js && ngc && cp package.json bin",
     "pack": "cd bin && npm pack"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vlio20/angular-datepicker.git"
+  },
   "private": false,
   "keywords": [
     "angular2",
@@ -23,7 +28,8 @@
     "ng2-datepicker",
     "ng-datepicker",
     "angular",
-    "picker"
+    "picker",
+    "angular-datepicker"
   ],
   "dependencies": {
     "moment": "^2.17.1"
