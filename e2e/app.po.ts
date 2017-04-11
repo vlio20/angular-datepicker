@@ -28,6 +28,9 @@ export class DemoPage {
   hideGoToCurrentRadio = $('#hideGoToCurrent');
   pickerEnabledRadio = $('#inputEnabledRadio');
   pickerDisabledRadio = $('#inputDisabledRadio');
+  enableRequiredValidationRadio = $('#enableRequiredRadio');
+  disableRequiredValidationRadio = $('#disableRequiredRadio');
+  requiredValidationMsg = $('#requiredValidation');
 
   openBtn = $('#openBtn');
 

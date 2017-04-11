@@ -152,4 +152,13 @@ describe('ng2-date-picker App', () => {
     page.pickerEnabledRadio.click();
     expect(page.datePickerInput.getAttribute('disabled')).toBe(null);
   });
+
+  it('should check if enable/diable required validation is working', () => {
+    page.datePickerInput.clear();
+    expect(page.requiredValidationMsg.isPresent()).toBe(false);
+    page.enableRequiredValidationRadio.click();
+    expect(page.requiredValidationMsg.getText()).toEqual('required');
+    page.disableRequiredValidationRadio.click();
+    expect(page.requiredValidationMsg.isPresent()).toBe(false);
+  });
 });

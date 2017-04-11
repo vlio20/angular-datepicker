@@ -40,7 +40,7 @@
                        [config]="config"
                        [theme]="material ? 'dp-material' : ''">
         </dp-day-picker>
-        <div *ngIf="dateItem.errors && dateItem.errors.required">required</div>
+        <div id="requiredValidation" *ngIf="dateItem.errors && dateItem.errors.required">required</div>
         <div *ngIf="dateItem.errors && dateItem.errors.format">format invalid</div>
         <div *ngIf="dateItem.errors && dateItem.errors.minDate">minDate invalid</div>
         <div *ngIf="dateItem.errors && dateItem.errors.maxDate">maxDate invalid</div>
@@ -94,10 +94,10 @@
       </span>
       <div class="dp-option-playground">
         <label>Required
-          <input type="radio" [(ngModel)]="required" name="required" [value]="true">
+          <input id="enableRequiredRadio" type="radio" [(ngModel)]="required" name="required" [value]="true">
         </label>
         <label>Not Required
-          <input type="radio" [(ngModel)]="required" name="required" [value]="false">
+          <input id="disableRequiredRadio" type="radio" [(ngModel)]="required" name="required" [value]="false">
         </label>
       </div>
     </div>
