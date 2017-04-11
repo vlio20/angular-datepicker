@@ -40,6 +40,7 @@ export class DemoPage {
   placeholderInput = $('#placeholderInput');
   firstDayOfWeekMonday = element(by.cssContainingText('#firstDayOfWeekSelect option', 'mo'));
   amountOfCalendarsInput = $('#amountOfCalendarsInput');
+  monthFormatInput = $('#monthFormatInput');
 
   openBtn = $('#openBtn');
 

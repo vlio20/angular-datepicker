@@ -1,6 +1,6 @@
 import {DemoPage} from './app.po';
 import {protractor, browser} from 'protractor';
-import moment = require('moment');
+import * as moment from 'moment';
 
 describe('ng2-date-picker App', () => {
   let page: DemoPage;
@@ -215,5 +215,15 @@ describe('ng2-date-picker App', () => {
     page.amountOfCalendarsInput.sendKeys(2);
     page.datePickerInput.click();
     expect(page.calendarContainer.count()).toEqual(2);
+  });
+
+  it('should check month format', () => {
+    page.datePickerInput.click();
+    expect(page.navHeader.getText()).toEqual(moment().format('MMM, YYYY'));
+    page.clickOnBody();
+    page.monthFormatInput.clear();
+    page.monthFormatInput.sendKeys('MM-YYYY');
+    page.datePickerInput.click();
+    expect(page.navHeader.getText()).toEqual(moment().format('MM-YYYY'));
   });
 });
