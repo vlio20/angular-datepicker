@@ -12,6 +12,7 @@ export class DemoPage {
   navLeftBtn = $(`${this.popupSelector} .dp-calendar-nav-left`);
   navRightBtn = $(`${this.popupSelector} .dp-calendar-nav-right`);
   weekDayNames = $$(`${this.popupSelector} .dp-weekdays`);
+  calendarContainer = $$(`${this.popupSelector} .dp-calendar-container `);
   currentLocationBtn = $(`#datePicker .dp-current-location-btn`);
   themeOnRadio = $('#themeOn');
   themeOffRadio = $('#themeOff');
@@ -38,6 +39,7 @@ export class DemoPage {
   maxDateValidationMsg = $('#maxDateValidation');
   placeholderInput = $('#placeholderInput');
   firstDayOfWeekMonday = element(by.cssContainingText('#firstDayOfWeekSelect option', 'mo'));
+  amountOfCalendarsInput = $('#amountOfCalendarsInput');
 
   openBtn = $('#openBtn');
 

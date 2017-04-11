@@ -206,4 +206,14 @@ describe('ng2-date-picker App', () => {
     page.datePickerInput.click();
     expect(page.weekDayNames.getText()).toEqual(['montuewedthufrisatsun']);
   });
+
+  it('should check amount of calendars', () => {
+    page.datePickerInput.click();
+    expect(page.calendarContainer.count()).toEqual(1);
+    page.clickOnBody();
+    page.amountOfCalendarsInput.clear();
+    page.amountOfCalendarsInput.sendKeys(2);
+    page.datePickerInput.click();
+    expect(page.calendarContainer.count()).toEqual(2);
+  });
 });
