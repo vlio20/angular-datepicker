@@ -144,4 +144,12 @@ describe('ng2-date-picker App', () => {
     page.hideGoToCurrentRadio.click();
     expect(page.currentLocationBtn.isPresent()).toBe(false);
   });
+
+  it('should check if enable/diable is working', () => {
+    expect(page.datePickerInput.getAttribute('disabled')).toBe(null);
+    page.pickerDisabledRadio.click();
+    expect(page.datePickerInput.getAttribute('disabled')).toEqual('true');
+    page.pickerEnabledRadio.click();
+    expect(page.datePickerInput.getAttribute('disabled')).toBe(null);
+  });
 });
