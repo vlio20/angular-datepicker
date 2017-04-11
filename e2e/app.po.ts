@@ -1,4 +1,4 @@
-import {browser, $, $$} from 'protractor';
+import {browser, $, $$, element, by} from 'protractor';
 
 export class DemoPage {
   private popupSelector = 'body > div .dp-popup';
@@ -11,6 +11,7 @@ export class DemoPage {
   calendarDays = $$(`${this.popupSelector} .dp-calendar-day`);
   navLeftBtn = $(`${this.popupSelector} .dp-calendar-nav-left`);
   navRightBtn = $(`${this.popupSelector} .dp-calendar-nav-right`);
+  weekDayNames = $$(`${this.popupSelector} .dp-weekdays`);
   currentLocationBtn = $(`#datePicker .dp-current-location-btn`);
   themeOnRadio = $('#themeOn');
   themeOffRadio = $('#themeOff');
@@ -36,6 +37,7 @@ export class DemoPage {
   maxDateValidationPickerInput = $('#maxDatePicker input');
   maxDateValidationMsg = $('#maxDateValidation');
   placeholderInput = $('#placeholderInput');
+  firstDayOfWeekMonday = element(by.cssContainingText('#firstDayOfWeekSelect option', 'mo'));
 
   openBtn = $('#openBtn');
 

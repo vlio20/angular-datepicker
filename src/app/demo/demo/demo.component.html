@@ -147,7 +147,7 @@
         First Day of The week (firstDayOfWeek):
       </span>
       <div class="dp-option-playground">
-        <select [(ngModel)]="config.firstDayOfWeek" (change)="configChanged()">
+        <select id="firstDayOfWeekSelect" [(ngModel)]="config.firstDayOfWeek" (change)="configChanged()">
           <option *ngFor="let day of DAYS" [value]="day"> {{day}}</option>
         </select>
       </div>

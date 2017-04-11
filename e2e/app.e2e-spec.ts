@@ -197,4 +197,13 @@ describe('ng2-date-picker App', () => {
     page.placeholderInput.sendKeys('bla');
     expect(page.datePickerInput.getAttribute('placeholder')).toEqual('bla');
   });
+
+  it('should check the first day of the week', () => {
+    page.datePickerInput.click();
+    expect(page.weekDayNames.getText()).toEqual(['sunmontuewedthufrisat']);
+    page.clickOnBody();
+    page.firstDayOfWeekMonday.click();
+    page.datePickerInput.click();
+    expect(page.weekDayNames.getText()).toEqual(['montuewedthufrisatsun']);
+  });
 });
