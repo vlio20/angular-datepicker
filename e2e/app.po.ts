@@ -26,6 +26,8 @@ export class DemoPage {
   disableMonthSelector = $('#disableMonthSelector');
   yearFormat = $('#yearFormat');
   hideGoToCurrentRadio = $('#hideGoToCurrent');
+  pickerEnabledRadio = $('#inputEnabledRadio');
+  pickerDisabledRadio = $('#inputDisabledRadio');
 
   openBtn = $('#openBtn');
 

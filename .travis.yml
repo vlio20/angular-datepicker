@@ -29,5 +29,5 @@ before_script:
 - npm run e2e
 
 script:
-- npm run build-demo
-- npm run build-prod
+- npm run build:demo
+- npm run build:prod
