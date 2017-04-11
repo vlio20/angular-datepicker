@@ -191,4 +191,10 @@ describe('ng2-date-picker App', () => {
     page.maxDateValidationPickerInput.sendKeys('12-04-2017');
     expect(page.maxDateValidationMsg.isPresent()).toBe(false);
   });
+
+  it('should check that placeholder attribute is working', () => {
+    page.placeholderInput.clear();
+    page.placeholderInput.sendKeys('bla');
+    expect(page.datePickerInput.getAttribute('placeholder')).toEqual('bla');
+  });
 });
