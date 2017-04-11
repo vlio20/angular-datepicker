@@ -31,6 +31,8 @@ export class DemoPage {
   enableRequiredValidationRadio = $('#enableRequiredRadio');
   disableRequiredValidationRadio = $('#disableRequiredRadio');
   requiredValidationMsg = $('#requiredValidation');
+  minDateValidationPickerInput = $('#minDatePicker input');
+  minDateValidationMsg = $('#minDateValidation');
 
   openBtn = $('#openBtn');
 

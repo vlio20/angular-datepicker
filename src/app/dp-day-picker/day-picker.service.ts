@@ -13,6 +13,7 @@ export class DayPickerService {
   private defaultConfig: IDayPickerConfig = {
     closeOnSelect: true,
     closeOnSelectDelay: 100,
+    format: 'DD-MM-YYYY',
     onOpenDelay: 0,
     disableKeypress: false,
     showNearMonthDays: true,

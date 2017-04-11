@@ -153,12 +153,23 @@ describe('ng2-date-picker App', () => {
     expect(page.datePickerInput.getAttribute('disabled')).toBe(null);
   });
 
-  it('should check if enable/diable required validation is working', () => {
+  it('should check if enable/disable required validation is working', () => {
     page.datePickerInput.clear();
     expect(page.requiredValidationMsg.isPresent()).toBe(false);
     page.enableRequiredValidationRadio.click();
     expect(page.requiredValidationMsg.getText()).toEqual('required');
     page.disableRequiredValidationRadio.click();
     expect(page.requiredValidationMsg.isPresent()).toBe(false);
+  });
+
+  it('should check if min date validation is working', () => {
+    page.minDateValidationPickerInput.clear();
+    expect(page.minDateValidationMsg.isPresent()).toBe(false);
+    page.minDateValidationPickerInput.sendKeys('11-04-2017');
+    page.datePickerInput.sendKeys('10-04-2017');
+    expect(page.minDateValidationMsg.getText()).toEqual('minDate invalid');
+    page.minDateValidationPickerInput.clear();
+    page.minDateValidationPickerInput.sendKeys('10-04-2017');
+    expect(page.minDateValidationMsg.isPresent()).toBe(false);
   });
 });

@@ -42,7 +42,7 @@
         </dp-day-picker>
         <div id="requiredValidation" *ngIf="dateItem.errors && dateItem.errors.required">required</div>
         <div *ngIf="dateItem.errors && dateItem.errors.format">format invalid</div>
-        <div *ngIf="dateItem.errors && dateItem.errors.minDate">minDate invalid</div>
+        <div id="minDateValidation" *ngIf="dateItem.errors && dateItem.errors.minDate">minDate invalid</div>
         <div *ngIf="dateItem.errors && dateItem.errors.maxDate">maxDate invalid</div>
       </form>
     </div>
@@ -107,7 +107,8 @@
         Min-Date Validation (minDate):
       </span>
       <div class="dp-option-playground">
-        <dp-day-picker theme="dp-material"
+        <dp-day-picker id="minDatePicker"
+                       theme="dp-material"
                        [(ngModel)]="validationMinDate"
                        placeholder="Select a min date">
         </dp-day-picker>
@@ -339,11 +340,13 @@
       </span>
       <div class="dp-option-playground">
         <label>Show
-          <input id="showNearMonthDaysRadio" type="radio" [(ngModel)]="config.showNearMonthDays" name="showNearMonthDays" [value]="true"
+          <input id="showNearMonthDaysRadio" type="radio" [(ngModel)]="config.showNearMonthDays"
+                 name="showNearMonthDays" [value]="true"
                  (ngModelChange)="configChanged()">
         </label>
         <label>Hide
-          <input id="hideNearMonthDaysRadio" type="radio" [(ngModel)]="config.showNearMonthDays" name="showNearMonthDays" [value]="false"
+          <input id="hideNearMonthDaysRadio" type="radio" [(ngModel)]="config.showNearMonthDays"
+                 name="showNearMonthDays" [value]="false"
                  (ngModelChange)="configChanged()">
         </label>
       </div>
@@ -355,11 +358,13 @@
       </span>
       <div class="dp-option-playground">
         <label>Show
-          <input id="showWeekNumbersRadio" type="radio" [(ngModel)]="config.showWeekNumbers" name="showWeekNumbers" [value]="true"
+          <input id="showWeekNumbersRadio" type="radio" [(ngModel)]="config.showWeekNumbers" name="showWeekNumbers"
+                 [value]="true"
                  (ngModelChange)="configChanged()">
         </label>
         <label>Hide
-          <input id="hideWeekNumbersRadio" type="radio" [(ngModel)]="config.showWeekNumbers" name="showWeekNumbers" [value]="false"
+          <input id="hideWeekNumbersRadio" type="radio" [(ngModel)]="config.showWeekNumbers" name="showWeekNumbers"
+                 [value]="false"
                  (ngModelChange)="configChanged()">
         </label>
       </div>
@@ -371,11 +376,13 @@
       </span>
       <div class="dp-option-playground">
         <label>Enabled
-          <input id="enableMonthSelector" type="radio" [(ngModel)]="config.enableMonthSelector" name="enableMonthSelector" [value]="true"
+          <input id="enableMonthSelector" type="radio" [(ngModel)]="config.enableMonthSelector"
+                 name="enableMonthSelector" [value]="true"
                  (ngModelChange)="configChanged()">
         </label>
         <label>Disabled
-          <input id="disableMonthSelector" type="radio" [(ngModel)]="config.enableMonthSelector" name="enableMonthSelector" [value]="false"
+          <input id="disableMonthSelector" type="radio" [(ngModel)]="config.enableMonthSelector"
+                 name="enableMonthSelector" [value]="false"
                  (ngModelChange)="configChanged()">
         </label>
       </div>
@@ -396,11 +403,13 @@
       </span>
       <div class="dp-option-playground">
         <label>Enabled
-          <input id="showGoToCurrent" type="radio" [(ngModel)]="config.showGoToCurrent" name="showGoToCurrent" [value]="true"
+          <input id="showGoToCurrent" type="radio" [(ngModel)]="config.showGoToCurrent" name="showGoToCurrent"
+                 [value]="true"
                  (ngModelChange)="configChanged()">
         </label>
         <label>Disabled
-          <input id="hideGoToCurrent" type="radio" [(ngModel)]="config.showGoToCurrent" name="showGoToCurrent" [value]="false"
+          <input id="hideGoToCurrent" type="radio" [(ngModel)]="config.showGoToCurrent" name="showGoToCurrent"
+                 [value]="false"
                  (ngModelChange)="configChanged()">
         </label>
       </div>

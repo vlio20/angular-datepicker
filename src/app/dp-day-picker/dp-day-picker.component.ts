@@ -78,6 +78,7 @@ export class DpDayPickerComponent implements OnChanges,
   }
 
   public set value(value: Moment[]) {
+    console.log(value);
     this._value = value;
     this.viewValue = this._value ? this._value.map(val => val.format(this.pickerConfig.format)).join(', ') : '';
     this.onChangeCallback(this.processOnChangeCallback(value));
