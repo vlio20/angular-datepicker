@@ -33,6 +33,8 @@ export class DemoPage {
   requiredValidationMsg = $('#requiredValidation');
   minDateValidationPickerInput = $('#minDatePicker input');
   minDateValidationMsg = $('#minDateValidation');
+  maxDateValidationPickerInput = $('#maxDatePicker input');
+  maxDateValidationMsg = $('#maxDateValidation');
 
   openBtn = $('#openBtn');
 

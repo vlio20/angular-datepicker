@@ -43,7 +43,7 @@
         <div id="requiredValidation" *ngIf="dateItem.errors && dateItem.errors.required">required</div>
         <div *ngIf="dateItem.errors && dateItem.errors.format">format invalid</div>
         <div id="minDateValidation" *ngIf="dateItem.errors && dateItem.errors.minDate">minDate invalid</div>
-        <div *ngIf="dateItem.errors && dateItem.errors.maxDate">maxDate invalid</div>
+        <div id="maxDateValidation" *ngIf="dateItem.errors && dateItem.errors.maxDate">maxDate invalid</div>
       </form>
     </div>
 
@@ -120,7 +120,8 @@
         Max-Date Validation (maxDate):
       </span>
       <div class="dp-option-playground">
-        <dp-day-picker theme="dp-material"
+        <dp-day-picker id="maxDatePicker"
+                       theme="dp-material"
                        [(ngModel)]="validationMaxDate"
                        placeholder="Select a max date">
         </dp-day-picker>

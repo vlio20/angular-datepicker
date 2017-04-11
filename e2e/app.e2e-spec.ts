@@ -180,4 +180,15 @@ describe('ng2-date-picker App', () => {
     page.minDateValidationPickerInput.sendKeys('10-04-2017');
     expect(page.minDateValidationMsg.isPresent()).toBe(false);
   });
+
+  it('should check if max date validation is working', () => {
+    page.maxDateValidationPickerInput.clear();
+    expect(page.maxDateValidationMsg.isPresent()).toBe(false);
+    page.maxDateValidationPickerInput.sendKeys('11-04-2017');
+    page.datePickerInput.sendKeys('12-04-2017');
+    expect(page.maxDateValidationMsg.getText()).toEqual('maxDate invalid');
+    page.maxDateValidationPickerInput.clear();
+    page.maxDateValidationPickerInput.sendKeys('12-04-2017');
+    expect(page.maxDateValidationMsg.isPresent()).toBe(false);
+  });
 });
