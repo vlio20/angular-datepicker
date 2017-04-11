@@ -162,6 +162,14 @@ describe('ng2-date-picker App', () => {
     expect(page.requiredValidationMsg.isPresent()).toBe(false);
   });
 
+  it('should check if enable/diable is working', () => {
+    expect(page.datePickerInput.getAttribute('disabled')).toBe(null);
+    page.pickerDisabledRadio.click();
+    expect(page.datePickerInput.getAttribute('disabled')).toEqual('true');
+    page.pickerEnabledRadio.click();
+    expect(page.datePickerInput.getAttribute('disabled')).toBe(null);
+  });
+
   it('should check if min date validation is working', () => {
     page.minDateValidationPickerInput.clear();
     expect(page.minDateValidationMsg.isPresent()).toBe(false);
