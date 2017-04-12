@@ -31,4 +31,12 @@ export class UtilsService {
 
     return retVal;
   }
+
+  isDateValid(date: string, format: string): boolean {
+    if (date === '') {
+      return true;
+    }
+
+    return moment(date, format, true).isValid();
+  }
 }

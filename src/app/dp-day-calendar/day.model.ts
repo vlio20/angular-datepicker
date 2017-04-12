@@ -1,6 +1,6 @@
 import {Moment} from 'moment';
 
-export interface ICalendarDay {
+export interface IDay {
   date: Moment;
   selected?: boolean;
   currentMonth?: boolean;
@@ -10,6 +10,6 @@ export interface ICalendarDay {
 }
 
 export interface IDayEvent {
-  day: ICalendarDay;
+  day: IDay;
   event: MouseEvent;
 }

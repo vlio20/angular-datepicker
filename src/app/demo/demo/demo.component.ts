@@ -3,6 +3,7 @@ import {DpDayPickerComponent} from '../../dp-day-picker/dp-day-picker.component'
 import {Moment} from 'moment';
 import {IDayPickerConfig} from '../../dp-day-picker/day-picker-config.model';
 import debounce from '../../common/decorators/decorators';
+import {DayCalendarComponent} from '../../dp-day-calendar/dp-day-calendar.component';
 
 @Component({
   selector: 'dp-demo',
@@ -11,7 +12,7 @@ import debounce from '../../common/decorators/decorators';
   styleUrls: ['./demo.component.less']
 })
 export class DemoComponent {
-  @ViewChild('dayPicker') dayPicker: DpDayPickerComponent;
+  @ViewChild('dayPicker') dayPicker: DayCalendarComponent;
   demoFormat = 'DD-MM-YYYY';
   readonly DAYS = ['su', 'mo', 'tu', 'we', 'th', 'fr', 'sa'];
   pickerMode = 'popup';
@@ -72,11 +73,11 @@ export class DemoComponent {
   }
 
   openCalendar() {
-    this.dayPicker.api.open();
+    // this.dayPicker.api.open();
   }
 
   closeCalendar() {
-    this.dayPicker.api.close();
+    // this.dayPicker.api.close();
   }
 
   log(item) {

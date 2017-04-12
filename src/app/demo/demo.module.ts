@@ -1,4 +1,4 @@
-import {DpDayPickerComponent} from './../dp-day-picker/dp-day-picker.component';
+import {DpDayPickerComponent} from '../dp-day-picker/dp-day-picker.component';
 import {RouterModule} from '@angular/router';
 import {NgModule} from '@angular/core';
 import {DemoComponent} from './demo/demo.component';

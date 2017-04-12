@@ -1,5 +1,5 @@
 import {TestBed, inject} from '@angular/core/testing';
-import {CalendarMonthService} from './day-calendar.service';
+import {DayCalendarService} from './day-calendar.service';
 import * as moment from 'moment';
 import {Moment} from 'moment';
 import {ICalendarMonthConfig} from './day-calendar-config.model';
@@ -8,12 +8,12 @@ import {UtilsService} from '../common/services/utils/utils.service';
 describe('Service: Calendar', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [CalendarMonthService, UtilsService]
+      providers: [DayCalendarService, UtilsService]
     });
   });
 
-  it('should check the generateDaysMap method', inject([CalendarMonthService],
-    (service: CalendarMonthService) => {
+  it('should check the generateDaysMap method', inject([DayCalendarService],
+    (service: DayCalendarService) => {
       expect(service.generateDaysIndexMap('su'))
         .toEqual({0: 'su', 1: 'mo', 2: 'tu', 3: 'we', 4: 'th', 5: 'fr', 6: 'sa'});
       expect(service.generateDaysIndexMap('mo'))
@@ -22,8 +22,8 @@ describe('Service: Calendar', () => {
         .toEqual({0: 'we', 1: 'th', 2: 'fr', 3: 'sa', 4: 'su', 5: 'mo', 6: 'tu'});
     }));
 
-  it('should check the generateDaysMap method', inject([CalendarMonthService],
-    (service: CalendarMonthService) => {
+  it('should check the generateDaysMap method', inject([DayCalendarService],
+    (service: DayCalendarService) => {
       expect(service.generateDaysMap('su'))
         .toEqual({'su': 0, 'mo': 1, 'tu': 2, 'we': 3, 'th': 4, 'fr': 5, 'sa': 6});
       expect(service.generateDaysMap('mo'))
@@ -33,8 +33,8 @@ describe('Service: Calendar', () => {
     }
   ));
 
-  it('should check the generateMonthArray method', inject([CalendarMonthService],
-    (service: CalendarMonthService) => {
+  it('should check the generateMonthArray method', inject([DayCalendarService],
+    (service: DayCalendarService) => {
       let monthWeeks = service.generateMonthArray(
         {
           firstDayOfWeek: 'su',
@@ -99,8 +99,8 @@ describe('Service: Calendar', () => {
       expect(monthWeeks[2][3].selected).toBe(false);
     }));
 
-  it('should check the generateWeekdays method', inject([CalendarMonthService],
-    (service: CalendarMonthService) => {
+  it('should check the generateWeekdays method', inject([DayCalendarService],
+    (service: DayCalendarService) => {
       expect(service.generateWeekdays('su', {
         su: 'sun',
         mo: 'mon',
@@ -132,8 +132,8 @@ describe('Service: Calendar', () => {
       })).toEqual(['2', '3', '4', '5', '6', '7', '1']);
     }));
 
-  it('should check isDateDisabled method', inject([CalendarMonthService],
-    (service: CalendarMonthService) => {
+  it('should check isDateDisabled method', inject([DayCalendarService],
+    (service: DayCalendarService) => {
       const config: ICalendarMonthConfig = {
         month: moment('13-10-2016', 'DD-MM-YYYY'),
         firstDayOfWeek: 'su',
@@ -155,8 +155,8 @@ describe('Service: Calendar', () => {
       expect(service.isDateDisabled({date: moment('11-10-2016', 'DD-MM-YYYY')}, config)).toBe(false);
     }));
 
-  it('should show/hide near month according to showNearMonthDays configuration', inject([CalendarMonthService],
-    (service: CalendarMonthService) => {
+  it('should show/hide near month according to showNearMonthDays configuration', inject([DayCalendarService],
+    (service: DayCalendarService) => {
       const config: ICalendarMonthConfig = {
         month: moment('27-03-2017', 'DD-MM-YYYY'),
         firstDayOfWeek: 'su',
@@ -169,8 +169,8 @@ describe('Service: Calendar', () => {
     }));
 
   it('should not effect the calendar when no full near weeks even if showNearMonthDays is false',
-    inject([CalendarMonthService],
-      (service: CalendarMonthService) => {
+    inject([DayCalendarService],
+      (service: DayCalendarService) => {
         const config: ICalendarMonthConfig = {
           month: moment('27-04-2017', 'DD-MM-YYYY'),
           firstDayOfWeek: 'su',

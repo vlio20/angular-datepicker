@@ -21,8 +21,7 @@ import {ControlValueAccessor, NG_VALUE_ACCESSOR, FormControl, NG_VALIDATORS, Val
 import {UtilsService} from '../common/services/utils/utils.service';
 import {IDpDayPickerApi} from './dp-day-picker.api';
 import {DomHelper} from '../common/services/dom-appender/dom-appender.service';
-
-export type CalendarValue = string | string[] | Moment | Moment[];
+import {CalendarValue} from '../common/types/calendar-value';
 
 @Component({
   selector: 'dp-day-picker',
@@ -78,7 +77,6 @@ export class DpDayPickerComponent implements OnChanges,
   }
 
   public set value(value: Moment[]) {
-    console.log(value);
     this._value = value;
     this.viewValue = this._value ? this._value.map(val => val.format(this.pickerConfig.format)).join(', ') : '';
     this.onChangeCallback(this.processOnChangeCallback(value));
