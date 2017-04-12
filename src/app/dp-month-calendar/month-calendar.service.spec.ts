@@ -2,7 +2,6 @@ import {TestBed, inject} from '@angular/core/testing';
 import * as moment from 'moment';
 import {UtilsService} from '../common/services/utils/utils.service';
 import {MonthCalendarService} from './month-calendar.service';
-import {ICalendarMonthConfig} from '../dp-day-calendar/day-calendar-config.model';
 import {IMonth} from './month.model';
 
 describe('Service: MonthCalendarService', () => {
@@ -39,7 +38,7 @@ describe('Service: MonthCalendarService', () => {
       selected: false,
       currentMonth: false
     };
-    const config1: ICalendarMonthConfig = {
+    const config1: any = {
       min: month.date.clone().subtract(1, 'month'),
       max: month.date.clone().add(1, 'month')
     };

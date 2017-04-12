@@ -4,7 +4,6 @@ import {Moment} from 'moment';
 import {WeekDays} from '../common/types/week-days.type';
 import {UtilsService} from '../common/services/utils/utils.service';
 import {IDay} from './day.model';
-import {ICalendarMonthConfig} from './day-calendar-config.model';
 import {CalendarValue, ECalendarValue} from '../common/types/calendar-value';
 import {FormControl} from '@angular/forms';
 import {IDayCalendar} from './day-calendar.model';
@@ -54,7 +53,7 @@ export class DayCalendarService {
     }, <{[key: number]: string}>{});
   }
 
-  generateMonthArray(config: ICalendarMonthConfig, month: Moment, selected?: Moment[]): IDay[][] {
+  generateMonthArray(config: IDayCalendar, month: Moment, selected?: Moment[]): IDay[][] {
     let monthArray: IDay[][] = [];
     const firstDayOfMonth = month.clone().startOf('month');
     const firstDayOfWeekIndex = this.DAYS.indexOf(config.firstDayOfWeek);
@@ -109,7 +108,7 @@ export class DayCalendarService {
     return weekdays;
   }
 
-  isDateDisabled(day: IDay, config: ICalendarMonthConfig): boolean {
+  isDateDisabled(day: IDay, config: IDayCalendar): boolean {
     if (config.isDisabledCallback) {
       return config.isDisabledCallback(day.date);
     }
@@ -268,16 +267,12 @@ export class DayCalendarService {
     return month.format(config.monthFormat);
   }
 
-  shouldShowLeft(componentConfig: IDayCalendar, currentMonthView: moment.Moment): boolean {
-    return componentConfig.min
-      ? componentConfig.min.isBefore(currentMonthView, 'month')
-      : false
+  shouldShowLeft(min: Moment, currentMonthView: moment.Moment): boolean {
+    return min ? min.isBefore(currentMonthView, 'month') : true;
   }
 
-  shouldShowRight(componentConfig: IDayCalendar, currentMonthView: moment.Moment): boolean {
-    return componentConfig.max
-      ? componentConfig.max.isAfter(currentMonthView, 'month')
-      : false
+  shouldShowRight(max: Moment, currentMonthView: moment.Moment): boolean {
+    return max ? max.isAfter(currentMonthView, 'month') : true;
   }
 
   generateDaysIndexMap(firstDayOfWeek: WeekDays) {

@@ -2,8 +2,8 @@ import {TestBed, inject} from '@angular/core/testing';
 import {DayCalendarService} from './day-calendar.service';
 import * as moment from 'moment';
 import {Moment} from 'moment';
-import {ICalendarMonthConfig} from './day-calendar-config.model';
 import {UtilsService} from '../common/services/utils/utils.service';
+import {IDayCalendar} from './day-calendar.model';
 
 describe('Service: Calendar', () => {
   beforeEach(() => {
@@ -40,6 +40,7 @@ describe('Service: Calendar', () => {
           firstDayOfWeek: 'su',
           month: moment('11-10-2016', 'DD-MM-YYYY')
         },
+        moment('11-10-2016', 'DD-MM-YYYY'),
         [moment('11-10-2016', 'DD-MM-YYYY')]);
       expect(monthWeeks[0][0].date.format('DD-MM-YYYY')).toBe('25-09-2016');
       expect(monthWeeks[0][0].prevMonth).toBe(true);
@@ -56,6 +57,7 @@ describe('Service: Calendar', () => {
           firstDayOfWeek: 'mo',
           month: moment('11-10-2016', 'DD-MM-YYYY')
         },
+        moment('11-10-2016', 'DD-MM-YYYY'),
         [moment('11-10-2016', 'DD-MM-YYYY'), moment('13-10-2016', 'DD-MM-YYYY')]
       );
       expect(monthWeeks[0][0].date.format('DD-MM-YYYY')).toBe('26-09-2016');
@@ -68,6 +70,7 @@ describe('Service: Calendar', () => {
           firstDayOfWeek: 'mo',
           month: moment('11-10-2016', 'DD-MM-YYYY')
         },
+        moment('11-10-2016', 'DD-MM-YYYY'),
         [moment('11-10-2016', 'DD-MM-YYYY')]);
       expect(monthWeeks[0][0].date.format('DD-MM-YYYY')).toBe('26-09-2016');
       expect(monthWeeks[5][6].date.format('DD-MM-YYYY')).toBe('06-11-2016');
@@ -79,6 +82,7 @@ describe('Service: Calendar', () => {
           firstDayOfWeek: 'mo',
           month: moment('11-10-2016', 'DD-MM-YYYY')
         },
+        moment('11-10-2016', 'DD-MM-YYYY'),
         []
       );
       expect(monthWeeks[0][0].date.format('DD-MM-YYYY')).toBe('26-09-2016');
@@ -91,7 +95,7 @@ describe('Service: Calendar', () => {
           firstDayOfWeek: 'mo',
           month: moment('11-10-2016', 'DD-MM-YYYY')
         },
-        null
+        moment('11-10-2016', 'DD-MM-YYYY')
       );
       expect(monthWeeks[0][0].date.format('DD-MM-YYYY')).toBe('26-09-2016');
       expect(monthWeeks[5][6].date.format('DD-MM-YYYY')).toBe('06-11-2016');
@@ -134,7 +138,7 @@ describe('Service: Calendar', () => {
 
   it('should check isDateDisabled method', inject([DayCalendarService],
     (service: DayCalendarService) => {
-      const config: ICalendarMonthConfig = {
+      const config: IDayCalendar = {
         month: moment('13-10-2016', 'DD-MM-YYYY'),
         firstDayOfWeek: 'su',
         min: moment('13-10-2016', 'DD-MM-YYYY').subtract(1, 'day'),
@@ -157,26 +161,26 @@ describe('Service: Calendar', () => {
 
   it('should show/hide near month according to showNearMonthDays configuration', inject([DayCalendarService],
     (service: DayCalendarService) => {
-      const config: ICalendarMonthConfig = {
+      const config: IDayCalendar = {
         month: moment('27-03-2017', 'DD-MM-YYYY'),
         firstDayOfWeek: 'su',
         showNearMonthDays: true
       };
 
-      expect(service.generateMonthArray(config).length).toBe(6);
+      expect(service.generateMonthArray(config, moment('27-03-2017', 'DD-MM-YYYY'), []).length).toBe(6);
       config.showNearMonthDays = false;
-      expect(service.generateMonthArray(config).length).toBe(5);
+      expect(service.generateMonthArray(config, moment('27-03-2017', 'DD-MM-YYYY'), []).length).toBe(5);
     }));
 
   it('should not effect the calendar when no full near weeks even if showNearMonthDays is false',
     inject([DayCalendarService],
       (service: DayCalendarService) => {
-        const config: ICalendarMonthConfig = {
+        const config: IDayCalendar = {
           month: moment('27-04-2017', 'DD-MM-YYYY'),
           firstDayOfWeek: 'su',
           showNearMonthDays: false
         };
 
-        expect(service.generateMonthArray(config).length).toBe(6);
+        expect(service.generateMonthArray(config, moment('27-04-2017', 'DD-MM-YYYY'), []).length).toBe(6);
       }));
 });

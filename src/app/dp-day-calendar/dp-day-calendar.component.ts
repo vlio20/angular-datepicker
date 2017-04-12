@@ -155,11 +155,11 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
   }
 
   shouldShowLeftNav(): boolean {
-    return this.dayCalendarService.shouldShowLeft(this.componentConfig, this.currentMonthView);
+    return this.dayCalendarService.shouldShowLeft(this.componentConfig.min, this.currentMonthView);
   }
 
   shouldShowRightNav(): boolean {
-    return this.dayCalendarService.shouldShowRight(this.componentConfig, this.currentMonthView);
+    return this.dayCalendarService.shouldShowRight(this.componentConfig.max, this.currentMonthView);
   }
 
   // api
