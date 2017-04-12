@@ -13,7 +13,7 @@ import {
 import {DayCalendarService} from './day-calendar.service';
 import * as moment from 'moment';
 import {Moment} from 'moment';
-import {IDayCalendarConfig} from './day-calendar.model';
+import {IDayCalendarConfig} from './day-calendar-config.model';
 import {IDay} from './day.model';
 import {
   NG_VALUE_ACCESSOR,

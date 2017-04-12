@@ -6,7 +6,7 @@ import {UtilsService} from '../common/services/utils/utils.service';
 import {IDay} from './day.model';
 import {CalendarValue, ECalendarValue} from '../common/types/calendar-value';
 import {FormControl} from '@angular/forms';
-import {IDayCalendarConfig} from './day-calendar.model';
+import {IDayCalendarConfig} from './day-calendar-config.model';
 
 @Injectable()
 export class DayCalendarService {

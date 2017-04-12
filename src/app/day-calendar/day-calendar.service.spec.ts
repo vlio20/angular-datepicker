@@ -3,7 +3,7 @@ import {DayCalendarService} from './day-calendar.service';
 import * as moment from 'moment';
 import {Moment} from 'moment';
 import {UtilsService} from '../common/services/utils/utils.service';
-import {IDayCalendarConfig} from './day-calendar.model';
+import {IDayCalendarConfig} from './day-calendar-config.model';
 
 describe('Service: Calendar', () => {
   beforeEach(() => {
