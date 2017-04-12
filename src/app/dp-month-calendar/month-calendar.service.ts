@@ -3,15 +3,26 @@ import * as moment from 'moment';
 import {Moment} from 'moment';
 import {UtilsService} from '../common/services/utils/utils.service';
 import {IMonth} from './month.model';
-import {ICalendar} from '../common/models/calendar.model';
 import {ICalendarConfig} from '../dp-calendar/calendar-config.model';
+import {IMonthCalendarConfig} from './month-calendar-config';
+import {FormControl} from '@angular/forms';
 
 @Injectable()
 export class MonthCalendarService {
+  readonly DEFAULT_CONFIG: IMonthCalendarConfig = {
+    allowMultiSelect: false,
+    yearFormat: 'YYYY',
+    format: 'MM-YYYY'
+  };
+
   constructor(private utilsService: UtilsService) {
   }
 
-  generateYear(year: Moment, selected: Moment = null): IMonth[][] {
+  getConfig(config: IMonthCalendarConfig): IMonthCalendarConfig {
+    return {...this.DEFAULT_CONFIG, ...config};
+  }
+
+  generateYear(year: Moment, selected: Moment[] = null): IMonth[][] {
     const index = year.clone().startOf('year');
 
     return this.utilsService.createArray(3).map(() => {
@@ -34,5 +45,88 @@ export class MonthCalendarService {
     }
 
     return !!(config.max && month.date.isAfter(config.max, 'month'));
+  }
+
+  createValidator({minDate, maxDate}, dateFormat: string): (FormControl, string) => {[key: string]: any} {
+    let isValid: boolean;
+    let value: Moment[];
+    const validators = [];
+
+    if (minDate) {
+      validators.push({
+        key: 'minDate',
+        isValid: () => {
+          const _isValid = value.every(val => val.isSameOrAfter(minDate, 'month'));
+          isValid = isValid ? _isValid : false;
+          return _isValid;
+        }
+      });
+    }
+
+    if (maxDate) {
+      validators.push({
+        key: 'maxDate',
+        isValid: () => {
+          const _isValid = value.every(val => val.isSameOrBefore(maxDate, 'month'));
+          isValid = isValid ? _isValid : false;
+          return _isValid;
+        }
+      });
+    }
+
+    return function validateInput(formControl: FormControl, format: string) {
+      isValid = true;
+
+      if (formControl.value) {
+        if (typeof formControl.value === 'string') {
+          const dateStrings = formControl.value.split(',').map(date => date.trim());
+          const validDateStrings = dateStrings
+            .filter(date => this.utilsService.isDateValid(date, format));
+          value = validDateStrings.map(dateString => moment(dateString, dateFormat));
+        } else if (!Array.isArray(formControl.value)) {
+          value = [formControl.value];
+        } else {
+          value = formControl.value.map(val => this.utilsService.convertToMoment(val, dateFormat));
+        }
+      } else {
+        return null;
+      }
+
+      if (!value.every(val => val.isValid())) {
+        return {
+          format: {
+            given: formControl.value
+          }
+        };
+      }
+
+      const errors = validators.reduce((map, err) => {
+        if (!err.isValid()) {
+          map[err.key] = {
+            given: value
+          };
+        }
+
+        return map;
+      }, {});
+
+      return !isValid ? errors : null;
+    };
+  }
+
+  shouldShowLeft(min: Moment, currentMonthView: Moment): boolean {
+    return min ? min.isBefore(currentMonthView, 'year') : true;
+  }
+
+  shouldShowRight(max: Moment, currentMonthView: Moment): boolean {
+    return max ? max.isAfter(currentMonthView, 'year') : true;
+  }
+
+  getHeaderLabel(config: IMonthCalendarConfig, year: Moment): string {
+    if (config.yearFormatter) {
+      return config.yearFormatter(year);
+    }
+
+    return year.format(config.yearFormat);
   }
 }

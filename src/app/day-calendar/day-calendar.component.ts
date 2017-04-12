@@ -53,11 +53,11 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
   @HostBinding('class') @Input() theme: string;
   @Output() onSelect: EventEmitter<Moment[]> = new EventEmitter();
 
-  _selected: Moment[];
   componentConfig: IDayCalendarConfig;
+  _selected: Moment[];
   weeks: IDay[][];
   weekdays: string[];
-  currentMonthView: Moment;
+  currentDateView: Moment;
   inputValueType: ECalendarValue;
   validateFn: (FormControl, string) => {[key: string]: any};
   api = {
@@ -84,6 +84,17 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
     this.initValidators();
   }
 
+  init() {
+    this.componentConfig = this.dayCalendarService.getConfig(this.config);
+    this.selected = this.selected || [];
+    this.currentDateView = this.displayDate || this.utilsService
+        .getDefaultDisplayDate(this.currentDateView, this.selected);
+    this.weeks = this.dayCalendarService
+      .generateMonthArray(this.componentConfig, this.currentDateView, this.selected);
+    this.weekdays = this.dayCalendarService
+      .generateWeekdays(this.componentConfig.firstDayOfWeek, this.componentConfig.weekdayNames);
+  }
+
   ngOnChanges(changes: SimpleChanges) {
     const {minDate, maxDate, theme} = changes;
     this.init();
@@ -94,9 +105,10 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
   }
 
   writeValue(value: CalendarValue): void {
+    this.inputValueType = this.utilsService.getInputType(value);
+
     if (value) {
-      this.inputValueType = this.dayCalendarService.getInputType(value);
-      this.selected = this.dayCalendarService.convertToMomentArray(value, this.componentConfig.format);
+      this.selected = this.utilsService.convertToMomentArray(value, this.componentConfig.format);
       this.init();
     }
   }
@@ -120,19 +132,10 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
   }
 
   processOnChangeCallback(value: Moment[]): CalendarValue {
-    return this.dayCalendarService.convertFromMomentArray(this.componentConfig.format, value, this.inputValueType);
-  }
-
-  init() {
-    this.componentConfig = this.dayCalendarService.getConfig(this.config);
-    this.selected = this.selected || [];
-    this.currentMonthView = this.displayDate || this.dayCalendarService.getDefaultDisplayDate(this.currentMonthView, this.selected);
-    this.weeks = this.dayCalendarService.generateMonthArray(this.componentConfig, this.currentMonthView, this.selected);
-    this.weekdays = this.dayCalendarService.generateWeekdays(this.componentConfig.firstDayOfWeek, this.componentConfig.weekdayNames);
+    return this.utilsService.convertFromMomentArray(this.componentConfig.format, value, this.inputValueType);
   }
 
   initValidators() {
-    // todo:: preprocess min,max dates
     this.validateFn = this.dayCalendarService.createValidator({
       minDate: this.utilsService.convertToMoment(this.minDate, this.componentConfig.format),
       maxDate: this.utilsService.convertToMoment(this.maxDate, this.componentConfig.format)
@@ -148,37 +151,37 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
   dayClicked(day: IDay) {
     this.selected = this.dayCalendarService.updateSelected(this.componentConfig, this.selected, day);
     this.weeks = this.dayCalendarService
-      .generateMonthArray(this.componentConfig, this.currentMonthView, this.selected);
+      .generateMonthArray(this.componentConfig, this.currentDateView, this.selected);
   }
 
   getNavLabel(): string {
-    return this.dayCalendarService.getHeaderLabel(this.componentConfig, this.currentMonthView);
+    return this.dayCalendarService.getHeaderLabel(this.componentConfig, this.currentDateView);
   }
 
   onLeftNav() {
-    this.currentMonthView.subtract(1, 'month');
+    this.currentDateView.subtract(1, 'month');
     this.weeks = this.dayCalendarService
-      .generateMonthArray(this.componentConfig, this.currentMonthView, this.selected);
+      .generateMonthArray(this.componentConfig, this.currentDateView, this.selected);
   }
 
   onRightNav() {
-    this.currentMonthView.add(1, 'month');
+    this.currentDateView.add(1, 'month');
     this.weeks = this.dayCalendarService
-      .generateMonthArray(this.componentConfig, this.currentMonthView, this.selected);
+      .generateMonthArray(this.componentConfig, this.currentDateView, this.selected);
   }
 
   shouldShowLeftNav(): boolean {
-    return this.dayCalendarService.shouldShowLeft(this.componentConfig.min, this.currentMonthView);
+    return this.dayCalendarService.shouldShowLeft(this.componentConfig.min, this.currentDateView);
   }
 
   shouldShowRightNav(): boolean {
-    return this.dayCalendarService.shouldShowRight(this.componentConfig.max, this.currentMonthView);
+    return this.dayCalendarService.shouldShowRight(this.componentConfig.max, this.currentDateView);
   }
 
   // api
   moveCalendarsBy(current: Moment, amount: number, granularity: moment.unitOfTime.Base = 'month') {
     const to = current.add(amount, granularity);
-    this.currentMonthView = to;
+    this.currentDateView = to;
     this.weeks = this.dayCalendarService.generateMonthArray(this.componentConfig, to, this.selected);
   }
 }

@@ -14,7 +14,7 @@ describe('Service: MonthCalendarService', () => {
   it('should check the generateYear method', inject([MonthCalendarService], (service: MonthCalendarService) => {
     const year = moment('14-01-1987', 'DD-MM-YYYY');
     const selected = moment('14-01-1987', 'DD-MM-YYYY');
-    const genYear = service.generateYear(year, selected);
+    const genYear = service.generateYear(year, [selected]);
 
     const current = year.clone().startOf('year');
     genYear.forEach((row) => {

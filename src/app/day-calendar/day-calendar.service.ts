@@ -4,7 +4,6 @@ import {Moment} from 'moment';
 import {WeekDays} from '../common/types/week-days.type';
 import {UtilsService} from '../common/services/utils/utils.service';
 import {IDay} from './day.model';
-import {CalendarValue, ECalendarValue} from '../common/types/calendar-value';
 import {FormControl} from '@angular/forms';
 import {IDayCalendarConfig} from './day-calendar-config.model';
 
@@ -120,67 +119,6 @@ export class DayCalendarService {
     return !!(config.max && day.date.isAfter(config.max, 'day'));
   }
 
-  // todo:: add unit test
-  getDefaultDisplayDate(currentMonthView: Moment, selected: Moment[]): Moment {
-    if (currentMonthView) {
-      return currentMonthView;
-    } else if (selected && selected[0]) {
-      return selected[0];
-    } else {
-      return moment();
-    }
-  }
-
-  // todo:: add unit test
-  getInputType(value: CalendarValue): ECalendarValue {
-    if (Array.isArray(value) && value.length) {
-      if (typeof value[0] === 'string') {
-        return ECalendarValue.StringArr;
-      } else if (moment.isMoment(value[0])) {
-        return ECalendarValue.MomentArr;
-      }
-    } else {
-      if (typeof value === 'string') {
-        return ECalendarValue.String;
-      } else if (moment.isMoment(value)) {
-        return ECalendarValue.Moment;
-      }
-    }
-  }
-
-  // todo:: add unit test
-  convertToMomentArray(value: CalendarValue, format: string): Moment[] {
-    switch (this.getInputType(value)) {
-      case (ECalendarValue.String):
-        return [moment(value, format)];
-      case (ECalendarValue.StringArr):
-        return (<string[]>value).map(v => moment(v, format));
-      case (ECalendarValue.Moment):
-        return [<Moment>value];
-      case (ECalendarValue.MomentArr):
-        return <Moment[]>value;
-      default:
-        return [];
-    }
-  }
-
-  // todo:: add unit test
-  convertFromMomentArray(format: string,
-                         value: moment.Moment[],
-                         inputValueType: ECalendarValue): CalendarValue {
-    switch (inputValueType) {
-      case (ECalendarValue.String):
-        return value[0].format(format);
-      case (ECalendarValue.StringArr):
-        return value.map(v => v.format(format));
-      case (ECalendarValue.Moment):
-        return value[0];
-      case (ECalendarValue.MomentArr):
-      default:
-        return value;
-    }
-  }
-
   createValidator({minDate, maxDate}, dateFormat: string): (FormControl, string) => {[key: string]: any} {
     let isValid: boolean;
     let value: Moment[];
@@ -259,7 +197,7 @@ export class DayCalendarService {
     }
   }
 
-  getHeaderLabel(config: IDayCalendarConfig, month: moment.Moment): string {
+  getHeaderLabel(config: IDayCalendarConfig, month: Moment): string {
     if (config.monthFormatter) {
       return config.monthFormatter(month);
     }
@@ -267,11 +205,11 @@ export class DayCalendarService {
     return month.format(config.monthFormat);
   }
 
-  shouldShowLeft(min: Moment, currentMonthView: moment.Moment): boolean {
+  shouldShowLeft(min: Moment, currentMonthView: Moment): boolean {
     return min ? min.isBefore(currentMonthView, 'month') : true;
   }
 
-  shouldShowRight(max: Moment, currentMonthView: moment.Moment): boolean {
+  shouldShowRight(max: Moment, currentMonthView: Moment): boolean {
     return max ? max.isAfter(currentMonthView, 'month') : true;
   }
 

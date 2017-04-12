@@ -22,20 +22,30 @@
     </select>
   </div>
 
- <form #form="ngForm">
+  <div>Date:{{date}}</div>
+  <form #form="ngForm">
     <dp-day-calendar
-                   name="dayCalendar"
-                   #dateItem="ngModel"
-                   #dayPicker
-                   [(ngModel)]="date"
-                   (ngModelChange)="log($event)"
-                   [minDate]="validationMinDate"
-                   [maxDate]="validationMaxDate"
-                   [config]="config"
-                   [theme]="material ? 'dp-material' : ''">
+        name="dayCalendar"
+        #dateItem="ngModel"
+        #dayPicker
+        [(ngModel)]="date"
+        (ngModelChange)="log($event)"
+        [minDate]="validationMinDate"
+        [maxDate]="validationMaxDate"
+        [config]="config"
+        [theme]="material ? 'dp-material' : ''">
     </dp-day-calendar>
   </form>
-  <span>Date:{{date}}</span>
+
+  <div>Date:{{date}}</div>
+  <dp-month-calendar
+      [(ngModel)]="date"
+      (ngModelChange)="log($event)"
+      [minDate]="validationMinDate"
+      [maxDate]="validationMaxDate"
+      [config]="config"
+      [theme]="material ? 'dp-material' : ''">
+  </dp-month-calendar>
 
   <br/>
   <br/>
@@ -49,25 +59,25 @@
   <div class="dp-demo-container" [ngClass]="{'dp-not-top': !isAtTop}">
     <div class="dp-picker-container" *ngIf="pickerMode === 'popup'">
       <!--<form #form="ngForm">-->
-        <!--<label>Date picker (<code>&lt;dp-day-picker&gt;</code>)</label><br>-->
-        <!--<dp-day-picker id="datePicker"-->
-                       <!--name="dateItem"-->
-                       <!--#dateItem="ngModel"-->
-                       <!--#dayPicker-->
-                       <!--[(ngModel)]="date"-->
-                       <!--(ngModelChange)="log($event)"-->
-                       <!--[disabled]="disabled"-->
-                       <!--[minDate]="validationMinDate"-->
-                       <!--[maxDate]="validationMaxDate"-->
-                       <!--[required]="required"-->
-                       <!--[placeholder]="placeholder"-->
-                       <!--[config]="config"-->
-                       <!--[theme]="material ? 'dp-material' : ''">-->
-        <!--</dp-day-picker>-->
-        <!--<div id="requiredValidation" *ngIf="dateItem.errors && dateItem.errors.required">required</div>-->
-        <!--<div *ngIf="dateItem.errors && dateItem.errors.format">format invalid</div>-->
-        <!--<div id="minDateValidation" *ngIf="dateItem.errors && dateItem.errors.minDate">minDate invalid</div>-->
-        <!--<div id="maxDateValidation" *ngIf="dateItem.errors && dateItem.errors.maxDate">maxDate invalid</div>-->
+      <!--<label>Date picker (<code>&lt;dp-day-picker&gt;</code>)</label><br>-->
+      <!--<dp-day-picker id="datePicker"-->
+      <!--name="dateItem"-->
+      <!--#dateItem="ngModel"-->
+      <!--#dayPicker-->
+      <!--[(ngModel)]="date"-->
+      <!--(ngModelChange)="log($event)"-->
+      <!--[disabled]="disabled"-->
+      <!--[minDate]="validationMinDate"-->
+      <!--[maxDate]="validationMaxDate"-->
+      <!--[required]="required"-->
+      <!--[placeholder]="placeholder"-->
+      <!--[config]="config"-->
+      <!--[theme]="material ? 'dp-material' : ''">-->
+      <!--</dp-day-picker>-->
+      <!--<div id="requiredValidation" *ngIf="dateItem.errors && dateItem.errors.required">required</div>-->
+      <!--<div *ngIf="dateItem.errors && dateItem.errors.format">format invalid</div>-->
+      <!--<div id="minDateValidation" *ngIf="dateItem.errors && dateItem.errors.minDate">minDate invalid</div>-->
+      <!--<div id="maxDateValidation" *ngIf="dateItem.errors && dateItem.errors.maxDate">maxDate invalid</div>-->
       <!--</form>-->
     </div>
 
@@ -132,9 +142,9 @@
       </span>
       <div class="dp-option-playground">
         <!--<dp-day-picker id="minDatePicker"-->
-                       <!--theme="dp-material"-->
-                       <!--[(ngModel)]="validationMinDate"-->
-                       <!--placeholder="Select a min date">-->
+        <!--theme="dp-material"-->
+        <!--[(ngModel)]="validationMinDate"-->
+        <!--placeholder="Select a min date">-->
         <!--</dp-day-picker>-->
       </div>
     </div>
@@ -145,9 +155,9 @@
       </span>
       <div class="dp-option-playground">
         <!--<dp-day-picker id="maxDatePicker"-->
-                       <!--theme="dp-material"-->
-                       <!--[(ngModel)]="validationMaxDate"-->
-                       <!--placeholder="Select a max date">-->
+        <!--theme="dp-material"-->
+        <!--[(ngModel)]="validationMaxDate"-->
+        <!--placeholder="Select a max date">-->
         <!--</dp-day-picker>-->
       </div>
     </div>
@@ -182,7 +192,8 @@
         Amount of Calendars (calendarsAmount):
       </span>
       <div class="dp-option-playground">
-        <input id="amountOfCalendarsInput" type="number" [(ngModel)]="config.calendarsAmount" (change)="configChanged()">
+        <input id="amountOfCalendarsInput" type="number" [(ngModel)]="config.calendarsAmount"
+               (change)="configChanged()">
       </div>
     </div>
 
@@ -210,9 +221,9 @@
       </span>
       <div class="dp-option-playground">
         <!--<dp-day-picker theme="dp-material"-->
-                       <!--[(ngModel)]="config.min"-->
-                       <!--(ngModelChange)="configChanged()"-->
-                       <!--placeholder="Select a min date">-->
+        <!--[(ngModel)]="config.min"-->
+        <!--(ngModelChange)="configChanged()"-->
+        <!--placeholder="Select a min date">-->
         <!--</dp-day-picker>-->
       </div>
     </div>
@@ -223,9 +234,9 @@
       </span>
       <div class="dp-option-playground">
         <!--<dp-day-picker theme="dp-material"-->
-                       <!--[(ngModel)]="config.max"-->
-                       <!--(ngModelChange)="configChanged()"-->
-                       <!--placeholder="Select a max date">-->
+        <!--[(ngModel)]="config.max"-->
+        <!--(ngModelChange)="configChanged()"-->
+        <!--placeholder="Select a max date">-->
         <!--</dp-day-picker>-->
       </div>
     </div>
