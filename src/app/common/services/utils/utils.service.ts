@@ -53,7 +53,7 @@ export class UtilsService {
   }
 
   // todo:: add unit test
-  getInputType(value: CalendarValue): ECalendarValue {
+  getInputType(value: CalendarValue, allowMultiSelect: boolean): ECalendarValue {
     if (Array.isArray(value) && (<Moment[]|string[]>value).length) {
       if (typeof value[0] === 'string') {
         return ECalendarValue.StringArr;
@@ -68,12 +68,12 @@ export class UtilsService {
       }
     }
 
-    return ECalendarValue.Moment  ;
+    return allowMultiSelect ? ECalendarValue.MomentArr : ECalendarValue.Moment;
   }
 
   // todo:: add unit test
-  convertToMomentArray(value: CalendarValue, format: string): Moment[] {
-    switch (this.getInputType(value)) {
+  convertToMomentArray(value: CalendarValue, format: string, allowMultiSelect: boolean): Moment[] {
+    switch (this.getInputType(value, allowMultiSelect)) {
       case (ECalendarValue.String):
         return [moment(value, format)];
       case (ECalendarValue.StringArr):

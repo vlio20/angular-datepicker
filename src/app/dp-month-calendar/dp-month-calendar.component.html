@@ -13,7 +13,7 @@
             *ngFor="let month of monthRow"
             [disabled]="isDisabledMonth(month)"
             [ngClass]="{'dp-selected': month.selected,'dp-current-month': month.currentMonth}"
-            (click)="monthSelected(month)">
+            (click)="monthClicked(month)">
       {{month.date.format('MMM')}}
     </button>
   </div>

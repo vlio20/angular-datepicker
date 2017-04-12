@@ -7,7 +7,6 @@ import {
   OnChanges,
   SimpleChanges,
   forwardRef,
-  ElementRef,
   HostBinding
 } from '@angular/core';
 import {DayCalendarService} from './day-calendar.service';
@@ -58,6 +57,7 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
   weeks: IDay[][];
   weekdays: string[];
   currentDateView: Moment;
+  inputValue: CalendarValue;
   inputValueType: ECalendarValue;
   validateFn: (FormControl, string) => {[key: string]: any};
   api = {
@@ -74,8 +74,7 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
     return this._selected;
   }
 
-  constructor(private elemRef: ElementRef,
-              private dayCalendarService: DayCalendarService,
+  constructor(private dayCalendarService: DayCalendarService,
               public utilsService: UtilsService) {
   }
 
@@ -93,10 +92,11 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
       .generateMonthArray(this.componentConfig, this.currentDateView, this.selected);
     this.weekdays = this.dayCalendarService
       .generateWeekdays(this.componentConfig.firstDayOfWeek, this.componentConfig.weekdayNames);
+    this.inputValueType = this.utilsService.getInputType(this.inputValue, this.componentConfig.allowMultiSelect);
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    const {minDate, maxDate, theme} = changes;
+    const {minDate, maxDate} = changes;
     this.init();
 
     if (minDate || maxDate) {
@@ -105,10 +105,11 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
   }
 
   writeValue(value: CalendarValue): void {
-    this.inputValueType = this.utilsService.getInputType(value);
+    this.inputValue = value;
 
     if (value) {
-      this.selected = this.utilsService.convertToMomentArray(value, this.componentConfig.format);
+      this.selected = this.utilsService
+        .convertToMomentArray(value, this.componentConfig.format, this.componentConfig.allowMultiSelect);
       this.init();
     }
   }

@@ -1,10 +1,10 @@
 <dp-calendar-nav
-  [label]="getNavLabel()"
-  [showLeftNav]="shouldShowLeftNav()"
-  [showRightNav]="shouldShowRightNav()"
-  (onLeftNav)="onLeftNav()"
-  (onRightNav)="onRightNav()"
-  [theme]="theme">
+    [label]="getNavLabel()"
+    [showLeftNav]="shouldShowLeftNav()"
+    [showRightNav]="shouldShowRightNav()"
+    (onLeftNav)="onLeftNav()"
+    (onRightNav)="onRightNav()"
+    [theme]="theme">
 </dp-calendar-nav>
 
 <div class="dp-calendar-wrapper" [ngClass]="{'dp-hide-near-month': !config.showNearMonthDays}">

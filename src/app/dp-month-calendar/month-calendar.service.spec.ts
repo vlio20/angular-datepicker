@@ -43,14 +43,14 @@ describe('Service: MonthCalendarService', () => {
       max: month.date.clone().add(1, 'month')
     };
 
-    expect(service.isDateDisabled(month, config1)).toBe(false);
+    expect(service.isMonthDisabled(month, config1)).toBe(false);
     month.date.subtract(1, 'month');
-    expect(service.isDateDisabled(month, config1)).toBe(false);
+    expect(service.isMonthDisabled(month, config1)).toBe(false);
     month.date.subtract(1, 'month');
-    expect(service.isDateDisabled(month, config1)).toBe(true);
+    expect(service.isMonthDisabled(month, config1)).toBe(true);
     month.date.add(3, 'month');
-    expect(service.isDateDisabled(month, config1)).toBe(false);
+    expect(service.isMonthDisabled(month, config1)).toBe(false);
     month.date.add(1, 'month');
-    expect(service.isDateDisabled(month, config1)).toBe(true);
+    expect(service.isMonthDisabled(month, config1)).toBe(true);
   }));
 });

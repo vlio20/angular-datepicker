@@ -29,7 +29,7 @@ export class MonthCalendarService {
       return this.utilsService.createArray(4).map(() => {
         const month = {
           date: index.clone(),
-          selected: index.isSame(selected, 'month'),
+          selected: !!selected.find(s => index.isSame(s, 'month')),
           currentMonth: index.isSame(moment(), 'month')
         };
 
@@ -39,7 +39,7 @@ export class MonthCalendarService {
     });
   }
 
-  isDateDisabled(month: IMonth, config: ICalendarConfig) {
+  isMonthDisabled(month: IMonth, config: ICalendarConfig) {
     if (config.min && month.date.isBefore(config.min, 'month')) {
       return true;
     }
@@ -128,5 +128,16 @@ export class MonthCalendarService {
     }
 
     return year.format(config.yearFormat);
+  }
+
+  updateSelected(config: IMonthCalendarConfig, currentlySelected: Moment[], month: IMonth): Moment[] {
+    const isSelected = !month.selected;
+    if (config.allowMultiSelect) {
+      return isSelected
+        ? currentlySelected.concat([month.date])
+        : currentlySelected.filter(date => !date.isSame(month.date, 'month'));
+    } else {
+      return isSelected ? [month.date] : [];
+    }
   }
 }
