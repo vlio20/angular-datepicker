@@ -43,4 +43,34 @@
   .dp-nav-header-btn {
     cursor: pointer;
   }
+
+  :host.dp-material {
+    .dp-calendar-nav-container {
+      height: @basic-height;
+      border: 1px solid @c-light-gray;
+    }
+
+    .dp-calendar-nav-left, .dp-calendar-nav-right {
+      border: none;
+      background: @c-white;
+      outline: none;
+      font-size: 16px;
+    }
+
+    .dp-nav-header-btn {
+      height: 20px;
+      width: 80px;
+      border: none;
+      background: @c-white;
+      outline: none;
+
+      &:hover {
+        background: fade(@c-black, 5);
+      }
+
+      &:active {
+        background: fade(@c-black, 10);
+      }
+    }
+  }
 }

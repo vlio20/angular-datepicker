@@ -3,7 +3,7 @@ import {DayCalendarService} from './day-calendar.service';
 import * as moment from 'moment';
 import {Moment} from 'moment';
 import {UtilsService} from '../common/services/utils/utils.service';
-import {IDayCalendar} from './day-calendar.model';
+import {IDayCalendarConfig} from './day-calendar.model';
 
 describe('Service: Calendar', () => {
   beforeEach(() => {
@@ -138,7 +138,7 @@ describe('Service: Calendar', () => {
 
   it('should check isDateDisabled method', inject([DayCalendarService],
     (service: DayCalendarService) => {
-      const config: IDayCalendar = {
+      const config: IDayCalendarConfig = {
         month: moment('13-10-2016', 'DD-MM-YYYY'),
         firstDayOfWeek: 'su',
         min: moment('13-10-2016', 'DD-MM-YYYY').subtract(1, 'day'),
@@ -161,7 +161,7 @@ describe('Service: Calendar', () => {
 
   it('should show/hide near month according to showNearMonthDays configuration', inject([DayCalendarService],
     (service: DayCalendarService) => {
-      const config: IDayCalendar = {
+      const config: IDayCalendarConfig = {
         month: moment('27-03-2017', 'DD-MM-YYYY'),
         firstDayOfWeek: 'su',
         showNearMonthDays: true
@@ -175,7 +175,7 @@ describe('Service: Calendar', () => {
   it('should not effect the calendar when no full near weeks even if showNearMonthDays is false',
     inject([DayCalendarService],
       (service: DayCalendarService) => {
-        const config: IDayCalendar = {
+        const config: IDayCalendarConfig = {
           month: moment('27-04-2017', 'DD-MM-YYYY'),
           firstDayOfWeek: 'su',
           showNearMonthDays: false

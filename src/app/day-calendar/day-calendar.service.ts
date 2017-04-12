@@ -6,12 +6,12 @@ import {UtilsService} from '../common/services/utils/utils.service';
 import {IDay} from './day.model';
 import {CalendarValue, ECalendarValue} from '../common/types/calendar-value';
 import {FormControl} from '@angular/forms';
-import {IDayCalendar} from './day-calendar.model';
+import {IDayCalendarConfig} from './day-calendar.model';
 
 @Injectable()
 export class DayCalendarService {
   readonly DAYS = ['su', 'mo', 'tu', 'we', 'th', 'fr', 'sa'];
-  readonly DEFAULT_CONFIG: IDayCalendar = {
+  readonly DEFAULT_CONFIG: IDayCalendarConfig = {
     weekdayNames: {
       su: 'sun',
       mo: 'mon',
@@ -40,7 +40,7 @@ export class DayCalendarService {
     }
   }
 
-  getConfig(config: IDayCalendar): IDayCalendar {
+  getConfig(config: IDayCalendarConfig): IDayCalendarConfig {
     return {...this.DEFAULT_CONFIG, ...config};
   }
 
@@ -53,7 +53,7 @@ export class DayCalendarService {
     }, <{[key: number]: string}>{});
   }
 
-  generateMonthArray(config: IDayCalendar, month: Moment, selected?: Moment[]): IDay[][] {
+  generateMonthArray(config: IDayCalendarConfig, month: Moment, selected?: Moment[]): IDay[][] {
     let monthArray: IDay[][] = [];
     const firstDayOfMonth = month.clone().startOf('month');
     const firstDayOfWeekIndex = this.DAYS.indexOf(config.firstDayOfWeek);
@@ -108,7 +108,7 @@ export class DayCalendarService {
     return weekdays;
   }
 
-  isDateDisabled(day: IDay, config: IDayCalendar): boolean {
+  isDateDisabled(day: IDay, config: IDayCalendarConfig): boolean {
     if (config.isDisabledCallback) {
       return config.isDisabledCallback(day.date);
     }
@@ -248,7 +248,7 @@ export class DayCalendarService {
     };
   }
 
-  updateSelected(config: IDayCalendar, currentlySelected: Moment[], day: IDay): Moment[] {
+  updateSelected(config: IDayCalendarConfig, currentlySelected: Moment[], day: IDay): Moment[] {
     const isSelected = !day.selected;
     if (config.allowMultiSelect) {
       return isSelected
@@ -259,7 +259,7 @@ export class DayCalendarService {
     }
   }
 
-  getHeaderLabel(config: IDayCalendar, month: moment.Moment): string {
+  getHeaderLabel(config: IDayCalendarConfig, month: moment.Moment): string {
     if (config.monthFormatter) {
       return config.monthFormatter(month);
     }

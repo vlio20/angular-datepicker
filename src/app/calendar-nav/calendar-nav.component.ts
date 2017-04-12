@@ -1,4 +1,4 @@
-import {Component, Output, EventEmitter, Input} from '@angular/core';
+import {Component, Output, EventEmitter, Input, HostBinding} from '@angular/core';
 
 @Component({
   selector: 'dp-calendar-nav',
@@ -15,6 +15,7 @@ export class CalendarNavComponent {
   @Input() showRightNav: boolean = true;
   @Input() leftNavDisabled: boolean = false;
   @Input() rightNavDisabled: boolean = false;
+  @HostBinding('class') @Input() theme: string;
 
   leftNavClicked() {
     this.onLeftNav.emit();

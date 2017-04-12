@@ -1,5 +1,4 @@
-import {ICalendarMonthConfig} from '../dp-day-calendar/day-calendar-config.model';
-import {IDayEvent} from '../dp-day-calendar/day.model';
+import {IDayEvent} from '../day-calendar/day.model';
 import {ICalendarConfig} from './calendar-config.model';
 import {CalendarService} from './calendar.service';
 import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, HostBinding, OnInit} from '@angular/core';
@@ -25,7 +24,7 @@ export class CalendarComponent implements OnInit, OnChanges {
   @Output() dayContextMenu: EventEmitter<IDayEvent> = new EventEmitter();
   @Output() calendarMove: EventEmitter<Moment> = new EventEmitter();
 
-  calendars: ICalendarMonthConfig[];
+  calendars: ICalendarConfig[];
   showMonthCalendar: boolean = false;
 
   constructor(private dayPickerService: DayPickerService,

@@ -49,4 +49,45 @@
     position: absolute;
     font-size: 9px;
   }
+
+  :host.dp-material {
+
+    .dp-calendar-weekday {
+      height: @basic-height - 5px;
+      width: @basic-height;
+      line-height: @basic-height - 5px;
+      background: @c-light-gray;
+      border: none;
+    }
+
+    .dp-calendar-wrapper {
+      border: 1px solid @c-light-gray;
+    }
+
+    .dp-calendar-month,
+    .dp-calendar-day {
+      box-sizing: border-box;
+      background: @c-white;
+      border-radius: 50%;
+      border: none;
+      outline: none;
+
+      &:hover {
+        background: @c-light-gray;
+      }
+    }
+
+    .dp-selected {
+      background: @c-primary;
+      color: @c-white;
+
+      &:hover {
+        background: @c-primary;
+      }
+    }
+
+    .dp-current-day {
+      border: 1px solid @c-primary;
+    }
+  }
 }

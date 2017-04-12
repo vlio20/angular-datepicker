@@ -1,5 +1,4 @@
 import {UtilsService} from '../common/services/utils/utils.service';
-import {ICalendarMonthConfig} from '../dp-day-calendar/day-calendar-config.model';
 import {ICalendarConfig} from './calendar-config.model';
 import {Injectable} from '@angular/core';
 import * as moment from 'moment';
@@ -46,7 +45,7 @@ export class CalendarService {
     return _config;
   }
 
-  generateCalendars(config: ICalendarConfig, selected: Moment[], month?: Moment): ICalendarMonthConfig[] {
+  generateCalendars(config: ICalendarConfig, selected: Moment[], month?: Moment): ICalendarConfig[] {
     const base = (month && month.clone()) || (selected && selected[0] && selected[0].clone()) || moment();
     return this.utilsService.createArray(config.calendarsAmount)
       .map((n: number, i: number) => ({
@@ -68,7 +67,7 @@ export class CalendarService {
     return moment(date, format, true).isValid();
   }
 
-  moveCalendars(config: ICalendarConfig, selected: Moment[], base: Moment, months: number): ICalendarMonthConfig[] {
+  moveCalendars(config: ICalendarConfig, selected: Moment[], base: Moment, months: number): ICalendarConfig[] {
     const month = base.clone().add(months, 'month');
     return this.generateCalendars(config, selected, month);
   }

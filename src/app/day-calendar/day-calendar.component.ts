@@ -1,8 +1,19 @@
-import {Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges, forwardRef} from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  Output,
+  EventEmitter,
+  OnChanges,
+  SimpleChanges,
+  forwardRef,
+  ElementRef,
+  HostBinding
+} from '@angular/core';
 import {DayCalendarService} from './day-calendar.service';
 import * as moment from 'moment';
 import {Moment} from 'moment';
-import {IDayCalendar} from './day-calendar.model';
+import {IDayCalendarConfig} from './day-calendar.model';
 import {IDay} from './day.model';
 import {
   NG_VALUE_ACCESSOR,
@@ -17,8 +28,8 @@ import {UtilsService} from '../common/services/utils/utils.service';
 
 @Component({
   selector: 'dp-day-calendar',
-  templateUrl: 'dp-day-calendar.component.html',
-  styleUrls: ['dp-day-calendar.component.less'],
+  templateUrl: 'day-calendar.component.html',
+  styleUrls: ['day-calendar.component.less'],
   providers: [
     DayCalendarService,
     {
@@ -35,15 +46,15 @@ import {UtilsService} from '../common/services/utils/utils.service';
 })
 export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAccessor, Validator {
 
-  @Input() config: IDayCalendar;
+  @Input() config: IDayCalendarConfig;
   @Input() displayDate: Moment;
   @Input() minDate: Moment;
   @Input() maxDate: Moment;
-  @Input() theme: string;
+  @HostBinding('class') @Input() theme: string;
   @Output() onSelect: EventEmitter<Moment[]> = new EventEmitter();
 
   _selected: Moment[];
-  componentConfig: IDayCalendar;
+  componentConfig: IDayCalendarConfig;
   weeks: IDay[][];
   weekdays: string[];
   currentMonthView: Moment;
@@ -63,7 +74,9 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
     return this._selected;
   }
 
-  constructor(private dayCalendarService: DayCalendarService, public utilsService: UtilsService) {
+  constructor(private elemRef: ElementRef,
+              private dayCalendarService: DayCalendarService,
+              public utilsService: UtilsService) {
   }
 
   ngOnInit() {
@@ -72,7 +85,7 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    const {minDate, maxDate} = changes;
+    const {minDate, maxDate, theme} = changes;
     this.init();
 
     if (minDate || maxDate) {

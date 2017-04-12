@@ -3,7 +3,8 @@ import * as moment from 'moment';
 import {Moment} from 'moment';
 import {UtilsService} from '../common/services/utils/utils.service';
 import {IMonth} from './month.model';
-import {ICalendarMonthConfig} from '../dp-day-calendar/day-calendar-config.model';
+import {ICalendar} from '../common/models/calendar.model';
+import {ICalendarConfig} from '../dp-calendar/calendar-config.model';
 
 @Injectable()
 export class MonthCalendarService {
@@ -27,7 +28,7 @@ export class MonthCalendarService {
     });
   }
 
-  isDateDisabled(month: IMonth, config: ICalendarMonthConfig) {
+  isDateDisabled(month: IMonth, config: ICalendarConfig) {
     if (config.min && month.date.isBefore(config.min, 'month')) {
       return true;
     }

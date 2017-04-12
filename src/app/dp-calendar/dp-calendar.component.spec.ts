@@ -1,4 +1,4 @@
-import {DayCalendarComponent} from '../dp-day-calendar/dp-day-calendar.component';
+import {DayCalendarComponent} from '../day-calendar/day-calendar.component';
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {CalendarComponent} from './dp-calendar.component';
 import {MonthCalendarComponent} from '../dp-month-calendar/dp-month-calendar.component';

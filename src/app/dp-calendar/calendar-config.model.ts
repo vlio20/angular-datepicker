@@ -1,8 +1,7 @@
-import {IBaseCalendarConfig} from '../dp-day-calendar/day-calendar-config.model';
 import {Moment} from 'moment';
-import {WeekDays} from '../common/types/week-days.type';
 
-export interface ICalendarConfig extends IBaseCalendarConfig {
+export interface ICalendarConfig {
+  firstDayOfWeek?: string;
   calendarsAmount?: number;
   min?: Moment | string;
   max?: Moment | string;
@@ -13,4 +12,9 @@ export interface ICalendarConfig extends IBaseCalendarConfig {
   yearFormat?: string;
   yearFormatter?: (date: Moment) => string;
   enableMonthSelector?: boolean;
+  showWeekNumbers?: boolean;
+  weekdayNames?: {[key: string]: string};
+  showNearMonthDays?: boolean;
+  month?: Moment;
+
 }
