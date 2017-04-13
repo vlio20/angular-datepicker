@@ -26,8 +26,8 @@ import {UtilsService} from '../common/services/utils/utils.service';
 
 @Component({
   selector: 'dp-month-calendar',
-  templateUrl: './dp-month-calendar.component.html',
-  styleUrls: ['./dp-month-calendar.component.less'],
+  templateUrl: 'month-calendar.component.html',
+  styleUrls: ['month-calendar.component.less'],
   providers: [
     MonthCalendarService,
     {
