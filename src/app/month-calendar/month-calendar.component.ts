@@ -48,8 +48,10 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
   @Input() minDate: Moment;
   @Input() maxDate: Moment;
   @HostBinding('class') @Input() theme: string;
-  @Output() onSelect: EventEmitter<Moment[]> = new EventEmitter();
+  @Output() onSelect: EventEmitter<IMonth> = new EventEmitter();
+  @Output() onNavHeaderBtnClick: EventEmitter<null> = new EventEmitter();
 
+  isInited: boolean = false;
   componentConfig: IMonthCalendarConfig;
   _selected: Moment[];
   yearMonths: IMonth[][];
@@ -61,7 +63,6 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
   set selected(selected: Moment[]) {
     this._selected = selected;
     this.onChangeCallback(this.processOnChangeCallback(selected));
-    this.onSelect.emit(this._selected);
   }
 
   get selected(): Moment[] {
@@ -73,24 +74,28 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
   }
 
   ngOnInit() {
+    this.isInited = true;
     this.init();
     this.initValidators();
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    const {minDate, maxDate} = changes;
-    this.init();
+    if (this.isInited) {
+      const {minDate, maxDate} = changes;
+      this.init();
 
-    if (minDate || maxDate) {
-      this.initValidators();
+      if (minDate || maxDate) {
+        this.initValidators();
+      }
     }
   }
 
   init() {
     this.componentConfig = this.monthCalendarService.getConfig(this.config);
     this.selected = this.selected || [];
-    this.currentDateView = this.displayDate || this.utilsService
-        .getDefaultDisplayDate(this.currentDateView, this.selected);
+    this.currentDateView = this.displayDate
+      ? this.displayDate.clone()
+      : this.utilsService.getDefaultDisplayDate(this.currentDateView, this.selected);
     this.yearMonths = this.monthCalendarService.generateYear(this.currentDateView, this.selected);
     this.inputValueType = this.utilsService.getInputType(this.inputValue, this.componentConfig.allowMultiSelect);
   }
@@ -144,6 +149,7 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
     this.selected = this.monthCalendarService.updateSelected(this.componentConfig, this.selected, month);
     this.yearMonths = this.monthCalendarService
       .generateYear(this.currentDateView, this.selected);
+    this.onSelect.emit(month);
   }
 
   getNavLabel(): string {
@@ -151,7 +157,7 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
   }
 
   onLeftNav() {
-    this.currentDateView.subtract(1, 'year');
+    this.currentDateView = this.currentDateView.subtract(1, 'year');
     this.yearMonths = this.monthCalendarService.generateYear(this.currentDateView, this.selected);
   }
 
@@ -166,5 +172,13 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
 
   shouldShowRightNav(): boolean {
     return this.monthCalendarService.shouldShowRight(this.componentConfig.max, this.currentDateView);
+  }
+
+  isNavHeaderBtnClickable(): boolean {
+    return this.componentConfig.isNavHeaderBtnClickable;
+  }
+
+  toggleCalendar() {
+    this.onNavHeaderBtnClick.emit();
   }
 }

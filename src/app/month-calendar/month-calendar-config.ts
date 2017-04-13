@@ -7,4 +7,5 @@ export interface IMonthCalendarConfig extends ICalendar {
   yearFormat?: string;
   yearFormatter?: (month: Moment) => string;
   format?: string;
+  isNavHeaderBtnClickable?: boolean;
 }

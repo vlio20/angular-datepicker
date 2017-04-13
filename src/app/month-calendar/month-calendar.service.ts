@@ -12,7 +12,8 @@ export class MonthCalendarService {
   readonly DEFAULT_CONFIG: IMonthCalendarConfig = {
     allowMultiSelect: false,
     yearFormat: 'YYYY',
-    format: 'MM-YYYY'
+    format: 'MM-YYYY',
+    isNavHeaderBtnClickable: false
   };
 
   constructor(private utilsService: UtilsService) {

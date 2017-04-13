@@ -12,4 +12,7 @@ export interface IDayCalendarConfig extends ICalendar {
   allowMultiSelect?: boolean;
   monthFormat?: string;
   monthFormatter?: (month: Moment) => string;
+  enableMonthSelector?: boolean;
+  yearFormat?: string;
+  yearFormatter?: (year: Moment) => string;
 }

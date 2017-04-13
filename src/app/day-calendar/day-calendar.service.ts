@@ -6,6 +6,7 @@ import {UtilsService} from '../common/services/utils/utils.service';
 import {IDay} from './day.model';
 import {FormControl} from '@angular/forms';
 import {IDayCalendarConfig} from './day-calendar-config.model';
+import {IMonthCalendarConfig} from '../month-calendar/month-calendar-config';
 
 @Injectable()
 export class DayCalendarService {
@@ -25,7 +26,8 @@ export class DayCalendarService {
     firstDayOfWeek: 'su',
     format: 'DD-MM-YYYY',
     allowMultiSelect: false,
-    monthFormat: 'MMM, YYYY'
+    monthFormat: 'MMM, YYYY',
+    enableMonthSelector: true
   };
 
   constructor(private utilsService: UtilsService) {
@@ -197,6 +199,7 @@ export class DayCalendarService {
     }
   }
 
+  // todo:: add unit tests
   getHeaderLabel(config: IDayCalendarConfig, month: Moment): string {
     if (config.monthFormatter) {
       return config.monthFormatter(month);
@@ -205,10 +208,12 @@ export class DayCalendarService {
     return month.format(config.monthFormat);
   }
 
+  // todo:: add unit tests
   shouldShowLeft(min: Moment, currentMonthView: Moment): boolean {
     return min ? min.isBefore(currentMonthView, 'month') : true;
   }
 
+  // todo:: add unit tests
   shouldShowRight(max: Moment, currentMonthView: Moment): boolean {
     return max ? max.isAfter(currentMonthView, 'month') : true;
   }
@@ -220,5 +225,18 @@ export class DayCalendarService {
       map[index] = day;
       return map;
     }, <{[key: number]: string}>{});
+  }
+
+  // todo:: add unit tests
+  getMonthCalendarConfig(componentConfig: IDayCalendarConfig): IMonthCalendarConfig {
+    return this.utilsService.clearUndefined({
+      min: componentConfig.min,
+      max: componentConfig.max,
+      format: componentConfig.format,
+      isNavHeaderBtnClickable: true,
+      allowMultiSelect: false,
+      yearFormat: componentConfig.yearFormat,
+      yearFormatter: componentConfig.yearFormatter
+    });
   }
 }

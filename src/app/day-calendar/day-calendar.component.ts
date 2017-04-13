@@ -24,6 +24,9 @@ import {
 } from '@angular/forms';
 import {CalendarValue, ECalendarValue} from '../common/types/calendar-value';
 import {UtilsService} from '../common/services/utils/utils.service';
+import {CalendarType} from '../common/types/calendar-types.enum';
+import {IMonthCalendarConfig} from '../month-calendar/month-calendar-config';
+import {IMonth} from '../month-calendar/month.model';
 
 @Component({
   selector: 'dp-day-calendar',
@@ -50,8 +53,11 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
   @Input() minDate: Moment;
   @Input() maxDate: Moment;
   @HostBinding('class') @Input() theme: string;
-  @Output() onSelect: EventEmitter<Moment[]> = new EventEmitter();
+  @Output() onSelect: EventEmitter<IDay> = new EventEmitter();
+  @Output() onNavHeaderBtnClick: EventEmitter<CalendarType> = new EventEmitter();
 
+  CalendarType = CalendarType;
+  isInited: boolean = false;
   componentConfig: IDayCalendarConfig;
   _selected: Moment[];
   weeks: IDay[][];
@@ -60,6 +66,9 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
   inputValue: CalendarValue;
   inputValueType: ECalendarValue;
   validateFn: (FormControl, string) => {[key: string]: any};
+  currentCalendarType: CalendarType = CalendarType.Day;
+  monthCalendarConfig: IMonthCalendarConfig;
+
   api = {
     moveCalendarsBy: this.moveCalendarsBy.bind(this)
   };
@@ -67,7 +76,6 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
   set selected(selected: Moment[]) {
     this._selected = selected;
     this.onChangeCallback(this.processOnChangeCallback(selected));
-    this.onSelect.emit(this._selected);
   }
 
   get selected(): Moment[] {
@@ -79,6 +87,7 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
   }
 
   ngOnInit() {
+    this.isInited = true;
     this.init();
     this.initValidators();
   }
@@ -86,21 +95,25 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
   init() {
     this.componentConfig = this.dayCalendarService.getConfig(this.config);
     this.selected = this.selected || [];
-    this.currentDateView = this.displayDate || this.utilsService
-        .getDefaultDisplayDate(this.currentDateView, this.selected);
+    this.currentDateView = this.displayDate
+      ? this.displayDate.clone()
+      : this.utilsService.getDefaultDisplayDate(this.currentDateView, this.selected);
     this.weeks = this.dayCalendarService
       .generateMonthArray(this.componentConfig, this.currentDateView, this.selected);
     this.weekdays = this.dayCalendarService
       .generateWeekdays(this.componentConfig.firstDayOfWeek, this.componentConfig.weekdayNames);
     this.inputValueType = this.utilsService.getInputType(this.inputValue, this.componentConfig.allowMultiSelect);
+    this.monthCalendarConfig = this.dayCalendarService.getMonthCalendarConfig(this.componentConfig);
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    const {minDate, maxDate} = changes;
-    this.init();
+    if (this.isInited) {
+      const {minDate, maxDate} = changes;
+      this.init();
 
-    if (minDate || maxDate) {
-      this.initValidators();
+      if (minDate || maxDate) {
+        this.initValidators();
+      }
     }
   }
 
@@ -153,6 +166,7 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
     this.selected = this.dayCalendarService.updateSelected(this.componentConfig, this.selected, day);
     this.weeks = this.dayCalendarService
       .generateMonthArray(this.componentConfig, this.currentDateView, this.selected);
+    this.onSelect.emit(day);
   }
 
   getNavLabel(): string {
@@ -177,6 +191,22 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
 
   shouldShowRightNav(): boolean {
     return this.dayCalendarService.shouldShowRight(this.componentConfig.max, this.currentDateView);
+  }
+
+  isNavHeaderBtnClickable(): boolean {
+    return this.componentConfig.enableMonthSelector;
+  }
+
+  toggleCalendar(type: CalendarType) {
+    this.currentCalendarType = type;
+    this.onNavHeaderBtnClick.emit(type);
+  }
+
+  monthSelected(month: IMonth) {
+    this.currentDateView = month.date.clone();
+    this.currentCalendarType = CalendarType.Day;
+    this.weeks = this.dayCalendarService
+      .generateMonthArray(this.componentConfig, this.currentDateView, this.selected)
   }
 
   // api

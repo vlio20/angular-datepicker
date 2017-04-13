@@ -2,9 +2,11 @@
     [label]="getNavLabel()"
     [showLeftNav]="shouldShowLeftNav()"
     [showRightNav]="shouldShowRightNav()"
+    [isLabelClickable]="isNavHeaderBtnClickable()"
+    [theme]="theme"
     (onLeftNav)="onLeftNav()"
     (onRightNav)="onRightNav()"
-    [theme]="theme">
+    (onLabelClick)="toggleCalendar()">
 </dp-calendar-nav>
 
 <div class="dp-calendar-wrapper">
