@@ -24,7 +24,7 @@ import {
 } from '@angular/forms';
 import {CalendarValue, ECalendarValue} from '../common/types/calendar-value';
 import {UtilsService} from '../common/services/utils/utils.service';
-import {CalendarType} from '../common/types/calendar-types.enum';
+import {ECalendarType} from '../common/types/calendar-type';
 import {IMonthCalendarConfig} from '../month-calendar/month-calendar-config';
 import {IMonth} from '../month-calendar/month.model';
 
@@ -54,9 +54,9 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
   @Input() maxDate: Moment;
   @HostBinding('class') @Input() theme: string;
   @Output() onSelect: EventEmitter<IDay> = new EventEmitter();
-  @Output() onNavHeaderBtnClick: EventEmitter<CalendarType> = new EventEmitter();
+  @Output() onNavHeaderBtnClick: EventEmitter<ECalendarType> = new EventEmitter();
 
-  CalendarType = CalendarType;
+  CalendarType = ECalendarType;
   isInited: boolean = false;
   componentConfig: IDayCalendarConfig;
   _selected: Moment[];
@@ -66,7 +66,7 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
   inputValue: CalendarValue;
   inputValueType: ECalendarValue;
   validateFn: (FormControl, string) => {[key: string]: any};
-  currentCalendarType: CalendarType = CalendarType.Day;
+  currentCalendarType: ECalendarType = ECalendarType.Day;
   monthCalendarConfig: IMonthCalendarConfig;
 
   api = {
@@ -197,14 +197,14 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
     return this.componentConfig.enableMonthSelector;
   }
 
-  toggleCalendar(type: CalendarType) {
+  toggleCalendar(type: ECalendarType) {
     this.currentCalendarType = type;
     this.onNavHeaderBtnClick.emit(type);
   }
 
   monthSelected(month: IMonth) {
     this.currentDateView = month.date.clone();
-    this.currentCalendarType = CalendarType.Day;
+    this.currentCalendarType = ECalendarType.Day;
     this.weeks = this.dayCalendarService
       .generateMonthArray(this.componentConfig, this.currentDateView, this.selected)
   }

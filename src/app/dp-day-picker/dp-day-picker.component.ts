@@ -11,7 +11,8 @@ import {
   ViewChild,
   AfterViewInit,
   Renderer,
-  OnDestroy
+  OnDestroy,
+  HostBinding
 } from '@angular/core';
 import * as moment from 'moment';
 import {Moment} from 'moment';
@@ -22,6 +23,7 @@ import {UtilsService} from '../common/services/utils/utils.service';
 import {IDpDayPickerApi} from './dp-day-picker.api';
 import {DomHelper} from '../common/services/dom-appender/dom-appender.service';
 import {CalendarValue} from '../common/types/calendar-value';
+import {CalendarType} from '../common/types/calendar-type';
 
 @Component({
   selector: 'dp-day-picker',
@@ -50,9 +52,10 @@ export class DpDayPickerComponent implements OnChanges,
                                              Validator {
   private shouldNgInit: boolean = true;
   @Input('config') private userConfig: IDayPickerConfig;
+  @Input() type: CalendarType = 'day';
   @Input() public placeholder: string = '';
   @Input() public disabled: boolean = false;
-  @Input() public theme: string;
+  @HostBinding('class') @Input() theme: string;
   @Input() private minDate: Moment | string;
   @Input() private maxDate: Moment | string;
 

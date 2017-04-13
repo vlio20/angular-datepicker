@@ -1,13 +1,12 @@
 @import '../common/styles/variables';
-@import '../common/styles/material-theme';
 
 & {
   :host {
     display: inline-block;
   }
 
-  .dp-material {
-    .dp-daypicker-input {
+  :host.dp-material {
+    .dp-picker-input {
       box-sizing: border-box;
       height: @basic-height;
       width: (@basic-height * 7) + 2px;
@@ -37,12 +36,6 @@
     border-bottom: 1px solid fade(@c-black, 10);
     z-index: 9999;
     white-space: nowrap;
-
-    &.dp-material {
-      & @{deep} dp-calendar {
-        .materialTheme();
-      }
-    }
   }
 
   .dp-selected {
