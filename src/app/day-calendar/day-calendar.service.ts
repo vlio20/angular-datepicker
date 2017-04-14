@@ -110,8 +110,8 @@ export class DayCalendarService {
   }
 
   isDateDisabled(day: IDay, config: IDayCalendarConfig): boolean {
-    if (config.isDisabledCallback) {
-      return config.isDisabledCallback(day.date);
+    if (config.isDayDisabledCallback) {
+      return config.isDayDisabledCallback(day.date);
     }
 
     if (config.min && day.date.isBefore(config.min, 'day')) {

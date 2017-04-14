@@ -1,16 +1,16 @@
-import {CalendarService} from '../dp-calendar/calendar.service';
 import {Injectable, EventEmitter} from '@angular/core';
-import {IDayPickerConfig} from './day-picker-config.model';
+import {IDatePickerConfig} from './day-picker-config.model';
 import * as moment from 'moment';
 import {Moment} from 'moment';
 import {UtilsService} from '../common/services/utils/utils.service';
 import {FormControl} from '@angular/forms';
-import {ICalendarConfig} from '../dp-calendar/calendar-config.model';
+import {IDayCalendarConfig} from '../day-calendar/day-calendar-config.model';
+import {IDay} from '../day-calendar/day.model';
 
 @Injectable()
 export class DayPickerService {
   readonly onPickerClosed: EventEmitter<null> = new EventEmitter();
-  private defaultConfig: IDayPickerConfig = {
+  private defaultConfig: IDatePickerConfig = {
     closeOnSelect: true,
     closeOnSelectDelay: 100,
     format: 'DD-MM-YYYY',
@@ -24,26 +24,40 @@ export class DayPickerService {
     showGoToCurrent: true
   };
 
-  static isDateValid(date: string, format: string): boolean {
-    if (date === '') {
-      return true;
-    }
-
-    return moment(date, format, true).isValid();
+  constructor(private utilsService: UtilsService) {
   }
 
-  constructor(private calendarContainerService: CalendarService,
-              private utilsService: UtilsService) {
-  }
-
-  getConfig(config: IDayPickerConfig): ICalendarConfig {
-    const _config = Object.assign({}, this.defaultConfig, config);
+  // todo:: add unit tests
+  getConfig(config: IDatePickerConfig): IDatePickerConfig {
+    const _config: IDatePickerConfig = {...this.defaultConfig, ...config};
+    const {min, max, format} = _config;
+    min && (_config.min = this.utilsService.convertToMoment(min, format));
+    max && (_config.max = this.utilsService.convertToMoment(max, format));
 
     if (config && config.allowMultiSelect && config.closeOnSelect === undefined) {
       _config.closeOnSelect = false;
     }
 
-    return this.calendarContainerService.getConfig(_config);
+    return _config;
+  }
+
+  getDayConfigService(pickerConfig: IDatePickerConfig): IDayCalendarConfig {
+    return {
+      min: pickerConfig.min,
+      max: pickerConfig.max,
+      isDayDisabledCallback: pickerConfig.isDayDisabledCallback,
+      weekdayNames: pickerConfig.weekdayNames,
+      showNearMonthDays: pickerConfig.showNearMonthDays,
+      showWeekNumbers: pickerConfig.showWeekNumbers,
+      firstDayOfWeek: pickerConfig.firstDayOfWeek,
+      format: pickerConfig.format,
+      allowMultiSelect: pickerConfig.allowMultiSelect,
+      monthFormat: pickerConfig.monthFormat,
+      monthFormatter: pickerConfig.monthFormatter,
+      enableMonthSelector: pickerConfig.enableMonthSelector,
+      yearFormat: pickerConfig.yearFormat,
+      yearFormatter: pickerConfig.yearFormatter
+    }
   }
 
   createValidator({minDate, maxDate}, dateFormat: string): (FormControl, string) => {[key: string]: any} {
@@ -80,7 +94,7 @@ export class DayPickerService {
         if (typeof formControl.value === 'string') {
           const dateStrings = formControl.value.split(',').map(date => date.trim());
           const validDateStrings = dateStrings
-            .filter(date => DayPickerService.isDateValid(date, format));
+            .filter(date => this.utilsService.isDateValid(date, format));
           value = validDateStrings.map(dateString => moment(dateString, dateFormat));
         } else if (!Array.isArray(formControl.value)) {
           value = [formControl.value];
@@ -111,6 +125,17 @@ export class DayPickerService {
 
       return !isValid ? errors : null;
     };
+  }
+
+  updateSelected(config: IDatePickerConfig, currentlySelected: Moment[], day: IDay): Moment[] {
+    const isSelected = !day.selected;
+    if (config.allowMultiSelect) {
+      return isSelected
+        ? currentlySelected.concat([day.date])
+        : currentlySelected.filter(date => !date.isSame(day.date, 'day'));
+    } else {
+      return isSelected ? [day.date] : [];
+    }
   }
 
   pickerClosed() {

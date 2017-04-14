@@ -3,7 +3,8 @@ import {WeekDays} from '../common/types/week-days.type';
 import {Moment} from 'moment';
 
 export interface IDayCalendarConfig extends ICalendar {
-  isDisabledCallback?: (date: Moment) => boolean;
+  isDayDisabledCallback?: (date: Moment) => boolean;
+  isMonthDisabledCallback?: (date: Moment) => boolean;
   weekdayNames?: {[key: string]: string};
   showNearMonthDays?: boolean;
   showWeekNumbers?: boolean;

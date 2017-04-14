@@ -2,7 +2,7 @@ import {Component, ViewChild, OnInit} from '@angular/core';
 import {DpDayPickerComponent} from '../../dp-day-picker/dp-day-picker.component';
 import {Moment} from 'moment';
 import * as moment from 'moment';
-import {IDayPickerConfig} from '../../dp-day-picker/day-picker-config.model';
+import {IDatePickerConfig} from '../../dp-day-picker/day-picker-config.model';
 
 @Component({
   selector: 'dp-test-page',
@@ -41,7 +41,7 @@ export class MultiselectTestComponent implements OnInit {
   validationMaxDate: Moment;
   placeholder: string = 'Choose a date...';
 
-  baseConfig: IDayPickerConfig = {
+  baseConfig: IDatePickerConfig = {
     firstDayOfWeek: 'su',
     calendarsAmount: 1,
     format: 'DD-MM-YYYY',
@@ -57,10 +57,10 @@ export class MultiselectTestComponent implements OnInit {
     },
   };
 
-  singleStringConfig: IDayPickerConfig = this.baseConfig;
-  multipleStringConfig: IDayPickerConfig = this.baseConfig;
-  singleMomentConfig: IDayPickerConfig = this.baseConfig;
-  multipleMomentConfig: IDayPickerConfig = this.baseConfig;
+  singleStringConfig: IDatePickerConfig = this.baseConfig;
+  multipleStringConfig: IDatePickerConfig = this.baseConfig;
+  singleMomentConfig: IDatePickerConfig = this.baseConfig;
+  multipleMomentConfig: IDatePickerConfig = this.baseConfig;
 
   ngOnInit() {
     this.configChanged();

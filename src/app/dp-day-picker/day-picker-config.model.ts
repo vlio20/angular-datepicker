@@ -1,14 +1,16 @@
 import {ICalendarConfig} from '../dp-calendar/calendar-config.model';
 import {TDrops, TOpens} from '../common/types/poistions.type';
+import {IDayCalendarConfig} from '../day-calendar/day-calendar-config.model';
+import {IMonthCalendarConfig} from '../month-calendar/month-calendar-config';
 
-export interface IDayPickerConfig extends ICalendarConfig {
+export interface IDatePickerConfig extends IDayCalendarConfig, IMonthCalendarConfig {
   closeOnSelect?: boolean;
   closeOnSelectDelay?: number;
   onOpenDelay?: number;
   disableKeypress?: boolean;
-  userValueType?: 'string' | 'object';
   appendTo?: string|HTMLElement;
   showGoToCurrent?: boolean;
   drops?: TDrops;
   opens?: TOpens;
+  calendarsAmount?: number;
 }

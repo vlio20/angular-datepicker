@@ -1,29 +1,33 @@
-<div class="{{theme}}">
+<div>
   <div class="dp-input-container">
     <input type="text"
            class="dp-picker-input"
            [placeholder]="placeholder"
-           [ngModel]="viewValue"
+           [ngModel]="inputElementValue"
            (ngModelChange)="onViewDateChange($event)"
            (focus)="inputFocused()"
            (keydown)="onKeydown($event)"
            [disabled]="disabled"/>
     <button class="dp-current-location-btn"
-            *ngIf="pickerConfig.showGoToCurrent"
+            *ngIf="componentConfig.showGoToCurrent"
             (click)="moveToCurrent()"
             [hidden]="!_areCalendarsShown">
     </button>
   </div>
   <div #container>
-    <div class="dp-popup {{theme}}" [hidden]="!_areCalendarsShown">
-      <!--<dp-calendar [(selected)]="value"-->
-                   <!--[config]="pickerConfig"-->
-                   <!--[openOn]="openOn"-->
-                   <!--(dayClick)="daySelected()">-->
-      <!--</dp-calendar>-->
-      <dp-day-calendar>
+    <div class="dp-popup {{theme}}"
+         [ngSwitch]="type"
+         [hidden]="!_areCalendarsShown">
+      <dp-day-calendar *ngSwitchCase="'day'"
+                       [ngModel]="_selected"
+                       (onSelect)="daySelected($event)"
+                       [theme]="theme">
 
       </dp-day-calendar>
+
+      <dp-month-calendar *ngSwitchCase="month">
+
+      </dp-month-calendar>
     </div>
   </div>
 </div>

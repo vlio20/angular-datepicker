@@ -81,7 +81,7 @@ export class UtilsService {
       case (ECalendarValue.Moment):
         return [<Moment>value];
       case (ECalendarValue.MomentArr):
-        return <Moment[]>value;
+        return <Moment[]>[].concat(value);
       default:
         return [];
     }

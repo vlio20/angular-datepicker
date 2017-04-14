@@ -1,7 +1,7 @@
 import {Component, ViewChild, HostListener} from '@angular/core';
 import {DpDayPickerComponent} from '../../dp-day-picker/dp-day-picker.component';
 import {Moment} from 'moment';
-import {IDayPickerConfig} from '../../dp-day-picker/day-picker-config.model';
+import {IDatePickerConfig} from '../../dp-day-picker/day-picker-config.model';
 import debounce from '../../common/decorators/decorators';
 import {DayCalendarComponent} from '../../day-calendar/day-calendar.component';
 
@@ -27,7 +27,7 @@ export class DemoComponent {
   validationMaxDate: Moment;
   placeholder: string = 'Choose a date...';
 
-  config: IDayPickerConfig = {
+  config: IDatePickerConfig = {
     firstDayOfWeek: 'su',
     calendarsAmount: 1,
     format: 'DD-MM-YYYY',
@@ -37,7 +37,6 @@ export class DemoComponent {
     closeOnSelect: true,
     closeOnSelectDelay: 100,
     onOpenDelay: 0,
-    userValueType: 'string',
     weekdayNames: {
       su: 'sun',
       mo: 'mon',
