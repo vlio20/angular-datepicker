@@ -90,15 +90,16 @@ export class DatePickerComponent implements OnChanges,
     close: this.hideCalendar.bind(this)
   };
 
-  get selected(): Moment[] {
-    return this._selected;
+  set selected(selected: Moment[]) {
+    this._selected = selected;
+    this.inputElementValue = (<string[]>this.utilsService
+      .convertFromMomentArray(this.componentConfig.format, selected, ECalendarValue.StringArr))
+      .join(', ');
+    this.onChangeCallback(this.processOnChangeCallback(selected));
   }
 
-  set selected(value: Moment[]) {
-    this._selected = value;
-    this.inputElementValue = (<string[]>this.utilsService
-      .convertFromMomentArray(this.componentConfig.format, value, ECalendarValue.StringArr))
-      .join(', ');
+  get selected(): Moment[] {
+    return this._selected;
   }
 
   get areCalendarsShown(): boolean {
@@ -185,8 +186,8 @@ export class DatePickerComponent implements OnChanges,
     }
   }
 
-  processOnChangeCallback(value: Moment[]): CalendarValue {
-    return this.utilsService.convertFromMomentArray(this.componentConfig.format, value, this.inputValueType);
+  processOnChangeCallback(selected: Moment[]): CalendarValue {
+    return this.utilsService.convertFromMomentArray(this.componentConfig.format, selected, this.inputValueType);
   }
 
   initValidators() {
@@ -249,11 +250,12 @@ export class DatePickerComponent implements OnChanges,
 
   init() {
     this.componentConfig = this.dayPickerService.getConfig(this.config);
-    this.dayCalendarConfig = this.dayPickerService.getDayConfigService(this.componentConfig);
     this.currentDateView = this.displayDate
       ? this.utilsService.convertToMoment(this.displayDate, this.componentConfig.format).clone()
       : this.utilsService
         .getDefaultDisplayDate(this.currentDateView, this.selected, this.componentConfig.allowMultiSelect);
+    this.inputValueType = this.utilsService.getInputType(this.inputValue, this.componentConfig.allowMultiSelect);
+    this.dayCalendarConfig = this.dayPickerService.getDayConfigService(this.componentConfig);
   }
 
   inputFocused() {

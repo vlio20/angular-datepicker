@@ -42,7 +42,7 @@ export class DayCalendarService {
   }
 
   getConfig(config: IDayCalendarConfig): IDayCalendarConfig {
-    return {...this.DEFAULT_CONFIG, ...config};
+    return {...this.DEFAULT_CONFIG, ...this.utilsService.clearUndefined(config)};
   }
 
   generateDaysMap(firstDayOfWeek: WeekDays) {

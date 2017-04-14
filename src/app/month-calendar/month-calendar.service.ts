@@ -19,7 +19,7 @@ export class MonthCalendarService {
   }
 
   getConfig(config: IMonthCalendarConfig): IMonthCalendarConfig {
-    return {...this.DEFAULT_CONFIG, ...config};
+    return {...this.DEFAULT_CONFIG, ...this.utilsService.clearUndefined(config)};
   }
 
   generateYear(year: Moment, selected: Moment[] = null): IMonth[][] {

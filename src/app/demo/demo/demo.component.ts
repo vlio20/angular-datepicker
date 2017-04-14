@@ -64,7 +64,7 @@ export class DemoComponent {
   }
 
   configChanged() {
-    this.config = Object.assign({}, this.config);
+    this.config = {...this.config};
   };
 
   createCustomWeekDays() {

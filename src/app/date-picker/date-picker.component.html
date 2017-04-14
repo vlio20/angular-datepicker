@@ -18,6 +18,7 @@
          [ngSwitch]="type"
          [hidden]="!_areCalendarsShown">
       <dp-day-calendar *ngSwitchCase="'day'"
+                       [config]="dayCalendarConfig"
                        [ngModel]="_selected"
                        [displayDate]="currentDateView"
                        (onSelect)="daySelected($event)"
