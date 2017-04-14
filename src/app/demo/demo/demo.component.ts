@@ -34,7 +34,7 @@ export class DemoComponent {
     monthFormat: 'MMM, YYYY',
     disableKeypress: false,
     allowMultiSelect: false,
-    closeOnSelect: true,
+    closeOnSelect: undefined,
     closeOnSelectDelay: 100,
     onOpenDelay: 0,
     weekdayNames: {

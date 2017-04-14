@@ -112,6 +112,10 @@ export class UtilsService {
 
   // todo:: add unit test
   clearUndefined<T>(obj: T): T {
+    if (!obj) {
+      return obj;
+    }
+
     Object.keys(obj).forEach((key) => (obj[key] === undefined) && delete obj[key]);
     return obj;
   }

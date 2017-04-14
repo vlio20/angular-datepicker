@@ -29,7 +29,7 @@ export class DatePickerService {
 
   // todo:: add unit tests
   getConfig(config: IDatePickerConfig): IDatePickerConfig {
-    const _config: IDatePickerConfig = {...this.defaultConfig, ...config};
+    const _config: IDatePickerConfig = {...this.defaultConfig, ...this.utilsService.clearUndefined(config)};
     const {min, max, format} = _config;
     min && (_config.min = this.utilsService.convertToMoment(min, format));
     max && (_config.max = this.utilsService.convertToMoment(max, format));
