@@ -259,10 +259,12 @@ export class DatePickerComponent implements OnChanges,
   }
 
   inputFocused() {
-    this.hideStateHelper = false;
-    setTimeout(() => {
-      this.areCalendarsShown = true;
-    }, this.componentConfig.onOpenDelay);
+    if (!this.areCalendarsShown) {
+      this.hideStateHelper = false;
+      setTimeout(() => {
+        this.areCalendarsShown = true;
+      }, this.componentConfig.onOpenDelay);
+    }
   }
 
   showCalendars() {
