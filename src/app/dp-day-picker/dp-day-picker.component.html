@@ -6,7 +6,6 @@
            [ngModel]="inputElementValue"
            (ngModelChange)="onViewDateChange($event)"
            (focus)="inputFocused()"
-           (keydown)="onKeydown($event)"
            [disabled]="disabled"/>
     <button class="dp-current-location-btn"
             *ngIf="componentConfig.showGoToCurrent"
@@ -20,6 +19,7 @@
          [hidden]="!_areCalendarsShown">
       <dp-day-calendar *ngSwitchCase="'day'"
                        [ngModel]="_selected"
+                       [displayDate]="currentDateView"
                        (onSelect)="daySelected($event)"
                        [theme]="theme">
 

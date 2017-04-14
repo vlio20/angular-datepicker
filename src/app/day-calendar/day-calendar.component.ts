@@ -22,7 +22,7 @@ import {
   ValidationErrors,
   FormControl
 } from '@angular/forms';
-import {CalendarValue, ECalendarValue} from '../common/types/calendar-value';
+import {CalendarValue, ECalendarValue, SingleCalendarValue} from '../common/types/calendar-value';
 import {UtilsService} from '../common/services/utils/utils.service';
 import {ECalendarType} from '../common/types/calendar-type';
 import {IMonthCalendarConfig} from '../month-calendar/month-calendar-config';
@@ -49,7 +49,7 @@ import {IMonth} from '../month-calendar/month.model';
 export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAccessor, Validator {
 
   @Input() config: IDayCalendarConfig;
-  @Input() displayDate: Moment;
+  @Input() displayDate: SingleCalendarValue;
   @Input() minDate: Moment;
   @Input() maxDate: Moment;
   @HostBinding('class') @Input() theme: string;
@@ -96,8 +96,9 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
     this.componentConfig = this.dayCalendarService.getConfig(this.config);
     this.selected = this.selected || [];
     this.currentDateView = this.displayDate
-      ? this.displayDate.clone()
-      : this.utilsService.getDefaultDisplayDate(this.currentDateView, this.selected);
+      ? this.utilsService.convertToMoment(this.displayDate, this.componentConfig.format).clone()
+      : this.utilsService
+        .getDefaultDisplayDate(this.currentDateView, this.selected, this.componentConfig.allowMultiSelect);
     this.weeks = this.dayCalendarService
       .generateMonthArray(this.componentConfig, this.currentDateView, this.selected);
     this.weekdays = this.dayCalendarService
@@ -123,7 +124,10 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
     if (value) {
       this.selected = this.utilsService
         .convertToMomentArray(value, this.componentConfig.format, this.componentConfig.allowMultiSelect);
-      this.init();
+      this.weeks = this.dayCalendarService
+        .generateMonthArray(this.componentConfig, this.currentDateView, this.selected);
+      this.inputValueType = this.utilsService
+        .getInputType(this.inputValue, this.componentConfig.allowMultiSelect);
     }
   }
 

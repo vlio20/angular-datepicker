@@ -54,7 +54,7 @@ export class DayCalendarService {
     }, <{[key: number]: string}>{});
   }
 
-  generateMonthArray(config: IDayCalendarConfig, month: Moment, selected?: Moment[]): IDay[][] {
+  generateMonthArray(config: IDayCalendarConfig, month: Moment, selected: Moment[]): IDay[][] {
     let monthArray: IDay[][] = [];
     const firstDayOfMonth = month.clone().startOf('month');
     const firstDayOfWeekIndex = this.DAYS.indexOf(config.firstDayOfWeek);
@@ -63,13 +63,11 @@ export class DayCalendarService {
     while (firstDayOfBoard.day() !== firstDayOfWeekIndex) {
       firstDayOfBoard.subtract(1, 'day');
     }
-
     const current = firstDayOfBoard.clone();
     const daysOfCalendar: IDay[] = this.utilsService.createArray(42).reduce((array: IDay[]) => {
       array.push({
         date: current.clone(),
-        selected: (selected ? selected
-            .find(selectedDay => current.isSame(selectedDay, 'day')) : undefined) !== undefined,
+        selected: !!selected.find(selectedDay => current.isSame(selectedDay, 'day')),
         currentMonth: current.isSame(month, 'month'),
         prevMonth: current.isSame(month.clone().subtract(1, 'month'), 'month'),
         nextMonth: current.isSame(month.clone().add(1, 'month'), 'month'),

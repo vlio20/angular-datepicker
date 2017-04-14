@@ -141,4 +141,32 @@ export class DayPickerService {
   pickerClosed() {
     this.onPickerClosed.emit();
   }
+
+  // todo:: add unit tests
+  isValidInputDateValue(value: string, config: IDatePickerConfig): boolean {
+    value = value ? value : '';
+    let datesStrArr: string[];
+
+    if (config.allowMultiSelect) {
+      datesStrArr = value.split(',');
+    } else {
+      datesStrArr = [value];
+    }
+
+    return datesStrArr.every(date => this.utilsService.isDateValid(date, config.format));
+  }
+
+  // todo:: add unit tests
+  convertInputValueToMomentArray(value: string, config: IDatePickerConfig): Moment[] {
+    value = value ? value : '';
+    let datesStrArr: string[];
+
+    if (config.allowMultiSelect) {
+      datesStrArr = value.split(',');
+    } else {
+      datesStrArr = [value];
+    }
+
+    return this.utilsService.convertToMomentArray(datesStrArr, config.format, config.allowMultiSelect);
+  }
 }

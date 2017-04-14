@@ -94,8 +94,9 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
     this.componentConfig = this.monthCalendarService.getConfig(this.config);
     this.selected = this.selected || [];
     this.currentDateView = this.displayDate
-      ? this.displayDate.clone()
-      : this.utilsService.getDefaultDisplayDate(this.currentDateView, this.selected);
+      ? this.displayDate
+      : this.utilsService
+        .getDefaultDisplayDate(this.currentDateView, this.selected, this.componentConfig.allowMultiSelect);
     this.yearMonths = this.monthCalendarService.generateYear(this.currentDateView, this.selected);
     this.inputValueType = this.utilsService.getInputType(this.inputValue, this.componentConfig.allowMultiSelect);
   }
@@ -106,7 +107,8 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
     if (value) {
       this.selected = this.utilsService
         .convertToMomentArray(value, this.componentConfig.format, this.componentConfig.allowMultiSelect);
-      this.init();
+      this.yearMonths = this.monthCalendarService.generateYear(this.currentDateView, this.selected);
+      this.inputValueType = this.utilsService.getInputType(this.inputValue, this.componentConfig.allowMultiSelect);
     }
   }
 

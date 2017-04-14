@@ -3,7 +3,6 @@ import * as moment from 'moment';
 import {Moment} from 'moment';
 import {UtilsService} from '../common/services/utils/utils.service';
 import {IMonth} from './month.model';
-import {ICalendarConfig} from '../dp-calendar/calendar-config.model';
 import {IMonthCalendarConfig} from './month-calendar-config';
 import {FormControl} from '@angular/forms';
 
@@ -40,7 +39,7 @@ export class MonthCalendarService {
     });
   }
 
-  isMonthDisabled(month: IMonth, config: ICalendarConfig) {
+  isMonthDisabled(month: IMonth, config: IMonthCalendarConfig) {
     if (config.min && month.date.isBefore(config.min, 'month')) {
       return true;
     }

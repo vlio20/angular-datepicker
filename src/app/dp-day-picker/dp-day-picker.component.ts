@@ -28,10 +28,11 @@ import {
 import {UtilsService} from '../common/services/utils/utils.service';
 import {IDpDayPickerApi} from './dp-day-picker.api';
 import {DomHelper} from '../common/services/dom-appender/dom-appender.service';
-import {CalendarValue, ECalendarValue} from '../common/types/calendar-value';
+import {CalendarValue, ECalendarValue, SingleCalendarValue} from '../common/types/calendar-value';
 import {CalendarType} from '../common/types/calendar-type';
 import {IDay} from '../day-calendar/day.model';
 import {IDayCalendarConfig} from '../day-calendar/day-calendar-config.model';
+import debounce from '../common/decorators/decorators';
 
 @Component({
   selector: 'dp-day-picker',
@@ -62,6 +63,7 @@ export class DpDayPickerComponent implements OnChanges,
   @Input() type: CalendarType = 'day';
   @Input() placeholder: string = '';
   @Input() disabled: boolean = false;
+  @Input() displayDate: SingleCalendarValue;
   @HostBinding('class') @Input() theme: string;
   @Input() minDate: Moment | string;
   @Input() maxDate: Moment | string;
@@ -75,6 +77,7 @@ export class DpDayPickerComponent implements OnChanges,
   _selected: Moment[] = [];
   inputValue: CalendarValue;
   inputValueType: ECalendarValue;
+  currentDateView: Moment;
   inputElementValue: string;
   calendarWrapper: HTMLElement;
   appendToElement: HTMLElement;
@@ -246,6 +249,10 @@ export class DpDayPickerComponent implements OnChanges,
   init() {
     this.componentConfig = this.dayPickerService.getConfig(this.config);
     this.dayCalendarConfig = this.dayPickerService.getDayConfigService(this.componentConfig);
+    this.currentDateView = this.displayDate
+      ? this.utilsService.convertToMoment(this.displayDate, this.componentConfig.format).clone()
+      : this.utilsService
+        .getDefaultDisplayDate(this.currentDateView, this.selected, this.componentConfig.allowMultiSelect);
   }
 
   inputFocused() {
@@ -264,7 +271,14 @@ export class DpDayPickerComponent implements OnChanges,
     this.areCalendarsShown = false;
   }
 
-  onViewDateChange(dates: string) {
+  @debounce(500)
+  onViewDateChange(value: string) {
+    if (this.dayPickerService.isValidInputDateValue(value, this.componentConfig)) {
+      this.selected = this.dayPickerService.convertInputValueToMomentArray(value, this.componentConfig);
+      this.currentDateView = this.selected.length
+        ? this.utilsService.getDefaultDisplayDate(null, this.selected, this.componentConfig.allowMultiSelect)
+        : this.currentDateView;
+    }
   }
 
   moveToCurrent() {
