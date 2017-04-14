@@ -8,7 +8,7 @@ import {IDayCalendarConfig} from '../day-calendar/day-calendar-config.model';
 import {IDay} from '../day-calendar/day.model';
 
 @Injectable()
-export class DayPickerService {
+export class DatePickerService {
   readonly onPickerClosed: EventEmitter<null> = new EventEmitter();
   private defaultConfig: IDatePickerConfig = {
     closeOnSelect: true,

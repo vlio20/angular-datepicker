@@ -15,7 +15,7 @@ import {
 } from '@angular/core';
 import * as moment from 'moment';
 import {Moment} from 'moment';
-import {DayPickerService} from './date-picker.service';
+import {DatePickerService} from './date-picker.service';
 import {IDatePickerConfig} from './date-picker-config.model';
 import {
   ControlValueAccessor,
@@ -38,25 +38,25 @@ import {IDayCalendarConfig} from '../day-calendar/day-calendar-config.model';
   templateUrl: 'date-picker.component.html',
   styleUrls: ['date-picker.component.less'],
   providers: [
-    DayPickerService,
+    DatePickerService,
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => DpDayPickerComponent),
+      useExisting: forwardRef(() => DatePickerComponent),
       multi: true
     },
     {
       provide: NG_VALIDATORS,
-      useExisting: forwardRef(() => DpDayPickerComponent),
+      useExisting: forwardRef(() => DatePickerComponent),
       multi: true
     }
   ]
 })
-export class DpDayPickerComponent implements OnChanges,
-                                             OnInit,
-                                             AfterViewInit,
-                                             ControlValueAccessor,
-                                             Validator,
-                                             OnDestroy {
+export class DatePickerComponent implements OnChanges,
+                                            OnInit,
+                                            AfterViewInit,
+                                            ControlValueAccessor,
+                                            Validator,
+                                            OnDestroy {
   isInited: boolean = false;
   @Input() config: IDatePickerConfig;
   @Input() type: CalendarType = 'day';
@@ -122,7 +122,7 @@ export class DpDayPickerComponent implements OnChanges,
     this._areCalendarsShown = value;
   }
 
-  constructor(private dayPickerService: DayPickerService,
+  constructor(private dayPickerService: DatePickerService,
               private domHelper: DomHelper,
               private elemRef: ElementRef,
               private renderer: Renderer,
@@ -201,6 +201,7 @@ export class DpDayPickerComponent implements OnChanges,
   ngOnInit() {
     this.isInited = true;
     this.init();
+    this.initValidators();
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -209,7 +210,7 @@ export class DpDayPickerComponent implements OnChanges,
       this.init();
 
       if (minDate || maxDate) {
-        // this.initValidators();
+        this.initValidators();
       }
     }
   }
@@ -224,11 +225,12 @@ export class DpDayPickerComponent implements OnChanges,
     this.popupElem = this.elemRef.nativeElement.querySelector('.dp-popup');
     this.handleInnerElementClick(this.popupElem);
 
-    if (this.componentConfig.appendTo) {
-      if (typeof this.componentConfig.appendTo === 'string') {
-        this.appendToElement = <HTMLElement>document.querySelector(this.componentConfig.appendTo);
+    const {appendTo} = this.componentConfig;
+    if (appendTo) {
+      if (typeof appendTo === 'string') {
+        this.appendToElement = <HTMLElement>document.querySelector(<string>appendTo);
       } else {
-        this.appendToElement = <HTMLElement>this.componentConfig.appendTo;
+        this.appendToElement = <HTMLElement>appendTo;
       }
     } else {
       this.appendToElement = this.elemRef.nativeElement;
@@ -285,6 +287,13 @@ export class DpDayPickerComponent implements OnChanges,
 
   daySelected(day: IDay) {
     this.selected = this.dayPickerService.updateSelected(this.componentConfig, this.selected, day);
+    this.onDateClick();
+  }
+
+  onDateClick() {
+    if (this.componentConfig.closeOnSelect) {
+      setTimeout(this.hideCalendar.bind(this), this.componentConfig.closeOnSelectDelay);
+    }
   }
 
   ngOnDestroy() {

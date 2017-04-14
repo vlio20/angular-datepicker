@@ -1,5 +1,5 @@
 import {Component, ViewChild, OnInit} from '@angular/core';
-import {DpDayPickerComponent} from '../../date-picker/date-picker.component';
+import {DatePickerComponent} from '../../date-picker/date-picker.component';
 import {Moment} from 'moment';
 import * as moment from 'moment';
 import {IDatePickerConfig} from '../../date-picker/date-picker-config.model';
@@ -10,7 +10,7 @@ import {IDatePickerConfig} from '../../date-picker/date-picker-config.model';
   styleUrls: ['./multiselect-test.component.less']
 })
 export class MultiselectTestComponent implements OnInit {
-  @ViewChild('dayPicker') dayPicker: DpDayPickerComponent;
+  @ViewChild('dayPicker') dayPicker: DatePickerComponent;
   demoFormat = 'DD-MM-YYYY';
   readonly DAYS = ['su', 'mo', 'tu', 'we', 'th', 'fr', 'sa'];
   stringDateBlank: string;
