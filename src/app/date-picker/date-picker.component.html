@@ -6,7 +6,9 @@
            [ngModel]="inputElementValue"
            (ngModelChange)="onViewDateChange($event)"
            (focus)="inputFocused()"
+           [readonly]="componentConfig.disableKeypress"
            [disabled]="disabled"/>
+
     <button class="dp-current-location-btn"
             *ngIf="componentConfig.showGoToCurrent"
             (click)="moveToCurrent()"
