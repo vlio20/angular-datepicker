@@ -1,5 +1,5 @@
 import {Injectable, EventEmitter} from '@angular/core';
-import {IDatePickerConfig} from './day-picker-config.model';
+import {IDatePickerConfig} from './date-picker-config.model';
 import * as moment from 'moment';
 import {Moment} from 'moment';
 import {UtilsService} from '../common/services/utils/utils.service';

@@ -1,7 +1,7 @@
 import {Component, ViewChild, HostListener} from '@angular/core';
-import {DpDayPickerComponent} from '../../dp-day-picker/dp-day-picker.component';
+import {DpDayPickerComponent} from '../../date-picker/date-picker.component';
 import {Moment} from 'moment';
-import {IDatePickerConfig} from '../../dp-day-picker/day-picker-config.model';
+import {IDatePickerConfig} from '../../date-picker/date-picker-config.model';
 import debounce from '../../common/decorators/decorators';
 import {DayCalendarComponent} from '../../day-calendar/day-calendar.component';
 

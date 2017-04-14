@@ -15,8 +15,8 @@ import {
 } from '@angular/core';
 import * as moment from 'moment';
 import {Moment} from 'moment';
-import {DayPickerService} from './day-picker.service';
-import {IDatePickerConfig} from './day-picker-config.model';
+import {DayPickerService} from './date-picker.service';
+import {IDatePickerConfig} from './date-picker-config.model';
 import {
   ControlValueAccessor,
   NG_VALUE_ACCESSOR,
@@ -26,18 +26,17 @@ import {
   ValidationErrors
 } from '@angular/forms';
 import {UtilsService} from '../common/services/utils/utils.service';
-import {IDpDayPickerApi} from './dp-day-picker.api';
+import {IDpDayPickerApi} from './date-picker.api';
 import {DomHelper} from '../common/services/dom-appender/dom-appender.service';
 import {CalendarValue, ECalendarValue, SingleCalendarValue} from '../common/types/calendar-value';
 import {CalendarType} from '../common/types/calendar-type';
 import {IDay} from '../day-calendar/day.model';
 import {IDayCalendarConfig} from '../day-calendar/day-calendar-config.model';
-import debounce from '../common/decorators/decorators';
 
 @Component({
   selector: 'dp-day-picker',
-  templateUrl: './dp-day-picker.component.html',
-  styleUrls: ['./dp-day-picker.component.less'],
+  templateUrl: 'date-picker.component.html',
+  styleUrls: ['date-picker.component.less'],
   providers: [
     DayPickerService,
     {
@@ -271,7 +270,6 @@ export class DpDayPickerComponent implements OnChanges,
     this.areCalendarsShown = false;
   }
 
-  @debounce(500)
   onViewDateChange(value: string) {
     if (this.dayPickerService.isValidInputDateValue(value, this.componentConfig)) {
       this.selected = this.dayPickerService.convertInputValueToMomentArray(value, this.componentConfig);

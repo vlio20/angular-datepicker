@@ -1,6 +1,6 @@
 import {CalendarService} from '../dp-calendar/calendar.service';
-import {DpDayPickerComponent} from './dp-day-picker.component';
-import {DayPickerService} from './day-picker.service';
+import {DpDayPickerComponent} from './date-picker.component';
+import {DayPickerService} from './date-picker.service';
 
 describe('Component: DpDayPicker', () => {
   const component = new DpDayPickerComponent(new DayPickerService(new CalendarService()));

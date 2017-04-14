@@ -1,4 +1,3 @@
-import {ICalendarConfig} from '../dp-calendar/calendar-config.model';
 import {TDrops, TOpens} from '../common/types/poistions.type';
 import {IDayCalendarConfig} from '../day-calendar/day-calendar-config.model';
 import {IMonthCalendarConfig} from '../month-calendar/month-calendar-config';

@@ -1,8 +1,8 @@
 import {Component, ViewChild, OnInit} from '@angular/core';
-import {DpDayPickerComponent} from '../../dp-day-picker/dp-day-picker.component';
+import {DpDayPickerComponent} from '../../date-picker/date-picker.component';
 import {Moment} from 'moment';
 import * as moment from 'moment';
-import {IDatePickerConfig} from '../../dp-day-picker/day-picker-config.model';
+import {IDatePickerConfig} from '../../date-picker/date-picker-config.model';
 
 @Component({
   selector: 'dp-test-page',
