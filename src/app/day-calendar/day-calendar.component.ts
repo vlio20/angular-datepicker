@@ -70,7 +70,8 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
   monthCalendarConfig: IMonthCalendarConfig;
 
   api = {
-    moveCalendarsBy: this.moveCalendarsBy.bind(this)
+    moveCalendarsBy: this.moveCalendarsBy.bind(this),
+    toggleCalendar: this.toggleCalendar.bind(this)
   };
 
   set selected(selected: Moment[]) {
@@ -202,8 +203,10 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
   }
 
   toggleCalendar(type: ECalendarType) {
-    this.currentCalendarType = type;
-    this.onNavHeaderBtnClick.emit(type);
+    if (this.currentCalendarType !== type) {
+      this.currentCalendarType = type;
+      this.onNavHeaderBtnClick.emit(type);
+    }
   }
 
   monthSelected(month: IMonth) {
@@ -213,7 +216,6 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
       .generateMonthArray(this.componentConfig, this.currentDateView, this.selected)
   }
 
-  // api
   moveCalendarsBy(current: Moment, amount: number, granularity: moment.unitOfTime.Base = 'month') {
     const to = current.add(amount, granularity);
     this.currentDateView = to;

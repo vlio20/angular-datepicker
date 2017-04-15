@@ -81,43 +81,43 @@ describe('ng2-date-picker App', () => {
   it('should disable/enable month selection', () => {
     page.datePickerInput.sendKeys('08-04-2017');
     page.datePickerInput.click();
-    expect(page.navHeaderBtn.isPresent()).toBe(true);
-    expect(page.dayCalendar.isPresent()).toBe(true);
-    expect(page.navHeaderBtn.getText()).toEqual('Apr, 2017');
+    expect(page.DayCalendarNavHeaderBtn.isPresent()).toBe(true);
+    expect(page.dayCalendarContainer.isDisplayed()).toBe(true);
+    expect(page.DayCalendarNavHeaderBtn.getText()).toEqual('Apr, 2017');
 
-    page.navHeaderBtn.click();
-    expect(page.dayCalendar.isPresent()).toBe(false);
+    page.DayCalendarNavHeaderBtn.click();
+    expect(page.dayCalendarContainer.isDisplayed()).toBe(false);
     expect(page.monthCalendar.isPresent()).toBe(true);
-    expect(page.navHeaderBtn.getText()).toEqual('2017');
+    expect(page.DayCalendarNavMonthHeaderBtn.getText()).toEqual('2017');
     expect(page.currentMonthCalendarBtn.getText()).toEqual('Apr');
-    page.navLeftBtn.click();
-    expect(page.navHeaderBtn.getText()).toEqual('2016');
+    page.monthCalendarLeftNavBtn.click();
+    expect(page.DayCalendarNavMonthHeaderBtn.getText()).toEqual('2016');
     expect(page.currentMonthCalendarBtn.isPresent()).toBe(false);
-    page.navRightBtn.click();
-    expect(page.navHeaderBtn.getText()).toEqual('2017');
+    page.monthCalendarRightNavBtn.click();
+    expect(page.DayCalendarNavMonthHeaderBtn.getText()).toEqual('2017');
     expect(page.currentMonthCalendarBtn.getText()).toEqual('Apr');
 
     page.clickOnBody();
     page.datePickerInput.click();
-    expect(page.dayCalendar.isPresent()).toBe(true);
+    expect(page.dayCalendarContainer.isDisplayed()).toBe(true);
     expect(page.monthCalendar.isPresent()).toBe(false);
-    page.navHeaderBtn.click();
-    expect(page.dayCalendar.isPresent()).toBe(false);
+    page.DayCalendarNavHeaderBtn.click();
+    expect(page.dayCalendarContainer.isDisplayed()).toBe(false);
     expect(page.monthCalendar.isPresent()).toBe(true);
 
-    page.navHeaderBtn.click();
-    expect(page.dayCalendar.isPresent()).toBe(true);
+    page.DayCalendarNavMonthHeaderBtn.click();
+    expect(page.dayCalendarContainer.isDisplayed()).toBe(true);
     expect(page.monthCalendar.isPresent()).toBe(false);
 
     page.disableMonthSelector.click();
-    expect(page.navHeaderBtn.isPresent()).toBe(false);
+    expect(page.DeyCalendarMonthNavHeader.isPresent()).toBe(false);
   });
 
   it('should change year format', () => {
     page.datePickerInput.sendKeys('08-04-2017');
     page.datePickerInput.click();
-    page.navHeaderBtn.click();
-    expect(page.navHeaderBtn.getText()).toEqual('2017');
+    page.DayCalendarNavHeaderBtn.click();
+    expect(page.DayCalendarNavHeaderBtn.getText()).toEqual('2017');
 
     page.clickOnBody();
 
@@ -125,18 +125,18 @@ describe('ng2-date-picker App', () => {
     page.yearFormat.sendKeys('YY');
 
     page.datePickerInput.click();
-    page.navHeaderBtn.click();
-    expect(page.navHeaderBtn.getText()).toEqual('17');
+    page.DayCalendarNavHeaderBtn.click();
+    expect(page.DayCalendarNavHeaderBtn.getText()).toEqual('17');
   });
 
   it('should check if go to current location btn is working as expected', () => {
     expect(page.currentLocationBtn.isDisplayed()).toBe(false);
     page.datePickerInput.sendKeys('08-04-2017');
-    expect(page.navHeaderBtn.getText()).toEqual(moment('08-04-2017', 'DD-MM-YYYY').format('MMM, YYYY'));
+    expect(page.DayCalendarNavHeaderBtn.getText()).toEqual(moment('08-04-2017', 'DD-MM-YYYY').format('MMM, YYYY'));
     page.datePickerInput.click();
     expect(page.currentLocationBtn.isDisplayed()).toBe(true);
     page.currentLocationBtn.click();
-    expect(page.navHeaderBtn.getText()).toEqual(moment().format('MMM, YYYY'));
+    expect(page.DayCalendarNavHeaderBtn.getText()).toEqual(moment().format('MMM, YYYY'));
 
     page.hideGoToCurrentRadio.click();
     expect(page.currentLocationBtn.isPresent()).toBe(false);
@@ -216,11 +216,11 @@ describe('ng2-date-picker App', () => {
 
   it('should check month format', () => {
     page.datePickerInput.click();
-    expect(page.navHeader.getText()).toEqual(moment().format('MMM, YYYY'));
+    expect(page.DeyCalendarNavHeader.getText()).toEqual(moment().format('MMM, YYYY'));
     page.clickOnBody();
     page.monthFormatInput.clear();
     page.monthFormatInput.sendKeys('MM-YYYY');
     page.datePickerInput.click();
-    expect(page.navHeader.getText()).toEqual(moment().format('MM-YYYY'));
+    expect(page.DeyCalendarNavHeader.getText()).toEqual(moment().format('MM-YYYY'));
   });
 });

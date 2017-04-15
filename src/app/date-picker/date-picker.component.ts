@@ -29,9 +29,10 @@ import {UtilsService} from '../common/services/utils/utils.service';
 import {IDpDayPickerApi} from './date-picker.api';
 import {DomHelper} from '../common/services/dom-appender/dom-appender.service';
 import {CalendarValue, ECalendarValue, SingleCalendarValue} from '../common/types/calendar-value';
-import {CalendarType} from '../common/types/calendar-type';
+import {CalendarType, ECalendarType} from '../common/types/calendar-type';
 import {IDay} from '../day-calendar/day.model';
 import {IDayCalendarConfig} from '../day-calendar/day-calendar-config.model';
+import {DayCalendarComponent} from '../day-calendar/day-calendar.component';
 
 @Component({
   selector: 'dp-day-picker',
@@ -68,6 +69,7 @@ export class DatePickerComponent implements OnChanges,
   @Input() maxDate: Moment | string;
 
   @ViewChild('container') calendarContainer: ElementRef;
+  @ViewChild('dayCalendar') dayCalendarRef: DayCalendarComponent;
 
   componentConfig: IDatePickerConfig;
   dayCalendarConfig: IDayCalendarConfig;
@@ -279,6 +281,7 @@ export class DatePickerComponent implements OnChanges,
 
   hideCalendar() {
     this.areCalendarsShown = false;
+    this.dayCalendarRef.api.toggleCalendar(ECalendarType.Day);
   }
 
   onViewDateChange(value: string) {
