@@ -44,10 +44,8 @@ describe('ng2-date-picker App', () => {
   it('should check that the showNearMonthDays is working as expected', () => {
     page.datePickerInput.clear();
     page.datePickerInput.sendKeys('27-03-2017');
-    page.datePickerInput.sendKeys(protractor.Key.ENTER);
     page.datePickerInput.click();
     expect(page.monthWeeks.count()).toBe(6);
-
     page.hideNearMonthDaysRadio.click();
     page.datePickerInput.click();
     expect(page.monthWeeks.count()).toBe(5);
@@ -58,7 +56,6 @@ describe('ng2-date-picker App', () => {
 
     page.datePickerInput.clear();
     page.datePickerInput.sendKeys('27-04-2017');
-    page.datePickerInput.sendKeys(protractor.Key.ENTER);
     page.hideNearMonthDaysRadio.click();
     page.datePickerInput.click();
     expect(page.monthWeeks.count()).toBe(6);

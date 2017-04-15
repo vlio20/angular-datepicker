@@ -83,6 +83,7 @@ export class DatePickerComponent implements OnChanges,
   inputElement: HTMLElement;
   popupElem: HTMLElement;
   handleInnerElementClickUnlisteners: Function[] = [];
+  globalListnersUnlisteners: Function[] = [];
   validateFn: (FormControl, string) => {[key: string]: any};
   api: IDpDayPickerApi = {
     open: this.showCalendars.bind(this),
@@ -107,6 +108,7 @@ export class DatePickerComponent implements OnChanges,
 
   set areCalendarsShown(value: boolean) {
     if (value) {
+      this.startGlobalListeners();
       this.domHelper.appendElementToPosition({
         container: this.appendToElement,
         element: this.calendarWrapper,
@@ -116,6 +118,7 @@ export class DatePickerComponent implements OnChanges,
         opens: this.componentConfig.opens
       });
     } else {
+      this.stopGlobalListeners();
       this.dayPickerService.pickerClosed();
     }
 
@@ -132,6 +135,9 @@ export class DatePickerComponent implements OnChanges,
   @HostListener('click')
   onClick() {
     this.hideStateHelper = true;
+    if (!this.areCalendarsShown) {
+      this.showCalendars();
+    }
   }
 
   @HostListener('document:click')
@@ -297,6 +303,27 @@ export class DatePickerComponent implements OnChanges,
     if (this.componentConfig.closeOnSelect) {
       setTimeout(this.hideCalendar.bind(this), this.componentConfig.closeOnSelectDelay);
     }
+  }
+
+  onKeyPress(event: KeyboardEvent) {
+    switch (event.keyCode) {
+      case (9):
+      case (27):
+        this.hideCalendar();
+        break;
+    }
+  }
+
+  startGlobalListeners() {
+    this.globalListnersUnlisteners.push(
+      this.renderer.listen('document', 'keydown', (e: KeyboardEvent) => {
+        this.onKeyPress(e);
+      }));
+  }
+
+  stopGlobalListeners() {
+    this.globalListnersUnlisteners.forEach((ul) => ul());
+    this.globalListnersUnlisteners = [];
   }
 
   ngOnDestroy() {
