@@ -83,7 +83,6 @@ export class DatePickerComponent implements OnChanges,
   inputElement: HTMLElement;
   popupElem: HTMLElement;
   handleInnerElementClickUnlisteners: Function[] = [];
-  openOn: Moment[];
   validateFn: (FormControl, string) => {[key: string]: any};
   api: IDpDayPickerApi = {
     open: this.showCalendars.bind(this),
@@ -286,7 +285,7 @@ export class DatePickerComponent implements OnChanges,
   }
 
   moveToCurrent() {
-    this.openOn = [moment()];
+    this.currentDateView = moment();
   }
 
   daySelected(day: IDay) {
