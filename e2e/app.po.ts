@@ -26,7 +26,7 @@ export class DemoPage {
   hideWeekNumbersRadio = $('#hideWeekNumbersRadio');
   weekNumbers = $$(`${this.popupSelector} .dp-week-number`);
   DeyCalendarNavHeader = $(`${this.popupSelector} .dp-nav-header`);
-  DayCalendarNavHeaderBtn = $(`${this.popupSelector} .dp-nav-header-btn`);
+  dayCalendarNavHeaderBtn = $(`${this.popupSelector} .dp-nav-header-btn`);
   DeyCalendarMonthNavHeader = $(`${this.popupSelector} dp-month-calendar .dp-nav-header`);
   DayCalendarNavMonthHeaderBtn = $(`${this.popupSelector} dp-month-calendar .dp-nav-header-btn`);
 
