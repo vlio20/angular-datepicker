@@ -123,7 +123,7 @@ i.e.
 |----------------------|:-----------------:|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | selected             | `Moment[]`        | Opens the date picker                                                                                                                                                                                                                                          |
 | theme                | `string`          | Same as putting a class on the element                                                                                                                                                                                                                                           |
-| config               | `ICalendarConfig` | A subset of the `IDayPickerConfig`.<br>Properties include: `firstDayOfWeek`, `calendarsAmount`, `min`, `max`, `allowMultiSelect`, `format`, `monthFormat`, and `monthFormatter`.<br>These properties behave as described in the `Configuration` section above. |
+| config               | `ICalendarConfig` | A subset of the `IDayPickerConfig`.<br>Properties include: `firstDayOfWeek`, `min`, `max`, `allowMultiSelect`, `format`, `monthFormat`, and `monthFormatter`.<br>These properties behave as described in the `Configuration` section above. |
 
 ### Outputs
 
