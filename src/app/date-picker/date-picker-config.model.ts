@@ -11,5 +11,4 @@ export interface IDatePickerConfig extends IDayCalendarConfig, IMonthCalendarCon
   showGoToCurrent?: boolean;
   drops?: TDrops;
   opens?: TOpens;
-  calendarsAmount?: number;
 }
