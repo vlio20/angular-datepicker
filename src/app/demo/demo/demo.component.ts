@@ -12,7 +12,7 @@ import {DayCalendarComponent} from '../../day-calendar/day-calendar.component';
   styleUrls: ['./demo.component.less']
 })
 export class DemoComponent {
-  @ViewChild('dayPicker') dayPicker: DayCalendarComponent;
+  @ViewChild('dayPicker') dayPicker: DatePickerComponent;
   demoFormat = 'DD-MM-YYYY';
   readonly DAYS = ['su', 'mo', 'tu', 'we', 'th', 'fr', 'sa'];
   pickerMode = 'popup';
@@ -29,7 +29,6 @@ export class DemoComponent {
 
   config: IDatePickerConfig = {
     firstDayOfWeek: 'su',
-    calendarsAmount: 1,
     format: 'DD-MM-YYYY',
     monthFormat: 'MMM, YYYY',
     disableKeypress: false,
@@ -72,11 +71,11 @@ export class DemoComponent {
   }
 
   openCalendar() {
-    // this.dayPicker.api.open();
+    this.dayPicker.api.open();
   }
 
   closeCalendar() {
-    // this.dayPicker.api.close();
+    this.dayPicker.api.close();
   }
 
   log(item) {

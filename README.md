@@ -75,7 +75,7 @@ In order to use the date-picker api user the `@ViewChild` annotation in the date
 Container component:
 ```ts  
 import {Component, ViewChild} from '@angular/core';
-import {DpDayPickerComponent} from 'ng2-date-picker';
+import {DayPickerComponent} from 'ng2-date-picker';
 
 @Component({
 selector: 'my-container',
@@ -89,7 +89,7 @@ template: `
 `
 });
 class MyContainer {
-    @ViewChild('dayPicker') dayPicker: DpDayPickerComponent;
+    @ViewChild('dayPicker') dayPicker: DayPickerComponent;
     
     open() {
         this.dayPicker.api.open();

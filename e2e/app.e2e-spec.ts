@@ -26,7 +26,7 @@ describe('ng2-date-picker App', () => {
     expect(page.datePickerPopup.getAttribute('class')).toContain('dp-material');
   });
 
-  xit('should check that the onOpenDelay is working', () => {
+  it('should check that the onOpenDelay is working', () => {
     page.onOpenDelayInput.clear();
     page.onOpenDelayInput.sendKeys(1000);
     page.openBtn.click();

@@ -78,6 +78,7 @@ export class DatePickerComponent implements OnChanges,
   _selected: Moment[] = [];
   inputValue: CalendarValue;
   inputValueType: ECalendarValue;
+  isFocusedTrigger: boolean = false;
   currentDateView: Moment;
   inputElementValue: string;
   calendarWrapper: HTMLElement;
@@ -136,9 +137,11 @@ export class DatePickerComponent implements OnChanges,
 
   @HostListener('click')
   onClick() {
-    this.hideStateHelper = true;
-    if (!this.areCalendarsShown) {
-      this.showCalendars();
+    if (!this.isFocusedTrigger) {
+      this.hideStateHelper = true;
+      if (!this.areCalendarsShown) {
+        this.showCalendars();
+      }
     }
   }
 
@@ -266,12 +269,14 @@ export class DatePickerComponent implements OnChanges,
   }
 
   inputFocused() {
-    if (!this.areCalendarsShown) {
+    this.isFocusedTrigger = true;
+    setTimeout(() => {
       this.hideStateHelper = false;
-      setTimeout(() => {
+      if (!this.areCalendarsShown) {
         this.areCalendarsShown = true;
-      }, this.componentConfig.onOpenDelay);
-    }
+      }
+      this.isFocusedTrigger = false;
+    }, this.componentConfig.onOpenDelay);
   }
 
   showCalendars() {
