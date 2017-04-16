@@ -31,8 +31,13 @@ export class DatePickerService {
   getConfig(config: IDatePickerConfig): IDatePickerConfig {
     const _config: IDatePickerConfig = {...this.defaultConfig, ...this.utilsService.clearUndefined(config)};
     const {min, max, format} = _config;
-    min && (_config.min = this.utilsService.convertToMoment(min, format));
-    max && (_config.max = this.utilsService.convertToMoment(max, format));
+    if (min) {
+      _config.min = this.utilsService.convertToMoment(min, format);
+    }
+
+    if (max) {
+      _config.max = this.utilsService.convertToMoment(max, format);
+    }
 
     if (config && config.allowMultiSelect && config.closeOnSelect === undefined) {
       _config.closeOnSelect = false;
@@ -57,7 +62,7 @@ export class DatePickerService {
       enableMonthSelector: pickerConfig.enableMonthSelector,
       yearFormat: pickerConfig.yearFormat,
       yearFormatter: pickerConfig.yearFormatter
-    }
+    };
   }
 
   createValidator({minDate, maxDate}, dateFormat: string): (FormControl, string) => {[key: string]: any} {

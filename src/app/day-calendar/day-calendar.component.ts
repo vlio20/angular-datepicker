@@ -213,7 +213,7 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
     this.currentDateView = month.date.clone();
     this.currentCalendarType = ECalendarType.Day;
     this.weeks = this.dayCalendarService
-      .generateMonthArray(this.componentConfig, this.currentDateView, this.selected)
+      .generateMonthArray(this.componentConfig, this.currentDateView, this.selected);
   }
 
   moveCalendarsBy(current: Moment, amount: number, granularity: moment.unitOfTime.Base = 'month') {

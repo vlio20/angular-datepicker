@@ -46,7 +46,7 @@ export class UtilsService {
     if (def) {
       return def;
     } else if (allowMultiSelect) {
-      if(selected && selected[selected.length]) {
+      if (selected && selected[selected.length]) {
         return selected[selected.length];
       }
     } else if (selected && selected[0]) {
@@ -105,6 +105,7 @@ export class UtilsService {
       case (ECalendarValue.Moment):
         return value[0];
       case (ECalendarValue.MomentArr):
+        return value;
       default:
         return value;
     }
