@@ -83,7 +83,7 @@ export class DatePickerComponent implements OnChanges,
   inputElementValue: string;
   calendarWrapper: HTMLElement;
   appendToElement: HTMLElement;
-  inputElement: HTMLElement;
+  inputElementContainer: HTMLElement;
   popupElem: HTMLElement;
   handleInnerElementClickUnlisteners: Function[] = [];
   globalListnersUnlisteners: Function[] = [];
@@ -115,7 +115,7 @@ export class DatePickerComponent implements OnChanges,
       this.domHelper.appendElementToPosition({
         container: this.appendToElement,
         element: this.calendarWrapper,
-        anchor: this.inputElement,
+        anchor: this.inputElementContainer,
         dimElem: this.popupElem,
         drops: this.componentConfig.drops,
         opens: this.componentConfig.opens
@@ -160,7 +160,7 @@ export class DatePickerComponent implements OnChanges,
       this.domHelper.setElementPosition({
         container: this.appendToElement,
         element: this.calendarWrapper,
-        anchor: this.inputElement,
+        anchor: this.inputElementContainer,
         dimElem: this.popupElem,
         drops: this.componentConfig.drops,
         opens: this.componentConfig.opens
@@ -232,7 +232,7 @@ export class DatePickerComponent implements OnChanges,
 
   setElementPositionInDom() {
     this.calendarWrapper = <HTMLElement> this.calendarContainer.nativeElement;
-    this.inputElement = this.elemRef.nativeElement.querySelector('input');
+    this.inputElementContainer = this.elemRef.nativeElement.querySelector('.dp-input-container');
     this.popupElem = this.elemRef.nativeElement.querySelector('.dp-popup');
     this.handleInnerElementClick(this.popupElem);
 
