@@ -1,5 +1,5 @@
 [![Package Quality](http://npm.packagequality.com/badge/ng2-date-picker.png)](http://packagequality.com/#?package=ng2-date-picker)  
-[![Build Status](https://travis-ci.org/vlio20/ng2-date-picker.svg?branch=master)](https://travis-ci.org/vlio20/ng2-date-picker)
+[![Build Status](https://travis-ci.org/vlio20/angular-datepicker.svg?branch=master)](https://travis-ci.org/vlio20/angular-datepicker)
 [![npm version](https://badge.fury.io/js/ng2-date-picker.svg)](https://badge.fury.io/js/ng2-date-picker)
 
 # Date Picker
