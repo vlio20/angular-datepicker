@@ -50,10 +50,10 @@
     <div class="dp-inline" *ngIf="pickerMode === 'inline'">
       <label>Inline Calendar (<code>&lt;dp-day-calendar&gt;</code>)</label><br>
       <dp-day-calendar
-        [theme]="material ? 'dp-material' : ''"
-        [(ngModel)]="dates"
-        (ngModelChange)="log($event)"
-        [config]="config">
+          [theme]="material ? 'dp-material' : ''"
+          [(ngModel)]="dates"
+          (ngModelChange)="log($event)"
+          [config]="config">
       </dp-day-calendar>
     </div>
   </div>
@@ -158,7 +158,7 @@
         Date Format (format):
       </span>
       <div class="dp-option-playground">
-        <input type="text" [(ngModel)]="config.format" (change)="configChanged()">
+        <input id="dateFormat" type="text" [(ngModel)]="config.format" (change)="configChanged()">
       </div>
     </div>
 
@@ -190,7 +190,8 @@
         Max Selectable Date (max):
       </span>
       <div class="dp-option-playground">
-        <dp-day-picker theme="dp-material"
+        <dp-day-picker id="maxSelectable"
+                       theme="dp-material"
                        [(ngModel)]="config.max"
                        (ngModelChange)="configChanged()"
                        placeholder="Select a max date">
@@ -204,11 +205,11 @@
       </span>
       <div class="dp-option-playground">
         <label>Single
-          <input type="radio" [(ngModel)]="config.allowMultiSelect" name="allowMultiSelect" [value]="false"
+          <input id="disableMultiselect" type="radio" [(ngModel)]="config.allowMultiSelect" name="allowMultiSelect" [value]="false"
                  (ngModelChange)="configChanged()">
         </label>
         <label>Multiple
-          <input type="radio" [(ngModel)]="config.allowMultiSelect" name="allowMultiSelect" [value]="true"
+          <input id="enableMultiselect" type="radio" [(ngModel)]="config.allowMultiSelect" name="allowMultiSelect" [value]="true"
                  (ngModelChange)="configChanged()">
         </label>
       </div>
@@ -220,11 +221,11 @@
       </span>
       <div class="dp-option-playground">
         <label>Close
-          <input type="radio" [(ngModel)]="config.closeOnSelect" name="closeOnSelect" [value]="true"
+          <input id="closeOnSelect" type="radio" [(ngModel)]="config.closeOnSelect" name="closeOnSelect" [value]="true"
                  (ngModelChange)="configChanged()">
         </label>
         <label>Don't Close
-          <input type="radio" [(ngModel)]="config.closeOnSelect" name="closeOnSelect" [value]="false"
+          <input id="noCloseOnSelect" type="radio" [(ngModel)]="config.closeOnSelect" name="closeOnSelect" [value]="false"
                  (ngModelChange)="configChanged()">
         </label>
       </div>
@@ -235,7 +236,7 @@
         Closing Delay in ms (closeOnSelectDelay):
       </span>
       <div class="dp-option-playground">
-        <input type="number" [(ngModel)]="config.closeOnSelectDelay" (change)="configChanged()">
+        <input id="closeDelay" type="number" [(ngModel)]="config.closeOnSelectDelay" (change)="configChanged()">
       </div>
     </div>
 
@@ -253,13 +254,13 @@
         Weekday Names (weekdayNames):
       </span>
       <div class="dp-option-playground dp-week-days">
-        <input type="text" [(ngModel)]="config.weekdayNames['su']" (change)="configChanged()">
-        <input type="text" [(ngModel)]="config.weekdayNames['mo']" (change)="configChanged()">
-        <input type="text" [(ngModel)]="config.weekdayNames['tu']" (change)="configChanged()">
-        <input type="text" [(ngModel)]="config.weekdayNames['we']" (change)="configChanged()">
-        <input type="text" [(ngModel)]="config.weekdayNames['th']" (change)="configChanged()">
-        <input type="text" [(ngModel)]="config.weekdayNames['fr']" (change)="configChanged()">
-        <input type="text" [(ngModel)]="config.weekdayNames['sa']" (change)="configChanged()">
+        <input id="weekDayName1" type="text" [(ngModel)]="config.weekdayNames['su']" (change)="configChanged()">
+        <input id="weekDayName2" type="text" [(ngModel)]="config.weekdayNames['mo']" (change)="configChanged()">
+        <input id="weekDayName3" type="text" [(ngModel)]="config.weekdayNames['tu']" (change)="configChanged()">
+        <input id="weekDayName4" type="text" [(ngModel)]="config.weekdayNames['we']" (change)="configChanged()">
+        <input id="weekDayName5" type="text" [(ngModel)]="config.weekdayNames['th']" (change)="configChanged()">
+        <input id="weekDayName6" type="text" [(ngModel)]="config.weekdayNames['fr']" (change)="configChanged()">
+        <input id="weekDayName7" type="text" [(ngModel)]="config.weekdayNames['sa']" (change)="configChanged()">
       </div>
     </div>
 

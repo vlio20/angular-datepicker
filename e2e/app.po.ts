@@ -10,6 +10,7 @@ export class DemoPage {
   monthCalendar = $(`${this.popupSelector} dp-month-calendar`);
   monthWeeks = $$(`${this.popupSelector} .dp-calendar-week`);
   calendarDays = $$(`${this.popupSelector} .dp-calendar-day`);
+  selectedDays = $$(`${this.popupSelector} .dp-calendar-day.dp-selected`);
   dayCalendarLeftNavBtn = $(`${this.popupSelector} .dp-calendar-nav-left`);
   dayCalendarRightNavBtn = $(`${this.popupSelector} .dp-calendar-nav-right`);
   monthCalendarLeftNavBtn = $(`${this.popupSelector} dp-month-calendar .dp-calendar-nav-left`);
@@ -48,6 +49,20 @@ export class DemoPage {
   firstDayOfWeekMonday = element(by.cssContainingText('#firstDayOfWeekSelect option', 'mo'));
   monthFormatInput = $('#monthFormatInput');
   minSelectableInput = $('#minSelectable input');
+  maxSelectableInput = $('#maxSelectable input');
+  closeOnSelect = $('#closeOnSelect');
+  noCloseOnSelect = $('#noCloseOnSelect');
+  closeDelayInput = $('#closeDelay');
+  weekDayName1Input = $('#weekDayName1');
+  weekDayName2Input = $('#weekDayName2');
+  weekDayName3Input = $('#weekDayName3');
+  weekDayName4Input = $('#weekDayName4');
+  weekDayName5Input = $('#weekDayName5');
+  weekDayName6Input = $('#weekDayName6');
+  weekDayName7Input = $('#weekDayName7');
+  dateFormatInput = $('#dateFormat');
+  enableMultiselect = $('#enableMultiselect');
+  disableMultiselect = $('#disableMultiselect');
 
   openBtn = $('#openBtn');
 
@@ -57,5 +72,9 @@ export class DemoPage {
 
   clickOnBody() {
     this.body.click();
+  }
+
+  clickOnDayButton(text: string) {
+    element(by.cssContainingText(`${this.popupSelector} .dp-calendar-day`, text)).click();
   }
 }
