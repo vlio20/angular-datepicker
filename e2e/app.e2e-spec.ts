@@ -219,7 +219,14 @@ describe('ng2-date-picker App', () => {
     page.minSelectableInput.sendKeys('11-04-2017');
     page.datePickerInput.sendKeys('17-04-2017');
     page.datePickerInput.click();
-    browser.pause();
     expect(page.calendarDisabledDays.count()).toBe(16);
+  });
+
+  it('should check check that the max selectable option is working', () => {
+    page.maxSelectableInput.clear();
+    page.maxSelectableInput.sendKeys('11-04-2017');
+    page.datePickerInput.sendKeys('12-04-2017');
+    page.datePickerInput.click();
+    expect(page.calendarDisabledDays.count()).toBe(25);
   });
 });

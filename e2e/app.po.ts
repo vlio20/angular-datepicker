@@ -48,6 +48,7 @@ export class DemoPage {
   firstDayOfWeekMonday = element(by.cssContainingText('#firstDayOfWeekSelect option', 'mo'));
   monthFormatInput = $('#monthFormatInput');
   minSelectableInput = $('#minSelectable input');
+  maxSelectableInput = $('#maxSelectable input');
 
   openBtn = $('#openBtn');
 

@@ -50,10 +50,10 @@
     <div class="dp-inline" *ngIf="pickerMode === 'inline'">
       <label>Inline Calendar (<code>&lt;dp-day-calendar&gt;</code>)</label><br>
       <dp-day-calendar
-        [theme]="material ? 'dp-material' : ''"
-        [(ngModel)]="dates"
-        (ngModelChange)="log($event)"
-        [config]="config">
+          [theme]="material ? 'dp-material' : ''"
+          [(ngModel)]="dates"
+          (ngModelChange)="log($event)"
+          [config]="config">
       </dp-day-calendar>
     </div>
   </div>
@@ -190,7 +190,8 @@
         Max Selectable Date (max):
       </span>
       <div class="dp-option-playground">
-        <dp-day-picker theme="dp-material"
+        <dp-day-picker id="maxSelectable"
+                       theme="dp-material"
                        [(ngModel)]="config.max"
                        (ngModelChange)="configChanged()"
                        placeholder="Select a max date">
