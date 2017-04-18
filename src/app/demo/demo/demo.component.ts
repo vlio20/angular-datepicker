@@ -52,7 +52,9 @@ export class DemoComponent {
     showWeekNumbers: false,
     enableMonthSelector: true,
     yearFormat: 'YYYY',
-    showGoToCurrent: true
+    showGoToCurrent: true,
+    dayBtnFormat: 'DD',
+    monthBtnFormat: 'MMM'
   };
   isAtTop: boolean = true;
 

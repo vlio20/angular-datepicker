@@ -61,7 +61,11 @@ export class DatePickerService {
       monthFormatter: pickerConfig.monthFormatter,
       enableMonthSelector: pickerConfig.enableMonthSelector,
       yearFormat: pickerConfig.yearFormat,
-      yearFormatter: pickerConfig.yearFormatter
+      yearFormatter: pickerConfig.yearFormatter,
+      dayBtnFormat: pickerConfig.dayBtnFormat,
+      dayBtnFormatter: pickerConfig.dayBtnFormatter,
+      monthBtnFormat: pickerConfig.monthBtnFormat,
+      monthBtnFormatter: pickerConfig.monthBtnFormatter
     };
   }
 

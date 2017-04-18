@@ -27,7 +27,8 @@ export class DayCalendarService {
     format: 'DD-MM-YYYY',
     allowMultiSelect: false,
     monthFormat: 'MMM, YYYY',
-    enableMonthSelector: true
+    enableMonthSelector: true,
+    dayBtnFormat: 'DD'
   };
 
   constructor(private utilsService: UtilsService) {
@@ -236,5 +237,14 @@ export class DayCalendarService {
       yearFormat: componentConfig.yearFormat,
       yearFormatter: componentConfig.yearFormatter
     });
+  }
+
+  // todo:: add unit tests
+  getDayBtnText(config: IDayCalendarConfig, day: IDay): string {
+    if (config.dayBtnFormatter) {
+      return config.dayBtnFormatter(day.date);
+    }
+
+    return day.date.format(config.dayBtnFormat);
   }
 }

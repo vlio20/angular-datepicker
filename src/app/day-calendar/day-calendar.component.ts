@@ -178,6 +178,10 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
     return this.dayCalendarService.getHeaderLabel(this.componentConfig, this.currentDateView);
   }
 
+  getDayBtnText(day: IDay): string {
+    return this.dayCalendarService.getDayBtnText(this.componentConfig, day);
+  }
+
   onLeftNav() {
     this.currentDateView.subtract(1, 'month');
     this.weeks = this.dayCalendarService

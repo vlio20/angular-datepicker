@@ -205,11 +205,13 @@
       </span>
       <div class="dp-option-playground">
         <label>Single
-          <input id="disableMultiselect" type="radio" [(ngModel)]="config.allowMultiSelect" name="allowMultiSelect" [value]="false"
+          <input id="disableMultiselect" type="radio" [(ngModel)]="config.allowMultiSelect" name="allowMultiSelect"
+                 [value]="false"
                  (ngModelChange)="configChanged()">
         </label>
         <label>Multiple
-          <input id="enableMultiselect" type="radio" [(ngModel)]="config.allowMultiSelect" name="allowMultiSelect" [value]="true"
+          <input id="enableMultiselect" type="radio" [(ngModel)]="config.allowMultiSelect" name="allowMultiSelect"
+                 [value]="true"
                  (ngModelChange)="configChanged()">
         </label>
       </div>
@@ -225,7 +227,8 @@
                  (ngModelChange)="configChanged()">
         </label>
         <label>Don't Close
-          <input id="noCloseOnSelect" type="radio" [(ngModel)]="config.closeOnSelect" name="closeOnSelect" [value]="false"
+          <input id="noCloseOnSelect" type="radio" [(ngModel)]="config.closeOnSelect" name="closeOnSelect"
+                 [value]="false"
                  (ngModelChange)="configChanged()">
         </label>
       </div>
@@ -390,6 +393,24 @@
                  [value]="false"
                  (ngModelChange)="configChanged()">
         </label>
+      </div>
+    </div>
+
+    <div class="dp-option">
+      <span class="dp-option-header">
+        Day Button Format (dayBtnFormat):
+      </span>
+      <div class="dp-option-playground">
+        <input id="dayBtnFormat" type="text" [(ngModel)]="config.dayBtnFormat" (change)="configChanged()">
+      </div>
+    </div>
+
+    <div class="dp-option">
+      <span class="dp-option-header">
+        Month Button Format (monthBtnFormat):
+      </span>
+      <div class="dp-option-playground">
+        <input id="monthBtnFormat" type="text" [(ngModel)]="config.monthBtnFormat" (change)="configChanged()">
       </div>
     </div>
 
