@@ -29,6 +29,7 @@ export class DemoPage {
   dayCalendarNavHeaderBtn = $(`${this.popupSelector} .dp-nav-header-btn`);
   DeyCalendarMonthNavHeader = $(`${this.popupSelector} dp-month-calendar .dp-nav-header`);
   DayCalendarNavMonthHeaderBtn = $(`${this.popupSelector} dp-month-calendar .dp-nav-header-btn`);
+  calendarDisabledDays = $$(`${this.popupSelector} .dp-calendar-day[disabled]`);
 
   currentMonthCalendarBtn = $(`${this.popupSelector} dp-month-calendar .dp-current-month`);
   disableMonthSelector = $('#disableMonthSelector');
@@ -46,6 +47,7 @@ export class DemoPage {
   placeholderInput = $('#placeholderInput');
   firstDayOfWeekMonday = element(by.cssContainingText('#firstDayOfWeekSelect option', 'mo'));
   monthFormatInput = $('#monthFormatInput');
+  minSelectableInput = $('#minSelectable input');
 
   openBtn = $('#openBtn');
 

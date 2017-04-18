@@ -213,4 +213,13 @@ describe('ng2-date-picker App', () => {
     page.datePickerInput.click();
     expect(page.dayCalendarNavHeaderBtn.getText()).toEqual(moment().format('MM-YYYY'));
   });
+
+  it('should check check that the min selectable option is working', () => {
+    page.minSelectableInput.clear();
+    page.minSelectableInput.sendKeys('11-04-2017');
+    page.datePickerInput.sendKeys('17-04-2017');
+    page.datePickerInput.click();
+    browser.pause();
+    expect(page.calendarDisabledDays.count()).toBe(16);
+  });
 });

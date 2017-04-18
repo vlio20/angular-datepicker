@@ -50,10 +50,10 @@
     <div class="dp-inline" *ngIf="pickerMode === 'inline'">
       <label>Inline Calendar (<code>&lt;dp-calendar&gt;</code>)</label><br>
       <!--<dp-day-calendar-->
-          <!--[theme]="material ? 'dp-material' : ''"-->
-          <!--[(ngModel)]="dates"-->
-          <!--(ngModelChange)="log($event)"-->
-          <!--[config]="config">-->
+      <!--[theme]="material ? 'dp-material' : ''"-->
+      <!--[(ngModel)]="dates"-->
+      <!--(ngModelChange)="log($event)"-->
+      <!--[config]="config">-->
       <!--</dp-day-calendar>-->
     </div>
   </div>
@@ -176,7 +176,8 @@
         Min Selectable Date (min):
       </span>
       <div class="dp-option-playground">
-        <dp-day-picker theme="dp-material"
+        <dp-day-picker id="minSelectable"
+                       theme="dp-material"
                        [(ngModel)]="config.min"
                        (ngModelChange)="configChanged()"
                        placeholder="Select a min date">
