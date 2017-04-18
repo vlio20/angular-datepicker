@@ -111,17 +111,26 @@ Here is the list of APIs:
 
 ## Inline
 
-You can use the `<dp-calendar>` component to display the calendar widget without an associated input box.
+You can use the `<dp-day-calendar>` component to display the calendar widget without an associated input box.
 
 i.e.
 ```html
-<dp-day-calendar [(ngModel)]="date" [config]="calendarConfig"></dp-day-calendar>
+<dp-day-calendar [(ngModel)]="selectedDate" [config]="config"></dp-day-calendar>
 ```
+
+### Attributes:  
+| Name                 | Type                | Default                                                                  | Description                                                                                                                                                                                                                                        |
+|----------------------|:-------------------:|:------------------------------------------------------------------------:|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| required             | `Boolean`           | `undefined`                                                              | This is a validation rule, if there won't be any selected date then the containing form will be invalid.                                                                                                                                           |
+| minDate              | `Moment|String`     | `undefined`                                                              | This is a validation rule, if the selected date will be before `minDate` the containing form will be invalid. Note: if provided as string format configuration should be provided in the config object.                                            |
+| maxDate              | `Moment|String`     | `undefined`                                                              | This is a validation rule, if the selected date will be after `maxDate` the containing form will be invalid. Note: if provided as string format configuration should be provided in the config object.                                             | 
+| theme                | `string       `     | `''`                                                                     | Theme is a class added to the popup container (and inner components) - this will allow styling of the calendar when it's appended to outer element (for example - body). There is a built in theme named dp-material, you can find it in the demo. | 
+| config               | `IDatePickerConfig` | See Below                                                                | Configuration object - see description below.                                                                                                                                                                                                      |
 
 ### Configuration:  
 In order to provide configurations to the day-calendar you need to pass it to the `dp-day-calendar` component:  
 ```html
-<dp-date-picker [(ngModel)]="selectedDate" [config]="datePickerConfig"></dp-date-picker>
+<dp-date-picker [(ngModel)]="selectedDate" [config]="config"></dp-date-picker>
 ```
 Here are the available configurations:  
 
