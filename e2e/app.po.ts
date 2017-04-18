@@ -1,4 +1,4 @@
-import {browser, $, $$} from 'protractor';
+import {browser, $, $$, element, by} from 'protractor';
 
 export class DemoPage {
   private popupSelector = 'body > div .dp-popup';
@@ -6,11 +6,16 @@ export class DemoPage {
   datePickerInput = $('#datePicker input');
   datePickerPopup = $(this.popupSelector);
   dayCalendar = $(`${this.popupSelector} dp-day-calendar`);
+  dayCalendarContainer = $(`${this.popupSelector} dp-day-calendar .dp-day-calendar-container`);
   monthCalendar = $(`${this.popupSelector} dp-month-calendar`);
   monthWeeks = $$(`${this.popupSelector} .dp-calendar-week`);
   calendarDays = $$(`${this.popupSelector} .dp-calendar-day`);
-  navLeftBtn = $(`${this.popupSelector} .dp-calendar-nav-left`);
-  navRightBtn = $(`${this.popupSelector} .dp-calendar-nav-right`);
+  dayCalendarLeftNavBtn = $(`${this.popupSelector} .dp-calendar-nav-left`);
+  dayCalendarRightNavBtn = $(`${this.popupSelector} .dp-calendar-nav-right`);
+  monthCalendarLeftNavBtn = $(`${this.popupSelector} dp-month-calendar .dp-calendar-nav-left`);
+  monthCalendarRightNavBtn = $(`${this.popupSelector} dp-month-calendar .dp-calendar-nav-right`);
+  weekDayNames = $$(`${this.popupSelector} .dp-weekdays`);
+  calendarContainer = $$(`${this.popupSelector} .dp-calendar-container `);
   currentLocationBtn = $(`#datePicker .dp-current-location-btn`);
   themeOnRadio = $('#themeOn');
   themeOffRadio = $('#themeOff');
@@ -20,12 +25,29 @@ export class DemoPage {
   showWeekNumbersRadio = $('#showWeekNumbersRadio');
   hideWeekNumbersRadio = $('#hideWeekNumbersRadio');
   weekNumbers = $$(`${this.popupSelector} .dp-week-number`);
-  navHeader = $(`${this.popupSelector} .dp-nav-header`);
-  navHeaderBtn = $(`${this.popupSelector} .dp-nav-header-btn`);
-  currentMonthCalendarBtn = $(`${this.popupSelector} .dp-current-month`);
+  DeyCalendarNavHeader = $(`${this.popupSelector} .dp-nav-header`);
+  dayCalendarNavHeaderBtn = $(`${this.popupSelector} .dp-nav-header-btn`);
+  DeyCalendarMonthNavHeader = $(`${this.popupSelector} dp-month-calendar .dp-nav-header`);
+  DayCalendarNavMonthHeaderBtn = $(`${this.popupSelector} dp-month-calendar .dp-nav-header-btn`);
+  calendarDisabledDays = $$(`${this.popupSelector} .dp-calendar-day[disabled]`);
+
+  currentMonthCalendarBtn = $(`${this.popupSelector} dp-month-calendar .dp-current-month`);
   disableMonthSelector = $('#disableMonthSelector');
   yearFormat = $('#yearFormat');
   hideGoToCurrentRadio = $('#hideGoToCurrent');
+  pickerEnabledRadio = $('#inputEnabledRadio');
+  pickerDisabledRadio = $('#inputDisabledRadio');
+  enableRequiredValidationRadio = $('#enableRequiredRadio');
+  disableRequiredValidationRadio = $('#disableRequiredRadio');
+  requiredValidationMsg = $('#requiredValidation');
+  minDateValidationPickerInput = $('#minDatePicker input');
+  minDateValidationMsg = $('#minDateValidation');
+  maxDateValidationPickerInput = $('#maxDatePicker input');
+  maxDateValidationMsg = $('#maxDateValidation');
+  placeholderInput = $('#placeholderInput');
+  firstDayOfWeekMonday = element(by.cssContainingText('#firstDayOfWeekSelect option', 'mo'));
+  monthFormatInput = $('#monthFormatInput');
+  minSelectableInput = $('#minSelectable input');
 
   openBtn = $('#openBtn');
 

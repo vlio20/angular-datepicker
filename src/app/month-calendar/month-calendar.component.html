@@ -1,0 +1,22 @@
+<dp-calendar-nav
+    [label]="getNavLabel()"
+    [showLeftNav]="shouldShowLeftNav()"
+    [showRightNav]="shouldShowRightNav()"
+    [isLabelClickable]="isNavHeaderBtnClickable()"
+    [theme]="theme"
+    (onLeftNav)="onLeftNav()"
+    (onRightNav)="onRightNav()"
+    (onLabelClick)="toggleCalendar()">
+</dp-calendar-nav>
+
+<div class="dp-calendar-wrapper">
+  <div class="dp-months-row" *ngFor="let monthRow of yearMonths">
+    <button class="dp-calendar-month"
+            *ngFor="let month of monthRow"
+            [disabled]="isDisabledMonth(month)"
+            [ngClass]="{'dp-selected': month.selected,'dp-current-month': month.currentMonth}"
+            (click)="monthClicked(month)">
+      {{month.date.format('MMM')}}
+    </button>
+  </div>
+</div>

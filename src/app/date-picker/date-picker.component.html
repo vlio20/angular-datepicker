@@ -1,0 +1,36 @@
+<div>
+  <div class="dp-input-container">
+    <input type="text"
+           class="dp-picker-input"
+           [placeholder]="placeholder"
+           [ngModel]="inputElementValue"
+           (ngModelChange)="onViewDateChange($event)"
+           (focus)="inputFocused()"
+           [readonly]="componentConfig.disableKeypress"
+           [disabled]="disabled"/>
+
+    <button class="dp-current-location-btn"
+            *ngIf="componentConfig.showGoToCurrent"
+            (click)="moveToCurrent()"
+            [hidden]="!_areCalendarsShown">
+    </button>
+  </div>
+  <div #container>
+    <div class="dp-popup {{theme}}"
+         [ngSwitch]="type"
+         [hidden]="!_areCalendarsShown">
+      <dp-day-calendar #dayCalendar
+                       *ngSwitchCase="'day'"
+                       [config]="dayCalendarConfig"
+                       [ngModel]="_selected"
+                       [displayDate]="currentDateView"
+                       (onSelect)="daySelected($event)"
+                       [theme]="theme">
+
+      </dp-day-calendar>
+
+      <dp-month-calendar *ngSwitchCase="'month'">
+      </dp-month-calendar>
+    </div>
+  </div>
+</div>

@@ -4,18 +4,23 @@ import {TDrops, TOpens} from '../../types/poistions.type';
 @Injectable()
 export class DomHelper {
 
-  private static setYAxisPosition(element: HTMLElement, anchor: HTMLElement, drops: TDrops) {
-    const {top, bottom} = anchor.getBoundingClientRect();
+  private static setYAxisPosition(element: HTMLElement, container: HTMLElement, anchor: HTMLElement, drops: TDrops) {
+    const anchorRect = anchor.getBoundingClientRect();
+    const containerRect = container.getBoundingClientRect();
+    const bottom = anchorRect.bottom - containerRect.top;
+    const top = anchorRect.top - containerRect.top;
 
     if (drops === 'down') {
-      element.style.top = bottom + document.body.scrollTop + 'px';
+      element.style.top = (bottom  + 'px');
     } else {
-      element.style.top = (top + document.body.scrollTop - element.scrollHeight) + 'px';
+      element.style.top = (top - element.scrollHeight) + 'px';
     }
   }
 
-  private static setXAxisPosition(element: HTMLElement, anchor: HTMLElement, dimElem: HTMLElement, opens: TOpens) {
-    const {left, right} = anchor.getBoundingClientRect();
+  private static setXAxisPosition(element: HTMLElement, container: HTMLElement, anchor: HTMLElement, dimElem: HTMLElement, opens: TOpens) {
+    const anchorRect = anchor.getBoundingClientRect();
+    const containerRect = container.getBoundingClientRect();
+    const left = anchorRect.left - containerRect.left;
 
     if (opens === 'right') {
       element.style.left = left + 'px';
@@ -47,7 +52,7 @@ export class DomHelper {
   appendElementToPosition(config: IAppendToArgs): void {
     const {container, element} = config;
 
-    if (container.style.position === 'static') {
+    if (!container.style.position || container.style.position === 'static') {
       container.style.position = 'relative';
     }
 
@@ -64,24 +69,24 @@ export class DomHelper {
     });
   }
 
-  setElementPosition({element, anchor, dimElem, drops, opens}: IAppendToArgs) {
-    DomHelper.setYAxisPosition(element, anchor, drops);
-    DomHelper.setXAxisPosition(element, anchor, dimElem, opens);
+  setElementPosition({element, container, anchor, dimElem, drops, opens}: IAppendToArgs) {
+    DomHelper.setYAxisPosition(element, container, anchor, drops);
+    DomHelper.setXAxisPosition(element, container, anchor, dimElem, opens);
 
     if (drops === 'down' && !DomHelper.isBottomInView(dimElem)) {
-      DomHelper.setYAxisPosition(element, anchor, 'up');
+      DomHelper.setYAxisPosition(element, container, anchor, 'up');
     }
 
     if (drops === 'up' && !DomHelper.isTopInView(dimElem)) {
-      DomHelper.setYAxisPosition(element, anchor, 'down');
+      DomHelper.setYAxisPosition(element, container, anchor, 'down');
     }
 
     if (opens === 'right' && !DomHelper.isRightInView(dimElem)) {
-      DomHelper.setXAxisPosition(element, anchor, dimElem, 'left');
+      DomHelper.setXAxisPosition(element, container, anchor, dimElem, 'left');
     }
 
     if (opens === 'left' && !DomHelper.isLeftInView(dimElem)) {
-      DomHelper.setXAxisPosition(element, anchor, dimElem, 'right');
+      DomHelper.setXAxisPosition(element, container, anchor, dimElem, 'right');
     }
   }
 }

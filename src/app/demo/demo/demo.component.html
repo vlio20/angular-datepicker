@@ -40,21 +40,21 @@
                        [config]="config"
                        [theme]="material ? 'dp-material' : ''">
         </dp-day-picker>
-        <div *ngIf="dateItem.errors && dateItem.errors.required">required</div>
+        <div id="requiredValidation" *ngIf="dateItem.errors && dateItem.errors.required">required</div>
         <div *ngIf="dateItem.errors && dateItem.errors.format">format invalid</div>
-        <div *ngIf="dateItem.errors && dateItem.errors.minDate">minDate invalid</div>
-        <div *ngIf="dateItem.errors && dateItem.errors.maxDate">maxDate invalid</div>
+        <div id="minDateValidation" *ngIf="dateItem.errors && dateItem.errors.minDate">minDate invalid</div>
+        <div id="maxDateValidation" *ngIf="dateItem.errors && dateItem.errors.maxDate">maxDate invalid</div>
       </form>
     </div>
 
     <div class="dp-inline" *ngIf="pickerMode === 'inline'">
-      <label>Inline Calendar (<code>&lt;dp-calendar&gt;</code>)</label><br>
-      <dp-calendar
-          [theme]="material ? 'dp-material' : ''"
-          [(selected)]="dates"
-          (selectedChange)="log($event)"
-          [config]="config">
-      </dp-calendar>
+      <label>Inline Calendar (<code>&lt;dp-day-calendar&gt;</code>)</label><br>
+      <dp-day-calendar
+        [theme]="material ? 'dp-material' : ''"
+        [(ngModel)]="dates"
+        (ngModelChange)="log($event)"
+        [config]="config">
+      </dp-day-calendar>
     </div>
   </div>
 
@@ -80,10 +80,10 @@
       </span>
       <div class="dp-option-playground">
         <label>Enabled
-          <input type="radio" [(ngModel)]="disabled" name="disabled" [value]="false">
+          <input id="inputEnabledRadio" type="radio" [(ngModel)]="disabled" name="disabled" [value]="false">
         </label>
         <label>Disabled
-          <input type="radio" [(ngModel)]="disabled" name="disabled" [value]="true">
+          <input id="inputDisabledRadio" type="radio" [(ngModel)]="disabled" name="disabled" [value]="true">
         </label>
       </div>
     </div>
@@ -94,10 +94,10 @@
       </span>
       <div class="dp-option-playground">
         <label>Required
-          <input type="radio" [(ngModel)]="required" name="required" [value]="true">
+          <input id="enableRequiredRadio" type="radio" [(ngModel)]="required" name="required" [value]="true">
         </label>
         <label>Not Required
-          <input type="radio" [(ngModel)]="required" name="required" [value]="false">
+          <input id="disableRequiredRadio" type="radio" [(ngModel)]="required" name="required" [value]="false">
         </label>
       </div>
     </div>
@@ -107,7 +107,8 @@
         Min-Date Validation (minDate):
       </span>
       <div class="dp-option-playground">
-        <dp-day-picker theme="dp-material"
+        <dp-day-picker id="minDatePicker"
+                       theme="dp-material"
                        [(ngModel)]="validationMinDate"
                        placeholder="Select a min date">
         </dp-day-picker>
@@ -119,7 +120,8 @@
         Max-Date Validation (maxDate):
       </span>
       <div class="dp-option-playground">
-        <dp-day-picker theme="dp-material"
+        <dp-day-picker id="maxDatePicker"
+                       theme="dp-material"
                        [(ngModel)]="validationMaxDate"
                        placeholder="Select a max date">
         </dp-day-picker>
@@ -131,7 +133,7 @@
         Placeholder (placeholder):
       </span>
       <div class="dp-option-playground">
-        <input type="text" placeholder="Put a placeholder" [(ngModel)]="placeholder"/>
+        <input id="placeholderInput" type="text" placeholder="Put a placeholder" [(ngModel)]="placeholder"/>
       </div>
     </div>
 
@@ -145,18 +147,9 @@
         First Day of The week (firstDayOfWeek):
       </span>
       <div class="dp-option-playground">
-        <select [(ngModel)]="config.firstDayOfWeek" (change)="configChanged()">
+        <select id="firstDayOfWeekSelect" [(ngModel)]="config.firstDayOfWeek" (change)="configChanged()">
           <option *ngFor="let day of DAYS" [value]="day"> {{day}}</option>
         </select>
-      </div>
-    </div>
-
-    <div class="dp-option">
-      <span class="dp-option-header">
-        Amount of Calendars (calendarsAmount):
-      </span>
-      <div class="dp-option-playground">
-        <input type="number" [(ngModel)]="config.calendarsAmount" (change)="configChanged()">
       </div>
     </div>
 
@@ -174,7 +167,7 @@
         Month Format (monthFormat):
       </span>
       <div class="dp-option-playground">
-        <input type="text" [(ngModel)]="config.monthFormat" (change)="configChanged()">
+        <input id="monthFormatInput" type="text" [(ngModel)]="config.monthFormat" (change)="configChanged()">
       </div>
     </div>
 
@@ -183,7 +176,8 @@
         Min Selectable Date (min):
       </span>
       <div class="dp-option-playground">
-        <dp-day-picker theme="dp-material"
+        <dp-day-picker id="minSelectable"
+                       theme="dp-material"
                        [(ngModel)]="config.min"
                        (ngModelChange)="configChanged()"
                        placeholder="Select a min date">
@@ -287,22 +281,6 @@
 
     <div class="dp-option">
       <span class="dp-option-header">
-        User Value Type (userValueType):
-      </span>
-      <div class="dp-option-playground">
-        <label>Moment <code>'object'</code>
-          <input type="radio" [(ngModel)]="config.userValueType" name="userValueType" value="object"
-                 (ngModelChange)="configChanged()">
-        </label>
-        <label>String <code>'string'</code>
-          <input type="radio" [(ngModel)]="config.userValueType" name="userValueType" value="string"
-                 (ngModelChange)="configChanged()">
-        </label>
-      </div>
-    </div>
-
-    <div class="dp-option">
-      <span class="dp-option-header">
         Drops (drops):
       </span>
       <div class="dp-option-playground">
@@ -339,11 +317,13 @@
       </span>
       <div class="dp-option-playground">
         <label>Show
-          <input id="showNearMonthDaysRadio" type="radio" [(ngModel)]="config.showNearMonthDays" name="showNearMonthDays" [value]="true"
+          <input id="showNearMonthDaysRadio" type="radio" [(ngModel)]="config.showNearMonthDays"
+                 name="showNearMonthDays" [value]="true"
                  (ngModelChange)="configChanged()">
         </label>
         <label>Hide
-          <input id="hideNearMonthDaysRadio" type="radio" [(ngModel)]="config.showNearMonthDays" name="showNearMonthDays" [value]="false"
+          <input id="hideNearMonthDaysRadio" type="radio" [(ngModel)]="config.showNearMonthDays"
+                 name="showNearMonthDays" [value]="false"
                  (ngModelChange)="configChanged()">
         </label>
       </div>
@@ -355,11 +335,13 @@
       </span>
       <div class="dp-option-playground">
         <label>Show
-          <input id="showWeekNumbersRadio" type="radio" [(ngModel)]="config.showWeekNumbers" name="showWeekNumbers" [value]="true"
+          <input id="showWeekNumbersRadio" type="radio" [(ngModel)]="config.showWeekNumbers" name="showWeekNumbers"
+                 [value]="true"
                  (ngModelChange)="configChanged()">
         </label>
         <label>Hide
-          <input id="hideWeekNumbersRadio" type="radio" [(ngModel)]="config.showWeekNumbers" name="showWeekNumbers" [value]="false"
+          <input id="hideWeekNumbersRadio" type="radio" [(ngModel)]="config.showWeekNumbers" name="showWeekNumbers"
+                 [value]="false"
                  (ngModelChange)="configChanged()">
         </label>
       </div>
@@ -371,11 +353,13 @@
       </span>
       <div class="dp-option-playground">
         <label>Enabled
-          <input id="enableMonthSelector" type="radio" [(ngModel)]="config.enableMonthSelector" name="enableMonthSelector" [value]="true"
+          <input id="enableMonthSelector" type="radio" [(ngModel)]="config.enableMonthSelector"
+                 name="enableMonthSelector" [value]="true"
                  (ngModelChange)="configChanged()">
         </label>
         <label>Disabled
-          <input id="disableMonthSelector" type="radio" [(ngModel)]="config.enableMonthSelector" name="enableMonthSelector" [value]="false"
+          <input id="disableMonthSelector" type="radio" [(ngModel)]="config.enableMonthSelector"
+                 name="enableMonthSelector" [value]="false"
                  (ngModelChange)="configChanged()">
         </label>
       </div>
@@ -396,11 +380,13 @@
       </span>
       <div class="dp-option-playground">
         <label>Enabled
-          <input id="showGoToCurrent" type="radio" [(ngModel)]="config.showGoToCurrent" name="showGoToCurrent" [value]="true"
+          <input id="showGoToCurrent" type="radio" [(ngModel)]="config.showGoToCurrent" name="showGoToCurrent"
+                 [value]="true"
                  (ngModelChange)="configChanged()">
         </label>
         <label>Disabled
-          <input id="hideGoToCurrent" type="radio" [(ngModel)]="config.showGoToCurrent" name="showGoToCurrent" [value]="false"
+          <input id="hideGoToCurrent" type="radio" [(ngModel)]="config.showGoToCurrent" name="showGoToCurrent"
+                 [value]="false"
                  (ngModelChange)="configChanged()">
         </label>
       </div>
@@ -430,28 +416,3 @@
     </div>
   </div>
 </div>
-
-<div class="dp-configs-container">
-  <h3>Attributes Values</h3>
-  <div class="dp-attribute-options">
-      <pre><code class="html">
-[class.dp-material]="{{material}}"
-[disabled]="{{disabled}}"
-[required]="{{required}}"
-[minDate]="{{validationMinDate && validationMinDate.format(demoFormat)}}"
-[maxDate]="{{validationMaxDate && validationMaxDate.format(demoFormat)}}"
-[placeholder]="{{placeholder}}"
-        </code>
-      </pre>
-  </div>
-  <h3>Configuration Object Values</h3>
-  <div class="dp-config-object">
-    <pre><code>{{config | json}}</code></pre>
-  </div>
-</div>
-
-<ul>
-  <li>
-    <a routerLink="multiselect-test">Multiselect Test</a>
-  </li>
-</ul>

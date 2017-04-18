@@ -1,6 +1,6 @@
 import {DemoPage} from './app.po';
 import {protractor, browser} from 'protractor';
-import moment = require('moment');
+import * as moment from 'moment';
 
 describe('ng2-date-picker App', () => {
   let page: DemoPage;
@@ -44,10 +44,8 @@ describe('ng2-date-picker App', () => {
   it('should check that the showNearMonthDays is working as expected', () => {
     page.datePickerInput.clear();
     page.datePickerInput.sendKeys('27-03-2017');
-    page.datePickerInput.sendKeys(protractor.Key.ENTER);
     page.datePickerInput.click();
     expect(page.monthWeeks.count()).toBe(6);
-
     page.hideNearMonthDaysRadio.click();
     page.datePickerInput.click();
     expect(page.monthWeeks.count()).toBe(5);
@@ -58,7 +56,6 @@ describe('ng2-date-picker App', () => {
 
     page.datePickerInput.clear();
     page.datePickerInput.sendKeys('27-04-2017');
-    page.datePickerInput.sendKeys(protractor.Key.ENTER);
     page.hideNearMonthDaysRadio.click();
     page.datePickerInput.click();
     expect(page.monthWeeks.count()).toBe(6);
@@ -84,43 +81,43 @@ describe('ng2-date-picker App', () => {
   it('should disable/enable month selection', () => {
     page.datePickerInput.sendKeys('08-04-2017');
     page.datePickerInput.click();
-    expect(page.navHeaderBtn.isPresent()).toBe(true);
-    expect(page.dayCalendar.isPresent()).toBe(true);
-    expect(page.navHeaderBtn.getText()).toEqual('Apr, 2017');
+    expect(page.dayCalendarNavHeaderBtn.isPresent()).toBe(true);
+    expect(page.dayCalendarContainer.isDisplayed()).toBe(true);
+    expect(page.dayCalendarNavHeaderBtn.getText()).toEqual('Apr, 2017');
 
-    page.navHeaderBtn.click();
-    expect(page.dayCalendar.isPresent()).toBe(false);
+    page.dayCalendarNavHeaderBtn.click();
+    expect(page.dayCalendarContainer.isDisplayed()).toBe(false);
     expect(page.monthCalendar.isPresent()).toBe(true);
-    expect(page.navHeaderBtn.getText()).toEqual('2017');
+    expect(page.DayCalendarNavMonthHeaderBtn.getText()).toEqual('2017');
     expect(page.currentMonthCalendarBtn.getText()).toEqual('Apr');
-    page.navLeftBtn.click();
-    expect(page.navHeaderBtn.getText()).toEqual('2016');
+    page.monthCalendarLeftNavBtn.click();
+    expect(page.DayCalendarNavMonthHeaderBtn.getText()).toEqual('2016');
     expect(page.currentMonthCalendarBtn.isPresent()).toBe(false);
-    page.navRightBtn.click();
-    expect(page.navHeaderBtn.getText()).toEqual('2017');
+    page.monthCalendarRightNavBtn.click();
+    expect(page.DayCalendarNavMonthHeaderBtn.getText()).toEqual('2017');
     expect(page.currentMonthCalendarBtn.getText()).toEqual('Apr');
 
     page.clickOnBody();
     page.datePickerInput.click();
-    expect(page.dayCalendar.isPresent()).toBe(true);
+    expect(page.dayCalendarContainer.isDisplayed()).toBe(true);
     expect(page.monthCalendar.isPresent()).toBe(false);
-    page.navHeaderBtn.click();
-    expect(page.dayCalendar.isPresent()).toBe(false);
+    page.dayCalendarNavHeaderBtn.click();
+    expect(page.dayCalendarContainer.isDisplayed()).toBe(false);
     expect(page.monthCalendar.isPresent()).toBe(true);
 
-    page.navHeaderBtn.click();
-    expect(page.dayCalendar.isPresent()).toBe(true);
+    page.DayCalendarNavMonthHeaderBtn.click();
+    expect(page.dayCalendarContainer.isDisplayed()).toBe(true);
     expect(page.monthCalendar.isPresent()).toBe(false);
 
     page.disableMonthSelector.click();
-    expect(page.navHeaderBtn.isPresent()).toBe(false);
+    expect(page.DeyCalendarMonthNavHeader.isPresent()).toBe(false);
   });
 
   it('should change year format', () => {
     page.datePickerInput.sendKeys('08-04-2017');
     page.datePickerInput.click();
-    page.navHeaderBtn.click();
-    expect(page.navHeaderBtn.getText()).toEqual('2017');
+    page.dayCalendarNavHeaderBtn.click();
+    expect(page.DayCalendarNavMonthHeaderBtn.getText()).toEqual('2017');
 
     page.clickOnBody();
 
@@ -128,20 +125,101 @@ describe('ng2-date-picker App', () => {
     page.yearFormat.sendKeys('YY');
 
     page.datePickerInput.click();
-    page.navHeaderBtn.click();
-    expect(page.navHeaderBtn.getText()).toEqual('17');
+    page.dayCalendarNavHeaderBtn.click();
+    expect(page.DayCalendarNavMonthHeaderBtn.getText()).toEqual('17');
   });
 
   it('should check if go to current location btn is working as expected', () => {
     expect(page.currentLocationBtn.isDisplayed()).toBe(false);
     page.datePickerInput.sendKeys('08-04-2017');
-    expect(page.navHeaderBtn.getText()).toEqual(moment('08-04-2017', 'DD-MM-YYYY').format('MMM, YYYY'));
+    expect(page.dayCalendarNavHeaderBtn.getText()).toEqual(moment('08-04-2017', 'DD-MM-YYYY').format('MMM, YYYY'));
     page.datePickerInput.click();
     expect(page.currentLocationBtn.isDisplayed()).toBe(true);
     page.currentLocationBtn.click();
-    expect(page.navHeaderBtn.getText()).toEqual(moment().format('MMM, YYYY'));
+    expect(page.dayCalendarNavHeaderBtn.getText()).toEqual(moment().format('MMM, YYYY'));
 
     page.hideGoToCurrentRadio.click();
     expect(page.currentLocationBtn.isPresent()).toBe(false);
+  });
+
+  it('should check if enable/diable is working', () => {
+    expect(page.datePickerInput.getAttribute('disabled')).toBe(null);
+    page.pickerDisabledRadio.click();
+    expect(page.datePickerInput.getAttribute('disabled')).toEqual('true');
+    page.pickerEnabledRadio.click();
+    expect(page.datePickerInput.getAttribute('disabled')).toBe(null);
+  });
+
+  it('should check if enable/disable required validation is working', () => {
+    page.datePickerInput.clear();
+    expect(page.requiredValidationMsg.isPresent()).toBe(false);
+    page.enableRequiredValidationRadio.click();
+    expect(page.requiredValidationMsg.getText()).toEqual('required');
+    page.disableRequiredValidationRadio.click();
+    expect(page.requiredValidationMsg.isPresent()).toBe(false);
+  });
+
+  it('should check if enable/diable is working', () => {
+    expect(page.datePickerInput.getAttribute('disabled')).toBe(null);
+    page.pickerDisabledRadio.click();
+    expect(page.datePickerInput.getAttribute('disabled')).toEqual('true');
+    page.pickerEnabledRadio.click();
+    expect(page.datePickerInput.getAttribute('disabled')).toBe(null);
+  });
+
+  it('should check if min date validation is working', () => {
+    page.minDateValidationPickerInput.clear();
+    expect(page.minDateValidationMsg.isPresent()).toBe(false);
+    page.minDateValidationPickerInput.sendKeys('11-04-2017');
+    page.datePickerInput.sendKeys('10-04-2017');
+    expect(page.minDateValidationMsg.getText()).toEqual('minDate invalid');
+    page.minDateValidationPickerInput.clear();
+    page.minDateValidationPickerInput.sendKeys('10-04-2017');
+    expect(page.minDateValidationMsg.isPresent()).toBe(false);
+  });
+
+  it('should check if max date validation is working', () => {
+    page.maxDateValidationPickerInput.clear();
+    expect(page.maxDateValidationMsg.isPresent()).toBe(false);
+    page.maxDateValidationPickerInput.sendKeys('11-04-2017');
+    page.datePickerInput.sendKeys('12-04-2017');
+    expect(page.maxDateValidationMsg.getText()).toEqual('maxDate invalid');
+    page.maxDateValidationPickerInput.clear();
+    page.maxDateValidationPickerInput.sendKeys('12-04-2017');
+    expect(page.maxDateValidationMsg.isPresent()).toBe(false);
+  });
+
+  it('should check that placeholder attribute is working', () => {
+    page.placeholderInput.clear();
+    page.placeholderInput.sendKeys('bla');
+    expect(page.datePickerInput.getAttribute('placeholder')).toEqual('bla');
+  });
+
+  it('should check the first day of the week', () => {
+    page.datePickerInput.click();
+    expect(page.weekDayNames.getText()).toEqual(['sunmontuewedthufrisat']);
+    page.clickOnBody();
+    page.firstDayOfWeekMonday.click();
+    page.datePickerInput.click();
+    expect(page.weekDayNames.getText()).toEqual(['montuewedthufrisatsun']);
+  });
+
+  it('should check month format', () => {
+    page.datePickerInput.click();
+    expect(page.dayCalendarNavHeaderBtn.getText()).toEqual(moment().format('MMM, YYYY'));
+    page.clickOnBody();
+    page.monthFormatInput.clear();
+    page.monthFormatInput.sendKeys('MM-YYYY');
+    page.datePickerInput.click();
+    expect(page.dayCalendarNavHeaderBtn.getText()).toEqual(moment().format('MM-YYYY'));
+  });
+
+  it('should check check that the min selectable option is working', () => {
+    page.minSelectableInput.clear();
+    page.minSelectableInput.sendKeys('11-04-2017');
+    page.datePickerInput.sendKeys('17-04-2017');
+    page.datePickerInput.click();
+    browser.pause();
+    expect(page.calendarDisabledDays.count()).toBe(16);
   });
 });

@@ -1,17 +1,18 @@
 import {Component, ViewChild, HostListener} from '@angular/core';
-import {DpDayPickerComponent} from '../../dp-day-picker/dp-day-picker.component';
+import {DatePickerComponent} from '../../date-picker/date-picker.component';
 import {Moment} from 'moment';
-import {IDayPickerConfig} from '../../dp-day-picker/day-picker-config.model';
+import {IDatePickerConfig} from '../../date-picker/date-picker-config.model';
 import debounce from '../../common/decorators/decorators';
+import {DayCalendarComponent} from '../../day-calendar/day-calendar.component';
 
 @Component({
   selector: 'dp-demo',
   templateUrl: './demo.component.html',
-  entryComponents: [DpDayPickerComponent],
+  entryComponents: [DatePickerComponent],
   styleUrls: ['./demo.component.less']
 })
 export class DemoComponent {
-  @ViewChild('dayPicker') dayPicker: DpDayPickerComponent;
+  @ViewChild('dayPicker') dayPicker: DatePickerComponent;
   demoFormat = 'DD-MM-YYYY';
   readonly DAYS = ['su', 'mo', 'tu', 'we', 'th', 'fr', 'sa'];
   pickerMode = 'popup';
@@ -26,17 +27,15 @@ export class DemoComponent {
   validationMaxDate: Moment;
   placeholder: string = 'Choose a date...';
 
-  config: IDayPickerConfig = {
+  config: IDatePickerConfig = {
     firstDayOfWeek: 'su',
-    calendarsAmount: 1,
     format: 'DD-MM-YYYY',
     monthFormat: 'MMM, YYYY',
     disableKeypress: false,
     allowMultiSelect: false,
-    closeOnSelect: true,
+    closeOnSelect: undefined,
     closeOnSelectDelay: 100,
     onOpenDelay: 0,
-    userValueType: 'string',
     weekdayNames: {
       su: 'sun',
       mo: 'mon',
@@ -64,7 +63,7 @@ export class DemoComponent {
   }
 
   configChanged() {
-    this.config = Object.assign({}, this.config);
+    this.config = {...this.config};
   };
 
   createCustomWeekDays() {
