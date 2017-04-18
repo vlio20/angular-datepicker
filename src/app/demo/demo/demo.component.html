@@ -48,13 +48,13 @@
     </div>
 
     <div class="dp-inline" *ngIf="pickerMode === 'inline'">
-      <label>Inline Calendar (<code>&lt;dp-calendar&gt;</code>)</label><br>
-      <!--<dp-day-calendar-->
-      <!--[theme]="material ? 'dp-material' : ''"-->
-      <!--[(ngModel)]="dates"-->
-      <!--(ngModelChange)="log($event)"-->
-      <!--[config]="config">-->
-      <!--</dp-day-calendar>-->
+      <label>Inline Calendar (<code>&lt;dp-day-calendar&gt;</code>)</label><br>
+      <dp-day-calendar
+        [theme]="material ? 'dp-material' : ''"
+        [(ngModel)]="dates"
+        (ngModelChange)="log($event)"
+        [config]="config">
+      </dp-day-calendar>
     </div>
   </div>
 
