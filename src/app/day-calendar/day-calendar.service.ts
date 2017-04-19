@@ -235,7 +235,9 @@ export class DayCalendarService {
       isNavHeaderBtnClickable: true,
       allowMultiSelect: false,
       yearFormat: componentConfig.yearFormat,
-      yearFormatter: componentConfig.yearFormatter
+      yearFormatter: componentConfig.yearFormatter,
+      monthBtnFormat: componentConfig.monthBtnFormat,
+      monthBtnFormatter: componentConfig.monthBtnFormatter,
     });
   }
 

@@ -53,4 +53,15 @@ describe('Service: MonthCalendarService', () => {
     month.date.add(1, 'month');
     expect(service.isMonthDisabled(month, config1)).toBe(true);
   }));
+
+  it('should check getDayBtnText method',
+    inject([MonthCalendarService],
+      (service: MonthCalendarService) => {
+        const date = moment('05-04-2017', 'DD-MM-YYYY');
+        expect(service.getMonthBtnText({monthBtnFormat: 'M'}, date)).toEqual('4');
+        expect(service.getMonthBtnText({monthBtnFormat: 'MM'}, date)).toEqual('04');
+        expect(service.getMonthBtnText({monthBtnFormatter: (m => 'bla')}, date)).toEqual('bla');
+        expect(service.getMonthBtnText({monthBtnFormat: 'MM', monthBtnFormatter: (m => m.format('M'))}, date))
+          .toEqual('4');
+      }));
 });

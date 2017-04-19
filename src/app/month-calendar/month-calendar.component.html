@@ -16,7 +16,7 @@
             [disabled]="isDisabledMonth(month)"
             [ngClass]="{'dp-selected': month.selected,'dp-current-month': month.currentMonth}"
             (click)="monthClicked(month)">
-      {{month.date.format('MMM')}}
+      {{getMonthBtnText(month)}}
     </button>
   </div>
 </div>

@@ -140,4 +140,12 @@ export class MonthCalendarService {
       return isSelected ? [month.date] : [];
     }
   }
+
+  getMonthBtnText(config: IMonthCalendarConfig, month: Moment) {
+    if (config.monthBtnFormatter) {
+      return config.monthBtnFormatter(month);
+    }
+
+    return month.format(config.monthBtnFormat);
+  }
 }

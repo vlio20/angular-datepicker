@@ -183,4 +183,8 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
   toggleCalendar() {
     this.onNavHeaderBtnClick.emit();
   }
+
+  getMonthBtnText(month: IMonth): string {
+    return this.monthCalendarService.getMonthBtnText(this.componentConfig, month.date);
+  }
 }
