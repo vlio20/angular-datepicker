@@ -179,7 +179,7 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
   }
 
   getDayBtnText(day: IDay): string {
-    return this.dayCalendarService.getDayBtnText(this.componentConfig, day);
+    return this.dayCalendarService.getDayBtnText(this.componentConfig, day.date);
   }
 
   onLeftNav() {

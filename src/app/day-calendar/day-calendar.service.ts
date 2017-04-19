@@ -239,12 +239,11 @@ export class DayCalendarService {
     });
   }
 
-  // todo:: add unit tests
-  getDayBtnText(config: IDayCalendarConfig, day: IDay): string {
+  getDayBtnText(config: IDayCalendarConfig, day: Moment): string {
     if (config.dayBtnFormatter) {
-      return config.dayBtnFormatter(day.date);
+      return config.dayBtnFormatter(day);
     }
 
-    return day.date.format(config.dayBtnFormat);
+    return day.format(config.dayBtnFormat);
   }
 }
