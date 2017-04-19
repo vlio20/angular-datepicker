@@ -88,13 +88,13 @@ describe('ng2-date-picker App', () => {
     page.dayCalendarNavHeaderBtn.click();
     expect(page.dayCalendarContainer.isDisplayed()).toBe(false);
     expect(page.monthCalendar.isPresent()).toBe(true);
-    expect(page.DayCalendarNavMonthHeaderBtn.getText()).toEqual('2017');
+    expect(page.dayCalendarNavMonthHeaderBtn.getText()).toEqual('2017');
     expect(page.currentMonthCalendarBtn.getText()).toEqual('Apr');
     page.monthCalendarLeftNavBtn.click();
-    expect(page.DayCalendarNavMonthHeaderBtn.getText()).toEqual('2016');
+    expect(page.dayCalendarNavMonthHeaderBtn.getText()).toEqual('2016');
     expect(page.currentMonthCalendarBtn.isPresent()).toBe(false);
     page.monthCalendarRightNavBtn.click();
-    expect(page.DayCalendarNavMonthHeaderBtn.getText()).toEqual('2017');
+    expect(page.dayCalendarNavMonthHeaderBtn.getText()).toEqual('2017');
     expect(page.currentMonthCalendarBtn.getText()).toEqual('Apr');
 
     page.clickOnBody();
@@ -105,19 +105,19 @@ describe('ng2-date-picker App', () => {
     expect(page.dayCalendarContainer.isDisplayed()).toBe(false);
     expect(page.monthCalendar.isPresent()).toBe(true);
 
-    page.DayCalendarNavMonthHeaderBtn.click();
+    page.dayCalendarNavMonthHeaderBtn.click();
     expect(page.dayCalendarContainer.isDisplayed()).toBe(true);
     expect(page.monthCalendar.isPresent()).toBe(false);
 
     page.disableMonthSelector.click();
-    expect(page.DeyCalendarMonthNavHeader.isPresent()).toBe(false);
+    expect(page.deyCalendarMonthNavHeader.isPresent()).toBe(false);
   });
 
   it('should change year format', () => {
     page.datePickerInput.sendKeys('08-04-2017');
     page.datePickerInput.click();
     page.dayCalendarNavHeaderBtn.click();
-    expect(page.DayCalendarNavMonthHeaderBtn.getText()).toEqual('2017');
+    expect(page.dayCalendarNavMonthHeaderBtn.getText()).toEqual('2017');
 
     page.clickOnBody();
 
@@ -126,7 +126,7 @@ describe('ng2-date-picker App', () => {
 
     page.datePickerInput.click();
     page.dayCalendarNavHeaderBtn.click();
-    expect(page.DayCalendarNavMonthHeaderBtn.getText()).toEqual('17');
+    expect(page.dayCalendarNavMonthHeaderBtn.getText()).toEqual('17');
   });
 
   it('should check if go to current location btn is working as expected', () => {
@@ -312,5 +312,20 @@ describe('ng2-date-picker App', () => {
     page.clickOnDayButton('18');
     expect(page.selectedDays.count()).toBe(2);
     expect(page.datePickerInput.getAttribute('value')).toEqual('15-04-2017, 16-04-2017');
+  });
+
+  it('should check dayBtnFormat is working', () => {
+    page.dayBtnFormatInput.clear();
+    page.dayBtnFormatInput.sendKeys('D');
+    page.datePickerInput.click();
+    expect(page.calendarFirstDayOfMonth.getText()).toEqual('1');
+  });
+
+  it('should check monthBtnFormat is working', () => {
+    page.monthBtnFormatInput.clear();
+    page.monthBtnFormatInput.sendKeys('M');
+    page.datePickerInput.click();
+    page.dayCalendarNavHeaderBtn.click();
+    expect(page.calendarFirstMonthOfYear.getText()).toEqual('1');
   });
 });
