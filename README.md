@@ -27,6 +27,7 @@ This is a configurable date-picker build for Angular2 applications and uses Mome
    ]
  })
 ```
+
 ## Usage
 Put the dp-date-picker component wherever you need it.
 
@@ -35,7 +36,7 @@ Put the dp-date-picker component wherever you need it.
 
 | Name                 | Type                | Default                                                                  | Description                                                                                                                                                                                                                                        |
 |----------------------|:-------------------:|:------------------------------------------------------------------------:|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| type                 | `day`|`month`       | `month`                                                                  | the type of the calender which will be displayed in the picker                                                                                                                                                                                     |
+| type                 | `day`|`month`       | `day`                                                                    | the type of the calender which will be displayed in the picker                                                                                                                                                                                     |
 | disabled             | `Boolean`           | `false`                                                                  | If set to true the input would be disabled                                                                                                                                                                                                         |
 | placeholder          | `String`            | `""`                                                                     | The date-picker input placeholder                                                                                                                                                                                                                  |
 | required             | `Boolean`           | `undefined`                                                              | This is a validation rule, if there won't be any selected date then the containing form will be invalid.                                                                                                                                           |
