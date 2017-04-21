@@ -15,7 +15,7 @@ export class DemoComponent {
   @ViewChild('dayPicker') dayPicker: DatePickerComponent;
   demoFormat = 'DD-MM-YYYY';
   readonly DAYS = ['su', 'mo', 'tu', 'we', 'th', 'fr', 'sa'];
-  pickerMode = 'popup';
+  pickerMode = 'dayPicker';
 
   date: Moment;
   dates: Moment[] = [];

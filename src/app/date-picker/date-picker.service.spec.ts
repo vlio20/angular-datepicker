@@ -3,6 +3,7 @@ import {DatePickerService} from './date-picker.service';
 import * as moment from 'moment';
 import {Moment} from 'moment';
 import {UtilsService} from '../common/services/utils/utils.service';
+import {IDate} from '../common/models/date.model';
 
 describe('Service: DatePicker', () => {
   beforeEach(() => {
@@ -13,9 +14,9 @@ describe('Service: DatePicker', () => {
 
   it('should check getConfig method for dates format', inject([DatePickerService],
     (service: DatePickerService) => {
-      const config1 = service.getConfig({
-        min: <Moment>'2016-10-25',
-        max: <Moment>'2017-10-25',
+      const config1 = service.getConfig(<any>{
+        min: '2016-10-25',
+        max: '2017-10-25',
         format: 'YYYY-MM-DD'
       });
 

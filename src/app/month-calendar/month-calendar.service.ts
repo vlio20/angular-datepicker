@@ -12,7 +12,8 @@ export class MonthCalendarService {
     allowMultiSelect: false,
     yearFormat: 'YYYY',
     format: 'MM-YYYY',
-    isNavHeaderBtnClickable: false
+    isNavHeaderBtnClickable: false,
+    monthBtnFormat: 'MMM'
   };
 
   constructor(private utilsService: UtilsService) {
@@ -128,17 +129,6 @@ export class MonthCalendarService {
     }
 
     return year.format(config.yearFormat);
-  }
-
-  updateSelected(config: IMonthCalendarConfig, currentlySelected: Moment[], month: IMonth): Moment[] {
-    const isSelected = !month.selected;
-    if (config.allowMultiSelect) {
-      return isSelected
-        ? currentlySelected.concat([month.date])
-        : currentlySelected.filter(date => !date.isSame(month.date, 'month'));
-    } else {
-      return isSelected ? [month.date] : [];
-    }
   }
 
   getMonthBtnText(config: IMonthCalendarConfig, month: Moment) {

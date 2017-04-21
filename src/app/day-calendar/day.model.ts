@@ -1,8 +1,6 @@
-import {Moment} from 'moment';
+import {IDate} from '../common/models/date.model';
 
-export interface IDay {
-  date: Moment;
-  selected?: boolean;
+export interface IDay extends IDate {
   currentMonth?: boolean;
   prevMonth?: boolean;
   nextMonth?: boolean;
