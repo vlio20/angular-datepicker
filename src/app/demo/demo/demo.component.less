@@ -1,6 +1,6 @@
 & {
-
   @stickyHeight: 80px;
+  @stickyHeightInline: 250px;
 
   .dp-demo-page {
     margin-top: @stickyHeight;
@@ -23,6 +23,11 @@
 
     &.dp-not-top {
       box-shadow: 0 2px 6px 1px #e3e3e3;
+    }
+
+    &.dp-inline {
+      height: @stickyHeightInline;
+      padding-top: 20px;
     }
   }
 
@@ -70,5 +75,4 @@
   .dp-option-header {
     font-weight: 600;
   }
-
 }
