@@ -26,11 +26,13 @@ export class DemoPage {
   showWeekNumbersRadio = $('#showWeekNumbersRadio');
   hideWeekNumbersRadio = $('#hideWeekNumbersRadio');
   weekNumbers = $$(`${this.popupSelector} .dp-week-number`);
-  DeyCalendarNavHeader = $(`${this.popupSelector} .dp-nav-header`);
+  deyCalendarNavHeader = $(`${this.popupSelector} .dp-nav-header`);
   dayCalendarNavHeaderBtn = $(`${this.popupSelector} .dp-nav-header-btn`);
-  DeyCalendarMonthNavHeader = $(`${this.popupSelector} dp-month-calendar .dp-nav-header`);
-  DayCalendarNavMonthHeaderBtn = $(`${this.popupSelector} dp-month-calendar .dp-nav-header-btn`);
+  deyCalendarMonthNavHeader = $(`${this.popupSelector} dp-month-calendar .dp-nav-header`);
+  dayCalendarNavMonthHeaderBtn = $(`${this.popupSelector} dp-month-calendar .dp-nav-header-btn`);
   calendarDisabledDays = $$(`${this.popupSelector} .dp-calendar-day[disabled]`);
+  calendarFirstDayOfMonth = $$(`${this.popupSelector} .dp-current-month`).get(0);
+  calendarFirstMonthOfYear = $$(`${this.popupSelector} dp-month-calendar .dp-calendar-month`).get(0);
 
   currentMonthCalendarBtn = $(`${this.popupSelector} dp-month-calendar .dp-current-month`);
   disableMonthSelector = $('#disableMonthSelector');
@@ -63,6 +65,8 @@ export class DemoPage {
   dateFormatInput = $('#dateFormat');
   enableMultiselect = $('#enableMultiselect');
   disableMultiselect = $('#disableMultiselect');
+  dayBtnFormatInput = $('#dayBtnFormat');
+  monthBtnFormatInput = $('#monthBtnFormat');
 
   openBtn = $('#openBtn');
 

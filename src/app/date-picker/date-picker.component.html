@@ -24,12 +24,18 @@
                        [config]="dayCalendarConfig"
                        [ngModel]="_selected"
                        [displayDate]="currentDateView"
-                       (onSelect)="daySelected($event)"
+                       (onSelect)="dateSelected($event, 'day')"
                        [theme]="theme">
 
       </dp-day-calendar>
 
-      <dp-month-calendar *ngSwitchCase="'month'">
+      <dp-month-calendar #monthCalendar
+                         *ngSwitchCase="'month'"
+                         [config]="dayCalendarConfig"
+                         [ngModel]="_selected"
+                         [displayDate]="currentDateView"
+                         (onSelect)="dateSelected($event, 'month')"
+                         [theme]="theme">
       </dp-month-calendar>
     </div>
   </div>

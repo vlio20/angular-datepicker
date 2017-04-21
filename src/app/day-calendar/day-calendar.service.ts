@@ -187,17 +187,6 @@ export class DayCalendarService {
     };
   }
 
-  updateSelected(config: IDayCalendarConfig, currentlySelected: Moment[], day: IDay): Moment[] {
-    const isSelected = !day.selected;
-    if (config.allowMultiSelect) {
-      return isSelected
-        ? currentlySelected.concat([day.date])
-        : currentlySelected.filter(date => !date.isSame(day.date, 'day'));
-    } else {
-      return isSelected ? [day.date] : [];
-    }
-  }
-
   // todo:: add unit tests
   getHeaderLabel(config: IDayCalendarConfig, month: Moment): string {
     if (config.monthFormatter) {

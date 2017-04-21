@@ -11,9 +11,9 @@ export class DomHelper {
     const top = anchorRect.top - containerRect.top;
 
     if (drops === 'down') {
-      element.style.top = (bottom  + 'px');
+      element.style.top = (bottom - 1  + 'px');
     } else {
-      element.style.top = (top - element.scrollHeight) + 'px';
+      element.style.top = (top + 1 - element.scrollHeight) + 'px';
     }
   }
 

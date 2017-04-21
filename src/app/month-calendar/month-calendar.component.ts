@@ -69,7 +69,7 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
     return this._selected;
   }
 
-  constructor(private monthCalendarService: MonthCalendarService,
+  constructor(public monthCalendarService: MonthCalendarService,
               public utilsService: UtilsService) {
   }
 
@@ -148,7 +148,8 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
   }
 
   monthClicked(month: IMonth) {
-    this.selected = this.monthCalendarService.updateSelected(this.componentConfig, this.selected, month);
+    this.selected = this.utilsService
+      .updateSelected(this.componentConfig.allowMultiSelect, this.selected, month, 'month');
     this.yearMonths = this.monthCalendarService
       .generateYear(this.currentDateView, this.selected);
     this.onSelect.emit(month);
