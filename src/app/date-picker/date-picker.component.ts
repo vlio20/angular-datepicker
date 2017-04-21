@@ -14,7 +14,7 @@ import {
   HostBinding
 } from '@angular/core';
 import * as moment from 'moment';
-import {Moment} from 'moment';
+import {Moment, unitOfTime} from 'moment';
 import {DatePickerService} from './date-picker.service';
 import {IDatePickerConfig} from './date-picker-config.model';
 import {
@@ -30,12 +30,12 @@ import {IDpDayPickerApi} from './date-picker.api';
 import {DomHelper} from '../common/services/dom-appender/dom-appender.service';
 import {CalendarValue, ECalendarValue, SingleCalendarValue} from '../common/types/calendar-value';
 import {CalendarType, ECalendarType} from '../common/types/calendar-type';
-import {IDay} from '../day-calendar/day.model';
 import {IDayCalendarConfig} from '../day-calendar/day-calendar-config.model';
 import {DayCalendarComponent} from '../day-calendar/day-calendar.component';
+import {IDate} from '../common/models/date.model';
 
 @Component({
-  selector: 'dp-day-picker',
+  selector: 'dp-date-picker',
   templateUrl: 'date-picker.component.html',
   styleUrls: ['date-picker.component.less'],
   providers: [
@@ -70,6 +70,7 @@ export class DatePickerComponent implements OnChanges,
 
   @ViewChild('container') calendarContainer: ElementRef;
   @ViewChild('dayCalendar') dayCalendarRef: DayCalendarComponent;
+  @ViewChild('monthCalendar') monthCalendarRef: DayCalendarComponent;
 
   componentConfig: IDatePickerConfig;
   dayCalendarConfig: IDayCalendarConfig;
@@ -286,7 +287,9 @@ export class DatePickerComponent implements OnChanges,
 
   hideCalendar() {
     this.areCalendarsShown = false;
-    this.dayCalendarRef.api.toggleCalendar(ECalendarType.Day);
+    if (this.dayCalendarRef) {
+      this.dayCalendarRef.api.toggleCalendar(ECalendarType.Day);
+    }
   }
 
   onViewDateChange(value: string) {
@@ -302,8 +305,9 @@ export class DatePickerComponent implements OnChanges,
     this.currentDateView = moment();
   }
 
-  daySelected(day: IDay) {
-    this.selected = this.dayPickerService.updateSelected(this.componentConfig, this.selected, day);
+  dateSelected(date: IDate, granularity: unitOfTime.Base) {
+    this.selected = this.utilsService
+      .updateSelected(this.componentConfig.allowMultiSelect, this.selected, date, granularity);
     this.onDateClick();
   }
 

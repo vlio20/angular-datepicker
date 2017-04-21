@@ -159,14 +159,6 @@ describe('ng2-date-picker App', () => {
     expect(page.requiredValidationMsg.isPresent()).toBe(false);
   });
 
-  it('should check if enable/diable is working', () => {
-    expect(page.datePickerInput.getAttribute('disabled')).toBe(null);
-    page.pickerDisabledRadio.click();
-    expect(page.datePickerInput.getAttribute('disabled')).toEqual('true');
-    page.pickerEnabledRadio.click();
-    expect(page.datePickerInput.getAttribute('disabled')).toBe(null);
-  });
-
   it('should check if min date validation is working', () => {
     page.minDateValidationPickerInput.clear();
     expect(page.minDateValidationMsg.isPresent()).toBe(false);
@@ -239,20 +231,6 @@ describe('ng2-date-picker App', () => {
     page.clickOnDayButton('16');
     expect(page.datePickerPopup.isDisplayed()).toBe(true);
     page.clickOnBody();
-    expect(page.datePickerPopup.isDisplayed()).toBe(false);
-  });
-
-  it('should check that the close delay is working', () => {
-    page.closeDelayInput.clear();
-    page.closeDelayInput.sendKeys(1000);
-    page.datePickerInput.click();
-    page.clickOnDayButton('15');
-    browser.waitForAngularEnabled(false);
-    expect(page.datePickerPopup.isDisplayed()).toBe(true);
-    browser.sleep(200);
-    expect(page.datePickerPopup.isDisplayed()).toBe(true);
-    browser.sleep(600);
-    browser.waitForAngularEnabled(true);
     expect(page.datePickerPopup.isDisplayed()).toBe(false);
   });
 

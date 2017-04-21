@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import * as moment from 'moment';
 import {Moment, unitOfTime} from 'moment';
 import {CalendarValue, ECalendarValue, SingleCalendarValue} from '../../types/calendar-value';
+import {IDate} from '../../models/date.model';
 
 @Injectable()
 export class UtilsService {
@@ -137,5 +138,19 @@ export class UtilsService {
     }
 
     return true;
+  }
+
+  updateSelected(isMultiple: boolean,
+                 currentlySelected: Moment[],
+                 date: IDate,
+                 granularity: unitOfTime.Base = 'day'): Moment[] {
+    const isSelected = !date.selected;
+    if (isMultiple) {
+      return isSelected
+        ? currentlySelected.concat([date.date])
+        : currentlySelected.filter(d => !d.isSame(date.date, granularity));
+    } else {
+      return isSelected ? [date.date] : [];
+    }
   }
 }
