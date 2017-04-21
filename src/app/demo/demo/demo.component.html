@@ -24,11 +24,10 @@
     </select>
   </div>
 
-  <div class="dp-demo-container" [ngClass]="{'dp-not-top': !isAtTop}">
+  <div class="dp-demo-container" [ngClass]="{'dp-not-top': !isAtTop, 'dp-inline': pickerMode.endsWith('Inline')}">
     <form #form="ngForm">
 
       <div class="dp-picker-container" *ngIf="pickerMode === 'dayPicker'">
-        <code>&lt;dp-date-picker type="day"&gt;</code> <br>
         <dp-date-picker id="datePicker"
                         name="datePicker"
                         #datePicker
@@ -53,7 +52,6 @@
       </div>
 
       <div class="dp-picker-container" *ngIf="pickerMode === 'monthPicker'">
-        <code>&lt;dp-date-picker type="month"&gt;</code> <br>
         <dp-date-picker id="monthPicker"
                         name="monthPicker"
                         #monthPicker="ngModel"
@@ -82,7 +80,6 @@
       </div>
 
       <div class="dp-inline" *ngIf="pickerMode === 'monthInline'">
-        <code>&lt;dp-day-calendar&gt;</code> <br>
         <dp-month-calendar
             name="monthInline"
             #monthInline="ngModel"
@@ -108,7 +105,6 @@
       </div>
 
       <div class="dp-inline" *ngIf="pickerMode === 'dayInline'">
-        <code>&lt;dp-month-calendar&gt;</code> <br>
         <dp-day-calendar
             name="dayCalendar"
             #dayCalendar="ngModel"
