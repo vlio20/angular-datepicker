@@ -30,18 +30,19 @@
       <div class="dp-picker-container" *ngIf="pickerMode === 'dayPicker'">
         <code>&lt;dp-date-picker type="day"&gt;</code> <br>
         <dp-date-picker id="datePicker"
-                       name="datePicker"
-                       #datePicker="ngModel"
-                       [(ngModel)]="date"
-                       (ngModelChange)="log($event)"
-                       [type]="'day'"
-                       [disabled]="disabled"
-                       [minDate]="validationMinDate"
-                       [maxDate]="validationMaxDate"
-                       [required]="required"
-                       [placeholder]="placeholder"
-                       [config]="config"
-                       [theme]="material ? 'dp-material' : ''">
+                        name="datePicker"
+                        #datePicker
+                        #datePicker="ngModel"
+                        [(ngModel)]="date"
+                        (ngModelChange)="log($event)"
+                        [type]="'day'"
+                        [disabled]="disabled"
+                        [minDate]="validationMinDate"
+                        [maxDate]="validationMaxDate"
+                        [required]="required"
+                        [placeholder]="placeholder"
+                        [config]="config"
+                        [theme]="material ? 'dp-material' : ''">
         </dp-date-picker>
         <div class="dp-validations">
           <div id="requiredValidation" *ngIf="datePicker.errors && datePicker.errors.required">required</div>
@@ -54,24 +55,29 @@
       <div class="dp-picker-container" *ngIf="pickerMode === 'monthPicker'">
         <code>&lt;dp-date-picker type="month"&gt;</code> <br>
         <dp-date-picker id="monthPicker"
-                       name="monthPicker"
-                       #monthPicker="ngModel"
-                       [(ngModel)]="date"
-                       (ngModelChange)="log($event)"
-                       [type]="'month'"
-                       [disabled]="disabled"
-                       [minDate]="validationMinDate"
-                       [maxDate]="validationMaxDate"
-                       [required]="required"
-                       [placeholder]="placeholder"
-                       [config]="config"
-                       [theme]="material ? 'dp-material' : ''">
+                        name="monthPicker"
+                        #monthPicker="ngModel"
+                        [(ngModel)]="date"
+                        (ngModelChange)="log($event)"
+                        [type]="'month'"
+                        [disabled]="disabled"
+                        [minDate]="validationMinDate"
+                        [maxDate]="validationMaxDate"
+                        [required]="required"
+                        [placeholder]="placeholder"
+                        [config]="config"
+                        [theme]="material ? 'dp-material' : ''">
         </dp-date-picker>
         <div class="dp-validations">
-          <div id="monthPickerRequiredValidation" *ngIf="monthPicker.errors && monthPicker.errors.required">required</div>
+          <div id="monthPickerRequiredValidation" *ngIf="monthPicker.errors && monthPicker.errors.required">required
+          </div>
           <div *ngIf="monthPicker.errors && monthPicker.errors.format">format invalid</div>
-          <div id="monthPickerMinDateValidation" *ngIf="monthPicker.errors && monthPicker.errors.minDate">minDate invalid</div>
-          <div id="monthPickerMaxDateValidation" *ngIf="monthPicker.errors && datePicker.errors.maxDate">maxDate invalid</div>
+          <div id="monthPickerMinDateValidation" *ngIf="monthPicker.errors && monthPicker.errors.minDate">minDate
+            invalid
+          </div>
+          <div id="monthPickerMaxDateValidation" *ngIf="monthPicker.errors && datePicker.errors.maxDate">maxDate
+            invalid
+          </div>
         </div>
       </div>
 
@@ -90,9 +96,14 @@
         </dp-month-calendar>
 
         <div class="dp-validations">
-          <div id="monthInlineRequiredValidation" *ngIf="monthInline.errors && monthInline.errors.required">required</div>
-          <div id="monthInlineMinDateValidation" *ngIf="monthInline.errors && monthInline.errors.minDate">minDate invalid</div>
-          <div id="monthInlineMaxDateValidation" *ngIf="monthInline.errors && monthInline.errors.maxDate">maxDate invalid</div>
+          <div id="monthInlineRequiredValidation" *ngIf="monthInline.errors && monthInline.errors.required">required
+          </div>
+          <div id="monthInlineMinDateValidation" *ngIf="monthInline.errors && monthInline.errors.minDate">minDate
+            invalid
+          </div>
+          <div id="monthInlineMaxDateValidation" *ngIf="monthInline.errors && monthInline.errors.maxDate">maxDate
+            invalid
+          </div>
         </div>
       </div>
 
@@ -170,9 +181,9 @@
       </span>
       <div class="dp-option-playground">
         <dp-date-picker id="minDatePicker"
-                       theme="dp-material"
-                       [(ngModel)]="validationMinDate"
-                       placeholder="Select a min date">
+                        theme="dp-material"
+                        [(ngModel)]="validationMinDate"
+                        placeholder="Select a min date">
         </dp-date-picker>
       </div>
     </div>
@@ -183,9 +194,9 @@
       </span>
       <div class="dp-option-playground">
         <dp-date-picker id="maxDatePicker"
-                       theme="dp-material"
-                       [(ngModel)]="validationMaxDate"
-                       placeholder="Select a max date">
+                        theme="dp-material"
+                        [(ngModel)]="validationMaxDate"
+                        placeholder="Select a max date">
         </dp-date-picker>
       </div>
     </div>
@@ -239,10 +250,10 @@
       </span>
       <div class="dp-option-playground">
         <dp-date-picker id="minSelectable"
-                       theme="dp-material"
-                       [(ngModel)]="config.min"
-                       (ngModelChange)="configChanged()"
-                       placeholder="Select a min date">
+                        theme="dp-material"
+                        [(ngModel)]="config.min"
+                        (ngModelChange)="configChanged()"
+                        placeholder="Select a min date">
         </dp-date-picker>
       </div>
     </div>
@@ -253,10 +264,10 @@
       </span>
       <div class="dp-option-playground">
         <dp-date-picker id="maxSelectable"
-                       theme="dp-material"
-                       [(ngModel)]="config.max"
-                       (ngModelChange)="configChanged()"
-                       placeholder="Select a max date">
+                        theme="dp-material"
+                        [(ngModel)]="config.max"
+                        (ngModelChange)="configChanged()"
+                        placeholder="Select a max date">
         </dp-date-picker>
       </div>
     </div>
