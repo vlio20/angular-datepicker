@@ -6,6 +6,11 @@
 This is a configurable date-picker build for Angular2 applications and uses MomentJS as its dependency.   
 [DEMO](https://vlio20.github.io/angular-datepicker/)
 
+## Screenshots
+![Imgur](http://i.imgur.com/4ZV7r5e.png) 
+
+![Imgur](http://i.imgur.com/Kho8Joq.png)
+
 
 ## Installation:
 1. Download from npm:
@@ -30,6 +35,7 @@ Put the dp-date-picker component wherever you need it.
 
 | Name                 | Type                | Default                                                                  | Description                                                                                                                                                                                                                                        |
 |----------------------|:-------------------:|:------------------------------------------------------------------------:|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| type                 | `day`|`month`       | `month`                                                                  | the type of the calender which will be displayed in the picker                                                                                                                                                                                     |
 | disabled             | `Boolean`           | `false`                                                                  | If set to true the input would be disabled                                                                                                                                                                                                         |
 | placeholder          | `String`            | `""`                                                                     | The date-picker input placeholder                                                                                                                                                                                                                  |
 | required             | `Boolean`           | `undefined`                                                              | This is a validation rule, if there won't be any selected date then the containing form will be invalid.                                                                                                                                           |
@@ -113,7 +119,7 @@ Here is the list of APIs:
 | close                | `() => void`    | Closes the date picker |
 
 
-## Inline
+## Inline - Day Calendar
 
 You can use the `<dp-day-calendar>` component to display the calendar widget without an associated input box.
 
@@ -129,7 +135,7 @@ i.e.
 | minDate              | `Moment|String`     | `undefined`                                                              | This is a validation rule, if the selected date will be before `minDate` the containing form will be invalid. Note: if provided as string format configuration should be provided in the config object.                                            |
 | maxDate              | `Moment|String`     | `undefined`                                                              | This is a validation rule, if the selected date will be after `maxDate` the containing form will be invalid. Note: if provided as string format configuration should be provided in the config object.                                             | 
 | theme                | `string       `     | `''`                                                                     | Theme is a class added to the popup container (and inner components) - this will allow styling of the calendar when it's appended to outer element (for example - body). There is a built in theme named dp-material, you can find it in the demo. | 
-| config               | `IDatePickerConfig` | See Below                                                                | Configuration object - see description below.                                                                                                                                                                                                      |
+| config               | `IDayPickerConfig`  | See Below                                                                | Configuration object - see description below.                                                                                                                                                                                                      |
 
 ### Configuration:  
 In order to provide configurations to the day-calendar you need to pass it to the `dp-day-calendar` component:  
@@ -157,5 +163,42 @@ Here are the available configurations:
 | isMonthDisabledCallback   | `(Moment) => boolean`| `undefined`                                                               | Callback which should indicate if specific month is disabled (month selector).                                                                                                                                                                                                |
 | dayBtnFormat              | `string`             | `DD`                                                                      | The day format of the day button in the calendar.                                                                                                                                                                                                                             |
 | dayBtnFormatter           | `(Moment) => String` | `undefined`                                                               | The formatter (callback function) of the day button in the calendar.                                                                                                                                                                                                          |
+| monthBtnFormat            | `string`             | `DD`                                                                      | The month format of the month button in the calendar.                                                                                                                                                                                                                         |
+| monthBtnFormatter         | `(Moment) => String` | `undefined`                                                               | The formatter (callback function) of the month button in the calendar.                                                                                                                                                                                                        |
+
+## Inline - Month Calendar
+
+You can use the `<dp-month-calendar>` component to display the calendar widget without an associated input box.
+
+i.e.
+```html
+<dp-month-calendar [(ngModel)]="selectedDate" [config]="config"></dp-month-calendar>
+```
+
+### Attributes:  
+| Name                 | Type                | Default                                                                  | Description                                                                                                                                                                                                                                        |
+|----------------------|:-------------------:|:------------------------------------------------------------------------:|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| required             | `Boolean`           | `undefined`                                                              | This is a validation rule, if there won't be any selected date then the containing form will be invalid.                                                                                                                                           |
+| minDate              | `Moment|String`     | `undefined`                                                              | This is a validation rule, if the selected date will be before `minDate` the containing form will be invalid. Note: if provided as string format configuration should be provided in the config object.                                            |
+| maxDate              | `Moment|String`     | `undefined`                                                              | This is a validation rule, if the selected date will be after `maxDate` the containing form will be invalid. Note: if provided as string format configuration should be provided in the config object.                                             | 
+| theme                | `string       `     | `''`                                                                     | Theme is a class added to the popup container (and inner components) - this will allow styling of the calendar when it's appended to outer element (for example - body). There is a built in theme named dp-material, you can find it in the demo. | 
+| config               | `IMonthPickerConfig` | See Below                                                                | Configuration object - see description below.                                                                                                                                                                                                     |
+
+### Configuration:  
+In order to provide configurations to the month-calendar you need to pass it to the `dp-month-calendar` component:  
+```html
+<dp-month-picker [(ngModel)]="selectedDate" [config]="config"></dp-month-picker>
+```
+Here are the available configurations:  
+
+| Name                      | Type                 | Default                                                                    | Description                                                                                                                                                                                                                                                                   |
+|---------------------------|:--------------------:|:-------------------------------------------------------------------------:|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| format                    | `String`             | `"DD-MM-YYYY"`                                                            | If ngModel provided as `String` the format is required, this format also will be used as the input format style.                                                                                                                                                              |
+| yearFormat                | `String`             | `"YYYY"`                                                                  | The date format of the month calendar, the one that seen above the calendar months. Will be overwritten if `yearFormatter` provided. (available when `enableMonthSelector` is set to `true`).                                                                                 |
+| yearFormatter             | `(Moment) => String` | `undefined`                                                               | The date formatter (callback function) of the month calendar, the one that seen above the calendar months. (available when `enableMonthSelector` is set to `true`).                                                                                                           |
+| allowMultiSelect          | `Boolean`            | `undefined`                                                               | If set to `true` will allow for choosing multiple dates. `false` will force a single selection. If `undefined`, the picker will attempt to guess based on the type of the input value.                                                                                        |
+| min                       | `Moment|String`      | `undefined`                                                               | Disables all dates (on the date-picker) that are set to before the `min`, note that if invalid date would be set by the input then the date picker value would be the min date but the input will show the user typed date.                                                   |
+| max                       | `Moment|String`      | `undefined`                                                               | Disables all dates (on the date-picker) that are set to after the `max`, note that if invalid date would be set by the input then the date picker value would be the max date but the input will show the user typed date.                                                    |
+| isMonthDisabledCallback   | `(Moment) => boolean`| `undefined`                                                               | Callback which should indicate if specific month is disabled (month selector).                                                                                                                                                                                                |
 | monthBtnFormat            | `string`             | `DD`                                                                      | The month format of the month button in the calendar.                                                                                                                                                                                                                         |
 | monthBtnFormatter         | `(Moment) => String` | `undefined`                                                               | The formatter (callback function) of the month button in the calendar.                                                                                                                                                                                                        |
