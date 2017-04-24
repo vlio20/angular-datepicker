@@ -153,4 +153,13 @@ export class UtilsService {
       return isSelected ? [date.date] : [];
     }
   }
+
+  // todo:: add unit test
+  closestParent(element: HTMLElement, selector: string): HTMLElement {
+    if (!element) {
+      return undefined;
+    }
+    const match = <HTMLElement>element.querySelector(selector);
+    return match || this.closestParent(element.parentElement, selector);
+  }
 }

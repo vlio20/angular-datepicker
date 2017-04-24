@@ -1,4 +1,4 @@
-import {Component, ViewChild, HostListener} from '@angular/core';
+import {Component, ViewChild, HostListener, ElementRef} from '@angular/core';
 import {DatePickerComponent} from '../../date-picker/date-picker.component';
 import {Moment} from 'moment';
 import {IDatePickerConfig} from '../../date-picker/date-picker-config.model';
@@ -62,6 +62,11 @@ export class DemoComponent {
   @debounce(100)
   updateIsAtTop() {
     this.isAtTop = document.body.scrollTop === 0;
+  }
+
+  modeChanged() {
+    this.config.hideInputContainer = false;
+    this.config.inputElementContainer = undefined;
   }
 
   configChanged() {

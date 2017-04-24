@@ -233,7 +233,13 @@ export class DatePickerComponent implements OnChanges,
 
   setElementPositionInDom() {
     this.calendarWrapper = <HTMLElement> this.calendarContainer.nativeElement;
-    this.inputElementContainer = this.elemRef.nativeElement.querySelector('.dp-input-container');
+    let inputElementContainer = this.componentConfig.inputElementContainer;
+    if (typeof inputElementContainer === 'string') {
+      inputElementContainer = <HTMLElement>document.querySelector(<string>inputElementContainer);
+    }
+    if (!this.inputElementContainer) {
+      this.inputElementContainer = inputElementContainer || this.elemRef.nativeElement.querySelector('.dp-input-container');
+    }
     this.popupElem = this.elemRef.nativeElement.querySelector('.dp-popup');
     this.handleInnerElementClick(this.popupElem);
 
