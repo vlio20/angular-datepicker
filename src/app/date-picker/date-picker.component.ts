@@ -233,13 +233,7 @@ export class DatePickerComponent implements OnChanges,
 
   setElementPositionInDom() {
     this.calendarWrapper = <HTMLElement> this.calendarContainer.nativeElement;
-    let inputElementContainer = this.componentConfig.inputElementContainer;
-    if (typeof inputElementContainer === 'string') {
-      inputElementContainer = <HTMLElement>document.querySelector(<string>inputElementContainer);
-    }
-    if (!this.inputElementContainer) {
-      this.inputElementContainer = inputElementContainer || this.elemRef.nativeElement.querySelector('.dp-input-container');
-    }
+    this.setInputElementContainer();
     this.popupElem = this.elemRef.nativeElement.querySelector('.dp-popup');
     this.handleInnerElementClick(this.popupElem);
 
@@ -255,6 +249,16 @@ export class DatePickerComponent implements OnChanges,
     }
 
     this.appendToElement.appendChild(this.calendarWrapper);
+  }
+
+  setInputElementContainer() {
+    let inputElementContainer = this.componentConfig.inputElementContainer;
+    if (typeof inputElementContainer === 'string') {
+      inputElementContainer = <HTMLElement>this.utilsService.closestParent(this.elemRef.nativeElement, <string>inputElementContainer);
+    }
+    if (!this.inputElementContainer) {
+      this.inputElementContainer = inputElementContainer || this.elemRef.nativeElement.querySelector('.dp-input-container');
+    }
   }
 
   handleInnerElementClick(element: HTMLElement) {

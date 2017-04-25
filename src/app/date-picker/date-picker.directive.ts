@@ -1,36 +1,53 @@
-import {UtilsService} from '../common/services/utils/utils.service';
-import {OnChanges, SimpleChanges} from '@angular/core/core';
-import {ElementRef} from '@angular/core';
-import {IDatePickerConfig} from './date-picker-config.model';
-import {NgModel} from '@angular/forms';
+import {CalendarType} from '../../../bin/common/types/calendar-type';
+import {IDatePickerDirectiveConfig} from './date-picker-directive-config.model';
+import {DatePickerDirectiveService} from './date-picker-directive.service';
+import {IDpDayPickerApi} from './date-picker.api';
 import {DatePickerComponent} from './date-picker.component';
+import {ChangeDetectorRef, OnChanges, SimpleChanges} from '@angular/core';
+import {ElementRef} from '@angular/core';
 import {OnInit} from '@angular/core';
 import {ViewContainerRef} from '@angular/core';
-import { Directive, ComponentFactoryResolver, Input, HostListener } from '@angular/core';
-import { Moment } from 'moment';
+import {ComponentFactoryResolver, ComponentRef, Directive, HostListener, Input} from '@angular/core';
+import {NgModel} from '@angular/forms';
 
-@Directive({ selector: '[dpDayPicker][ngModel]' })
+@Directive({
+  exportAs: 'dpDayPicker',
+  providers: [DatePickerDirectiveService],
+  selector: '[dpDayPicker][ngModel]',
+})
 export class DatePickerDirective implements OnInit, OnChanges {
-  @Input('dpDayPicker') config: IDatePickerConfig = {
+  @Input('dpDayPicker') config: IDatePickerDirectiveConfig = {
     hideInputContainer: true,
   };
 
-  @Input() inputElementContainer: ElementRef;
+  @Input() attachTo: ElementRef | string;
   @Input() theme: string;
+  @Input() type: CalendarType;
 
   public datePicker: DatePickerComponent;
+  public api: IDpDayPickerApi;
 
   constructor(
     public viewContainerRef: ViewContainerRef,
     public componentFactoryResolver: ComponentFactoryResolver,
     public model: NgModel,
-    public utils: UtilsService,
+    public service: DatePickerDirectiveService,
   ) { }
 
   ngOnInit(): void {
+    this.datePicker = this.createDatePicker();
+    this.api = this.datePicker.api;
+    this.attachModelToDatePicker();
+    this.updateDatepickerConfig();
+    this.datePicker.theme = this.theme;
+  }
+
+  createDatePicker(): DatePickerComponent {
     const factory = this.componentFactoryResolver.resolveComponentFactory(DatePickerComponent);
-    this.datePicker = this.viewContainerRef.createComponent(factory).instance;
-    this.model.control.setValidators(this.datePicker.validate.bind(this.datePicker));
+    return this.viewContainerRef.createComponent(factory).instance;
+  }
+
+  attachModelToDatePicker() {
     this.model.valueChanges.subscribe(value => {
       if (value !== this.datePicker.inputElementValue) {
         this.datePicker.onViewDateChange(value);
@@ -39,20 +56,19 @@ export class DatePickerDirective implements OnInit, OnChanges {
     this.datePicker.registerOnChange(value => {
       this.model.control.setValue(this.datePicker.inputElementValue, { emitEvent: false });
     });
-    if (this.config) {
-      this.config = this.updateDatepickerConfig(this.config);
-    }
-    this.datePicker.theme = this.theme;
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    const { config, theme, inputElementContainer } = changes;
+    const { config, theme, type, attachTo } = changes;
     if (this.datePicker) {
-      if (theme && theme.currentValue) {
+      if (theme) {
         this.datePicker.theme = theme.currentValue;
       }
-      if (config && config.currentValue || inputElementContainer && inputElementContainer.currentValue) {
-        this.config = this.updateDatepickerConfig(config.currentValue);
+      if (type) {
+        this.datePicker.type = type.currentValue;
+      }
+      if (config && config.currentValue || attachTo && attachTo.currentValue) {
+        this.updateDatepickerConfig();
       }
       this.datePicker.init();
     }
@@ -61,22 +77,14 @@ export class DatePickerDirective implements OnInit, OnChanges {
   @HostListener('click')
   @HostListener('focus')
   onClick() {
-    if (this.config) {
-      this.config = this.updateDatepickerConfig(this.config);
-    }
-    this.datePicker.onClick();
+    console.log('onClick');
+    this.updateDatepickerConfig();
+    this.datePicker.inputFocused();
   }
 
-  private updateDatepickerConfig(config: IDatePickerConfig): IDatePickerConfig {
-    config.hideInputContainer = true;
-    if (typeof this.inputElementContainer === 'string') {
-      config.inputElementContainer = this.inputElementContainer;
-    } else if (this.inputElementContainer) {
-      config.inputElementContainer = this.inputElementContainer.nativeElement;
-    } else {
-      config.inputElementContainer = this.utils.closestParent(this.viewContainerRef.element.nativeElement, '.mat-input-wrapper');
-    }
-    this.datePicker.config = config;
-    return config;
+  private updateDatepickerConfig() {
+    this.config = this.service.getConfig(this.config, this.attachTo || this.viewContainerRef.element);
+    this.datePicker.type = this.type || 'day';
+    this.datePicker.config = this.config;
   }
 }

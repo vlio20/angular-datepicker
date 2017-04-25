@@ -154,7 +154,6 @@ export class UtilsService {
     }
   }
 
-  // todo:: add unit test
   closestParent(element: HTMLElement, selector: string): HTMLElement {
     if (!element) {
       return undefined;
