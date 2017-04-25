@@ -4,12 +4,14 @@ import {ElementRef, Injectable} from '@angular/core';
 @Injectable()
 export class DatePickerDirectiveService {
   getConfig(config: IDatePickerDirectiveConfig = {}, attachTo?: ElementRef | string): IDatePickerDirectiveConfig {
-    config.hideInputContainer = true;
+    const baseConfig = { hideInputContainer: true };
+
     if (typeof attachTo === 'string') {
-      config.inputElementContainer = attachTo;
+      return { ...config, ...baseConfig, ...{ inputElementContainer: attachTo } };
     } else if (attachTo) {
-      config.inputElementContainer = attachTo.nativeElement;
+      return { ...config, ...baseConfig, ...{ inputElementContainer: attachTo.nativeElement } };
     }
-    return config;
+
+    return { ...config, ...baseConfig };
   }
 }

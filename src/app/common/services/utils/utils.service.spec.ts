@@ -4,15 +4,9 @@ import {UtilsService} from './utils.service';
 import * as moment from 'moment';
 import {IDate} from '../../models/date.model';
 
-@Component({
-  template: '',
-})
-class Test {};
-
 describe('Service: ObUtilsService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [Test],
       providers: [UtilsService]
     });
   });
@@ -90,28 +84,5 @@ describe('Service: ObUtilsService', () => {
 
     date1.selected = true;
     expect(service.updateSelected(true, [date1.date], date1, 'month').length).toEqual(0);
-  }));
-
-  it('should check closestParent method', inject([UtilsService], (service: UtilsService) => {
-    const root = TestBed.createComponent(Test).nativeElement;
-    root.innerHTML = `
-    <div id="top">
-      <span class="wrapper">
-        <input type="text" />
-      </span>
-    </div>
-    `;
-    const inputElement = root.querySelector('input');
-
-    const wrapperElement = service.closestParent(inputElement, '.wrapper');
-    expect(wrapperElement.tagName).toBe('SPAN');
-    expect(wrapperElement.className).toBe('wrapper');
-
-    const topElement = service.closestParent(inputElement, '#top');
-    expect(topElement.tagName).toBe('DIV');
-    expect(topElement.id).toBe('top');
-
-    const notFoundElement = service.closestParent(inputElement, '.notFound');
-    expect(notFoundElement).toBeUndefined();
   }));
 });
