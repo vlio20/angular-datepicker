@@ -183,6 +183,8 @@ describe('ng2-date-picker App', () => {
     expect(page.datePickerInput.getAttribute('disabled')).toBe(null);
     page.pickerDisabledRadio.click();
     expect(page.datePickerInput.getAttribute('disabled')).toEqual('true');
+    page.datePickerInput.click();
+    expect(page.datePickerPopup.isDisplayed()).toBe(false);
     page.pickerEnabledRadio.click();
     expect(page.datePickerInput.getAttribute('disabled')).toBe(null);
   });

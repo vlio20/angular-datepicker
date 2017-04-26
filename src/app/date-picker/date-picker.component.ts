@@ -134,7 +134,7 @@ export class DatePickerComponent implements OnChanges,
 
   @HostListener('click')
   onClick() {
-    if (!this.isFocusedTrigger) {
+    if (!this.isFocusedTrigger && !this.disabled) {
       this.hideStateHelper = true;
       if (!this.areCalendarsShown) {
         this.showCalendars();
