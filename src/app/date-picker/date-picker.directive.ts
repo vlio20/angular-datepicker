@@ -3,10 +3,15 @@ import {IDatePickerDirectiveConfig} from './date-picker-directive-config.model';
 import {DatePickerDirectiveService} from './date-picker-directive.service';
 import {IDpDayPickerApi} from './date-picker.api';
 import {DatePickerComponent} from './date-picker.component';
-import {ElementRef} from '@angular/core';
-import {OnInit} from '@angular/core';
-import {ViewContainerRef} from '@angular/core';
-import {ComponentFactoryResolver, Directive, HostListener, Input} from '@angular/core';
+import {
+  ElementRef,
+  OnInit,
+  ViewContainerRef,
+  ComponentFactoryResolver,
+  Directive,
+  HostListener,
+  Input
+} from '@angular/core';
 import {NgModel} from '@angular/forms';
 
 @Directive({
@@ -24,6 +29,7 @@ export class DatePickerDirective implements OnInit {
   get config(): IDatePickerDirectiveConfig {
     return this._config;
   }
+
   @Input('dpDayPicker') set config(config: IDatePickerDirectiveConfig) {
     this._config = this.service.getConfig(config, this.attachToElement || this.viewContainerRef.element.nativeElement);
     this.updateDatepickerConfig();
@@ -35,10 +41,13 @@ export class DatePickerDirective implements OnInit {
   get attachTo(): ElementRef | string {
     return this._attachTo;
   }
+
   @Input() set attachTo(attachTo: ElementRef | string) {
     this._attachTo = attachTo;
-    this.attachToElement = this.service.convertToHTMLElement(attachTo, this.viewContainerRef.element.nativeElement);
-    this._config = this.service.getConfig(this.config, this.attachToElement || this.viewContainerRef.element.nativeElement);
+    this.attachToElement = this.service
+      .convertToHTMLElement(attachTo, this.viewContainerRef.element.nativeElement);
+    this._config = this.service
+      .getConfig(this.config, this.attachToElement || this.viewContainerRef.element.nativeElement);
     this.updateDatepickerConfig();
     if (this.datePicker) {
       this.datePicker.init();
@@ -48,15 +57,18 @@ export class DatePickerDirective implements OnInit {
   get theme(): string {
     return this._theme;
   }
+
   @Input() set theme(theme: string) {
     this._theme = theme;
     if (this.datePicker) {
       this.datePicker.theme = theme;
     }
   }
+
   get type(): CalendarType {
     return this._type;
   }
+
   @Input() set type(type: CalendarType) {
     this._type = type;
     if (this.datePicker) {
@@ -67,12 +79,11 @@ export class DatePickerDirective implements OnInit {
   public datePicker: DatePickerComponent;
   public api: IDpDayPickerApi;
 
-  constructor(
-    public viewContainerRef: ViewContainerRef,
-    public componentFactoryResolver: ComponentFactoryResolver,
-    public model: NgModel,
-    public service: DatePickerDirectiveService,
-  ) { }
+  constructor(public viewContainerRef: ViewContainerRef,
+              public componentFactoryResolver: ComponentFactoryResolver,
+              public model: NgModel,
+              public service: DatePickerDirectiveService,) {
+  }
 
   ngOnInit(): void {
     this.datePicker = this.createDatePicker();
@@ -94,7 +105,7 @@ export class DatePickerDirective implements OnInit {
       }
     });
     this.datePicker.registerOnChange(value => {
-      this.model.control.setValue(this.datePicker.inputElementValue, { emitEvent: false });
+      this.model.control.setValue(this.datePicker.inputElementValue, {emitEvent: false});
     });
   }
 

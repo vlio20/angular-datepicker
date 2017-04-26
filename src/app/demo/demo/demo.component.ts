@@ -1,10 +1,9 @@
 import {DatePickerDirective} from '../../date-picker/date-picker.directive';
-import {Component, ViewChild, HostListener, ElementRef} from '@angular/core';
+import {Component, ViewChild, HostListener} from '@angular/core';
 import {DatePickerComponent} from '../../date-picker/date-picker.component';
 import {Moment} from 'moment';
 import {IDatePickerConfig} from '../../date-picker/date-picker-config.model';
 import debounce from '../../common/decorators/decorators';
-import {DayCalendarComponent} from '../../day-calendar/day-calendar.component';
 
 @Component({
   selector: 'dp-demo',

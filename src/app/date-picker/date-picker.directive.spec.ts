@@ -6,7 +6,8 @@ import {inject, TestBed} from '@angular/core/testing';
 @Component({
   template: '',
 })
-class TestComponent {};
+class TestComponent {
+}
 
 describe('Directive: DpDayPicker', () => {
   beforeEach(() => {
@@ -25,12 +26,12 @@ describe('Directive: DpDayPicker', () => {
   it('should check UtilsService.closestParent', inject([UtilsService], (service: UtilsService) => {
     const root = TestBed.createComponent(TestComponent).nativeElement;
     root.innerHTML = `
-    <div id="top">
-      <span class="wrapper">
-        <input type="text" />
-      </span>
-    </div>
-    `;
+      <div id="top">
+        <span class="wrapper">
+          <input type="text" />
+        </span>
+      </div>
+      `;
     const inputElement = root.querySelector('input');
 
     const wrapperElement = service.closestParent(inputElement, '.wrapper');

@@ -26,9 +26,16 @@ import {
   SimpleChanges,
   ViewChild
 } from '@angular/core';
-import {ControlValueAccessor, FormControl, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator} from '@angular/forms';
-import {Moment, unitOfTime} from 'moment';
+import {
+  ControlValueAccessor,
+  FormControl,
+  NG_VALIDATORS,
+  NG_VALUE_ACCESSOR,
+  ValidationErrors,
+  Validator
+} from '@angular/forms';
 import * as moment from 'moment';
+import {Moment, unitOfTime} from 'moment';
 
 @Component({
   selector: 'dp-date-picker',
