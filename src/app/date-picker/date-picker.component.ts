@@ -1,8 +1,11 @@
 import {IDate} from '../common/models/date.model';
 import {DomHelper} from '../common/services/dom-appender/dom-appender.service';
 import {UtilsService} from '../common/services/utils/utils.service';
-import {CalendarType, ECalendarType} from '../common/types/calendar-type';
-import {CalendarValue, ECalendarValue, SingleCalendarValue} from '../common/types/calendar-value';
+import {CalendarType} from '../common/types/calendar-type';
+import {ECalendarType} from '../common/types/calendar-type-enum';
+import {CalendarValue} from '../common/types/calendar-value';
+import {ECalendarValue} from '../common/types/calendar-value-enum';
+import {SingleCalendarValue} from '../common/types/single-calendar-value';
 import {IDayCalendarConfig} from '../day-calendar/day-calendar-config.model';
 import {DayCalendarComponent} from '../day-calendar/day-calendar.component';
 import {IDatePickerConfig} from './date-picker-config.model';
@@ -24,8 +27,8 @@ import {
   ViewChild
 } from '@angular/core';
 import {ControlValueAccessor, FormControl, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator} from '@angular/forms';
-import * as moment from 'moment';
 import {Moment, unitOfTime} from 'moment';
+import * as moment from 'moment';
 
 @Component({
   selector: 'dp-date-picker',
