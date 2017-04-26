@@ -1,7 +1,9 @@
+import {ECalendarValue} from '../../types/calendar-value-enum';
+import {SingleCalendarValue} from '../../types/single-calendar-value';
 import {Injectable} from '@angular/core';
 import * as moment from 'moment';
 import {Moment, unitOfTime} from 'moment';
-import {CalendarValue, ECalendarValue, SingleCalendarValue} from '../../types/calendar-value';
+import {CalendarValue} from '../../types/calendar-value';
 import {IDate} from '../../models/date.model';
 
 @Injectable()

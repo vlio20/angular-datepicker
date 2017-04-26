@@ -1,3 +1,6 @@
+import {ECalendarValue} from '../common/types/calendar-value-enum';
+import {SingleCalendarValue} from '../common/types/single-calendar-value';
+import {ECalendarType} from '../common/types/calendar-type-enum';
 import {
   Component,
   forwardRef,
@@ -28,8 +31,8 @@ import {
 import {UtilsService} from '../common/services/utils/utils.service';
 import {IDpDayPickerApi} from './date-picker.api';
 import {DomHelper} from '../common/services/dom-appender/dom-appender.service';
-import {CalendarValue, ECalendarValue, SingleCalendarValue} from '../common/types/calendar-value';
-import {CalendarType, ECalendarType} from '../common/types/calendar-type';
+import {CalendarValue} from '../common/types/calendar-value';
+import {CalendarType} from '../common/types/calendar-type';
 import {IDayCalendarConfig} from '../day-calendar/day-calendar-config.model';
 import {DayCalendarComponent} from '../day-calendar/day-calendar.component';
 import {IDate} from '../common/models/date.model';
