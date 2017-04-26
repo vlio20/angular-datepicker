@@ -8,7 +8,7 @@ export interface IDatePickerConfig extends IDayCalendarConfig, IMonthCalendarCon
   onOpenDelay?: number;
   disableKeypress?: boolean;
   appendTo?: string|HTMLElement;
-  inputElementContainer?: string|HTMLElement;
+  inputElementContainer?: HTMLElement;
   showGoToCurrent?: boolean;
   drops?: TDrops;
   opens?: TOpens;

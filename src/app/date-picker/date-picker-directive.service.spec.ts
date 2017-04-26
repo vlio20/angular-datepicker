@@ -12,6 +12,20 @@ describe('Service: DatePickerDirective', () => {
     });
   });
 
+  it('should check convertToElement method', inject([DatePickerDirectiveService, UtilsService],
+    (service: DatePickerDirectiveService, stubUtilsService: UtilsService) => {
+      stubUtilsService.closestParent = jasmine.createSpy('closestParent').and.returnValue('fakeElement');
+
+      const baseElement = <any>{};
+      const element1 = service.convertToHTMLElement({ nativeElement: 'fakeElement'}, baseElement);
+      expect(element1).toBe('fakeElement');
+      expect(stubUtilsService.closestParent).not.toHaveBeenCalled();
+
+      const element2 = service.convertToHTMLElement('.notFound', baseElement);
+      expect(element2).toBe('fakeElement');
+      expect(stubUtilsService.closestParent).toHaveBeenCalledWith(baseElement, '.notFound');
+  }));
+
   it('should check getConfig method', inject([DatePickerDirectiveService],
     (service: DatePickerDirectiveService) => {
       const config1 = service.getConfig();
@@ -23,18 +37,11 @@ describe('Service: DatePickerDirective', () => {
         hideInputContainer: true,
       });
 
-      const config3 = service.getConfig({ allowMultiSelect: true }, '.some-class');
+      const config3 = service.getConfig({ allowMultiSelect: true }, 'fakeElement');
       expect(config3).toEqual({
-        allowMultiSelect: true,
-        hideInputContainer: true,
-        inputElementContainer: '.some-class',
-      });
-
-      const config4 = service.getConfig({ allowMultiSelect: true }, { nativeElement: 'fakeElement' });
-      expect(config4).toEqual({
         allowMultiSelect: true,
         hideInputContainer: true,
         inputElementContainer: 'fakeElement',
       });
-    }));
+  }));
 });

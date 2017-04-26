@@ -17,6 +17,7 @@ import {NgModel} from '@angular/forms';
 export class DatePickerDirective implements OnInit {
   private _config: IDatePickerDirectiveConfig;
   private _attachTo: ElementRef | string;
+  private attachToElement: HTMLElement;
   private _theme: string;
   private _type: CalendarType;
 
@@ -24,7 +25,7 @@ export class DatePickerDirective implements OnInit {
     return this._config;
   }
   @Input('dpDayPicker') set config(config: IDatePickerDirectiveConfig) {
-    this._config = this.service.getConfig(config, this.attachTo || this.viewContainerRef.element);
+    this._config = this.service.getConfig(config, this.attachToElement || this.viewContainerRef.element.nativeElement);
     this.updateDatepickerConfig();
     if (this.datePicker) {
       this.datePicker.init();
@@ -36,6 +37,8 @@ export class DatePickerDirective implements OnInit {
   }
   @Input() set attachTo(attachTo: ElementRef | string) {
     this._attachTo = attachTo;
+    this.attachToElement = this.service.convertToHTMLElement(attachTo, this.viewContainerRef.element.nativeElement);
+    this._config = this.service.getConfig(this.config, this.attachToElement || this.viewContainerRef.element.nativeElement);
     this.updateDatepickerConfig();
     if (this.datePicker) {
       this.datePicker.init();
@@ -96,8 +99,13 @@ export class DatePickerDirective implements OnInit {
   }
 
   @HostListener('click')
-  @HostListener('focus')
   onClick() {
+    this.updateDatepickerConfig();
+    this.datePicker.onClick();
+  }
+
+  @HostListener('focus')
+  onFocus() {
     this.updateDatepickerConfig();
     this.datePicker.inputFocused();
   }

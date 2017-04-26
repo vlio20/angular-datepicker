@@ -6,12 +6,12 @@ import {inject, TestBed} from '@angular/core/testing';
 @Component({
   template: '',
 })
-class Test {};
+class TestComponent {};
 
 describe('Directive: DpDayPicker', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [Test],
+      declarations: [TestComponent],
       providers: [UtilsService]
     });
   });
@@ -23,7 +23,7 @@ describe('Directive: DpDayPicker', () => {
   });
 
   it('should check UtilsService.closestParent', inject([UtilsService], (service: UtilsService) => {
-    const root = TestBed.createComponent(Test).nativeElement;
+    const root = TestBed.createComponent(TestComponent).nativeElement;
     root.innerHTML = `
     <div id="top">
       <span class="wrapper">

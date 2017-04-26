@@ -245,13 +245,8 @@ export class DatePickerComponent implements OnChanges,
   }
 
   setInputElementContainer() {
-    let inputElementContainer = this.componentConfig.inputElementContainer;
-    if (typeof inputElementContainer === 'string') {
-      inputElementContainer = <HTMLElement>this.utilsService.closestParent(this.elemRef.nativeElement, <string>inputElementContainer);
-    }
-    if (!this.inputElementContainer) {
-      this.inputElementContainer = inputElementContainer || this.elemRef.nativeElement.querySelector('.dp-input-container');
-    }
+    this.inputElementContainer = this.componentConfig.inputElementContainer
+      || this.elemRef.nativeElement.querySelector('.dp-input-container');
   }
 
   handleInnerElementClick(element: HTMLElement) {
