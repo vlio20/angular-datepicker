@@ -1,3 +1,4 @@
+import {Component} from '@angular/core';
 import {TestBed, inject} from '@angular/core/testing';
 import {UtilsService} from './utils.service';
 import * as moment from 'moment';

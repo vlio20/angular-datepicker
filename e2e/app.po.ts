@@ -68,6 +68,8 @@ export class DemoPage {
   dayBtnFormatInput = $('#dayBtnFormat');
   monthBtnFormatInput = $('#monthBtnFormat');
 
+  pickerModeDayDirective = $('#pickerMode > [value=dayDirective]');
+
   openBtn = $('#openBtn');
 
   navigateTo() {
