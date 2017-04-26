@@ -1,3 +1,4 @@
+import {ECalendarValue} from '../common/types/calendar-value-enum';
 import {
   Component,
   OnInit,
@@ -21,7 +22,7 @@ import {
   FormControl,
   ValidationErrors
 } from '@angular/forms';
-import {CalendarValue, ECalendarValue} from '../common/types/calendar-value';
+import {CalendarValue} from '../common/types/calendar-value';
 import {UtilsService} from '../common/services/utils/utils.service';
 
 @Component({
