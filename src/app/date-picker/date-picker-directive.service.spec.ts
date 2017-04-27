@@ -34,11 +34,12 @@ describe('Service: DatePickerDirective', () => {
         hideInputContainer: true,
       });
 
-      const config3 = service.getConfig({allowMultiSelect: true}, 'fakeElement');
+      const fakeElement = new HTMLElement();
+      const config3 = service.getConfig({allowMultiSelect: true}, fakeElement);
       expect(config3).toEqual({
         allowMultiSelect: true,
         hideInputContainer: true,
-        inputElementContainer: 'fakeElement',
+        inputElementContainer: fakeElement,
       });
     }));
 });
