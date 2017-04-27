@@ -20,6 +20,7 @@
       <option value="dayPicker">Day Picker</option>
       <option value="dayInline">Day Inline</option>
       <option value="dayDirective">Day Directive</option>
+      <option value="dayDirectiveReactive">Day Directive Reactive Forms</option>
       <option value="monthPicker">Month Picker</option>
       <option value="monthInline">Month Inline</option>
       <option value="monthDirective">Month Directive</option>
@@ -141,6 +142,20 @@
           <div id="requiredValidation" *ngIf="dateDirectivePickerModel.errors?.required || false">required</div>
           <div *ngIf="dateDirectivePickerModel.errors?.format || false">format invalid</div>
         </div>
+      </div>
+
+      <div class="dp-picker-container" id="datePicker" *ngIf="pickerMode === 'dayDirectiveReactive'">
+        <form [formGroup]="formGroup">
+          <input [dpDayPicker]="config"
+                name="datePicker"
+                #dateDirectivePicker="dpDayPicker"
+                [theme]="material ? 'dp-material' : ''"
+                formControlName="datePicker"
+                [placeholder]="placeholder"
+                [disabled]="disabled"
+                [required]="required"
+                />
+        </form>
       </div>
 
       <div class="dp-picker-container" id="datePicker" *ngIf="pickerMode === 'monthDirective'">
