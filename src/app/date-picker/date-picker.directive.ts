@@ -10,14 +10,15 @@ import {
   ComponentFactoryResolver,
   Directive,
   HostListener,
-  Input
+  Input,
+  Optional
 } from '@angular/core';
-import {NgModel} from '@angular/forms';
+import {NgControl} from '@angular/forms';
 
 @Directive({
   exportAs: 'dpDayPicker',
   providers: [DatePickerDirectiveService],
-  selector: '[dpDayPicker][ngModel]',
+  selector: '[dpDayPicker]',
 })
 export class DatePickerDirective implements OnInit {
   private _config: IDatePickerDirectiveConfig;
@@ -77,7 +78,7 @@ export class DatePickerDirective implements OnInit {
 
   constructor(public viewContainerRef: ViewContainerRef,
               public componentFactoryResolver: ComponentFactoryResolver,
-              public model: NgModel,
+              @Optional() public formControl: NgControl,
               public service: DatePickerDirectiveService) {
   }
 
@@ -95,13 +96,16 @@ export class DatePickerDirective implements OnInit {
   }
 
   attachModelToDatePicker() {
-    this.model.valueChanges.subscribe(value => {
+    if (!this.formControl) {
+      return;
+    }
+    this.formControl.valueChanges.subscribe(value => {
       if (value !== this.datePicker.inputElementValue) {
         this.datePicker.onViewDateChange(value);
       }
     });
     this.datePicker.registerOnChange(value => {
-      this.model.control.setValue(this.datePicker.inputElementValue, {emitEvent: false});
+      this.formControl.control.setValue(this.datePicker.inputElementValue, {emitEvent: false});
     });
   }
 
