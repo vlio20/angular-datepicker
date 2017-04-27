@@ -211,14 +211,14 @@ You can use the `[dpDayPicker]` directive to attach the picker to any component 
 
 i.e.
 ```html
-<input name="someName" [(ngModel)]="selectedDate" [dpDayPicker]="config"></input>
+<input name="someName" [(ngModel)]="selectedDate" [dpDayPicker]="config" />
 ```
 
 or using reactive forms:
 ```html
-<input name="someName" formControlName="selectedDate" [dpDayPicker]="config"></input>
+<input name="someName" formControlName="selectedDate" [dpDayPicker]="config" />
 <!-- OR -->
-<input name="someName" [formControl]="selectedDateFormControl" [dpDayPicker]="config"></input>
+<input name="someName" [formControl]="selectedDateFormControl" [dpDayPicker]="config" />
 ```
 
 or with `@angular/material`:
