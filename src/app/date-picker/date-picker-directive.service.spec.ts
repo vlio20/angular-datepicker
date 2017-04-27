@@ -25,20 +25,44 @@ describe('Service: DatePickerDirective', () => {
 
   it('should check getConfig method', inject([DatePickerDirectiveService],
     (service: DatePickerDirectiveService) => {
+      service.convertToHTMLElement = jasmine.createSpy('convertToHTMLElement').and.returnValue('fakeElement');
+
       const config1 = service.getConfig();
       expect(config1).toEqual({hideInputContainer: true});
+      expect(service.convertToHTMLElement).not.toHaveBeenCalled();
 
       const config2 = service.getConfig({allowMultiSelect: true});
       expect(config2).toEqual({
         allowMultiSelect: true,
         hideInputContainer: true,
       });
+      expect(service.convertToHTMLElement).not.toHaveBeenCalled();
 
-      const config3 = service.getConfig({allowMultiSelect: true}, 'fakeElement');
+      const fakeElement = {};
+      const config3 = service.getConfig({allowMultiSelect: true}, { nativeElement: fakeElement });
       expect(config3).toEqual({
+        allowMultiSelect: true,
+        hideInputContainer: true,
+        inputElementContainer: fakeElement,
+      });
+      expect(service.convertToHTMLElement).not.toHaveBeenCalled();
+
+      const fakeAttachElementRef = { nativeElement: {} };
+      const fakeElementRef = { nativeElement: fakeElement };
+      const config4 = service.getConfig({allowMultiSelect: true}, fakeElementRef, fakeAttachElementRef);
+      expect(config4).toEqual({
         allowMultiSelect: true,
         hideInputContainer: true,
         inputElementContainer: 'fakeElement',
       });
+      expect(service.convertToHTMLElement).toHaveBeenCalledWith(fakeAttachElementRef, fakeElement);
+
+      const config5 = service.getConfig({allowMultiSelect: true}, fakeElementRef, 'someSelector');
+      expect(config5).toEqual({
+        allowMultiSelect: true,
+        hideInputContainer: true,
+        inputElementContainer: 'fakeElement',
+      });
+      expect(service.convertToHTMLElement).toHaveBeenCalledWith('someSelector', fakeElement);
     }));
 });

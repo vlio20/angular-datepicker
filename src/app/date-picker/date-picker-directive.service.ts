@@ -17,12 +17,18 @@ export class DatePickerDirectiveService {
     return undefined;
   }
 
-  getConfig(config: IDatePickerDirectiveConfig = {}, attachTo?: HTMLElement): IDatePickerDirectiveConfig {
+  getConfig(
+    config: IDatePickerDirectiveConfig = {},
+    baseElement?: ElementRef,
+    attachTo?: ElementRef | string,
+  ): IDatePickerDirectiveConfig {
     const _config: IDatePickerDirectiveConfig = {...config};
     _config.hideInputContainer = true;
 
-    if (attachTo) {
-      _config.inputElementContainer = attachTo;
+    if (baseElement) {
+      _config.inputElementContainer = attachTo
+        ? this.convertToHTMLElement(attachTo, baseElement.nativeElement)
+        : baseElement.nativeElement;
     }
 
     return _config;

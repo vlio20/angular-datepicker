@@ -22,7 +22,6 @@ import {NgModel} from '@angular/forms';
 export class DatePickerDirective implements OnInit {
   private _config: IDatePickerDirectiveConfig;
   private _attachTo: ElementRef | string;
-  private attachToElement: HTMLElement;
   private _theme: string;
   private _type: CalendarType;
 
@@ -31,7 +30,7 @@ export class DatePickerDirective implements OnInit {
   }
 
   @Input('dpDayPicker') set config(config: IDatePickerDirectiveConfig) {
-    this._config = this.service.getConfig(config, this.attachToElement || this.viewContainerRef.element.nativeElement);
+    this._config = this.service.getConfig(config, this.viewContainerRef.element, this.attachTo);
     this.updateDatepickerConfig();
     if (this.datePicker) {
       this.datePicker.init();
@@ -44,10 +43,7 @@ export class DatePickerDirective implements OnInit {
 
   @Input() set attachTo(attachTo: ElementRef | string) {
     this._attachTo = attachTo;
-    this.attachToElement = this.service
-      .convertToHTMLElement(attachTo, this.viewContainerRef.element.nativeElement);
-    this._config = this.service
-      .getConfig(this.config, this.attachToElement || this.viewContainerRef.element.nativeElement);
+    this._config = this.service.getConfig(this.config, this.viewContainerRef.element, this.attachTo);
     this.updateDatepickerConfig();
     if (this.datePicker) {
       this.datePicker.init();
