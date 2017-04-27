@@ -16,11 +16,13 @@
 
   <div>
     <label>Mode:</label>
-    <select [(ngModel)]="pickerMode">
+    <select id="pickerMode" [(ngModel)]="pickerMode" (ngModelChange)="modeChanged()">
       <option value="dayPicker">Day Picker</option>
       <option value="dayInline">Day Inline</option>
+      <option value="dayDirective">Day Directive</option>
       <option value="monthPicker">Month Picker</option>
       <option value="monthInline">Month Inline</option>
+      <option value="monthDirective">Month Directive</option>
     </select>
   </div>
 
@@ -121,6 +123,41 @@
           <div id="dayRequiredValidation" *ngIf="dayCalendar.errors && dayCalendar.errors.required">required</div>
           <div id="dayMinDateValidation" *ngIf="dayCalendar.errors && dayCalendar.errors.minDate">minDate invalid</div>
           <div id="dayMaxDateValidation" *ngIf="dayCalendar.errors && dayCalendar.errors.maxDate">maxDate invalid</div>
+        </div>
+      </div>
+
+      <div class="dp-picker-container" id="datePicker" *ngIf="pickerMode === 'dayDirective'">
+        <input [dpDayPicker]="config"
+               name="datePicker"
+               #dateDirectivePicker="dpDayPicker"
+               #dateDirectivePickerModel="ngModel"
+               [theme]="material ? 'dp-material' : ''"
+               [(ngModel)]="date"
+               [placeholder]="placeholder"
+               [disabled]="disabled"
+               [required]="required"
+               (ngModelChange)="log($event)"/>
+        <div class="dp-validations">
+          <div id="requiredValidation" *ngIf="dateDirectivePickerModel.errors?.required || false">required</div>
+          <div *ngIf="dateDirectivePickerModel.errors?.format || false">format invalid</div>
+        </div>
+      </div>
+
+      <div class="dp-picker-container" id="datePicker" *ngIf="pickerMode === 'monthDirective'">
+        <input [dpDayPicker]="config"
+               name="datePicker"
+               #dateDirectivePicker="dpDayPicker"
+               #dateDirectivePickerModel="ngModel"
+               [theme]="material ? 'dp-material' : ''"
+               [type]="'month'"
+               [(ngModel)]="date"
+               [placeholder]="placeholder"
+               [disabled]="disabled"
+               [required]="required"
+               (ngModelChange)="log($event)"/>
+        <div class="dp-validations">
+          <div id="requiredValidation" *ngIf="dateDirectivePickerModel.errors?.required || false">required</div>
+          <div *ngIf="dateDirectivePickerModel.errors?.format || false">format invalid</div>
         </div>
       </div>
     </form>

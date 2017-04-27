@@ -4,4 +4,5 @@ import {Component} from '@angular/core';
   selector: 'dp-demo-root',
   template: '<router-outlet></router-outlet>',
 })
-export class DemoRootComponent {}
+export class DemoRootComponent {
+}

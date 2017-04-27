@@ -1,3 +1,6 @@
+import {ECalendarValue} from '../common/types/calendar-value-enum';
+import {SingleCalendarValue} from '../common/types/single-calendar-value';
+import {ECalendarType} from '../common/types/calendar-type-enum';
 import {
   Component,
   OnInit,
@@ -22,9 +25,8 @@ import {
   ValidationErrors,
   FormControl
 } from '@angular/forms';
-import {CalendarValue, ECalendarValue, SingleCalendarValue} from '../common/types/calendar-value';
+import {CalendarValue} from '../common/types/calendar-value';
 import {UtilsService} from '../common/services/utils/utils.service';
-import {ECalendarType} from '../common/types/calendar-type';
 import {IMonthCalendarConfig} from '../month-calendar/month-calendar-config';
 import {IMonth} from '../month-calendar/month.model';
 

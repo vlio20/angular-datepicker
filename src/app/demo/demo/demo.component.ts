@@ -1,9 +1,9 @@
+import {DatePickerDirective} from '../../date-picker/date-picker.directive';
 import {Component, ViewChild, HostListener} from '@angular/core';
 import {DatePickerComponent} from '../../date-picker/date-picker.component';
 import {Moment} from 'moment';
 import {IDatePickerConfig} from '../../date-picker/date-picker-config.model';
 import debounce from '../../common/decorators/decorators';
-import {DayCalendarComponent} from '../../day-calendar/day-calendar.component';
 
 @Component({
   selector: 'dp-demo',
@@ -13,6 +13,7 @@ import {DayCalendarComponent} from '../../day-calendar/day-calendar.component';
 })
 export class DemoComponent {
   @ViewChild('datePicker') datePicker: DatePickerComponent;
+  @ViewChild('dateDirectivePicker') dateDirectivePicker: DatePickerDirective;
   demoFormat = 'DD-MM-YYYY';
   readonly DAYS = ['su', 'mo', 'tu', 'we', 'th', 'fr', 'sa'];
   pickerMode = 'dayPicker';
@@ -64,6 +65,11 @@ export class DemoComponent {
     this.isAtTop = document.body.scrollTop === 0;
   }
 
+  modeChanged() {
+    this.config.hideInputContainer = false;
+    this.config.inputElementContainer = undefined;
+  }
+
   configChanged() {
     this.config = {...this.config};
   };
@@ -73,11 +79,11 @@ export class DemoComponent {
   }
 
   openCalendar() {
-    this.datePicker.api.open();
+    (this.datePicker || this.dateDirectivePicker).api.open();
   }
 
   closeCalendar() {
-    this.datePicker.api.close();
+    (this.datePicker || this.dateDirectivePicker).api.close();
   }
 
   log(item) {

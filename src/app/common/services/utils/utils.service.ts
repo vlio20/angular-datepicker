@@ -1,7 +1,9 @@
+import {ECalendarValue} from '../../types/calendar-value-enum';
+import {SingleCalendarValue} from '../../types/single-calendar-value';
 import {Injectable} from '@angular/core';
 import * as moment from 'moment';
 import {Moment, unitOfTime} from 'moment';
-import {CalendarValue, ECalendarValue, SingleCalendarValue} from '../../types/calendar-value';
+import {CalendarValue} from '../../types/calendar-value';
 import {IDate} from '../../models/date.model';
 
 @Injectable()
@@ -152,5 +154,13 @@ export class UtilsService {
     } else {
       return isSelected ? [date.date] : [];
     }
+  }
+
+  closestParent(element: HTMLElement, selector: string): HTMLElement {
+    if (!element) {
+      return undefined;
+    }
+    const match = <HTMLElement>element.querySelector(selector);
+    return match || this.closestParent(element.parentElement, selector);
   }
 }

@@ -3,7 +3,6 @@ import {DatePickerService} from './date-picker.service';
 import * as moment from 'moment';
 import {Moment} from 'moment';
 import {UtilsService} from '../common/services/utils/utils.service';
-import {IDate} from '../common/models/date.model';
 
 describe('Service: DatePicker', () => {
   beforeEach(() => {
