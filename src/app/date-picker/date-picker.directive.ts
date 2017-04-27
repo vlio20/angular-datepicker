@@ -82,7 +82,7 @@ export class DatePickerDirective implements OnInit {
   constructor(public viewContainerRef: ViewContainerRef,
               public componentFactoryResolver: ComponentFactoryResolver,
               public model: NgModel,
-              public service: DatePickerDirectiveService,) {
+              public service: DatePickerDirectiveService) {
   }
 
   ngOnInit(): void {
