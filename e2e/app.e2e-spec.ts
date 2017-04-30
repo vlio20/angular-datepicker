@@ -16,7 +16,7 @@ describe('ng2-date-picker App', () => {
     });
 
     it('should check that the popup upended to body', () => {
-      page.datePickerInput.click();
+      page.dayDirectivePickerInput.click();
       expect(page.datePickerPopup.isDisplayed()).toBe(true);
       page.clickOnBody();
       expect(page.datePickerPopup.isDisplayed()).toBe(false);
@@ -39,7 +39,7 @@ describe('ng2-date-picker App', () => {
       page.clickOnBody();
       browser.sleep(200);
       browser.waitForAngularEnabled(false);
-      page.datePickerInput.click();
+      page.dayDirectivePickerInput.click();
       expect(page.datePickerPopup.isDisplayed()).toBe(false);
       browser.waitForAngularEnabled(true);
       browser.sleep(1000);

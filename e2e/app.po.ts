@@ -4,6 +4,8 @@ export class DemoPage {
   private popupSelector = 'body > div .dp-popup';
   body = $('body');
   datePickerInput = $('#datePicker input');
+  dayDirectivePickerInput = $('#datePickerDirDay input');
+  monthDirectiveInput = $('#datePickerDirMonth input');
   datePickerPopup = $(this.popupSelector);
   dayCalendar = $(`${this.popupSelector} dp-day-calendar`);
   dayCalendarContainer = $(`${this.popupSelector} dp-day-calendar .dp-day-calendar-container`);
