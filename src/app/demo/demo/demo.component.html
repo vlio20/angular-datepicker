@@ -127,7 +127,7 @@
         </div>
       </div>
 
-      <div class="dp-picker-container" id="datePickerDirective" *ngIf="pickerMode === 'dayDirective'">
+      <div class="dp-picker-container" id="datePickerDirDay" *ngIf="pickerMode === 'dayDirective'">
         <input [dpDayPicker]="config"
                name="datePicker"
                #dateDirectivePicker="dpDayPicker"
@@ -144,7 +144,7 @@
         </div>
       </div>
 
-      <div class="dp-picker-container" id="datePickerReactiveDirective" *ngIf="pickerMode === 'dayDirectiveReactive'">
+      <div class="dp-picker-container" id="datePickerDirDayReactive" *ngIf="pickerMode === 'dayDirectiveReactive'">
         <form [formGroup]="formGroup">
           <input [dpDayPicker]="config"
                 name="datePicker"
@@ -163,7 +163,7 @@
         </form>
       </div>
 
-      <div class="dp-picker-container" id="datePickerMonthDirective" *ngIf="pickerMode === 'monthDirective'">
+      <div class="dp-picker-container" id="datePickerDirMonth" *ngIf="pickerMode === 'monthDirective'">
         <input [dpDayPicker]="config"
                name="datePicker"
                #dateDirectivePicker="dpDayPicker"

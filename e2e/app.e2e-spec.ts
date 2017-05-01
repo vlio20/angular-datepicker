@@ -16,7 +16,7 @@ describe('ng2-date-picker App', () => {
     });
 
     it('should check that the popup appended to body', () => {
-      page.datePickerDirectiveInput.click();
+      page.dayDirectivePickerInput.click();
       expect(page.datePickerPopup.isDisplayed()).toBe(true);
       page.clickOnBody();
       expect(page.datePickerPopup.isDisplayed()).toBe(false);
@@ -39,7 +39,7 @@ describe('ng2-date-picker App', () => {
       page.clickOnBody();
       browser.sleep(200);
       browser.waitForAngularEnabled(false);
-      page.datePickerDirectiveInput.click();
+      page.dayDirectivePickerInput.click();
       expect(page.datePickerPopup.isDisplayed()).toBe(false);
       browser.waitForAngularEnabled(true);
       browser.sleep(1000);
@@ -53,7 +53,7 @@ describe('ng2-date-picker App', () => {
     });
 
     it('should check that the popup appended to body', () => {
-      page.datePickerReactiveDirectiveInput.click();
+      page.dayReactiveDirectivePickerInput.click();
       expect(page.datePickerPopup.isDisplayed()).toBe(true);
       page.clickOnBody();
       expect(page.datePickerPopup.isDisplayed()).toBe(false);
@@ -76,7 +76,7 @@ describe('ng2-date-picker App', () => {
       page.clickOnBody();
       browser.sleep(200);
       browser.waitForAngularEnabled(false);
-      page.datePickerReactiveDirectiveInput.click();
+      page.dayReactiveDirectivePickerInput.click();
       expect(page.datePickerPopup.isDisplayed()).toBe(false);
       browser.waitForAngularEnabled(true);
       browser.sleep(1000);
@@ -84,7 +84,7 @@ describe('ng2-date-picker App', () => {
     });
 
     it('should check if enable/disable required validation is working', () => {
-      page.datePickerReactiveDirectiveInput.clear();
+      page.dayReactiveDirectivePickerInput.clear();
       expect(page.reactiveRequiredValidationMsg.isPresent()).toBe(false);
       page.enableRequiredValidationRadio.click();
       expect(page.reactiveRequiredValidationMsg.getText()).toEqual('required');
@@ -96,7 +96,7 @@ describe('ng2-date-picker App', () => {
       page.minDateValidationPickerInput.clear();
       expect(page.reactiveMinDateValidationMsg.isPresent()).toBe(false);
       page.minDateValidationPickerInput.sendKeys('11-04-2017');
-      page.datePickerReactiveDirectiveInput.sendKeys('10-04-2017');
+      page.dayReactiveDirectivePickerInput.sendKeys('10-04-2017');
       page.clickOnBody();
       expect(page.reactiveMinDateValidationMsg.getText()).toEqual('minDate invalid');
       page.minDateValidationPickerInput.clear();
@@ -108,7 +108,7 @@ describe('ng2-date-picker App', () => {
       page.maxDateValidationPickerInput.clear();
       expect(page.reactiveMaxDateValidationMsg.isPresent()).toBe(false);
       page.maxDateValidationPickerInput.sendKeys('11-04-2017');
-      page.datePickerReactiveDirectiveInput.sendKeys('12-04-2017');
+      page.dayReactiveDirectivePickerInput.sendKeys('12-04-2017');
       page.clickOnBody();
       expect(page.reactiveMaxDateValidationMsg.getText()).toEqual('maxDate invalid');
       page.maxDateValidationPickerInput.clear();
