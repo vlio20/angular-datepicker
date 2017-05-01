@@ -237,7 +237,7 @@ or with `@angular/material`:
 | config               | `IDatePickerDirectiveConfig` | See Below                                                                | Configuration object - see description below.                                                                                                                                                                                                      | 
 
 ### Configuration:  
-In order to provide configurations to the date-picker you need to pass it to the `[dpDatePicker]` directive:  
+In order to provide configurations to the date-picker you need to pass it to the `[dpDayPicker]` directive:  
 ```html
 <input [(ngModel)]="selectedDate" [dpDayPicker]="datePickerConfig" />
 ```

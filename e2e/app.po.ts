@@ -4,6 +4,9 @@ export class DemoPage {
   private popupSelector = 'body > div .dp-popup';
   body = $('body');
   datePickerInput = $('#datePicker input');
+  datePickerDirectiveInput = $('#datePickerDirective input');
+  datePickerReactiveDirectiveInput = $('#datePickerReactiveDirective input');
+  datePickerMonthDirectiveInput = $('#datePickerMonthDirective input');
   datePickerPopup = $(this.popupSelector);
   dayCalendar = $(`${this.popupSelector} dp-day-calendar`);
   dayCalendarContainer = $(`${this.popupSelector} dp-day-calendar .dp-day-calendar-container`);
@@ -43,10 +46,13 @@ export class DemoPage {
   enableRequiredValidationRadio = $('#enableRequiredRadio');
   disableRequiredValidationRadio = $('#disableRequiredRadio');
   requiredValidationMsg = $('#requiredValidation');
+  reactiveRequiredValidationMsg = $('#reactiveRequiredValidation');
   minDateValidationPickerInput = $('#minDatePicker input');
   minDateValidationMsg = $('#minDateValidation');
+  reactiveMinDateValidationMsg = $('#reactiveMinDateValidation');
   maxDateValidationPickerInput = $('#maxDatePicker input');
   maxDateValidationMsg = $('#maxDateValidation');
+  reactiveMaxDateValidationMsg = $('#reactiveMaxDateValidation');
   placeholderInput = $('#placeholderInput');
   firstDayOfWeekMonday = element(by.cssContainingText('#firstDayOfWeekSelect option', 'mo'));
   monthFormatInput = $('#monthFormatInput');

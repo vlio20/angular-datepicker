@@ -127,7 +127,7 @@
         </div>
       </div>
 
-      <div class="dp-picker-container" id="datePicker" *ngIf="pickerMode === 'dayDirective'">
+      <div class="dp-picker-container" id="datePickerDirective" *ngIf="pickerMode === 'dayDirective'">
         <input [dpDayPicker]="config"
                name="datePicker"
                #dateDirectivePicker="dpDayPicker"
@@ -144,7 +144,7 @@
         </div>
       </div>
 
-      <div class="dp-picker-container" id="datePicker" *ngIf="pickerMode === 'dayDirectiveReactive'">
+      <div class="dp-picker-container" id="datePickerReactiveDirective" *ngIf="pickerMode === 'dayDirectiveReactive'">
         <form [formGroup]="formGroup">
           <input [dpDayPicker]="config"
                 name="datePicker"
@@ -155,10 +155,15 @@
                 [disabled]="disabled"
                 [required]="required"
                 />
+          <div class="dp-validations">
+            <div id="reactiveRequiredValidation" *ngIf="formGroup.get('datePicker').hasError('required') && formGroup.get('datePicker').touched">required</div>
+            <div id="reactiveMinDateValidation" *ngIf="formGroup.get('datePicker').hasError('minDate') && formGroup.get('datePicker').touched">minDate invalid</div>
+            <div id="reactiveMaxDateValidation" *ngIf="formGroup.get('datePicker').hasError('maxDate') && formGroup.get('datePicker').touched">maxDate invalid</div>
+          </div>
         </form>
       </div>
 
-      <div class="dp-picker-container" id="datePicker" *ngIf="pickerMode === 'monthDirective'">
+      <div class="dp-picker-container" id="datePickerMonthDirective" *ngIf="pickerMode === 'monthDirective'">
         <input [dpDayPicker]="config"
                name="datePicker"
                #dateDirectivePicker="dpDayPicker"
@@ -215,10 +220,10 @@
       </span>
       <div class="dp-option-playground">
         <label>Required
-          <input id="enableRequiredRadio" type="radio" [(ngModel)]="required" name="required" [value]="true">
+          <input id="enableRequiredRadio" type="radio" [(ngModel)]="required" (ngModelChange)="validatorsChanged()" name="required" [value]="true">
         </label>
         <label>Not Required
-          <input id="disableRequiredRadio" type="radio" [(ngModel)]="required" name="required" [value]="false">
+          <input id="disableRequiredRadio" type="radio" [(ngModel)]="required" (ngModelChange)="validatorsChanged()" name="required" [value]="false">
         </label>
       </div>
     </div>
@@ -231,6 +236,7 @@
         <dp-date-picker id="minDatePicker"
                         theme="dp-material"
                         [(ngModel)]="validationMinDate"
+                        (ngModelChange)="validatorsChanged()"
                         placeholder="Select a min date">
         </dp-date-picker>
       </div>
@@ -244,6 +250,7 @@
         <dp-date-picker id="maxDatePicker"
                         theme="dp-material"
                         [(ngModel)]="validationMaxDate"
+                        (ngModelChange)="validatorsChanged()"
                         placeholder="Select a max date">
         </dp-date-picker>
       </div>
