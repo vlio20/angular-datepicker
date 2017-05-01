@@ -207,17 +207,24 @@ Here are the available configurations:
 
 ## Directive
 
-You can use the `[dpDayPicker]` directive to attach the picker to any component with an `ngModel`.
+You can use the `[dpDayPicker]` directive to attach the picker to any component with an `ngModel` or a `FormControl` (using reactive forms).
 
 i.e.
 ```html
-<input name="someName" [(ngModel)]="selectedDate" [dpDayPicker]="config"></input>
+<input name="someName" [(ngModel)]="selectedDate" [dpDayPicker]="config" />
+```
+
+or using reactive forms:
+```html
+<input name="someName" formControlName="selectedDate" [dpDayPicker]="config" />
+<!-- OR -->
+<input name="someName" [formControl]="selectedDateFormControl" [dpDayPicker]="config" />
 ```
 
 or with `@angular/material`:
 ```html
 <md-input-container>
-  <input mdInput name="someName" [(ngModel)]="selectedDate" [dpDayPicker]="config" theme="dp-material" attachTo=".mat-input-wrapper"></input>
+  <input mdInput name="someName" [(ngModel)]="selectedDate" [dpDayPicker]="config" theme="dp-material" attachTo=".mat-input-wrapper" />
 </md-input-container>
 ```
 
@@ -230,9 +237,9 @@ or with `@angular/material`:
 | config               | `IDatePickerDirectiveConfig` | See Below                                                                | Configuration object - see description below.                                                                                                                                                                                                      | 
 
 ### Configuration:  
-In order to provide configurations to the date-picker you need to pass it to the `[dpDatePicker]` directive:  
+In order to provide configurations to the date-picker you need to pass it to the `[dpDayPicker]` directive:  
 ```html
-<input [(ngModel)]="selectedDate" [dpDatePicker]="datePickerConfig" />
+<input [(ngModel)]="selectedDate" [dpDayPicker]="datePickerConfig" />
 ```
 
 The `IDatePickerDirectiveConfig` is identical to [`IDatePickerConfig`](#configuration) above except that it lacks the `showGoToCurrent` property.

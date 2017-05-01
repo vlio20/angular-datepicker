@@ -1,9 +1,11 @@
-import {DatePickerDirective} from '../../date-picker/date-picker.directive';
-import {Component, ViewChild, HostListener} from '@angular/core';
-import {DatePickerComponent} from '../../date-picker/date-picker.component';
-import {Moment} from 'moment';
-import {IDatePickerConfig} from '../../date-picker/date-picker-config.model';
 import debounce from '../../common/decorators/decorators';
+import {IDatePickerConfig} from '../../date-picker/date-picker-config.model';
+import {DatePickerComponent} from '../../date-picker/date-picker.component';
+import {DatePickerDirective} from '../../date-picker/date-picker.directive';
+import {Component, HostListener, ViewChild} from '@angular/core';
+import { FormControl, NgForm, FormGroup, Validators, Validator, AbstractControl } from '@angular/forms';
+import {Moment} from 'moment';
+import * as moment from 'moment';
 
 @Component({
   selector: 'dp-demo',
@@ -20,13 +22,22 @@ export class DemoComponent {
 
   date: Moment;
   dates: Moment[] = [];
-
   material: boolean = true;
   required: boolean = false;
   disabled: boolean = false;
   validationMinDate: Moment;
   validationMaxDate: Moment;
   placeholder: string = 'Choose a date...';
+
+  formGroup: FormGroup = new FormGroup({
+    datePicker: new FormControl(this.date, [
+      this.required ? Validators.required : () => undefined,
+      control => this.validationMinDate && this.config && moment(control.value, this.config.format).isBefore(this.validationMinDate)
+        ? {minDate: 'minDate Invalid'} : undefined,
+      control => this.validationMaxDate && this.config && moment(control.value, this.config.format).isAfter(this.validationMaxDate)
+        ? {maxDate: 'maxDate Invalid'} : undefined,
+    ]),
+  });
 
   config: IDatePickerConfig = {
     firstDayOfWeek: 'su',
@@ -68,6 +79,10 @@ export class DemoComponent {
   modeChanged() {
     this.config.hideInputContainer = false;
     this.config.inputElementContainer = undefined;
+  }
+
+  validatorsChanged() {
+    this.formGroup.get('datePicker').updateValueAndValidity();
   }
 
   configChanged() {
