@@ -79,7 +79,7 @@ export class DemoComponent {
   modeChanged() {
     this.config.hideInputContainer = false;
     this.config.inputElementContainer = undefined;
-    this.formGroup.setValue({ datePicker: this.date });
+    this.formGroup.get('datePicker').setValue(this.date);
   }
 
   validatorsChanged() {
