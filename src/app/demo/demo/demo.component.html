@@ -152,7 +152,7 @@
                 [theme]="material ? 'dp-material' : ''"
                 formControlName="datePicker"
                 [placeholder]="placeholder"
-                [disabled]="disabled"
+                (ngModelChange)="date = $event; log($event)"
                 [required]="required"
                 />
           <div class="dp-validations">

@@ -30,7 +30,7 @@ export class DemoComponent {
   placeholder: string = 'Choose a date...';
 
   formGroup: FormGroup = new FormGroup({
-    datePicker: new FormControl(this.date, [
+    datePicker: new FormControl({ value: this.date, disabled: this.disabled }, [
       this.required ? Validators.required : () => undefined,
       control => this.validationMinDate && this.config && moment(control.value, this.config.format).isBefore(this.validationMinDate)
         ? {minDate: 'minDate Invalid'} : undefined,
@@ -79,6 +79,7 @@ export class DemoComponent {
   modeChanged() {
     this.config.hideInputContainer = false;
     this.config.inputElementContainer = undefined;
+    this.formGroup.get('datePicker').setValue(this.date);
   }
 
   validatorsChanged() {

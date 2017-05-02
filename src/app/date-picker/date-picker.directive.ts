@@ -1,3 +1,4 @@
+import {ECalendarValue} from '../common/types/calendar-value-enum';
 import {CalendarType} from './../common/types/calendar-type';
 import {IDatePickerDirectiveConfig} from './date-picker-directive-config.model';
 import {DatePickerDirectiveService} from './date-picker-directive.service';
@@ -33,9 +34,6 @@ export class DatePickerDirective implements OnInit {
   @Input('dpDayPicker') set config(config: IDatePickerDirectiveConfig) {
     this._config = this.service.getConfig(config, this.viewContainerRef.element, this.attachTo);
     this.updateDatepickerConfig();
-    if (this.datePicker) {
-      this.datePicker.init();
-    }
   }
 
   get attachTo(): ElementRef | string {
@@ -46,9 +44,6 @@ export class DatePickerDirective implements OnInit {
     this._attachTo = attachTo;
     this._config = this.service.getConfig(this.config, this.viewContainerRef.element, this.attachTo);
     this.updateDatepickerConfig();
-    if (this.datePicker) {
-      this.datePicker.init();
-    }
   }
 
   get theme(): string {
@@ -85,8 +80,8 @@ export class DatePickerDirective implements OnInit {
   ngOnInit(): void {
     this.datePicker = this.createDatePicker();
     this.api = this.datePicker.api;
-    this.attachModelToDatePicker();
     this.updateDatepickerConfig();
+    this.attachModelToDatePicker();
     this.datePicker.theme = this.theme;
   }
 
@@ -99,6 +94,7 @@ export class DatePickerDirective implements OnInit {
     if (!this.formControl) {
       return;
     }
+    this.datePicker.onViewDateChange(this.formControl.value);
     this.formControl.valueChanges.subscribe(value => {
       if (value !== this.datePicker.inputElementValue) {
         this.datePicker.onViewDateChange(value);
@@ -126,6 +122,7 @@ export class DatePickerDirective implements OnInit {
     if (this.datePicker) {
       this.datePicker.type = this.type || 'day';
       this.datePicker.config = this.config;
+      this.datePicker.init();
     }
   }
 }
