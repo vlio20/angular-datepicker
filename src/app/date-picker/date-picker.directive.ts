@@ -1,3 +1,5 @@
+import {UtilsService} from '../common/services/utils/utils.service';
+import {ECalendarValue} from '../common/types/calendar-value-enum';
 import {CalendarType} from './../common/types/calendar-type';
 import {IDatePickerDirectiveConfig} from './date-picker-directive-config.model';
 import {DatePickerDirectiveService} from './date-picker-directive.service';
@@ -79,7 +81,8 @@ export class DatePickerDirective implements OnInit {
   constructor(public viewContainerRef: ViewContainerRef,
               public componentFactoryResolver: ComponentFactoryResolver,
               @Optional() public formControl: NgControl,
-              public service: DatePickerDirectiveService) {
+              public service: DatePickerDirectiveService,
+              public utilsService: UtilsService) {
   }
 
   ngOnInit(): void {
@@ -98,6 +101,11 @@ export class DatePickerDirective implements OnInit {
   attachModelToDatePicker() {
     if (!this.formControl) {
       return;
+    }
+    this.updateDatepickerConfig();
+    if (this.datePicker) {
+      this.datePicker.init();
+      this.datePicker.onViewDateChange(this.formControl.value);
     }
     this.formControl.valueChanges.subscribe(value => {
       if (value !== this.datePicker.inputElementValue) {
