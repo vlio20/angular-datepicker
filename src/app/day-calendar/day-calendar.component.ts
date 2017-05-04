@@ -56,6 +56,7 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
   @Input() maxDate: Moment;
   @HostBinding('class') @Input() theme: string;
   @Output() onSelect: EventEmitter<IDay> = new EventEmitter();
+  @Output() onMonthSelect: EventEmitter<IMonth> = new EventEmitter();
   @Output() onNavHeaderBtnClick: EventEmitter<ECalendarType> = new EventEmitter();
 
   CalendarType = ECalendarType;
@@ -221,6 +222,7 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
     this.currentCalendarType = ECalendarType.Day;
     this.weeks = this.dayCalendarService
       .generateMonthArray(this.componentConfig, this.currentDateView, this.selected);
+    this.onMonthSelect.emit(month);
   }
 
   moveCalendarsBy(current: Moment, amount: number, granularity: moment.unitOfTime.Base = 'month') {
