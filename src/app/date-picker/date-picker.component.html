@@ -9,7 +9,8 @@
            [readonly]="componentConfig.disableKeypress"
            [disabled]="disabled"/>
 
-    <button class="dp-current-location-btn"
+    <button type="button"
+            class="dp-current-location-btn"
             *ngIf="componentConfig.showGoToCurrent"
             (click)="moveToCurrent()"
             [hidden]="!_areCalendarsShown">
