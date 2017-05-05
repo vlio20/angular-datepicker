@@ -1,16 +1,19 @@
 <div class="dp-calendar-nav-container">
-  <button class="dp-calendar-nav-left"
+  <button type="button"
+          class="dp-calendar-nav-left"
           [hidden]="!showLeftNav"
           [disabled]="leftNavDisabled"
           (click)="leftNavClicked()">  &lt;
   </button>
   <span class="dp-nav-header" [hidden]="isLabelClickable">{{label}}</span>
-  <button class="dp-nav-header dp-nav-header-btn"
+  <button type="button"
+          class="dp-nav-header dp-nav-header-btn"
           [hidden]="!isLabelClickable"
           (click)="labelClicked()">
     {{label}}
   </button>
-  <button class="dp-calendar-nav-right"
+  <button type="button"
+          class="dp-calendar-nav-right"
           [hidden]="!showRightNav"
           [disabled]="rightNavDisabled"
           (click)="rightNavClicked()">  &gt;
