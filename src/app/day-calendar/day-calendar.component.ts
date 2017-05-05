@@ -68,7 +68,7 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
   currentDateView: Moment;
   inputValue: CalendarValue;
   inputValueType: ECalendarValue;
-  validateFn: (FormControl, string) => {[key: string]: any};
+  validateFn: (inputVal: CalendarValue) => {[key: string]: any};
   currentCalendarType: ECalendarType = ECalendarType.Day;
   monthCalendarConfig: IMonthCalendarConfig;
 
@@ -147,7 +147,7 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
 
   validate(formControl: FormControl): ValidationErrors | any {
     if (this.minDate || this.maxDate) {
-      return this.validateFn(formControl, this.componentConfig.format);
+      return this.validateFn(formControl.value);
     } else {
       return () => null;
     }
@@ -158,10 +158,8 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
   }
 
   initValidators() {
-    this.validateFn = this.dayCalendarService.createValidator({
-      minDate: this.utilsService.convertToMoment(this.minDate, this.componentConfig.format),
-      maxDate: this.utilsService.convertToMoment(this.maxDate, this.componentConfig.format)
-    }, this.componentConfig.format);
+    this.validateFn = this.utilsService.createValidator(
+      {minDate: this.minDate, maxDate: this.maxDate}, this.componentConfig.format, 'day');
 
     this.onChangeCallback(this.processOnChangeCallback(this.selected));
   }

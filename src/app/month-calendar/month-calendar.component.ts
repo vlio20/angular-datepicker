@@ -59,7 +59,7 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
   currentDateView: Moment;
   inputValue: CalendarValue;
   inputValueType: ECalendarValue;
-  validateFn: (FormControl, string) => {[key: string]: any};
+  validateFn: (inputVal: CalendarValue) => {[key: string]: any};
 
   set selected(selected: Moment[]) {
     this._selected = selected;
@@ -125,7 +125,7 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
 
   validate(formControl: FormControl): ValidationErrors | any {
     if (this.minDate || this.maxDate) {
-      return this.validateFn(formControl, this.componentConfig.format);
+      return this.validateFn(formControl.value);
     } else {
       return () => null;
     }
@@ -136,10 +136,8 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
   }
 
   initValidators() {
-    this.validateFn = this.monthCalendarService.createValidator({
-      minDate: this.utilsService.convertToMoment(this.minDate, this.componentConfig.format),
-      maxDate: this.utilsService.convertToMoment(this.maxDate, this.componentConfig.format)
-    }, this.componentConfig.format);
+    this.validateFn = this.validateFn = this.utilsService.createValidator(
+      {minDate: this.minDate, maxDate: this.maxDate}, this.componentConfig.format, 'month');
 
     this.onChangeCallback(this.processOnChangeCallback(this.selected));
   }
