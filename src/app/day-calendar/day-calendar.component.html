@@ -17,7 +17,8 @@
     </div>
     <div class="dp-calendar-week" *ngFor="let week of weeks">
       <span *ngIf="componentConfig.showWeekNumbers" class="dp-week-number">{{week[0].date.isoWeek()}}</span>
-      <button class="dp-calendar-day"
+      <button type="button"
+              class="dp-calendar-day"
               *ngFor="let day of week"
               (click)="dayClicked(day)"
               [disabled]="isDisabledDay(day)"
