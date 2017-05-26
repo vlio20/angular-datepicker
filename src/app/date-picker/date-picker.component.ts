@@ -207,7 +207,6 @@ export class DatePickerComponent implements OnChanges,
   initValidators() {
     this.validateFn = this.utilsService.createValidator(
       {minDate: this.minDate, maxDate: this.maxDate}, this.componentConfig.format, this.type);
-
     this.onChangeCallback(this.processOnChangeCallback(this.selected));
   }
 
