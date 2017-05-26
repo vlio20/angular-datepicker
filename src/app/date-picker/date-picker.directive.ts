@@ -1,4 +1,3 @@
-import {ECalendarValue} from '../common/types/calendar-value-enum';
 import {CalendarType} from './../common/types/calendar-type';
 import {IDatePickerDirectiveConfig} from './date-picker-directive-config.model';
 import {DatePickerDirectiveService} from './date-picker-directive.service';
@@ -15,6 +14,7 @@ import {
   Optional
 } from '@angular/core';
 import {NgControl} from '@angular/forms';
+import {Moment} from 'moment';
 
 @Directive({
   exportAs: 'dpDayPicker',
@@ -25,7 +25,9 @@ export class DatePickerDirective implements OnInit {
   private _config: IDatePickerDirectiveConfig;
   private _attachTo: ElementRef | string;
   private _theme: string;
-  private _type: CalendarType;
+  private _type: CalendarType = 'day';
+  private _minDate: Moment | string;
+  private _maxDate: Moment | string;
 
   get config(): IDatePickerDirectiveConfig {
     return this._config;
@@ -68,6 +70,30 @@ export class DatePickerDirective implements OnInit {
     }
   }
 
+  @Input() set minDate(minDate: Moment | string) {
+    this._minDate = minDate;
+    if (this.datePicker) {
+      this.datePicker.minDate = minDate;
+      this.datePicker.ngOnInit();
+    }
+  }
+
+  get minDate(): Moment | string {
+    return this._minDate;
+  }
+
+  @Input() set maxDate(maxDate: Moment | string) {
+    this._maxDate = maxDate;
+    if (this.datePicker) {
+      this.datePicker.maxDate = maxDate;
+      this.datePicker.ngOnInit();
+    }
+  }
+
+  get maxDate(): Moment | string {
+    return this._maxDate;
+  }
+
   public datePicker: DatePickerComponent;
   public api: IDpDayPickerApi;
 
@@ -94,14 +120,21 @@ export class DatePickerDirective implements OnInit {
     if (!this.formControl) {
       return;
     }
+
     this.datePicker.onViewDateChange(this.formControl.value);
     this.formControl.valueChanges.subscribe(value => {
       if (value !== this.datePicker.inputElementValue) {
         this.datePicker.onViewDateChange(value);
       }
     });
-    this.datePicker.registerOnChange(value => {
-      this.formControl.control.setValue(this.datePicker.inputElementValue);
+
+    this.datePicker.registerOnChange((value) => {
+      const errors = this.datePicker.validateFn(value);
+      if (errors) {
+        this.formControl.control.setErrors(errors);
+      } else {
+        this.formControl.control.setValue(this.datePicker.inputElementValue);
+      }
       this.formControl.control.markAsDirty();
     });
   }
@@ -120,6 +153,8 @@ export class DatePickerDirective implements OnInit {
 
   private updateDatepickerConfig() {
     if (this.datePicker) {
+      this.datePicker.minDate = this.minDate;
+      this.datePicker.maxDate = this.maxDate;
       this.datePicker.type = this.type || 'day';
       this.datePicker.config = this.config;
       this.datePicker.init();
