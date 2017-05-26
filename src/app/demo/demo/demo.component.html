@@ -135,12 +135,16 @@
                [theme]="material ? 'dp-material' : ''"
                [(ngModel)]="date"
                [placeholder]="placeholder"
+               [minDate]="validationMinDate"
+               [maxDate]="validationMaxDate"
                [disabled]="disabled"
                [required]="required"
                (ngModelChange)="log($event)"/>
         <div class="dp-validations">
           <div id="requiredValidation" *ngIf="dateDirectivePickerModel.errors?.required || false">required</div>
           <div *ngIf="dateDirectivePickerModel.errors?.format || false">format invalid</div>
+          <div *ngIf="dateDirectivePickerModel.errors?.minDate">minDate invalid</div>
+          <div *ngIf="dateDirectivePickerModel.errors?.maxDate">maxDate invalid</div>
         </div>
       </div>
 
