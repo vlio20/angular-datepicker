@@ -18,9 +18,9 @@ export class DemoComponent {
   @ViewChild('dateDirectivePicker') dateDirectivePicker: DatePickerDirective;
   demoFormat = 'DD-MM-YYYY';
   readonly DAYS = ['su', 'mo', 'tu', 'we', 'th', 'fr', 'sa'];
-  pickerMode = 'dayPicker';
+  pickerMode = 'timeInline';
 
-  date: Moment;
+  date: Moment = moment('6/22/16 10:45 am');
   dates: Moment[] = [];
   material: boolean = true;
   required: boolean = false;
@@ -66,7 +66,17 @@ export class DemoComponent {
     yearFormat: 'YYYY',
     showGoToCurrent: true,
     dayBtnFormat: 'DD',
-    monthBtnFormat: 'MMM'
+    monthBtnFormat: 'MMM',
+    hours12Format: 'hh',
+    hours24Format: 'HH',
+    meridiemFormat: 'A',
+    minutesFormat: 'mm',
+    minutesInterval: 1,
+    secondsFormat: 'ss',
+    secondsInterval: 1,
+    showSeconds: false,
+    showTwentyFourHours: false,
+    timeSeparator: ':',
   };
   isAtTop: boolean = true;
 

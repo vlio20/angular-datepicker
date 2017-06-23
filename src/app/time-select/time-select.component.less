@@ -1,0 +1,55 @@
+@import '../common/styles/variables';
+
+& {
+  .controls {
+    text-align: center;
+    padding: 10px 0;
+    line-height: normal;
+    margin: 0;
+  }
+  .control {
+    vertical-align: middle;
+    display: inline-block;
+    font-size: inherit;
+    margin: 0 auto;
+    width: 35px;
+    letter-spacing: 1.3px;
+  }
+  .control-up, .control-down {
+    position: relative;
+    display: block;
+    margin: 3px auto;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    &:before {
+      display: inline-block;
+      position: relative;
+    }
+  }
+  .control-up:before {
+    content: '︿';
+    bottom: 0.2em;
+  }
+  .control-down:before {
+    content: '﹀';
+    top: 0.3em;
+  }
+  .separator {
+    width: 5px;
+  }
+
+  :host.dp-material {
+    .control-up, .control-down {
+      box-sizing: border-box;
+      background: @c-white;
+      border: none;
+      outline: none;
+      border-radius: 50%;
+
+      &:hover {
+        background: @c-light-gray;
+      }
+    }
+  }
+}

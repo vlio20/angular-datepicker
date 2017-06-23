@@ -24,6 +24,7 @@
       <option value="monthPicker">Month Picker</option>
       <option value="monthInline">Month Inline</option>
       <option value="monthDirective">Month Directive</option>
+      <option value="timeInline">Time Inline</option>
     </select>
   </div>
 
@@ -124,6 +125,30 @@
           <div id="dayRequiredValidation" *ngIf="dayCalendar.errors && dayCalendar.errors.required">required</div>
           <div id="dayMinDateValidation" *ngIf="dayCalendar.errors && dayCalendar.errors.minDate">minDate invalid</div>
           <div id="dayMaxDateValidation" *ngIf="dayCalendar.errors && dayCalendar.errors.maxDate">maxDate invalid</div>
+        </div>
+      </div>
+
+      <div class="dp-inline" *ngIf="pickerMode === 'timeInline'">
+        <dp-time-select
+            name="timeInline"
+            #timeInline="ngModel"
+            [theme]="material ? 'dp-material' : ''"
+            [(ngModel)]="date"
+            (ngModelChange)="log($event)"
+            [minDate]="validationMinDate"
+            [maxDate]="validationMaxDate"
+            [config]="config">
+        </dp-time-select>
+
+        <div class="dp-validations">
+          <div id="timeInlineRequiredValidation" *ngIf="timeInline.errors && timeInline.errors.required">required
+          </div>
+          <div id="timeInlineMinDateValidation" *ngIf="timeInline.errors && timeInline.errors.minDate">minDate
+            invalid
+          </div>
+          <div id="timeInlineMaxDateValidation" *ngIf="timeInline.errors && timeInline.errors.maxDate">maxDate
+            invalid
+          </div>
         </div>
       </div>
 
@@ -546,6 +571,113 @@
       </div>
     </div>
 
+    <div class="dp-option">
+      <span class="dp-option-header">
+        12 Hour Format (hours12Format):
+      </span>
+      <div class="dp-option-playground">
+        <input id="hours12Format" type="text" [(ngModel)]="config.hours12Format" (change)="configChanged()">
+      </div>
+    </div>
+
+    <div class="dp-option">
+      <span class="dp-option-header">
+        24 Hour Format (hours24Format):
+      </span>
+      <div class="dp-option-playground">
+        <input id="hours24Format" type="text" [(ngModel)]="config.hours24Format" (change)="configChanged()">
+      </div>
+    </div>
+
+    <div class="dp-option">
+      <span class="dp-option-header">
+        Meridiem Format (meridiemFormat):
+      </span>
+      <div class="dp-option-playground">
+        <input id="meridiemFormat" type="text" [(ngModel)]="config.meridiemFormat" (change)="configChanged()">
+      </div>
+    </div>
+
+    <div class="dp-option">
+      <span class="dp-option-header">
+        Minutes Format (minutesFormat):
+      </span>
+      <div class="dp-option-playground">
+        <input id="minutesFormat" type="text" [(ngModel)]="config.minutesFormat" (change)="configChanged()">
+      </div>
+    </div>
+
+    <div class="dp-option">
+      <span class="dp-option-header">
+        Minutes Interval (minutesInterval):
+      </span>
+      <div class="dp-option-playground">
+        <input id="minutesInterval" type="number" [(ngModel)]="config.minutesInterval" (change)="configChanged()">
+      </div>
+    </div>
+
+    <div class="dp-option">
+      <span class="dp-option-header">
+        Seconds Format (secondsFormat):
+      </span>
+      <div class="dp-option-playground">
+        <input id="secondsFormat" type="text" [(ngModel)]="config.secondsFormat" (change)="configChanged()">
+      </div>
+    </div>
+
+    <div class="dp-option">
+      <span class="dp-option-header">
+        Seconds Interval (secondsInterval):
+      </span>
+      <div class="dp-option-playground">
+        <input id="secondsInterval" type="number" [(ngModel)]="config.secondsInterval" (change)="configChanged()">
+      </div>
+    </div>
+
+    <div class="dp-option">
+      <span class="dp-option-header">
+        Show seconds (showSeconds):
+      </span>
+      <div class="dp-option-playground">
+        <label>Enabled
+          <input id="showSeconds" type="radio" [(ngModel)]="config.showSeconds" name="showSeconds"
+                 [value]="true"
+                 (ngModelChange)="configChanged()">
+        </label>
+        <label>Disabled
+          <input id="hideSeconds" type="radio" [(ngModel)]="config.showSeconds" name="showSeconds"
+                 [value]="false"
+                 (ngModelChange)="configChanged()">
+        </label>
+      </div>
+    </div>
+
+    <div class="dp-option">
+      <span class="dp-option-header">
+        Show twenty four hours (showTwentyFourHours):
+      </span>
+      <div class="dp-option-playground">
+        <label>Enabled
+          <input id="showTwentyFourHours" type="radio" [(ngModel)]="config.showTwentyFourHours" name="showTwentyFourHours"
+                 [value]="true"
+                 (ngModelChange)="configChanged()">
+        </label>
+        <label>Disabled
+          <input id="hideTwentyFourHours" type="radio" [(ngModel)]="config.showTwentyFourHours" name="showTwentyFourHours"
+                 [value]="false"
+                 (ngModelChange)="configChanged()">
+        </label>
+      </div>
+    </div>
+
+    <div class="dp-option">
+      <span class="dp-option-header">
+        Time Separator (timeSeparator):
+      </span>
+      <div class="dp-option-playground">
+        <input id="timeSeparator" type="text" [(ngModel)]="config.timeSeparator" (change)="configChanged()">
+      </div>
+    </div>
   </div>
 
   <div class="dp-api">

@@ -1,0 +1,145 @@
+import {TestBed, inject} from '@angular/core/testing';
+import {TimeSelectService} from './time-select.service';
+import * as moment from 'moment';
+import {Moment} from 'moment';
+import {UtilsService} from '../common/services/utils/utils.service';
+import {ITimeSelectConfig} from './time-select-config.model';
+
+describe('Service: TimeSelectService', () => {
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      providers: [TimeSelectService, UtilsService]
+    });
+  });
+
+  const configBase: ITimeSelectConfig = {
+    hours12Format: 'h',
+    hours24Format: 'H',
+    minutesFormat: 'm',
+    secondsFormat: 's',
+    meridiemFormat: 'a',
+    timeSeparator: '-',
+    minutesInterval: 3,
+    secondsInterval: 4,
+  };
+
+  it('should check the getTimeFormat method', inject([TimeSelectService],
+    (service: TimeSelectService) => {
+      expect(service.getTimeFormat({
+        ...configBase,
+        showTwentyFourHours: false,
+        showSeconds: false,
+      })).toEqual('h-m a');
+      expect(service.getTimeFormat({
+        ...configBase,
+        showTwentyFourHours: true,
+        showSeconds: false,
+      })).toEqual('H-m');
+      expect(service.getTimeFormat({
+        ...configBase,
+        showTwentyFourHours: false,
+        showSeconds: true,
+      })).toEqual('h-m-s a');
+      expect(service.getTimeFormat({
+        ...configBase,
+        showTwentyFourHours: true,
+        showSeconds: true,
+      })).toEqual('H-m-s');
+    }));
+
+  it('should check the getHours method', inject([TimeSelectService],
+    (service: TimeSelectService) => {
+      const time = moment('13:12:11', 'HH:mm:ss');
+      expect(service.getHours(configBase, time))
+        .toEqual('1');
+      expect(service.getHours({
+        ...configBase,
+        showTwentyFourHours: true,
+      }, time))
+        .toEqual('13');
+    }));
+
+  it('should check the decrease method', inject([TimeSelectService],
+    (service: TimeSelectService) => {
+      const time = moment('13:12:11', 'HH:mm:ss');
+      expect(service.decrease(configBase, time, 'hour').hour()).toEqual(12);
+      expect(service.decrease(configBase, time, 'minute').minute()).toEqual(9);
+      expect(service.decrease(configBase, time, 'second').second()).toEqual(7);
+    }));
+
+  it('should check the increase method', inject([TimeSelectService],
+    (service: TimeSelectService) => {
+      const time = moment('13:12:11', 'HH:mm:ss');
+      expect(service.increase(configBase, time, 'hour').hour()).toEqual(14);
+      expect(service.increase(configBase, time, 'minute').minute()).toEqual(15);
+      expect(service.increase(configBase, time, 'second').second()).toEqual(15);
+    }));
+
+  it('should check the toggleMeridiem method', inject([TimeSelectService],
+    (service: TimeSelectService) => {
+      const time = moment('13:12:11', 'HH:mm:ss');
+      expect(service.toggleMeridiem(time).hour()).toEqual(1);
+      expect(service.toggleMeridiem(service.toggleMeridiem(time)).isSame(time)).toEqual(true);
+    }));
+
+  it('should check the shouldShowDecrease method', inject([TimeSelectService],
+    (service: TimeSelectService) => {
+      const time = moment('13:12:11', 'HH:mm:ss');
+      const minConfig = {
+        ...configBase,
+        min: moment('13:12:11', 'HH:mm:ss'),
+      };
+      expect(service.shouldShowDecrease(minConfig, time, 'hour')).toEqual(false);
+      expect(service.shouldShowDecrease(minConfig, time, 'minute')).toEqual(false);
+      expect(service.shouldShowDecrease(minConfig, time, 'second')).toEqual(false);
+      expect(service.shouldShowDecrease(minConfig, time.clone().add(1, 'hour'), 'hour')).toEqual(true);
+      expect(service.shouldShowDecrease(minConfig, time.clone().add(2, 'minute'), 'minute')).toEqual(false);
+      expect(service.shouldShowDecrease(minConfig, time.clone().add(3, 'second'), 'second')).toEqual(false);
+      expect(service.shouldShowDecrease(minConfig, time.clone().add(10, 'minute'), 'minute')).toEqual(true);
+      expect(service.shouldShowDecrease(minConfig, time.clone().add(15, 'second'), 'second')).toEqual(true);
+    }));
+
+  it('should check the shouldShowIncrease method', inject([TimeSelectService],
+    (service: TimeSelectService) => {
+      const time = moment('13:12:11', 'HH:mm:ss');
+      const maxConfig = {
+        ...configBase,
+        max: moment('13:12:11', 'HH:mm:ss'),
+      };
+      expect(service.shouldShowIncrease(maxConfig, time, 'hour')).toEqual(false);
+      expect(service.shouldShowIncrease(maxConfig, time, 'minute')).toEqual(false);
+      expect(service.shouldShowIncrease(maxConfig, time, 'second')).toEqual(false);
+      expect(service.shouldShowIncrease(maxConfig, time.clone().subtract(1, 'hour'), 'hour')).toEqual(true);
+      expect(service.shouldShowIncrease(maxConfig, time.clone().subtract(2, 'minute'), 'minute')).toEqual(false);
+      expect(service.shouldShowIncrease(maxConfig, time.clone().subtract(3, 'second'), 'second')).toEqual(false);
+      expect(service.shouldShowIncrease(maxConfig, time.clone().subtract(10, 'minute'), 'minute')).toEqual(true);
+      expect(service.shouldShowIncrease(maxConfig, time.clone().subtract(15, 'second'), 'second')).toEqual(true);
+    }));
+
+  it('should check the shouldShowToggleMeridiem method', inject([TimeSelectService],
+    (service: TimeSelectService) => {
+      const afternoonTime = moment('13:12:11', 'HH:mm:ss');
+      const morningTime = moment('10:12:11', 'HH:mm:ss');
+      const minConfig = {
+        ...configBase,
+        min: moment('13:12:11', 'HH:mm:ss'),
+      };
+      const maxConfig = {
+        ...configBase,
+        max: moment('13:12:11', 'HH:mm:ss'),
+      };
+      const minMaxConfig = {
+        ...configBase,
+        min: moment('11:12:11', 'HH:mm:ss'),
+        max: moment('15:12:11', 'HH:mm:ss'),
+      };
+      expect(service.shouldShowToggleMeridiem(configBase, morningTime)).toEqual(true);
+      expect(service.shouldShowToggleMeridiem(configBase, afternoonTime)).toEqual(true);
+      expect(service.shouldShowToggleMeridiem(minConfig, morningTime)).toEqual(true);
+      expect(service.shouldShowToggleMeridiem(minConfig, afternoonTime)).toEqual(false);
+      expect(service.shouldShowToggleMeridiem(maxConfig, morningTime)).toEqual(false);
+      expect(service.shouldShowToggleMeridiem(maxConfig, afternoonTime)).toEqual(true);
+      expect(service.shouldShowToggleMeridiem(minMaxConfig, morningTime)).toEqual(false);
+      expect(service.shouldShowToggleMeridiem(minMaxConfig, afternoonTime)).toEqual(false);
+    }));
+});
