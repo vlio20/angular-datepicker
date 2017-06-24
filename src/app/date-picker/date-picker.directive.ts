@@ -28,7 +28,11 @@ export class DatePickerDirective implements OnInit {
   private _type: CalendarType = 'day';
   private _minDate: Moment | string;
   private _maxDate: Moment | string;
+<<<<<<< HEAD
   private _previouslySelectedDate: string = "";
+=======
+  private _previouslySelectedDate: string = '';
+>>>>>>> Datepicker in directive mode opens on previously selected date
 
   get config(): IDatePickerDirectiveConfig {
     return this._config;
@@ -129,12 +133,12 @@ export class DatePickerDirective implements OnInit {
     });
 
     this.datePicker.registerOnChange((value) => {
-      if(value != null){
-        let formattedValue = value.format(this.config.format);
-        if(formattedValue !== this._previouslySelectedDate)
-        this.formControl.control.setValue(formattedValue);
+      if (value != null) {
+        const formattedValue = value.format(this.config.format);
+        if (formattedValue !== this._previouslySelectedDate) {
+          this.formControl.control.setValue(formattedValue);
+        }
       }
-      
       const errors = this.datePicker.validateFn(value);
       if (errors) {
         this.formControl.control.setErrors(errors);
