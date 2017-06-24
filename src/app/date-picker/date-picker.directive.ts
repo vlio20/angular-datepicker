@@ -28,6 +28,7 @@ export class DatePickerDirective implements OnInit {
   private _type: CalendarType = 'day';
   private _minDate: Moment | string;
   private _maxDate: Moment | string;
+  private _previouslySelectedDate: string = "";
 
   get config(): IDatePickerDirectiveConfig {
     return this._config;
@@ -123,13 +124,17 @@ export class DatePickerDirective implements OnInit {
 
     this.datePicker.onViewDateChange(this.formControl.value);
     this.formControl.valueChanges.subscribe(value => {
-      if (value !== this.datePicker.inputElementValue) {
+        this._previouslySelectedDate = value;
         this.datePicker.onViewDateChange(value);
-      }
     });
 
     this.datePicker.registerOnChange((value) => {
-      this.formControl.control.setValue(this.datePicker.inputElementValue);
+      if(value != null){
+        let formattedValue = value.format(this.config.format);
+        if(formattedValue !== this._previouslySelectedDate)
+        this.formControl.control.setValue(formattedValue);
+      }
+      
       const errors = this.datePicker.validateFn(value);
       if (errors) {
         this.formControl.control.setErrors(errors);
