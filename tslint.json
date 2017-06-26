@@ -24,6 +24,7 @@
       true,
       140
     ],
+    "trailing-comma": [true, {"multiline": "never", "singleline": "never"}],
     "member-access": false,
     "member-ordering": [
       true,

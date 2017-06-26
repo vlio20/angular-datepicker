@@ -196,13 +196,13 @@ describe('ng2-date-picker App', () => {
     expect(page.dayCalendarContainer.isDisplayed()).toBe(false);
     expect(page.monthCalendar.isPresent()).toBe(true);
     expect(page.dayCalendarNavMonthHeaderBtn.getText()).toEqual('2017');
-    expect(page.currentMonthCalendarBtn.getText()).toEqual('May');
+    expect(page.currentMonthCalendarBtn.getText()).toEqual(moment().format('MMM'));
     page.monthCalendarLeftNavBtn.click();
     expect(page.dayCalendarNavMonthHeaderBtn.getText()).toEqual('2016');
     expect(page.currentMonthCalendarBtn.isPresent()).toBe(false);
     page.monthCalendarRightNavBtn.click();
     expect(page.dayCalendarNavMonthHeaderBtn.getText()).toEqual('2017');
-    expect(page.currentMonthCalendarBtn.getText()).toEqual('May');
+    expect(page.currentMonthCalendarBtn.getText()).toEqual(moment().format('MMM'));
 
     page.clickOnBody();
     page.datePickerInput.click();
@@ -387,8 +387,8 @@ describe('ng2-date-picker App', () => {
 
   it('should check allow multiselect is working', () => {
     page.enableMultiselect.click();
-    page.datePickerInput.sendKeys('18-05-2017');
     page.datePickerInput.click();
+    page.datePickerInput.sendKeys('18-05-2017');
 
     page.clickOnDayButton('15');
     page.clickOnDayButton('16');

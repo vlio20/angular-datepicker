@@ -16,7 +16,7 @@ import {DpDatePickerModule} from '../date-picker.module';
     RouterModule.forRoot([
       {
         path: '**',
-        component: DemoComponent,
+        component: DemoComponent
       }
     ])
   ],
@@ -25,7 +25,7 @@ import {DpDatePickerModule} from '../date-picker.module';
     DemoComponent
   ],
   entryComponents: [
-    DatePickerComponent,
+    DatePickerComponent
   ],
   bootstrap: [DemoRootComponent]
 })

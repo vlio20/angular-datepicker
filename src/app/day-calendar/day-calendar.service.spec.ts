@@ -37,7 +37,7 @@ describe('Service: Calendar', () => {
     (service: DayCalendarService) => {
       let monthWeeks = service.generateMonthArray(
         {
-          firstDayOfWeek: 'su',
+          firstDayOfWeek: 'su'
         },
         moment('11-10-2016', 'DD-MM-YYYY'),
         [moment('11-10-2016', 'DD-MM-YYYY')]);
@@ -53,7 +53,7 @@ describe('Service: Calendar', () => {
 
       monthWeeks = service.generateMonthArray(
         {
-          firstDayOfWeek: 'mo',
+          firstDayOfWeek: 'mo'
         },
         moment('11-10-2016', 'DD-MM-YYYY'),
         [moment('11-10-2016', 'DD-MM-YYYY'), moment('13-10-2016', 'DD-MM-YYYY')]
@@ -65,7 +65,7 @@ describe('Service: Calendar', () => {
 
       monthWeeks = service.generateMonthArray(
         {
-          firstDayOfWeek: 'mo',
+          firstDayOfWeek: 'mo'
         },
         moment('11-10-2016', 'DD-MM-YYYY'),
         [moment('11-10-2016', 'DD-MM-YYYY')]);
@@ -76,7 +76,7 @@ describe('Service: Calendar', () => {
 
       monthWeeks = service.generateMonthArray(
         {
-          firstDayOfWeek: 'mo',
+          firstDayOfWeek: 'mo'
         },
         moment('11-10-2016', 'DD-MM-YYYY'),
         []
@@ -88,7 +88,7 @@ describe('Service: Calendar', () => {
 
       monthWeeks = service.generateMonthArray(
         {
-          firstDayOfWeek: 'mo',
+          firstDayOfWeek: 'mo'
         },
         moment('11-10-2016', 'DD-MM-YYYY'),
         []

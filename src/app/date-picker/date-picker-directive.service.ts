@@ -20,7 +20,7 @@ export class DatePickerDirectiveService {
   getConfig(
     config: IDatePickerDirectiveConfig = {},
     baseElement?: ElementRef,
-    attachTo?: ElementRef | string,
+    attachTo?: ElementRef | string
   ): IDatePickerDirectiveConfig {
     const _config: IDatePickerDirectiveConfig = {...config};
     _config.hideInputContainer = true;
