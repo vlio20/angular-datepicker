@@ -46,19 +46,19 @@ export class TimeSelectService {
   }
 
   getHours(config: ITimeSelectConfig, time: Moment): string {
-    return time.format(config.showTwentyFourHours ? config.hours24Format : config.hours12Format);
+    return time && time.format(config.showTwentyFourHours ? config.hours24Format : config.hours12Format);
   }
 
   getMinutes(config: ITimeSelectConfig, time: Moment): string {
-    return time.format(config.minutesFormat);
+    return time && time.format(config.minutesFormat);
   }
 
   getSeconds(config: ITimeSelectConfig, time: Moment): string {
-    return time.format(config.secondsFormat);
+    return time && time.format(config.secondsFormat);
   }
 
   getMeridiem(config: ITimeSelectConfig, time: Moment): string {
-    return time.format(config.meridiemFormat);
+    return time && time.format(config.meridiemFormat);
   }
 
   decrease(config: ITimeSelectConfig, time: Moment, unit: TimeUnit): Moment {

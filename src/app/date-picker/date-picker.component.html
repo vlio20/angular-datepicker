@@ -11,7 +11,7 @@
 
     <button type="button"
             class="dp-current-location-btn"
-            *ngIf="componentConfig.showGoToCurrent"
+            *ngIf="componentConfig.showGoToCurrent && type !== 'time'"
             (click)="moveToCurrent()"
             [hidden]="!_areCalendarsShown">
     </button>
@@ -37,6 +37,14 @@
                          (onSelect)="dateSelected($event, 'month')"
                          [theme]="theme">
       </dp-month-calendar>
+
+      <dp-time-select #timeSelect
+                      *ngSwitchCase="'time'"
+                      [config]="timeSelectConfig"
+                      [ngModel]="_selected && _selected[0]"
+                      (onChange)="dateSelected($event, 'second', true)"
+                      [theme]="theme">
+      </dp-time-select>
     </div>
   </div>
 </div>

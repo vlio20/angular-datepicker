@@ -2,6 +2,9 @@ import debounce from '../../common/decorators/decorators';
 import {IDatePickerConfig} from '../../date-picker/date-picker-config.model';
 import {DatePickerComponent} from '../../date-picker/date-picker.component';
 import {DatePickerDirective} from '../../date-picker/date-picker.directive';
+import {DatePickerService} from '../../date-picker/date-picker.service';
+import {DayCalendarService} from '../../day-calendar/day-calendar.service';
+import {MonthCalendarService} from '../../month-calendar/month-calendar.service';
 import {TimeSelectService} from '../../time-select/time-select.service';
 import {Component, HostListener, ViewChild} from '@angular/core';
 import {AbstractControl, FormControl, FormGroup, NgForm, Validator, Validators} from '@angular/forms';
@@ -19,7 +22,7 @@ export class DemoComponent {
   @ViewChild('dateDirectivePicker') dateDirectivePicker: DatePickerDirective;
   demoFormat = 'DD-MM-YYYY';
   readonly DAYS = ['su', 'mo', 'tu', 'we', 'th', 'fr', 'sa'];
-  pickerMode = 'timeInline';
+  pickerMode = 'timePicker';
 
   date: Moment = moment('10:45', 'HH:mm');
   dates: Moment[] = [];
@@ -44,7 +47,7 @@ export class DemoComponent {
 
   config: IDatePickerConfig = {
     firstDayOfWeek: 'su',
-    format: 'DD-MM-YYYY',
+    format: 'DD-MM-YYYY HH:mm:ss',
     monthFormat: 'MMM, YYYY',
     disableKeypress: false,
     allowMultiSelect: false,
@@ -83,7 +86,12 @@ export class DemoComponent {
   };
   isAtTop: boolean = true;
 
-  constructor(public timeService: TimeSelectService) {}
+  constructor(
+    private dayService: DayCalendarService,
+    private monthService: MonthCalendarService,
+    private timeService: TimeSelectService,
+    private datePickerService: DatePickerService,
+  ) {}
 
   @HostListener('document:scroll')
   @debounce(100)
@@ -119,6 +127,10 @@ export class DemoComponent {
 
   isValidConfig(key: string): boolean {
     switch (this.pickerMode) {
+      case 'dayInline':
+        return Object.keys(this.dayService.getConfig({})).indexOf(key) > -1;
+      case 'monthInline':
+        return Object.keys(this.monthService.getConfig({})).indexOf(key) > -1;
       case 'timeInline':
         return Object.keys(this.timeService.getConfig({})).indexOf(key) > -1;
       default:

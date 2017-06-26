@@ -26,8 +26,7 @@ import {
 } from '@angular/forms';
 import {CalendarValue} from '../common/types/calendar-value';
 import {UtilsService} from '../common/services/utils/utils.service';
-import {IMonthCalendarConfig} from '../month-calendar/month-calendar-config';
-import {IMonth} from '../month-calendar/month.model';
+import {IDate} from '../common/models/date.model';
 
 @Component({
   selector: 'dp-time-select',
@@ -56,6 +55,7 @@ export class TimeSelectComponent implements OnInit, OnChanges, ControlValueAcces
   @Input() minTime: Moment;
   @Input() maxTime: Moment;
   @HostBinding('class') @Input() theme: string;
+  @Output() onChange: EventEmitter<IDate> = new EventEmitter();
 
   CalendarType = ECalendarType;
   isInited: boolean = false;
@@ -79,6 +79,10 @@ export class TimeSelectComponent implements OnInit, OnChanges, ControlValueAcces
   get selected(): Moment {
     return this._selected;
   }
+
+  api = {
+    triggerChange: this.emitChange.bind(this),
+  };
 
   constructor(public timeSelectService: TimeSelectService,
               public utilsService: UtilsService) {
@@ -158,14 +162,21 @@ export class TimeSelectComponent implements OnInit, OnChanges, ControlValueAcces
 
   decrease(unit: TimeUnit) {
     this.selected = this.timeSelectService.decrease(this.componentConfig, this.selected, unit);
+    this.emitChange();
   }
 
   increase(unit: TimeUnit) {
     this.selected = this.timeSelectService.increase(this.componentConfig, this.selected, unit);
+    this.emitChange();
   }
 
   toggleMeridiem() {
     this.selected = this.timeSelectService.toggleMeridiem(this.selected);
+    this.emitChange();
+  }
+
+  emitChange() {
+    this.onChange.emit({ date: this.selected, selected: false });
   }
 
   calculateTimeParts(time: Moment) {

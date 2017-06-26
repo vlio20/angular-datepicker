@@ -10,6 +10,9 @@ import {MonthCalendarComponent} from './month-calendar/month-calendar.component'
 import {TimeSelectComponent} from './time-select/time-select.component';
 import {TimeSelectService} from './time-select/time-select.service';
 import {CalendarNavComponent} from './calendar-nav/calendar-nav.component';
+import {DatePickerService} from './date-picker/date-picker.service';
+import {MonthCalendarService} from './month-calendar/month-calendar.service';
+import {DayCalendarService} from './day-calendar/day-calendar.service';
 export {DatePickerComponent} from './date-picker/date-picker.component';
 export {DatePickerDirective} from './date-picker/date-picker.directive';
 export {DayCalendarComponent} from './day-calendar/day-calendar.component';
@@ -18,7 +21,10 @@ export {DayCalendarComponent} from './day-calendar/day-calendar.component';
   providers: [
     DomHelper,
     UtilsService,
-    TimeSelectService
+    TimeSelectService,
+    MonthCalendarService,
+    DayCalendarService,
+    DatePickerService,
   ],
   declarations: [
     DatePickerComponent,

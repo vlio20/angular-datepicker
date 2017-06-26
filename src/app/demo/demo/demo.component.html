@@ -24,6 +24,7 @@
       <option value="monthPicker">Month Picker</option>
       <option value="monthInline">Month Inline</option>
       <option value="monthDirective">Month Directive</option>
+      <option value="timePicker">Time Picker</option>
       <option value="timeInline">Time Inline</option>
     </select>
   </div>
@@ -77,7 +78,7 @@
           <div id="monthPickerMinDateValidation" *ngIf="monthPicker.errors && monthPicker.errors.minDate">minDate
             invalid
           </div>
-          <div id="monthPickerMaxDateValidation" *ngIf="monthPicker.errors && datePicker.errors.maxDate">maxDate
+          <div id="monthPickerMaxDateValidation" *ngIf="monthPicker.errors && monthPicker.errors.maxDate">maxDate
             invalid
           </div>
         </div>
@@ -125,6 +126,42 @@
           <div id="dayRequiredValidation" *ngIf="dayCalendar.errors && dayCalendar.errors.required">required</div>
           <div id="dayMinDateValidation" *ngIf="dayCalendar.errors && dayCalendar.errors.minDate">minDate invalid</div>
           <div id="dayMaxDateValidation" *ngIf="dayCalendar.errors && dayCalendar.errors.maxDate">maxDate invalid</div>
+        </div>
+      </div>
+
+      <div class="dp-picker-container" *ngIf="pickerMode === 'timePicker'">
+        <dp-date-picker id="timePicker"
+                        name="timePicker"
+                        #timePicker="ngModel"
+                        [(ngModel)]="date"
+                        (ngModelChange)="log($event)"
+                        [type]="'time'"
+                        [disabled]="disabled"
+                        [minDate]="validationMinDate"
+                        [maxDate]="validationMaxDate"
+                        [minTime]="validationMinTime"
+                        [maxTime]="validationMaxTime"
+                        [required]="required"
+                        [placeholder]="placeholder"
+                        [config]="config"
+                        [theme]="material ? 'dp-material' : ''">
+        </dp-date-picker>
+        <div class="dp-validations">
+          <div id="timePickerRequiredValidation" *ngIf="timePicker.errors && timePicker.errors.required">required
+          </div>
+          <div *ngIf="timePicker.errors && timePicker.errors.format">format invalid</div>
+          <div id="timePickerMinDateValidation" *ngIf="timePicker.errors && timePicker.errors.minDate">minDate
+            invalid
+          </div>
+          <div id="timePickerMaxDateValidation" *ngIf="timePicker.errors && timePicker.errors.maxDate">maxDate
+            invalid
+          </div>
+          <div id="timePickerMinTimeValidation" *ngIf="timePicker.errors && timePicker.errors.minTime">minTime
+            invalid
+          </div>
+          <div id="timePickerMaxTimeValidation" *ngIf="timePicker.errors && timePicker.errors.maxTime">maxTime
+            invalid
+          </div>
         </div>
       </div>
 
@@ -298,11 +335,14 @@
         Min-Time Validation (minTime):
       </span>
       <div class="dp-option-playground">
-        <dp-time-select id="minTimeValidation"
+        <dp-date-picker id="minTimeValidation"
                         theme="dp-material"
                         [(ngModel)]="validationMinTime"
-                        (ngModelChange)="validatorsChanged()">
-        </dp-time-select>
+                        type="time"
+                        [config]="{format: 'HH:mm:ss'}"
+                        (ngModelChange)="validatorsChanged()"
+                        placeholder="Select a min time">
+        </dp-date-picker>
       </div>
     </div>
 
@@ -311,11 +351,14 @@
         Max-Time Validation (maxTime):
       </span>
       <div class="dp-option-playground">
-        <dp-time-select id="maxTimeValidation"
+        <dp-date-picker id="maxTimeValidation"
                         theme="dp-material"
                         [(ngModel)]="validationMaxTime"
-                        (ngModelChange)="validatorsChanged()">
-        </dp-time-select>
+                        type="time"
+                        [config]="{format: 'HH:mm:ss'}"
+                        (ngModelChange)="validatorsChanged()"
+                        placeholder="Select a max time">
+        </dp-date-picker>
       </div>
     </div>
 
@@ -395,11 +438,14 @@
         Min Selectable Time (minTime):
       </span>
       <div class="dp-option-playground">
-        <dp-time-select id="minSelectable"
+        <dp-date-picker id="minTimeSelectable"
                         theme="dp-material"
                         [(ngModel)]="config.minTime"
-                        (ngModelChange)="configChanged()">
-        </dp-time-select>
+                        type="time"
+                        [config]="{format: 'HH:mm:ss'}"
+                        (ngModelChange)="configChanged()"
+                        placeholder="Select a min time">
+        </dp-date-picker>
       </div>
     </div>
 
@@ -408,11 +454,14 @@
         Max Selectable Time (maxTime):
       </span>
       <div class="dp-option-playground">
-        <dp-time-select id="maxSelectable"
+        <dp-date-picker id="maxTimeSelectable"
                         theme="dp-material"
                         [(ngModel)]="config.maxTime"
-                        (ngModelChange)="configChanged()">
-        </dp-time-select>
+                        type="time"
+                        [config]="{format: 'HH:mm:ss'}"
+                        (ngModelChange)="configChanged()"
+                        placeholder="Select a max time">
+        </dp-date-picker>
       </div>
     </div>
 

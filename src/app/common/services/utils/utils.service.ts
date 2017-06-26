@@ -5,6 +5,7 @@ import * as moment from 'moment';
 import {Moment, unitOfTime} from 'moment';
 import {CalendarValue} from '../../types/calendar-value';
 import {IDate} from '../../models/date.model';
+import { CalendarType } from '../../types/calendar-type';
 
 export type DateValidatorFn = (inputVal: CalendarValue) => {[key: string]: any};
 export interface DateLimits {
@@ -176,10 +177,22 @@ export class UtilsService {
     return m && moment(m.format('HH:mm:ss'), 'HH:mm:ss');
   }
 
-  createValidator({minDate, maxDate, minTime, maxTime}: DateLimits, format: string, granularity: unitOfTime.Base): DateValidatorFn {
+  granularityFromType(calendarType: CalendarType): unitOfTime.Base {
+    switch (calendarType) {
+      case 'time':
+        return 'second';
+      case 'daytime':
+        return 'second';
+      default:
+        return calendarType;
+    }
+  }
+
+  createValidator({minDate, maxDate, minTime, maxTime}: DateLimits, format: string, calendarType: CalendarType): DateValidatorFn {
     let isValid: boolean;
     let value: Moment[];
     const validators = [];
+    const granularity = this.granularityFromType(calendarType);
 
     if (minDate) {
       const md = this.convertToMoment(minDate, format);
