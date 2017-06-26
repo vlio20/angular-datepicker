@@ -25,7 +25,7 @@ export {DayCalendarComponent} from './day-calendar/day-calendar.component';
     CalendarNavComponent
   ],
   entryComponents: [
-    DatePickerComponent,
+    DatePickerComponent
   ],
   imports: [
     CommonModule,

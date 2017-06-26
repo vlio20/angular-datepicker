@@ -35,8 +35,8 @@ export class DemoComponent {
       control => this.validationMinDate && this.config && moment(control.value, this.config.format).isBefore(this.validationMinDate)
         ? {minDate: 'minDate Invalid'} : undefined,
       control => this.validationMaxDate && this.config && moment(control.value, this.config.format).isAfter(this.validationMaxDate)
-        ? {maxDate: 'maxDate Invalid'} : undefined,
-    ]),
+        ? {maxDate: 'maxDate Invalid'} : undefined
+    ])
   });
 
   config: IDatePickerConfig = {

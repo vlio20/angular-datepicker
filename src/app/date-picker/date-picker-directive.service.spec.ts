@@ -34,7 +34,7 @@ describe('Service: DatePickerDirective', () => {
       const config2 = service.getConfig({allowMultiSelect: true});
       expect(config2).toEqual({
         allowMultiSelect: true,
-        hideInputContainer: true,
+        hideInputContainer: true
       });
       expect(service.convertToHTMLElement).not.toHaveBeenCalled();
 
@@ -43,7 +43,7 @@ describe('Service: DatePickerDirective', () => {
       expect(config3).toEqual({
         allowMultiSelect: true,
         hideInputContainer: true,
-        inputElementContainer: fakeElement,
+        inputElementContainer: fakeElement
       });
       expect(service.convertToHTMLElement).not.toHaveBeenCalled();
 
@@ -53,7 +53,7 @@ describe('Service: DatePickerDirective', () => {
       expect(config4).toEqual({
         allowMultiSelect: true,
         hideInputContainer: true,
-        inputElementContainer: 'fakeElement',
+        inputElementContainer: 'fakeElement'
       });
       expect(service.convertToHTMLElement).toHaveBeenCalledWith(fakeAttachElementRef, fakeElement);
 
@@ -61,7 +61,7 @@ describe('Service: DatePickerDirective', () => {
       expect(config5).toEqual({
         allowMultiSelect: true,
         hideInputContainer: true,
-        inputElementContainer: 'fakeElement',
+        inputElementContainer: 'fakeElement'
       });
       expect(service.convertToHTMLElement).toHaveBeenCalledWith('someSelector', fakeElement);
     }));

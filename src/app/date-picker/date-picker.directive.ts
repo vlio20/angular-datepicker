@@ -19,7 +19,7 @@ import {Moment} from 'moment';
 @Directive({
   exportAs: 'dpDayPicker',
   providers: [DatePickerDirectiveService],
-  selector: '[dpDayPicker]',
+  selector: '[dpDayPicker]'
 })
 export class DatePickerDirective implements OnInit {
   private _config: IDatePickerDirectiveConfig;
