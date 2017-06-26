@@ -89,6 +89,20 @@ describe('Service: TimeSelectService', () => {
         ...configBase,
         min: moment('13:12:11', 'HH:mm:ss'),
       };
+      const minTimeConfig = {
+        ...configBase,
+        minTime: moment('13:12:11', 'HH:mm:ss'),
+      };
+      const minAndMinTimeConfig = {
+        ...configBase,
+        min: moment('11:11:11', 'HH:mm:ss'),
+        minTime: moment('13:12:11', 'HH:mm:ss'),
+      };
+      const minAndMinTimeConfig2 = {
+        ...configBase,
+        min: moment('13:12:11', 'HH:mm:ss'),
+        minTime: moment('11:11:11', 'HH:mm:ss'),
+      };
       expect(service.shouldShowDecrease(minConfig, time, 'hour')).toEqual(false);
       expect(service.shouldShowDecrease(minConfig, time, 'minute')).toEqual(false);
       expect(service.shouldShowDecrease(minConfig, time, 'second')).toEqual(false);
@@ -97,6 +111,30 @@ describe('Service: TimeSelectService', () => {
       expect(service.shouldShowDecrease(minConfig, time.clone().add(3, 'second'), 'second')).toEqual(false);
       expect(service.shouldShowDecrease(minConfig, time.clone().add(10, 'minute'), 'minute')).toEqual(true);
       expect(service.shouldShowDecrease(minConfig, time.clone().add(15, 'second'), 'second')).toEqual(true);
+      expect(service.shouldShowDecrease(minTimeConfig, time, 'hour')).toEqual(false);
+      expect(service.shouldShowDecrease(minTimeConfig, time, 'minute')).toEqual(false);
+      expect(service.shouldShowDecrease(minTimeConfig, time, 'second')).toEqual(false);
+      expect(service.shouldShowDecrease(minTimeConfig, time.clone().add(1, 'hour'), 'hour')).toEqual(true);
+      expect(service.shouldShowDecrease(minTimeConfig, time.clone().add(2, 'minute'), 'minute')).toEqual(false);
+      expect(service.shouldShowDecrease(minTimeConfig, time.clone().add(3, 'second'), 'second')).toEqual(false);
+      expect(service.shouldShowDecrease(minTimeConfig, time.clone().add(10, 'minute'), 'minute')).toEqual(true);
+      expect(service.shouldShowDecrease(minTimeConfig, time.clone().add(15, 'second'), 'second')).toEqual(true);
+      expect(service.shouldShowDecrease(minAndMinTimeConfig, time, 'hour')).toEqual(false);
+      expect(service.shouldShowDecrease(minAndMinTimeConfig, time, 'minute')).toEqual(false);
+      expect(service.shouldShowDecrease(minAndMinTimeConfig, time, 'second')).toEqual(false);
+      expect(service.shouldShowDecrease(minAndMinTimeConfig, time.clone().add(1, 'hour'), 'hour')).toEqual(true);
+      expect(service.shouldShowDecrease(minAndMinTimeConfig, time.clone().add(2, 'minute'), 'minute')).toEqual(false);
+      expect(service.shouldShowDecrease(minAndMinTimeConfig, time.clone().add(3, 'second'), 'second')).toEqual(false);
+      expect(service.shouldShowDecrease(minAndMinTimeConfig, time.clone().add(10, 'minute'), 'minute')).toEqual(true);
+      expect(service.shouldShowDecrease(minAndMinTimeConfig, time.clone().add(15, 'second'), 'second')).toEqual(true);
+      expect(service.shouldShowDecrease(minAndMinTimeConfig2, time, 'hour')).toEqual(false);
+      expect(service.shouldShowDecrease(minAndMinTimeConfig2, time, 'minute')).toEqual(false);
+      expect(service.shouldShowDecrease(minAndMinTimeConfig2, time, 'second')).toEqual(false);
+      expect(service.shouldShowDecrease(minAndMinTimeConfig2, time.clone().add(1, 'hour'), 'hour')).toEqual(true);
+      expect(service.shouldShowDecrease(minAndMinTimeConfig2, time.clone().add(2, 'minute'), 'minute')).toEqual(false);
+      expect(service.shouldShowDecrease(minAndMinTimeConfig2, time.clone().add(3, 'second'), 'second')).toEqual(false);
+      expect(service.shouldShowDecrease(minAndMinTimeConfig2, time.clone().add(10, 'minute'), 'minute')).toEqual(true);
+      expect(service.shouldShowDecrease(minAndMinTimeConfig2, time.clone().add(15, 'second'), 'second')).toEqual(true);
     }));
 
   it('should check the shouldShowIncrease method', inject([TimeSelectService],
@@ -106,6 +144,20 @@ describe('Service: TimeSelectService', () => {
         ...configBase,
         max: moment('13:12:11', 'HH:mm:ss'),
       };
+      const maxTimeConfig = {
+        ...configBase,
+        maxTime: moment('13:12:11', 'HH:mm:ss'),
+      };
+      const maxAndMaxTimeConfig = {
+        ...configBase,
+        max: moment('15:11:11', 'HH:mm:ss'),
+        maxTime: moment('13:12:11', 'HH:mm:ss'),
+      };
+      const maxAndMaxTimeConfig2 = {
+        ...configBase,
+        max: moment('13:12:11', 'HH:mm:ss'),
+        maxTime: moment('15:11:11', 'HH:mm:ss'),
+      };
       expect(service.shouldShowIncrease(maxConfig, time, 'hour')).toEqual(false);
       expect(service.shouldShowIncrease(maxConfig, time, 'minute')).toEqual(false);
       expect(service.shouldShowIncrease(maxConfig, time, 'second')).toEqual(false);
@@ -114,6 +166,30 @@ describe('Service: TimeSelectService', () => {
       expect(service.shouldShowIncrease(maxConfig, time.clone().subtract(3, 'second'), 'second')).toEqual(false);
       expect(service.shouldShowIncrease(maxConfig, time.clone().subtract(10, 'minute'), 'minute')).toEqual(true);
       expect(service.shouldShowIncrease(maxConfig, time.clone().subtract(15, 'second'), 'second')).toEqual(true);
+      expect(service.shouldShowIncrease(maxTimeConfig, time, 'hour')).toEqual(false);
+      expect(service.shouldShowIncrease(maxTimeConfig, time, 'minute')).toEqual(false);
+      expect(service.shouldShowIncrease(maxTimeConfig, time, 'second')).toEqual(false);
+      expect(service.shouldShowIncrease(maxTimeConfig, time.clone().subtract(1, 'hour'), 'hour')).toEqual(true);
+      expect(service.shouldShowIncrease(maxTimeConfig, time.clone().subtract(2, 'minute'), 'minute')).toEqual(false);
+      expect(service.shouldShowIncrease(maxTimeConfig, time.clone().subtract(3, 'second'), 'second')).toEqual(false);
+      expect(service.shouldShowIncrease(maxTimeConfig, time.clone().subtract(10, 'minute'), 'minute')).toEqual(true);
+      expect(service.shouldShowIncrease(maxTimeConfig, time.clone().subtract(15, 'second'), 'second')).toEqual(true);
+      expect(service.shouldShowIncrease(maxAndMaxTimeConfig, time, 'hour')).toEqual(false);
+      expect(service.shouldShowIncrease(maxAndMaxTimeConfig, time, 'minute')).toEqual(false);
+      expect(service.shouldShowIncrease(maxAndMaxTimeConfig, time, 'second')).toEqual(false);
+      expect(service.shouldShowIncrease(maxAndMaxTimeConfig, time.clone().subtract(1, 'hour'), 'hour')).toEqual(true);
+      expect(service.shouldShowIncrease(maxAndMaxTimeConfig, time.clone().subtract(2, 'minute'), 'minute')).toEqual(false);
+      expect(service.shouldShowIncrease(maxAndMaxTimeConfig, time.clone().subtract(3, 'second'), 'second')).toEqual(false);
+      expect(service.shouldShowIncrease(maxAndMaxTimeConfig, time.clone().subtract(10, 'minute'), 'minute')).toEqual(true);
+      expect(service.shouldShowIncrease(maxAndMaxTimeConfig, time.clone().subtract(15, 'second'), 'second')).toEqual(true);
+      expect(service.shouldShowIncrease(maxAndMaxTimeConfig2, time, 'hour')).toEqual(false);
+      expect(service.shouldShowIncrease(maxAndMaxTimeConfig2, time, 'minute')).toEqual(false);
+      expect(service.shouldShowIncrease(maxAndMaxTimeConfig2, time, 'second')).toEqual(false);
+      expect(service.shouldShowIncrease(maxAndMaxTimeConfig2, time.clone().subtract(1, 'hour'), 'hour')).toEqual(true);
+      expect(service.shouldShowIncrease(maxAndMaxTimeConfig2, time.clone().subtract(2, 'minute'), 'minute')).toEqual(false);
+      expect(service.shouldShowIncrease(maxAndMaxTimeConfig2, time.clone().subtract(3, 'second'), 'second')).toEqual(false);
+      expect(service.shouldShowIncrease(maxAndMaxTimeConfig2, time.clone().subtract(10, 'minute'), 'minute')).toEqual(true);
+      expect(service.shouldShowIncrease(maxAndMaxTimeConfig2, time.clone().subtract(15, 'second'), 'second')).toEqual(true);
     }));
 
   it('should check the shouldShowToggleMeridiem method', inject([TimeSelectService],

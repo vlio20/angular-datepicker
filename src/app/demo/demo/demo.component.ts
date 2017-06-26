@@ -20,13 +20,15 @@ export class DemoComponent {
   readonly DAYS = ['su', 'mo', 'tu', 'we', 'th', 'fr', 'sa'];
   pickerMode = 'timeInline';
 
-  date: Moment = moment('6/22/16 10:45 am');
+  date: Moment = moment('10:45', 'HH:mm');
   dates: Moment[] = [];
   material: boolean = true;
   required: boolean = false;
   disabled: boolean = false;
   validationMinDate: Moment;
   validationMaxDate: Moment;
+  validationMinTime: Moment;
+  validationMaxTime: Moment;
   placeholder: string = 'Choose a date...';
 
   formGroup: FormGroup = new FormGroup({

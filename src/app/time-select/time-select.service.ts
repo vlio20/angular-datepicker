@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Moment} from 'moment';
+import * as moment from 'moment';
 
 import {UtilsService} from '../common/services/utils/utils.service';
 import {ITimeSelectConfig} from './time-select-config.model';
@@ -26,7 +27,11 @@ export class TimeSelectService {
   }
 
   getConfig(config: ITimeSelectConfig): ITimeSelectConfig {
-    return {...this.DEFAULT_CONFIG, ...this.utilsService.clearUndefined(config)};
+    const timeConfigs = {
+      maxTime: this.utilsService.onlyTime(config && config.maxTime),
+      minTime: this.utilsService.onlyTime(config && config.minTime),
+    };
+    return {...this.DEFAULT_CONFIG, ...this.utilsService.clearUndefined(config), ...timeConfigs};
   }
 
   getTimeFormat(config: ITimeSelectConfig): string {
@@ -87,27 +92,33 @@ export class TimeSelectService {
   }
 
   shouldShowDecrease(config: ITimeSelectConfig, time: Moment, unit: TimeUnit): boolean {
-    if (!config.min) {
+    if (!config.min && !config.minTime) {
       return true;
     };
     const newTime = this.decrease(config, time, unit);
-    return config.min.isSameOrBefore(newTime);
+
+    return (!config.min || config.min.isSameOrBefore(newTime))
+      && (!config.minTime || config.minTime.isSameOrBefore(this.utilsService.onlyTime(newTime)));
   }
 
   shouldShowIncrease(config: ITimeSelectConfig, time: Moment, unit: TimeUnit): boolean {
-    if (!config.max) {
+    if (!config.max && !config.maxTime) {
       return true;
     };
     const newTime = this.increase(config, time, unit);
-    return config.max.isSameOrAfter(newTime);
+
+    return (!config.max || config.max.isSameOrAfter(newTime))
+      && (!config.maxTime || config.maxTime.isSameOrAfter(this.utilsService.onlyTime(newTime)));
   }
 
   shouldShowToggleMeridiem(config: ITimeSelectConfig, time: Moment): boolean {
-    if (!config.min && !config.max) {
+    if (!config.min && !config.max && !config.minTime && !config.maxTime) {
       return true;
     }
     const newTime = this.toggleMeridiem(time);
     return (!config.max || config.max.isSameOrAfter(newTime))
-      && (!config.min || config.min.isSameOrBefore(newTime));
+      && (!config.min || config.min.isSameOrBefore(newTime))
+      && (!config.maxTime || config.maxTime.isSameOrAfter(this.utilsService.onlyTime(newTime)))
+      && (!config.minTime || config.minTime.isSameOrBefore(this.utilsService.onlyTime(newTime)));
   }
 }

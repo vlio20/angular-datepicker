@@ -53,6 +53,8 @@ export class TimeSelectComponent implements OnInit, OnChanges, ControlValueAcces
   @Input() displayDate: SingleCalendarValue;
   @Input() minDate: Moment;
   @Input() maxDate: Moment;
+  @Input() minTime: Moment;
+  @Input() maxTime: Moment;
   @HostBinding('class') @Input() theme: string;
 
   CalendarType = ECalendarType;
@@ -96,10 +98,10 @@ export class TimeSelectComponent implements OnInit, OnChanges, ControlValueAcces
 
   ngOnChanges(changes: SimpleChanges) {
     if (this.isInited) {
-      const {minDate, maxDate} = changes;
+      const {minDate, maxDate, minTime, maxTime} = changes;
       this.init();
 
-      if (minDate || maxDate) {
+      if (minDate || maxDate || minTime || maxTime) {
         this.initValidators();
       }
     }
@@ -127,7 +129,7 @@ export class TimeSelectComponent implements OnInit, OnChanges, ControlValueAcces
   }
 
   validate(formControl: FormControl): ValidationErrors | any {
-    if (this.minDate || this.maxDate) {
+    if (this.minDate || this.maxDate || this.minTime || this.maxTime) {
       return this.validateFn(formControl.value);
     } else {
       return () => null;
@@ -144,7 +146,12 @@ export class TimeSelectComponent implements OnInit, OnChanges, ControlValueAcces
 
   initValidators() {
     this.validateFn = this.utilsService.createValidator(
-      {minDate: this.minDate, maxDate: this.maxDate}, this.timeSelectService.getTimeFormat(this.componentConfig), 'day');
+      {
+        minDate: this.minDate,
+        maxDate: this.maxDate,
+        minTime: this.minTime,
+        maxTime: this.maxTime,
+      }, undefined, 'day');
 
     this.onChangeCallback(this.processOnChangeCallback(this.selected));
   }

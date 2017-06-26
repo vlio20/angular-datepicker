@@ -137,6 +137,8 @@
             (ngModelChange)="log($event)"
             [minDate]="validationMinDate"
             [maxDate]="validationMaxDate"
+            [minTime]="validationMinTime"
+            [maxTime]="validationMaxTime"
             [config]="config">
         </dp-time-select>
 
@@ -147,6 +149,12 @@
             invalid
           </div>
           <div id="timeInlineMaxDateValidation" *ngIf="timeInline.errors && timeInline.errors.maxDate">maxDate
+            invalid
+          </div>
+          <div id="timeInlineMinTimeValidation" *ngIf="timeInline.errors && timeInline.errors.minTime">minTime
+            invalid
+          </div>
+          <div id="timeInlineMaxTimeValidation" *ngIf="timeInline.errors && timeInline.errors.maxTime">maxTime
             invalid
           </div>
         </div>
@@ -287,6 +295,32 @@
 
     <div class="dp-option">
       <span class="dp-option-header">
+        Min-Time Validation (minTime):
+      </span>
+      <div class="dp-option-playground">
+        <dp-time-select id="minTimeValidation"
+                        theme="dp-material"
+                        [(ngModel)]="validationMinTime"
+                        (ngModelChange)="validatorsChanged()">
+        </dp-time-select>
+      </div>
+    </div>
+
+    <div class="dp-option">
+      <span class="dp-option-header">
+        Max-Time Validation (maxTime):
+      </span>
+      <div class="dp-option-playground">
+        <dp-time-select id="maxTimeValidation"
+                        theme="dp-material"
+                        [(ngModel)]="validationMaxTime"
+                        (ngModelChange)="validatorsChanged()">
+        </dp-time-select>
+      </div>
+    </div>
+
+    <div class="dp-option">
+      <span class="dp-option-header">
         Placeholder (placeholder):
       </span>
       <div class="dp-option-playground">
@@ -353,6 +387,32 @@
                         (ngModelChange)="configChanged()"
                         placeholder="Select a max date">
         </dp-date-picker>
+      </div>
+    </div>
+
+    <div class="dp-option">
+      <span class="dp-option-header">
+        Min Selectable Time (minTime):
+      </span>
+      <div class="dp-option-playground">
+        <dp-time-select id="minSelectable"
+                        theme="dp-material"
+                        [(ngModel)]="config.minTime"
+                        (ngModelChange)="configChanged()">
+        </dp-time-select>
+      </div>
+    </div>
+
+    <div class="dp-option">
+      <span class="dp-option-header">
+        Max Selectable Time (maxTime):
+      </span>
+      <div class="dp-option-playground">
+        <dp-time-select id="maxSelectable"
+                        theme="dp-material"
+                        [(ngModel)]="config.maxTime"
+                        (ngModelChange)="configChanged()">
+        </dp-time-select>
       </div>
     </div>
 
