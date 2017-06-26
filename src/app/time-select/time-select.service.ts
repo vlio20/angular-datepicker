@@ -24,7 +24,7 @@ export class TimeSelectService {
     secondsInterval: 1,
     showSeconds: false,
     showTwentyFourHours: false,
-    timeSeparator: ':',
+    timeSeparator: ':'
   };
 
   constructor(private utilsService: UtilsService) {
@@ -33,9 +33,13 @@ export class TimeSelectService {
   getConfig(config: ITimeSelectConfig): ITimeSelectConfig {
     const timeConfigs = {
       maxTime: this.utilsService.onlyTime(config && config.maxTime),
-      minTime: this.utilsService.onlyTime(config && config.minTime),
+      minTime: this.utilsService.onlyTime(config && config.minTime)
     };
-    return {...this.DEFAULT_CONFIG, ...this.utilsService.clearUndefined(config), ...timeConfigs};
+    return {
+      ...this.DEFAULT_CONFIG,
+      ...this.utilsService.clearUndefined(config),
+      ...timeConfigs
+    };
   }
 
   getTimeFormat(config: ITimeSelectConfig): string {

@@ -1,13 +1,14 @@
 @import '../common/styles/variables';
 
 & {
-  .controls {
+  .dp-time-select-controls {
     text-align: center;
     padding: 10px 0;
     line-height: normal;
     margin: 0;
   }
-  .control {
+
+  .dp-time-select-control {
     vertical-align: middle;
     display: inline-block;
     font-size: inherit;
@@ -15,32 +16,42 @@
     width: 35px;
     letter-spacing: 1.3px;
   }
-  .control-up, .control-down {
+
+  .dp-time-select-control-up, .dp-time-select-control-down {
     position: relative;
     display: block;
+    width: 24px;
+    height: 24px;
     margin: 3px auto;
-    font-size: 18px;
-    font-weight: bold;
     cursor: pointer;
-    &:before {
+
+    &::before {
+      border-style: solid;
+      border-width: 3px 3px 0 0;
+      content: '';
       display: inline-block;
+      height: 8px;
       position: relative;
+      vertical-align: baseline;
+      width: 8px;
     }
   }
-  .control-up:before {
-    content: '︿';
-    bottom: 0.2em;
+
+  .dp-time-select-control-up::before {
+    transform: rotate(-45deg);
+    top: 4px;
   }
-  .control-down:before {
-    content: '﹀';
-    top: 0.3em;
+
+  .dp-time-select-control-down::before {
+    transform: rotate(135deg);
   }
-  .separator {
+
+  .dp-time-select-separator {
     width: 5px;
   }
 
   :host.dp-material {
-    .control-up, .control-down {
+    .dp-time-select-control-up, .dp-time-select-control-down {
       box-sizing: border-box;
       background: transparent;
       border: none;

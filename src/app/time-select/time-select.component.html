@@ -1,28 +1,28 @@
 <div class="dp-time-select-container">
-  <ul class="controls">
-    <li class="control">
-      <button [disabled]="!shouldShowIncrease('hour')" class="control-up" (click)="increase('hour')"></button>
-      <span class="control--hours">{{hours}}</span>
-      <button [disabled]="!shouldShowDecrease('hour')" class="control-down" (click)="decrease('hour')"></button>
+  <ul class="dp-time-select-controls">
+    <li class="dp-time-select-control">
+      <button [disabled]="!shouldShowIncrease('hour')" class="dp-time-select-control-up" (click)="increase('hour')"></button>
+      <span class="dp-time-select-control-hours">{{hours}}</span>
+      <button [disabled]="!shouldShowDecrease('hour')" class="dp-time-select-control-down" (click)="decrease('hour')"></button>
     </li>
-    <li class="control separator">{{componentConfig.timeSeparator}}</li>
-    <li class="control">
-      <button [disabled]="!shouldShowIncrease('minute')" class="control-up" (click)="increase('minute')"></button>
-      <span class="control--minutes">{{minutes}}</span>
-      <button [disabled]="!shouldShowDecrease('minute')" class="control-down" (click)="decrease('minute')"></button>
+    <li class="dp-time-select-control dp-time-select-separator">{{componentConfig.timeSeparator}}</li>
+    <li class="dp-time-select-control">
+      <button [disabled]="!shouldShowIncrease('minute')" class="dp-time-select-control-up" (click)="increase('minute')"></button>
+      <span class="dp-time-select-control-minutes">{{minutes}}</span>
+      <button [disabled]="!shouldShowDecrease('minute')" class="dp-time-select-control-down" (click)="decrease('minute')"></button>
     </li>
     <ng-container *ngIf="componentConfig.showSeconds">
-      <li class="control separator">{{componentConfig.timeSeparator}}</li>
-      <li class="control">
-        <button [disabled]="!shouldShowIncrease('second')" class="control-up" (click)="increase('second')"></button>
-        <span class="control--seconds">{{seconds}}</span>
-        <button [disabled]="!shouldShowDecrease('second')" class="control-down" (click)="decrease('second')"></button>
+      <li class="dp-time-select-control dp-time-select-separator">{{componentConfig.timeSeparator}}</li>
+      <li class="dp-time-select-control">
+        <button [disabled]="!shouldShowIncrease('second')" class="dp-time-select-control-up" (click)="increase('second')"></button>
+        <span class="dp-time-select-control--seconds">{{seconds}}</span>
+        <button [disabled]="!shouldShowDecrease('second')" class="dp-time-select-control-down" (click)="decrease('second')"></button>
       </li>
     </ng-container>
-    <li class="control" *ngIf="!componentConfig.showTwentyFourHours">
-      <button [disabled]="!shouldShowToggleMeridiem()" class="control-up" (click)="toggleMeridiem()"></button>
-      <span class="control--meridiem">{{meridiem}}</span>
-      <button [disabled]="!shouldShowToggleMeridiem()" class="control-down" (click)="toggleMeridiem()"></button>
+    <li class="dp-time-select-control" *ngIf="!componentConfig.showTwentyFourHours">
+      <button [disabled]="!shouldShowToggleMeridiem()" class="dp-time-select-control-up" (click)="toggleMeridiem()"></button>
+      <span class="dp-time-select-control--meridiem">{{meridiem}}</span>
+      <button [disabled]="!shouldShowToggleMeridiem()" class="dp-time-select-control-down" (click)="toggleMeridiem()"></button>
     </li>
   </ul>
 </div>
