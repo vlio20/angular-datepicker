@@ -8,6 +8,7 @@ import {DatePickerDirective} from './date-picker/date-picker.directive';
 import {DayCalendarComponent} from './day-calendar/day-calendar.component';
 import {MonthCalendarComponent} from './month-calendar/month-calendar.component';
 import {TimeSelectComponent} from './time-select/time-select.component';
+import {TimeSelectService} from './time-select/time-select.service';
 import {CalendarNavComponent} from './calendar-nav/calendar-nav.component';
 export {DatePickerComponent} from './date-picker/date-picker.component';
 export {DatePickerDirective} from './date-picker/date-picker.directive';
@@ -16,7 +17,8 @@ export {DayCalendarComponent} from './day-calendar/day-calendar.component';
 @NgModule({
   providers: [
     DomHelper,
-    UtilsService
+    UtilsService,
+    TimeSelectService
   ],
   declarations: [
     DatePickerComponent,

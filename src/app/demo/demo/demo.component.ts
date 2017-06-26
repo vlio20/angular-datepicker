@@ -2,8 +2,9 @@ import debounce from '../../common/decorators/decorators';
 import {IDatePickerConfig} from '../../date-picker/date-picker-config.model';
 import {DatePickerComponent} from '../../date-picker/date-picker.component';
 import {DatePickerDirective} from '../../date-picker/date-picker.directive';
+import {TimeSelectService} from '../../time-select/time-select.service';
 import {Component, HostListener, ViewChild} from '@angular/core';
-import { FormControl, NgForm, FormGroup, Validators, Validator, AbstractControl } from '@angular/forms';
+import {AbstractControl, FormControl, FormGroup, NgForm, Validator, Validators} from '@angular/forms';
 import {Moment} from 'moment';
 import * as moment from 'moment';
 
@@ -82,6 +83,8 @@ export class DemoComponent {
   };
   isAtTop: boolean = true;
 
+  constructor(public timeService: TimeSelectService) {}
+
   @HostListener('document:scroll')
   @debounce(100)
   updateIsAtTop() {
@@ -112,6 +115,15 @@ export class DemoComponent {
 
   closeCalendar() {
     (this.datePicker || this.dateDirectivePicker).api.close();
+  }
+
+  isValidConfig(key: string): boolean {
+    switch (this.pickerMode) {
+      case 'timeInline':
+        return Object.keys(this.timeService.getConfig({})).indexOf(key) > -1;
+      default:
+        return true;
+    }
   }
 
   log(item) {
