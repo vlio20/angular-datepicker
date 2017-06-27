@@ -3,11 +3,20 @@ import {DatePickerService} from './date-picker.service';
 import * as moment from 'moment';
 import {Moment} from 'moment';
 import {UtilsService} from '../common/services/utils/utils.service';
+import {DayTimeCalendarService} from '../day-time-calendar/day-time-calendar.service';
+import {DayCalendarService} from '../day-calendar/day-calendar.service';
+import {TimeSelectService} from '../time-select/time-select.service';
 
 describe('Service: DatePicker', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [DatePickerService, UtilsService]
+      providers: [
+        DatePickerService,
+        DayTimeCalendarService,
+        DayCalendarService,
+        TimeSelectService,
+        UtilsService
+      ]
     });
   });
 

@@ -8,8 +8,12 @@ import {ECalendarValue} from '../common/types/calendar-value-enum';
 import {SingleCalendarValue} from '../common/types/single-calendar-value';
 import {IDayCalendarConfig} from '../day-calendar/day-calendar-config.model';
 import {DayCalendarComponent} from '../day-calendar/day-calendar.component';
+import {DayCalendarService} from '../day-calendar/day-calendar.service';
+import {IDayTimeCalendarConfig} from '../day-time-calendar/day-time-calendar-config.model';
+import {DayTimeCalendarService} from '../day-time-calendar/day-time-calendar.service';
 import {ITimeSelectConfig} from '../time-select/time-select-config.model';
 import {TimeSelectComponent} from '../time-select/time-select.component';
+import {TimeSelectService} from '../time-select/time-select.service';
 import {IDatePickerConfig} from './date-picker-config.model';
 import {IDpDayPickerApi} from './date-picker.api';
 import {DatePickerService} from './date-picker.service';
@@ -26,7 +30,7 @@ import {
   OnInit,
   Renderer,
   SimpleChanges,
-  ViewChild,
+  ViewChild
 } from '@angular/core';
 import {ControlValueAccessor, FormControl, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator} from '@angular/forms';
 import * as moment from 'moment';
@@ -38,6 +42,9 @@ import {Moment, unitOfTime} from 'moment';
   styleUrls: ['date-picker.component.less'],
   providers: [
     DatePickerService,
+    DayTimeCalendarService,
+    DayCalendarService,
+    TimeSelectService,
     {
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => DatePickerComponent),
@@ -75,6 +82,7 @@ export class DatePickerComponent implements OnChanges,
 
   componentConfig: IDatePickerConfig;
   dayCalendarConfig: IDayCalendarConfig;
+  dayTimeCalendarConfig: IDayTimeCalendarConfig;
   timeSelectConfig: ITimeSelectConfig;
   _areCalendarsShown: boolean = false;
   hideStateHelper: boolean = false;
@@ -271,6 +279,7 @@ export class DatePickerComponent implements OnChanges,
         .getDefaultDisplayDate(this.currentDateView, this.selected, this.componentConfig.allowMultiSelect);
     this.inputValueType = this.utilsService.getInputType(this.inputValue, this.componentConfig.allowMultiSelect);
     this.dayCalendarConfig = this.dayPickerService.getDayConfigService(this.componentConfig);
+    this.dayTimeCalendarConfig = this.dayPickerService.getDayTimeConfigService(this.componentConfig);
     this.timeSelectConfig = this.dayPickerService.getTimeConfigService(this.componentConfig);
   }
 

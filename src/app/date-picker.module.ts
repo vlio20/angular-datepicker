@@ -13,18 +13,18 @@ import {CalendarNavComponent} from './calendar-nav/calendar-nav.component';
 import {DatePickerService} from './date-picker/date-picker.service';
 import {MonthCalendarService} from './month-calendar/month-calendar.service';
 import {DayCalendarService} from './day-calendar/day-calendar.service';
+import {DayTimeCalendarComponent} from './day-time-calendar/day-time-calendar.component';
 export {DatePickerComponent} from './date-picker/date-picker.component';
 export {DatePickerDirective} from './date-picker/date-picker.directive';
 export {DayCalendarComponent} from './day-calendar/day-calendar.component';
+export {DayTimeCalendarComponent} from './day-time-calendar/day-time-calendar.component';
+export {TimeSelectComponent} from './time-select/time-select.component';
+export {MonthCalendarComponent} from './month-calendar/month-calendar.component';
 
 @NgModule({
   providers: [
     DomHelper,
-    UtilsService,
-    TimeSelectService,
-    MonthCalendarService,
-    DayCalendarService,
-    DatePickerService,
+    UtilsService
   ],
   declarations: [
     DatePickerComponent,
@@ -33,6 +33,7 @@ export {DayCalendarComponent} from './day-calendar/day-calendar.component';
     MonthCalendarComponent,
     CalendarNavComponent,
     TimeSelectComponent,
+    DayTimeCalendarComponent
   ],
   entryComponents: [
     DatePickerComponent
@@ -41,7 +42,14 @@ export {DayCalendarComponent} from './day-calendar/day-calendar.component';
     CommonModule,
     FormsModule
   ],
-  exports: [DatePickerComponent, DatePickerDirective, MonthCalendarComponent, DayCalendarComponent, TimeSelectComponent]
+  exports: [
+    DatePickerComponent,
+    DatePickerDirective,
+    MonthCalendarComponent,
+    DayCalendarComponent,
+    TimeSelectComponent,
+    DayTimeCalendarComponent
+  ]
 })
 export class DpDatePickerModule {
 }

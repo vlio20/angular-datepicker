@@ -81,7 +81,7 @@ export class TimeSelectComponent implements OnInit, OnChanges, ControlValueAcces
   }
 
   api = {
-    triggerChange: this.emitChange.bind(this),
+    triggerChange: this.emitChange.bind(this)
   };
 
   constructor(public timeSelectService: TimeSelectService,
@@ -154,7 +154,7 @@ export class TimeSelectComponent implements OnInit, OnChanges, ControlValueAcces
         minDate: this.minDate,
         maxDate: this.maxDate,
         minTime: this.minTime,
-        maxTime: this.maxTime,
+        maxTime: this.maxTime
       }, undefined, 'day');
 
     this.onChangeCallback(this.processOnChangeCallback(this.selected));

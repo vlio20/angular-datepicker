@@ -45,6 +45,15 @@
                       (onChange)="dateSelected($event, 'second', true)"
                       [theme]="theme">
       </dp-time-select>
+
+      <dp-day-time-calendar #daytimeCalendar
+                            *ngSwitchCase="'daytime'"
+                            [config]="dayTimeCalendarConfig"
+                            [displayDate]="currentDateView"
+                            [ngModel]="_selected && _selected[0]"
+                            (onChange)="dateSelected($event, 'second', true)"
+                            [theme]="theme">
+      </dp-day-time-calendar>
     </div>
   </div>
 </div>
