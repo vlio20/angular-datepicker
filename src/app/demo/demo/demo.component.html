@@ -23,8 +23,10 @@
       <option value="monthDirective">Month Directive</option>
       <option value="timePicker">Time Picker</option>
       <option value="timeInline">Time Inline</option>
+      <option value="timeDirective">Time Directive</option>
       <option value="daytimePicker">Day Time Picker</option>
       <option value="daytimeInline">Day Time Inline</option>
+      <option value="daytimeDirective">Day Time Directive</option>
     </select>
   </div>
 
@@ -294,6 +296,50 @@
           <div *ngIf="dateDirectivePickerModel.errors?.format || false">format invalid</div>
         </div>
       </div>
+
+      <div class="dp-picker-container" id="timePickerDirDay" *ngIf="pickerMode === 'timeDirective'">
+        <input [dpDayPicker]="config"
+               name="timePickerDir"
+               #dateDirectivePicker="dpDayPicker"
+               #timeDirectivePickerModel="ngModel"
+               [theme]="material ? 'dp-material' : ''"
+               [type]="'time'"
+               [(ngModel)]="date"
+               [placeholder]="placeholder"
+               [minTime]="validationMinTime"
+               [maxTime]="validationMaxTime"
+               [disabled]="disabled"
+               [required]="required"
+               (ngModelChange)="log($event)"/>
+        <div class="dp-validations">
+          <div id="requiredValidation" *ngIf="timeDirectivePickerModel.errors?.required || false">required</div>
+          <div *ngIf="timeDirectivePickerModel.errors?.format || false">format invalid</div>
+          <div *ngIf="timeDirectivePickerModel.errors?.minTime">minTime invalid</div>
+          <div *ngIf="timeDirectivePickerModel.errors?.maxTime">maxTime invalid</div>
+        </div>
+      </div>
+
+      <div class="dp-picker-container" id="daytimePickerDirDay" *ngIf="pickerMode === 'daytimeDirective'">
+        <input [dpDayPicker]="config"
+               name="daytimePickerDir"
+               #dateDirectivePicker="dpDayPicker"
+               #daytimeDirectivePickerModel="ngModel"
+               [theme]="material ? 'dp-material' : ''"
+               [type]="'daytime'"
+               [(ngModel)]="date"
+               [placeholder]="placeholder"
+               [minDate]="validationMinDate"
+               [maxDate]="validationMaxDate"
+               [disabled]="disabled"
+               [required]="required"
+               (ngModelChange)="log($event)"/>
+        <div class="dp-validations">
+          <div id="requiredValidation" *ngIf="daytimeDirectivePickerModel.errors?.required || false">required</div>
+          <div *ngIf="daytimeDirectivePickerModel.errors?.format || false">format invalid</div>
+          <div *ngIf="daytimeDirectivePickerModel.errors?.minDate">minDate invalid</div>
+          <div *ngIf="daytimeDirectivePickerModel.errors?.maxDate">maxDate invalid</div>
+        </div>
+      </div>
     </form>
 
   </div>
@@ -350,6 +396,8 @@
         <dp-date-picker id="minDatePicker"
                         theme="dp-material"
                         [(ngModel)]="validationMinDate"
+                        [type]="pickerMode.startsWith('daytime') ? 'daytime' : 'day'"
+                        [config]="{format: config.format}"
                         (ngModelChange)="validatorsChanged()"
                         placeholder="Select a min date">
         </dp-date-picker>
@@ -364,6 +412,8 @@
         <dp-date-picker id="maxDatePicker"
                         theme="dp-material"
                         [(ngModel)]="validationMaxDate"
+                        [type]="pickerMode.startsWith('daytime') ? 'daytime' : 'day'"
+                        [config]="{format: config.format}"
                         (ngModelChange)="validatorsChanged()"
                         placeholder="Select a max date">
         </dp-date-picker>
@@ -453,6 +503,8 @@
         <dp-date-picker id="minSelectable"
                         theme="dp-material"
                         [(ngModel)]="config.min"
+                        [type]="pickerMode.startsWith('daytime') ? 'daytime' : 'day'"
+                        [config]="{format: config.format}"
                         (ngModelChange)="configChanged()"
                         placeholder="Select a min date">
         </dp-date-picker>
@@ -467,6 +519,8 @@
         <dp-date-picker id="maxSelectable"
                         theme="dp-material"
                         [(ngModel)]="config.max"
+                        [type]="pickerMode.startsWith('daytime') ? 'daytime' : 'day'"
+                        [config]="{format: config.format}"
                         (ngModelChange)="configChanged()"
                         placeholder="Select a max date">
         </dp-date-picker>

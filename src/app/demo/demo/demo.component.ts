@@ -33,6 +33,10 @@ const DAY_PICKER_OPTION_KEYS = [
   'showGoToCurrent',
   ...DAY_PICKER_DIRECTIVE_OPTION_KEYS
 ];
+const DAY_TIME_PICKER_OPTION_KEYS = [
+  'showGoToCurrent',
+  ...PICKER_OPTION_KEYS
+];
 const TIME_PICKER_OPTION_KEYS = [
   ...PICKER_OPTION_KEYS
 ];
@@ -93,9 +97,9 @@ export class DemoComponent {
   @ViewChild('dateDirectivePicker') datePickerDirective: DatePickerDirective;
   demoFormat = 'DD-MM-YYYY';
   readonly DAYS = ['su', 'mo', 'tu', 'we', 'th', 'fr', 'sa'];
-  pickerMode = 'daytimePicker';
+  pickerMode = 'timeDirective';
 
-  date: Moment = moment('10:45', 'HH:mm');
+  date: string = '15-10-2017 13:10:05';
   dates: Moment[] = [];
   material: boolean = true;
   required: boolean = false;
@@ -239,13 +243,15 @@ export class DemoComponent {
           ...MONTH_CALENDAR_OPTION_KEYS
         ].indexOf(key) > -1;
       case 'timePicker':
+      case 'timeDirective':
         return [
           ...TIME_PICKER_OPTION_KEYS,
           ...TIME_SELECT_OPTION_KEYS
         ].indexOf(key) > -1;
       case 'daytimePicker':
+      case 'daytimeDirective':
         return [
-          ...TIME_PICKER_OPTION_KEYS,
+          ...DAY_TIME_PICKER_OPTION_KEYS,
           ...DAY_TIME_CALENDAR_OPTION_KEYS
         ].indexOf(key) > -1;
       default:

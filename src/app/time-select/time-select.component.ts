@@ -115,10 +115,13 @@ export class TimeSelectComponent implements OnInit, OnChanges, ControlValueAcces
     this.inputValue = value;
 
     if (value) {
-      this.selected = this.utilsService
+      const momentValue = this.utilsService
         .convertToMomentArray(value, this.timeSelectService.getTimeFormat(this.componentConfig), false)[0];
-      this.inputValueType = this.utilsService
-        .getInputType(this.inputValue, false);
+      if (momentValue.isValid()) {
+        this.selected = momentValue;
+        this.inputValueType = this.utilsService
+          .getInputType(this.inputValue, false);
+      }
     }
   }
 

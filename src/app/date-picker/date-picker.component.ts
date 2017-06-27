@@ -364,8 +364,4 @@ export class DatePickerComponent implements OnChanges,
     this.handleInnerElementClickUnlisteners.forEach(ul => ul());
     this.appendToElement.removeChild(this.calendarWrapper);
   }
-
-  log(message: any) {
-    console.log(message);
-  }
 }
