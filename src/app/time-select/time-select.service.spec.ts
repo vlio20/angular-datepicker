@@ -20,7 +20,7 @@ describe('Service: TimeSelectService', () => {
     meridiemFormat: 'a',
     timeSeparator: '-',
     minutesInterval: 3,
-    secondsInterval: 4,
+    secondsInterval: 4
   };
 
   it('should check the getTimeFormat method', inject([TimeSelectService],
@@ -28,22 +28,22 @@ describe('Service: TimeSelectService', () => {
       expect(service.getTimeFormat({
         ...configBase,
         showTwentyFourHours: false,
-        showSeconds: false,
+        showSeconds: false
       })).toEqual('h-m a');
       expect(service.getTimeFormat({
         ...configBase,
         showTwentyFourHours: true,
-        showSeconds: false,
+        showSeconds: false
       })).toEqual('H-m');
       expect(service.getTimeFormat({
         ...configBase,
         showTwentyFourHours: false,
-        showSeconds: true,
+        showSeconds: true
       })).toEqual('h-m-s a');
       expect(service.getTimeFormat({
         ...configBase,
         showTwentyFourHours: true,
-        showSeconds: true,
+        showSeconds: true
       })).toEqual('H-m-s');
     }));
 
@@ -54,7 +54,7 @@ describe('Service: TimeSelectService', () => {
         .toEqual('1');
       expect(service.getHours({
         ...configBase,
-        showTwentyFourHours: true,
+        showTwentyFourHours: true
       }, time))
         .toEqual('13');
     }));
@@ -87,21 +87,21 @@ describe('Service: TimeSelectService', () => {
       const time = moment('13:12:11', 'HH:mm:ss');
       const minConfig = {
         ...configBase,
-        min: moment('13:12:11', 'HH:mm:ss'),
+        min: moment('13:12:11', 'HH:mm:ss')
       };
       const minTimeConfig = {
         ...configBase,
-        minTime: moment('13:12:11', 'HH:mm:ss'),
+        minTime: moment('13:12:11', 'HH:mm:ss')
       };
       const minAndMinTimeConfig = {
         ...configBase,
         min: moment('11:11:11', 'HH:mm:ss'),
-        minTime: moment('13:12:11', 'HH:mm:ss'),
+        minTime: moment('13:12:11', 'HH:mm:ss')
       };
       const minAndMinTimeConfig2 = {
         ...configBase,
         min: moment('13:12:11', 'HH:mm:ss'),
-        minTime: moment('11:11:11', 'HH:mm:ss'),
+        minTime: moment('11:11:11', 'HH:mm:ss')
       };
       expect(service.shouldShowDecrease(minConfig, time, 'hour')).toEqual(false);
       expect(service.shouldShowDecrease(minConfig, time, 'minute')).toEqual(false);
@@ -142,21 +142,21 @@ describe('Service: TimeSelectService', () => {
       const time = moment('13:12:11', 'HH:mm:ss');
       const maxConfig = {
         ...configBase,
-        max: moment('13:12:11', 'HH:mm:ss'),
+        max: moment('13:12:11', 'HH:mm:ss')
       };
       const maxTimeConfig = {
         ...configBase,
-        maxTime: moment('13:12:11', 'HH:mm:ss'),
+        maxTime: moment('13:12:11', 'HH:mm:ss')
       };
       const maxAndMaxTimeConfig = {
         ...configBase,
         max: moment('15:11:11', 'HH:mm:ss'),
-        maxTime: moment('13:12:11', 'HH:mm:ss'),
+        maxTime: moment('13:12:11', 'HH:mm:ss')
       };
       const maxAndMaxTimeConfig2 = {
         ...configBase,
         max: moment('13:12:11', 'HH:mm:ss'),
-        maxTime: moment('15:11:11', 'HH:mm:ss'),
+        maxTime: moment('15:11:11', 'HH:mm:ss')
       };
       expect(service.shouldShowIncrease(maxConfig, time, 'hour')).toEqual(false);
       expect(service.shouldShowIncrease(maxConfig, time, 'minute')).toEqual(false);
@@ -198,16 +198,16 @@ describe('Service: TimeSelectService', () => {
       const morningTime = moment('10:12:11', 'HH:mm:ss');
       const minConfig = {
         ...configBase,
-        min: moment('13:12:11', 'HH:mm:ss'),
+        min: moment('13:12:11', 'HH:mm:ss')
       };
       const maxConfig = {
         ...configBase,
-        max: moment('13:12:11', 'HH:mm:ss'),
+        max: moment('13:12:11', 'HH:mm:ss')
       };
       const minMaxConfig = {
         ...configBase,
         min: moment('11:12:11', 'HH:mm:ss'),
-        max: moment('15:12:11', 'HH:mm:ss'),
+        max: moment('15:12:11', 'HH:mm:ss')
       };
       expect(service.shouldShowToggleMeridiem(configBase, morningTime)).toEqual(true);
       expect(service.shouldShowToggleMeridiem(configBase, afternoonTime)).toEqual(true);
