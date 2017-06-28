@@ -27,13 +27,14 @@
 
     &::before {
       border-style: solid;
-      border-width: 3px 3px 0 0;
+      border-width: 2px 2px 0 0;
       content: '';
       display: inline-block;
       height: 8px;
       position: relative;
       vertical-align: baseline;
       width: 8px;
+      left: -1px;
     }
   }
 
@@ -57,6 +58,10 @@
       border: none;
       outline: none;
       border-radius: 50%;
+
+      &::before {
+        left: 0px;
+      }
 
       &:hover {
         background: @c-light-gray;

@@ -32,7 +32,14 @@ import {
   SimpleChanges,
   ViewChild
 } from '@angular/core';
-import {ControlValueAccessor, FormControl, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator} from '@angular/forms';
+import {
+  ControlValueAccessor,
+  FormControl,
+  NG_VALIDATORS,
+  NG_VALUE_ACCESSOR,
+  ValidationErrors,
+  Validator
+} from '@angular/forms';
 import * as moment from 'moment';
 import {Moment, unitOfTime} from 'moment';
 
@@ -319,6 +326,10 @@ export class DatePickerComponent implements OnChanges,
         ? this.utilsService.getDefaultDisplayDate(null, this.selected, this.componentConfig.allowMultiSelect)
         : this.currentDateView;
     }
+  }
+
+  shouldShowGoToCurrent(): boolean {
+    return this.componentConfig.showGoToCurrent && this.type !== 'time';
   }
 
   moveToCurrent() {
