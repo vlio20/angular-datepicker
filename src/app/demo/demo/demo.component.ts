@@ -97,7 +97,7 @@ export class DemoComponent {
   @ViewChild('dateDirectivePicker') datePickerDirective: DatePickerDirective;
   demoFormat = 'DD-MM-YYYY';
   readonly DAYS = ['su', 'mo', 'tu', 'we', 'th', 'fr', 'sa'];
-  pickerMode = 'timeDirective';
+  pickerMode = 'dayPicker';
 
   date: string = '15-10-2017 13:10:05';
   dates: Moment[] = [];
