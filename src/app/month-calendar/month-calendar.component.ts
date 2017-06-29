@@ -1,26 +1,26 @@
 import {ECalendarValue} from '../common/types/calendar-value-enum';
 import {
   Component,
-  OnInit,
-  Input,
-  Output,
   EventEmitter,
   forwardRef,
   HostBinding,
-  SimpleChanges,
-  OnChanges
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges
 } from '@angular/core';
 import {IMonth} from './month.model';
 import {MonthCalendarService} from './month-calendar.service';
 import {Moment} from 'moment';
 import {IMonthCalendarConfig} from './month-calendar-config';
 import {
-  NG_VALUE_ACCESSOR,
-  NG_VALIDATORS,
   ControlValueAccessor,
-  Validator,
   FormControl,
-  ValidationErrors
+  NG_VALIDATORS,
+  NG_VALUE_ACCESSOR,
+  ValidationErrors,
+  Validator
 } from '@angular/forms';
 import {CalendarValue} from '../common/types/calendar-value';
 import {UtilsService} from '../common/services/utils/utils.service';
@@ -59,7 +59,7 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
   currentDateView: Moment;
   inputValue: CalendarValue;
   inputValueType: ECalendarValue;
-  validateFn: (inputVal: CalendarValue) => {[key: string]: any};
+  validateFn: (inputVal: CalendarValue) => { [key: string]: any };
 
   set selected(selected: Moment[]) {
     this._selected = selected;

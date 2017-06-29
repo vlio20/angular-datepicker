@@ -4,7 +4,6 @@ import {Moment} from 'moment';
 import {WeekDays} from '../common/types/week-days.type';
 import {UtilsService} from '../common/services/utils/utils.service';
 import {IDay} from './day.model';
-import {FormControl} from '@angular/forms';
 import {IDayCalendarConfig} from './day-calendar-config.model';
 import {IMonthCalendarConfig} from '../month-calendar/month-calendar-config';
 
@@ -52,7 +51,7 @@ export class DayCalendarService {
     return daysArr.reduce((map, day, index) => {
       map[day] = index;
       return map;
-    }, <{[key: number]: string}>{});
+    }, <{ [key: number]: string }>{});
   }
 
   generateMonthArray(config: IDayCalendarConfig, month: Moment, selected: Moment[]): IDay[][] {
@@ -95,7 +94,7 @@ export class DayCalendarService {
     return monthArray;
   }
 
-  generateWeekdays(firstDayOfWeek: WeekDays, weekdayNames: {[key: string]: string}): string[] {
+  generateWeekdays(firstDayOfWeek: WeekDays, weekdayNames: { [key: string]: string }): string[] {
     const weekdays: string[] = [];
     const daysMap = this.generateDaysMap(firstDayOfWeek);
 
@@ -145,7 +144,7 @@ export class DayCalendarService {
     return daysArr.reduce((map, day, index) => {
       map[index] = day;
       return map;
-    }, <{[key: number]: string}>{});
+    }, <{ [key: number]: string }>{});
   }
 
   // todo:: add unit tests

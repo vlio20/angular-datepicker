@@ -113,6 +113,6 @@ function processTemplateUrl(content, options, targetDir) {
 }
 
 function getAbsoluteUrl(url, options, targetDir) {
-  return options.relative ? path.join(targetDir, url) : path.join(options.base,
-      url);
+  return options.relative ? path.join(targetDir, url) :
+    path.join(options.base, url);
 }

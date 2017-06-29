@@ -1,4 +1,4 @@
-import {TestBed, inject} from '@angular/core/testing';
+import {inject, TestBed} from '@angular/core/testing';
 import {DatePickerService} from './date-picker.service';
 import * as moment from 'moment';
 import {Moment} from 'moment';

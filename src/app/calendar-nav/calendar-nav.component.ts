@@ -1,4 +1,4 @@
-import {Component, Output, EventEmitter, Input, HostBinding} from '@angular/core';
+import {Component, EventEmitter, HostBinding, Input, Output} from '@angular/core';
 
 @Component({
   selector: 'dp-calendar-nav',

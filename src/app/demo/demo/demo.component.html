@@ -52,8 +52,10 @@
         <div class="dp-validations">
           <div id="requiredValidation" *ngIf="datePickerModel.errors && datePickerModel.errors.required">required</div>
           <div *ngIf="datePickerModel.errors && datePickerModel.errors.format">format invalid</div>
-          <div id="minDateValidation" *ngIf="datePickerModel.errors && datePickerModel.errors.minDate">minDate invalid</div>
-          <div id="maxDateValidation" *ngIf="datePickerModel.errors && datePickerModel.errors.maxDate">maxDate invalid</div>
+          <div id="minDateValidation" *ngIf="datePickerModel.errors && datePickerModel.errors.minDate">minDate invalid
+          </div>
+          <div id="maxDateValidation" *ngIf="datePickerModel.errors && datePickerModel.errors.maxDate">maxDate invalid
+          </div>
         </div>
       </div>
 
@@ -228,7 +230,8 @@
         </dp-day-time-calendar>
 
         <div class="dp-validations">
-          <div id="daytimeInlineRequiredValidation" *ngIf="daytimeInline.errors && daytimeInline.errors.required">required
+          <div id="daytimeInlineRequiredValidation" *ngIf="daytimeInline.errors && daytimeInline.errors.required">
+            required
           </div>
           <div id="daytimeInlineMinDateValidation" *ngIf="daytimeInline.errors && daytimeInline.errors.minDate">minDate
             invalid
@@ -263,18 +266,27 @@
       <div class="dp-picker-container" id="datePickerDirDayReactive" *ngIf="pickerMode === 'dayDirectiveReactive'">
         <form [formGroup]="formGroup">
           <input [dpDayPicker]="config"
-                name="datePicker"
-                #dateDirectivePicker="dpDayPicker"
-                [theme]="material ? 'dp-material' : ''"
-                formControlName="datePicker"
-                [placeholder]="placeholder"
-                (ngModelChange)="date = $event; log($event)"
-                [required]="required"
-                />
+                 name="datePicker"
+                 #dateDirectivePicker="dpDayPicker"
+                 [theme]="material ? 'dp-material' : ''"
+                 formControlName="datePicker"
+                 [placeholder]="placeholder"
+                 (ngModelChange)="date = $event; log($event)"
+                 [required]="required"
+          />
           <div class="dp-validations">
-            <div id="reactiveRequiredValidation" *ngIf="formGroup.get('datePicker').hasError('required') && formGroup.get('datePicker').touched">required</div>
-            <div id="reactiveMinDateValidation" *ngIf="formGroup.get('datePicker').hasError('minDate') && formGroup.get('datePicker').touched">minDate invalid</div>
-            <div id="reactiveMaxDateValidation" *ngIf="formGroup.get('datePicker').hasError('maxDate') && formGroup.get('datePicker').touched">maxDate invalid</div>
+            <div id="reactiveRequiredValidation"
+                 *ngIf="formGroup.get('datePicker').hasError('required') && formGroup.get('datePicker').touched">
+              required
+            </div>
+            <div id="reactiveMinDateValidation"
+                 *ngIf="formGroup.get('datePicker').hasError('minDate') && formGroup.get('datePicker').touched">minDate
+              invalid
+            </div>
+            <div id="reactiveMaxDateValidation"
+                 *ngIf="formGroup.get('datePicker').hasError('maxDate') && formGroup.get('datePicker').touched">maxDate
+              invalid
+            </div>
           </div>
         </form>
       </div>
@@ -380,10 +392,12 @@
       </span>
       <div class="dp-option-playground">
         <label>Required
-          <input id="enableRequiredRadio" type="radio" [(ngModel)]="required" (ngModelChange)="validatorsChanged()" name="required" [value]="true">
+          <input id="enableRequiredRadio" type="radio" [(ngModel)]="required" (ngModelChange)="validatorsChanged()"
+                 name="required" [value]="true">
         </label>
         <label>Not Required
-          <input id="disableRequiredRadio" type="radio" [(ngModel)]="required" (ngModelChange)="validatorsChanged()" name="required" [value]="false">
+          <input id="disableRequiredRadio" type="radio" [(ngModel)]="required" (ngModelChange)="validatorsChanged()"
+                 name="required" [value]="false">
         </label>
       </div>
     </div>
@@ -861,12 +875,14 @@
       </span>
       <div class="dp-option-playground">
         <label>Enabled
-          <input id="showTwentyFourHours" type="radio" [(ngModel)]="config.showTwentyFourHours" name="showTwentyFourHours"
+          <input id="showTwentyFourHours" type="radio" [(ngModel)]="config.showTwentyFourHours"
+                 name="showTwentyFourHours"
                  [value]="true"
                  (ngModelChange)="configChanged()">
         </label>
         <label>Disabled
-          <input id="hideTwentyFourHours" type="radio" [(ngModel)]="config.showTwentyFourHours" name="showTwentyFourHours"
+          <input id="hideTwentyFourHours" type="radio" [(ngModel)]="config.showTwentyFourHours"
+                 name="showTwentyFourHours"
                  [value]="false"
                  (ngModelChange)="configChanged()">
         </label>

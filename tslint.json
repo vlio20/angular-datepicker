@@ -12,7 +12,10 @@
     "curly": true,
     "eofline": false,
     "forin": true,
-    "import-blacklist": [true, "rxjs"],
+    "import-blacklist": [
+      true,
+      "rxjs"
+    ],
     "import-spacing": true,
     "indent": [
       true,
@@ -24,7 +27,13 @@
       true,
       140
     ],
-    "trailing-comma": [true, {"multiline": "never", "singleline": "never"}],
+    "trailing-comma": [
+      true,
+      {
+        "multiline": "never",
+        "singleline": "never"
+      }
+    ],
     "member-access": false,
     "member-ordering": [
       true,
@@ -47,7 +56,10 @@
     "no-empty": false,
     "no-empty-interface": true,
     "no-eval": true,
-    "no-inferrable-types": [false, "ignore-params"],
+    "no-inferrable-types": [
+      false,
+      "ignore-params"
+    ],
     "no-shadowed-variable": true,
     "no-string-literal": false,
     "no-string-throw": true,
@@ -98,9 +110,18 @@
       "check-separator",
       "check-type"
     ],
-
-    "directive-selector": [true, "attribute", "dp", "camelCase"],
-    "component-selector": [true, "element", "dp", "kebab-case"],
+    "directive-selector": [
+      true,
+      "attribute",
+      "dp",
+      "camelCase"
+    ],
+    "component-selector": [
+      true,
+      "element",
+      "dp",
+      "kebab-case"
+    ],
     "use-input-property-decorator": true,
     "use-output-property-decorator": true,
     "use-host-property-decorator": true,

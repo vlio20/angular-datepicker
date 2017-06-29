@@ -1,5 +1,5 @@
 import {DemoPage} from './app.po';
-import {protractor, browser} from 'protractor';
+import {browser, protractor} from 'protractor';
 import * as moment from 'moment';
 
 describe('ng2-date-picker App', () => {
@@ -592,7 +592,8 @@ describe('ng2-date-picker App', () => {
       expect(page.selectedDays.count()).toBe(3);
       expect(page.datePickerPopup.isDisplayed()).toBe(true);
       expect(page.datePickerInput.getAttribute('value')).toEqual(
-        `${moment().date(18).format('DD-MM-YYYY')}, ${moment().date(15).format('DD-MM-YYYY')}, ${moment().date(16).format('DD-MM-YYYY')}`
+        `${moment().date(18).format('DD-MM-YYYY')}, ${moment().date(15).format('DD-MM-YYYY')}, ${moment().date(16)
+          .format('DD-MM-YYYY')}`
       );
 
       page.clickOnDayButton('18');

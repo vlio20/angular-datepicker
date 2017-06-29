@@ -7,7 +7,7 @@ import {CalendarValue} from '../../types/calendar-value';
 import {IDate} from '../../models/date.model';
 import {CalendarType} from '../../types/calendar-type';
 
-export type DateValidatorFn = (inputVal: CalendarValue) => {[key: string]: any};
+export type DateValidatorFn = (inputVal: CalendarValue) => { [key: string]: any };
 export interface DateLimits {
   minDate?: SingleCalendarValue;
   maxDate?: SingleCalendarValue;

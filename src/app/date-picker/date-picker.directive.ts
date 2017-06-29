@@ -4,14 +4,14 @@ import {DatePickerDirectiveService} from './date-picker-directive.service';
 import {IDpDayPickerApi} from './date-picker.api';
 import {DatePickerComponent} from './date-picker.component';
 import {
-  ElementRef,
-  OnInit,
-  ViewContainerRef,
   ComponentFactoryResolver,
   Directive,
+  ElementRef,
   HostListener,
   Input,
-  Optional
+  OnInit,
+  Optional,
+  ViewContainerRef
 } from '@angular/core';
 import {NgControl} from '@angular/forms';
 import {Moment} from 'moment';

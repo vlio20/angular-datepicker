@@ -1,4 +1,4 @@
-import {TestBed, inject} from '@angular/core/testing';
+import {inject, TestBed} from '@angular/core/testing';
 import * as moment from 'moment';
 import {UtilsService} from '../common/services/utils/utils.service';
 import {MonthCalendarService} from './month-calendar.service';

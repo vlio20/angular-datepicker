@@ -105,7 +105,7 @@ export class DatePickerComponent implements OnChanges,
   popupElem: HTMLElement;
   handleInnerElementClickUnlisteners: Function[] = [];
   globalListnersUnlisteners: Function[] = [];
-  validateFn: (inputVal: CalendarValue) => {[key: string]: any};
+  validateFn: (inputVal: CalendarValue) => { [key: string]: any };
   api: IDpDayPickerApi = {
     open: this.showCalendars.bind(this),
     close: this.hideCalendar.bind(this)
@@ -220,7 +220,12 @@ export class DatePickerComponent implements OnChanges,
 
   initValidators() {
     this.validateFn = this.utilsService.createValidator(
-      {minDate: this.minDate, maxDate: this.maxDate, minTime: this.minTime, maxTime: this.maxTime}, this.componentConfig.format, this.type);
+      {
+        minDate: this.minDate,
+        maxDate: this.maxDate,
+        minTime: this.minTime,
+        maxTime: this.maxTime
+      }, this.componentConfig.format, this.type);
     this.onChangeCallback(this.processOnChangeCallback(this.selected));
   }
 

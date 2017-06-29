@@ -5,7 +5,7 @@ import {Moment} from 'moment';
 export interface IDayCalendarConfig extends ICalendar {
   isDayDisabledCallback?: (date: Moment) => boolean;
   isMonthDisabledCallback?: (date: Moment) => boolean;
-  weekdayNames?: {[key: string]: string};
+  weekdayNames?: { [key: string]: string };
   showNearMonthDays?: boolean;
   showWeekNumbers?: boolean;
   firstDayOfWeek?: WeekDays;

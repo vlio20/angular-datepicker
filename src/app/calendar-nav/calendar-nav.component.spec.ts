@@ -8,9 +8,9 @@ describe('CalendarNavComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CalendarNavComponent ]
+      declarations: [CalendarNavComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

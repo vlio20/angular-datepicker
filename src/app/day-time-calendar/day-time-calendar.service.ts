@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
-import {Moment} from 'moment';
 import * as moment from 'moment';
+import {Moment} from 'moment';
 
 import {UtilsService} from '../common/services/utils/utils.service';
 import {DayCalendarService} from '../day-calendar/day-calendar.service';
@@ -13,13 +13,12 @@ const COMBINED_FORMAT = DAY_FORMAT + TIME_FORMAT;
 
 @Injectable()
 export class DayTimeCalendarService {
-  readonly DEFAULT_CONFIG: IDayTimeCalendarConfig = {
-  };
+  readonly DEFAULT_CONFIG: IDayTimeCalendarConfig = {};
 
-  constructor(
-    private utilsService: UtilsService,
-    private dayCalendarService: DayCalendarService,
-    private timeSelectService: TimeSelectService) {}
+  constructor(private utilsService: UtilsService,
+              private dayCalendarService: DayCalendarService,
+              private timeSelectService: TimeSelectService) {
+  }
 
   getConfig(config: IDayTimeCalendarConfig): IDayTimeCalendarConfig {
     return {

@@ -1,4 +1,4 @@
-import {TestBed, inject} from '@angular/core/testing';
+import {inject, TestBed} from '@angular/core/testing';
 import {DatePickerDirectiveService} from './date-picker-directive.service';
 import {UtilsService} from '../common/services/utils/utils.service';
 
@@ -39,7 +39,7 @@ describe('Service: DatePickerDirective', () => {
       expect(service.convertToHTMLElement).not.toHaveBeenCalled();
 
       const fakeElement = {};
-      const config3 = service.getConfig({allowMultiSelect: true}, { nativeElement: fakeElement });
+      const config3 = service.getConfig({allowMultiSelect: true}, {nativeElement: fakeElement});
       expect(config3).toEqual({
         allowMultiSelect: true,
         hideInputContainer: true,
@@ -47,8 +47,8 @@ describe('Service: DatePickerDirective', () => {
       });
       expect(service.convertToHTMLElement).not.toHaveBeenCalled();
 
-      const fakeAttachElementRef = { nativeElement: {} };
-      const fakeElementRef = { nativeElement: fakeElement };
+      const fakeAttachElementRef = {nativeElement: {}};
+      const fakeElementRef = {nativeElement: fakeElement};
       const config4 = service.getConfig({allowMultiSelect: true}, fakeElementRef, fakeAttachElementRef);
       expect(config4).toEqual({
         allowMultiSelect: true,

@@ -3,14 +3,14 @@ import {SingleCalendarValue} from '../common/types/single-calendar-value';
 import {ECalendarType} from '../common/types/calendar-type-enum';
 import {
   Component,
-  OnInit,
-  Input,
-  Output,
   EventEmitter,
-  OnChanges,
-  SimpleChanges,
   forwardRef,
-  HostBinding
+  HostBinding,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges
 } from '@angular/core';
 import {DayCalendarService} from './day-calendar.service';
 import * as moment from 'moment';
@@ -18,12 +18,12 @@ import {Moment} from 'moment';
 import {IDayCalendarConfig} from './day-calendar-config.model';
 import {IDay} from './day.model';
 import {
-  NG_VALUE_ACCESSOR,
-  NG_VALIDATORS,
   ControlValueAccessor,
-  Validator,
+  FormControl,
+  NG_VALIDATORS,
+  NG_VALUE_ACCESSOR,
   ValidationErrors,
-  FormControl
+  Validator
 } from '@angular/forms';
 import {CalendarValue} from '../common/types/calendar-value';
 import {UtilsService} from '../common/services/utils/utils.service';
@@ -68,7 +68,7 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
   currentDateView: Moment;
   inputValue: CalendarValue;
   inputValueType: ECalendarValue;
-  validateFn: (inputVal: CalendarValue) => {[key: string]: any};
+  validateFn: (inputVal: CalendarValue) => { [key: string]: any };
   currentCalendarType: ECalendarType = ECalendarType.Day;
   monthCalendarConfig: IMonthCalendarConfig;
 

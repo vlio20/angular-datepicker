@@ -1,9 +1,7 @@
-import {Injectable, EventEmitter} from '@angular/core';
+import {EventEmitter, Injectable} from '@angular/core';
 import {IDatePickerConfig} from './date-picker-config.model';
-import * as moment from 'moment';
 import {Moment} from 'moment';
 import {UtilsService} from '../common/services/utils/utils.service';
-import {FormControl} from '@angular/forms';
 import {IDayCalendarConfig} from '../day-calendar/day-calendar-config.model';
 import {TimeSelectService} from '../time-select/time-select.service';
 import {DayTimeCalendarService} from '../day-time-calendar/day-time-calendar.service';
@@ -26,10 +24,10 @@ export class DatePickerService {
     showGoToCurrent: true
   };
 
-  constructor(
-    private utilsService: UtilsService,
-    private timeSelectService: TimeSelectService,
-    private daytimeCalendarService: DayTimeCalendarService) {}
+  constructor(private utilsService: UtilsService,
+              private timeSelectService: TimeSelectService,
+              private daytimeCalendarService: DayTimeCalendarService) {
+  }
 
   // todo:: add unit tests
   getConfig(config: IDatePickerConfig): IDatePickerConfig {

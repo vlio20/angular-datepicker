@@ -3,26 +3,26 @@ import {SingleCalendarValue} from '../common/types/single-calendar-value';
 import {ECalendarType} from '../common/types/calendar-type-enum';
 import {
   Component,
-  OnInit,
-  Input,
-  Output,
   EventEmitter,
-  OnChanges,
-  SimpleChanges,
   forwardRef,
-  HostBinding
+  HostBinding,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges
 } from '@angular/core';
 import {TimeSelectService, TimeUnit} from './time-select.service';
 import * as moment from 'moment';
 import {Moment} from 'moment';
 import {ITimeSelectConfig} from './time-select-config.model';
 import {
-  NG_VALUE_ACCESSOR,
-  NG_VALIDATORS,
   ControlValueAccessor,
-  Validator,
+  FormControl,
+  NG_VALIDATORS,
+  NG_VALUE_ACCESSOR,
   ValidationErrors,
-  FormControl
+  Validator
 } from '@angular/forms';
 import {CalendarValue} from '../common/types/calendar-value';
 import {UtilsService} from '../common/services/utils/utils.service';
@@ -63,7 +63,7 @@ export class TimeSelectComponent implements OnInit, OnChanges, ControlValueAcces
   _selected: Moment;
   inputValue: CalendarValue;
   inputValueType: ECalendarValue;
-  validateFn: (inputVal: CalendarValue) => {[key: string]: any};
+  validateFn: (inputVal: CalendarValue) => { [key: string]: any };
 
   hours: string;
   minutes: string;
@@ -179,7 +179,7 @@ export class TimeSelectComponent implements OnInit, OnChanges, ControlValueAcces
   }
 
   emitChange() {
-    this.onChange.emit({ date: this.selected, selected: false });
+    this.onChange.emit({date: this.selected, selected: false});
   }
 
   calculateTimeParts(time: Moment) {

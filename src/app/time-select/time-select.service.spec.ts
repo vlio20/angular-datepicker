@@ -1,7 +1,6 @@
-import {TestBed, inject} from '@angular/core/testing';
+import {inject, TestBed} from '@angular/core/testing';
 import {TimeSelectService} from './time-select.service';
 import * as moment from 'moment';
-import {Moment} from 'moment';
 import {UtilsService} from '../common/services/utils/utils.service';
 import {ITimeSelectConfig} from './time-select-config.model';
 
@@ -178,18 +177,26 @@ describe('Service: TimeSelectService', () => {
       expect(service.shouldShowIncrease(maxAndMaxTimeConfig, time, 'minute')).toEqual(false);
       expect(service.shouldShowIncrease(maxAndMaxTimeConfig, time, 'second')).toEqual(false);
       expect(service.shouldShowIncrease(maxAndMaxTimeConfig, time.clone().subtract(1, 'hour'), 'hour')).toEqual(true);
-      expect(service.shouldShowIncrease(maxAndMaxTimeConfig, time.clone().subtract(2, 'minute'), 'minute')).toEqual(false);
-      expect(service.shouldShowIncrease(maxAndMaxTimeConfig, time.clone().subtract(3, 'second'), 'second')).toEqual(false);
-      expect(service.shouldShowIncrease(maxAndMaxTimeConfig, time.clone().subtract(10, 'minute'), 'minute')).toEqual(true);
-      expect(service.shouldShowIncrease(maxAndMaxTimeConfig, time.clone().subtract(15, 'second'), 'second')).toEqual(true);
+      expect(service.shouldShowIncrease(maxAndMaxTimeConfig, time.clone().subtract(2, 'minute'), 'minute'))
+        .toEqual(false);
+      expect(service.shouldShowIncrease(maxAndMaxTimeConfig, time.clone().subtract(3, 'second'), 'second'))
+        .toEqual(false);
+      expect(service.shouldShowIncrease(maxAndMaxTimeConfig, time.clone().subtract(10, 'minute'), 'minute'))
+        .toEqual(true);
+      expect(service.shouldShowIncrease(maxAndMaxTimeConfig, time.clone().subtract(15, 'second'), 'second'))
+        .toEqual(true);
       expect(service.shouldShowIncrease(maxAndMaxTimeConfig2, time, 'hour')).toEqual(false);
       expect(service.shouldShowIncrease(maxAndMaxTimeConfig2, time, 'minute')).toEqual(false);
       expect(service.shouldShowIncrease(maxAndMaxTimeConfig2, time, 'second')).toEqual(false);
       expect(service.shouldShowIncrease(maxAndMaxTimeConfig2, time.clone().subtract(1, 'hour'), 'hour')).toEqual(true);
-      expect(service.shouldShowIncrease(maxAndMaxTimeConfig2, time.clone().subtract(2, 'minute'), 'minute')).toEqual(false);
-      expect(service.shouldShowIncrease(maxAndMaxTimeConfig2, time.clone().subtract(3, 'second'), 'second')).toEqual(false);
-      expect(service.shouldShowIncrease(maxAndMaxTimeConfig2, time.clone().subtract(10, 'minute'), 'minute')).toEqual(true);
-      expect(service.shouldShowIncrease(maxAndMaxTimeConfig2, time.clone().subtract(15, 'second'), 'second')).toEqual(true);
+      expect(service.shouldShowIncrease(maxAndMaxTimeConfig2, time.clone().subtract(2, 'minute'), 'minute'))
+        .toEqual(false);
+      expect(service.shouldShowIncrease(maxAndMaxTimeConfig2, time.clone().subtract(3, 'second'), 'second'))
+        .toEqual(false);
+      expect(service.shouldShowIncrease(maxAndMaxTimeConfig2, time.clone().subtract(10, 'minute'), 'minute'))
+        .toEqual(true);
+      expect(service.shouldShowIncrease(maxAndMaxTimeConfig2, time.clone().subtract(15, 'second'), 'second'))
+        .toEqual(true);
     }));
 
   it('should check the shouldShowToggleMeridiem method', inject([TimeSelectService],

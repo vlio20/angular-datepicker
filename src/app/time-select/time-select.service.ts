@@ -96,7 +96,8 @@ export class TimeSelectService {
   shouldShowDecrease(config: ITimeSelectConfig, time: Moment, unit: TimeUnit): boolean {
     if (!config.min && !config.minTime) {
       return true;
-    };
+    }
+    ;
     const newTime = this.decrease(config, time, unit);
 
     return (!config.min || config.min.isSameOrBefore(newTime))
@@ -106,7 +107,8 @@ export class TimeSelectService {
   shouldShowIncrease(config: ITimeSelectConfig, time: Moment, unit: TimeUnit): boolean {
     if (!config.max && !config.maxTime) {
       return true;
-    };
+    }
+    ;
     const newTime = this.increase(config, time, unit);
 
     return (!config.max || config.max.isSameOrAfter(newTime))

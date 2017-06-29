@@ -1,15 +1,31 @@
 import {ECalendarValue} from '../common/types/calendar-value-enum';
 import {SingleCalendarValue} from '../common/types/single-calendar-value';
 import {ECalendarType} from '../common/types/calendar-type-enum';
-import {Component, EventEmitter, forwardRef, HostBinding, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
-import {ControlValueAccessor, FormControl, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator} from '@angular/forms';
+import {
+  Component,
+  EventEmitter,
+  forwardRef,
+  HostBinding,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges
+} from '@angular/core';
+import {
+  ControlValueAccessor,
+  FormControl,
+  NG_VALIDATORS,
+  NG_VALUE_ACCESSOR,
+  ValidationErrors,
+  Validator
+} from '@angular/forms';
 import * as moment from 'moment';
 import {Moment} from 'moment';
 import {CalendarValue} from '../common/types/calendar-value';
 import {UtilsService} from '../common/services/utils/utils.service';
 import {IDate} from '../common/models/date.model';
 import {DayCalendarService} from '../day-calendar/day-calendar.service';
-import {IDay} from '../day-calendar/day.model';
 import {TimeSelectService} from '../time-select/time-select.service';
 import {IDayTimeCalendarConfig} from './day-time-calendar-config.model';
 import {DayTimeCalendarService} from './day-time-calendar.service';
@@ -49,7 +65,7 @@ export class DayTimeCalendarComponent implements OnInit, OnChanges, ControlValue
   _selected: Moment;
   inputValue: CalendarValue;
   inputValueType: ECalendarValue;
-  validateFn: (inputVal: CalendarValue) => {[key: string]: any};
+  validateFn: (inputVal: CalendarValue) => { [key: string]: any };
 
   set selected(selected: Moment) {
     this._selected = selected;
@@ -145,6 +161,6 @@ export class DayTimeCalendarComponent implements OnInit, OnChanges, ControlValue
   }
 
   emitChange() {
-    this.onChange.emit({ date: this.selected, selected: false });
+    this.onChange.emit({date: this.selected, selected: false});
   }
 }
