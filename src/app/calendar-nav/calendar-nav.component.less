@@ -21,14 +21,20 @@
     top: 50%;
     transform: translateY(-50%);
     cursor: pointer;
+    .arrow(45deg);
+
+    &::before {
+      top: 1px;
+    }
   }
 
   .dp-calendar-nav-left {
-    left: 0;
+    .arrow(-135deg);
+    left: 5px;
   }
 
   .dp-calendar-nav-right {
-    right: 0;
+    right: 5px;
   }
 
   .dp-nav-header {

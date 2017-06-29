@@ -14,7 +14,7 @@
     margin: 0 auto;
     vertical-align: middle;
     font-size: inherit;
-    letter-spacing: 1.3px;
+    letter-spacing: 1px;
   }
 
   .dp-time-select-control-up, .dp-time-select-control-down {
@@ -24,18 +24,7 @@
     height: 24px;
     margin: 3px auto;
     cursor: pointer;
-
-    &::before {
-      position: relative;
-      content: '';
-      display: inline-block;
-      height: 8px;
-      width: 8px;
-      left: -1px;
-      vertical-align: baseline;
-      border-style: solid;
-      border-width: 2px 2px 0 0;
-    }
+    .arrow(0deg)
   }
 
   .dp-time-select-control-up::before {
