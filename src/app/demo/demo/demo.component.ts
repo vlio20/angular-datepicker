@@ -99,7 +99,7 @@ export class DemoComponent {
   readonly DAYS = ['su', 'mo', 'tu', 'we', 'th', 'fr', 'sa'];
   pickerMode = 'dayPicker';
 
-  date: string = '15-10-2017 13:10:05';
+  date: Moment;
   dates: Moment[] = [];
   material: boolean = true;
   required: boolean = false;
@@ -122,7 +122,7 @@ export class DemoComponent {
 
   config: IDatePickerConfig = {
     firstDayOfWeek: 'su',
-    format: 'DD-MM-YYYY HH:mm:ss',
+    format: 'DD-MM-YYYY',
     monthFormat: 'MMM, YYYY',
     disableKeypress: false,
     allowMultiSelect: false,

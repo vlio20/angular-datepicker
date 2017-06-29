@@ -203,13 +203,13 @@
                         [theme]="material ? 'dp-material' : ''">
         </dp-date-picker>
         <div class="dp-validations">
-          <div id="daytimePickerRequiredValidation" *ngIf="daytimePicker.errors && daytimePicker.errors.required">required
+          <div id="requiredValidation" *ngIf="daytimePicker.errors && daytimePicker.errors.required">required
           </div>
           <div *ngIf="daytimePicker.errors && daytimePicker.errors.format">format invalid</div>
-          <div id="daytimePickerMinDateValidation" *ngIf="daytimePicker.errors && daytimePicker.errors.minDate">minDate
+          <div id="minDateValidation" *ngIf="daytimePicker.errors && daytimePicker.errors.minDate">minDate
             invalid
           </div>
-          <div id="daytimePickerMaxDateValidation" *ngIf="daytimePicker.errors && daytimePicker.errors.maxDate">maxDate
+          <div id="maxDateValidation" *ngIf="daytimePicker.errors && daytimePicker.errors.maxDate">maxDate
             invalid
           </div>
         </div>
