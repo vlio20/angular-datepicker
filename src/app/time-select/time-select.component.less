@@ -2,18 +2,18 @@
 
 & {
   .dp-time-select-controls {
+    margin: 0;
+    padding: 0;
     text-align: center;
     line-height: normal;
-    padding: 0;
-    margin: 0;
   }
 
   .dp-time-select-control {
-    vertical-align: middle;
     display: inline-block;
-    font-size: inherit;
-    margin: 0 auto;
     width: 35px;
+    margin: 0 auto;
+    vertical-align: middle;
+    font-size: inherit;
     letter-spacing: 1.3px;
   }
 
@@ -26,15 +26,15 @@
     cursor: pointer;
 
     &::before {
-      border-style: solid;
-      border-width: 2px 2px 0 0;
+      position: relative;
       content: '';
       display: inline-block;
       height: 8px;
-      position: relative;
-      vertical-align: baseline;
       width: 8px;
       left: -1px;
+      vertical-align: baseline;
+      border-style: solid;
+      border-width: 2px 2px 0 0;
     }
   }
 
@@ -60,7 +60,7 @@
       border-radius: 50%;
 
       &::before {
-        left: 0px;
+        left: 0;
       }
 
       &:hover {
