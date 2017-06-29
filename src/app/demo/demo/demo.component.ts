@@ -97,7 +97,7 @@ export class DemoComponent {
   @ViewChild('dateDirectivePicker') datePickerDirective: DatePickerDirective;
   demoFormat = 'DD-MM-YYYY';
   readonly DAYS = ['su', 'mo', 'tu', 'we', 'th', 'fr', 'sa'];
-  pickerMode = 'dayPicker';
+  pickerMode = 'daytimePicker';
 
   date: Moment;
   dates: Moment[] = [];
@@ -122,7 +122,7 @@ export class DemoComponent {
 
   config: IDatePickerConfig = {
     firstDayOfWeek: 'su',
-    format: 'DD-MM-YYYY',
+    format: 'DD-MM-YYYY HH:mm:ss',
     monthFormat: 'MMM, YYYY',
     disableKeypress: false,
     allowMultiSelect: false,

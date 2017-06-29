@@ -109,7 +109,7 @@ export class DemoPage {
   meridiemUpBtn = $(`${this.popupSelector} .dp-time-select-control-meridiem > .dp-time-select-control-up`);
   meridiemDownBtn = $(`${this.popupSelector} .dp-time-select-control-meridiem > .dp-time-select-control-down`);
   meridiemDisplay = $(`${this.popupSelector} .dp-time-select-display-meridiem`);
-  timeSeparatorDisplay = $(`${this.popupSelector} .dp-time-select-separator`);
+  timeSeparatorDisplay = $(`${this.popupSelector} .dp-time-select-separator:nth-child(2)`);
 
   pickerModeDayPicker = $('#pickerMode > [value=dayPicker]');
   pickerModeDayInline = $('#pickerMode > [value=dayInline]');
