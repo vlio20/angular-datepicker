@@ -3,9 +3,88 @@ import {IDatePickerConfig} from '../../date-picker/date-picker-config.model';
 import {DatePickerComponent} from '../../date-picker/date-picker.component';
 import {DatePickerDirective} from '../../date-picker/date-picker.directive';
 import {Component, HostListener, ViewChild} from '@angular/core';
-import { FormControl, NgForm, FormGroup, Validators, Validator, AbstractControl } from '@angular/forms';
+import {AbstractControl, FormControl, FormGroup, MaxLengthValidator, NgForm, Validator, Validators} from '@angular/forms';
 import {Moment} from 'moment';
 import * as moment from 'moment';
+
+const GLOBAL_OPTION_KEYS = [
+  'theme'
+];
+const PICKER_OPTION_KEYS = [
+  'apiclose',
+  'apiopen',
+  'appendTo',
+  'disabled',
+  'disableKeypress',
+  'drops',
+  'format',
+  'onOpenDelay',
+  'opens',
+  'placeholder',
+  'required'
+];
+const DAY_PICKER_DIRECTIVE_OPTION_KEYS = [
+  'allowMultiSelect',
+  'closeOnSelect',
+  'closeOnSelectDelay',
+  ...PICKER_OPTION_KEYS
+];
+const DAY_PICKER_OPTION_KEYS = [
+  'showGoToCurrent',
+  ...DAY_PICKER_DIRECTIVE_OPTION_KEYS
+];
+const DAY_TIME_PICKER_OPTION_KEYS = [
+  'showGoToCurrent',
+  ...PICKER_OPTION_KEYS
+];
+const TIME_PICKER_OPTION_KEYS = [
+  ...PICKER_OPTION_KEYS
+];
+const MONTH_CALENDAR_OPTION_KEYS = [
+  'max',
+  'min',
+  'monthBtnFormat',
+  'yearFormat',
+  ...GLOBAL_OPTION_KEYS
+];
+const DAY_CALENDAR_OPTION_KEYS = [
+  'firstDayOfWeek',
+  'max',
+  'maxValidation',
+  'min',
+  'minValidation',
+  'monthFormat',
+  'weekdayNames',
+  'showNearMonthDays',
+  'showWeekNumbers',
+  'enableMonthSelector',
+  'dayBtnFormat',
+  ...MONTH_CALENDAR_OPTION_KEYS
+];
+const TIME_SELECT_SHARED_OPTION_KEYS = [
+  'hours12Format',
+  'hours24Format',
+  'meridiemFormat',
+  'minutesFormat',
+  'minutesInterval',
+  'secondsFormat',
+  'secondsInterval',
+  'showSeconds',
+  'showTwentyFourHours',
+  'timeSeparator',
+  ...GLOBAL_OPTION_KEYS
+];
+const TIME_SELECT_OPTION_KEYS = [
+  'maxTime',
+  'maxTimeValidation',
+  'minTime',
+  'minTimeValidation',
+  ...TIME_SELECT_SHARED_OPTION_KEYS
+];
+const DAY_TIME_CALENDAR_OPTION_KEYS = [
+  ...DAY_CALENDAR_OPTION_KEYS,
+  ...TIME_SELECT_SHARED_OPTION_KEYS
+];
 
 @Component({
   selector: 'dp-demo',
@@ -15,10 +94,10 @@ import * as moment from 'moment';
 })
 export class DemoComponent {
   @ViewChild('datePicker') datePicker: DatePickerComponent;
-  @ViewChild('dateDirectivePicker') dateDirectivePicker: DatePickerDirective;
+  @ViewChild('dateDirectivePicker') datePickerDirective: DatePickerDirective;
   demoFormat = 'DD-MM-YYYY';
   readonly DAYS = ['su', 'mo', 'tu', 'we', 'th', 'fr', 'sa'];
-  pickerMode = 'dayPicker';
+  pickerMode = 'daytimePicker';
 
   date: Moment;
   dates: Moment[] = [];
@@ -27,6 +106,8 @@ export class DemoComponent {
   disabled: boolean = false;
   validationMinDate: Moment;
   validationMaxDate: Moment;
+  validationMinTime: Moment;
+  validationMaxTime: Moment;
   placeholder: string = 'Choose a date...';
 
   formGroup: FormGroup = new FormGroup({
@@ -41,7 +122,7 @@ export class DemoComponent {
 
   config: IDatePickerConfig = {
     firstDayOfWeek: 'su',
-    format: 'DD-MM-YYYY',
+    format: 'DD-MM-YYYY HH:mm:ss',
     monthFormat: 'MMM, YYYY',
     disableKeypress: false,
     allowMultiSelect: false,
@@ -66,7 +147,17 @@ export class DemoComponent {
     yearFormat: 'YYYY',
     showGoToCurrent: true,
     dayBtnFormat: 'DD',
-    monthBtnFormat: 'MMM'
+    monthBtnFormat: 'MMM',
+    hours12Format: 'hh',
+    hours24Format: 'HH',
+    meridiemFormat: 'A',
+    minutesFormat: 'mm',
+    minutesInterval: 1,
+    secondsFormat: 'ss',
+    secondsInterval: 1,
+    showSeconds: false,
+    showTwentyFourHours: false,
+    timeSeparator: ':'
   };
   isAtTop: boolean = true;
 
@@ -95,11 +186,77 @@ export class DemoComponent {
   }
 
   openCalendar() {
-    (this.datePicker || this.dateDirectivePicker).api.open();
+    if (this.datePicker) {
+      this.datePicker.api.open();
+    }
+    if (this.datePickerDirective) {
+      this.datePickerDirective.api.open();
+    }
   }
 
   closeCalendar() {
-    (this.datePicker || this.dateDirectivePicker).api.close();
+    if (this.datePicker) {
+      this.datePicker.api.close();
+    }
+    if (this.datePickerDirective) {
+      this.datePickerDirective.api.close();
+    }
+  }
+
+  isValidConfig(key: string): boolean {
+    switch (this.pickerMode) {
+      case 'dayInline':
+        return [
+          ...DAY_CALENDAR_OPTION_KEYS
+        ].indexOf(key) > -1;
+      case 'monthInline':
+        return [
+          ...MONTH_CALENDAR_OPTION_KEYS
+        ].indexOf(key) > -1;
+      case 'timeInline':
+        return [
+          ...TIME_SELECT_OPTION_KEYS
+        ].indexOf(key) > -1;
+      case 'daytimeInline':
+        return [
+          ...DAY_TIME_CALENDAR_OPTION_KEYS
+        ].indexOf(key) > -1;
+      case 'dayPicker':
+        return [
+          ...DAY_PICKER_OPTION_KEYS,
+          ...DAY_CALENDAR_OPTION_KEYS
+        ].indexOf(key) > -1;
+      case 'dayDirective':
+      case 'dayDirectiveReactive':
+        return [
+          ...DAY_PICKER_DIRECTIVE_OPTION_KEYS,
+          ...DAY_CALENDAR_OPTION_KEYS
+        ].indexOf(key) > -1;
+      case 'monthPicker':
+        return [
+          ...DAY_PICKER_OPTION_KEYS,
+          ...MONTH_CALENDAR_OPTION_KEYS
+        ].indexOf(key) > -1;
+      case 'monthDirective':
+        return [
+          ...DAY_PICKER_DIRECTIVE_OPTION_KEYS,
+          ...MONTH_CALENDAR_OPTION_KEYS
+        ].indexOf(key) > -1;
+      case 'timePicker':
+      case 'timeDirective':
+        return [
+          ...TIME_PICKER_OPTION_KEYS,
+          ...TIME_SELECT_OPTION_KEYS
+        ].indexOf(key) > -1;
+      case 'daytimePicker':
+      case 'daytimeDirective':
+        return [
+          ...DAY_TIME_PICKER_OPTION_KEYS,
+          ...DAY_TIME_CALENDAR_OPTION_KEYS
+        ].indexOf(key) > -1;
+      default:
+        return true;
+    }
   }
 
   log(item) {

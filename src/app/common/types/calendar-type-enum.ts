@@ -1,4 +1,6 @@
 export enum ECalendarType {
   Day,
-  Month
+  DayTime,
+  Month,
+  Time
 }

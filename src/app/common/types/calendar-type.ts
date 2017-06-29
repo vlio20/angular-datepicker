@@ -1,1 +1,1 @@
-export type CalendarType = 'day' | 'month';
+export type CalendarType = 'day' | 'month' | 'daytime' | 'time';

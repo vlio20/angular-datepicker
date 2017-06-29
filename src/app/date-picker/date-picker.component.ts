@@ -8,6 +8,12 @@ import {ECalendarValue} from '../common/types/calendar-value-enum';
 import {SingleCalendarValue} from '../common/types/single-calendar-value';
 import {IDayCalendarConfig} from '../day-calendar/day-calendar-config.model';
 import {DayCalendarComponent} from '../day-calendar/day-calendar.component';
+import {DayCalendarService} from '../day-calendar/day-calendar.service';
+import {IDayTimeCalendarConfig} from '../day-time-calendar/day-time-calendar-config.model';
+import {DayTimeCalendarService} from '../day-time-calendar/day-time-calendar.service';
+import {ITimeSelectConfig} from '../time-select/time-select-config.model';
+import {TimeSelectComponent} from '../time-select/time-select.component';
+import {TimeSelectService} from '../time-select/time-select.service';
 import {IDatePickerConfig} from './date-picker-config.model';
 import {IDpDayPickerApi} from './date-picker.api';
 import {DatePickerService} from './date-picker.service';
@@ -43,6 +49,9 @@ import {Moment, unitOfTime} from 'moment';
   styleUrls: ['date-picker.component.less'],
   providers: [
     DatePickerService,
+    DayTimeCalendarService,
+    DayCalendarService,
+    TimeSelectService,
     {
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => DatePickerComponent),
@@ -70,13 +79,18 @@ export class DatePickerComponent implements OnChanges,
   @HostBinding('class') @Input() theme: string;
   @Input() minDate: Moment | string;
   @Input() maxDate: Moment | string;
+  @Input() minTime: Moment | string;
+  @Input() maxTime: Moment | string;
 
   @ViewChild('container') calendarContainer: ElementRef;
   @ViewChild('dayCalendar') dayCalendarRef: DayCalendarComponent;
   @ViewChild('monthCalendar') monthCalendarRef: DayCalendarComponent;
+  @ViewChild('timeSelect') timeSelectRef: TimeSelectComponent;
 
   componentConfig: IDatePickerConfig;
   dayCalendarConfig: IDayCalendarConfig;
+  dayTimeCalendarConfig: IDayTimeCalendarConfig;
+  timeSelectConfig: ITimeSelectConfig;
   _areCalendarsShown: boolean = false;
   hideStateHelper: boolean = false;
   _selected: Moment[] = [];
@@ -193,7 +207,7 @@ export class DatePickerComponent implements OnChanges,
   }
 
   validate(formControl: FormControl): ValidationErrors | any {
-    if (this.minDate || this.maxDate) {
+    if (this.minDate || this.maxDate || this.minTime || this.maxTime) {
       return this.validateFn(formControl.value);
     } else {
       return () => null;
@@ -206,7 +220,7 @@ export class DatePickerComponent implements OnChanges,
 
   initValidators() {
     this.validateFn = this.utilsService.createValidator(
-      {minDate: this.minDate, maxDate: this.maxDate}, this.componentConfig.format, this.type);
+      {minDate: this.minDate, maxDate: this.maxDate, minTime: this.minTime, maxTime: this.maxTime}, this.componentConfig.format, this.type);
     this.onChangeCallback(this.processOnChangeCallback(this.selected));
   }
 
@@ -218,10 +232,10 @@ export class DatePickerComponent implements OnChanges,
 
   ngOnChanges(changes: SimpleChanges) {
     if (this.isInited) {
-      const {minDate, maxDate} = changes;
+      const {minDate, maxDate, minTime, maxTime} = changes;
       this.init();
 
-      if (minDate || maxDate) {
+      if (minDate || maxDate || minTime || maxTime) {
         this.initValidators();
       }
     }
@@ -272,6 +286,8 @@ export class DatePickerComponent implements OnChanges,
         .getDefaultDisplayDate(this.currentDateView, this.selected, this.componentConfig.allowMultiSelect);
     this.inputValueType = this.utilsService.getInputType(this.inputValue, this.componentConfig.allowMultiSelect);
     this.dayCalendarConfig = this.dayPickerService.getDayConfigService(this.componentConfig);
+    this.dayTimeCalendarConfig = this.dayPickerService.getDayTimeConfigService(this.componentConfig);
+    this.timeSelectConfig = this.dayPickerService.getTimeConfigService(this.componentConfig);
   }
 
   inputFocused() {
@@ -280,6 +296,9 @@ export class DatePickerComponent implements OnChanges,
       this.hideStateHelper = false;
       if (!this.areCalendarsShown) {
         this.areCalendarsShown = true;
+        if (this.timeSelectRef) {
+          this.timeSelectRef.api.triggerChange();
+        }
       }
       this.isFocusedTrigger = false;
     }, this.componentConfig.onOpenDelay);
@@ -288,6 +307,9 @@ export class DatePickerComponent implements OnChanges,
   showCalendars() {
     this.hideStateHelper = true;
     this.areCalendarsShown = true;
+    if (this.timeSelectRef) {
+      this.timeSelectRef.api.triggerChange();
+    }
   }
 
   hideCalendar() {
@@ -306,14 +328,20 @@ export class DatePickerComponent implements OnChanges,
     }
   }
 
+  shouldShowGoToCurrent(): boolean {
+    return this.componentConfig.showGoToCurrent && this.type !== 'time';
+  }
+
   moveToCurrent() {
     this.currentDateView = moment();
   }
 
-  dateSelected(date: IDate, granularity: unitOfTime.Base) {
+  dateSelected(date: IDate, granularity: unitOfTime.Base, ignoreClose?: boolean) {
     this.selected = this.utilsService
       .updateSelected(this.componentConfig.allowMultiSelect, this.selected, date, granularity);
-    this.onDateClick();
+    if (!ignoreClose) {
+      this.onDateClick();
+    }
   }
 
   onDateClick() {

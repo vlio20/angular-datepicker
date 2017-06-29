@@ -28,6 +28,8 @@ export class DatePickerDirective implements OnInit {
   private _type: CalendarType = 'day';
   private _minDate: Moment | string;
   private _maxDate: Moment | string;
+  private _minTime: Moment | string;
+  private _maxTime: Moment | string;
 
   get config(): IDatePickerDirectiveConfig {
     return this._config;
@@ -94,6 +96,30 @@ export class DatePickerDirective implements OnInit {
     return this._maxDate;
   }
 
+  @Input() set minTime(minTime: Moment | string) {
+    this._minTime = minTime;
+    if (this.datePicker) {
+      this.datePicker.minTime = minTime;
+      this.datePicker.ngOnInit();
+    }
+  }
+
+  get minTime(): Moment | string {
+    return this._minTime;
+  }
+
+  @Input() set maxTime(maxTime: Moment | string) {
+    this._maxTime = maxTime;
+    if (this.datePicker) {
+      this.datePicker.maxTime = maxTime;
+      this.datePicker.ngOnInit();
+    }
+  }
+
+  get maxTime(): Moment | string {
+    return this._maxTime;
+  }
+
   public datePicker: DatePickerComponent;
   public api: IDpDayPickerApi;
 
@@ -154,6 +180,8 @@ export class DatePickerDirective implements OnInit {
     if (this.datePicker) {
       this.datePicker.minDate = this.minDate;
       this.datePicker.maxDate = this.maxDate;
+      this.datePicker.minTime = this.minTime;
+      this.datePicker.maxTime = this.maxTime;
       this.datePicker.type = this.type || 'day';
       this.datePicker.config = this.config;
       this.datePicker.init();

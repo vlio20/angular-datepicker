@@ -1,5 +1,5 @@
 <div class="dp-demo-page">
-  <div class="dp-description">
+  <div class="dp-description" [class.dp-inline]="pickerMode.endsWith('Inline')">
     <h2>Angular 2 Date Picker</h2>
     <p>
       This is a highly configurable date picker based built for Angular and above applications.<br>
@@ -11,9 +11,6 @@
     </p>
   </div>
 
-  <br>
-  <br>
-
   <div>
     <label>Mode:</label>
     <select id="pickerMode" [(ngModel)]="pickerMode" (ngModelChange)="modeChanged()">
@@ -24,6 +21,12 @@
       <option value="monthPicker">Month Picker</option>
       <option value="monthInline">Month Inline</option>
       <option value="monthDirective">Month Directive</option>
+      <option value="timePicker">Time Picker</option>
+      <option value="timeInline">Time Inline</option>
+      <option value="timeDirective">Time Directive</option>
+      <option value="daytimePicker">Day Time Picker</option>
+      <option value="daytimeInline">Day Time Inline</option>
+      <option value="daytimeDirective">Day Time Directive</option>
     </select>
   </div>
 
@@ -34,7 +37,7 @@
         <dp-date-picker id="datePicker"
                         name="datePicker"
                         #datePicker
-                        #datePicker="ngModel"
+                        #datePickerModel="ngModel"
                         [(ngModel)]="date"
                         (ngModelChange)="log($event)"
                         [type]="'day'"
@@ -47,16 +50,17 @@
                         [theme]="material ? 'dp-material' : ''">
         </dp-date-picker>
         <div class="dp-validations">
-          <div id="requiredValidation" *ngIf="datePicker.errors && datePicker.errors.required">required</div>
-          <div *ngIf="datePicker.errors && datePicker.errors.format">format invalid</div>
-          <div id="minDateValidation" *ngIf="datePicker.errors && datePicker.errors.minDate">minDate invalid</div>
-          <div id="maxDateValidation" *ngIf="datePicker.errors && datePicker.errors.maxDate">maxDate invalid</div>
+          <div id="requiredValidation" *ngIf="datePickerModel.errors && datePickerModel.errors.required">required</div>
+          <div *ngIf="datePickerModel.errors && datePickerModel.errors.format">format invalid</div>
+          <div id="minDateValidation" *ngIf="datePickerModel.errors && datePickerModel.errors.minDate">minDate invalid</div>
+          <div id="maxDateValidation" *ngIf="datePickerModel.errors && datePickerModel.errors.maxDate">maxDate invalid</div>
         </div>
       </div>
 
       <div class="dp-picker-container" *ngIf="pickerMode === 'monthPicker'">
         <dp-date-picker id="monthPicker"
                         name="monthPicker"
+                        #datePicker
                         #monthPicker="ngModel"
                         [(ngModel)]="date"
                         (ngModelChange)="log($event)"
@@ -76,7 +80,7 @@
           <div id="monthPickerMinDateValidation" *ngIf="monthPicker.errors && monthPicker.errors.minDate">minDate
             invalid
           </div>
-          <div id="monthPickerMaxDateValidation" *ngIf="monthPicker.errors && datePicker.errors.maxDate">maxDate
+          <div id="monthPickerMaxDateValidation" *ngIf="monthPicker.errors && monthPicker.errors.maxDate">maxDate
             invalid
           </div>
         </div>
@@ -124,6 +128,114 @@
           <div id="dayRequiredValidation" *ngIf="dayCalendar.errors && dayCalendar.errors.required">required</div>
           <div id="dayMinDateValidation" *ngIf="dayCalendar.errors && dayCalendar.errors.minDate">minDate invalid</div>
           <div id="dayMaxDateValidation" *ngIf="dayCalendar.errors && dayCalendar.errors.maxDate">maxDate invalid</div>
+        </div>
+      </div>
+
+      <div class="dp-picker-container" *ngIf="pickerMode === 'timePicker'">
+        <dp-date-picker id="timePicker"
+                        name="timePicker"
+                        #datePicker
+                        #timePicker="ngModel"
+                        [(ngModel)]="date"
+                        (ngModelChange)="log($event)"
+                        [type]="'time'"
+                        [disabled]="disabled"
+                        [minTime]="validationMinTime"
+                        [maxTime]="validationMaxTime"
+                        [required]="required"
+                        [placeholder]="placeholder"
+                        [config]="config"
+                        [theme]="material ? 'dp-material' : ''">
+        </dp-date-picker>
+        <div class="dp-validations">
+          <div id="timePickerRequiredValidation" *ngIf="timePicker.errors && timePicker.errors.required">required
+          </div>
+          <div *ngIf="timePicker.errors && timePicker.errors.format">format invalid</div>
+          <div id="timePickerMinTimeValidation" *ngIf="timePicker.errors && timePicker.errors.minTime">minTime
+            invalid
+          </div>
+          <div id="timePickerMaxTimeValidation" *ngIf="timePicker.errors && timePicker.errors.maxTime">maxTime
+            invalid
+          </div>
+        </div>
+      </div>
+
+      <div class="dp-inline" *ngIf="pickerMode === 'timeInline'">
+        <dp-time-select
+            name="timeInline"
+            #timeInline="ngModel"
+            [theme]="material ? 'dp-material' : ''"
+            [(ngModel)]="date"
+            (ngModelChange)="log($event)"
+            [minDate]="validationMinDate"
+            [maxDate]="validationMaxDate"
+            [minTime]="validationMinTime"
+            [maxTime]="validationMaxTime"
+            [config]="config">
+        </dp-time-select>
+
+        <div class="dp-validations">
+          <div id="timeInlineRequiredValidation" *ngIf="timeInline.errors && timeInline.errors.required">required
+          </div>
+          <div id="timeInlineMinTimeValidation" *ngIf="timeInline.errors && timeInline.errors.minTime">minTime
+            invalid
+          </div>
+          <div id="timeInlineMaxTimeValidation" *ngIf="timeInline.errors && timeInline.errors.maxTime">maxTime
+            invalid
+          </div>
+        </div>
+      </div>
+
+      <div class="dp-picker-container" *ngIf="pickerMode === 'daytimePicker'">
+        <dp-date-picker id="daytimePicker"
+                        name="daytimePicker"
+                        #datePicker
+                        #daytimePicker="ngModel"
+                        [(ngModel)]="date"
+                        (ngModelChange)="log($event)"
+                        [type]="'daytime'"
+                        [disabled]="disabled"
+                        [minDate]="validationMinDate"
+                        [maxDate]="validationMaxDate"
+                        [required]="required"
+                        [placeholder]="placeholder"
+                        [config]="config"
+                        [theme]="material ? 'dp-material' : ''">
+        </dp-date-picker>
+        <div class="dp-validations">
+          <div id="requiredValidation" *ngIf="daytimePicker.errors && daytimePicker.errors.required">required
+          </div>
+          <div *ngIf="daytimePicker.errors && daytimePicker.errors.format">format invalid</div>
+          <div id="minDateValidation" *ngIf="daytimePicker.errors && daytimePicker.errors.minDate">minDate
+            invalid
+          </div>
+          <div id="maxDateValidation" *ngIf="daytimePicker.errors && daytimePicker.errors.maxDate">maxDate
+            invalid
+          </div>
+        </div>
+      </div>
+
+      <div class="dp-inline" *ngIf="pickerMode === 'daytimeInline'">
+        <dp-day-time-calendar
+            name="daytimeInline"
+            #daytimeInline="ngModel"
+            [theme]="material ? 'dp-material' : ''"
+            [(ngModel)]="date"
+            (ngModelChange)="log($event)"
+            [minDate]="validationMinDate"
+            [maxDate]="validationMaxDate"
+            [config]="config">
+        </dp-day-time-calendar>
+
+        <div class="dp-validations">
+          <div id="daytimeInlineRequiredValidation" *ngIf="daytimeInline.errors && daytimeInline.errors.required">required
+          </div>
+          <div id="daytimeInlineMinDateValidation" *ngIf="daytimeInline.errors && daytimeInline.errors.minDate">minDate
+            invalid
+          </div>
+          <div id="daytimeInlineMaxDateValidation" *ngIf="daytimeInline.errors && daytimeInline.errors.maxDate">maxDate
+            invalid
+          </div>
         </div>
       </div>
 
@@ -184,13 +296,57 @@
           <div *ngIf="dateDirectivePickerModel.errors?.format || false">format invalid</div>
         </div>
       </div>
+
+      <div class="dp-picker-container" id="timePickerDirDay" *ngIf="pickerMode === 'timeDirective'">
+        <input [dpDayPicker]="config"
+               name="timePickerDir"
+               #dateDirectivePicker="dpDayPicker"
+               #timeDirectivePickerModel="ngModel"
+               [theme]="material ? 'dp-material' : ''"
+               [type]="'time'"
+               [(ngModel)]="date"
+               [placeholder]="placeholder"
+               [minTime]="validationMinTime"
+               [maxTime]="validationMaxTime"
+               [disabled]="disabled"
+               [required]="required"
+               (ngModelChange)="log($event)"/>
+        <div class="dp-validations">
+          <div id="requiredValidation" *ngIf="timeDirectivePickerModel.errors?.required || false">required</div>
+          <div *ngIf="timeDirectivePickerModel.errors?.format || false">format invalid</div>
+          <div *ngIf="timeDirectivePickerModel.errors?.minTime">minTime invalid</div>
+          <div *ngIf="timeDirectivePickerModel.errors?.maxTime">maxTime invalid</div>
+        </div>
+      </div>
+
+      <div class="dp-picker-container" id="daytimePickerDirDay" *ngIf="pickerMode === 'daytimeDirective'">
+        <input [dpDayPicker]="config"
+               name="daytimePickerDir"
+               #dateDirectivePicker="dpDayPicker"
+               #daytimeDirectivePickerModel="ngModel"
+               [theme]="material ? 'dp-material' : ''"
+               [type]="'daytime'"
+               [(ngModel)]="date"
+               [placeholder]="placeholder"
+               [minDate]="validationMinDate"
+               [maxDate]="validationMaxDate"
+               [disabled]="disabled"
+               [required]="required"
+               (ngModelChange)="log($event)"/>
+        <div class="dp-validations">
+          <div id="requiredValidation" *ngIf="daytimeDirectivePickerModel.errors?.required || false">required</div>
+          <div *ngIf="daytimeDirectivePickerModel.errors?.format || false">format invalid</div>
+          <div *ngIf="daytimeDirectivePickerModel.errors?.minDate">minDate invalid</div>
+          <div *ngIf="daytimeDirectivePickerModel.errors?.maxDate">maxDate invalid</div>
+        </div>
+      </div>
     </form>
 
   </div>
 
   <div class="dp-attributes">
     <h3 class="dp-options-section">Attribute options</h3>
-    <div class="dp-option">
+    <div class="dp-option" *ngIf="isValidConfig('theme')">
       <span class="dp-option-header">
         Theme (theme | for example the built in material theme - dp-material):
       </span>
@@ -204,7 +360,7 @@
       </div>
     </div>
 
-    <div class="dp-option">
+    <div class="dp-option" *ngIf="isValidConfig('disabled')">
       <span class="dp-option-header">
         Disabled (disabled):
       </span>
@@ -218,7 +374,7 @@
       </div>
     </div>
 
-    <div class="dp-option">
+    <div class="dp-option" *ngIf="isValidConfig('required')">
       <span class="dp-option-header">
         Required Validation (required):
       </span>
@@ -232,7 +388,7 @@
       </div>
     </div>
 
-    <div class="dp-option">
+    <div class="dp-option" *ngIf="isValidConfig('minValidation')">
       <span class="dp-option-header">
         Min-Date Validation (minDate):
       </span>
@@ -240,13 +396,15 @@
         <dp-date-picker id="minDatePicker"
                         theme="dp-material"
                         [(ngModel)]="validationMinDate"
+                        [type]="pickerMode.startsWith('daytime') ? 'daytime' : 'day'"
+                        [config]="{format: config.format}"
                         (ngModelChange)="validatorsChanged()"
                         placeholder="Select a min date">
         </dp-date-picker>
       </div>
     </div>
 
-    <div class="dp-option">
+    <div class="dp-option" *ngIf="isValidConfig('maxValidation')">
       <span class="dp-option-header">
         Max-Date Validation (maxDate):
       </span>
@@ -254,13 +412,47 @@
         <dp-date-picker id="maxDatePicker"
                         theme="dp-material"
                         [(ngModel)]="validationMaxDate"
+                        [type]="pickerMode.startsWith('daytime') ? 'daytime' : 'day'"
+                        [config]="{format: config.format}"
                         (ngModelChange)="validatorsChanged()"
                         placeholder="Select a max date">
         </dp-date-picker>
       </div>
     </div>
 
-    <div class="dp-option">
+    <div class="dp-option" *ngIf="isValidConfig('minTimeValidation')">
+      <span class="dp-option-header">
+        Min-Time Validation (minTime):
+      </span>
+      <div class="dp-option-playground">
+        <dp-date-picker id="minTimeValidation"
+                        theme="dp-material"
+                        [(ngModel)]="validationMinTime"
+                        type="time"
+                        [config]="{format: 'HH:mm:ss'}"
+                        (ngModelChange)="validatorsChanged()"
+                        placeholder="Select a min time">
+        </dp-date-picker>
+      </div>
+    </div>
+
+    <div class="dp-option" *ngIf="isValidConfig('maxTimeValidation')">
+      <span class="dp-option-header">
+        Max-Time Validation (maxTime):
+      </span>
+      <div class="dp-option-playground">
+        <dp-date-picker id="maxTimeValidation"
+                        theme="dp-material"
+                        [(ngModel)]="validationMaxTime"
+                        type="time"
+                        [config]="{format: 'HH:mm:ss'}"
+                        (ngModelChange)="validatorsChanged()"
+                        placeholder="Select a max time">
+        </dp-date-picker>
+      </div>
+    </div>
+
+    <div class="dp-option" *ngIf="isValidConfig('placeholder')">
       <span class="dp-option-header">
         Placeholder (placeholder):
       </span>
@@ -274,7 +466,7 @@
   <div class="dp-configs">
     <h3 class="dp-options-section">Config options</h3>
 
-    <div class="dp-option">
+    <div class="dp-option" *ngIf="isValidConfig('firstDayOfWeek')">
       <span class="dp-option-header">
         First Day of The week (firstDayOfWeek):
       </span>
@@ -285,7 +477,7 @@
       </div>
     </div>
 
-    <div class="dp-option">
+    <div class="dp-option" *ngIf="isValidConfig('format')">
       <span class="dp-option-header">
         Date Format (format):
       </span>
@@ -294,7 +486,7 @@
       </div>
     </div>
 
-    <div class="dp-option">
+    <div class="dp-option" *ngIf="isValidConfig('monthFormat')">
       <span class="dp-option-header">
         Month Format (monthFormat):
       </span>
@@ -303,7 +495,7 @@
       </div>
     </div>
 
-    <div class="dp-option">
+    <div class="dp-option" *ngIf="isValidConfig('min')">
       <span class="dp-option-header">
         Min Selectable Date (min):
       </span>
@@ -311,13 +503,15 @@
         <dp-date-picker id="minSelectable"
                         theme="dp-material"
                         [(ngModel)]="config.min"
+                        [type]="pickerMode.startsWith('daytime') ? 'daytime' : 'day'"
+                        [config]="{format: config.format}"
                         (ngModelChange)="configChanged()"
                         placeholder="Select a min date">
         </dp-date-picker>
       </div>
     </div>
 
-    <div class="dp-option">
+    <div class="dp-option" *ngIf="isValidConfig('max')">
       <span class="dp-option-header">
         Max Selectable Date (max):
       </span>
@@ -325,13 +519,47 @@
         <dp-date-picker id="maxSelectable"
                         theme="dp-material"
                         [(ngModel)]="config.max"
+                        [type]="pickerMode.startsWith('daytime') ? 'daytime' : 'day'"
+                        [config]="{format: config.format}"
                         (ngModelChange)="configChanged()"
                         placeholder="Select a max date">
         </dp-date-picker>
       </div>
     </div>
 
-    <div class="dp-option">
+    <div class="dp-option" *ngIf="isValidConfig('minTime')">
+      <span class="dp-option-header">
+        Min Selectable Time (minTime):
+      </span>
+      <div class="dp-option-playground">
+        <dp-date-picker id="minTimeSelectable"
+                        theme="dp-material"
+                        [(ngModel)]="config.minTime"
+                        type="time"
+                        [config]="{format: 'HH:mm:ss'}"
+                        (ngModelChange)="configChanged()"
+                        placeholder="Select a min time">
+        </dp-date-picker>
+      </div>
+    </div>
+
+    <div class="dp-option" *ngIf="isValidConfig('maxTime')">
+      <span class="dp-option-header">
+        Max Selectable Time (maxTime):
+      </span>
+      <div class="dp-option-playground">
+        <dp-date-picker id="maxTimeSelectable"
+                        theme="dp-material"
+                        [(ngModel)]="config.maxTime"
+                        type="time"
+                        [config]="{format: 'HH:mm:ss'}"
+                        (ngModelChange)="configChanged()"
+                        placeholder="Select a max time">
+        </dp-date-picker>
+      </div>
+    </div>
+
+    <div class="dp-option" *ngIf="isValidConfig('allowMultiSelect')">
       <span class="dp-option-header">
         Allow Multiple Selection (allowMultiSelect):
       </span>
@@ -349,7 +577,7 @@
       </div>
     </div>
 
-    <div class="dp-option">
+    <div class="dp-option" *ngIf="isValidConfig('closeOnSelect')">
       <span class="dp-option-header">
         Close after selection (closeOnSelect):
       </span>
@@ -366,7 +594,7 @@
       </div>
     </div>
 
-    <div class="dp-option">
+    <div class="dp-option" *ngIf="isValidConfig('closeOnSelectDelay')">
       <span class="dp-option-header">
         Closing Delay in ms (closeOnSelectDelay):
       </span>
@@ -375,7 +603,7 @@
       </div>
     </div>
 
-    <div class="dp-option">
+    <div class="dp-option" *ngIf="isValidConfig('onOpenDelay')">
       <span class="dp-option-header">
         Open Delay in ms (onOpenDelay):
       </span>
@@ -384,7 +612,7 @@
       </div>
     </div>
 
-    <div class="dp-option">
+    <div class="dp-option" *ngIf="isValidConfig('weekdayNames')">
       <span class="dp-option-header">
         Weekday Names (weekdayNames):
       </span>
@@ -399,7 +627,7 @@
       </div>
     </div>
 
-    <div class="dp-option">
+    <div class="dp-option" *ngIf="isValidConfig('disableKeypress')">
       <span class="dp-option-header">
         Disable keyboard on input (disableKeypress):
       </span>
@@ -415,7 +643,7 @@
       </div>
     </div>
 
-    <div class="dp-option">
+    <div class="dp-option" *ngIf="isValidConfig('drops')">
       <span class="dp-option-header">
         Drops (drops):
       </span>
@@ -431,7 +659,7 @@
       </div>
     </div>
 
-    <div class="dp-option">
+    <div class="dp-option" *ngIf="isValidConfig('opens')">
       <span class="dp-option-header">
         Opens (opens):
       </span>
@@ -447,7 +675,7 @@
       </div>
     </div>
 
-    <div class="dp-option">
+    <div class="dp-option" *ngIf="isValidConfig('showNearMonthDays')">
       <span class="dp-option-header">
         Show near month days (showNearMonthDays):
       </span>
@@ -465,7 +693,7 @@
       </div>
     </div>
 
-    <div class="dp-option">
+    <div class="dp-option" *ngIf="isValidConfig('showWeekNumbers')">
       <span class="dp-option-header">
         Show week numbers (showWeekNumbers):
       </span>
@@ -483,7 +711,7 @@
       </div>
     </div>
 
-    <div class="dp-option">
+    <div class="dp-option" *ngIf="isValidConfig('enableMonthSelector')">
       <span class="dp-option-header">
         Enable month selector (enableMonthSelector):
       </span>
@@ -501,7 +729,7 @@
       </div>
     </div>
 
-    <div class="dp-option">
+    <div class="dp-option" *ngIf="isValidConfig('yearFormat')">
       <span class="dp-option-header">
         Year Format (yearFormat):
       </span>
@@ -510,7 +738,7 @@
       </div>
     </div>
 
-    <div class="dp-option">
+    <div class="dp-option" *ngIf="isValidConfig('showGoToCurrent')">
       <span class="dp-option-header">
         Show go to current button (showGoToCurrent):
       </span>
@@ -528,7 +756,7 @@
       </div>
     </div>
 
-    <div class="dp-option">
+    <div class="dp-option" *ngIf="isValidConfig('dayBtnFormat')">
       <span class="dp-option-header">
         Day Button Format (dayBtnFormat):
       </span>
@@ -537,7 +765,7 @@
       </div>
     </div>
 
-    <div class="dp-option">
+    <div class="dp-option" *ngIf="isValidConfig('monthBtnFormat')">
       <span class="dp-option-header">
         Month Button Format (monthBtnFormat):
       </span>
@@ -546,12 +774,119 @@
       </div>
     </div>
 
+    <div class="dp-option" *ngIf="isValidConfig('hours12Format')">
+      <span class="dp-option-header">
+        12 Hour Format (hours12Format):
+      </span>
+      <div class="dp-option-playground">
+        <input id="hours12Format" type="text" [(ngModel)]="config.hours12Format" (change)="configChanged()">
+      </div>
+    </div>
+
+    <div class="dp-option" *ngIf="isValidConfig('hours24Format')">
+      <span class="dp-option-header">
+        24 Hour Format (hours24Format):
+      </span>
+      <div class="dp-option-playground">
+        <input id="hours24Format" type="text" [(ngModel)]="config.hours24Format" (change)="configChanged()">
+      </div>
+    </div>
+
+    <div class="dp-option" *ngIf="isValidConfig('meridiemFormat')">
+      <span class="dp-option-header">
+        Meridiem Format (meridiemFormat):
+      </span>
+      <div class="dp-option-playground">
+        <input id="meridiemFormat" type="text" [(ngModel)]="config.meridiemFormat" (change)="configChanged()">
+      </div>
+    </div>
+
+    <div class="dp-option" *ngIf="isValidConfig('minutesFormat')">
+      <span class="dp-option-header">
+        Minutes Format (minutesFormat):
+      </span>
+      <div class="dp-option-playground">
+        <input id="minutesFormat" type="text" [(ngModel)]="config.minutesFormat" (change)="configChanged()">
+      </div>
+    </div>
+
+    <div class="dp-option" *ngIf="isValidConfig('minutesInterval')">
+      <span class="dp-option-header">
+        Minutes Interval (minutesInterval):
+      </span>
+      <div class="dp-option-playground">
+        <input id="minutesInterval" type="number" [(ngModel)]="config.minutesInterval" (change)="configChanged()">
+      </div>
+    </div>
+
+    <div class="dp-option" *ngIf="isValidConfig('secondsFormat')">
+      <span class="dp-option-header">
+        Seconds Format (secondsFormat):
+      </span>
+      <div class="dp-option-playground">
+        <input id="secondsFormat" type="text" [(ngModel)]="config.secondsFormat" (change)="configChanged()">
+      </div>
+    </div>
+
+    <div class="dp-option" *ngIf="isValidConfig('secondsInterval')">
+      <span class="dp-option-header">
+        Seconds Interval (secondsInterval):
+      </span>
+      <div class="dp-option-playground">
+        <input id="secondsInterval" type="number" [(ngModel)]="config.secondsInterval" (change)="configChanged()">
+      </div>
+    </div>
+
+    <div class="dp-option" *ngIf="isValidConfig('showSeconds')">
+      <span class="dp-option-header">
+        Show seconds (showSeconds):
+      </span>
+      <div class="dp-option-playground">
+        <label>Enabled
+          <input id="showSeconds" type="radio" [(ngModel)]="config.showSeconds" name="showSeconds"
+                 [value]="true"
+                 (ngModelChange)="configChanged()">
+        </label>
+        <label>Disabled
+          <input id="hideSeconds" type="radio" [(ngModel)]="config.showSeconds" name="showSeconds"
+                 [value]="false"
+                 (ngModelChange)="configChanged()">
+        </label>
+      </div>
+    </div>
+
+    <div class="dp-option" *ngIf="isValidConfig('showTwentyFourHours')">
+      <span class="dp-option-header">
+        Show twenty four hours (showTwentyFourHours):
+      </span>
+      <div class="dp-option-playground">
+        <label>Enabled
+          <input id="showTwentyFourHours" type="radio" [(ngModel)]="config.showTwentyFourHours" name="showTwentyFourHours"
+                 [value]="true"
+                 (ngModelChange)="configChanged()">
+        </label>
+        <label>Disabled
+          <input id="hideTwentyFourHours" type="radio" [(ngModel)]="config.showTwentyFourHours" name="showTwentyFourHours"
+                 [value]="false"
+                 (ngModelChange)="configChanged()">
+        </label>
+      </div>
+    </div>
+
+    <div class="dp-option" *ngIf="isValidConfig('timeSeparator')">
+      <span class="dp-option-header">
+        Time Separator (timeSeparator):
+      </span>
+      <div class="dp-option-playground">
+        <input id="timeSeparator" type="text" [(ngModel)]="config.timeSeparator" (change)="configChanged()">
+      </div>
+    </div>
   </div>
 
   <div class="dp-api">
     <h3 class="dp-options-section">API</h3>
 
-    <div class="dp-option">
+    <div class="dp-option" *ngIf="isValidConfig('apiopen')">
       <span class="dp-option-header">
         Open (api.open()):
       </span>
@@ -560,7 +895,7 @@
       </div>
     </div>
 
-    <div class="dp-option">
+    <div class="dp-option" *ngIf="isValidConfig('apiclose')">
       <span class="dp-option-header">
         Close (api.close()):
       </span>

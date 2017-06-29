@@ -1,0 +1,13 @@
+<dp-day-calendar #dayCalendar
+                 [config]="componentConfig"
+                 [ngModel]="_selected"
+                 [displayDate]="displayDate"
+                 (onSelect)="dateSelected($event)"
+                 [theme]="theme">
+</dp-day-calendar>
+<dp-time-select #timeSelect
+                [config]="componentConfig"
+                [ngModel]="_selected"
+                (onChange)="timeChange($event)"
+                [theme]="theme">
+</dp-time-select>

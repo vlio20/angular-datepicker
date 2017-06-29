@@ -1,10 +1,15 @@
 & {
   @stickyHeight: 80px;
-  @stickyHeightInline: 250px;
+  @stickyHeightInline: 340px;
 
   .dp-demo-page {
     margin-top: @stickyHeight;
     padding: 5px;
+  }
+
+  .dp-description.dp-inline {
+    height: @stickyHeightInline - @stickyHeight;
+    padding-top: 20px;
   }
 
   .dp-options-section {

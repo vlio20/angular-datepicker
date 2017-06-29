@@ -5,6 +5,9 @@ import {Moment} from 'moment';
 import {UtilsService} from '../common/services/utils/utils.service';
 import {FormControl} from '@angular/forms';
 import {IDayCalendarConfig} from '../day-calendar/day-calendar-config.model';
+import {TimeSelectService} from '../time-select/time-select.service';
+import {DayTimeCalendarService} from '../day-time-calendar/day-time-calendar.service';
+import {ITimeSelectConfig} from '../time-select/time-select-config.model';
 
 @Injectable()
 export class DatePickerService {
@@ -23,8 +26,10 @@ export class DatePickerService {
     showGoToCurrent: true
   };
 
-  constructor(private utilsService: UtilsService) {
-  }
+  constructor(
+    private utilsService: UtilsService,
+    private timeSelectService: TimeSelectService,
+    private daytimeCalendarService: DayTimeCalendarService) {}
 
   // todo:: add unit tests
   getConfig(config: IDatePickerConfig): IDatePickerConfig {
@@ -66,6 +71,14 @@ export class DatePickerService {
       monthBtnFormat: pickerConfig.monthBtnFormat,
       monthBtnFormatter: pickerConfig.monthBtnFormatter
     };
+  }
+
+  getDayTimeConfigService(pickerConfig: IDatePickerConfig): ITimeSelectConfig {
+    return this.daytimeCalendarService.getConfig(pickerConfig);
+  }
+
+  getTimeConfigService(pickerConfig: IDatePickerConfig): ITimeSelectConfig {
+    return this.timeSelectService.getConfig(pickerConfig);
   }
 
   pickerClosed() {

@@ -4,6 +4,8 @@ export class DemoPage {
   private popupSelector = 'body > div .dp-popup';
   body = $('body');
   datePickerInput = $('#datePicker input');
+  timePickerInput = $('#timePicker input');
+  daytimePickerInput = $('#daytimePicker input');
   dayDirectivePickerInput = $('#datePickerDirDay input');
   dayReactiveDirectivePickerInput = $('#datePickerDirDayReactive input');
   monthDirectiveInput = $('#datePickerDirMonth input');
@@ -47,12 +49,18 @@ export class DemoPage {
   disableRequiredValidationRadio = $('#disableRequiredRadio');
   requiredValidationMsg = $('#requiredValidation');
   reactiveRequiredValidationMsg = $('#reactiveRequiredValidation');
+  reactiveMinDateValidationMsg = $('#reactiveMinDateValidation');
+  reactiveMaxDateValidationMsg = $('#reactiveMaxDateValidation');
+  timePickerMinTimeValidationMsg = $('#timePickerMinTimeValidation');
+  timePickerMaxTimeValidationMsg = $('#timePickerMaxTimeValidation');
   minDateValidationPickerInput = $('#minDatePicker input');
   minDateValidationMsg = $('#minDateValidation');
-  reactiveMinDateValidationMsg = $('#reactiveMinDateValidation');
   maxDateValidationPickerInput = $('#maxDatePicker input');
   maxDateValidationMsg = $('#maxDateValidation');
-  reactiveMaxDateValidationMsg = $('#reactiveMaxDateValidation');
+  minTimeValidationPickerInput = $('#minTimeValidation input');
+  minTimeValidationMsg = $('#minTimeValidation');
+  maxTimeValidationPickerInput = $('#maxTimeValidation input');
+  maxTimeValidationMsg = $('#maxTimeValidation');
   placeholderInput = $('#placeholderInput');
   firstDayOfWeekMonday = element(by.cssContainingText('#firstDayOfWeekSelect option', 'mo'));
   monthFormatInput = $('#monthFormatInput');
@@ -74,8 +82,48 @@ export class DemoPage {
   dayBtnFormatInput = $('#dayBtnFormat');
   monthBtnFormatInput = $('#monthBtnFormat');
 
+  hours12FormatInput = $('#hours12Format');
+  hours24FormatInput = $('#hours24Format');
+  maxTimeInput = $('#maxTimeSelectable input');
+  meridiemFormatInput = $('#meridiemFormat');
+  minTimeInput = $('#minTimeSelectable input');
+  minutesFormatInput = $('#minutesFormat');
+  minutesIntervalInput = $('#minutesInterval');
+  secondsFormatInput = $('#secondsFormat');
+  secondsIntervalInput = $('#secondsInterval');
+  showSeconds = $('#showSeconds');
+  hideSeconds = $('#hideSeconds');
+  showTwentyFourHours = $('#showTwentyFourHours');
+  hideTwentyFourHours = $('#hideTwentyFourHours');
+  timeSeparatorInput = $('#timeSeparator');
+
+  hourUpBtn = $(`${this.popupSelector} .dp-time-select-control-hours > .dp-time-select-control-up`);
+  hourDownBtn = $(`${this.popupSelector} .dp-time-select-control-hours > .dp-time-select-control-down`);
+  hourDisplay = $(`${this.popupSelector} .dp-time-select-display-hours`);
+  minuteUpBtn = $(`${this.popupSelector} .dp-time-select-control-minutes > .dp-time-select-control-up`);
+  minuteDownBtn = $(`${this.popupSelector} .dp-time-select-control-minutes > .dp-time-select-control-down`);
+  minuteDisplay = $(`${this.popupSelector} .dp-time-select-display-minutes`);
+  secondUpBtn = $(`${this.popupSelector} .dp-time-select-control-seconds > .dp-time-select-control-up`);
+  secondDownBtn = $(`${this.popupSelector} .dp-time-select-control-seconds > .dp-time-select-control-down`);
+  secondDisplay = $(`${this.popupSelector} .dp-time-select-display-seconds`);
+  meridiemUpBtn = $(`${this.popupSelector} .dp-time-select-control-meridiem > .dp-time-select-control-up`);
+  meridiemDownBtn = $(`${this.popupSelector} .dp-time-select-control-meridiem > .dp-time-select-control-down`);
+  meridiemDisplay = $(`${this.popupSelector} .dp-time-select-display-meridiem`);
+  timeSeparatorDisplay = $(`${this.popupSelector} .dp-time-select-separator:nth-child(2)`);
+
+  pickerModeDayPicker = $('#pickerMode > [value=dayPicker]');
+  pickerModeDayInline = $('#pickerMode > [value=dayInline]');
   pickerModeDayDirective = $('#pickerMode > [value=dayDirective]');
   pickerModeDayDirectiveReactive = $('#pickerMode > [value=dayDirectiveReactive]');
+  pickerModeMonthPicker = $('#pickerMode > [value=monthPicker]');
+  pickerModeMonthInline = $('#pickerMode > [value=monthInline]');
+  pickerModeMonthDirective = $('#pickerMode > [value=monthDirective]');
+  pickerModeTimePicker = $('#pickerMode > [value=timePicker]');
+  pickerModeTimeInline = $('#pickerMode > [value=timeInline]');
+  pickerModeTimeDirective = $('#pickerMode > [value=timeDirective]');
+  pickerModeDaytimePicker = $('#pickerMode > [value=daytimePicker]');
+  pickerModeDaytimeInline = $('#pickerMode > [value=daytimeInline]');
+  pickerModeDaytimeDirective = $('#pickerMode > [value=daytimeDirective]');
 
   openBtn = $('#openBtn');
 
