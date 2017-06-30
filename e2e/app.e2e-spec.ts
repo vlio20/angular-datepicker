@@ -22,6 +22,18 @@ describe('ng2-date-picker App', () => {
       expect(page.datePickerPopup.isDisplayed()).toBe(false);
     });
 
+    it('should make sure that day directive keeps the prev state of the calendar', () => {
+      page.dayDirectivePickerInput.click();
+      page.dayCalendarLeftNavBtn.click();
+      page.clickOnBody();
+
+      page.dayDirectivePickerInput.click();
+      expect(page.dayCalendarNavHeaderBtn.getText())
+        .toEqual(moment().subtract(1, 'month').format('MMM, YYYY'));
+
+
+    });
+
     it('should check that the theme is added and removed', () => {
       page.themeOnRadio.click();
       expect(page.datePickerPopup.getAttribute('class')).toContain('dp-material');

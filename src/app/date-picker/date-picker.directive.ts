@@ -166,13 +166,11 @@ export class DatePickerDirective implements OnInit {
 
   @HostListener('click')
   onClick() {
-    this.updateDatepickerConfig();
     this.datePicker.onClick();
   }
 
   @HostListener('focus')
   onFocus() {
-    this.updateDatepickerConfig();
     this.datePicker.inputFocused();
   }
 
