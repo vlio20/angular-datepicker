@@ -68,7 +68,6 @@ describe('ng2-date-picker App', () => {
 
     it('should check that the popup appended to body', () => {
       page.dayReactiveDirectivePickerInput.click();
-      browser.pause();
       expect(page.datePickerPopup.isDisplayed()).toBe(true);
       page.clickOnBody();
       expect(page.datePickerPopup.isDisplayed()).toBe(false);
