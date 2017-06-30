@@ -11,6 +11,7 @@ This is a configurable date-picker build for Angular2 applications and uses Mome
 
 ![Imgur](http://i.imgur.com/Kho8Joq.png)
 
+![Imgur](http://imgur.com/uKklzbq)
 
 ## Installation:
 1. Download from npm:
