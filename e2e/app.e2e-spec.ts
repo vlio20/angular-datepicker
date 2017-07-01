@@ -540,7 +540,7 @@ describe('ng2-date-picker App', () => {
       expect(page.calendarDisabledDays.count()).toBe(25);
     });
 
-    fit('should check that the date picker popup closes/opened after selection ', () => {
+    it('should check that the date picker popup closes/opened after selection ', () => {
       page.datePickerInput.click();
       page.clickOnDayButton('15');
       expect(page.datePickerPopup.isDisplayed()).toBe(false);
@@ -548,9 +548,6 @@ describe('ng2-date-picker App', () => {
       page.datePickerInput.click();
       page.clickOnDayButton('16');
       expect(page.datePickerPopup.isDisplayed()).toBe(true);
-      page.clickOnBody();
-      browser.sleep(500);
-      expect(page.datePickerPopup.isDisplayed()).toBe(false);
     });
 
     it('should check that the close delay is working', () => {
