@@ -35,7 +35,7 @@ export class DatePickerService {
     const _config: IDatePickerConfig = {
       ...this.defaultConfig,
       format: this.getDefaultFormatByType(type),
-      ...this.utilsService.clearUndefined(config),
+      ...this.utilsService.clearUndefined(config)
     };
 
     const {min, max, format} = _config;
