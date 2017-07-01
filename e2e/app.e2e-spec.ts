@@ -12,7 +12,7 @@ describe('ng2-date-picker App', () => {
 
   describe('dpDayPicker directive', () => {
     beforeEach(() => {
-      page.pickerModeDayDirective.click();
+      page.dayDirectiveMenu.click();
     });
 
     it('should check that the popup appended to body', () => {
@@ -63,7 +63,7 @@ describe('ng2-date-picker App', () => {
     beforeEach(() => {
       page.dateFormatInput.clear();
       page.dateFormatInput.sendKeys('DD-MM-YYYY');
-      page.pickerModeDayDirectiveReactive.click();
+      page.dayDirectiveReactive.click();
     });
 
     it('should check that the popup appended to body', () => {
@@ -135,7 +135,7 @@ describe('ng2-date-picker App', () => {
     beforeEach(() => {
       page.dateFormatInput.clear();
       page.dateFormatInput.sendKeys('HH:mm:ss');
-      page.pickerModeTimePicker.click();
+      page.timePickerMenu.click();
     });
 
     it('should check if min time validation is working', () => {
@@ -265,7 +265,7 @@ describe('ng2-date-picker App', () => {
     beforeEach(() => {
       page.dateFormatInput.clear();
       page.dateFormatInput.sendKeys('DD-MM-YYYY HH:mm:ss');
-      page.pickerModeDaytimePicker.click();
+      page.daytimePickerMenu.click();
     });
 
     it('should check if min date validation is working', () => {
@@ -323,7 +323,7 @@ describe('ng2-date-picker App', () => {
     beforeEach(() => {
       page.dateFormatInput.clear();
       page.dateFormatInput.sendKeys('DD-MM-YYYY');
-      page.pickerModeDayPicker.click();
+      page.dayPickerMenu.click();
     });
 
     it('should check that the popup appended to body', () => {
@@ -548,8 +548,6 @@ describe('ng2-date-picker App', () => {
       page.datePickerInput.click();
       page.clickOnDayButton('16');
       expect(page.datePickerPopup.isDisplayed()).toBe(true);
-      page.clickOnBody();
-      expect(page.datePickerPopup.isDisplayed()).toBe(false);
     });
 
     it('should check that the close delay is working', () => {
