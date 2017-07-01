@@ -111,19 +111,19 @@ export class DemoPage {
   meridiemDisplay = $(`${this.popupSelector} .dp-time-select-display-meridiem`);
   timeSeparatorDisplay = $(`${this.popupSelector} .dp-time-select-separator:nth-child(2)`);
 
-  pickerModeDayPicker = $('#pickerMode > [value=dayPicker]');
-  pickerModeDayInline = $('#pickerMode > [value=dayInline]');
-  pickerModeDayDirective = $('#pickerMode > [value=dayDirective]');
-  pickerModeDayDirectiveReactive = $('#pickerMode > [value=dayDirectiveReactive]');
-  pickerModeMonthPicker = $('#pickerMode > [value=monthPicker]');
-  pickerModeMonthInline = $('#pickerMode > [value=monthInline]');
-  pickerModeMonthDirective = $('#pickerMode > [value=monthDirective]');
-  pickerModeTimePicker = $('#pickerMode > [value=timePicker]');
-  pickerModeTimeInline = $('#pickerMode > [value=timeInline]');
-  pickerModeTimeDirective = $('#pickerMode > [value=timeDirective]');
-  pickerModeDaytimePicker = $('#pickerMode > [value=daytimePicker]');
-  pickerModeDaytimeInline = $('#pickerMode > [value=daytimeInline]');
-  pickerModeDaytimeDirective = $('#pickerMode > [value=daytimeDirective]');
+  daytimePickerMenu = $('#daytimePickerMenu');
+  daytimeInlineMenu = $('#daytimeInlineMenu');
+  daytimeDirectiveMenu = $('#daytimeDirectiveMenu');
+  dayPickerMenu = $('#dayPickerMenu');
+  dayInlineMenu = $('#dayInlineMenu');
+  dayDirectiveMenu = $('#dayDirectiveMenu');
+  dayDirectiveReactive = $('#dayDirectiveReactive');
+  monthPickerMenu = $('#monthPickerMenu');
+  monthInlineMenu = $('#monthInlineMenu');
+  monthDirectiveMenu = $('#monthDirectiveMenu');
+  timePickerMenu = $('#timePickerMenu');
+  timeInlineMenu = $('#timeInlineMenu');
+  timeDirectiveMenu = $('#timeDirectiveMenu');
 
   openBtn = $('#openBtn');
 

@@ -5,14 +5,22 @@
     display: inline-block;
   }
 
+  .dp-day-calendar-container {
+    background: @c-white;
+  }
+
   .dp-calendar-wrapper {
     box-sizing: border-box;
     border: 1px solid @c-black;
-    background: @c-white;
 
     .dp-calendar-weekday:first-child {
       border-left: none;
     }
+  }
+
+  .dp-weekdays {
+    font-size: 15px;
+    margin-bottom: 5px;
   }
 
   .dp-calendar-weekday {
@@ -57,7 +65,7 @@
       height: @basic-height - 5px;
       width: @basic-height;
       line-height: @basic-height - 5px;
-      background: @c-light-gray;
+      color: darken(@c-light-gray, 40%);
       border: none;
     }
 

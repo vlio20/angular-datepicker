@@ -169,7 +169,8 @@ export class DemoComponent {
     this.isAtTop = document.body.scrollTop === 0;
   }
 
-  modeChanged() {
+  modeChanged(mode) {
+    this.pickerMode = mode;
     this.config.hideInputContainer = false;
     this.config.inputElementContainer = undefined;
     this.formGroup.get('datePicker').setValue(this.date);
