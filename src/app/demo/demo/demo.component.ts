@@ -6,6 +6,7 @@ import {Component, HostListener, ViewChild} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import * as moment from 'moment';
 import {Moment} from 'moment';
+import {CalendarType} from '../../common/types/calendar-type';
 
 const GLOBAL_OPTION_KEYS = [
   'theme'
@@ -113,10 +114,10 @@ export class DemoComponent {
   formGroup: FormGroup = new FormGroup({
     datePicker: new FormControl({value: this.date, disabled: this.disabled}, [
       this.required ? Validators.required : () => undefined,
-      control => this.validationMinDate && this.config && moment(control.value, this.config.format)
+      control => this.validationMinDate && this.config && moment(control.value, this.config.format || this.getDefaultFormatByType(this.pickerMode))
         .isBefore(this.validationMinDate)
         ? {minDate: 'minDate Invalid'} : undefined,
-      control => this.validationMaxDate && this.config && moment(control.value, this.config.format)
+      control => this.validationMaxDate && this.config && moment(control.value, this.config.format || this.getDefaultFormatByType(this.pickerMode))
         .isAfter(this.validationMaxDate)
         ? {maxDate: 'maxDate Invalid'} : undefined
     ])
@@ -259,6 +260,28 @@ export class DemoComponent {
           ].indexOf(key) > -1;
       default:
         return true;
+    }
+  }
+
+  private getDefaultFormatByType(type: string): string {
+    switch (type) {
+      case 'daytimePicker':
+      case 'daytimeInline':
+      case 'daytimeDirective':
+        return 'DD-MM-YYYY HH:mm:ss';
+      case 'dayPicker':
+      case 'dayInline':
+      case 'dayDirective':
+      case 'dayDirectiveReactive':
+        return 'DD-MM-YYYY';
+      case 'monthPicker':
+      case 'monthInline':
+      case 'monthDirective':
+        return 'MMM, YYYY';
+      case 'timePicker':
+      case 'timeInline':
+      case 'timeDirective':
+        return 'HH:mm:ss';
     }
   }
 
