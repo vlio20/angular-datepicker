@@ -38,5 +38,9 @@ describe('Service: DatePicker', () => {
 
       expect((<Moment>config2.min).isSame(moment('2016-10-25', 'YYYY-MM-DD'), 'day')).toBe(true);
       expect((<Moment>config2.max).isSame(moment('2017-10-25', 'YYYY-MM-DD'), 'day')).toBe(true);
+
+      const config3 = service.getConfig({}, 'time');
+      expect((config3.format).to(moment('2016-10-25', 'YYYY-MM-DD'), 'day')).toBe(true);
+
     }));
 });

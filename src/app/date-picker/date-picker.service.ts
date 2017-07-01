@@ -6,6 +6,7 @@ import {IDayCalendarConfig} from '../day-calendar/day-calendar-config.model';
 import {TimeSelectService} from '../time-select/time-select.service';
 import {DayTimeCalendarService} from '../day-time-calendar/day-time-calendar.service';
 import {ITimeSelectConfig} from '../time-select/time-select-config.model';
+import {CalendarType} from '../common/types/calendar-type';
 
 @Injectable()
 export class DatePickerService {
@@ -30,8 +31,13 @@ export class DatePickerService {
   }
 
   // todo:: add unit tests
-  getConfig(config: IDatePickerConfig): IDatePickerConfig {
-    const _config: IDatePickerConfig = {...this.defaultConfig, ...this.utilsService.clearUndefined(config)};
+  getConfig(config: IDatePickerConfig, type: CalendarType = 'daytime'): IDatePickerConfig {
+    const _config: IDatePickerConfig = {
+      ...this.defaultConfig,
+      format: this.getDefaultFormatByType(type),
+      ...this.utilsService.clearUndefined(config),
+    };
+
     const {min, max, format} = _config;
     if (min) {
       _config.min = this.utilsService.convertToMoment(min, format);
@@ -109,5 +115,18 @@ export class DatePickerService {
     }
 
     return this.utilsService.convertToMomentArray(datesStrArr, config.format, config.allowMultiSelect);
+  }
+
+  private getDefaultFormatByType(type: CalendarType): string {
+    switch (type) {
+      case 'day':
+        return 'DD-MM-YYYY';
+      case 'daytime':
+        return 'DD-MM-YYYY HH:mm:ss';
+      case 'time':
+        return 'HH:mm:ss';
+      case 'month':
+        return 'MMM, YYYY';
+    }
   }
 }

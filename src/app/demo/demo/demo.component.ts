@@ -124,7 +124,7 @@ export class DemoComponent {
 
   config: IDatePickerConfig = {
     firstDayOfWeek: 'su',
-    format: 'DD-MM-YYYY HH:mm:ss',
+    // format: 'DD-MM-YYYY HH:mm:ss',
     monthFormat: 'MMM, YYYY',
     disableKeypress: false,
     allowMultiSelect: false,

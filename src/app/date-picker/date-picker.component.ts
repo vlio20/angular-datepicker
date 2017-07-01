@@ -284,7 +284,7 @@ export class DatePickerComponent implements OnChanges,
   }
 
   init() {
-    this.componentConfig = this.dayPickerService.getConfig(this.config);
+    this.componentConfig = this.dayPickerService.getConfig(this.config, this.type);
     this.currentDateView = this.displayDate
       ? this.utilsService.convertToMoment(this.displayDate, this.componentConfig.format).clone()
       : this.utilsService

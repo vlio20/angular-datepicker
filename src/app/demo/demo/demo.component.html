@@ -28,7 +28,7 @@
       </li>
       <li>
         <a id="dayDirectiveReactive" href="#" (click)="modeChanged('dayDirectiveReactive')"
-           [ngClass]="{'dp-active-item': pickerMode == 'dayDirective'}">Day Picker directive Reactive</a>
+           [ngClass]="{'dp-active-item': pickerMode == 'dayDirectiveReactive'}">Day Picker directive Reactive</a>
       </li>
       <li>
         <a id="monthPickerMenu" href="#" (click)="modeChanged('monthPicker')"
@@ -56,38 +56,6 @@
       </li>
     </ul>
   </div>
-
-
-  <!--<div class="dp-description" [class.dp-inline]="pickerMode.endsWith('Inline')">-->
-  <!--<h2>Angular ( >= 2 ) Date Picker</h2>-->
-  <!--<p>-->
-  <!--This is a highly configurable date picker based built for Angular and above applications.<br>-->
-  <!--Bellow you will find an interactive demo with which you can play. <br>-->
-  <!--Installation guide can be found in the repo's README.md file.-->
-  <!--</p>-->
-  <!--<p>-->
-  <!--Feel free to open issues, suggest improvements and submit PRs.-->
-  <!--</p>-->
-  <!--</div>-->
-
-  <!--<div>-->
-  <!--<label>Mode:</label>-->
-  <!--<select id="pickerMode" [(ngModel)]="pickerMode" (ngModelChange)="modeChanged()">-->
-  <!--<option value="dayPicker">Day Picker</option>-->
-  <!--<option value="dayInline">Day Inline</option>-->
-  <!--<option value="dayDirective">Day Directive</option>-->
-  <!--<option value="dayDirectiveReactive">Day Directive Reactive Forms</option>-->
-  <!--<option value="monthPicker">Month Picker</option>-->
-  <!--<option value="monthInline">Month Inline</option>-->
-  <!--<option value="monthDirective">Month Directive</option>-->
-  <!--<option value="timePicker">Time Picker</option>-->
-  <!--<option value="timeInline">Time Inline</option>-->
-  <!--<option value="timeDirective">Time Directive</option>-->
-  <!--<option value="daytimePicker">Day Time Picker</option>-->
-  <!--<option value="daytimeInline">Day Time Inline</option>-->
-  <!--<option value="daytimeDirective">Day Time Directive</option>-->
-  <!--</select>-->
-  <!--</div>-->
 
   <div class="dp-demo-container" [ngClass]="{'dp-not-top': !isAtTop,
                                              'dp-inline': pickerMode.endsWith('Inline'),
