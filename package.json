@@ -11,7 +11,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "build:demo": "rm -rf dist/ && ng build --prod --bh /angular-datepicker/",
+    "build:demo": "rm -rf dist/ && ng build --prod --bh /angular-datepicker/ && npm run build:index",
+    "build:index": "cd build-helpers && node index-maker.js",
     "build:prod": "node build.js && ngc && cp package.json bin",
     "release": "npm run build:prod && npm publish bin",
     "pack": "cd bin && npm pack"
