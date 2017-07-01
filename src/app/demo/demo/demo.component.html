@@ -534,7 +534,9 @@
         First Day of The week (firstDayOfWeek):
       </span>
         <div class="dp-option-playground">
-          <select id="firstDayOfWeekSelect" [(ngModel)]="config.firstDayOfWeek" (change)="configChanged()">
+          <select id="firstDayOfWeekSelect"
+                  [(ngModel)]="config.firstDayOfWeek"
+                  (change)="configChanged('firstDayOfWeek', config.firstDayOfWeek)">
             <option *ngFor="let day of DAYS" [value]="day"> {{day}}</option>
           </select>
         </div>
@@ -545,7 +547,10 @@
         Date Format (format):
       </span>
         <div class="dp-option-playground">
-          <input id="dateFormat" type="text" [(ngModel)]="config.format" (change)="configChanged()">
+          <input id="dateFormat"
+                 type="text"
+                 [(ngModel)]="config.format"
+                 (change)="configChanged('format', config.format)">
         </div>
       </div>
 
@@ -554,7 +559,10 @@
         Month Format (monthFormat):
       </span>
         <div class="dp-option-playground">
-          <input id="monthFormatInput" type="text" [(ngModel)]="config.monthFormat" (change)="configChanged()">
+          <input id="monthFormatInput"
+                 type="text"
+                 [(ngModel)]="config.monthFormat"
+                 (change)="configChanged('monthFormat', config.monthFormat)">
         </div>
       </div>
 
@@ -568,7 +576,7 @@
                           [(ngModel)]="config.min"
                           [type]="pickerMode.startsWith('daytime') ? 'daytime' : 'day'"
                           [config]="{format: config.format}"
-                          (ngModelChange)="configChanged()"
+                          (ngModelChange)="configChanged('min', config.min)"
                           placeholder="Select a min date">
           </dp-date-picker>
         </div>
@@ -584,7 +592,7 @@
                           [(ngModel)]="config.max"
                           [type]="pickerMode.startsWith('daytime') ? 'daytime' : 'day'"
                           [config]="{format: config.format}"
-                          (ngModelChange)="configChanged()"
+                          (ngModelChange)="configChanged('max', config.max)"
                           placeholder="Select a max date">
           </dp-date-picker>
         </div>
@@ -600,7 +608,7 @@
                           [(ngModel)]="config.minTime"
                           type="time"
                           [config]="{format: 'HH:mm:ss'}"
-                          (ngModelChange)="configChanged()"
+                          (ngModelChange)="configChanged('minTime', config.minTime)"
                           placeholder="Select a min time">
           </dp-date-picker>
         </div>
@@ -616,7 +624,7 @@
                           [(ngModel)]="config.maxTime"
                           type="time"
                           [config]="{format: 'HH:mm:ss'}"
-                          (ngModelChange)="configChanged()"
+                          (ngModelChange)="configChanged('maxTime', config.maxTime)"
                           placeholder="Select a max time">
           </dp-date-picker>
         </div>
@@ -628,14 +636,20 @@
       </span>
         <div class="dp-option-playground">
           <label>Single
-            <input id="disableMultiselect" type="radio" [(ngModel)]="config.allowMultiSelect" name="allowMultiSelect"
+            <input id="disableMultiselect"
+                   type="radio"
+                   [(ngModel)]="config.allowMultiSelect"
+                   name="allowMultiSelect"
                    [value]="false"
-                   (ngModelChange)="configChanged()">
+                   (ngModelChange)="configChanged('allowMultiSelect', 'single')">
           </label>
           <label>Multiple
-            <input id="enableMultiselect" type="radio" [(ngModel)]="config.allowMultiSelect" name="allowMultiSelect"
+            <input id="enableMultiselect"
+                   type="radio"
+                   [(ngModel)]="config.allowMultiSelect"
+                   name="allowMultiSelect"
                    [value]="true"
-                   (ngModelChange)="configChanged()">
+                   (ngModelChange)="configChanged('allowMultiSelect', 'multiple')">
           </label>
         </div>
       </div>
@@ -646,14 +660,19 @@
       </span>
         <div class="dp-option-playground">
           <label>Close
-            <input id="closeOnSelect" type="radio" [(ngModel)]="config.closeOnSelect" name="closeOnSelect"
+            <input id="closeOnSelect"
+                   type="radio"
+                   [(ngModel)]="config.closeOnSelect"
+                   name="closeOnSelect"
                    [value]="true"
-                   (ngModelChange)="configChanged()">
+                   (ngModelChange)="configChanged('closeOnSelect', 'true')">
           </label>
           <label>Don't Close
-            <input id="noCloseOnSelect" type="radio" [(ngModel)]="config.closeOnSelect" name="closeOnSelect"
+            <input id="noCloseOnSelect"
+                   type="radio"
+                   [(ngModel)]="config.closeOnSelect" name="closeOnSelect"
                    [value]="false"
-                   (ngModelChange)="configChanged()">
+                   (ngModelChange)="configChanged('closeOnSelect', 'false')">
           </label>
         </div>
       </div>
@@ -663,7 +682,10 @@
         Closing Delay in ms (closeOnSelectDelay):
       </span>
         <div class="dp-option-playground">
-          <input id="closeDelay" type="number" [(ngModel)]="config.closeOnSelectDelay" (change)="configChanged()">
+          <input id="closeDelay"
+                 type="number"
+                 [(ngModel)]="config.closeOnSelectDelay"
+                 (change)="configChanged('closeOnSelectDelay', config.closeOnSelectDelay)">
         </div>
       </div>
 
@@ -672,7 +694,10 @@
         Open Delay in ms (onOpenDelay):
       </span>
         <div class="dp-option-playground">
-          <input id="onOpenDelay" type="number" [(ngModel)]="config.onOpenDelay" (change)="configChanged()">
+          <input id="onOpenDelay"
+                 type="number"
+                 [(ngModel)]="config.onOpenDelay"
+                 (change)="configChanged('onOpenDelay', config.onOpenDelay)">
         </div>
       </div>
 
@@ -681,13 +706,20 @@
         Weekday Names (weekdayNames):
       </span>
         <div class="dp-option-playground dp-week-days">
-          <input id="weekDayName1" type="text" [(ngModel)]="config.weekdayNames['su']" (change)="configChanged()">
-          <input id="weekDayName2" type="text" [(ngModel)]="config.weekdayNames['mo']" (change)="configChanged()">
-          <input id="weekDayName3" type="text" [(ngModel)]="config.weekdayNames['tu']" (change)="configChanged()">
-          <input id="weekDayName4" type="text" [(ngModel)]="config.weekdayNames['we']" (change)="configChanged()">
-          <input id="weekDayName5" type="text" [(ngModel)]="config.weekdayNames['th']" (change)="configChanged()">
-          <input id="weekDayName6" type="text" [(ngModel)]="config.weekdayNames['fr']" (change)="configChanged()">
-          <input id="weekDayName7" type="text" [(ngModel)]="config.weekdayNames['sa']" (change)="configChanged()">
+          <input id="weekDayName1" type="text" [(ngModel)]="config.weekdayNames['su']"
+                 (change)="configChanged('weekdayNames_su', config.weekdayNames['su'])">
+          <input id="weekDayName2" type="text" [(ngModel)]="config.weekdayNames['mo']"
+                 (change)="configChanged('weekdayNames_mo', config.weekdayNames['mo'])">
+          <input id="weekDayName3" type="text" [(ngModel)]="config.weekdayNames['tu']"
+                 (change)="configChanged('weekdayNames_tu', config.weekdayNames['tu'])">
+          <input id="weekDayName4" type="text" [(ngModel)]="config.weekdayNames['we']"
+                 (change)="configChanged('weekdayNames_we', config.weekdayNames['we'])">
+          <input id="weekDayName5" type="text" [(ngModel)]="config.weekdayNames['th']"
+                 (change)="configChanged('weekdayNames_th', config.weekdayNames['th'])">
+          <input id="weekDayName6" type="text" [(ngModel)]="config.weekdayNames['fr']"
+                 (change)="configChanged('weekdayNames_fr', config.weekdayNames['fr'])">
+          <input id="weekDayName7" type="text" [(ngModel)]="config.weekdayNames['sa']"
+                 (change)="configChanged('weekdayNames_sa', config.weekdayNames['sa'])">
         </div>
       </div>
 
@@ -697,12 +729,15 @@
       </span>
         <div class="dp-option-playground">
           <label>Disabled
-            <input type="radio" [(ngModel)]="config.disableKeypress" name="disableKeypress" [value]="true"
-                   (ngModelChange)="configChanged()">
+            <input type="radio"
+                   [(ngModel)]="config.disableKeypress"
+                   name="disableKeypress"
+                   [value]="true"
+                   (ngModelChange)="configChanged('disableKeypress', 'true')">
           </label>
           <label>Enabled
             <input type="radio" [(ngModel)]="config.disableKeypress" name="disableKeypress" [value]="false"
-                   (ngModelChange)="configChanged()">
+                   (ngModelChange)="configChanged('disableKeypress', 'false')">
           </label>
         </div>
       </div>
@@ -713,12 +748,17 @@
       </span>
         <div class="dp-option-playground">
           <label>Down
-            <input type="radio" [(ngModel)]="config.drops" name="drops" value="down"
-                   (ngModelChange)="configChanged()">
+            <input type="radio"
+                   [(ngModel)]="config.drops"
+                   name="drops"
+                   value="down"
+                   (ngModelChange)="configChanged('drops', 'down')">
           </label>
           <label>Up
-            <input type="radio" [(ngModel)]="config.drops" name="drops" value="up"
-                   (ngModelChange)="configChanged()">
+            <input type="radio"
+                   [(ngModel)]="config.drops"
+                   name="drops" value="up"
+                   (ngModelChange)="configChanged('drops', 'up')">
           </label>
         </div>
       </div>
@@ -729,12 +769,18 @@
       </span>
         <div class="dp-option-playground">
           <label>Right
-            <input type="radio" [(ngModel)]="config.opens" name="opens" value="right"
-                   (ngModelChange)="configChanged()">
+            <input type="radio"
+                   [(ngModel)]="config.opens"
+                   name="opens"
+                   value="right"
+                   (ngModelChange)="configChanged('opens', 'right')">
           </label>
           <label>Left
-            <input type="radio" [(ngModel)]="config.opens" name="opens" value="left"
-                   (ngModelChange)="configChanged()">
+            <input type="radio"
+                   [(ngModel)]="config.opens"
+                   name="opens"
+                   value="left"
+                   (ngModelChange)="configChanged('opens', 'left')">
           </label>
         </div>
       </div>
@@ -745,14 +791,19 @@
       </span>
         <div class="dp-option-playground">
           <label>Show
-            <input id="showNearMonthDaysRadio" type="radio" [(ngModel)]="config.showNearMonthDays"
-                   name="showNearMonthDays" [value]="true"
-                   (ngModelChange)="configChanged()">
+            <input id="showNearMonthDaysRadio"
+                   type="radio"
+                   [(ngModel)]="config.showNearMonthDays"
+                   name="showNearMonthDays"
+                   [value]="true"
+                   (ngModelChange)="configChanged('showNearMonthDays', 'true')">
           </label>
           <label>Hide
-            <input id="hideNearMonthDaysRadio" type="radio" [(ngModel)]="config.showNearMonthDays"
+            <input id="hideNearMonthDaysRadio"
+                   type="radio"
+                   [(ngModel)]="config.showNearMonthDays"
                    name="showNearMonthDays" [value]="false"
-                   (ngModelChange)="configChanged()">
+                   (ngModelChange)="configChanged('showNearMonthDays', 'false')">
           </label>
         </div>
       </div>
@@ -763,14 +814,20 @@
       </span>
         <div class="dp-option-playground">
           <label>Show
-            <input id="showWeekNumbersRadio" type="radio" [(ngModel)]="config.showWeekNumbers" name="showWeekNumbers"
+            <input id="showWeekNumbersRadio"
+                   type="radio"
+                   [(ngModel)]="config.showWeekNumbers"
+                   name="showWeekNumbers"
                    [value]="true"
-                   (ngModelChange)="configChanged()">
+                   (ngModelChange)="configChanged('showWeekNumbers', 'true')">
           </label>
           <label>Hide
-            <input id="hideWeekNumbersRadio" type="radio" [(ngModel)]="config.showWeekNumbers" name="showWeekNumbers"
+            <input id="hideWeekNumbersRadio"
+                   type="radio"
+                   [(ngModel)]="config.showWeekNumbers"
+                   name="showWeekNumbers"
                    [value]="false"
-                   (ngModelChange)="configChanged()">
+                   (ngModelChange)="configChanged('showWeekNumbers', 'false')">
           </label>
         </div>
       </div>
@@ -781,14 +838,20 @@
       </span>
         <div class="dp-option-playground">
           <label>Enabled
-            <input id="enableMonthSelector" type="radio" [(ngModel)]="config.enableMonthSelector"
-                   name="enableMonthSelector" [value]="true"
-                   (ngModelChange)="configChanged()">
+            <input id="enableMonthSelector"
+                   type="radio"
+                   [(ngModel)]="config.enableMonthSelector"
+                   name="enableMonthSelector"
+                   [value]="true"
+                   (ngModelChange)="configChanged('enableMonthSelector', 'true')">
           </label>
           <label>Disabled
-            <input id="disableMonthSelector" type="radio" [(ngModel)]="config.enableMonthSelector"
-                   name="enableMonthSelector" [value]="false"
-                   (ngModelChange)="configChanged()">
+            <input id="disableMonthSelector"
+                   type="radio"
+                   [(ngModel)]="config.enableMonthSelector"
+                   name="enableMonthSelector"
+                   [value]="false"
+                   (ngModelChange)="configChanged('enableMonthSelector', 'false')">
           </label>
         </div>
       </div>
@@ -798,7 +861,10 @@
         Year Format (yearFormat):
       </span>
         <div class="dp-option-playground">
-          <input id="yearFormat" type="text" [(ngModel)]="config.yearFormat" (change)="configChanged()">
+          <input id="yearFormat"
+                 type="text"
+                 [(ngModel)]="config.yearFormat"
+                 (change)="configChanged('yearFormat', config.yearFormat)">
         </div>
       </div>
 
@@ -808,14 +874,20 @@
       </span>
         <div class="dp-option-playground">
           <label>Enabled
-            <input id="showGoToCurrent" type="radio" [(ngModel)]="config.showGoToCurrent" name="showGoToCurrent"
+            <input id="showGoToCurrent"
+                   type="radio"
+                   [(ngModel)]="config.showGoToCurrent"
+                   name="showGoToCurrent"
                    [value]="true"
-                   (ngModelChange)="configChanged()">
+                   (ngModelChange)="configChanged('showGoToCurrent', 'true')">
           </label>
           <label>Disabled
-            <input id="hideGoToCurrent" type="radio" [(ngModel)]="config.showGoToCurrent" name="showGoToCurrent"
+            <input id="hideGoToCurrent"
+                   type="radio"
+                   [(ngModel)]="config.showGoToCurrent"
+                   name="showGoToCurrent"
                    [value]="false"
-                   (ngModelChange)="configChanged()">
+                   (ngModelChange)="configChanged('showGoToCurrent', 'false')">
           </label>
         </div>
       </div>
@@ -825,7 +897,10 @@
         Day Button Format (dayBtnFormat):
       </span>
         <div class="dp-option-playground">
-          <input id="dayBtnFormat" type="text" [(ngModel)]="config.dayBtnFormat" (change)="configChanged()">
+          <input id="dayBtnFormat"
+                 type="text"
+                 [(ngModel)]="config.dayBtnFormat"
+                 (change)="configChanged('dayBtnFormat', config.dayBtnFormat)">
         </div>
       </div>
 
@@ -834,7 +909,10 @@
         Month Button Format (monthBtnFormat):
       </span>
         <div class="dp-option-playground">
-          <input id="monthBtnFormat" type="text" [(ngModel)]="config.monthBtnFormat" (change)="configChanged()">
+          <input id="monthBtnFormat"
+                 type="text"
+                 [(ngModel)]="config.monthBtnFormat"
+                 (change)="configChanged('monthBtnFormat', config.monthBtnFormat)">
         </div>
       </div>
 
@@ -843,7 +921,10 @@
         12 Hour Format (hours12Format):
       </span>
         <div class="dp-option-playground">
-          <input id="hours12Format" type="text" [(ngModel)]="config.hours12Format" (change)="configChanged()">
+          <input id="hours12Format"
+                 type="text"
+                 [(ngModel)]="config.hours12Format"
+                 (change)="configChanged('hours12Format', config.hours12Format)">
         </div>
       </div>
 
@@ -852,7 +933,11 @@
         24 Hour Format (hours24Format):
       </span>
         <div class="dp-option-playground">
-          <input id="hours24Format" type="text" [(ngModel)]="config.hours24Format" (change)="configChanged()">
+          <input
+              id="hours24Format"
+              type="text"
+              [(ngModel)]="config.hours24Format"
+              (change)="configChanged('hours24Format', config.hours24Format)">
         </div>
       </div>
 
@@ -861,7 +946,10 @@
         Meridiem Format (meridiemFormat):
       </span>
         <div class="dp-option-playground">
-          <input id="meridiemFormat" type="text" [(ngModel)]="config.meridiemFormat" (change)="configChanged()">
+          <input id="meridiemFormat"
+                 type="text"
+                 [(ngModel)]="config.meridiemFormat"
+                 (change)="configChanged('meridiemFormat', config.meridiemFormat)">
         </div>
       </div>
 
@@ -870,7 +958,10 @@
         Minutes Format (minutesFormat):
       </span>
         <div class="dp-option-playground">
-          <input id="minutesFormat" type="text" [(ngModel)]="config.minutesFormat" (change)="configChanged()">
+          <input id="minutesFormat"
+                 type="text"
+                 [(ngModel)]="config.minutesFormat"
+                 (change)="configChanged('minutesFormat', config.minutesFormat)">
         </div>
       </div>
 
@@ -879,7 +970,10 @@
         Minutes Interval (minutesInterval):
       </span>
         <div class="dp-option-playground">
-          <input id="minutesInterval" type="number" [(ngModel)]="config.minutesInterval" (change)="configChanged()">
+          <input id="minutesInterval"
+                 type="number"
+                 [(ngModel)]="config.minutesInterval"
+                 (change)="configChanged('minutesInterval', config.minutesInterval)">
         </div>
       </div>
 
@@ -888,7 +982,10 @@
         Seconds Format (secondsFormat):
       </span>
         <div class="dp-option-playground">
-          <input id="secondsFormat" type="text" [(ngModel)]="config.secondsFormat" (change)="configChanged()">
+          <input id="secondsFormat"
+                 type="text"
+                 [(ngModel)]="config.secondsFormat"
+                 (change)="configChanged('secondsFormat', config.secondsFormat)">
         </div>
       </div>
 
@@ -897,7 +994,10 @@
         Seconds Interval (secondsInterval):
       </span>
         <div class="dp-option-playground">
-          <input id="secondsInterval" type="number" [(ngModel)]="config.secondsInterval" (change)="configChanged()">
+          <input id="secondsInterval"
+                 type="number"
+                 [(ngModel)]="config.secondsInterval"
+                 (change)="configChanged('secondsInterval', config.secondsInterval)">
         </div>
       </div>
 
@@ -907,14 +1007,20 @@
       </span>
         <div class="dp-option-playground">
           <label>Enabled
-            <input id="showSeconds" type="radio" [(ngModel)]="config.showSeconds" name="showSeconds"
+            <input id="showSeconds"
+                   type="radio"
+                   [(ngModel)]="config.showSeconds"
+                   name="showSeconds"
                    [value]="true"
-                   (ngModelChange)="configChanged()">
+                   (ngModelChange)="configChanged('showSeconds', 'true')">
           </label>
           <label>Disabled
-            <input id="hideSeconds" type="radio" [(ngModel)]="config.showSeconds" name="showSeconds"
+            <input id="hideSeconds"
+                   type="radio"
+                   [(ngModel)]="config.showSeconds"
+                   name="showSeconds"
                    [value]="false"
-                   (ngModelChange)="configChanged()">
+                   (ngModelChange)="configChanged('showSeconds', 'false')">
           </label>
         </div>
       </div>
@@ -925,16 +1031,20 @@
       </span>
         <div class="dp-option-playground">
           <label>Enabled
-            <input id="showTwentyFourHours" type="radio" [(ngModel)]="config.showTwentyFourHours"
+            <input id="showTwentyFourHours"
+                   type="radio"
+                   [(ngModel)]="config.showTwentyFourHours"
                    name="showTwentyFourHours"
                    [value]="true"
-                   (ngModelChange)="configChanged()">
+                   (ngModelChange)="configChanged('showTwentyFourHours', 'true')">
           </label>
           <label>Disabled
-            <input id="hideTwentyFourHours" type="radio" [(ngModel)]="config.showTwentyFourHours"
+            <input id="hideTwentyFourHours"
+                   type="radio"
+                   [(ngModel)]="config.showTwentyFourHours"
                    name="showTwentyFourHours"
                    [value]="false"
-                   (ngModelChange)="configChanged()">
+                   (ngModelChange)="configChanged('showTwentyFourHours', 'false')">
           </label>
         </div>
       </div>
@@ -944,7 +1054,10 @@
         Time Separator (timeSeparator):
       </span>
         <div class="dp-option-playground">
-          <input id="timeSeparator" type="text" [(ngModel)]="config.timeSeparator" (change)="configChanged()">
+          <input id="timeSeparator"
+                 type="text"
+                 [(ngModel)]="config.timeSeparator"
+                 (change)="configChanged('timeSeparator', config.timeSeparator)">
         </div>
       </div>
     </div>

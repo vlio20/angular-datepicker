@@ -6,6 +6,7 @@ import {Component, HostListener, ViewChild} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import * as moment from 'moment';
 import {Moment} from 'moment';
+import {GaService} from '../services/ga/ga.service';
 
 const GLOBAL_OPTION_KEYS = [
   'theme'
@@ -41,6 +42,9 @@ const TIME_PICKER_OPTION_KEYS = [
   ...PICKER_OPTION_KEYS
 ];
 const MONTH_CALENDAR_OPTION_KEYS = [
+  'minValidation',
+  'maxValidation',
+  'required',
   'max',
   'min',
   'monthBtnFormat',
@@ -165,6 +169,9 @@ export class DemoComponent {
   };
   isAtTop: boolean = true;
 
+  constructor(private gaService: GaService) {
+  }
+
   @HostListener('document:scroll')
   @debounce(100)
   updateIsAtTop() {
@@ -176,14 +183,18 @@ export class DemoComponent {
     this.config.hideInputContainer = false;
     this.config.inputElementContainer = undefined;
     this.formGroup.get('datePicker').setValue(this.date);
+
+    this.gaService.emitEvent('Navigation', mode);
   }
 
   validatorsChanged() {
     this.formGroup.get('datePicker').updateValueAndValidity();
   }
 
-  configChanged() {
+  configChanged(change: string = 'N/A', value: any = 'N/A') {
     this.config = {...this.config};
+
+    this.gaService.emitEvent('ConfigChange', change, value);
   };
 
   createCustomWeekDays() {
