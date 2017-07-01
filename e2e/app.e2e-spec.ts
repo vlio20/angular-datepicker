@@ -59,7 +59,7 @@ describe('ng2-date-picker App', () => {
     });
   });
 
-  fdescribe('dpDayPicker reactive directive', () => {
+  describe('dpDayPicker reactive directive', () => {
     beforeEach(() => {
       page.dateFormatInput.clear();
       page.dateFormatInput.sendKeys('DD-MM-YYYY');
