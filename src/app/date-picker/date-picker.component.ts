@@ -250,6 +250,10 @@ export class DatePickerComponent implements OnChanges,
     this.setElementPositionInDom();
   }
 
+  setDisabledState(isDisabled: boolean) {
+    this.disabled = isDisabled;
+  }
+
   setElementPositionInDom() {
     this.calendarWrapper = <HTMLElement> this.calendarContainer.nativeElement;
     this.setInputElementContainer();
