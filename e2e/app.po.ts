@@ -9,7 +9,7 @@ export class DemoPage {
   daytimeDirectiveInput = $('#daytimeDirective input');
   dayDirectiveInput = $('#dayDirective input');
   dayReactiveDirectivePickerInput = $('#datePickerDirDayReactive input');
-  monthDirectiveInput = $('#datePickerDirMonth input'); 
+  monthDirectiveInput = $('#datePickerDirMonth input');
   timeSelectDirectiveInput = $('#timePickerDirDay input');
   datePickerPopup = $(this.popupSelector);
   dayCalendar = $(`${this.popupSelector} dp-day-calendar`);

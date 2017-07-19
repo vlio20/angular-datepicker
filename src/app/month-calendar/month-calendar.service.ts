@@ -25,7 +25,7 @@ export class MonthCalendarService {
       ...this.utilsService.clearUndefined(config)
     };
 
-    moment.locale(_config.locale)
+    moment.locale(_config.locale);
 
     return _config;
   }
