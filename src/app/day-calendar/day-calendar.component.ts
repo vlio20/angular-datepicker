@@ -1,6 +1,6 @@
 import {ECalendarValue} from '../common/types/calendar-value-enum';
 import {SingleCalendarValue} from '../common/types/single-calendar-value';
-import {ECalendarType} from '../common/types/calendar-type-enum';
+import {ECalendarMode} from '../common/types/calendar-mode-enum';
 import {
   Component,
   EventEmitter,
@@ -57,9 +57,9 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
   @HostBinding('class') @Input() theme: string;
   @Output() onSelect: EventEmitter<IDay> = new EventEmitter();
   @Output() onMonthSelect: EventEmitter<IMonth> = new EventEmitter();
-  @Output() onNavHeaderBtnClick: EventEmitter<ECalendarType> = new EventEmitter();
+  @Output() onNavHeaderBtnClick: EventEmitter<ECalendarMode> = new EventEmitter();
 
-  CalendarType = ECalendarType;
+  CalendarMode = ECalendarMode;
   isInited: boolean = false;
   componentConfig: IDayCalendarConfig;
   _selected: Moment[];
@@ -69,7 +69,7 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
   inputValue: CalendarValue;
   inputValueType: ECalendarValue;
   validateFn: (inputVal: CalendarValue) => { [key: string]: any };
-  currentCalendarType: ECalendarType = ECalendarType.Day;
+  currentCalendarMode: ECalendarMode = ECalendarMode.Day;
   monthCalendarConfig: IMonthCalendarConfig;
 
   api = {
@@ -208,16 +208,16 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
     return this.componentConfig.enableMonthSelector;
   }
 
-  toggleCalendar(type: ECalendarType) {
-    if (this.currentCalendarType !== type) {
-      this.currentCalendarType = type;
-      this.onNavHeaderBtnClick.emit(type);
+  toggleCalendar(mode: ECalendarMode) {
+    if (this.currentCalendarMode !== mode) {
+      this.currentCalendarMode = mode;
+      this.onNavHeaderBtnClick.emit(mode);
     }
   }
 
   monthSelected(month: IMonth) {
     this.currentDateView = month.date.clone();
-    this.currentCalendarType = ECalendarType.Day;
+    this.currentCalendarMode = ECalendarMode.Day;
     this.weeks = this.dayCalendarService
       .generateMonthArray(this.componentConfig, this.currentDateView, this.selected);
     this.onMonthSelect.emit(month);

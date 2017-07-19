@@ -7,7 +7,7 @@ import {IDayCalendarConfig} from '../day-calendar/day-calendar-config.model';
 import {TimeSelectService} from '../time-select/time-select.service';
 import {DayTimeCalendarService} from '../day-time-calendar/day-time-calendar.service';
 import {ITimeSelectConfig} from '../time-select/time-select-config.model';
-import {CalendarType} from '../common/types/calendar-type';
+import {CalendarMode} from '../common/types/calendar-mode';
 
 @Injectable()
 export class DatePickerService {
@@ -33,10 +33,10 @@ export class DatePickerService {
   }
 
   // todo:: add unit tests
-  getConfig(config: IDatePickerConfig, type: CalendarType = 'daytime'): IDatePickerConfig {
+  getConfig(config: IDatePickerConfig, mode: CalendarMode = 'daytime'): IDatePickerConfig {
     const _config: IDatePickerConfig = {
       ...this.defaultConfig,
-      format: this.getDefaultFormatByType(type),
+      format: this.getDefaultFormatByMode(mode),
       ...this.utilsService.clearUndefined(config)
     };
 
@@ -122,8 +122,8 @@ export class DatePickerService {
     return this.utilsService.convertToMomentArray(datesStrArr, config.format, config.allowMultiSelect);
   }
 
-  private getDefaultFormatByType(type: CalendarType): string {
-    switch (type) {
+  private getDefaultFormatByMode(mode: CalendarMode): string {
+    switch (mode) {
       case 'day':
         return 'DD-MM-YYYY';
       case 'daytime':

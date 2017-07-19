@@ -135,11 +135,11 @@ export class DemoComponent {
     datePicker: new FormControl({value: this.date, disabled: this.disabled}, [
       this.required ? Validators.required : () => undefined,
       control => this.validationMinDate && this.config &&
-      moment(control.value, this.config.format || this.getDefaultFormatByType(this.pickerMode))
+      moment(control.value, this.config.format || this.getDefaultFormatByMode(this.pickerMode))
         .isBefore(this.validationMinDate)
         ? {minDate: 'minDate Invalid'} : undefined,
       control => this.validationMaxDate && this.config &&
-      moment(control.value, this.config.format || this.getDefaultFormatByType(this.pickerMode))
+      moment(control.value, this.config.format || this.getDefaultFormatByMode(this.pickerMode))
         .isAfter(this.validationMaxDate)
         ? {maxDate: 'maxDate Invalid'} : undefined
     ])
@@ -291,8 +291,8 @@ export class DemoComponent {
     }
   }
 
-  private getDefaultFormatByType(type: string): string {
-    switch (type) {
+  private getDefaultFormatByMode(mode: string): string {
+    switch (mode) {
       case 'daytimePicker':
       case 'daytimeInline':
       case 'daytimeDirective':

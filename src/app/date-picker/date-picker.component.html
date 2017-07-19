@@ -18,7 +18,7 @@
   </div>
   <div #container>
     <div class="dp-popup {{theme}}"
-         [ngSwitch]="type"
+         [ngSwitch]="mode"
          [hidden]="!_areCalendarsShown">
       <dp-day-calendar #dayCalendar
                        *ngSwitchCase="'day'"

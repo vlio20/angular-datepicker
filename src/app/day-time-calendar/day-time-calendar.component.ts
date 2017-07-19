@@ -1,6 +1,5 @@
 import {ECalendarValue} from '../common/types/calendar-value-enum';
 import {SingleCalendarValue} from '../common/types/single-calendar-value';
-import {ECalendarType} from '../common/types/calendar-type-enum';
 import {
   Component,
   EventEmitter,
@@ -59,7 +58,6 @@ export class DayTimeCalendarComponent implements OnInit, OnChanges, ControlValue
   @HostBinding('class') @Input() theme: string;
   @Output() onChange: EventEmitter<IDate> = new EventEmitter();
 
-  CalendarType = ECalendarType;
   isInited: boolean = false;
   componentConfig: IDayTimeCalendarConfig;
   _selected: Moment;
