@@ -16,22 +16,20 @@ describe('ng2-date-picker App', () => {
     });
 
     it('should check that the popup appended to body', () => {
-      page.daytimeDirectiveInput.click();
+      page.dayDirectiveInput.click();
       expect(page.datePickerPopup.isDisplayed()).toBe(true);
       page.clickOnBody();
       expect(page.datePickerPopup.isDisplayed()).toBe(false);
     });
 
     it('should make sure that day directive keeps the prev state of the calendar', () => {
-      page.daytimeDirectiveInput.click();
+      page.dayDirectiveInput.click();
       page.dayCalendarLeftNavBtn.click();
       page.clickOnBody();
 
-      page.daytimeDirectiveInput.click();
+      page.dayDirectiveInput.click();
       expect(page.dayCalendarNavHeaderBtn.getText())
         .toEqual(moment().subtract(1, 'month').format('MMM, YYYY'));
-
-
     });
 
     it('should check that the theme is added and removed', () => {
@@ -51,7 +49,7 @@ describe('ng2-date-picker App', () => {
       page.clickOnBody();
       browser.sleep(200);
       browser.waitForAngularEnabled(false);
-      page.daytimeDirectiveInput.click();
+      page.dayDirectiveInput.click();
       expect(page.datePickerPopup.isDisplayed()).toBe(false);
       browser.waitForAngularEnabled(true);
       browser.sleep(1000);
@@ -507,11 +505,11 @@ describe('ng2-date-picker App', () => {
 
     it('should check the first day of the week', () => {
       page.dayPickerInput.click();
-      expect(page.weekDayNames.getText()).toEqual(['sunmontuewedthufrisat']);
+      expect(page.weekDayNames.getText()).toEqual(['Sun Mon Tue Wed Thu Fri Sat']);
       page.clickOnBody();
       page.firstDayOfWeekMonday.click();
       page.dayPickerInput.click();
-      expect(page.weekDayNames.getText()).toEqual(['montuewedthufrisatsun']);
+      expect(page.weekDayNames.getText()).toEqual(['Mon Sun Tue Wed Thu Fri Sat']);
     });
 
     it('should check month format', () => {
@@ -656,14 +654,14 @@ describe('ng2-date-picker App', () => {
 
       page.timePickerMenu.click();
       page.timePickerInput.click();
-      expect(page.meridiemDisplay.getText()).toMatch(/(בערב|בבוקר)/);
+      expect(page.meridiemDisplay.getText()).toMatch(/(בערב|בבוקר|לפני הצהריים)/);
 
       page.timeInlineMenu.click();
-      expect(page.meridiemDisplayInline.getText()).toMatch(/(בערב|בבוקר)/);
+      expect(page.meridiemDisplayInline.getText()).toMatch(/(בערב|בבוקר|לפני הצהריים)/);
 
       page.timeDirectiveMenu.click();
       page.timeSelectDirectiveInput.click();
-      expect(page.meridiemDisplay.getText()).toMatch(/(בערב|בבוקר)/);
+      expect(page.meridiemDisplay.getText()).toMatch(/(בערב|בבוקר|לפני הצהריים)/);
     });
   });
 });
