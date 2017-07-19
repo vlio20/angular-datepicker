@@ -1,4 +1,4 @@
-import {Moment} from 'moment';
+import {locale, Moment} from 'moment';
 import {ICalendar} from '../common/models/calendar.model';
 
 export interface IMonthCalendarConfig extends ICalendar {

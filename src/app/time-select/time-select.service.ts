@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Moment} from 'moment';
+import * as moment from 'moment';
 import {UtilsService} from '../common/services/utils/utils.service';
 import {ITimeSelectConfig} from './time-select-config.model';
 
@@ -18,7 +19,8 @@ export class TimeSelectService {
     secondsInterval: 1,
     showSeconds: false,
     showTwentyFourHours: false,
-    timeSeparator: ':'
+    timeSeparator: ':',
+    locale: 'en'
   };
 
   constructor(private utilsService: UtilsService) {
@@ -29,11 +31,16 @@ export class TimeSelectService {
       maxTime: this.utilsService.onlyTime(config && config.maxTime),
       minTime: this.utilsService.onlyTime(config && config.minTime)
     };
-    return {
+
+    const _config = {
       ...this.DEFAULT_CONFIG,
       ...this.utilsService.clearUndefined(config),
       ...timeConfigs
     };
+
+    moment.locale(_config.locale);
+
+    return _config;
   }
 
   getTimeFormat(config: ITimeSelectConfig): string {

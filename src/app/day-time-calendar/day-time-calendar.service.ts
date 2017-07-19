@@ -13,7 +13,9 @@ const COMBINED_FORMAT = DAY_FORMAT + TIME_FORMAT;
 
 @Injectable()
 export class DayTimeCalendarService {
-  readonly DEFAULT_CONFIG: IDayTimeCalendarConfig = {};
+  readonly DEFAULT_CONFIG: IDayTimeCalendarConfig = {
+    locale: 'en'
+  };
 
   constructor(private utilsService: UtilsService,
               private dayCalendarService: DayCalendarService,
@@ -21,11 +23,15 @@ export class DayTimeCalendarService {
   }
 
   getConfig(config: IDayTimeCalendarConfig): IDayTimeCalendarConfig {
-    return {
+    const _config = {
       ...this.DEFAULT_CONFIG,
       ...this.timeSelectService.getConfig(config),
       ...this.dayCalendarService.getConfig(config)
     };
+
+    moment.locale(config.locale);
+
+    return _config;
   }
 
   updateDay(current: Moment, day: Moment): Moment {

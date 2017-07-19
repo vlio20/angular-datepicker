@@ -3,15 +3,18 @@ import {$, $$, browser, by, element} from 'protractor';
 export class DemoPage {
   private popupSelector = 'body > div .dp-popup';
   body = $('body');
-  datePickerInput = $('#datePicker input');
+  dayPickerInput = $('#datePicker input');
   timePickerInput = $('#timePicker input');
   daytimePickerInput = $('#daytimePicker input');
-  dayDirectivePickerInput = $('#datePickerDirDay input');
+  daytimeDirectiveInput = $('#daytimeDirective input');
+  dayDirectiveInput = $('#dayDirective input');
   dayReactiveDirectivePickerInput = $('#datePickerDirDayReactive input');
   monthDirectiveInput = $('#datePickerDirMonth input');
+  timeSelectDirectiveInput = $('#timePickerDirDay input');
   datePickerPopup = $(this.popupSelector);
   dayCalendar = $(`${this.popupSelector} dp-day-calendar`);
   dayCalendarContainer = $(`${this.popupSelector} dp-day-calendar .dp-day-calendar-container`);
+  monthPickerInput = $('#monthPicker input');
   monthCalendar = $(`${this.popupSelector} dp-month-calendar`);
   monthWeeks = $$(`${this.popupSelector} .dp-calendar-week`);
   calendarDays = $$(`${this.popupSelector} .dp-calendar-day`);
@@ -21,6 +24,7 @@ export class DemoPage {
   monthCalendarLeftNavBtn = $(`${this.popupSelector} dp-month-calendar .dp-calendar-nav-left`);
   monthCalendarRightNavBtn = $(`${this.popupSelector} dp-month-calendar .dp-calendar-nav-right`);
   weekDayNames = $$(`${this.popupSelector} .dp-weekdays`);
+  weekDayInline = $$(`.dp-demo-container .dp-weekdays`);
   calendarContainer = $$(`${this.popupSelector} .dp-calendar-container `);
   currentLocationBtn = $(`#datePicker .dp-current-location-btn`);
   themeOnRadio = $('#themeOn');
@@ -38,10 +42,12 @@ export class DemoPage {
   calendarDisabledDays = $$(`${this.popupSelector} .dp-calendar-day[disabled]`);
   calendarFirstDayOfMonth = $$(`${this.popupSelector} .dp-current-month`).get(0);
   calendarFirstMonthOfYear = $$(`${this.popupSelector} dp-month-calendar .dp-calendar-month`).get(0);
+  calendarFirstMonthOfYearInline = $$(`.dp-demo-container dp-month-calendar .dp-calendar-month`).get(0);
 
   currentMonthCalendarBtn = $(`${this.popupSelector} dp-month-calendar .dp-current-month`);
   disableMonthSelector = $('#disableMonthSelector');
   yearFormat = $('#yearFormat');
+  localeOptions = $('#locale');
   hideGoToCurrentRadio = $('#hideGoToCurrent');
   pickerEnabledRadio = $('#inputEnabledRadio');
   pickerDisabledRadio = $('#inputDisabledRadio');
@@ -63,19 +69,14 @@ export class DemoPage {
   maxTimeValidationMsg = $('#maxTimeValidation');
   placeholderInput = $('#placeholderInput');
   firstDayOfWeekMonday = element(by.cssContainingText('#firstDayOfWeekSelect option', 'mo'));
+  hebrewLocale = element(by.cssContainingText('#locale option', 'he'));
   monthFormatInput = $('#monthFormatInput');
   minSelectableInput = $('#minSelectable input');
   maxSelectableInput = $('#maxSelectable input');
   closeOnSelect = $('#closeOnSelect');
   noCloseOnSelect = $('#noCloseOnSelect');
   closeDelayInput = $('#closeDelay');
-  weekDayName1Input = $('#weekDayName1');
-  weekDayName2Input = $('#weekDayName2');
-  weekDayName3Input = $('#weekDayName3');
-  weekDayName4Input = $('#weekDayName4');
-  weekDayName5Input = $('#weekDayName5');
-  weekDayName6Input = $('#weekDayName6');
-  weekDayName7Input = $('#weekDayName7');
+  weekDaysFormatInput = $('#weekDaysFormat');
   dateFormatInput = $('#dateFormat');
   enableMultiselect = $('#enableMultiselect');
   disableMultiselect = $('#disableMultiselect');
@@ -109,6 +110,7 @@ export class DemoPage {
   meridiemUpBtn = $(`${this.popupSelector} .dp-time-select-control-meridiem > .dp-time-select-control-up`);
   meridiemDownBtn = $(`${this.popupSelector} .dp-time-select-control-meridiem > .dp-time-select-control-down`);
   meridiemDisplay = $(`${this.popupSelector} .dp-time-select-display-meridiem`);
+  meridiemDisplayInline = $(`.dp-demo-container .dp-time-select-display-meridiem`);
   timeSeparatorDisplay = $(`${this.popupSelector} .dp-time-select-separator:nth-child(2)`);
 
   daytimePickerMenu = $('#daytimePickerMenu');

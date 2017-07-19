@@ -49,6 +49,7 @@
     "@types/google.analytics": "0.0.33",
     "@types/jasmine": "2.5.38",
     "@types/node": "~6.0.60",
+    "classlist.js": "^1.1.20150312",
     "codelyzer": "~2.1.1",
     "core-js": "^2.4.1",
     "jasmine-core": "~2.5.2",
@@ -68,6 +69,7 @@
     "tslint": "~4.4.2",
     "typescript": "~2.1.6",
     "uglify-js": "^2.8.12",
+    "web-animations-js": "^2.2.5",
     "zone.js": "^0.8.4"
   },
   "angularCompilerOptions": {
