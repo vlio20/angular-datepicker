@@ -509,7 +509,7 @@ describe('ng2-date-picker App', () => {
       page.clickOnBody();
       page.firstDayOfWeekMonday.click();
       page.dayPickerInput.click();
-      expect(page.weekDayNames.getText()).toEqual(['Mon Sun Tue Wed Thu Fri Sat']);
+      expect(page.weekDayNames.getText()).toEqual(['Mon Tue Wed Thu Fri Sat Sun']);
     });
 
     it('should check month format', () => {
