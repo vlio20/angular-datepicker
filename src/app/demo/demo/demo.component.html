@@ -57,12 +57,13 @@
     </ul>
   </div>
 
-  <div class="dp-demo-container" [ngClass]="{'dp-not-top': !isAtTop,
+  <div *ngIf="showDemo" class="dp-demo-container" [ngClass]="{'dp-not-top': !isAtTop,
                                              'dp-inline': pickerMode.endsWith('Inline'),
                                              'dp-inline-day': pickerMode == 'dayInline',
                                              'dp-inline-month': pickerMode == 'monthInline',
                                              'dp-inline-time': pickerMode == 'timeInline',
                                              'dp-inline-day-time': pickerMode == 'daytimeInline'}">
+
     <h2 class="dp-page-header">Angular Date/Time/Month Picker</h2>
 
     <form #form="ngForm">
@@ -113,7 +114,7 @@
         </div>
       </div>
 
-      <div class="dp-picker-day-directive" id="datePickerDirDay" *ngIf="pickerMode === 'dayDirective'">
+      <div class="dp-picker-day-directive" id="dayDirective" *ngIf="pickerMode === 'dayDirective'">
         <input [dpDayPicker]="config"
                name="datePicker"
                #dateDirectivePicker="dpDayPicker"
@@ -366,7 +367,7 @@
         </div>
       </div>
 
-      <div class="dp-picker-day-time-directive" id="daytimePickerDirDay" *ngIf="pickerMode === 'daytimeDirective'">
+      <div class="dp-picker-day-time-directive" id="daytimeDirective" *ngIf="pickerMode === 'daytimeDirective'">
         <input [dpDayPicker]="config"
                name="daytimePickerDir"
                #dateDirectivePicker="dpDayPicker"
@@ -492,7 +493,7 @@
                           theme="dp-material"
                           [(ngModel)]="validationMinTime"
                           type="time"
-                          [config]="{format: 'HH:mm:ss'}"
+                          [config]="{format: 'HH:mm:ss', locale: config.locale}"
                           (ngModelChange)="validatorsChanged()"
                           placeholder="Select a min time">
           </dp-date-picker>
@@ -508,7 +509,7 @@
                           theme="dp-material"
                           [(ngModel)]="validationMaxTime"
                           type="time"
-                          [config]="{format: 'HH:mm:ss'}"
+                          [config]="{format: 'HH:mm:ss', locale: config.locale}"
                           (ngModelChange)="validatorsChanged()"
                           placeholder="Select a max time">
           </dp-date-picker>
@@ -529,10 +530,23 @@
     <div class="dp-configs">
       <h3 class="dp-options-section">Config options</h3>
 
+      <div class="dp-option" *ngIf="isValidConfig('locale')">
+        <span class="dp-option-header">
+          Locale (locale):
+        </span>
+        <div class="dp-option-playground">
+          <select id="locale"
+                  [(ngModel)]="config.locale"
+                  (change)="configChanged('locale', config.locale)">
+            <option *ngFor="let lang of LANGS" [value]="lang"> {{lang}}</option>
+          </select>
+        </div>
+      </div>
+
       <div class="dp-option" *ngIf="isValidConfig('firstDayOfWeek')">
-      <span class="dp-option-header">
-        First Day of The week (firstDayOfWeek):
-      </span>
+        <span class="dp-option-header">
+          First Day of The week (firstDayOfWeek):
+        </span>
         <div class="dp-option-playground">
           <select id="firstDayOfWeekSelect"
                   [(ngModel)]="config.firstDayOfWeek"
@@ -543,9 +557,9 @@
       </div>
 
       <div class="dp-option" *ngIf="isValidConfig('format')">
-      <span class="dp-option-header">
-        Date Format (format):
-      </span>
+        <span class="dp-option-header">
+          Date Format (format):
+        </span>
         <div class="dp-option-playground">
           <input id="dateFormat"
                  type="text"
@@ -555,9 +569,9 @@
       </div>
 
       <div class="dp-option" *ngIf="isValidConfig('monthFormat')">
-      <span class="dp-option-header">
-        Month Format (monthFormat):
-      </span>
+        <span class="dp-option-header">
+          Month Format (monthFormat):
+        </span>
         <div class="dp-option-playground">
           <input id="monthFormatInput"
                  type="text"
@@ -567,9 +581,9 @@
       </div>
 
       <div class="dp-option" *ngIf="isValidConfig('min')">
-      <span class="dp-option-header">
-        Min Selectable Date (min):
-      </span>
+        <span class="dp-option-header">
+          Min Selectable Date (min):
+        </span>
         <div class="dp-option-playground">
           <dp-date-picker id="minSelectable"
                           theme="dp-material"
@@ -583,9 +597,9 @@
       </div>
 
       <div class="dp-option" *ngIf="isValidConfig('max')">
-      <span class="dp-option-header">
-        Max Selectable Date (max):
-      </span>
+        <span class="dp-option-header">
+          Max Selectable Date (max):
+        </span>
         <div class="dp-option-playground">
           <dp-date-picker id="maxSelectable"
                           theme="dp-material"
@@ -599,9 +613,9 @@
       </div>
 
       <div class="dp-option" *ngIf="isValidConfig('minTime')">
-      <span class="dp-option-header">
-        Min Selectable Time (minTime):
-      </span>
+        <span class="dp-option-header">
+          Min Selectable Time (minTime):
+        </span>
         <div class="dp-option-playground">
           <dp-date-picker id="minTimeSelectable"
                           theme="dp-material"
@@ -615,9 +629,9 @@
       </div>
 
       <div class="dp-option" *ngIf="isValidConfig('maxTime')">
-      <span class="dp-option-header">
-        Max Selectable Time (maxTime):
-      </span>
+        <span class="dp-option-header">
+          Max Selectable Time (maxTime):
+        </span>
         <div class="dp-option-playground">
           <dp-date-picker id="maxTimeSelectable"
                           theme="dp-material"
@@ -631,9 +645,9 @@
       </div>
 
       <div class="dp-option" *ngIf="isValidConfig('allowMultiSelect')">
-      <span class="dp-option-header">
-        Allow Multiple Selection (allowMultiSelect):
-      </span>
+        <span class="dp-option-header">
+          Allow Multiple Selection (allowMultiSelect):
+        </span>
         <div class="dp-option-playground">
           <label>Single
             <input id="disableMultiselect"
@@ -655,9 +669,9 @@
       </div>
 
       <div class="dp-option" *ngIf="isValidConfig('closeOnSelect')">
-      <span class="dp-option-header">
-        Close after selection (closeOnSelect):
-      </span>
+        <span class="dp-option-header">
+          Close after selection (closeOnSelect):
+        </span>
         <div class="dp-option-playground">
           <label>Close
             <input id="closeOnSelect"
@@ -678,9 +692,9 @@
       </div>
 
       <div class="dp-option" *ngIf="isValidConfig('closeOnSelectDelay')">
-      <span class="dp-option-header">
-        Closing Delay in ms (closeOnSelectDelay):
-      </span>
+        <span class="dp-option-header">
+          Closing Delay in ms (closeOnSelectDelay):
+        </span>
         <div class="dp-option-playground">
           <input id="closeDelay"
                  type="number"
@@ -690,9 +704,9 @@
       </div>
 
       <div class="dp-option" *ngIf="isValidConfig('onOpenDelay')">
-      <span class="dp-option-header">
-        Open Delay in ms (onOpenDelay):
-      </span>
+        <span class="dp-option-header">
+          Open Delay in ms (onOpenDelay):
+        </span>
         <div class="dp-option-playground">
           <input id="onOpenDelay"
                  type="number"
@@ -701,32 +715,22 @@
         </div>
       </div>
 
-      <div class="dp-option" *ngIf="isValidConfig('weekdayNames')">
-      <span class="dp-option-header">
-        Weekday Names (weekdayNames):
-      </span>
-        <div class="dp-option-playground dp-week-days">
-          <input id="weekDayName1" type="text" [(ngModel)]="config.weekdayNames['su']"
-                 (change)="configChanged('weekdayNames_su', config.weekdayNames['su'])">
-          <input id="weekDayName2" type="text" [(ngModel)]="config.weekdayNames['mo']"
-                 (change)="configChanged('weekdayNames_mo', config.weekdayNames['mo'])">
-          <input id="weekDayName3" type="text" [(ngModel)]="config.weekdayNames['tu']"
-                 (change)="configChanged('weekdayNames_tu', config.weekdayNames['tu'])">
-          <input id="weekDayName4" type="text" [(ngModel)]="config.weekdayNames['we']"
-                 (change)="configChanged('weekdayNames_we', config.weekdayNames['we'])">
-          <input id="weekDayName5" type="text" [(ngModel)]="config.weekdayNames['th']"
-                 (change)="configChanged('weekdayNames_th', config.weekdayNames['th'])">
-          <input id="weekDayName6" type="text" [(ngModel)]="config.weekdayNames['fr']"
-                 (change)="configChanged('weekdayNames_fr', config.weekdayNames['fr'])">
-          <input id="weekDayName7" type="text" [(ngModel)]="config.weekdayNames['sa']"
-                 (change)="configChanged('weekdayNames_sa', config.weekdayNames['sa'])">
+      <div class="dp-option" *ngIf="isValidConfig('weekdayFormat')">
+        <span class="dp-option-header">
+          Weekday Format (weekDayFormat):
+        </span>
+        <div class="dp-option-playground">
+          <input id="weekDaysFormat"
+                 type="text"
+                 [(ngModel)]="config.weekDayFormat"
+                 (change)="configChanged('weekDayFormat', config.weekDayFormat)">
         </div>
       </div>
 
       <div class="dp-option" *ngIf="isValidConfig('disableKeypress')">
-      <span class="dp-option-header">
-        Disable keyboard on input (disableKeypress):
-      </span>
+        <span class="dp-option-header">
+          Disable keyboard on input (disableKeypress):
+        </span>
         <div class="dp-option-playground">
           <label>Disabled
             <input type="radio"
@@ -743,9 +747,9 @@
       </div>
 
       <div class="dp-option" *ngIf="isValidConfig('drops')">
-      <span class="dp-option-header">
-        Drops (drops):
-      </span>
+        <span class="dp-option-header">
+          Drops (drops):
+        </span>
         <div class="dp-option-playground">
           <label>Down
             <input type="radio"
@@ -764,9 +768,9 @@
       </div>
 
       <div class="dp-option" *ngIf="isValidConfig('opens')">
-      <span class="dp-option-header">
-        Opens (opens):
-      </span>
+        <span class="dp-option-header">
+          Opens (opens):
+        </span>
         <div class="dp-option-playground">
           <label>Right
             <input type="radio"
@@ -786,9 +790,9 @@
       </div>
 
       <div class="dp-option" *ngIf="isValidConfig('showNearMonthDays')">
-      <span class="dp-option-header">
-        Show near month days (showNearMonthDays):
-      </span>
+        <span class="dp-option-header">
+          Show near month days (showNearMonthDays):
+        </span>
         <div class="dp-option-playground">
           <label>Show
             <input id="showNearMonthDaysRadio"
@@ -809,9 +813,9 @@
       </div>
 
       <div class="dp-option" *ngIf="isValidConfig('showWeekNumbers')">
-      <span class="dp-option-header">
-        Show week numbers (showWeekNumbers):
-      </span>
+        <span class="dp-option-header">
+          Show week numbers (showWeekNumbers):
+        </span>
         <div class="dp-option-playground">
           <label>Show
             <input id="showWeekNumbersRadio"
@@ -833,9 +837,9 @@
       </div>
 
       <div class="dp-option" *ngIf="isValidConfig('enableMonthSelector')">
-      <span class="dp-option-header">
-        Enable month selector (enableMonthSelector):
-      </span>
+        <span class="dp-option-header">
+          Enable month selector (enableMonthSelector):
+        </span>
         <div class="dp-option-playground">
           <label>Enabled
             <input id="enableMonthSelector"
@@ -857,9 +861,9 @@
       </div>
 
       <div class="dp-option" *ngIf="isValidConfig('yearFormat')">
-      <span class="dp-option-header">
-        Year Format (yearFormat):
-      </span>
+        <span class="dp-option-header">
+          Year Format (yearFormat):
+        </span>
         <div class="dp-option-playground">
           <input id="yearFormat"
                  type="text"
@@ -869,9 +873,9 @@
       </div>
 
       <div class="dp-option" *ngIf="isValidConfig('showGoToCurrent')">
-      <span class="dp-option-header">
-        Show go to current button (showGoToCurrent):
-      </span>
+        <span class="dp-option-header">
+          Show go to current button (showGoToCurrent):
+        </span>
         <div class="dp-option-playground">
           <label>Enabled
             <input id="showGoToCurrent"
@@ -893,9 +897,9 @@
       </div>
 
       <div class="dp-option" *ngIf="isValidConfig('dayBtnFormat')">
-      <span class="dp-option-header">
-        Day Button Format (dayBtnFormat):
-      </span>
+        <span class="dp-option-header">
+          Day Button Format (dayBtnFormat):
+        </span>
         <div class="dp-option-playground">
           <input id="dayBtnFormat"
                  type="text"
@@ -905,9 +909,9 @@
       </div>
 
       <div class="dp-option" *ngIf="isValidConfig('monthBtnFormat')">
-      <span class="dp-option-header">
-        Month Button Format (monthBtnFormat):
-      </span>
+        <span class="dp-option-header">
+          Month Button Format (monthBtnFormat):
+        </span>
         <div class="dp-option-playground">
           <input id="monthBtnFormat"
                  type="text"
@@ -917,9 +921,9 @@
       </div>
 
       <div class="dp-option" *ngIf="isValidConfig('hours12Format')">
-      <span class="dp-option-header">
-        12 Hour Format (hours12Format):
-      </span>
+        <span class="dp-option-header">
+          12 Hour Format (hours12Format):
+        </span>
         <div class="dp-option-playground">
           <input id="hours12Format"
                  type="text"
@@ -929,9 +933,9 @@
       </div>
 
       <div class="dp-option" *ngIf="isValidConfig('hours24Format')">
-      <span class="dp-option-header">
-        24 Hour Format (hours24Format):
-      </span>
+        <span class="dp-option-header">
+          24 Hour Format (hours24Format):
+        </span>
         <div class="dp-option-playground">
           <input
               id="hours24Format"
@@ -942,9 +946,9 @@
       </div>
 
       <div class="dp-option" *ngIf="isValidConfig('meridiemFormat')">
-      <span class="dp-option-header">
-        Meridiem Format (meridiemFormat):
-      </span>
+        <span class="dp-option-header">
+          Meridiem Format (meridiemFormat):
+        </span>
         <div class="dp-option-playground">
           <input id="meridiemFormat"
                  type="text"
@@ -954,9 +958,9 @@
       </div>
 
       <div class="dp-option" *ngIf="isValidConfig('minutesFormat')">
-      <span class="dp-option-header">
-        Minutes Format (minutesFormat):
-      </span>
+        <span class="dp-option-header">
+          Minutes Format (minutesFormat):
+        </span>
         <div class="dp-option-playground">
           <input id="minutesFormat"
                  type="text"
@@ -966,9 +970,9 @@
       </div>
 
       <div class="dp-option" *ngIf="isValidConfig('minutesInterval')">
-      <span class="dp-option-header">
-        Minutes Interval (minutesInterval):
-      </span>
+        <span class="dp-option-header">
+          Minutes Interval (minutesInterval):
+        </span>
         <div class="dp-option-playground">
           <input id="minutesInterval"
                  type="number"
@@ -978,9 +982,9 @@
       </div>
 
       <div class="dp-option" *ngIf="isValidConfig('secondsFormat')">
-      <span class="dp-option-header">
-        Seconds Format (secondsFormat):
-      </span>
+        <span class="dp-option-header">
+          Seconds Format (secondsFormat):
+        </span>
         <div class="dp-option-playground">
           <input id="secondsFormat"
                  type="text"
@@ -990,9 +994,9 @@
       </div>
 
       <div class="dp-option" *ngIf="isValidConfig('secondsInterval')">
-      <span class="dp-option-header">
-        Seconds Interval (secondsInterval):
-      </span>
+        <span class="dp-option-header">
+          Seconds Interval (secondsInterval):
+        </span>
         <div class="dp-option-playground">
           <input id="secondsInterval"
                  type="number"
@@ -1002,9 +1006,9 @@
       </div>
 
       <div class="dp-option" *ngIf="isValidConfig('showSeconds')">
-      <span class="dp-option-header">
-        Show seconds (showSeconds):
-      </span>
+        <span class="dp-option-header">
+          Show seconds (showSeconds):
+        </span>
         <div class="dp-option-playground">
           <label>Enabled
             <input id="showSeconds"
@@ -1026,9 +1030,9 @@
       </div>
 
       <div class="dp-option" *ngIf="isValidConfig('showTwentyFourHours')">
-      <span class="dp-option-header">
-        Show twenty four hours (showTwentyFourHours):
-      </span>
+        <span class="dp-option-header">
+          Show twenty four hours (showTwentyFourHours):
+        </span>
         <div class="dp-option-playground">
           <label>Enabled
             <input id="showTwentyFourHours"
@@ -1050,9 +1054,9 @@
       </div>
 
       <div class="dp-option" *ngIf="isValidConfig('timeSeparator')">
-      <span class="dp-option-header">
-        Time Separator (timeSeparator):
-      </span>
+        <span class="dp-option-header">
+          Time Separator (timeSeparator):
+        </span>
         <div class="dp-option-playground">
           <input id="timeSeparator"
                  type="text"
@@ -1066,18 +1070,18 @@
       <h3 class="dp-options-section">API</h3>
 
       <div class="dp-option" *ngIf="isValidConfig('apiopen')">
-      <span class="dp-option-header">
-        Open (api.open()):
-      </span>
+        <span class="dp-option-header">
+          Open (api.open()):
+        </span>
         <div class="dp-option-playground">
           <button id="openBtn" (click)="openCalendar()">Open</button>
         </div>
       </div>
 
       <div class="dp-option" *ngIf="isValidConfig('apiclose')">
-      <span class="dp-option-header">
-        Close (api.close()):
-      </span>
+        <span class="dp-option-header">
+          Close (api.close()):
+        </span>
         <div class="dp-option-playground">
           <button (click)="closeCalendar()">Close</button>
         </div>

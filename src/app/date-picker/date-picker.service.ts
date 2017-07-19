@@ -1,6 +1,7 @@
 import {EventEmitter, Injectable} from '@angular/core';
 import {IDatePickerConfig} from './date-picker-config.model';
 import {Moment} from 'moment';
+import * as moment from 'moment';
 import {UtilsService} from '../common/services/utils/utils.service';
 import {IDayCalendarConfig} from '../day-calendar/day-calendar-config.model';
 import {TimeSelectService} from '../time-select/time-select.service';
@@ -22,7 +23,8 @@ export class DatePickerService {
     opens: 'right',
     showWeekNumbers: false,
     enableMonthSelector: true,
-    showGoToCurrent: true
+    showGoToCurrent: true,
+    locale: 'en'
   };
 
   constructor(private utilsService: UtilsService,
@@ -51,6 +53,8 @@ export class DatePickerService {
       _config.closeOnSelect = false;
     }
 
+    moment.locale(_config.locale);
+
     return _config;
   }
 
@@ -59,7 +63,7 @@ export class DatePickerService {
       min: pickerConfig.min,
       max: pickerConfig.max,
       isDayDisabledCallback: pickerConfig.isDayDisabledCallback,
-      weekdayNames: pickerConfig.weekdayNames,
+      weekDayFormat: pickerConfig.weekDayFormat,
       showNearMonthDays: pickerConfig.showNearMonthDays,
       showWeekNumbers: pickerConfig.showWeekNumbers,
       firstDayOfWeek: pickerConfig.firstDayOfWeek,
@@ -73,7 +77,8 @@ export class DatePickerService {
       dayBtnFormat: pickerConfig.dayBtnFormat,
       dayBtnFormatter: pickerConfig.dayBtnFormatter,
       monthBtnFormat: pickerConfig.monthBtnFormat,
-      monthBtnFormatter: pickerConfig.monthBtnFormatter
+      monthBtnFormatter: pickerConfig.monthBtnFormatter,
+      locale: pickerConfig.locale
     };
   }
 
