@@ -9,24 +9,17 @@ import {IMonthCalendarConfig} from '../month-calendar/month-calendar-config';
 
 @Injectable()
 export class DayCalendarService {
-  readonly DAYS = ['su', 'mo', 'tu', 'we', 'th', 'fr', 'sa'];
+  private readonly DAYS = ['su', 'mo', 'tu', 'we', 'th', 'fr', 'sa'];
   readonly DEFAULT_CONFIG: IDayCalendarConfig = {
-    weekdayNames: {
-      su: 'sun',
-      mo: 'mon',
-      tu: 'tue',
-      we: 'wed',
-      th: 'thu',
-      fr: 'fri',
-      sa: 'sat'
-    },
     showNearMonthDays: true,
     showWeekNumbers: false,
     firstDayOfWeek: 'su',
+    weekDayFormat: 'ddd',
     format: 'DD-MM-YYYY',
     allowMultiSelect: false,
     monthFormat: 'MMM, YYYY',
     enableMonthSelector: true,
+    locale: 'en',
     dayBtnFormat: 'DD'
   };
 
@@ -42,7 +35,10 @@ export class DayCalendarService {
   }
 
   getConfig(config: IDayCalendarConfig): IDayCalendarConfig {
-    return {...this.DEFAULT_CONFIG, ...this.utilsService.clearUndefined(config)};
+    const _config = {...this.DEFAULT_CONFIG, ...this.utilsService.clearUndefined(config)};
+    moment.locale(_config.locale);
+
+    return _config;
   }
 
   generateDaysMap(firstDayOfWeek: WeekDays) {
@@ -60,9 +56,11 @@ export class DayCalendarService {
     const firstDayOfWeekIndex = this.DAYS.indexOf(config.firstDayOfWeek);
 
     const firstDayOfBoard = firstDayOfMonth;
+
     while (firstDayOfBoard.day() !== firstDayOfWeekIndex) {
       firstDayOfBoard.subtract(1, 'day');
     }
+
     const current = firstDayOfBoard.clone();
     const daysOfCalendar: IDay[] = this.utilsService.createArray(42).reduce((array: IDay[]) => {
       array.push({
@@ -94,8 +92,17 @@ export class DayCalendarService {
     return monthArray;
   }
 
-  generateWeekdays(firstDayOfWeek: WeekDays, weekdayNames: { [key: string]: string }): string[] {
-    const weekdays: string[] = [];
+  generateWeekdays(firstDayOfWeek: WeekDays): Moment[] {
+    const weekdayNames: {[key: string]: Moment} = {
+      su: moment().day(0),
+      mo: moment().day(1),
+      tu: moment().day(2),
+      we: moment().day(3),
+      th: moment().day(4),
+      fr: moment().day(5),
+      sa: moment().day(6)
+    };
+    const weekdays: Moment[] = [];
     const daysMap = this.generateDaysMap(firstDayOfWeek);
 
     for (const dayKey in daysMap) {

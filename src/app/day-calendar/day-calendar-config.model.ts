@@ -1,11 +1,11 @@
 import {ICalendar} from '../common/models/calendar.model';
 import {WeekDays} from '../common/types/week-days.type';
-import {Moment} from 'moment';
+import {locale, Moment} from 'moment';
 
 export interface IDayCalendarConfig extends ICalendar {
   isDayDisabledCallback?: (date: Moment) => boolean;
   isMonthDisabledCallback?: (date: Moment) => boolean;
-  weekdayNames?: { [key: string]: string };
+  weekDayFormat?: string;
   showNearMonthDays?: boolean;
   showWeekNumbers?: boolean;
   firstDayOfWeek?: WeekDays;

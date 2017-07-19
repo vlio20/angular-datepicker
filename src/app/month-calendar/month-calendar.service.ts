@@ -12,14 +12,22 @@ export class MonthCalendarService {
     yearFormat: 'YYYY',
     format: 'MM-YYYY',
     isNavHeaderBtnClickable: false,
-    monthBtnFormat: 'MMM'
+    monthBtnFormat: 'MMM',
+    locale: 'en'
   };
 
   constructor(private utilsService: UtilsService) {
   }
 
   getConfig(config: IMonthCalendarConfig): IMonthCalendarConfig {
-    return {...this.DEFAULT_CONFIG, ...this.utilsService.clearUndefined(config)};
+    const _config = {
+      ...this.DEFAULT_CONFIG,
+      ...this.utilsService.clearUndefined(config)
+    };
+
+    moment.locale(_config.locale)
+
+    return _config;
   }
 
   generateYear(year: Moment, selected: Moment[] = null): IMonth[][] {

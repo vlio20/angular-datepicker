@@ -64,7 +64,7 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
   componentConfig: IDayCalendarConfig;
   _selected: Moment[];
   weeks: IDay[][];
-  weekdays: string[];
+  weekdays: Moment[];
   currentDateView: Moment;
   inputValue: CalendarValue;
   inputValueType: ECalendarValue;
@@ -106,7 +106,7 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
     this.weeks = this.dayCalendarService
       .generateMonthArray(this.componentConfig, this.currentDateView, this.selected);
     this.weekdays = this.dayCalendarService
-      .generateWeekdays(this.componentConfig.firstDayOfWeek, this.componentConfig.weekdayNames);
+      .generateWeekdays(this.componentConfig.firstDayOfWeek);
     this.inputValueType = this.utilsService.getInputType(this.inputValue, this.componentConfig.allowMultiSelect);
     this.monthCalendarConfig = this.dayCalendarService.getMonthCalendarConfig(this.componentConfig);
   }

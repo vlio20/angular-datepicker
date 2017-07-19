@@ -9,7 +9,8 @@ import {Moment} from 'moment';
 import {GaService} from '../services/ga/ga.service';
 
 const GLOBAL_OPTION_KEYS = [
-  'theme'
+  'theme',
+  'locale'
 ];
 const PICKER_OPTION_KEYS = [
   'apiclose',
@@ -63,6 +64,7 @@ const DAY_CALENDAR_OPTION_KEYS = [
   'showWeekNumbers',
   'enableMonthSelector',
   'dayBtnFormat',
+  'weekdayFormat',
   ...MONTH_CALENDAR_OPTION_KEYS
 ];
 const TIME_SELECT_SHARED_OPTION_KEYS = [
@@ -97,10 +99,25 @@ const DAY_TIME_CALENDAR_OPTION_KEYS = [
   styleUrls: ['./demo.component.less']
 })
 export class DemoComponent {
+  showDemo: boolean = true;
   @ViewChild('datePicker') datePicker: DatePickerComponent;
   @ViewChild('dateDirectivePicker') datePickerDirective: DatePickerDirective;
   demoFormat = 'DD-MM-YYYY';
   readonly DAYS = ['su', 'mo', 'tu', 'we', 'th', 'fr', 'sa'];
+  readonly LANGS = [
+    'en', 'af', 'ar-dz', 'ar-kw', 'ar-ly',
+  'ar-ma', 'ar-sa', 'ar-tn', 'ar', 'az', 'be', 'bg', 'bn', 'bo',
+  'br', 'bs', 'ca', 'cs', 'cv', 'cy', 'da', 'de-at', 'de-ch',
+  'de', 'dv', 'el', 'en-au', 'en-ca', 'en-gb', 'en-ie', 'en-nz',
+  'eo', 'es-do', 'es', 'et', 'eu', 'fa', 'fi', 'fo', 'fr-ca',
+  'fr-ch', 'fr', 'fy', 'gd', 'gl', 'gom-latn', 'he', 'hi', 'hr',
+  'hu', 'hy-am', 'id', 'is', 'it', 'ja', 'jv', 'ka', 'kk', 'km', 'kn',
+  'ko', 'ky', 'lb', 'lo', 'lt', 'lv', 'me', 'mi', 'mk', 'ml', 'mr', 'ms-my',
+  'ms', 'my', 'nb', 'ne', 'nl-be', 'nl', 'nn', 'pa-in', 'pl', 'pt-br',
+  'pt', 'ro', 'ru', 'sd', 'se', 'si', 'sk', 'sl', 'sq', 'sr-cyrl', 'sr',
+  'ss', 'sv', 'sw', 'ta', 'te', 'tet', 'th', 'tl-ph', 'tlh', 'tr', 'tzl',
+  'tzm-latn', 'tzm', 'uk', 'ur', 'uz-latn', 'uz', 'vi', 'x-pseudo', 'yo', 'zh-cn', 'zh-hk', 'zh-tw'
+];
   pickerMode = 'daytimePicker';
 
   date: Moment;
@@ -130,22 +147,13 @@ export class DemoComponent {
 
   config: IDatePickerConfig = {
     firstDayOfWeek: 'su',
-    // format: 'DD-MM-YYYY HH:mm:ss',
     monthFormat: 'MMM, YYYY',
     disableKeypress: false,
     allowMultiSelect: false,
     closeOnSelect: undefined,
     closeOnSelectDelay: 100,
     onOpenDelay: 0,
-    weekdayNames: {
-      su: 'sun',
-      mo: 'mon',
-      tu: 'tue',
-      we: 'wed',
-      th: 'thu',
-      fr: 'fri',
-      sa: 'sat'
-    },
+    weekDayFormat: 'ddd',
     appendTo: document.body,
     drops: 'down',
     opens: 'right',
@@ -165,7 +173,8 @@ export class DemoComponent {
     secondsInterval: 1,
     showSeconds: false,
     showTwentyFourHours: false,
-    timeSeparator: ':'
+    timeSeparator: ':',
+    locale: 'en'
   };
   isAtTop: boolean = true;
 
@@ -191,15 +200,22 @@ export class DemoComponent {
     this.formGroup.get('datePicker').updateValueAndValidity();
   }
 
+  refreshDemo() {
+    this.showDemo = false;
+    setTimeout(() => {
+      this.showDemo = true;
+    });
+  }
+
   configChanged(change: string = 'N/A', value: any = 'N/A') {
     this.config = {...this.config};
 
     this.gaService.emitEvent('ConfigChange', change, value);
-  };
 
-  createCustomWeekDays() {
-    this.config.weekdayNames = this.config.weekdayNames || {};
-  }
+    if (change === 'locale') {
+      this.refreshDemo();
+    }
+  };
 
   openCalendar() {
     if (this.datePicker) {
@@ -299,5 +315,9 @@ export class DemoComponent {
 
   log(item) {
     console.log(item);
+  }
+
+  donateClicked() {
+    this.gaService.emitEvent('donate', 'clicked');
   }
 }
