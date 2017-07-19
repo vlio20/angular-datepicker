@@ -30,6 +30,7 @@ export class DatePickerDirective implements OnInit {
   private _maxDate: Moment | string;
   private _minTime: Moment | string;
   private _maxTime: Moment | string;
+  private firstChange: boolean = true;
 
   get config(): IDatePickerDirectiveConfig {
     return this._config;
@@ -157,10 +158,6 @@ export class DatePickerDirective implements OnInit {
     this.datePicker.registerOnChange((value) => {
       this.formControl.control.setValue(this.datePicker.inputElementValue);
       const errors = this.datePicker.validateFn(value);
-
-      if (this.formControl.pristine && value) {
-        this.formControl.control.markAsDirty();
-      }
 
       if (errors) {
         this.formControl.control.setErrors(errors);
