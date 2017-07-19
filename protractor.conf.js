@@ -1,7 +1,9 @@
 // Protractor configuration file, see link for more information
 // https://github.com/angular/protractor/blob/master/lib/config.ts
 
-const { SpecReporter } = require('jasmine-spec-reporter');
+const {SpecReporter} = require('jasmine-spec-reporter');
+const args = process.argv;
+const headless = args.indexOf('headless') !== -1;
 
 exports.config = {
   allScriptsTimeout: 11000,
@@ -9,7 +11,10 @@ exports.config = {
     './e2e/**/*.e2e-spec.ts'
   ],
   capabilities: {
-    'browserName': 'chrome'
+    'browserName': 'chrome',
+    chromeOptions: {
+      args: headless ? [ "--headless", "--disable-gpu", "--window-size=1280,1024" ] : []
+    }
   },
   directConnect: true,
   baseUrl: 'http://localhost:4200/',
