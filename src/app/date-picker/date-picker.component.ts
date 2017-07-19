@@ -1,8 +1,8 @@
 import {IDate} from '../common/models/date.model';
 import {DomHelper} from '../common/services/dom-appender/dom-appender.service';
 import {UtilsService} from '../common/services/utils/utils.service';
-import {CalendarType} from '../common/types/calendar-type';
-import {ECalendarType} from '../common/types/calendar-type-enum';
+import {CalendarMode} from '../common/types/calendar-mode';
+import {ECalendarMode} from '../common/types/calendar-mode-enum';
 import {CalendarValue} from '../common/types/calendar-value';
 import {ECalendarValue} from '../common/types/calendar-value-enum';
 import {SingleCalendarValue} from '../common/types/single-calendar-value';
@@ -72,7 +72,7 @@ export class DatePickerComponent implements OnChanges,
                                             OnDestroy {
   isInited: boolean = false;
   @Input() config: IDatePickerConfig;
-  @Input() type: CalendarType = 'day';
+  @Input() mode: CalendarMode = 'day';
   @Input() placeholder: string = '';
   @Input() disabled: boolean = false;
   @Input() displayDate: SingleCalendarValue;
@@ -225,7 +225,7 @@ export class DatePickerComponent implements OnChanges,
         maxDate: this.maxDate,
         minTime: this.minTime,
         maxTime: this.maxTime
-      }, this.componentConfig.format, this.type);
+      }, this.componentConfig.format, this.mode);
     this.onChangeCallback(this.processOnChangeCallback(this.selected));
   }
 
@@ -288,7 +288,7 @@ export class DatePickerComponent implements OnChanges,
   }
 
   init() {
-    this.componentConfig = this.dayPickerService.getConfig(this.config, this.type);
+    this.componentConfig = this.dayPickerService.getConfig(this.config, this.mode);
     this.currentDateView = this.displayDate
       ? this.utilsService.convertToMoment(this.displayDate, this.componentConfig.format).clone()
       : this.utilsService
@@ -324,7 +324,7 @@ export class DatePickerComponent implements OnChanges,
   hideCalendar() {
     this.areCalendarsShown = false;
     if (this.dayCalendarRef) {
-      this.dayCalendarRef.api.toggleCalendar(ECalendarType.Day);
+      this.dayCalendarRef.api.toggleCalendar(ECalendarMode.Day);
     }
   }
 
@@ -338,7 +338,7 @@ export class DatePickerComponent implements OnChanges,
   }
 
   shouldShowGoToCurrent(): boolean {
-    return this.componentConfig.showGoToCurrent && this.type !== 'time';
+    return this.componentConfig.showGoToCurrent && this.mode !== 'time';
   }
 
   moveToCurrent() {

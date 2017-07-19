@@ -1,4 +1,4 @@
-import {CalendarType} from './../common/types/calendar-type';
+import {CalendarMode} from '../common/types/calendar-mode';
 import {IDatePickerDirectiveConfig} from './date-picker-directive-config.model';
 import {DatePickerDirectiveService} from './date-picker-directive.service';
 import {IDpDayPickerApi} from './date-picker.api';
@@ -25,7 +25,7 @@ export class DatePickerDirective implements OnInit {
   private _config: IDatePickerDirectiveConfig;
   private _attachTo: ElementRef | string;
   private _theme: string;
-  private _type: CalendarType = 'day';
+  private _mode: CalendarMode = 'day';
   private _minDate: Moment | string;
   private _maxDate: Moment | string;
   private _minTime: Moment | string;
@@ -61,14 +61,14 @@ export class DatePickerDirective implements OnInit {
     }
   }
 
-  get type(): CalendarType {
-    return this._type;
+  get mode(): CalendarMode {
+    return this._mode;
   }
 
-  @Input() set type(type: CalendarType) {
-    this._type = type;
+  @Input() set mode(mode: CalendarMode) {
+    this._mode = mode;
     if (this.datePicker) {
-      this.datePicker.type = type;
+      this.datePicker.mode = mode;
     }
   }
 
@@ -180,7 +180,7 @@ export class DatePickerDirective implements OnInit {
       this.datePicker.maxDate = this.maxDate;
       this.datePicker.minTime = this.minTime;
       this.datePicker.maxTime = this.maxTime;
-      this.datePicker.type = this.type || 'day';
+      this.datePicker.mode = this.mode || 'day';
       this.datePicker.config = this.config;
       this.datePicker.init();
     }

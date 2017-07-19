@@ -35,7 +35,7 @@ function processStyleUrls(content, options, targetDir) {
       let fileNamePartsRe = /^[\./]*([^]*)\.(css|less)$/g;
       let fileNamePartsMatches = url.match(fileNamePartsRe);
       if (fileNamePartsMatches === null || fileNamePartsMatches.length <= 0) {
-        // Unsupported file type / malformed url
+        // Unsupported file mode / malformed url
         return file;
       }
 

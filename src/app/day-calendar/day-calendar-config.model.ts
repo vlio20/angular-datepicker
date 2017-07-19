@@ -1,6 +1,6 @@
 import {ICalendar} from '../common/models/calendar.model';
 import {WeekDays} from '../common/types/week-days.type';
-import {locale, Moment} from 'moment';
+import {Moment} from 'moment';
 
 export interface IDayCalendarConfig extends ICalendar {
   isDayDisabledCallback?: (date: Moment) => boolean;

@@ -1,4 +1,4 @@
-<div class="dp-day-calendar-container" [hidden]="currentCalendarType !==  CalendarType.Day">
+<div class="dp-day-calendar-container" [hidden]="currentCalendarMode !==  CalendarMode.Day">
   <dp-calendar-nav
       [label]="getNavLabel()"
       [showLeftNav]="shouldShowLeftNav()"
@@ -7,13 +7,13 @@
       [theme]="theme"
       (onLeftNav)="onLeftNav()"
       (onRightNav)="onRightNav()"
-      (onLabelClick)="toggleCalendar(CalendarType.Month)">
+      (onLabelClick)="toggleCalendar(CalendarMode.Month)">
   </dp-calendar-nav>
 
   <div class="dp-calendar-wrapper"
        [ngClass]="{'dp-hide-near-month': !componentConfig.showNearMonthDays}">
     <div class="dp-weekdays">
-      <span class="dp-calendar-weekday" 
+      <span class="dp-calendar-weekday"
             *ngFor="let weekday of weekdays">
             {{weekday.format(componentConfig.weekDayFormat)}}
       </span>
@@ -40,10 +40,10 @@
 </div>
 
 <dp-month-calendar
-    *ngIf="currentCalendarType ===  CalendarType.Month"
+    *ngIf="currentCalendarMode ===  CalendarMode.Month"
     [config]="monthCalendarConfig"
     [displayDate]="currentDateView"
     [theme]="theme"
     (onSelect)="monthSelected($event)"
-    (onNavHeaderBtnClick)="toggleCalendar(CalendarType.Day)">
+    (onNavHeaderBtnClick)="toggleCalendar(CalendarMode.Day)">
 </dp-month-calendar>
