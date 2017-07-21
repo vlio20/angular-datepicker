@@ -35,10 +35,12 @@ export class DayTimeCalendarService {
   }
 
   updateDay(current: Moment, day: Moment): Moment {
-    return moment(day.format(DAY_FORMAT) + current.format(TIME_FORMAT), COMBINED_FORMAT);
+    const time = current ? current : moment();
+    return moment(day.format(DAY_FORMAT) + time.format(TIME_FORMAT), COMBINED_FORMAT);
   }
 
   updateTime(current: Moment, time: Moment): Moment {
-    return moment(current.format(DAY_FORMAT) + time.format(TIME_FORMAT), COMBINED_FORMAT);
+    const day = current ? current : moment();
+    return moment(day.format(DAY_FORMAT) + time.format(TIME_FORMAT), COMBINED_FORMAT);
   }
 }

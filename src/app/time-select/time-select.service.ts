@@ -50,15 +50,18 @@ export class TimeSelectService {
       + (config.showTwentyFourHours ? '' : ' ' + config.meridiemFormat);
   }
 
-  getHours(config: ITimeSelectConfig, time: Moment): string {
+  getHours(config: ITimeSelectConfig, t: Moment | null): string {
+    const time = t || moment();
     return time && time.format(config.showTwentyFourHours ? config.hours24Format : config.hours12Format);
   }
 
-  getMinutes(config: ITimeSelectConfig, time: Moment): string {
+  getMinutes(config: ITimeSelectConfig, t: Moment | null): string {
+    const time = t || moment();
     return time && time.format(config.minutesFormat);
   }
 
-  getSeconds(config: ITimeSelectConfig, time: Moment): string {
+  getSeconds(config: ITimeSelectConfig, t: Moment | null): string {
+    const time = t || moment();
     return time && time.format(config.secondsFormat);
   }
 

@@ -72,7 +72,7 @@ export class TimeSelectComponent implements OnInit, OnChanges, ControlValueAcces
 
   set selected(selected: Moment) {
     this._selected = selected;
-    this.calculateTimeParts(selected);
+    this.calculateTimeParts(this.selected);
     this.onChangeCallback(this.processOnChangeCallback(selected));
   }
 
@@ -184,10 +184,10 @@ export class TimeSelectComponent implements OnInit, OnChanges, ControlValueAcces
   }
 
   calculateTimeParts(time: Moment) {
-    this.hours = this.timeSelectService.getHours(this.componentConfig, this.selected);
-    this.minutes = this.timeSelectService.getMinutes(this.componentConfig, this.selected);
-    this.seconds = this.timeSelectService.getSeconds(this.componentConfig, this.selected);
-    this.meridiem = this.timeSelectService.getMeridiem(this.componentConfig, this.selected);
+    this.hours = this.timeSelectService.getHours(this.componentConfig, time);
+    this.minutes = this.timeSelectService.getMinutes(this.componentConfig, time);
+    this.seconds = this.timeSelectService.getSeconds(this.componentConfig, time);
+    this.meridiem = this.timeSelectService.getMeridiem(this.componentConfig, time);
   }
 
   shouldShowDecrease(unit: TimeUnit): boolean {

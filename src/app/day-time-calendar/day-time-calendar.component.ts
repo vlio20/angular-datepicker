@@ -19,7 +19,6 @@ import {
   ValidationErrors,
   Validator
 } from '@angular/forms';
-import * as moment from 'moment';
 import {Moment} from 'moment';
 import {CalendarValue} from '../common/types/calendar-value';
 import {UtilsService} from '../common/services/utils/utils.service';
@@ -86,7 +85,6 @@ export class DayTimeCalendarComponent implements OnInit, OnChanges, ControlValue
 
   init() {
     this.componentConfig = this.dayTimeCalendarService.getConfig(this.config);
-    this.selected = this.selected || moment();
     this.inputValueType = this.utilsService.getInputType(this.inputValue, false);
   }
 
@@ -149,6 +147,7 @@ export class DayTimeCalendarComponent implements OnInit, OnChanges, ControlValue
   }
 
   dateSelected(day: IDate) {
+    console.log(day);
     this.selected = this.dayTimeCalendarService.updateDay(this.selected, day.date);
     this.emitChange();
   }
