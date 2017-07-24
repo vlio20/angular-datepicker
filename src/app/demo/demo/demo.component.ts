@@ -2,7 +2,7 @@ import debounce from '../../common/decorators/decorators';
 import {IDatePickerConfig} from '../../date-picker/date-picker-config.model';
 import {DatePickerComponent} from '../../date-picker/date-picker.component';
 import {DatePickerDirective} from '../../date-picker/date-picker.directive';
-import {Component, HostListener, ViewChild} from '@angular/core';
+import {Component, HostListener, PACKAGE_ROOT_URL, ViewChild} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import * as moment from 'moment';
 import {Moment} from 'moment';
@@ -101,6 +101,7 @@ const DAY_TIME_CALENDAR_OPTION_KEYS = [
 export class DemoComponent {
   showDemo: boolean = true;
   @ViewChild('datePicker') datePicker: DatePickerComponent;
+  @ViewChild('donateForm') donateForm: any;
   @ViewChild('dateDirectivePicker') datePickerDirective: DatePickerDirective;
   demoFormat = 'DD-MM-YYYY';
   readonly DAYS = ['su', 'mo', 'tu', 'we', 'th', 'fr', 'sa'];
@@ -319,5 +320,6 @@ export class DemoComponent {
 
   donateClicked() {
     this.gaService.emitEvent('donate', 'clicked');
+    this.donateForm.nativeElement.submit();
   }
 }
