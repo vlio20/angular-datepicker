@@ -654,14 +654,14 @@ describe('ng2-date-picker App', () => {
 
       page.timePickerMenu.click();
       page.timePickerInput.click();
-      expect(page.meridiemDisplay.getText()).toMatch(/(בערב|בבוקר|לפני הצהריים)/);
+      expect(page.meridiemDisplay.getText()).toMatch(/(בערב|בבוקר|לפני הצהריים|אחרי הצהריים)/);
 
       page.timeInlineMenu.click();
-      expect(page.meridiemDisplayInline.getText()).toMatch(/(בערב|בבוקר|לפני הצהריים)/);
+      expect(page.meridiemDisplayInline.getText()).toMatch(/(בערב|בבוקר|לפני הצהריים|אחרי הצהריים)/);
 
       page.timeDirectiveMenu.click();
       page.timeSelectDirectiveInput.click();
-      expect(page.meridiemDisplay.getText()).toMatch(/(בערב|בבוקר|לפני הצהריים)/);
+      expect(page.meridiemDisplay.getText()).toMatch(/(בערב|בבוקר|לפני הצהריים|אחרי הצהריים)/);
     });
   });
 });
