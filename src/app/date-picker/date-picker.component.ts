@@ -370,7 +370,7 @@ export class DatePickerComponent implements OnChanges,
 
   startGlobalListeners() {
     this.globalListnersUnlisteners.push(
-      this.renderer.listen('document', 'keydown', (e: KeyboardEvent) => {
+      this.renderer.listen(document, 'keydown', (e: KeyboardEvent) => {
         this.onKeyPress(e);
       }));
   }
