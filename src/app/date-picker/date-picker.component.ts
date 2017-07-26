@@ -193,6 +193,8 @@ export class DatePickerComponent implements OnChanges,
       this.selected = this.utilsService
         .convertToMomentArray(value, this.componentConfig.format, this.componentConfig.allowMultiSelect);
       this.init();
+    } else {
+      this.selected = [];
     }
   }
 

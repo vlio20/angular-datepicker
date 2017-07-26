@@ -132,6 +132,10 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
         .generateMonthArray(this.componentConfig, this.currentDateView, this.selected);
       this.inputValueType = this.utilsService
         .getInputType(this.inputValue, this.componentConfig.allowMultiSelect);
+    } else {
+      this.selected = [];
+      this.weeks = this.dayCalendarService
+        .generateMonthArray(this.componentConfig, this.currentDateView, this.selected);
     }
   }
 
