@@ -78,7 +78,9 @@ export class DatePickerService {
       dayBtnFormatter: pickerConfig.dayBtnFormatter,
       monthBtnFormat: pickerConfig.monthBtnFormat,
       monthBtnFormatter: pickerConfig.monthBtnFormatter,
-      locale: pickerConfig.locale
+      multipleYearsNavigateBy: pickerConfig.multipleYearsNavigateBy,
+      showMultipleYearsNavigation: pickerConfig.showMultipleYearsNavigation,
+      locale: pickerConfig.locale,
     };
   }
 
