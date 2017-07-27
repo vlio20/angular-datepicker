@@ -16,11 +16,25 @@
     border-bottom: none;
   }
 
-  .dp-calendar-nav-left, .dp-calendar-nav-right {
+  .dp-calendar-nav-container-left, .dp-calendar-nav-container-right {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
+  }
+
+  .dp-calendar-nav-container-left {
+    left: 5px;
+  }
+
+  .dp-calendar-nav-container-right {
+    right: 5px;
+  }
+
+  .dp-calendar-nav-left, .dp-calendar-nav-right, .dp-calendar-secondary-nav-left, .dp-calendar-secondary-nav-right {
     cursor: pointer;
+  }
+
+  .dp-calendar-nav-left, .dp-calendar-nav-right {
     .arrow(45deg);
 
     &::before {
@@ -30,11 +44,15 @@
 
   .dp-calendar-nav-left {
     .arrow(-135deg);
-    left: 5px;
   }
 
-  .dp-calendar-nav-right {
-    right: 5px;
+  .dp-calendar-secondary-nav-left::before, .dp-calendar-secondary-nav-right::before {
+    content: "«";
+    font-size: 16px;
+  }
+
+  .dp-calendar-secondary-nav-right::before {
+    content: "»";
   }
 
   .dp-nav-header {
@@ -55,7 +73,7 @@
       border: 1px solid @c-light-gray;
     }
 
-    .dp-calendar-nav-left, .dp-calendar-nav-right {
+    .dp-calendar-nav-left, .dp-calendar-nav-right, .dp-calendar-secondary-nav-left, .dp-calendar-secondary-nav-right {
       border: none;
       background: @c-white;
       outline: none;
