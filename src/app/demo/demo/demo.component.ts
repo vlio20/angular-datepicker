@@ -49,6 +49,8 @@ const MONTH_CALENDAR_OPTION_KEYS = [
   'max',
   'min',
   'monthBtnFormat',
+  'multipleYearsNavigateBy',
+  'showMultipleYearsNavigation',
   'yearFormat',
   ...GLOBAL_OPTION_KEYS
 ];
@@ -175,6 +177,8 @@ export class DemoComponent {
     showSeconds: false,
     showTwentyFourHours: false,
     timeSeparator: ':',
+    multipleYearsNavigateBy: 10,
+    showMultipleYearsNavigation: false,
     locale: 'en'
   };
   isAtTop: boolean = true;
