@@ -164,7 +164,11 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
   }
 
   onLeftSecondaryNav() {
-    this.currentDateView = this.currentDateView.subtract(this.componentConfig.multipleYearsNavigateBy, 'year');
+    let navigateBy = this.componentConfig.multipleYearsNavigateBy
+    if (this.componentConfig.min && this.currentDateView.year() - this.componentConfig.min.year() < navigateBy) {
+      navigateBy = this.currentDateView.year() - this.componentConfig.min.year()
+    }
+    this.currentDateView = this.currentDateView.subtract(navigateBy, 'year');
     this.yearMonths = this.monthCalendarService.generateYear(this.currentDateView, this.selected);
   }
 
@@ -174,7 +178,11 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
   }
 
   onRightSecondaryNav() {
-    this.currentDateView.add(this.componentConfig.multipleYearsNavigateBy, 'year');
+    let navigateBy = this.componentConfig.multipleYearsNavigateBy
+    if (this.componentConfig.max && this.componentConfig.max.year() - this.currentDateView.year() < navigateBy) {
+      navigateBy = this.componentConfig.max.year() - this.currentDateView.year()
+    }
+    this.currentDateView.add(navigateBy, 'year');
     this.yearMonths = this.monthCalendarService.generateYear(this.currentDateView, this.selected);
   }
 
