@@ -155,9 +155,17 @@ export class DatePickerDirective implements OnInit {
       }
     });
 
+    let setup = true;
+
     this.datePicker.registerOnChange((value) => {
       this.formControl.control.setValue(this.datePicker.inputElementValue);
       const errors = this.datePicker.validateFn(value);
+
+      if (!setup) {
+        this.formControl.control.markAsDirty(true);
+      } else {
+        setup = false;
+      }
 
       if (errors) {
         this.formControl.control.setErrors(errors);
