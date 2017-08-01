@@ -614,7 +614,7 @@ describe('ng2-date-picker App', () => {
       expect(page.calendarFirstMonthOfYear.getText()).toEqual('1');
     });
 
-    xit('should check showMultipleYearsNavigation is working', () => {
+    it('should check showMultipleYearsNavigation is working', () => {
       page.dayPickerInput.click();
       page.dayCalendarNavHeaderBtn.click();
       expect(page.dayCalendarLeftSecondaryNavBtn.isDisplayed()).toBe(false);
