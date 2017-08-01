@@ -80,7 +80,7 @@ export class DatePickerService {
       monthBtnFormatter: pickerConfig.monthBtnFormatter,
       multipleYearsNavigateBy: pickerConfig.multipleYearsNavigateBy,
       showMultipleYearsNavigation: pickerConfig.showMultipleYearsNavigation,
-      locale: pickerConfig.locale,
+      locale: pickerConfig.locale
     };
   }
 

@@ -164,9 +164,11 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
   }
 
   onLeftSecondaryNav() {
-    let navigateBy = this.componentConfig.multipleYearsNavigateBy
-    if (this.componentConfig.min && this.currentDateView.year() - this.componentConfig.min.year() < navigateBy) {
-      navigateBy = this.currentDateView.year() - this.componentConfig.min.year()
+    let navigateBy = this.componentConfig.multipleYearsNavigateBy;
+    const isOutsideRange = this.componentConfig.min &&
+                         this.currentDateView.year() - this.componentConfig.min.year() < navigateBy;
+    if (isOutsideRange) {
+      navigateBy = this.currentDateView.year() - this.componentConfig.min.year();
     }
     this.currentDateView = this.currentDateView.subtract(navigateBy, 'year');
     this.yearMonths = this.monthCalendarService.generateYear(this.currentDateView, this.selected);
@@ -178,9 +180,11 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
   }
 
   onRightSecondaryNav() {
-    let navigateBy = this.componentConfig.multipleYearsNavigateBy
-    if (this.componentConfig.max && this.componentConfig.max.year() - this.currentDateView.year() < navigateBy) {
-      navigateBy = this.componentConfig.max.year() - this.currentDateView.year()
+    let navigateBy = this.componentConfig.multipleYearsNavigateBy;
+    const isOutsideRange = this.componentConfig.max &&
+                         this.componentConfig.max.year() - this.currentDateView.year() < navigateBy;
+    if (isOutsideRange) {
+      navigateBy = this.componentConfig.max.year() - this.currentDateView.year();
     }
     this.currentDateView.add(navigateBy, 'year');
     this.yearMonths = this.monthCalendarService.generateYear(this.currentDateView, this.selected);
