@@ -613,6 +613,25 @@ describe('ng2-date-picker App', () => {
       page.dayCalendarNavHeaderBtn.click();
       expect(page.calendarFirstMonthOfYear.getText()).toEqual('1');
     });
+
+    xit('should check showMultipleYearsNavigation is working', () => {
+      page.dayPickerInput.click();
+      page.dayCalendarNavHeaderBtn.click();
+      expect(page.dayCalendarLeftSecondaryNavBtn.isDisplayed()).toBe(false);
+      expect(page.dayCalendarRightSecondaryNavBtn.isDisplayed()).toBe(false);
+
+      page.showMultipleYearsNavigation.click();
+      page.multipleYearsNavigateBy.clear();
+      page.multipleYearsNavigateBy.sendKeys('20');
+      page.dayPickerInput.click();
+      page.dayCalendarNavHeaderBtn.click();
+      page.dayCalendarLeftSecondaryNavBtn.click();
+      expect(page.dayPickerInput.getAttribute('value')).toEqual(moment().subtract(20, 'year').format('DD-MM-YYYY'));
+
+      page.dayCalendarRightSecondaryNavBtn.click();
+      page.dayCalendarRightSecondaryNavBtn.click();
+      expect(page.dayPickerInput.getAttribute('value')).toEqual(moment().add(20, 'year').format('DD-MM-YYYY'));
+    });
   });
 
   describe('Locales', () => {

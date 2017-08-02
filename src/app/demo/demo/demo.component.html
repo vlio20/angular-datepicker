@@ -1072,6 +1072,42 @@
                  (change)="configChanged('timeSeparator', config.timeSeparator)">
         </div>
       </div>
+
+      <div class="dp-option" *ngIf="isValidConfig('showMultipleYearsNavigation')">
+        <span class="dp-option-header">
+          Show multiple years navigation buttons (showMultipleYearsNavigation):
+        </span>
+        <div class="dp-option-playground">
+          <label>Enabled
+            <input id="showMultipleYearsNavigation"
+                   type="radio"
+                   [(ngModel)]="config.showMultipleYearsNavigation"
+                   name="showMultipleYearsNavigation"
+                   [value]="true"
+                   (ngModelChange)="configChanged('showMultipleYearsNavigation', 'true')">
+          </label>
+          <label>Disabled
+            <input id="hideMultipleYearsNavigation"
+                   type="radio"
+                   [(ngModel)]="config.showMultipleYearsNavigation"
+                   name="showMultipleYearsNavigation"
+                   [value]="false"
+                   (ngModelChange)="configChanged('showMultipleYearsNavigation', 'false')">
+          </label>
+        </div>
+      </div>
+
+      <div class="dp-option" *ngIf="isValidConfig('showMultipleYearsNavigation')">
+        <span class="dp-option-header">
+          Multiple years navigate by (multipleYearsNavigateBy):
+        </span>
+        <div class="dp-option-playground">
+          <input id="multipleYearsNavigateBy"
+                 type="text"
+                 [(ngModel)]="config.multipleYearsNavigateBy"
+                 (change)="configChanged('multipleYearsNavigateBy', config.multipleYearsNavigateBy)">
+        </div>
+      </div>
     </div>
 
     <div class="dp-api">

@@ -20,7 +20,9 @@ export class DemoPage {
   calendarDays = $$(`${this.popupSelector} .dp-calendar-day`);
   selectedDays = $$(`${this.popupSelector} .dp-calendar-day.dp-selected`);
   dayCalendarLeftNavBtn = $(`${this.popupSelector} .dp-calendar-nav-left`);
+  dayCalendarLeftSecondaryNavBtn = $(`${this.popupSelector} .dp-calendar-secondary-nav-left`);
   dayCalendarRightNavBtn = $(`${this.popupSelector} .dp-calendar-nav-right`);
+  dayCalendarRightSecondaryNavBtn = $(`${this.popupSelector} .dp-calendar-secondary-nav-right`);
   monthCalendarLeftNavBtn = $(`${this.popupSelector} dp-month-calendar .dp-calendar-nav-left`);
   monthCalendarRightNavBtn = $(`${this.popupSelector} dp-month-calendar .dp-calendar-nav-right`);
   weekDayNames = $$(`${this.popupSelector} .dp-weekdays`);
@@ -97,6 +99,9 @@ export class DemoPage {
   showTwentyFourHours = $('#showTwentyFourHours');
   hideTwentyFourHours = $('#hideTwentyFourHours');
   timeSeparatorInput = $('#timeSeparator');
+  showMultipleYearsNavigation = $('#showMultipleYearsNavigation');
+  hideMultipleYearsNavigation = $('#hideMultipleYearsNavigation');
+  multipleYearsNavigateBy = $('#multipleYearsNavigateBy');
 
   hourUpBtn = $(`${this.popupSelector} .dp-time-select-control-hours > .dp-time-select-control-up`);
   hourDownBtn = $(`${this.popupSelector} .dp-time-select-control-hours > .dp-time-select-control-down`);

@@ -163,8 +163,30 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
     this.yearMonths = this.monthCalendarService.generateYear(this.currentDateView, this.selected);
   }
 
+  onLeftSecondaryNav() {
+    let navigateBy = this.componentConfig.multipleYearsNavigateBy;
+    const isOutsideRange = this.componentConfig.min &&
+                         this.currentDateView.year() - this.componentConfig.min.year() < navigateBy;
+    if (isOutsideRange) {
+      navigateBy = this.currentDateView.year() - this.componentConfig.min.year();
+    }
+    this.currentDateView = this.currentDateView.subtract(navigateBy, 'year');
+    this.yearMonths = this.monthCalendarService.generateYear(this.currentDateView, this.selected);
+  }
+
   onRightNav() {
     this.currentDateView.add(1, 'year');
+    this.yearMonths = this.monthCalendarService.generateYear(this.currentDateView, this.selected);
+  }
+
+  onRightSecondaryNav() {
+    let navigateBy = this.componentConfig.multipleYearsNavigateBy;
+    const isOutsideRange = this.componentConfig.max &&
+                         this.componentConfig.max.year() - this.currentDateView.year() < navigateBy;
+    if (isOutsideRange) {
+      navigateBy = this.componentConfig.max.year() - this.currentDateView.year();
+    }
+    this.currentDateView.add(navigateBy, 'year');
     this.yearMonths = this.monthCalendarService.generateYear(this.currentDateView, this.selected);
   }
 
@@ -172,8 +194,16 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
     return this.monthCalendarService.shouldShowLeft(this.componentConfig.min, this.currentDateView);
   }
 
+  shouldShowLeftSecondaryNav(): boolean {
+    return this.componentConfig.showMultipleYearsNavigation && this.shouldShowLeftNav();
+  }
+
   shouldShowRightNav(): boolean {
     return this.monthCalendarService.shouldShowRight(this.componentConfig.max, this.currentDateView);
+  }
+
+  shouldShowRightSecondaryNav(): boolean {
+    return this.componentConfig.showMultipleYearsNavigation && this.shouldShowRightNav();
   }
 
   isNavHeaderBtnClickable(): boolean {
