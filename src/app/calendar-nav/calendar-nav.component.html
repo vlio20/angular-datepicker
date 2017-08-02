@@ -8,7 +8,7 @@
     </button>
     <button type="button"
             class="dp-calendar-secondary-nav-left"
-            [hidden]="!showLeftSecondaryNav"
+            *ngIf="showLeftSecondaryNav"
             [disabled]="leftSecondaryNavDisabled"
             (click)="leftSecondaryNavClicked()">
     </button>
@@ -23,7 +23,7 @@
   <div class="dp-calendar-nav-container-right">
     <button type="button"
             class="dp-calendar-secondary-nav-right"
-            [hidden]="!showRightSecondaryNav"
+            *ngIf="showRightSecondaryNav"
             [disabled]="rightSecondaryNavDisabled"
             (click)="rightSecondaryNavClicked()">
     </button>
