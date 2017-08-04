@@ -175,7 +175,6 @@ export class TimeSelectComponent implements OnInit, OnChanges, ControlValueAcces
 
   toggleMeridiem() {
     this.selected = this.timeSelectService.toggleMeridiem(this.selected);
-    console.log(this.selected.locale());
     this.emitChange();
   }
 
