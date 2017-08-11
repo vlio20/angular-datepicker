@@ -278,7 +278,8 @@ export class DatePickerComponent implements OnChanges,
 
   setInputElementContainer() {
     this.inputElementContainer = this.componentConfig.inputElementContainer
-      || this.elemRef.nativeElement.querySelector('.dp-input-container');
+      || this.elemRef.nativeElement.querySelector('.dp-input-container')
+      || document.body;;
   }
 
   handleInnerElementClick(element: HTMLElement) {
