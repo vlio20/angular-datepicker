@@ -56,13 +56,13 @@ export class UtilsService {
   // todo:: add unit test
   getDefaultDisplayDate(def: Moment, selected: Moment[], allowMultiSelect: boolean): Moment {
     if (def) {
-      return def;
+      return def.clone();
     } else if (allowMultiSelect) {
       if (selected && selected[selected.length]) {
-        return selected[selected.length];
+        return selected[selected.length].clone();
       }
     } else if (selected && selected[0]) {
-      return selected[0];
+      return selected[0].clone();
     }
 
     return moment();
