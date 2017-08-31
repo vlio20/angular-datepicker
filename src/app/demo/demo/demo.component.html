@@ -90,7 +90,7 @@
                         [required]="required"
                         [placeholder]="placeholder"
                         [config]="config"
-                        [theme]="'vlad'">
+                        [theme]="material ? 'dp-material' : ''">
         </dp-date-picker>
         <div class="dp-validations">
           <div id="requiredValidation" *ngIf="datePickerModel.errors && datePickerModel.errors.required">required</div>
