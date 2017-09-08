@@ -213,6 +213,8 @@
                         [(ngModel)]="date"
                         (ngModelChange)="log($event)"
                         [mode]="'time'"
+                        (open)="opened()"
+                        (close)="closed()"
                         [disabled]="disabled"
                         [minTime]="validationMinTime"
                         [maxTime]="validationMaxTime"

@@ -140,6 +140,7 @@ export class DemoPage {
 
   clickOnBody() {
     this.body.click();
+    this.body.click();
   }
 
   clickOnDayButton(text: string) {
