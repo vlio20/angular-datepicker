@@ -84,7 +84,9 @@
                         [(ngModel)]="date"
                         (ngModelChange)="log($event)"
                         [mode]="'day'"
+                        [displayDate]="displayDate"
                         [disabled]="disabled"
+                        [displayDate]="displayDate"
                         [minDate]="validationMinDate"
                         [maxDate]="validationMaxDate"
                         [required]="required"
@@ -151,6 +153,7 @@
                         [(ngModel)]="date"
                         (ngModelChange)="log($event)"
                         [mode]="'month'"
+                        [displayDate]="displayDate"
                         [disabled]="disabled"
                         [minDate]="validationMinDate"
                         [maxDate]="validationMaxDate"
@@ -260,6 +263,7 @@
                         [(ngModel)]="date"
                         (ngModelChange)="log($event)"
                         [mode]="'daytime'"
+                        [displayDate]="displayDate"
                         [disabled]="disabled"
                         [minDate]="validationMinDate"
                         [maxDate]="validationMaxDate"
@@ -461,9 +465,9 @@
       </div>
 
       <div class="dp-option" *ngIf="isValidConfig('minValidation')">
-      <span class="dp-option-header">
-        Min-Date Validation (minDate):
-      </span>
+        <span class="dp-option-header">
+          Min-Date Validation (minDate):
+        </span>
         <div class="dp-option-playground">
           <dp-date-picker id="minDatePicker"
                           theme="dp-material"
@@ -477,9 +481,9 @@
       </div>
 
       <div class="dp-option" *ngIf="isValidConfig('maxValidation')">
-      <span class="dp-option-header">
-        Max-Date Validation (maxDate):
-      </span>
+        <span class="dp-option-header">
+          Max-Date Validation (maxDate):
+        </span>
         <div class="dp-option-playground">
           <dp-date-picker id="maxDatePicker"
                           theme="dp-material"
@@ -488,6 +492,20 @@
                           [config]="{format: config.format}"
                           (ngModelChange)="validatorsChanged()"
                           placeholder="Select a max date">
+          </dp-date-picker>
+        </div>
+      </div>
+
+      <div class="dp-option" *ngIf="isValidConfig('displayDate')">
+        <span class="dp-option-header">
+          Display Date (displayDate):
+        </span>
+        <div class="dp-option-playground">
+          <dp-date-picker id="displayDate"
+                          theme="dp-material"
+                          [(ngModel)]="displayDate"
+                          mode="day"
+                          placeholder="Select a display date">
           </dp-date-picker>
         </div>
       </div>

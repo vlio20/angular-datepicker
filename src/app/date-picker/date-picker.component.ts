@@ -70,7 +70,7 @@ export class DatePickerComponent implements OnChanges,
                                             ControlValueAccessor,
                                             Validator,
                                             OnDestroy {
-  isInited: boolean = false;
+  isInitialized: boolean = false;
   @Input() config: IDatePickerConfig;
   @Input() mode: CalendarMode = 'day';
   @Input() placeholder: string = '';
@@ -105,7 +105,7 @@ export class DatePickerComponent implements OnChanges,
   popupElem: HTMLElement;
   handleInnerElementClickUnlisteners: Function[] = [];
   globalListnersUnlisteners: Function[] = [];
-  validateFn: (inputVal: CalendarValue) => { [key: string]: any };
+  validateFn: (inputVal: CalendarValue) => {[key: string]: any};
   api: IDpDayPickerApi = {
     open: this.showCalendars.bind(this),
     close: this.hideCalendar.bind(this)
@@ -232,13 +232,13 @@ export class DatePickerComponent implements OnChanges,
   }
 
   ngOnInit() {
-    this.isInited = true;
+    this.isInitialized = true;
     this.init();
     this.initValidators();
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (this.isInited) {
+    if (this.isInitialized) {
       const {minDate, maxDate, minTime, maxTime} = changes;
       this.init();
 

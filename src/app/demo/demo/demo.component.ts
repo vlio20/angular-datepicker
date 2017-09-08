@@ -2,7 +2,7 @@ import debounce from '../../common/decorators/decorators';
 import {IDatePickerConfig} from '../../date-picker/date-picker-config.model';
 import {DatePickerComponent} from '../../date-picker/date-picker.component';
 import {DatePickerDirective} from '../../date-picker/date-picker.directive';
-import {Component, HostListener, PACKAGE_ROOT_URL, ViewChild} from '@angular/core';
+import {Component, HostListener, ViewChild} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import * as moment from 'moment';
 import {Moment} from 'moment';
@@ -17,6 +17,7 @@ const PICKER_OPTION_KEYS = [
   'apiopen',
   'appendTo',
   'disabled',
+  'displayDate',
   'disableKeypress',
   'drops',
   'format',
@@ -109,18 +110,18 @@ export class DemoComponent {
   readonly DAYS = ['su', 'mo', 'tu', 'we', 'th', 'fr', 'sa'];
   readonly LANGS = [
     'en', 'af', 'ar-dz', 'ar-kw', 'ar-ly',
-  'ar-ma', 'ar-sa', 'ar-tn', 'ar', 'az', 'be', 'bg', 'bn', 'bo',
-  'br', 'bs', 'ca', 'cs', 'cv', 'cy', 'da', 'de-at', 'de-ch',
-  'de', 'dv', 'el', 'en-au', 'en-ca', 'en-gb', 'en-ie', 'en-nz',
-  'eo', 'es-do', 'es', 'et', 'eu', 'fa', 'fi', 'fo', 'fr-ca',
-  'fr-ch', 'fr', 'fy', 'gd', 'gl', 'gom-latn', 'he', 'hi', 'hr',
-  'hu', 'hy-am', 'id', 'is', 'it', 'ja', 'jv', 'ka', 'kk', 'km', 'kn',
-  'ko', 'ky', 'lb', 'lo', 'lt', 'lv', 'me', 'mi', 'mk', 'ml', 'mr', 'ms-my',
-  'ms', 'my', 'nb', 'ne', 'nl-be', 'nl', 'nn', 'pa-in', 'pl', 'pt-br',
-  'pt', 'ro', 'ru', 'sd', 'se', 'si', 'sk', 'sl', 'sq', 'sr-cyrl', 'sr',
-  'ss', 'sv', 'sw', 'ta', 'te', 'tet', 'th', 'tl-ph', 'tlh', 'tr', 'tzl',
-  'tzm-latn', 'tzm', 'uk', 'ur', 'uz-latn', 'uz', 'vi', 'x-pseudo', 'yo', 'zh-cn', 'zh-hk', 'zh-tw'
-];
+    'ar-ma', 'ar-sa', 'ar-tn', 'ar', 'az', 'be', 'bg', 'bn', 'bo',
+    'br', 'bs', 'ca', 'cs', 'cv', 'cy', 'da', 'de-at', 'de-ch',
+    'de', 'dv', 'el', 'en-au', 'en-ca', 'en-gb', 'en-ie', 'en-nz',
+    'eo', 'es-do', 'es', 'et', 'eu', 'fa', 'fi', 'fo', 'fr-ca',
+    'fr-ch', 'fr', 'fy', 'gd', 'gl', 'gom-latn', 'he', 'hi', 'hr',
+    'hu', 'hy-am', 'id', 'is', 'it', 'ja', 'jv', 'ka', 'kk', 'km', 'kn',
+    'ko', 'ky', 'lb', 'lo', 'lt', 'lv', 'me', 'mi', 'mk', 'ml', 'mr', 'ms-my',
+    'ms', 'my', 'nb', 'ne', 'nl-be', 'nl', 'nn', 'pa-in', 'pl', 'pt-br',
+    'pt', 'ro', 'ru', 'sd', 'se', 'si', 'sk', 'sl', 'sq', 'sr-cyrl', 'sr',
+    'ss', 'sv', 'sw', 'ta', 'te', 'tet', 'th', 'tl-ph', 'tlh', 'tr', 'tzl',
+    'tzm-latn', 'tzm', 'uk', 'ur', 'uz-latn', 'uz', 'vi', 'x-pseudo', 'yo', 'zh-cn', 'zh-hk', 'zh-tw'
+  ];
   pickerMode = 'daytimePicker';
 
   date: Moment;
@@ -133,6 +134,7 @@ export class DemoComponent {
   validationMinTime: Moment;
   validationMaxTime: Moment;
   placeholder: string = 'Choose a date...';
+  displayDate: Moment;
 
   formGroup: FormGroup = new FormGroup({
     datePicker: new FormControl({value: this.date, disabled: this.disabled}, [
