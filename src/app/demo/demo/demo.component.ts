@@ -242,6 +242,14 @@ export class DemoComponent {
     }
   }
 
+  opened() {
+    console.log('opened');
+  }
+
+  closed() {
+    console.log('closed');
+  }
+
   isValidConfig(key: string): boolean {
     switch (this.pickerMode) {
       case 'dayInline':
