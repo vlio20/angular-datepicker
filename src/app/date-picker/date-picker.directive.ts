@@ -6,11 +6,11 @@ import {DatePickerComponent} from './date-picker.component';
 import {
   ComponentFactoryResolver,
   Directive,
-  ElementRef,
+  ElementRef, EventEmitter,
   HostListener,
   Input,
   OnInit,
-  Optional,
+  Optional, Output,
   ViewContainerRef
 } from '@angular/core';
 import {NgControl} from '@angular/forms';
@@ -117,6 +117,9 @@ export class DatePickerDirective implements OnInit {
     }
   }
 
+  @Output() open = new EventEmitter<void>();
+  @Output() close = new EventEmitter<void>();
+
   get maxTime(): Moment | string {
     return this._maxTime;
   }
@@ -198,6 +201,9 @@ export class DatePickerDirective implements OnInit {
       this.datePicker.maxTime = this.maxTime;
       this.datePicker.mode = this.mode || 'day';
       this.datePicker.config = this.config;
+      this.datePicker.open = this.open;
+      this.datePicker.close = this.close;
+
       this.datePicker.init();
     }
   }

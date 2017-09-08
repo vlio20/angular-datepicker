@@ -21,6 +21,7 @@ import {
   AfterViewInit,
   Component,
   ElementRef,
+  EventEmitter,
   forwardRef,
   HostBinding,
   HostListener,
@@ -28,6 +29,7 @@ import {
   OnChanges,
   OnDestroy,
   OnInit,
+  Output,
   Renderer,
   SimpleChanges,
   ViewChild
@@ -81,6 +83,9 @@ export class DatePickerComponent implements OnChanges,
   @Input() maxDate: Moment | string;
   @Input() minTime: Moment | string;
   @Input() maxTime: Moment | string;
+
+  @Output() open = new EventEmitter<void>();
+  @Output() close = new EventEmitter<void>();
 
   @ViewChild('container') calendarContainer: ElementRef;
   @ViewChild('dayCalendar') dayCalendarRef: DayCalendarComponent;
@@ -165,9 +170,10 @@ export class DatePickerComponent implements OnChanges,
 
   @HostListener('document:click')
   onBodyClick() {
-    if (!this.hideStateHelper) {
+    if (!this.hideStateHelper && this.areCalendarsShown) {
       this.hideCalendar();
     }
+
     this.hideStateHelper = false;
   }
 
@@ -306,12 +312,11 @@ export class DatePickerComponent implements OnChanges,
     this.isFocusedTrigger = true;
     setTimeout(() => {
       this.hideStateHelper = false;
+
       if (!this.areCalendarsShown) {
-        this.areCalendarsShown = true;
-        if (this.timeSelectRef) {
-          this.timeSelectRef.api.triggerChange();
-        }
+        this.showCalendars();
       }
+
       this.isFocusedTrigger = false;
     }, this.componentConfig.onOpenDelay);
   }
@@ -319,16 +324,22 @@ export class DatePickerComponent implements OnChanges,
   showCalendars() {
     this.hideStateHelper = true;
     this.areCalendarsShown = true;
+
     if (this.timeSelectRef) {
       this.timeSelectRef.api.triggerChange();
     }
+
+    this.open.emit();
   }
 
   hideCalendar() {
     this.areCalendarsShown = false;
+
     if (this.dayCalendarRef) {
       this.dayCalendarRef.api.toggleCalendar(ECalendarMode.Day);
     }
+
+    this.close.emit();
   }
 
   onViewDateChange(value: string) {
