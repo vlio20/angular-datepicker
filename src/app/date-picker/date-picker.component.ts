@@ -84,8 +84,8 @@ export class DatePickerComponent implements OnChanges,
   @Input() minTime: Moment | string;
   @Input() maxTime: Moment | string;
 
-  @Output('open') openEventEmitter = new EventEmitter<void>();
-  @Output('close') closeEventEmitter = new EventEmitter<void>();
+  @Output() open = new EventEmitter<void>();
+  @Output() close = new EventEmitter<void>();
 
   @ViewChild('container') calendarContainer: ElementRef;
   @ViewChild('dayCalendar') dayCalendarRef: DayCalendarComponent;
@@ -329,7 +329,7 @@ export class DatePickerComponent implements OnChanges,
       this.timeSelectRef.api.triggerChange();
     }
 
-    this.openEventEmitter.emit();
+    this.open.emit();
   }
 
   hideCalendar() {
@@ -339,7 +339,7 @@ export class DatePickerComponent implements OnChanges,
       this.dayCalendarRef.api.toggleCalendar(ECalendarMode.Day);
     }
 
-    this.closeEventEmitter.emit();
+    this.close.emit();
   }
 
   onViewDateChange(value: string) {
