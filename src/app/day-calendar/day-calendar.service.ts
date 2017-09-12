@@ -166,6 +166,7 @@ export class DayCalendarService {
       yearFormatter: componentConfig.yearFormatter,
       monthBtnFormat: componentConfig.monthBtnFormat,
       monthBtnFormatter: componentConfig.monthBtnFormatter,
+      monthBtnCssClass: componentConfig.monthBtnCssClass,
       multipleYearsNavigateBy: componentConfig.multipleYearsNavigateBy,
       showMultipleYearsNavigation: componentConfig.showMultipleYearsNavigation
     });

@@ -80,4 +80,12 @@ export class MonthCalendarService {
 
     return month.format(config.monthBtnFormat);
   }
+
+  getMonthBtnCssClass(config: IMonthCalendarConfig, month: Moment) {
+    if (config.monthBtnCssClass) {
+      return config.monthBtnCssClass(month);
+    }
+
+    return '';
+  }
 }
