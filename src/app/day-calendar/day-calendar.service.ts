@@ -178,4 +178,11 @@ export class DayCalendarService {
 
     return day.format(config.dayBtnFormat);
   }
+
+  getDayBtnCssClass(config: IDayCalendarConfig, day: Moment): string {
+    if (config.dayBtnCssClass) {
+      return config.dayBtnCssClass(day);
+    }
+    return '';
+  }
 }

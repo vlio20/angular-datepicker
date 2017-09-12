@@ -18,6 +18,7 @@ export interface IDayCalendarConfig extends ICalendar {
   yearFormatter?: (year: Moment) => string;
   dayBtnFormat?: string;
   dayBtnFormatter?: (day: Moment) => string;
+  dayBtnCssClass?: (day: Moment) => string;
   monthBtnFormat?: string;
   monthBtnFormatter?: (day: Moment) => string;
   multipleYearsNavigateBy?: number;
