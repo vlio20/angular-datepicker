@@ -227,6 +227,7 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
     if (customCssClass) {
       cssClass[customCssClass] = true;
     }
+
     return cssClass;
   }
 }

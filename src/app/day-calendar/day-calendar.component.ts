@@ -200,6 +200,7 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
     if (customCssClass) {
       cssClasses[customCssClass] = true;
     }
+
     return cssClasses;
   }
 

@@ -184,6 +184,7 @@ export class DayCalendarService {
     if (config.dayBtnCssClassCallback) {
       return config.dayBtnCssClassCallback(day);
     }
+
     return '';
   }
 }
