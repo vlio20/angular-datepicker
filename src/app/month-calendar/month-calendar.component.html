@@ -20,7 +20,7 @@
               class="dp-calendar-month"
               *ngFor="let month of monthRow"
               [disabled]="isDisabledMonth(month)"
-              [ngClass]="{'dp-selected': month.selected,'dp-current-month': month.currentMonth}"
+              [ngClass]="getMonthBtnCssClass(month)"
               (click)="monthClicked(month)">
         {{getMonthBtnText(month)}}
       </button>

@@ -165,4 +165,12 @@ describe('Service: Calendar', () => {
         expect(service.getDayBtnText({dayBtnFormat: 'DD', dayBtnFormatter: (m => m.format('D'))}, date))
           .toEqual('5');
   }));
+
+  it('should check getDayBtnCssClass method',
+    inject([DayCalendarService],
+      (service: DayCalendarService) => {
+        const date = moment('05-04-2017', 'DD-MM-YYYY');
+        expect(service.getDayBtnCssClass({}, date)).toEqual('');
+        expect(service.getDayBtnCssClass({dayBtnCssClassCallback: (m => 'class1 class2')}, date)).toEqual('class1 class2');
+      }));
 });

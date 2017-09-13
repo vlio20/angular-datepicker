@@ -73,11 +73,19 @@ export class MonthCalendarService {
     return year.format(config.yearFormat);
   }
 
-  getMonthBtnText(config: IMonthCalendarConfig, month: Moment) {
+  getMonthBtnText(config: IMonthCalendarConfig, month: Moment): string {
     if (config.monthBtnFormatter) {
       return config.monthBtnFormatter(month);
     }
 
     return month.format(config.monthBtnFormat);
+  }
+
+  getMonthBtnCssClass(config: IMonthCalendarConfig, month: Moment): string {
+    if (config.monthBtnCssClassCallback) {
+      return config.monthBtnCssClassCallback(month);
+    }
+
+    return '';
   }
 }

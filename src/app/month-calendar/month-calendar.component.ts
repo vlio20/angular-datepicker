@@ -217,4 +217,17 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
   getMonthBtnText(month: IMonth): string {
     return this.monthCalendarService.getMonthBtnText(this.componentConfig, month.date);
   }
+
+  getMonthBtnCssClass(month: IMonth): {[klass: string]: boolean} {
+    const cssClass: {[klass: string]: boolean} = {
+      'dp-selected': month.selected,
+      'dp-current-month': month.currentMonth
+    };
+    const customCssClass: string = this.monthCalendarService.getMonthBtnCssClass(this.componentConfig, month.date);
+    if (customCssClass) {
+      cssClass[customCssClass] = true;
+    }
+
+    return cssClass;
+  }
 }

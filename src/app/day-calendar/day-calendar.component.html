@@ -25,13 +25,7 @@
               *ngFor="let day of week"
               (click)="dayClicked(day)"
               [disabled]="isDisabledDay(day)"
-              [ngClass]="{
-              'dp-selected': day.selected,
-              'dp-current-month': day.currentMonth,
-              'dp-prev-month': day.prevMonth,
-              'dp-next-month': day.nextMonth,
-              'dp-current-day': day.currentDay
-            }">
+              [ngClass]="getDayBtnCssClass(day)">
         {{getDayBtnText(day)}}
       </button>
     </div>

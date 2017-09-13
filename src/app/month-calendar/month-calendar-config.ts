@@ -10,6 +10,7 @@ export interface IMonthCalendarConfig extends ICalendar {
   isNavHeaderBtnClickable?: boolean;
   monthBtnFormat?: string;
   monthBtnFormatter?: (day: Moment) => string;
+  monthBtnCssClassCallback?: (day: Moment) => string;
   multipleYearsNavigateBy?: number;
   showMultipleYearsNavigation?: boolean;
 }

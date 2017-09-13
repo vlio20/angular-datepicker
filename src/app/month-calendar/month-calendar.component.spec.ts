@@ -4,6 +4,8 @@ import {UtilsService} from '../common/services/utils/utils.service';
 import {CalendarNavComponent} from '../calendar-nav/calendar-nav.component';
 import {MonthCalendarService} from './month-calendar.service';
 import * as moment from 'moment';
+import {IMonth} from './month.model';
+import {Moment} from 'moment';
 
 describe('Component: MonthCalendarComponent', () => {
   let component: MonthCalendarComponent;
@@ -30,6 +32,49 @@ describe('Component: MonthCalendarComponent', () => {
   it('should check getMonthBtnText default value', () => {
     expect(component.getMonthBtnText({
       date: moment('05-04-2017', 'DD-MM-YYYY')
-    })).toEqual('Apr');
+    } as IMonth)).toEqual('Apr');
+  });
+
+  describe('should have the right CSS classes for', () => {
+    const defaultMonth: IMonth = {
+      date: undefined,
+      selected: false,
+      currentMonth: false
+    };
+    const defaultCssClasses: { [klass: string]: boolean } = {
+      'dp-selected': false,
+      'dp-current-month': false
+    };
+
+    it('the selected month', () => {
+      expect(component.getMonthBtnCssClass({
+        ...defaultMonth,
+        selected: true
+      } as IMonth)).toEqual({
+        ...defaultCssClasses,
+        'dp-selected': true
+      });
+    });
+
+    it('the current month', () => {
+      expect(component.getMonthBtnCssClass({
+        ...defaultMonth,
+        currentMonth: true
+      } as IMonth)).toEqual({
+        ...defaultCssClasses,
+        'dp-current-month': true
+      });
+    });
+
+    it('custom days', () => {
+      component.componentConfig.monthBtnCssClassCallback = (day: Moment) => 'custom-class';
+
+      expect(component.getMonthBtnCssClass({
+        ...defaultMonth
+      } as IMonth)).toEqual({
+        ...defaultCssClasses,
+        'custom-class': true
+      });
+    });
   });
 });

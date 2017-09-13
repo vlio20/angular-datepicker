@@ -64,4 +64,12 @@ describe('Service: MonthCalendarService', () => {
         expect(service.getMonthBtnText({monthBtnFormat: 'MM', monthBtnFormatter: (m => m.format('M'))}, date))
           .toEqual('4');
       }));
+
+  it('should check getMonthBtnCssClass method',
+    inject([MonthCalendarService],
+      (service: MonthCalendarService) => {
+        const date = moment('05-04-2017', 'DD-MM-YYYY');
+        expect(service.getMonthBtnCssClass({}, date)).toEqual('');
+        expect(service.getMonthBtnCssClass({monthBtnCssClassCallback: (m => 'class1 class2')}, date)).toEqual('class1 class2');
+      }));
 });

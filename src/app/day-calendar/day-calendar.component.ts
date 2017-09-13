@@ -188,6 +188,22 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
     return this.dayCalendarService.getDayBtnText(this.componentConfig, day.date);
   }
 
+  getDayBtnCssClass(day: IDay): {[klass: string]: boolean} {
+    const cssClasses: {[klass: string]: boolean} = {
+      'dp-selected': day.selected,
+      'dp-current-month': day.currentMonth,
+      'dp-prev-month': day.prevMonth,
+      'dp-next-month': day.nextMonth,
+      'dp-current-day': day.currentDay
+    };
+    const customCssClass: string = this.dayCalendarService.getDayBtnCssClass(this.componentConfig, day.date);
+    if (customCssClass) {
+      cssClasses[customCssClass] = true;
+    }
+
+    return cssClasses;
+  }
+
   onLeftNav() {
     this.currentDateView.subtract(1, 'month');
     this.weeks = this.dayCalendarService

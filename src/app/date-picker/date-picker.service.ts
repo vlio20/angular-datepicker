@@ -76,8 +76,10 @@ export class DatePickerService {
       yearFormatter: pickerConfig.yearFormatter,
       dayBtnFormat: pickerConfig.dayBtnFormat,
       dayBtnFormatter: pickerConfig.dayBtnFormatter,
+      dayBtnCssClassCallback: pickerConfig.dayBtnCssClassCallback,
       monthBtnFormat: pickerConfig.monthBtnFormat,
       monthBtnFormatter: pickerConfig.monthBtnFormatter,
+      monthBtnCssClassCallback: pickerConfig.monthBtnCssClassCallback,
       multipleYearsNavigateBy: pickerConfig.multipleYearsNavigateBy,
       showMultipleYearsNavigation: pickerConfig.showMultipleYearsNavigation,
       locale: pickerConfig.locale
