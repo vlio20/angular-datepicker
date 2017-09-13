@@ -45,7 +45,7 @@ describe('Component: DayCalendarComponent', () => {
       nextMonth: false,
       currentDay: false
     };
-    const defaultCssClasses: { [klass: string]: any } = {
+    const defaultCssClasses: { [klass: string]: boolean } = {
       'dp-selected': false,
       'dp-current-month': false,
       'dp-prev-month': false,

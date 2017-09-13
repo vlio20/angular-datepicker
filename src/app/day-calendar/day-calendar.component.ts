@@ -188,8 +188,8 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
     return this.dayCalendarService.getDayBtnText(this.componentConfig, day.date);
   }
 
-  getDayBtnCssClass(day: IDay): {[klass: string]: any} {
-    const cssClasses: {[klass: string]: any} = {
+  getDayBtnCssClass(day: IDay): {[klass: string]: boolean} {
+    const cssClasses: {[klass: string]: boolean} = {
       'dp-selected': day.selected,
       'dp-current-month': day.currentMonth,
       'dp-prev-month': day.prevMonth,
