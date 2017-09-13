@@ -82,8 +82,8 @@ export class MonthCalendarService {
   }
 
   getMonthBtnCssClass(config: IMonthCalendarConfig, month: Moment) {
-    if (config.monthBtnCssClass) {
-      return config.monthBtnCssClass(month);
+    if (config.monthBtnCssClassCallback) {
+      return config.monthBtnCssClassCallback(month);
     }
 
     return '';

@@ -104,7 +104,7 @@ describe('Component: DayCalendarComponent', () => {
     });
 
     it('custom days', () => {
-      component.componentConfig.dayBtnCssClass = (day: Moment) => 'custom-class';
+      component.componentConfig.dayBtnCssClassCallback = (day: Moment) => 'custom-class';
 
       expect(component.getDayBtnCssClass({
         ...defaultDay

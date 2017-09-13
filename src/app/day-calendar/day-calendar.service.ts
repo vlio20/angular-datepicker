@@ -166,7 +166,7 @@ export class DayCalendarService {
       yearFormatter: componentConfig.yearFormatter,
       monthBtnFormat: componentConfig.monthBtnFormat,
       monthBtnFormatter: componentConfig.monthBtnFormatter,
-      monthBtnCssClass: componentConfig.monthBtnCssClass,
+      monthBtnCssClassCallback: componentConfig.monthBtnCssClassCallback,
       multipleYearsNavigateBy: componentConfig.multipleYearsNavigateBy,
       showMultipleYearsNavigation: componentConfig.showMultipleYearsNavigation
     });
@@ -181,8 +181,8 @@ export class DayCalendarService {
   }
 
   getDayBtnCssClass(config: IDayCalendarConfig, day: Moment): string {
-    if (config.dayBtnCssClass) {
-      return config.dayBtnCssClass(day);
+    if (config.dayBtnCssClassCallback) {
+      return config.dayBtnCssClassCallback(day);
     }
     return '';
   }

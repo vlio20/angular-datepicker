@@ -171,6 +171,6 @@ describe('Service: Calendar', () => {
       (service: DayCalendarService) => {
         const date = moment('05-04-2017', 'DD-MM-YYYY');
         expect(service.getDayBtnCssClass({}, date)).toEqual('');
-        expect(service.getDayBtnCssClass({dayBtnCssClass: (m => 'class1 class2')}, date)).toEqual('class1 class2');
+        expect(service.getDayBtnCssClass({dayBtnCssClassCallback: (m => 'class1 class2')}, date)).toEqual('class1 class2');
       }));
 });

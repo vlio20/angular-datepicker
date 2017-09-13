@@ -70,6 +70,6 @@ describe('Service: MonthCalendarService', () => {
       (service: MonthCalendarService) => {
         const date = moment('05-04-2017', 'DD-MM-YYYY');
         expect(service.getMonthBtnCssClass({}, date)).toEqual('');
-        expect(service.getMonthBtnCssClass({monthBtnCssClass: (m => 'class1 class2')}, date)).toEqual('class1 class2');
+        expect(service.getMonthBtnCssClass({monthBtnCssClassCallback: (m => 'class1 class2')}, date)).toEqual('class1 class2');
       }));
 });

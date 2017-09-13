@@ -67,7 +67,7 @@ describe('Component: MonthCalendarComponent', () => {
     });
 
     it('custom days', () => {
-      component.componentConfig.monthBtnCssClass = (day: Moment) => 'custom-class';
+      component.componentConfig.monthBtnCssClassCallback = (day: Moment) => 'custom-class';
 
       expect(component.getMonthBtnCssClass({
         ...defaultMonth
