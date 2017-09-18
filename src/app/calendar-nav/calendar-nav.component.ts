@@ -1,9 +1,10 @@
-import {Component, EventEmitter, HostBinding, Input, Output} from '@angular/core';
+import {Component, EventEmitter, HostBinding, Input, Output, ViewEncapsulation} from '@angular/core';
 
 @Component({
   selector: 'dp-calendar-nav',
   templateUrl: './calendar-nav.component.html',
-  styleUrls: ['./calendar-nav.component.less']
+  styleUrls: ['./calendar-nav.component.less'],
+  encapsulation: ViewEncapsulation.None
 })
 export class CalendarNavComponent {
   @Output() onLeftNav: EventEmitter<null> = new EventEmitter();

@@ -10,7 +10,8 @@ import {
   OnChanges,
   OnInit,
   Output,
-  SimpleChanges
+  SimpleChanges,
+  ViewEncapsulation
 } from '@angular/core';
 import {DayCalendarService} from './day-calendar.service';
 import * as moment from 'moment';
@@ -34,6 +35,7 @@ import {IMonth} from '../month-calendar/month.model';
   selector: 'dp-day-calendar',
   templateUrl: 'day-calendar.component.html',
   styleUrls: ['day-calendar.component.less'],
+  encapsulation: ViewEncapsulation.None,
   providers: [
     DayCalendarService,
     {
@@ -68,7 +70,7 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
   currentDateView: Moment;
   inputValue: CalendarValue;
   inputValueType: ECalendarValue;
-  validateFn: (inputVal: CalendarValue) => { [key: string]: any };
+  validateFn: (inputVal: CalendarValue) => {[key: string]: any};
   currentCalendarMode: ECalendarMode = ECalendarMode.Day;
   monthCalendarConfig: IMonthCalendarConfig;
 

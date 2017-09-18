@@ -32,7 +32,8 @@ import {
   Output,
   Renderer,
   SimpleChanges,
-  ViewChild
+  ViewChild,
+  ViewEncapsulation
 } from '@angular/core';
 import {
   ControlValueAccessor,
@@ -49,6 +50,7 @@ import {Moment, unitOfTime} from 'moment';
   selector: 'dp-date-picker',
   templateUrl: 'date-picker.component.html',
   styleUrls: ['date-picker.component.less'],
+  encapsulation: ViewEncapsulation.None,
   providers: [
     DatePickerService,
     DayTimeCalendarService,

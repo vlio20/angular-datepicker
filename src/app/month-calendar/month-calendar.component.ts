@@ -8,7 +8,8 @@ import {
   OnChanges,
   OnInit,
   Output,
-  SimpleChanges
+  SimpleChanges,
+  ViewEncapsulation
 } from '@angular/core';
 import {IMonth} from './month.model';
 import {MonthCalendarService} from './month-calendar.service';
@@ -29,6 +30,7 @@ import {UtilsService} from '../common/services/utils/utils.service';
   selector: 'dp-month-calendar',
   templateUrl: 'month-calendar.component.html',
   styleUrls: ['month-calendar.component.less'],
+  encapsulation: ViewEncapsulation.None,
   providers: [
     MonthCalendarService,
     {
@@ -59,7 +61,7 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
   currentDateView: Moment;
   inputValue: CalendarValue;
   inputValueType: ECalendarValue;
-  validateFn: (inputVal: CalendarValue) => { [key: string]: any };
+  validateFn: (inputVal: CalendarValue) => {[key: string]: any};
 
   set selected(selected: Moment[]) {
     this._selected = selected;
@@ -166,7 +168,7 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
   onLeftSecondaryNav() {
     let navigateBy = this.componentConfig.multipleYearsNavigateBy;
     const isOutsideRange = this.componentConfig.min &&
-                         this.currentDateView.year() - this.componentConfig.min.year() < navigateBy;
+      this.currentDateView.year() - this.componentConfig.min.year() < navigateBy;
     if (isOutsideRange) {
       navigateBy = this.currentDateView.year() - this.componentConfig.min.year();
     }
@@ -182,7 +184,7 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
   onRightSecondaryNav() {
     let navigateBy = this.componentConfig.multipleYearsNavigateBy;
     const isOutsideRange = this.componentConfig.max &&
-                         this.componentConfig.max.year() - this.currentDateView.year() < navigateBy;
+      this.componentConfig.max.year() - this.currentDateView.year() < navigateBy;
     if (isOutsideRange) {
       navigateBy = this.componentConfig.max.year() - this.currentDateView.year();
     }

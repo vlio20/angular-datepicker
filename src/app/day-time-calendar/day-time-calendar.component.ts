@@ -9,7 +9,7 @@ import {
   OnChanges,
   OnInit,
   Output,
-  SimpleChanges
+  SimpleChanges, ViewEncapsulation
 } from '@angular/core';
 import {
   ControlValueAccessor,
@@ -32,6 +32,7 @@ import {DayTimeCalendarService} from './day-time-calendar.service';
   selector: 'dp-day-time-calendar',
   templateUrl: 'day-time-calendar.component.html',
   styleUrls: ['day-time-calendar.component.less'],
+  encapsulation: ViewEncapsulation.None,
   providers: [
     DayTimeCalendarService,
     DayCalendarService,

@@ -10,7 +10,7 @@ import {
   OnChanges,
   OnInit,
   Output,
-  SimpleChanges
+  SimpleChanges, ViewEncapsulation
 } from '@angular/core';
 import {TimeSelectService, TimeUnit} from './time-select.service';
 import * as moment from 'moment';
@@ -32,6 +32,7 @@ import {IDate} from '../common/models/date.model';
   selector: 'dp-time-select',
   templateUrl: 'time-select.component.html',
   styleUrls: ['time-select.component.less'],
+  encapsulation: ViewEncapsulation.None,
   providers: [
     TimeSelectService,
     {
