@@ -16,6 +16,7 @@ export class DatePickerService {
     closeOnSelect: true,
     closeOnSelectDelay: 100,
     format: 'DD-MM-YYYY',
+    apiControlOnly: true,
     onOpenDelay: 0,
     disableKeypress: false,
     showNearMonthDays: true,

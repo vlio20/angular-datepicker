@@ -745,6 +745,25 @@
         </div>
       </div>
 
+      <div class="dp-option" *ngIf="isValidConfig('apiControlOnly')">
+        <span class="dp-option-header">
+          Show picker via api control only (apiControlOnly):
+        </span>
+        <div class="dp-option-playground">
+          <label>No
+            <input type="radio"
+                   [(ngModel)]="config.apiControlOnly"
+                   name="openOnFocus"
+                   [value]="false"
+                   (ngModelChange)="configChanged('apiControlOnly', 'false')">
+          </label>
+          <label>Yes
+            <input type="radio" [(ngModel)]="config.apiControlOnly" name="openOnFocus" [value]="true"
+                   (ngModelChange)="configChanged('apiControlOnly', 'true')">
+          </label>
+        </div>
+      </div>
+
       <div class="dp-option" *ngIf="isValidConfig('onOpenDelay')">
         <span class="dp-option-header">
           Open Delay in ms (onOpenDelay):

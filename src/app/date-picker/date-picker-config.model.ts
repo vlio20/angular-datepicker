@@ -8,6 +8,7 @@ export interface IDatePickerConfig extends IDayCalendarConfig,
                                            ITimeSelectConfig {
   closeOnSelect?: boolean;
   closeOnSelectDelay?: number;
+  apiControlOnly?: boolean;
   onOpenDelay?: number;
   disableKeypress?: boolean;
   appendTo?: string | HTMLElement;
