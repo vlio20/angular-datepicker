@@ -745,21 +745,40 @@
         </div>
       </div>
 
-      <div class="dp-option" *ngIf="isValidConfig('apiControlOnly')">
+      <div class="dp-option" *ngIf="isValidConfig('openOnFocus')">
         <span class="dp-option-header">
-          Show picker via api control only (apiControlOnly):
+          Show picker when input receives focus (openOnFocus):
         </span>
         <div class="dp-option-playground">
           <label>No
             <input type="radio"
-                   [(ngModel)]="config.apiControlOnly"
+                   [(ngModel)]="config.openOnFocus"
                    name="openOnFocus"
                    [value]="false"
-                   (ngModelChange)="configChanged('apiControlOnly', 'false')">
+                   (ngModelChange)="configChanged('openOnFocus', 'false')">
           </label>
           <label>Yes
-            <input type="radio" [(ngModel)]="config.apiControlOnly" name="openOnFocus" [value]="true"
-                   (ngModelChange)="configChanged('apiControlOnly', 'true')">
+            <input type="radio" [(ngModel)]="config.openOnFocus" name="openOnFocus" [value]="true"
+                   (ngModelChange)="configChanged('openOnFocus', 'true')">
+          </label>
+        </div>
+      </div>
+
+      <div class="dp-option" *ngIf="isValidConfig('openOnClick')">
+        <span class="dp-option-header">
+          Show picker when input is clicked (openOnClick):
+        </span>
+        <div class="dp-option-playground">
+          <label>No
+            <input type="radio"
+                   [(ngModel)]="config.openOnClick"
+                   name="openOnClick"
+                   [value]="false"
+                   (ngModelChange)="configChanged('openOnClick', 'false')">
+          </label>
+          <label>Yes
+            <input type="radio" [(ngModel)]="config.openOnClick" name="openOnClick" [value]="true"
+                   (ngModelChange)="configChanged('openOnClick', 'true')">
           </label>
         </div>
       </div>

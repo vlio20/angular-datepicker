@@ -69,11 +69,11 @@ import {Moment, unitOfTime} from 'moment';
   ]
 })
 export class DatePickerComponent implements OnChanges,
-  OnInit,
-  AfterViewInit,
-  ControlValueAccessor,
-  Validator,
-  OnDestroy {
+                                            OnInit,
+                                            AfterViewInit,
+                                            ControlValueAccessor,
+                                            Validator,
+                                            OnDestroy {
   isInitialized: boolean = false;
   @Input() config: IDatePickerConfig;
   @Input() mode: CalendarMode = 'day';
@@ -112,7 +112,7 @@ export class DatePickerComponent implements OnChanges,
   popupElem: HTMLElement;
   handleInnerElementClickUnlisteners: Function[] = [];
   globalListnersUnlisteners: Function[] = [];
-  validateFn: (inputVal: CalendarValue) => { [key: string]: any };
+  validateFn: (inputVal: CalendarValue) => {[key: string]: any};
   api: IDpDayPickerApi = {
     open: this.showCalendars.bind(this),
     close: this.hideCalendar.bind(this)
@@ -132,6 +132,14 @@ export class DatePickerComponent implements OnChanges,
 
   get areCalendarsShown(): boolean {
     return this._areCalendarsShown;
+  }
+
+  get openOnFocus(): boolean {
+    return this.componentConfig.openOnFocus;
+  }
+
+  get openOnClick(): boolean {
+    return this.componentConfig.openOnClick;
   }
 
   set areCalendarsShown(value: boolean) {
@@ -162,7 +170,11 @@ export class DatePickerComponent implements OnChanges,
 
   @HostListener('click')
   onClick() {
-    if (!this.isFocusedTrigger && !this.disabled && !this.config.apiControlOnly) {
+    if (!this.openOnClick) {
+      return;
+    }
+
+    if (!this.isFocusedTrigger && !this.disabled) {
       this.hideStateHelper = true;
       if (!this.areCalendarsShown) {
         this.showCalendars();
@@ -311,9 +323,10 @@ export class DatePickerComponent implements OnChanges,
   }
 
   inputFocused() {
-    if (this.config.apiControlOnly) {
+    if (!this.openOnFocus) {
       return;
     }
+
     this.isFocusedTrigger = true;
     setTimeout(() => {
       this.hideStateHelper = false;
