@@ -751,14 +751,19 @@
         </span>
         <div class="dp-option-playground">
           <label>No
-            <input type="radio"
+            <input id="noOpenOnFocus"
+                   type="radio"
                    [(ngModel)]="config.openOnFocus"
                    name="openOnFocus"
                    [value]="false"
                    (ngModelChange)="configChanged('openOnFocus', 'false')">
           </label>
           <label>Yes
-            <input type="radio" [(ngModel)]="config.openOnFocus" name="openOnFocus" [value]="true"
+            <input id="yesOpenOnFocus"
+                   type="radio"
+                   [(ngModel)]="config.openOnFocus"
+                   name="openOnFocus"
+                   [value]="true"
                    (ngModelChange)="configChanged('openOnFocus', 'true')">
           </label>
         </div>
@@ -770,14 +775,19 @@
         </span>
         <div class="dp-option-playground">
           <label>No
-            <input type="radio"
+            <input id="noOpenOnClick"
+                   type="radio"
                    [(ngModel)]="config.openOnClick"
                    name="openOnClick"
                    [value]="false"
                    (ngModelChange)="configChanged('openOnClick', 'false')">
           </label>
           <label>Yes
-            <input type="radio" [(ngModel)]="config.openOnClick" name="openOnClick" [value]="true"
+            <input id="yesOpenOnClick"
+                   type="radio"
+                   [(ngModel)]="config.openOnClick"
+                   name="openOnClick"
+                   [value]="true"
                    (ngModelChange)="configChanged('openOnClick', 'true')">
           </label>
         </div>

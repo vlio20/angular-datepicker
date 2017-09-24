@@ -10,6 +10,26 @@ describe('ng2-date-picker App', () => {
     page.navigateTo();
   });
 
+  describe('dpDayPicker configuration', () => {
+    beforeEach(() => {
+      page.daytimePickerMenu.click();
+    });
+
+    it('openOnClick = false, should not open picker when clicked', () => {
+      page.openOnClickRadioOff.click();
+      page.openOnFocusRadioOff.click();
+      page.daytimePickerInput.click();
+      expect(page.datePickerPopup.isDisplayed()).toBe(false);
+    });
+
+    it('openOnClick = true, should open picker when clicked', () => {
+      page.openOnFocusRadioOn.click();
+      page.daytimePickerInput.click();
+      expect(page.datePickerPopup.isDisplayed()).toBe(true);
+    });
+
+  });
+
   describe('dpDayPicker directive', () => {
     beforeEach(() => {
       page.dayDirectiveMenu.click();
@@ -635,7 +655,7 @@ describe('ng2-date-picker App', () => {
   });
 
   describe('Locales', () => {
-    it ('should check day time picker locale', () => {
+    it('should check day time picker locale', () => {
       page.hebrewLocale.click();
 
       page.daytimePickerMenu.click();
