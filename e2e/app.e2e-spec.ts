@@ -23,7 +23,8 @@ describe('ng2-date-picker App', () => {
     });
 
     it('openOnClick = true, should open picker when clicked', () => {
-      page.openOnFocusRadioOn.click();
+      page.openOnClickRadioOn.click();
+      page.openOnFocusRadioOff.click();
       page.daytimePickerInput.click();
       expect(page.datePickerPopup.isDisplayed()).toBe(true);
     });
