@@ -1,5 +1,6 @@
 import {ECalendarValue} from '../common/types/calendar-value-enum';
 import {
+  ChangeDetectionStrategy,
   Component,
   EventEmitter,
   forwardRef,
@@ -31,6 +32,7 @@ import {UtilsService} from '../common/services/utils/utils.service';
   templateUrl: 'month-calendar.component.html',
   styleUrls: ['month-calendar.component.less'],
   encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     MonthCalendarService,
     {
