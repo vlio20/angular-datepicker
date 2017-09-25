@@ -2,6 +2,7 @@ import {ECalendarValue} from '../common/types/calendar-value-enum';
 import {SingleCalendarValue} from '../common/types/single-calendar-value';
 import {ECalendarMode} from '../common/types/calendar-mode-enum';
 import {
+  ChangeDetectionStrategy,
   Component,
   EventEmitter,
   forwardRef,
@@ -33,6 +34,7 @@ import {IDate} from '../common/models/date.model';
   templateUrl: 'time-select.component.html',
   styleUrls: ['time-select.component.less'],
   encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     TimeSelectService,
     {

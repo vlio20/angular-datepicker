@@ -19,6 +19,8 @@ import {IDpDayPickerApi} from './date-picker.api';
 import {DatePickerService} from './date-picker.service';
 import {
   AfterViewInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   ElementRef,
   EventEmitter,
@@ -51,6 +53,7 @@ import {Moment, unitOfTime} from 'moment';
   templateUrl: 'date-picker.component.html',
   styleUrls: ['date-picker.component.less'],
   encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     DatePickerService,
     DayTimeCalendarService,
@@ -165,7 +168,8 @@ export class DatePickerComponent implements OnChanges,
               private domHelper: DomHelper,
               private elemRef: ElementRef,
               private renderer: Renderer,
-              private utilsService: UtilsService) {
+              private utilsService: UtilsService,
+              private cd: ChangeDetectorRef) {
   }
 
   @HostListener('click')
@@ -352,6 +356,7 @@ export class DatePickerComponent implements OnChanges,
 
   hideCalendar() {
     this.areCalendarsShown = false;
+    this.cd.markForCheck();
 
     if (this.dayCalendarRef) {
       this.dayCalendarRef.api.toggleCalendar(ECalendarMode.Day);

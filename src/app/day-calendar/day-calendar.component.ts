@@ -2,6 +2,7 @@ import {ECalendarValue} from '../common/types/calendar-value-enum';
 import {SingleCalendarValue} from '../common/types/single-calendar-value';
 import {ECalendarMode} from '../common/types/calendar-mode-enum';
 import {
+  ChangeDetectionStrategy,
   Component,
   EventEmitter,
   forwardRef,
@@ -36,6 +37,7 @@ import {IMonth} from '../month-calendar/month.model';
   templateUrl: 'day-calendar.component.html',
   styleUrls: ['day-calendar.component.less'],
   encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     DayCalendarService,
     {
