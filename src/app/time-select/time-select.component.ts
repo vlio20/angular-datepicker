@@ -3,6 +3,7 @@ import {SingleCalendarValue} from '../common/types/single-calendar-value';
 import {ECalendarMode} from '../common/types/calendar-mode-enum';
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   EventEmitter,
   forwardRef,
@@ -77,6 +78,7 @@ export class TimeSelectComponent implements OnInit, OnChanges, ControlValueAcces
     this._selected = selected;
     this.calculateTimeParts(this.selected);
     this.onChangeCallback(this.processOnChangeCallback(selected));
+    this.cd.markForCheck();
   }
 
   get selected(): Moment {
@@ -88,7 +90,8 @@ export class TimeSelectComponent implements OnInit, OnChanges, ControlValueAcces
   };
 
   constructor(public timeSelectService: TimeSelectService,
-              public utilsService: UtilsService) {
+              public utilsService: UtilsService,
+              private cd: ChangeDetectorRef) {
   }
 
   ngOnInit() {
