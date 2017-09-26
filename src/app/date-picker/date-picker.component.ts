@@ -83,7 +83,6 @@ export class DatePickerComponent implements OnChanges,
   @Input() placeholder: string = '';
   @Input() disabled: boolean = false;
   @Input() displayDate: SingleCalendarValue;
-  @HostBinding('class') @Input() theme: string;
   @Input() minDate: Moment | string;
   @Input() maxDate: Moment | string;
   @Input() minTime: Moment | string;
@@ -96,6 +95,17 @@ export class DatePickerComponent implements OnChanges,
   @ViewChild('dayCalendar') dayCalendarRef: DayCalendarComponent;
   @ViewChild('monthCalendar') monthCalendarRef: DayCalendarComponent;
   @ViewChild('timeSelect') timeSelectRef: TimeSelectComponent;
+
+  private _theme: string;
+
+  get theme(): string {
+    return this._theme;
+  }
+
+  @HostBinding('class') @Input() set theme(value: string) {
+    this._theme = value;
+    this.cd.markForCheck();
+  }
 
   componentConfig: IDatePickerConfig;
   dayCalendarConfig: IDayCalendarConfig;
@@ -346,7 +356,7 @@ export class DatePickerComponent implements OnChanges,
   showCalendars() {
     this.hideStateHelper = true;
     this.areCalendarsShown = true;
-
+    this.cd.markForCheck();
     if (this.timeSelectRef) {
       this.timeSelectRef.api.triggerChange();
     }
