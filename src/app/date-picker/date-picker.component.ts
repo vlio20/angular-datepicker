@@ -340,7 +340,9 @@ export class DatePickerComponent implements OnChanges,
   showCalendars() {
     this.hideStateHelper = true;
     this.areCalendarsShown = true;
+
     this.cd.markForCheck();
+
     if (this.timeSelectRef) {
       this.timeSelectRef.api.triggerChange();
     }
