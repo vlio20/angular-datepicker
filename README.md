@@ -3,7 +3,8 @@
 [![Package Quality](http://npm.packagequality.com/shield/ng2-date-picker.svg)](http://packagequality.com/#?package=ng2-date-picker)
 
 # Date Picker
-This is a configurable date-picker build for Angular2 applications and uses MomentJS as its dependency.   
+This is a configurable date-picker build for Angular2 applications and uses MomentJS as its dependency.
+Support OnPush change detection strategy.
 [DEMO](https://vlio20.github.io/angular-datepicker/)
 
 ## Screenshots
