@@ -134,6 +134,14 @@ export class DatePickerComponent implements OnChanges,
     return this._areCalendarsShown;
   }
 
+  get openOnFocus(): boolean {
+    return this.componentConfig.openOnFocus;
+  }
+
+  get openOnClick(): boolean {
+    return this.componentConfig.openOnClick;
+  }
+
   set areCalendarsShown(value: boolean) {
     if (value) {
       this.startGlobalListeners();
@@ -162,6 +170,10 @@ export class DatePickerComponent implements OnChanges,
 
   @HostListener('click')
   onClick() {
+    if (!this.openOnClick) {
+      return;
+    }
+
     if (!this.isFocusedTrigger && !this.disabled) {
       this.hideStateHelper = true;
       if (!this.areCalendarsShown) {
@@ -311,6 +323,10 @@ export class DatePickerComponent implements OnChanges,
   }
 
   inputFocused() {
+    if (!this.openOnFocus) {
+      return;
+    }
+
     this.isFocusedTrigger = true;
     setTimeout(() => {
       this.hideStateHelper = false;

@@ -745,6 +745,54 @@
         </div>
       </div>
 
+      <div class="dp-option" *ngIf="isValidConfig('openOnFocus')">
+        <span class="dp-option-header">
+          Show picker when input receives focus (openOnFocus):
+        </span>
+        <div class="dp-option-playground">
+          <label>No
+            <input id="noOpenOnFocus"
+                   type="radio"
+                   [(ngModel)]="config.openOnFocus"
+                   name="openOnFocus"
+                   [value]="false"
+                   (ngModelChange)="configChanged('openOnFocus', 'false')">
+          </label>
+          <label>Yes
+            <input id="yesOpenOnFocus"
+                   type="radio"
+                   [(ngModel)]="config.openOnFocus"
+                   name="openOnFocus"
+                   [value]="true"
+                   (ngModelChange)="configChanged('openOnFocus', 'true')">
+          </label>
+        </div>
+      </div>
+
+      <div class="dp-option" *ngIf="isValidConfig('openOnClick')">
+        <span class="dp-option-header">
+          Show picker when input is clicked (openOnClick):
+        </span>
+        <div class="dp-option-playground">
+          <label>No
+            <input id="noOpenOnClick"
+                   type="radio"
+                   [(ngModel)]="config.openOnClick"
+                   name="openOnClick"
+                   [value]="false"
+                   (ngModelChange)="configChanged('openOnClick', 'false')">
+          </label>
+          <label>Yes
+            <input id="yesOpenOnClick"
+                   type="radio"
+                   [(ngModel)]="config.openOnClick"
+                   name="openOnClick"
+                   [value]="true"
+                   (ngModelChange)="configChanged('openOnClick', 'true')">
+          </label>
+        </div>
+      </div>
+
       <div class="dp-option" *ngIf="isValidConfig('onOpenDelay')">
         <span class="dp-option-header">
           Open Delay in ms (onOpenDelay):

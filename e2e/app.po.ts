@@ -31,6 +31,10 @@ export class DemoPage {
   currentLocationBtn = $(`#datePicker .dp-current-location-btn`);
   themeOnRadio = $('#themeOn');
   themeOffRadio = $('#themeOff');
+  openOnFocusRadioOn = $('#yesOpenOnFocus');
+  openOnFocusRadioOff = $('#noOpenOnFocus');
+  openOnClickRadioOn = $('#yesOpenOnClick');
+  openOnClickRadioOff = $('#noOpenOnClick');
   onOpenDelayInput = $('#onOpenDelay');
   showNearMonthDaysRadio = $('#showNearMonthDaysRadio');
   hideNearMonthDaysRadio = $('#hideNearMonthDaysRadio');
