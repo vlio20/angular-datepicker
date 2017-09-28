@@ -2,6 +2,8 @@ import {ECalendarValue} from '../common/types/calendar-value-enum';
 import {SingleCalendarValue} from '../common/types/single-calendar-value';
 import {ECalendarMode} from '../common/types/calendar-mode-enum';
 import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   EventEmitter,
   forwardRef,
@@ -36,6 +38,7 @@ import {IMonth} from '../month-calendar/month.model';
   templateUrl: 'day-calendar.component.html',
   styleUrls: ['day-calendar.component.less'],
   encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     DayCalendarService,
     {
@@ -89,7 +92,8 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
   }
 
   constructor(public dayCalendarService: DayCalendarService,
-              public utilsService: UtilsService) {
+              public utilsService: UtilsService,
+              private cd: ChangeDetectorRef) {
   }
 
   ngOnInit() {
@@ -111,6 +115,7 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
       .generateWeekdays(this.componentConfig.firstDayOfWeek);
     this.inputValueType = this.utilsService.getInputType(this.inputValue, this.componentConfig.allowMultiSelect);
     this.monthCalendarConfig = this.dayCalendarService.getMonthCalendarConfig(this.componentConfig);
+    this.cd.markForCheck();
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -234,6 +239,7 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
     if (this.currentCalendarMode !== mode) {
       this.currentCalendarMode = mode;
       this.onNavHeaderBtnClick.emit(mode);
+      this.cd.markForCheck();
     }
   }
 
@@ -243,6 +249,7 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
     this.weeks = this.dayCalendarService
       .generateMonthArray(this.componentConfig, this.currentDateView, this.selected);
     this.onMonthSelect.emit(month);
+    this.cd.markForCheck();
   }
 
   moveCalendarsBy(current: Moment, amount: number, granularity: moment.unitOfTime.Base = 'month') {
