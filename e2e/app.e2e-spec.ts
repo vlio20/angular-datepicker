@@ -711,5 +711,5 @@ describe('ng2-date-picker App', () => {
       page.hideInputRadio.click();
       expect(page.daytimePickerInput.isDisplayed()).toBe(false);
     });
-  })
+  });
 });
