@@ -635,11 +635,12 @@ describe('ng2-date-picker App', () => {
       expect(page.calendarFirstMonthOfYear.getText()).toEqual('1');
     });
 
-    xit('should check showMultipleYearsNavigation is working', () => {
+    it('should check showMultipleYearsNavigation is working', () => {
+      page.dayPickerMenu.click();
       page.dayPickerInput.click();
       page.dayCalendarNavHeaderBtn.click();
-      expect(page.dayCalendarLeftSecondaryNavBtn.isDisplayed()).toBe(false);
-      expect(page.dayCalendarRightSecondaryNavBtn.isDisplayed()).toBe(false);
+      expect(page.dayCalendarLeftSecondaryNavBtn.isPresent()).toBe(false);
+      expect(page.dayCalendarRightSecondaryNavBtn.isPresent()).toBe(false);
 
       page.showMultipleYearsNavigation.click();
       page.multipleYearsNavigateBy.clear();
@@ -647,11 +648,11 @@ describe('ng2-date-picker App', () => {
       page.dayPickerInput.click();
       page.dayCalendarNavHeaderBtn.click();
       page.dayCalendarLeftSecondaryNavBtn.click();
-      expect(page.dayPickerInput.getAttribute('value')).toEqual(moment().subtract(20, 'year').format('DD-MM-YYYY'));
+      expect(page.dayCalendarNavMonthHeaderBtn.getText()).toEqual(moment().subtract(20, 'year').format('YYYY'));
 
       page.dayCalendarRightSecondaryNavBtn.click();
       page.dayCalendarRightSecondaryNavBtn.click();
-      expect(page.dayPickerInput.getAttribute('value')).toEqual(moment().add(20, 'year').format('DD-MM-YYYY'));
+      expect(page.dayCalendarNavMonthHeaderBtn.getText()).toEqual(moment().add(20, 'year').format('YYYY'));
     });
   });
 
