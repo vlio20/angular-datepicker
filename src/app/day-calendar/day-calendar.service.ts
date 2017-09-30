@@ -67,7 +67,6 @@ export class DayCalendarService {
 
     const daysOfCalendar: IDay[] = this.utilsService.createArray(42)
       .reduce((array: IDay[]) => {
-        console.log(current.format('DD-MM HH:mm'));
         array.push({
           date: current.clone(),
           selected: !!selected.find(selectedDay => current.isSame(selectedDay, 'day')),
