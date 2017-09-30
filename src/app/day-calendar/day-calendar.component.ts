@@ -85,6 +85,7 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
   set selected(selected: Moment[]) {
     this._selected = selected;
     this.onChangeCallback(this.processOnChangeCallback(selected));
+    this.cd.markForCheck();
   }
 
   get selected(): Moment[] {
@@ -130,6 +131,7 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
   }
 
   writeValue(value: CalendarValue): void {
+    console.log('inputValue equal: ', this.inputValue === value);
     this.inputValue = value;
 
     if (value) {

@@ -137,6 +137,7 @@ export class DatePickerComponent implements OnChanges,
       .convertFromMomentArray(this.componentConfig.format, selected, ECalendarValue.StringArr))
       .join(', ');
     this.onChangeCallback(this.processOnChangeCallback(selected));
+    this.cd.markForCheck();
   }
 
   get selected(): Moment[] {
