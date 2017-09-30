@@ -237,10 +237,10 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
 
   getWeekdayName(weekday: Moment): string {
     if (this.componentConfig.weekDayFormatter) {
-      return this.componentConfig.weekDayFormatter(weekday.day())
+      return this.componentConfig.weekDayFormatter(weekday.day());
     }
 
-    return weekday.format(this.componentConfig.weekDayFormat)
+    return weekday.format(this.componentConfig.weekDayFormat);
   }
 
   toggleCalendar(mode: ECalendarMode) {
