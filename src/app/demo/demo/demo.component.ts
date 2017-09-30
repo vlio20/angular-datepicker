@@ -2,7 +2,7 @@ import debounce from '../../common/decorators/decorators';
 import {IDatePickerConfig} from '../../date-picker/date-picker-config.model';
 import {DatePickerComponent} from '../../date-picker/date-picker.component';
 import {DatePickerDirective} from '../../date-picker/date-picker.directive';
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, HostListener, ViewChild} from '@angular/core';
+import {Component, HostListener, ViewChild} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import * as moment from 'moment';
 import {Moment} from 'moment';
@@ -102,8 +102,7 @@ const DAY_TIME_CALENDAR_OPTION_KEYS = [
   selector: 'dp-demo',
   templateUrl: './demo.component.html',
   entryComponents: [DatePickerComponent],
-  styleUrls: ['./demo.component.less'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./demo.component.less']
 })
 export class DemoComponent {
   showDemo: boolean = true;
@@ -192,8 +191,7 @@ export class DemoComponent {
   };
   isAtTop: boolean = true;
 
-  constructor(private gaService: GaService,
-              private cd: ChangeDetectorRef) {
+  constructor(private gaService: GaService) {
   }
 
   @HostListener('document:scroll')
@@ -224,7 +222,7 @@ export class DemoComponent {
 
   configChanged(change: string = 'N/A', value: any = 'N/A') {
     this.config = {...this.config};
-    this.cd.markForCheck();
+
     this.gaService.emitEvent('ConfigChange', change, value);
 
     if (change === 'locale') {
