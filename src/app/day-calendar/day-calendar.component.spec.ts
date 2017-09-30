@@ -2,11 +2,11 @@ import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {UtilsService} from '../common/services/utils/utils.service';
 import {CalendarNavComponent} from '../calendar-nav/calendar-nav.component';
 import * as moment from 'moment';
+import {Moment} from 'moment';
 import {DayCalendarComponent} from './day-calendar.component';
 import {DayCalendarService} from './day-calendar.service';
 import {MonthCalendarComponent} from '../month-calendar/month-calendar.component';
 import {IDay} from './day.model';
-import {Moment} from 'moment';
 
 describe('Component: DayCalendarComponent', () => {
   let component: DayCalendarComponent;
@@ -45,7 +45,7 @@ describe('Component: DayCalendarComponent', () => {
       nextMonth: false,
       currentDay: false
     };
-    const defaultCssClasses: { [klass: string]: boolean } = {
+    const defaultCssClasses: {[klass: string]: boolean} = {
       'dp-selected': false,
       'dp-current-month': false,
       'dp-prev-month': false,
@@ -115,4 +115,17 @@ describe('Component: DayCalendarComponent', () => {
     });
   });
 
+  describe('should have the correct weekday format', () => {
+    it('weekdayFormat', () => {
+      component.componentConfig.weekDayFormat = 'd';
+
+      expect(component.getWeekdayName(moment())).toBe(moment().format('d'));
+    });
+
+    it('weekdayFormatter', () => {
+      component.componentConfig.weekDayFormatter = (x: number) => x.toString();
+
+      expect(component.getWeekdayName(moment())).toBe(moment().day().toString());
+    });
+  });
 });

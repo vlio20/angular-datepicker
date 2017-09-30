@@ -235,6 +235,14 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
     return this.componentConfig.enableMonthSelector;
   }
 
+  getWeekdayName(weekday: Moment): string {
+    if (this.componentConfig.weekDayFormatter) {
+      return this.componentConfig.weekDayFormatter(weekday.day())
+    }
+
+    return weekday.format(this.componentConfig.weekDayFormat)
+  }
+
   toggleCalendar(mode: ECalendarMode) {
     if (this.currentCalendarMode !== mode) {
       this.currentCalendarMode = mode;
