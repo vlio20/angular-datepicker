@@ -131,7 +131,6 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
   }
 
   writeValue(value: CalendarValue): void {
-    console.log('inputValue equal: ', this.inputValue === value);
     this.inputValue = value;
 
     if (value) {
