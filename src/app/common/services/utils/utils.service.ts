@@ -6,8 +6,8 @@ import {Moment, unitOfTime} from 'moment';
 import {CalendarValue} from '../../types/calendar-value';
 import {IDate} from '../../models/date.model';
 import {CalendarMode} from '../../types/calendar-mode';
+import {DateValidator} from '../../types/validator.type';
 
-export type DateValidatorFn = (inputVal: CalendarValue) => { [key: string]: any };
 export interface DateLimits {
   minDate?: SingleCalendarValue;
   maxDate?: SingleCalendarValue;
@@ -93,9 +93,9 @@ export class UtilsService {
   convertToMomentArray(value: CalendarValue, format: string, allowMultiSelect: boolean): Moment[] {
     switch (this.getInputType(value, allowMultiSelect)) {
       case (ECalendarValue.String):
-        return value ? [moment(value, format)] : [];
+        return value ? [moment(value, format, true)] : [];
       case (ECalendarValue.StringArr):
-        return (<string[]>value).map(v => v ? moment(v, format) : null).filter(Boolean);
+        return (<string[]>value).map(v => v ? moment(v, format, true) : null).filter(Boolean);
       case (ECalendarValue.Moment):
         return [<Moment>value];
       case (ECalendarValue.MomentArr):
@@ -188,7 +188,9 @@ export class UtilsService {
     }
   }
 
-  createValidator({minDate, maxDate, minTime, maxTime}: DateLimits, format: string, calendarType: CalendarMode): DateValidatorFn {
+  createValidator({minDate, maxDate, minTime, maxTime}: DateLimits,
+                  format: string,
+                  calendarType: CalendarMode): DateValidator {
     let isValid: boolean;
     let value: Moment[];
     const validators = [];

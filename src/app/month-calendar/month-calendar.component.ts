@@ -25,6 +25,7 @@ import {
 } from '@angular/forms';
 import {CalendarValue} from '../common/types/calendar-value';
 import {UtilsService} from '../common/services/utils/utils.service';
+import {DateValidator} from '../common/types/validator.type';
 
 @Component({
   selector: 'dp-month-calendar',
@@ -61,7 +62,7 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
   currentDateView: Moment;
   inputValue: CalendarValue;
   inputValueType: ECalendarValue;
-  validateFn: (inputVal: CalendarValue) => {[key: string]: any};
+  validateFn: DateValidator;
 
   set selected(selected: Moment[]) {
     this._selected = selected;
@@ -139,7 +140,10 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
 
   initValidators() {
     this.validateFn = this.validateFn = this.utilsService.createValidator(
-      {minDate: this.minDate, maxDate: this.maxDate}, this.componentConfig.format, 'month');
+      {minDate: this.minDate, maxDate: this.maxDate},
+      this.componentConfig.format,
+      'month'
+    );
 
     this.onChangeCallback(this.processOnChangeCallback(this.selected));
   }
