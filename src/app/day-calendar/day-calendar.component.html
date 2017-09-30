@@ -15,7 +15,7 @@
     <div class="dp-weekdays">
       <span class="dp-calendar-weekday"
             *ngFor="let weekday of weekdays">
-            {{weekday.format(componentConfig.weekDayFormat)}}
+            {{getWeekdayName(weekday)}}
       </span>
     </div>
     <div class="dp-calendar-week" *ngFor="let week of weeks">
