@@ -2,6 +2,8 @@ import {ECalendarValue} from '../common/types/calendar-value-enum';
 import {SingleCalendarValue} from '../common/types/single-calendar-value';
 import {ECalendarMode} from '../common/types/calendar-mode-enum';
 import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   EventEmitter,
   forwardRef,
@@ -33,6 +35,7 @@ import {IDate} from '../common/models/date.model';
   templateUrl: 'time-select.component.html',
   styleUrls: ['time-select.component.less'],
   encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     TimeSelectService,
     {
@@ -75,6 +78,7 @@ export class TimeSelectComponent implements OnInit, OnChanges, ControlValueAcces
     this._selected = selected;
     this.calculateTimeParts(this.selected);
     this.onChangeCallback(this.processOnChangeCallback(selected));
+    this.cd.markForCheck();
   }
 
   get selected(): Moment {
@@ -86,7 +90,8 @@ export class TimeSelectComponent implements OnInit, OnChanges, ControlValueAcces
   };
 
   constructor(public timeSelectService: TimeSelectService,
-              public utilsService: UtilsService) {
+              public utilsService: UtilsService,
+              private cd: ChangeDetectorRef) {
   }
 
   ngOnInit() {

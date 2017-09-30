@@ -19,6 +19,8 @@ import {IDpDayPickerApi} from './date-picker.api';
 import {DatePickerService} from './date-picker.service';
 import {
   AfterViewInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   ElementRef,
   EventEmitter,
@@ -51,6 +53,7 @@ import {Moment, unitOfTime} from 'moment';
   templateUrl: 'date-picker.component.html',
   styleUrls: ['date-picker.component.less'],
   encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     DatePickerService,
     DayTimeCalendarService,
@@ -80,7 +83,6 @@ export class DatePickerComponent implements OnChanges,
   @Input() placeholder: string = '';
   @Input() disabled: boolean = false;
   @Input() displayDate: SingleCalendarValue;
-  @HostBinding('class') @Input() theme: string;
   @Input() minDate: Moment | string;
   @Input() maxDate: Moment | string;
   @Input() minTime: Moment | string;
@@ -93,6 +95,17 @@ export class DatePickerComponent implements OnChanges,
   @ViewChild('dayCalendar') dayCalendarRef: DayCalendarComponent;
   @ViewChild('monthCalendar') monthCalendarRef: DayCalendarComponent;
   @ViewChild('timeSelect') timeSelectRef: TimeSelectComponent;
+
+  private _theme: string;
+
+  get theme(): string {
+    return this._theme;
+  }
+
+  @HostBinding('class') @Input() set theme(value: string) {
+    this._theme = value;
+    this.cd.markForCheck();
+  }
 
   componentConfig: IDatePickerConfig;
   dayCalendarConfig: IDayCalendarConfig;
@@ -124,6 +137,7 @@ export class DatePickerComponent implements OnChanges,
       .convertFromMomentArray(this.componentConfig.format, selected, ECalendarValue.StringArr))
       .join(', ');
     this.onChangeCallback(this.processOnChangeCallback(selected));
+    this.cd.markForCheck();
   }
 
   get selected(): Moment[] {
@@ -165,7 +179,8 @@ export class DatePickerComponent implements OnChanges,
               private domHelper: DomHelper,
               private elemRef: ElementRef,
               private renderer: Renderer,
-              private utilsService: UtilsService) {
+              private utilsService: UtilsService,
+              private cd: ChangeDetectorRef) {
   }
 
   @HostListener('click')
@@ -343,6 +358,8 @@ export class DatePickerComponent implements OnChanges,
     this.hideStateHelper = true;
     this.areCalendarsShown = true;
 
+    this.cd.markForCheck();
+
     if (this.timeSelectRef) {
       this.timeSelectRef.api.triggerChange();
     }
@@ -352,6 +369,7 @@ export class DatePickerComponent implements OnChanges,
 
   hideCalendar() {
     this.areCalendarsShown = false;
+    this.cd.markForCheck();
 
     if (this.dayCalendarRef) {
       this.dayCalendarRef.api.toggleCalendar(ECalendarMode.Day);

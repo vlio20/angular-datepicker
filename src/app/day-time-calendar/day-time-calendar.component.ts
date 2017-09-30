@@ -1,6 +1,7 @@
 import {ECalendarValue} from '../common/types/calendar-value-enum';
 import {SingleCalendarValue} from '../common/types/single-calendar-value';
 import {
+  ChangeDetectionStrategy,
   Component,
   EventEmitter,
   forwardRef,
@@ -33,6 +34,7 @@ import {DayTimeCalendarService} from './day-time-calendar.service';
   templateUrl: 'day-time-calendar.component.html',
   styleUrls: ['day-time-calendar.component.less'],
   encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     DayTimeCalendarService,
     DayCalendarService,
