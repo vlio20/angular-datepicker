@@ -58,6 +58,7 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
   @Input() minDate: Moment;
   @Input() maxDate: Moment;
   @HostBinding('class') @Input() theme: string;
+
   @Output() onSelect: EventEmitter<IDay> = new EventEmitter();
   @Output() onMonthSelect: EventEmitter<IMonth> = new EventEmitter();
   @Output() onNavHeaderBtnClick: EventEmitter<ECalendarMode> = new EventEmitter();

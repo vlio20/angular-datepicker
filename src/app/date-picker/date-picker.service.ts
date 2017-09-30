@@ -1,7 +1,7 @@
 import {EventEmitter, Injectable} from '@angular/core';
 import {IDatePickerConfig} from './date-picker-config.model';
-import {Moment} from 'moment';
 import * as moment from 'moment';
+import {Moment} from 'moment';
 import {UtilsService} from '../common/services/utils/utils.service';
 import {IDayCalendarConfig} from '../day-calendar/day-calendar-config.model';
 import {TimeSelectService} from '../time-select/time-select.service';
@@ -103,13 +103,7 @@ export class DatePickerService {
   // todo:: add unit tests
   isValidInputDateValue(value: string, config: IDatePickerConfig): boolean {
     value = value ? value : '';
-    let datesStrArr: string[];
-
-    if (config.allowMultiSelect) {
-      datesStrArr = value.split(',');
-    } else {
-      datesStrArr = [value];
-    }
+    const datesStrArr: string[] = this.utilsService.datesStringToStringArray(value);
 
     return datesStrArr.every(date => this.utilsService.isDateValid(date, config.format));
   }
@@ -117,13 +111,7 @@ export class DatePickerService {
   // todo:: add unit tests
   convertInputValueToMomentArray(value: string, config: IDatePickerConfig): Moment[] {
     value = value ? value : '';
-    let datesStrArr: string[];
-
-    if (config.allowMultiSelect) {
-      datesStrArr = value.split(',');
-    } else {
-      datesStrArr = [value];
-    }
+    const datesStrArr: string[] = this.utilsService.datesStringToStringArray(value);
 
     return this.utilsService.convertToMomentArray(datesStrArr, config.format, config.allowMultiSelect);
   }

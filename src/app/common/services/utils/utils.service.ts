@@ -107,7 +107,7 @@ export class UtilsService {
 
   // todo:: add unit test
   convertFromMomentArray(format: string,
-                         value: moment.Moment[],
+                         value: Moment[],
                          inputValueType: ECalendarValue): CalendarValue {
     switch (inputValueType) {
       case (ECalendarValue.String):
@@ -131,24 +131,6 @@ export class UtilsService {
 
     Object.keys(obj).forEach((key) => (obj[key] === undefined) && delete obj[key]);
     return obj;
-  }
-
-  // todo:: add unit test
-  compareMomentArrays(arr1: Moment[], arr2: Moment[], granularity: unitOfTime.Base): boolean {
-    if (arr1.length !== arr2.length) {
-      return false;
-    }
-
-    const sortArr1 = arr1.sort((a, b) => a.diff(b));
-    const sortArr2 = arr1.sort((a, b) => a.diff(b));
-
-    for (let i = 0; i < sortArr1.length; i++) {
-      if (!sortArr1[i].isSame(sortArr2, granularity)) {
-        return false;
-      }
-    }
-
-    return true;
   }
 
   updateSelected(isMultiple: boolean,
@@ -269,5 +251,16 @@ export class UtilsService {
 
       return !isValid ? errors : null;
     };
+  }
+
+  datesStringToStringArray(value: string): string[] {
+    return value.split(',').map(m => m.trim());
+  }
+
+  getValidMomentArray(value: string,
+                      format: string): Moment[] {
+    return this.datesStringToStringArray(value)
+      .filter(d => this.isDateValid(d, format))
+      .map(d => moment(d, format));
   }
 }

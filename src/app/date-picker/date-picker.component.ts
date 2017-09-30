@@ -369,6 +369,8 @@ export class DatePickerComponent implements OnChanges,
         : this.currentDateView;
     }
     else {
+      this._selected = this.utilsService
+        .getValidMomentArray(value, this.componentConfig.format);
       this.onChangeCallback(this.processOnChangeCallback(value));
     }
   }
