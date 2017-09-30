@@ -106,6 +106,8 @@ export class DemoPage {
   showMultipleYearsNavigation = $('#showMultipleYearsNavigation');
   hideMultipleYearsNavigation = $('#hideMultipleYearsNavigation');
   multipleYearsNavigateBy = $('#multipleYearsNavigateBy');
+  showInputRadio = $('#showInputRadio');
+  hideInputRadio = $('#hideInputRadio');
 
   hourUpBtn = $(`${this.popupSelector} .dp-time-select-control-hours > .dp-time-select-control-up`);
   hourDownBtn = $(`${this.popupSelector} .dp-time-select-control-hours > .dp-time-select-control-down`);
