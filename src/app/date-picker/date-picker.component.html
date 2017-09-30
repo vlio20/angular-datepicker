@@ -1,5 +1,5 @@
 <div [ngClass]="{'dp-open': areCalendarsShown}">
-  <div *ngIf="!componentConfig.hideInputContainer" class="dp-input-container">
+  <div [hidden]="componentConfig.hideInputContainer" class="dp-input-container">
     <input type="text"
            class="dp-picker-input"
            [placeholder]="placeholder"

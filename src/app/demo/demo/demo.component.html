@@ -879,6 +879,30 @@
         </div>
       </div>
 
+      <div class="dp-option" *ngIf="isValidConfig('hideInputContainer')">
+        <span class="dp-option-header">
+          Hide Input Container (hideInputContainer):
+        </span>
+        <div class="dp-option-playground">
+          <label>Hidden
+            <input type="radio"
+                   [(ngModel)]="config.hideInputContainer"
+                   name="hideInputContainer"
+                   [value]="true"
+                   (ngModelChange)="configChanged('hideInputContainer', 'hidden')">
+          </label>
+          <label>Shown
+            <input type="radio"
+                   [(ngModel)]="config.hideInputContainer"
+                   name="hideInputContainer"
+                   [value]="false"
+                   (ngModelChange)="configChanged('hideInputContainer', 'shown')">
+          </label>
+        </div>
+      </div>
+
+
+
       <div class="dp-option" *ngIf="isValidConfig('showNearMonthDays')">
         <span class="dp-option-header">
           Show near month days (showNearMonthDays):
