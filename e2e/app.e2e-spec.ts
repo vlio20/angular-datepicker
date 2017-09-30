@@ -704,4 +704,12 @@ describe('ng2-date-picker App', () => {
       expect(page.meridiemDisplay.getText()).toMatch(/(בערב|בבוקר|לפני הצהריים|אחרי הצהריים)/);
     });
   });
+
+  describe('hideInputContainer', () => {
+    it('should hide/show InputContainer datetimepicker', () => {
+      expect(page.daytimePickerInput.isDisplayed()).toBe(true);
+      page.hideInputRadio.click();
+      expect(page.daytimePickerInput.isDisplayed()).toBe(false);
+    });
+  });
 });
