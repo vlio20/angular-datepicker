@@ -26,7 +26,8 @@ const PICKER_OPTION_KEYS = [
   'onOpenDelay',
   'opens',
   'placeholder',
-  'required'
+  'required',
+  'hideInputContainer'
 ];
 const DAY_PICKER_DIRECTIVE_OPTION_KEYS = [
   'allowMultiSelect',
@@ -186,7 +187,8 @@ export class DemoComponent {
     timeSeparator: ':',
     multipleYearsNavigateBy: 10,
     showMultipleYearsNavigation: false,
-    locale: 'en'
+    locale: 'en',
+    hideInputContainer: false
   };
   isAtTop: boolean = true;
 
