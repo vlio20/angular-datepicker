@@ -46,34 +46,39 @@ export class DayCalendarService {
     const daysArr = this.DAYS.slice(firstDayIndex, 7).concat(this.DAYS.slice(0, firstDayIndex));
     return daysArr.reduce((map, day, index) => {
       map[day] = index;
+
       return map;
-    }, <{ [key: number]: string }>{});
+    }, <{[key: number]: string}>{});
   }
 
   generateMonthArray(config: IDayCalendarConfig, month: Moment, selected: Moment[]): IDay[][] {
     let monthArray: IDay[][] = [];
-    const firstDayOfMonth = month.clone().startOf('month');
     const firstDayOfWeekIndex = this.DAYS.indexOf(config.firstDayOfWeek);
-
-    const firstDayOfBoard = firstDayOfMonth;
+    const firstDayOfBoard = month.clone().startOf('month');
 
     while (firstDayOfBoard.day() !== firstDayOfWeekIndex) {
       firstDayOfBoard.subtract(1, 'day');
     }
 
     const current = firstDayOfBoard.clone();
-    const daysOfCalendar: IDay[] = this.utilsService.createArray(42).reduce((array: IDay[]) => {
-      array.push({
-        date: current.clone(),
-        selected: !!selected.find(selectedDay => current.isSame(selectedDay, 'day')),
-        currentMonth: current.isSame(month, 'month'),
-        prevMonth: current.isSame(month.clone().subtract(1, 'month'), 'month'),
-        nextMonth: current.isSame(month.clone().add(1, 'month'), 'month'),
-        currentDay: current.isSame(moment(), 'day')
-      });
-      current.add(1, 'd');
-      return array;
-    }, []);
+    const prevMonth = month.clone().subtract(1, 'month');
+    const nextMonth = month.clone().add(1, 'month');
+    const today = moment();
+
+    const daysOfCalendar: IDay[] = this.utilsService.createArray(42)
+      .reduce((array: IDay[]) => {
+        array.push({
+          date: current.clone(),
+          selected: !!selected.find(selectedDay => current.isSame(selectedDay, 'day')),
+          currentMonth: current.isSame(month, 'month'),
+          prevMonth: current.isSame(prevMonth, 'month'),
+          nextMonth: current.isSame(nextMonth, 'month'),
+          currentDay: current.isSame(today, 'day')
+        });
+        current.add(24, 'hour');
+
+        return array;
+      }, []);
 
     daysOfCalendar.forEach((day, index) => {
       const weekIndex = Math.floor(index / 7);
@@ -150,8 +155,9 @@ export class DayCalendarService {
     const daysArr = this.DAYS.slice(firstDayIndex, 7).concat(this.DAYS.slice(0, firstDayIndex));
     return daysArr.reduce((map, day, index) => {
       map[index] = day;
+
       return map;
-    }, <{ [key: number]: string }>{});
+    }, <{[key: number]: string}>{});
   }
 
   // todo:: add unit tests
