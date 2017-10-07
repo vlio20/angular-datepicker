@@ -1,3 +1,4 @@
+import {error} from 'util';
 import {CalendarMode} from '../common/types/calendar-mode';
 import {IDatePickerDirectiveConfig} from './date-picker-directive-config.model';
 import {DatePickerDirectiveService} from './date-picker-directive.service';
@@ -129,8 +130,8 @@ export class DatePickerDirective implements OnInit {
 
   constructor(public viewContainerRef: ViewContainerRef,
               public componentFactoryResolver: ComponentFactoryResolver,
-              @Optional() public formControl: NgControl,
-              public service: DatePickerDirectiveService) {
+              public service: DatePickerDirectiveService,
+              @Optional() public formControl: NgControl) {
   }
 
   ngOnInit(): void {
@@ -152,7 +153,8 @@ export class DatePickerDirective implements OnInit {
     }
 
     this.datePicker.onViewDateChange(this.formControl.value);
-    this.formControl.valueChanges.subscribe(value => {
+
+    this.formControl.valueChanges.subscribe((value) => {
       if (value !== this.datePicker.inputElementValue) {
         this.datePicker.onViewDateChange(value);
       }
@@ -169,7 +171,7 @@ export class DatePickerDirective implements OnInit {
         }
       }
 
-      const errors = this.datePicker.validateFn(value, this.formControl.control.value);
+      const errors = this.datePicker.validateFn(value);
 
       if (!setup) {
         this.formControl.control.markAsDirty(true);
@@ -178,6 +180,12 @@ export class DatePickerDirective implements OnInit {
       }
 
       if (errors) {
+        if (errors.hasOwnProperty('format')) {
+          const {given} = errors['format'];
+          this.datePicker.inputElementValue = given;
+          this.formControl.control.setValue(given);
+        }
+
         this.formControl.control.setErrors(errors);
       }
     });
