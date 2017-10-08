@@ -104,6 +104,7 @@ describe('ng2-date-picker App', () => {
     it('should check that the onOpenDelay is working', () => {
       page.onOpenDelayInput.clear();
       page.onOpenDelayInput.sendKeys(1000);
+      page.scrollIntoView(page.openBtn);
       page.openBtn.click();
       expect(page.datePickerPopup.isDisplayed()).toBe(true);
       page.clickOnBody();
