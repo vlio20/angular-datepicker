@@ -150,6 +150,10 @@ export class DemoPage {
     this.body.click();
   }
 
+  scrollIntoView(el, top = false) {
+    browser.executeScript(`arguments[0].scrollIntoView(${top})`, el.getWebElement());
+  }
+
   clickOnDayButton(text: string) {
     element(by.cssContainingText(`${this.popupSelector} .dp-calendar-day`, text)).click();
   }

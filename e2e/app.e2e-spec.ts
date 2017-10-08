@@ -64,6 +64,7 @@ describe('ng2-date-picker App', () => {
     it('should check that the onOpenDelay is working', () => {
       page.onOpenDelayInput.clear();
       page.onOpenDelayInput.sendKeys(1000);
+      page.scrollIntoView(page.openBtn);
       page.openBtn.click();
       expect(page.datePickerPopup.isDisplayed()).toBe(true);
       page.clickOnBody();
@@ -151,9 +152,9 @@ describe('ng2-date-picker App', () => {
 
   describe('dpDayPicker timePicker', () => {
     beforeEach(() => {
+      page.timePickerMenu.click();
       page.dateFormatInput.clear();
       page.dateFormatInput.sendKeys('HH:mm:ss');
-      page.timePickerMenu.click();
     });
 
     it('should check if min time validation is working', () => {

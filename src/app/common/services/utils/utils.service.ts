@@ -156,7 +156,7 @@ export class UtilsService {
   }
 
   onlyTime(m: Moment): Moment {
-    return m && moment(m.format('HH:mm:ss'), 'HH:mm:ss');
+    return m && moment.isMoment(m) && moment(m.format('HH:mm:ss'), 'HH:mm:ss');
   }
 
   granularityFromType(calendarType: CalendarMode): unitOfTime.Base {
