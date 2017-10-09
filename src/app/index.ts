@@ -1,3 +1,4 @@
+export {ECalendarValue} from './common/types/calendar-value-enum';
 export {CalendarValue} from './common/types/calendar-value';
 export {IDayCalendarConfig} from './day-calendar/day-calendar-config.model';
 export {IDayEvent} from './day-calendar/day.model';

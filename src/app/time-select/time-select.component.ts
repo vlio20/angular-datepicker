@@ -150,7 +150,7 @@ export class TimeSelectComponent implements OnInit, OnChanges, ControlValueAcces
     return this.utilsService.convertFromMomentArray(
       this.timeSelectService.getTimeFormat(this.componentConfig),
       [value],
-      this.inputValueType
+      this.componentConfig.returnedValueType || this.inputValueType
     );
   }
 

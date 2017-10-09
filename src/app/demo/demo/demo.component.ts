@@ -7,10 +7,12 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import * as moment from 'moment';
 import {Moment} from 'moment';
 import {GaService} from '../services/ga/ga.service';
+import {ECalendarValue} from '../../common/types/calendar-value-enum';
 
 const GLOBAL_OPTION_KEYS = [
   'theme',
-  'locale'
+  'locale',
+  'returnedValueType'
 ];
 const PICKER_OPTION_KEYS = [
   'apiclose',
@@ -138,6 +140,28 @@ export class DemoComponent {
   validationMaxTime: Moment;
   placeholder: string = 'Choose a date...';
   displayDate: Moment;
+  dateTypes: {name: string, value: ECalendarValue}[] = [
+    {
+      name: 'Guess',
+      value: null
+    },
+    {
+      name: ECalendarValue[ECalendarValue.Moment],
+      value: ECalendarValue.Moment
+    },
+    {
+      name: ECalendarValue[ECalendarValue.MomentArr],
+      value: ECalendarValue.MomentArr
+    },
+    {
+      name: ECalendarValue[ECalendarValue.String],
+      value: ECalendarValue.String
+    },
+    {
+      name: ECalendarValue[ECalendarValue.StringArr],
+      value: ECalendarValue.StringArr
+    }
+  ];
 
   formGroup: FormGroup = new FormGroup({
     datePicker: new FormControl({value: this.date, disabled: this.disabled}, [
@@ -187,7 +211,8 @@ export class DemoComponent {
     multipleYearsNavigateBy: 10,
     showMultipleYearsNavigation: false,
     locale: 'en',
-    hideInputContainer: false
+    hideInputContainer: false,
+    returnedValueType: ECalendarValue.String
   };
   isAtTop: boolean = true;
 
@@ -222,6 +247,7 @@ export class DemoComponent {
 
   configChanged(change: string = 'N/A', value: any = 'N/A') {
     this.config = {...this.config};
+    console.log(this.config);
 
     this.gaService.emitEvent('ConfigChange', change, value);
 

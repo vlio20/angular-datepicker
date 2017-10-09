@@ -1,5 +1,6 @@
 import {locale, Moment} from 'moment';
 import {ICalendar} from '../common/models/calendar.model';
+import {ECalendarValue} from '../common/types/calendar-value-enum';
 
 export interface IMonthCalendarConfig extends ICalendar {
   isMonthDisabledCallback?: (date: Moment) => boolean;
@@ -13,4 +14,5 @@ export interface IMonthCalendarConfig extends ICalendar {
   monthBtnCssClassCallback?: (day: Moment) => string;
   multipleYearsNavigateBy?: number;
   showMultipleYearsNavigation?: boolean;
+  returnedValueType?: ECalendarValue;
 }
