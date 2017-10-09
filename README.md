@@ -33,7 +33,7 @@ This is a configurable date-picker build for Angular2 applications and uses Mome
 Put the dp-date-picker component wherever you need it.
 
 
-### Attributes:  
+### Attributes (Input):  
 
 | Name                 | Type                                | Default            | Applies To                | Description                                                                                                                                                                                                                                        |
 |----------------------|:-----------------------------------:|:------------------:|:-------------------------:|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -48,6 +48,13 @@ Put the dp-date-picker component wherever you need it.
 | maxTime              | `Moment\|String`                    | `undefined`        | `time`                    | This is a validation rule, if the selected date will be after `maxTime` the containing form will be invalid. Note: if provided as string format configuration should be provided in the config object.                                             |
 | theme                | `String`                            | `""`               | All                       | Theme is a class added to the popup container (and inner components) - this will allow styling of the calendar when it's appended to outer element (for example - body). There is a built in theme named dp-material, you can find it in the demo. |
 | config               | `IDatePickerConfig`                 | See Below          | All                       | Configuration object - see description below.                                                                                                                                                                                                      |
+
+### Attributes (Output):  
+
+| Name                 | Type                                | Applies To                | Description                                                                                                                                                                                                                                        |
+|----------------------|:-----------------------------------:|:-------------------------:|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| onChange             | `CalendarValue`                     | All Pickers               | This event will be emitted on every valid value change, if you want to receive every value (valid and invalid) please use the native `ngModelChange` output.                                                                                                                                                                                      |                                                                                                                                                                                                   |
+
 
 
 ### Configuration:  

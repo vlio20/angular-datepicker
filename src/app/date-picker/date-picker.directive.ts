@@ -16,6 +16,7 @@ import {
 } from '@angular/core';
 import {NgControl} from '@angular/forms';
 import {Moment} from 'moment';
+import {CalendarValue} from '../common/types/calendar-value';
 
 @Directive({
   exportAs: 'dpDayPicker',
@@ -120,6 +121,7 @@ export class DatePickerDirective implements OnInit {
 
   @Output() open = new EventEmitter<void>();
   @Output() close = new EventEmitter<void>();
+  @Output() onChange = new EventEmitter<CalendarValue>();
 
   get maxTime(): Moment | string {
     return this._maxTime;
@@ -211,6 +213,7 @@ export class DatePickerDirective implements OnInit {
       this.datePicker.config = this.config;
       this.datePicker.open = this.open;
       this.datePicker.close = this.close;
+      this.datePicker.onChange = this.onChange;
 
       this.datePicker.init();
     }
