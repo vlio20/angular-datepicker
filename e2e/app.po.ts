@@ -60,6 +60,7 @@ export class DemoPage {
   enableRequiredValidationRadio = $('#enableRequiredRadio');
   disableRequiredValidationRadio = $('#disableRequiredRadio');
   requiredValidationMsg = $('#requiredValidation');
+  formatValidationMsg = $('#formatValidation');
   reactiveRequiredValidationMsg = $('#reactiveRequiredValidation');
   reactiveMinDateValidationMsg = $('#reactiveMinDateValidation');
   reactiveMaxDateValidationMsg = $('#reactiveMaxDateValidation');
@@ -130,7 +131,7 @@ export class DemoPage {
   dayPickerMenu = $('#dayPickerMenu');
   dayInlineMenu = $('#dayInlineMenu');
   dayDirectiveMenu = $('#dayDirectiveMenu');
-  dayDirectiveReactive = $('#dayDirectiveReactive');
+  dayDirectiveReactiveMenu = $('#dayDirectiveReactiveMenu');
   monthPickerMenu = $('#monthPickerMenu');
   monthInlineMenu = $('#monthInlineMenu');
   monthDirectiveMenu = $('#monthDirectiveMenu');
@@ -147,6 +148,10 @@ export class DemoPage {
   clickOnBody() {
     this.body.click();
     this.body.click();
+  }
+
+  scrollIntoView(el, top = false) {
+    browser.executeScript(`arguments[0].scrollIntoView(${top})`, el.getWebElement());
   }
 
   clickOnDayButton(text: string) {

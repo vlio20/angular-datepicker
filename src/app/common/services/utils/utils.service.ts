@@ -6,8 +6,8 @@ import {Moment, unitOfTime} from 'moment';
 import {CalendarValue} from '../../types/calendar-value';
 import {IDate} from '../../models/date.model';
 import {CalendarMode} from '../../types/calendar-mode';
+import {DateValidator} from '../../types/validator.type';
 
-export type DateValidatorFn = (inputVal: CalendarValue) => { [key: string]: any };
 export interface DateLimits {
   minDate?: SingleCalendarValue;
   maxDate?: SingleCalendarValue;
@@ -93,9 +93,9 @@ export class UtilsService {
   convertToMomentArray(value: CalendarValue, format: string, allowMultiSelect: boolean): Moment[] {
     switch (this.getInputType(value, allowMultiSelect)) {
       case (ECalendarValue.String):
-        return value ? [moment(value, format)] : [];
+        return value ? [moment(value, format, true)] : [];
       case (ECalendarValue.StringArr):
-        return (<string[]>value).map(v => v ? moment(v, format) : null).filter(Boolean);
+        return (<string[]>value).map(v => v ? moment(v, format, true) : null).filter(Boolean);
       case (ECalendarValue.Moment):
         return [<Moment>value];
       case (ECalendarValue.MomentArr):
@@ -107,7 +107,7 @@ export class UtilsService {
 
   // todo:: add unit test
   convertFromMomentArray(format: string,
-                         value: moment.Moment[],
+                         value: Moment[],
                          inputValueType: ECalendarValue): CalendarValue {
     switch (inputValueType) {
       case (ECalendarValue.String):
@@ -133,24 +133,6 @@ export class UtilsService {
     return obj;
   }
 
-  // todo:: add unit test
-  compareMomentArrays(arr1: Moment[], arr2: Moment[], granularity: unitOfTime.Base): boolean {
-    if (arr1.length !== arr2.length) {
-      return false;
-    }
-
-    const sortArr1 = arr1.sort((a, b) => a.diff(b));
-    const sortArr2 = arr1.sort((a, b) => a.diff(b));
-
-    for (let i = 0; i < sortArr1.length; i++) {
-      if (!sortArr1[i].isSame(sortArr2, granularity)) {
-        return false;
-      }
-    }
-
-    return true;
-  }
-
   updateSelected(isMultiple: boolean,
                  currentlySelected: Moment[],
                  date: IDate,
@@ -174,7 +156,7 @@ export class UtilsService {
   }
 
   onlyTime(m: Moment): Moment {
-    return m && moment(m.format('HH:mm:ss'), 'HH:mm:ss');
+    return m && moment.isMoment(m) && moment(m.format('HH:mm:ss'), 'HH:mm:ss');
   }
 
   granularityFromType(calendarType: CalendarMode): unitOfTime.Base {
@@ -188,7 +170,9 @@ export class UtilsService {
     }
   }
 
-  createValidator({minDate, maxDate, minTime, maxTime}: DateLimits, format: string, calendarType: CalendarMode): DateValidatorFn {
+  createValidator({minDate, maxDate, minTime, maxTime}: DateLimits,
+                  format: string,
+                  calendarType: CalendarMode): DateValidator {
     let isValid: boolean;
     let value: Moment[];
     const validators = [];
@@ -267,5 +251,16 @@ export class UtilsService {
 
       return !isValid ? errors : null;
     };
+  }
+
+  datesStringToStringArray(value: string): string[] {
+    return value.split(',').map(m => m.trim());
+  }
+
+  getValidMomentArray(value: string,
+                      format: string): Moment[] {
+    return this.datesStringToStringArray(value)
+      .filter(d => this.isDateValid(d, format))
+      .map(d => moment(d, format));
   }
 }

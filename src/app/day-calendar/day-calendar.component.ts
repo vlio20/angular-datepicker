@@ -30,6 +30,7 @@ import {CalendarValue} from '../common/types/calendar-value';
 import {UtilsService} from '../common/services/utils/utils.service';
 import {IMonthCalendarConfig} from '../month-calendar/month-calendar-config';
 import {IMonth} from '../month-calendar/month.model';
+import {DateValidator} from '../common/types/validator.type';
 
 @Component({
   selector: 'dp-day-calendar',
@@ -57,6 +58,7 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
   @Input() minDate: Moment;
   @Input() maxDate: Moment;
   @HostBinding('class') @Input() theme: string;
+
   @Output() onSelect: EventEmitter<IDay> = new EventEmitter();
   @Output() onMonthSelect: EventEmitter<IMonth> = new EventEmitter();
   @Output() onNavHeaderBtnClick: EventEmitter<ECalendarMode> = new EventEmitter();
@@ -70,7 +72,7 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
   currentDateView: Moment;
   inputValue: CalendarValue;
   inputValueType: ECalendarValue;
-  validateFn: (inputVal: CalendarValue) => {[key: string]: any};
+  validateFn: DateValidator;
   currentCalendarMode: ECalendarMode = ECalendarMode.Day;
   monthCalendarConfig: IMonthCalendarConfig;
 
@@ -165,7 +167,10 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
 
   initValidators() {
     this.validateFn = this.utilsService.createValidator(
-      {minDate: this.minDate, maxDate: this.maxDate}, this.componentConfig.format, 'day');
+      {minDate: this.minDate, maxDate: this.maxDate},
+      this.componentConfig.format,
+      'day'
+    );
 
     this.onChangeCallback(this.processOnChangeCallback(this.selected));
   }

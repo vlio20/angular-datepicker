@@ -27,6 +27,7 @@ import {DayCalendarService} from '../day-calendar/day-calendar.service';
 import {TimeSelectService} from '../time-select/time-select.service';
 import {IDayTimeCalendarConfig} from './day-time-calendar-config.model';
 import {DayTimeCalendarService} from './day-time-calendar.service';
+import {DateValidator} from '../common/types/validator.type';
 
 @Component({
   selector: 'dp-day-time-calendar',
@@ -63,7 +64,7 @@ export class DayTimeCalendarComponent implements OnInit, OnChanges, ControlValue
   _selected: Moment;
   inputValue: CalendarValue;
   inputValueType: ECalendarValue;
-  validateFn: (inputVal: CalendarValue) => { [key: string]: any };
+  validateFn: DateValidator;
 
   set selected(selected: Moment) {
     this._selected = selected;

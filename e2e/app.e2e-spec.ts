@@ -28,7 +28,6 @@ describe('ng2-date-picker App', () => {
       page.daytimePickerInput.click();
       expect(page.datePickerPopup.isDisplayed()).toBe(true);
     });
-
   });
 
   describe('dpDayPicker directive', () => {
@@ -65,6 +64,7 @@ describe('ng2-date-picker App', () => {
     it('should check that the onOpenDelay is working', () => {
       page.onOpenDelayInput.clear();
       page.onOpenDelayInput.sendKeys(1000);
+      page.scrollIntoView(page.openBtn);
       page.openBtn.click();
       expect(page.datePickerPopup.isDisplayed()).toBe(true);
       page.clickOnBody();
@@ -82,7 +82,7 @@ describe('ng2-date-picker App', () => {
     beforeEach(() => {
       page.dateFormatInput.clear();
       page.dateFormatInput.sendKeys('DD-MM-YYYY');
-      page.dayDirectiveReactive.click();
+      page.dayDirectiveReactiveMenu.click();
     });
 
     it('should check that the popup appended to body', () => {
@@ -104,6 +104,7 @@ describe('ng2-date-picker App', () => {
     it('should check that the onOpenDelay is working', () => {
       page.onOpenDelayInput.clear();
       page.onOpenDelayInput.sendKeys(1000);
+      page.scrollIntoView(page.openBtn);
       page.openBtn.click();
       expect(page.datePickerPopup.isDisplayed()).toBe(true);
       page.clickOnBody();
@@ -152,9 +153,9 @@ describe('ng2-date-picker App', () => {
 
   describe('dpDayPicker timePicker', () => {
     beforeEach(() => {
+      page.timePickerMenu.click();
       page.dateFormatInput.clear();
       page.dateFormatInput.sendKeys('HH:mm:ss');
-      page.timePickerMenu.click();
     });
 
     it('should check if min time validation is working', () => {
@@ -711,6 +712,28 @@ describe('ng2-date-picker App', () => {
       expect(page.daytimePickerInput.isDisplayed()).toBe(true);
       page.hideInputRadio.click();
       expect(page.daytimePickerInput.isDisplayed()).toBe(false);
+    });
+  });
+
+  describe('', () => {
+    it('should check that the format validation is working', () => {
+      const common = (menu, input) => {
+        menu.click();
+        input.sendKeys('lmaldlad');
+        page.clickOnBody();
+        expect(page.formatValidationMsg.getText()).toBe('invalid format');
+        input.clear();
+      };
+
+      common(page.daytimePickerMenu, page.daytimePickerInput);
+      common(page.daytimeDirectiveMenu, page.daytimeDirectiveInput);
+      common(page.dayPickerMenu, page.dayPickerInput);
+      common(page.dayDirectiveMenu, page.dayDirectiveInput);
+      common(page.dayDirectiveReactiveMenu, page.dayReactiveDirectivePickerInput);
+      common(page.monthPickerMenu, page.monthPickerInput);
+      common(page.monthDirectiveMenu, page.monthDirectiveInput);
+      common(page.timePickerMenu, page.timePickerInput);
+      common(page.timeDirectiveMenu, page.timeSelectDirectiveInput);
     });
   });
 });

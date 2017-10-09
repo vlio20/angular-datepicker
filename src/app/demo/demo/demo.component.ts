@@ -280,7 +280,7 @@ export class DemoComponent {
             ...DAY_CALENDAR_OPTION_KEYS
           ].indexOf(key) > -1;
       case 'dayDirective':
-      case 'dayDirectiveReactive':
+      case 'dayDirectiveReactiveMenu':
         return [
             ...DAY_PICKER_DIRECTIVE_OPTION_KEYS,
             ...DAY_CALENDAR_OPTION_KEYS
@@ -321,7 +321,7 @@ export class DemoComponent {
       case 'dayPicker':
       case 'dayInline':
       case 'dayDirective':
-      case 'dayDirectiveReactive':
+      case 'dayDirectiveReactiveMenu':
         return 'DD-MM-YYYY';
       case 'monthPicker':
       case 'monthInline':

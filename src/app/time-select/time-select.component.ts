@@ -10,7 +10,8 @@ import {
   OnChanges,
   OnInit,
   Output,
-  SimpleChanges, ViewEncapsulation
+  SimpleChanges,
+  ViewEncapsulation
 } from '@angular/core';
 import {TimeSelectService, TimeUnit} from './time-select.service';
 import * as moment from 'moment';
@@ -27,6 +28,7 @@ import {
 import {CalendarValue} from '../common/types/calendar-value';
 import {UtilsService} from '../common/services/utils/utils.service';
 import {IDate} from '../common/models/date.model';
+import {DateValidator} from '../common/types/validator.type';
 
 @Component({
   selector: 'dp-time-select',
@@ -64,7 +66,7 @@ export class TimeSelectComponent implements OnInit, OnChanges, ControlValueAcces
   _selected: Moment;
   inputValue: CalendarValue;
   inputValueType: ECalendarValue;
-  validateFn: (inputVal: CalendarValue) => { [key: string]: any };
+  validateFn: DateValidator;
 
   hours: string;
   minutes: string;

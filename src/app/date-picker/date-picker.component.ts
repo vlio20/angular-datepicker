@@ -45,6 +45,7 @@ import {
 } from '@angular/forms';
 import * as moment from 'moment';
 import {Moment, unitOfTime} from 'moment';
+import {DateValidator} from '../common/types/validator.type';
 
 @Component({
   selector: 'dp-date-picker',
@@ -112,7 +113,7 @@ export class DatePickerComponent implements OnChanges,
   popupElem: HTMLElement;
   handleInnerElementClickUnlisteners: Function[] = [];
   globalListnersUnlisteners: Function[] = [];
-  validateFn: (inputVal: CalendarValue) => {[key: string]: any};
+  validateFn: DateValidator;
   api: IDpDayPickerApi = {
     open: this.showCalendars.bind(this),
     close: this.hideCalendar.bind(this)
@@ -228,16 +229,16 @@ export class DatePickerComponent implements OnChanges,
   registerOnTouched(fn: any): void {
   }
 
-  validate(formControl: FormControl): ValidationErrors | any {
-    if (this.minDate || this.maxDate || this.minTime || this.maxTime) {
-      return this.validateFn(formControl.value);
-    } else {
-      return () => null;
-    }
+  validate(formControl: FormControl): ValidationErrors {
+    return this.validateFn(formControl.value);
   }
 
-  processOnChangeCallback(selected: Moment[]): CalendarValue {
-    return this.utilsService.convertFromMomentArray(this.componentConfig.format, selected, this.inputValueType);
+  processOnChangeCallback(selected: Moment[] | string): CalendarValue {
+    if (typeof selected === 'string') {
+      return selected;
+    } else {
+      return this.utilsService.convertFromMomentArray(this.componentConfig.format, selected, this.inputValueType);
+    }
   }
 
   initValidators() {
@@ -366,6 +367,10 @@ export class DatePickerComponent implements OnChanges,
       this.currentDateView = this.selected.length
         ? this.utilsService.getDefaultDisplayDate(null, this.selected, this.componentConfig.allowMultiSelect)
         : this.currentDateView;
+    } else {
+      this._selected = this.utilsService
+        .getValidMomentArray(value, this.componentConfig.format);
+      this.onChangeCallback(this.processOnChangeCallback(value));
     }
   }
 
