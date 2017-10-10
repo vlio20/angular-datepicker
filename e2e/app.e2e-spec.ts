@@ -2,7 +2,7 @@ import {DemoPage} from './app.po';
 import {browser, protractor} from 'protractor';
 import * as moment from 'moment';
 
-describe('ng2-date-picker App', () => {
+fdescribe('ng2-date-picker App', () => {
   let page: DemoPage;
 
   beforeEach(() => {
