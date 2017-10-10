@@ -478,6 +478,13 @@ describe('ng2-date-picker App', () => {
       expect(page.currentLocationBtn.isPresent()).toBe(false);
     });
 
+    it('should hide current date button when not between min and max', () => {
+      page.dayPickerMenu.click();
+      page.minSelectableInput.sendKeys(moment().add(3, 'month').format('DD-MM-YYYY'));
+      page.dayPickerInput.click();
+      expect(page.currentLocationBtn.isPresent()).toBe(false);
+    });
+
     it('should check if enable/disable is working', () => {
       expect(page.dayPickerInput.getAttribute('disabled')).toBe(null);
       page.pickerDisabledRadio.click();

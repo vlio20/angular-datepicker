@@ -382,7 +382,9 @@ export class DatePickerComponent implements OnChanges,
   }
 
   shouldShowGoToCurrent(): boolean {
-    return this.componentConfig.showGoToCurrent && this.mode !== 'time';
+    return this.componentConfig.showGoToCurrent &&
+      this.utilsService.isDateInRange(moment(), this.componentConfig.min, this.componentConfig.max) &&
+      this.mode !== 'time';
   }
 
   moveToCurrent() {

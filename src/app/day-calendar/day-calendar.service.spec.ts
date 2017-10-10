@@ -108,7 +108,7 @@ describe('Service: Calendar', () => {
       expect(
         service.generateWeekdays('mo').map(d => d.format('ddd'))
       ).toEqual(['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']);
-  }));
+    }));
 
   it('should check isDateDisabled method', inject([DayCalendarService],
     (service: DayCalendarService) => {
@@ -164,13 +164,14 @@ describe('Service: Calendar', () => {
         expect(service.getDayBtnText({dayBtnFormatter: (m => 'bla')}, date)).toEqual('bla');
         expect(service.getDayBtnText({dayBtnFormat: 'DD', dayBtnFormatter: (m => m.format('D'))}, date))
           .toEqual('5');
-  }));
+      }));
 
   it('should check getDayBtnCssClass method',
     inject([DayCalendarService],
       (service: DayCalendarService) => {
         const date = moment('05-04-2017', 'DD-MM-YYYY');
         expect(service.getDayBtnCssClass({}, date)).toEqual('');
-        expect(service.getDayBtnCssClass({dayBtnCssClassCallback: (m => 'class1 class2')}, date)).toEqual('class1 class2');
+        expect(service.getDayBtnCssClass({dayBtnCssClassCallback: (m => 'class1 class2')}, date))
+          .toEqual('class1 class2');
       }));
 });
