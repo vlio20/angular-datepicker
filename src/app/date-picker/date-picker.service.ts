@@ -84,7 +84,8 @@ export class DatePickerService {
       monthBtnCssClassCallback: pickerConfig.monthBtnCssClassCallback,
       multipleYearsNavigateBy: pickerConfig.multipleYearsNavigateBy,
       showMultipleYearsNavigation: pickerConfig.showMultipleYearsNavigation,
-      locale: pickerConfig.locale
+      locale: pickerConfig.locale,
+      returnedValueType: pickerConfig.returnedValueType
     };
   }
 

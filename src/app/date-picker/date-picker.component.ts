@@ -213,7 +213,7 @@ export class DatePickerComponent implements OnChanges,
   writeValue(value: CalendarValue): void {
     this.inputValue = value;
 
-    if (value) {
+    if (value || value === '') {
       this.selected = this.utilsService
         .convertToMomentArray(value, this.componentConfig.format, this.componentConfig.allowMultiSelect);
       this.init();
@@ -240,7 +240,11 @@ export class DatePickerComponent implements OnChanges,
     if (typeof selected === 'string') {
       return selected;
     } else {
-      return this.utilsService.convertFromMomentArray(this.componentConfig.format, selected, this.inputValueType);
+      return this.utilsService.convertFromMomentArray(
+        this.componentConfig.format,
+        selected,
+        this.componentConfig.returnedValueType || this.inputValueType
+      );
     }
   }
 

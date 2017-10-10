@@ -1220,6 +1220,20 @@
                  (change)="configChanged('multipleYearsNavigateBy', config.multipleYearsNavigateBy)">
         </div>
       </div>
+
+
+      <div class="dp-option" *ngIf="isValidConfig('returnedValueType')">
+        <span class="dp-option-header">
+          Returned Value Type (returnedValueType):
+        </span>
+        <div class="dp-option-playground">
+          <select id="returnedValueType"
+                  [(ngModel)]="config.returnedValueType"
+                  (change)="configChanged('returnedValueType', config.returnedValueType)">
+            <option *ngFor="let type of dateTypes" [value]="type.value">{{type.name}}</option>
+          </select>
+        </div>
+      </div>
     </div>
 
     <div class="dp-api">

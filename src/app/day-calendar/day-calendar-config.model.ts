@@ -1,6 +1,7 @@
 import {ICalendar} from '../common/models/calendar.model';
 import {WeekDays} from '../common/types/week-days.type';
 import {Moment} from 'moment';
+import {ECalendarValue} from '../common/types/calendar-value-enum';
 
 export interface IDayCalendarConfig extends ICalendar {
   isDayDisabledCallback?: (date: Moment) => boolean;
@@ -25,4 +26,5 @@ export interface IDayCalendarConfig extends ICalendar {
   monthBtnCssClassCallback?: (day: Moment) => string;
   multipleYearsNavigateBy?: number;
   showMultipleYearsNavigation?: boolean;
+  returnedValueType?: ECalendarValue;
 }

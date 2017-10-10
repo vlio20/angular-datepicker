@@ -136,7 +136,7 @@ export class DayTimeCalendarComponent implements OnInit, OnChanges, ControlValue
     return this.utilsService.convertFromMomentArray(
       this.componentConfig.format,
       [value],
-      this.inputValueType
+      this.componentConfig.returnedValueType || this.inputValueType
     );
   }
 

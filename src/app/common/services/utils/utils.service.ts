@@ -108,12 +108,12 @@ export class UtilsService {
   // todo:: add unit test
   convertFromMomentArray(format: string,
                          value: Moment[],
-                         inputValueType: ECalendarValue): CalendarValue {
-    switch (inputValueType) {
+                         convertTo: ECalendarValue): CalendarValue {
+    switch (convertTo) {
       case (ECalendarValue.String):
-        return value[0].format(format);
+        return value[0] && value[0].format(format);
       case (ECalendarValue.StringArr):
-        return value.map(v => v.format(format));
+        return value.filter(Boolean).map(v => v.format(format));
       case (ECalendarValue.Moment):
         return value[0];
       case (ECalendarValue.MomentArr):

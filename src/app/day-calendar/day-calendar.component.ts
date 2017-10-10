@@ -162,7 +162,11 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
   }
 
   processOnChangeCallback(value: Moment[]): CalendarValue {
-    return this.utilsService.convertFromMomentArray(this.componentConfig.format, value, this.inputValueType);
+    return this.utilsService.convertFromMomentArray(
+      this.componentConfig.format,
+      value,
+      this.componentConfig.returnedValueType || this.inputValueType
+    );
   }
 
   initValidators() {
