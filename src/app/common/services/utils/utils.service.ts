@@ -263,4 +263,8 @@ export class UtilsService {
       .filter(d => this.isDateValid(d, format))
       .map(d => moment(d, format));
   }
+
+  isDateInRange(date: Moment, from: Moment, to: Moment): boolean {
+    return date.isBetween(from, to, 'day', '[]');
+  }
 }
