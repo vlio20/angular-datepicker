@@ -658,7 +658,7 @@ describe('ng2-date-picker App', () => {
   });
 
   describe('Locales', () => {
-    it('should check day time picker locale', () => {
+    fit('should check day time picker locale', () => {
       page.hebrewLocale.click();
 
       page.daytimePickerMenu.click();
@@ -698,12 +698,12 @@ describe('ng2-date-picker App', () => {
       page.timePickerInput.click();
       expect(page.meridiemDisplay.getText()).toMatch(/(בערב|בבוקר|לפני הצהריים|אחרי הצהריים)/);
 
-      page.timeInlineMenu.click();
-      expect(page.meridiemDisplayInline.getText()).toMatch(/(בערב|בבוקר|לפני הצהריים|אחרי הצהריים)/);
-
       page.timeDirectiveMenu.click();
       page.timeSelectDirectiveInput.click();
       expect(page.meridiemDisplay.getText()).toMatch(/(בערב|בבוקר|לפני הצהריים|אחרי הצהריים)/);
+
+      page.timeInlineMenu.click();
+      expect(page.meridiemDisplayInline.getText()).toMatch(/(בערב|בבוקר|לפני הצהריים|אחרי הצהריים)/);
     });
   });
 

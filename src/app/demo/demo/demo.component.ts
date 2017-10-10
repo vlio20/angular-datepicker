@@ -247,7 +247,6 @@ export class DemoComponent {
 
   configChanged(change: string = 'N/A', value: any = 'N/A') {
     this.config = {...this.config};
-    console.log(this.config);
 
     this.gaService.emitEvent('ConfigChange', change, value);
 
