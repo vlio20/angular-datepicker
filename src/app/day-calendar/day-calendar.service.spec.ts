@@ -36,7 +36,8 @@ describe('Service: Calendar', () => {
   it('should check the generateMonthArray method', inject([DayCalendarService], (service: DayCalendarService) => {
     let monthWeeks = service.generateMonthArray(
       {
-        firstDayOfWeek: 'su'
+        firstDayOfWeek: 'su',
+        locale: 'en'
       },
       moment('11-10-2016', 'DD-MM-YYYY'),
       [moment('11-10-2016', 'DD-MM-YYYY')]);
@@ -52,7 +53,8 @@ describe('Service: Calendar', () => {
 
     monthWeeks = service.generateMonthArray(
       {
-        firstDayOfWeek: 'mo'
+        firstDayOfWeek: 'mo',
+        locale: 'en'
       },
       moment('11-10-2016', 'DD-MM-YYYY'),
       [moment('11-10-2016', 'DD-MM-YYYY'), moment('13-10-2016', 'DD-MM-YYYY')]
@@ -64,7 +66,8 @@ describe('Service: Calendar', () => {
 
     monthWeeks = service.generateMonthArray(
       {
-        firstDayOfWeek: 'mo'
+        firstDayOfWeek: 'mo',
+        locale: 'en'
       },
       moment('11-10-2016', 'DD-MM-YYYY'),
       [moment('11-10-2016', 'DD-MM-YYYY')]);
@@ -87,7 +90,8 @@ describe('Service: Calendar', () => {
 
     monthWeeks = service.generateMonthArray(
       {
-        firstDayOfWeek: 'mo'
+        firstDayOfWeek: 'mo',
+        locale: 'en'
       },
       moment('11-10-2016', 'DD-MM-YYYY'),
       []
@@ -113,6 +117,7 @@ describe('Service: Calendar', () => {
     (service: DayCalendarService) => {
       const config: IDayCalendarConfig = {
         firstDayOfWeek: 'su',
+        locale: 'en',
         min: moment('13-10-2016', 'DD-MM-YYYY').subtract(1, 'day'),
         max: moment('13-10-2016', 'DD-MM-YYYY').add(1, 'day')
       };
@@ -135,6 +140,7 @@ describe('Service: Calendar', () => {
     (service: DayCalendarService) => {
       const config: IDayCalendarConfig = {
         firstDayOfWeek: 'su',
+        locale: 'en',
         showNearMonthDays: true
       };
 
@@ -148,6 +154,7 @@ describe('Service: Calendar', () => {
       (service: DayCalendarService) => {
         const config: IDayCalendarConfig = {
           firstDayOfWeek: 'su',
+          locale: 'en',
           showNearMonthDays: false
         };
 
