@@ -1,4 +1,3 @@
-import {error} from 'util';
 import {CalendarMode} from '../common/types/calendar-mode';
 import {IDatePickerDirectiveConfig} from './date-picker-directive-config.model';
 import {DatePickerDirectiveService} from './date-picker-directive.service';
@@ -7,11 +6,13 @@ import {DatePickerComponent} from './date-picker.component';
 import {
   ComponentFactoryResolver,
   Directive,
-  ElementRef, EventEmitter,
+  ElementRef,
+  EventEmitter,
   HostListener,
   Input,
   OnInit,
-  Optional, Output,
+  Optional,
+  Output,
   ViewContainerRef
 } from '@angular/core';
 import {NgControl} from '@angular/forms';
@@ -32,7 +33,6 @@ export class DatePickerDirective implements OnInit {
   private _maxDate: Moment | string;
   private _minTime: Moment | string;
   private _maxTime: Moment | string;
-  private firstChange: boolean = true;
 
   get config(): IDatePickerDirectiveConfig {
     return this._config;
@@ -131,6 +131,7 @@ export class DatePickerDirective implements OnInit {
   public api: IDpDayPickerApi;
 
   constructor(public viewContainerRef: ViewContainerRef,
+              public elemRef: ElementRef,
               public componentFactoryResolver: ComponentFactoryResolver,
               public service: DatePickerDirectiveService,
               @Optional() public formControl: NgControl) {
@@ -216,6 +217,12 @@ export class DatePickerDirective implements OnInit {
       this.datePicker.onChange = this.onChange;
 
       this.datePicker.init();
+
+      if (this.datePicker.componentConfig.disableKeypress) {
+        this.elemRef.nativeElement.setAttribute('readonly');
+      } else {
+        this.elemRef.nativeElement.removeAttribute('readonly');
+      }
     }
   }
 }
