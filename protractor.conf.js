@@ -6,7 +6,7 @@ const args = process.argv;
 const headless = args.indexOf('headless') !== -1;
 
 exports.config = {
-  allScriptsTimeout: 60000,
+  allScriptsTimeout: 120000,
   specs: [
     './e2e/**/*spec.ts'
   ],
@@ -26,7 +26,7 @@ exports.config = {
   framework: 'jasmine',
   jasmineNodeOpts: {
     showColors: true,
-    defaultTimeoutInterval: 30000,
+    defaultTimeoutInterval: 120000,
     print: function () {
     }
   },
