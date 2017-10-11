@@ -8,16 +8,17 @@ const headless = args.indexOf('headless') !== -1;
 exports.config = {
   allScriptsTimeout: 11000,
   specs: [
-    './e2e/**/*.e2e-spec.ts'
+    './e2e/**/*spec.ts'
   ],
   capabilities: {
-    'browserName': 'chrome',
+    browserName: 'chrome',
+    shardTestFiles: true,
+    maxInstances: 10,
     chromeOptions: {
       args: headless ? [
-        '--headless', 
+        '--headless',
         '--disable-gpu',
-        '--window-size=1280,1024'] : 
-        []
+        '--window-size=1280,1024'] : []
     }
   },
   directConnect: true,
@@ -29,13 +30,15 @@ exports.config = {
     print: function () {
     }
   },
-  beforeLaunch: function () {
-    require('ts-node').register({
-      project: 'e2e/tsconfig.e2e.json'
-    });
-  },
+  // beforeLaunch: function () {
+  //   require('ts-node').register({
+  //     project: 'e2e/tsconfig.e2e.json'
+  //   });
+  // },
   onPrepare() {
     jasmine.getEnv().addReporter(
       new SpecReporter({spec: {displayStacktrace: true}}));
+
+    require('ts-node').register({ project: 'e2e/tsconfig.e2e.json' });
   }
 };
