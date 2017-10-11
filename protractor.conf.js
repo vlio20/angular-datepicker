@@ -13,7 +13,7 @@ exports.config = {
   capabilities: {
     browserName: 'chrome',
     shardTestFiles: true,
-    maxInstances: 10,
+    maxInstances: 5,
     chromeOptions: {
       args: headless ? [
         '--headless',
