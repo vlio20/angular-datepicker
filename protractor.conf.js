@@ -6,7 +6,7 @@ const args = process.argv;
 const headless = args.indexOf('headless') !== -1;
 
 exports.config = {
-  allScriptsTimeout: 11000,
+  allScriptsTimeout: 60000,
   specs: [
     './e2e/**/*spec.ts'
   ],
