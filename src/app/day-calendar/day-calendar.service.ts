@@ -19,7 +19,7 @@ export class DayCalendarService {
     allowMultiSelect: false,
     monthFormat: 'MMM, YYYY',
     enableMonthSelector: true,
-    locale: 'en',
+    locale: moment.locale(),
     dayBtnFormat: 'DD'
   };
 

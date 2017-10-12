@@ -13,7 +13,7 @@ export class MonthCalendarService {
     format: 'MM-YYYY',
     isNavHeaderBtnClickable: false,
     monthBtnFormat: 'MMM',
-    locale: 'en',
+    locale: moment.locale(),
     multipleYearsNavigateBy: 10,
     showMultipleYearsNavigation: false
   };

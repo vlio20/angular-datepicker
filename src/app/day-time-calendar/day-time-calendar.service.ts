@@ -14,7 +14,7 @@ const COMBINED_FORMAT = DAY_FORMAT + TIME_FORMAT;
 @Injectable()
 export class DayTimeCalendarService {
   readonly DEFAULT_CONFIG: IDayTimeCalendarConfig = {
-    locale: 'en'
+    locale: moment.locale()
   };
 
   constructor(private utilsService: UtilsService,
