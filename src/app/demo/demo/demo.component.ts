@@ -210,7 +210,7 @@ export class DemoComponent {
     timeSeparator: ':',
     multipleYearsNavigateBy: 10,
     showMultipleYearsNavigation: false,
-    locale: 'en',
+    locale: moment.locale(),
     hideInputContainer: false,
     returnedValueType: ECalendarValue.String
   };

@@ -20,7 +20,7 @@ export class TimeSelectService {
     showSeconds: false,
     showTwentyFourHours: false,
     timeSeparator: ':',
-    locale: 'en'
+    locale: moment.locale()
   };
 
   constructor(private utilsService: UtilsService) {

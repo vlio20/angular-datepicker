@@ -11,9 +11,9 @@ All notable changes to this project will be documented in this file.
 - none
 
 ### Bug Fixed
-- 29th October 2017 displayed twice [#235](https://github.com/vlio20/angular-datepicker/issues/235#issuecomment-336217634)
+- none
 
 ### Breaking Changes
-- none
+- default locale is now set with [`moment.locale()`](https://momentjs.com/docs/#/i18n/getting-locale/) instead of hard coded `en` 
 
 
