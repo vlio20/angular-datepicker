@@ -75,7 +75,11 @@ export class DayCalendarService {
           nextMonth: current.isSame(nextMonth, 'month'),
           currentDay: current.isSame(today, 'day')
         });
-        current.add(24, 'hour');
+        current.add(1, 'day');
+
+        if (current.format('HH') !== '00') {
+          current.startOf('day').add(1, 'day');
+        }
 
         return array;
       }, []);
