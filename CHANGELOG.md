@@ -19,7 +19,7 @@ All notable changes to this project will be documented in this file.
 
 
 <a name="2.5.1"></a>
-# [2.5.1] (2017-10-12)
+# [2.5.1](https://github.com/vlio20/angular-datepicker/releases/tag/2.5.1) (2017-10-12)
 
 ### Features
 - none
