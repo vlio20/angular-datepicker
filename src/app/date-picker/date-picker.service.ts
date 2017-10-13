@@ -21,8 +21,6 @@ export class DatePickerService {
     onOpenDelay: 0,
     disableKeypress: false,
     showNearMonthDays: true,
-    drops: 'down',
-    opens: 'right',
     showWeekNumbers: false,
     enableMonthSelector: true,
     showGoToCurrent: true,

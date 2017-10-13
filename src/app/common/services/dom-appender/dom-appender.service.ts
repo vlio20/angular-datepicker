@@ -70,23 +70,27 @@ export class DomHelper {
   }
 
   setElementPosition({element, container, anchor, dimElem, drops, opens}: IAppendToArgs) {
-    DomHelper.setYAxisPosition(element, container, anchor, drops);
-    DomHelper.setXAxisPosition(element, container, anchor, dimElem, opens);
+    DomHelper.setYAxisPosition(element, container, anchor, 'down');
+    DomHelper.setXAxisPosition(element, container, anchor, dimElem, 'right');
 
-    if (drops === 'down' && !DomHelper.isBottomInView(dimElem)) {
-      DomHelper.setYAxisPosition(element, container, anchor, 'up');
+    if (drops !== 'down' && drops !== 'up') {
+      if (DomHelper.isBottomInView(dimElem)) {
+        DomHelper.setYAxisPosition(element, container, anchor, 'down');
+      } else if (DomHelper.isTopInView(dimElem)) {
+        DomHelper.setYAxisPosition(element, container, anchor, 'up');
+      }
+    } else {
+      DomHelper.setYAxisPosition(element, container, anchor, drops);
     }
 
-    if (drops === 'up' && !DomHelper.isTopInView(dimElem)) {
-      DomHelper.setYAxisPosition(element, container, anchor, 'down');
-    }
-
-    if (opens === 'right' && !DomHelper.isRightInView(dimElem)) {
-      DomHelper.setXAxisPosition(element, container, anchor, dimElem, 'left');
-    }
-
-    if (opens === 'left' && !DomHelper.isLeftInView(dimElem)) {
-      DomHelper.setXAxisPosition(element, container, anchor, dimElem, 'right');
+    if (opens !== 'left' && opens !== 'right') {
+      if (DomHelper.isRightInView(dimElem)) {
+        DomHelper.setXAxisPosition(element, container, anchor, dimElem, 'right');
+      } else if (DomHelper.isLeftInView(dimElem)) {
+        DomHelper.setXAxisPosition(element, container, anchor, dimElem, 'left');
+      }
+    } else {
+      DomHelper.setXAxisPosition(element, container, anchor, dimElem, opens);
     }
   }
 }

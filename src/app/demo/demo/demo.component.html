@@ -856,8 +856,16 @@
           <label>Up
             <input type="radio"
                    [(ngModel)]="config.drops"
-                   name="drops" value="up"
+                   name="drops"
+                   value="up"
                    (ngModelChange)="configChanged('drops', 'up')">
+          </label>
+          <label>Auto
+            <input type="radio"
+                   [(ngModel)]="config.drops"
+                   name="drops"
+                   value="null"
+                   (ngModelChange)="configChanged('drops', null)">
           </label>
         </div>
       </div>
@@ -880,6 +888,13 @@
                    name="opens"
                    value="left"
                    (ngModelChange)="configChanged('opens', 'left')">
+          </label>
+          <label>Auto
+            <input type="radio"
+                   [(ngModel)]="config.opens"
+                   name="opens"
+                   value="null"
+                   (ngModelChange)="configChanged('opens', null)">
           </label>
         </div>
       </div>
