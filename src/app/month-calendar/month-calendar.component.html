@@ -1,17 +1,19 @@
 <div class="dp-month-calendar-container">
   <dp-calendar-nav
-      [label]="getNavLabel()"
+      [label]="navLabel"
       [showLeftNav]="shouldShowLeftNav()"
       [showLeftSecondaryNav]="shouldShowLeftSecondaryNav()"
       [showRightNav]="shouldShowRightNav()"
       [showRightSecondaryNav]="shouldShowRightSecondaryNav()"
       [isLabelClickable]="isNavHeaderBtnClickable()"
+      [showGoToCurrent]="shouldShowCurrent()"
       [theme]="theme"
       (onLeftNav)="onLeftNav()"
       (onLeftSecondaryNav)="onLeftSecondaryNav()"
       (onRightNav)="onRightNav()"
       (onRightSecondaryNav)="onRightSecondaryNav()"
-      (onLabelClick)="toggleCalendar()">
+      (onLabelClick)="toggleCalendar()"
+      (goToCurrent)="goToCurrent()">
   </dp-calendar-nav>
 
   <div class="dp-calendar-wrapper">

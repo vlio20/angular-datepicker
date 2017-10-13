@@ -14,7 +14,7 @@ describe('dpDayPicker reactive directive', () => {
   });
 
   it('should check that the popup appended to body', () => {
-    page.dayReactiveDirectivePickerInput.click();
+    page.dayDirectiveReactiveInput.click();
     expect(page.datePickerPopup.isDisplayed()).toBe(true);
     page.clickOnBody();
     expect(page.datePickerPopup.isDisplayed()).toBe(false);
@@ -38,7 +38,7 @@ describe('dpDayPicker reactive directive', () => {
     page.clickOnBody();
     browser.sleep(200);
     browser.waitForAngularEnabled(false);
-    page.dayReactiveDirectivePickerInput.click();
+    page.dayDirectiveReactiveInput.click();
     expect(page.datePickerPopup.isDisplayed()).toBe(false);
     browser.waitForAngularEnabled(true);
     browser.sleep(1000);
@@ -46,7 +46,7 @@ describe('dpDayPicker reactive directive', () => {
   });
 
   it('should check if enable/disable required validation is working', () => {
-    page.dayReactiveDirectivePickerInput.clear();
+    page.dayDirectiveReactiveInput.clear();
     expect(page.reactiveRequiredValidationMsg.isPresent()).toBe(false);
     page.enableRequiredValidationRadio.click();
     expect(page.reactiveRequiredValidationMsg.getText()).toEqual('required');
@@ -58,7 +58,7 @@ describe('dpDayPicker reactive directive', () => {
     page.minDateValidationPickerInput.clear();
     expect(page.reactiveMinDateValidationMsg.isPresent()).toBe(false);
     page.minDateValidationPickerInput.sendKeys('11-04-2017');
-    page.dayReactiveDirectivePickerInput.sendKeys('10-04-2017');
+    page.dayDirectiveReactiveInput.sendKeys('10-04-2017');
     page.clickOnBody();
     expect(page.reactiveMinDateValidationMsg.getText()).toEqual('minDate invalid');
     page.minDateValidationPickerInput.clear();
@@ -70,7 +70,7 @@ describe('dpDayPicker reactive directive', () => {
     page.maxDateValidationPickerInput.clear();
     expect(page.reactiveMaxDateValidationMsg.isPresent()).toBe(false);
     page.maxDateValidationPickerInput.sendKeys('11-04-2017');
-    page.dayReactiveDirectivePickerInput.sendKeys('12-04-2017');
+    page.dayDirectiveReactiveInput.sendKeys('12-04-2017');
     page.clickOnBody();
     expect(page.reactiveMaxDateValidationMsg.getText()).toEqual('maxDate invalid');
     page.maxDateValidationPickerInput.clear();

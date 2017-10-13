@@ -15,4 +15,5 @@ export interface IMonthCalendarConfig extends ICalendar {
   multipleYearsNavigateBy?: number;
   showMultipleYearsNavigation?: boolean;
   returnedValueType?: ECalendarValue;
+  showGoToCurrent?: boolean;
 }

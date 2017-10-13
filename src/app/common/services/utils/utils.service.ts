@@ -264,6 +264,12 @@ export class UtilsService {
       .map(d => moment(d, format));
   }
 
+  shouldShowCurrent(showGoToCurrent: boolean, mode: CalendarMode, min: Moment, max: Moment): boolean {
+    return showGoToCurrent &&
+      mode !== 'time' &&
+      this.isDateInRange(moment(), min, max);
+  }
+
   isDateInRange(date: Moment, from: Moment, to: Moment): boolean {
     return date.isBetween(from, to, 'day', '[]');
   }

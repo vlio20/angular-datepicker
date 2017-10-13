@@ -1,37 +1,47 @@
 <div class="dp-calendar-nav-container">
-  <div class="dp-calendar-nav-container-left">
+  <div class="dp-nav-header">
+    <span [hidden]="isLabelClickable">{{label}}</span>
     <button type="button"
-            class="dp-calendar-nav-left"
-            [hidden]="!showLeftNav"
-            [disabled]="leftNavDisabled"
-            (click)="leftNavClicked()">
-    </button>
-    <button type="button"
-            class="dp-calendar-secondary-nav-left"
-            *ngIf="showLeftSecondaryNav"
-            [disabled]="leftSecondaryNavDisabled"
-            (click)="leftSecondaryNavClicked()">
+            class="dp-nav-header-btn"
+            [hidden]="!isLabelClickable"
+            (click)="labelClicked()">
+      {{label}}
     </button>
   </div>
-  <span class="dp-nav-header" [hidden]="isLabelClickable">{{label}}</span>
-  <button type="button"
-          class="dp-nav-header dp-nav-header-btn"
-          [hidden]="!isLabelClickable"
-          (click)="labelClicked()">
-    {{label}}
-  </button>
-  <div class="dp-calendar-nav-container-right">
+
+  <div class="dp-nav-btns-container">
+    <div class="dp-calendar-nav-container-left">
+      <button type="button"
+              class="dp-calendar-secondary-nav-left"
+              *ngIf="showLeftSecondaryNav"
+              [disabled]="leftSecondaryNavDisabled"
+              (click)="leftSecondaryNavClicked()">
+      </button>
+      <button type="button"
+              class="dp-calendar-nav-left"
+              [hidden]="!showLeftNav"
+              [disabled]="leftNavDisabled"
+              (click)="leftNavClicked()">
+      </button>
+    </div>
     <button type="button"
-            class="dp-calendar-secondary-nav-right"
-            *ngIf="showRightSecondaryNav"
-            [disabled]="rightSecondaryNavDisabled"
-            (click)="rightSecondaryNavClicked()">
+            class="dp-current-location-btn"
+            *ngIf="showGoToCurrent"
+            (click)="goToCurrent.emit()">
     </button>
-    <button type="button"
-            class="dp-calendar-nav-right"
-            [hidden]="!showRightNav"
-            [disabled]="rightNavDisabled"
-            (click)="rightNavClicked()">
-    </button>
+    <div class="dp-calendar-nav-container-right">
+      <button type="button"
+              class="dp-calendar-nav-right"
+              [hidden]="!showRightNav"
+              [disabled]="rightNavDisabled"
+              (click)="rightNavClicked()">
+      </button>
+      <button type="button"
+              class="dp-calendar-secondary-nav-right"
+              *ngIf="showRightSecondaryNav"
+              [disabled]="rightSecondaryNavDisabled"
+              (click)="rightSecondaryNavClicked()">
+      </button>
+    </div>
   </div>
 </div>
