@@ -8,13 +8,13 @@ All notable changes to this project will be documented in this file.
 - none
 
 ### UI/UX Changes
-- Moving go to current button inside the navigation component (#commit).
+- Moving go to current button inside the navigation component ([dd283c5](https://github.com/vlio20/angular-datepicker/commit/dd283c5)).
 
 ### Bug Fixed
 - none
 
 ### Breaking Changes
-- Go to current button moved from input element to the navigation component (#commit).
+- Go to current button moved from input element to the navigation component ([ec692cd](https://github.com/vlio20/angular-datepicker/commit/ec692cd)).
 
 
 
@@ -31,6 +31,6 @@ All notable changes to this project will be documented in this file.
 - none
 
 ### Breaking Changes
-- default locale is now set with [`moment.locale()`](https://momentjs.com/docs/#/i18n/getting-locale/) instead of hard coded `en` 
+- default locale is now set with [`moment.locale()`](https://momentjs.com/docs/#/i18n/getting-locale/) instead of hard coded `en` ([ec692cd](https://github.com/vlio20/angular-datepicker/commit/ec692cd)) closes [#228](https://github.com/vlio20/angular-datepicker/issues/228) 
 
 
