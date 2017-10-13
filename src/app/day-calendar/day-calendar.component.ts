@@ -268,7 +268,7 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
       'day',
       this.componentConfig.min,
       this.componentConfig.max
-    )
+    );
   }
 
   goToCurrent() {

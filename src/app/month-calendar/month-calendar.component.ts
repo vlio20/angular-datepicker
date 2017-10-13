@@ -263,7 +263,7 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
       'month',
       this.componentConfig.min,
       this.componentConfig.max
-    )
+    );
   }
 
   goToCurrent() {
