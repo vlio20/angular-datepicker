@@ -14,7 +14,6 @@ export interface IDatePickerConfig extends IDayCalendarConfig,
   disableKeypress?: boolean;
   appendTo?: string | HTMLElement;
   inputElementContainer?: HTMLElement;
-  showGoToCurrent?: boolean;
   drops?: TDrops;
   opens?: TOpens;
   hideInputContainer?: boolean;

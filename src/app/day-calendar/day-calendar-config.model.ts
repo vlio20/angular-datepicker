@@ -27,4 +27,5 @@ export interface IDayCalendarConfig extends ICalendar {
   multipleYearsNavigateBy?: number;
   showMultipleYearsNavigation?: boolean;
   returnedValueType?: ECalendarValue;
+  showGoToCurrent?: boolean;
 }

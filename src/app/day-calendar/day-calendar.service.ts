@@ -19,7 +19,7 @@ export class DayCalendarService {
     allowMultiSelect: false,
     monthFormat: 'MMM, YYYY',
     enableMonthSelector: true,
-    locale: 'en',
+    locale: moment.locale(),
     dayBtnFormat: 'DD'
   };
 
@@ -178,7 +178,8 @@ export class DayCalendarService {
       monthBtnFormatter: componentConfig.monthBtnFormatter,
       monthBtnCssClassCallback: componentConfig.monthBtnCssClassCallback,
       multipleYearsNavigateBy: componentConfig.multipleYearsNavigateBy,
-      showMultipleYearsNavigation: componentConfig.showMultipleYearsNavigation
+      showMultipleYearsNavigation: componentConfig.showMultipleYearsNavigation,
+      showGoToCurrent: componentConfig.showGoToCurrent
     });
   }
 

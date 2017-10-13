@@ -1,14 +1,14 @@
 import {$, $$, browser, by, element} from 'protractor';
 
 export class DemoPage {
-  private popupSelector = 'body > div .dp-popup';
+  private popupSelector = '.dp-popup.dp-main';
   body = $('body');
   dayPickerInput = $('#datePicker input');
   timePickerInput = $('#timePicker input');
   daytimePickerInput = $('#daytimePicker input');
   daytimeDirectiveInput = $('#daytimeDirective input');
   dayDirectiveInput = $('#dayDirective input');
-  dayReactiveDirectivePickerInput = $('#datePickerDirDayReactive input');
+  dayDirectiveReactiveInput = $('#datePickerDirDayReactive input');
   monthDirectiveInput = $('#datePickerDirMonth input');
   timeSelectDirectiveInput = $('#timePickerDirDay input');
   datePickerPopup = $(this.popupSelector);
@@ -28,7 +28,7 @@ export class DemoPage {
   weekDayNames = $$(`${this.popupSelector} .dp-weekdays`);
   weekDayInline = $$(`.dp-demo-container .dp-weekdays`);
   calendarContainer = $$(`${this.popupSelector} .dp-calendar-container `);
-  currentLocationBtn = $(`#datePicker .dp-current-location-btn`);
+  currentLocationBtn = $(`${this.popupSelector} .dp-current-location-btn`);
   themeOnRadio = $('#themeOn');
   themeOffRadio = $('#themeOff');
   openOnFocusRadioOn = $('#yesOpenOnFocus');
@@ -55,6 +55,7 @@ export class DemoPage {
   yearFormat = $('#yearFormat');
   localeOptions = $('#locale');
   hideGoToCurrentRadio = $('#hideGoToCurrent');
+  showGoToCurrentRadio = $('#showGoToCurrent');
   pickerEnabledRadio = $('#inputEnabledRadio');
   pickerDisabledRadio = $('#inputDisabledRadio');
   enableRequiredValidationRadio = $('#enableRequiredRadio');

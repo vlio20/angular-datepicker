@@ -26,7 +26,7 @@ export class DatePickerService {
     showWeekNumbers: false,
     enableMonthSelector: true,
     showGoToCurrent: true,
-    locale: 'en'
+    locale: moment.locale()
   };
 
   constructor(private utilsService: UtilsService,
@@ -85,7 +85,8 @@ export class DatePickerService {
       multipleYearsNavigateBy: pickerConfig.multipleYearsNavigateBy,
       showMultipleYearsNavigation: pickerConfig.showMultipleYearsNavigation,
       locale: pickerConfig.locale,
-      returnedValueType: pickerConfig.returnedValueType
+      returnedValueType: pickerConfig.returnedValueType,
+      showGoToCurrent: pickerConfig.showGoToCurrent
     };
   }
 

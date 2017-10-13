@@ -9,7 +9,8 @@ import {
   OnChanges,
   OnInit,
   Output,
-  SimpleChanges, ViewEncapsulation
+  SimpleChanges,
+  ViewEncapsulation
 } from '@angular/core';
 import {
   ControlValueAccessor,
@@ -57,6 +58,7 @@ export class DayTimeCalendarComponent implements OnInit, OnChanges, ControlValue
   @Input() minDate: Moment | string;
   @Input() maxDate: Moment | string;
   @HostBinding('class') @Input() theme: string;
+
   @Output() onChange: EventEmitter<IDate> = new EventEmitter();
 
   isInited: boolean = false;

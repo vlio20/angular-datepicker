@@ -35,14 +35,13 @@ const DAY_PICKER_DIRECTIVE_OPTION_KEYS = [
   'allowMultiSelect',
   'closeOnSelect',
   'closeOnSelectDelay',
+  'showGoToCurrent',
   ...PICKER_OPTION_KEYS
 ];
 const DAY_PICKER_OPTION_KEYS = [
-  'showGoToCurrent',
   ...DAY_PICKER_DIRECTIVE_OPTION_KEYS
 ];
 const DAY_TIME_PICKER_OPTION_KEYS = [
-  'showGoToCurrent',
   ...PICKER_OPTION_KEYS
 ];
 const TIME_PICKER_OPTION_KEYS = [
@@ -58,6 +57,7 @@ const MONTH_CALENDAR_OPTION_KEYS = [
   'multipleYearsNavigateBy',
   'showMultipleYearsNavigation',
   'yearFormat',
+  'showGoToCurrent',
   ...GLOBAL_OPTION_KEYS
 ];
 const DAY_CALENDAR_OPTION_KEYS = [
@@ -73,6 +73,7 @@ const DAY_CALENDAR_OPTION_KEYS = [
   'enableMonthSelector',
   'dayBtnFormat',
   'weekdayFormat',
+  'showGoToCurrent',
   ...MONTH_CALENDAR_OPTION_KEYS
 ];
 const TIME_SELECT_SHARED_OPTION_KEYS = [
@@ -210,7 +211,7 @@ export class DemoComponent {
     timeSeparator: ':',
     multipleYearsNavigateBy: 10,
     showMultipleYearsNavigation: false,
-    locale: 'en',
+    locale: moment.locale(),
     hideInputContainer: false,
     returnedValueType: ECalendarValue.String
   };
