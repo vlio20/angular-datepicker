@@ -91,7 +91,7 @@ describe('dpDayPicker dayPicker', () => {
     expect(page.dayCalendarNavHeaderBtn.getText()).toEqual('Apr, 2017');
 
     page.dayCalendarNavHeaderBtn.click();
-    expect(page.dayCalendarContainer.isDisplayed()).toBe(false);
+    expect(page.dayCalendarContainer.isPresent()).toBe(false);
     expect(page.monthCalendar.isPresent()).toBe(true);
     expect(page.dayCalendarNavMonthHeaderBtn.getText()).toEqual('2017');
     expect(page.currentMonthCalendarBtn.getText()).toEqual(moment().format('MMM'));
@@ -107,7 +107,7 @@ describe('dpDayPicker dayPicker', () => {
     expect(page.dayCalendarContainer.isDisplayed()).toBe(true);
     expect(page.monthCalendar.isPresent()).toBe(false);
     page.dayCalendarNavHeaderBtn.click();
-    expect(page.dayCalendarContainer.isDisplayed()).toBe(false);
+    expect(page.dayCalendarContainer.isPresent()).toBe(false);
     expect(page.monthCalendar.isPresent()).toBe(true);
 
     page.dayCalendarNavMonthHeaderBtn.click();
