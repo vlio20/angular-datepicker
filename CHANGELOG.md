@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 # [2.6.0] (2017-00-00)
 
 ### Features
-- none
+- Moving go to current button inside the navigation component, enables go to current in inline components ([dd283c5](https://github.com/vlio20/angular-datepicker/commit/dd283c5)).
 
 ### UI/UX Changes
 - Moving go to current button inside the navigation component ([dd283c5](https://github.com/vlio20/angular-datepicker/commit/dd283c5)).

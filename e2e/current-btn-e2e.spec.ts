@@ -1,6 +1,6 @@
 import {DemoPage} from './app.po';
 import * as moment from 'moment';
-import {browser, ElementFinder} from 'protractor';
+import {ElementFinder} from 'protractor';
 
 describe('dpDayPicker dayPicker', () => {
 
