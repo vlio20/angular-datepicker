@@ -14,7 +14,7 @@ All notable changes to this project will be documented in this file.
 - none
 
 ### Breaking Changes
-- Go to current button moved from input element to the navigation component ([ec692cd](https://github.com/vlio20/angular-datepicker/commit/ec692cd)).
+- Go to current button moved from input element to the navigation component ([dd283c5](https://github.com/vlio20/angular-datepicker/commit/dd283c5)).
 
 
 
