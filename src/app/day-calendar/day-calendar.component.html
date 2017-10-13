@@ -1,13 +1,15 @@
-<div class="dp-day-calendar-container" [hidden]="currentCalendarMode !==  CalendarMode.Day">
+<div class="dp-day-calendar-container" *ngIf="currentCalendarMode ===  CalendarMode.Day">
   <dp-calendar-nav
-      [label]="getNavLabel()"
-      [showLeftNav]="shouldShowLeftNav()"
-      [showRightNav]="shouldShowRightNav()"
-      [isLabelClickable]="isNavHeaderBtnClickable()"
+      [label]="navLabel"
+      [showLeftNav]="showLeftNav"
+      [showRightNav]="showRightNav"
+      [isLabelClickable]="componentConfig.enableMonthSelector"
+      [showGoToCurrent]="_shouldShowCurrent"
       [theme]="theme"
       (onLeftNav)="onLeftNav()"
       (onRightNav)="onRightNav()"
-      (onLabelClick)="toggleCalendar(CalendarMode.Month)">
+      (onLabelClick)="toggleCalendar(CalendarMode.Month)"
+      (goToCurrent)="goToCurrent()">
   </dp-calendar-nav>
 
   <div class="dp-calendar-wrapper"
@@ -30,13 +32,12 @@
       </button>
     </div>
   </div>
-
 </div>
 
 <dp-month-calendar
     *ngIf="currentCalendarMode ===  CalendarMode.Month"
     [config]="monthCalendarConfig"
-    [displayDate]="currentDateView"
+    [displayDate]="_currentDateView"
     [theme]="theme"
     (onSelect)="monthSelected($event)"
     (onNavHeaderBtnClick)="toggleCalendar(CalendarMode.Day)">

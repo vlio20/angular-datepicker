@@ -95,7 +95,7 @@
                         [required]="required"
                         [placeholder]="placeholder"
                         [config]="config"
-                        [theme]="material ? 'dp-material' : ''">
+                        [theme]="material ? 'dp-material dp-main' : 'dp-main'">
         </dp-date-picker>
 
         <div class="dp-validations">
@@ -110,7 +110,7 @@
         <dp-day-time-calendar
             name="daytimeInline"
             #daytimeInline="ngModel"
-            [theme]="material ? 'dp-material' : ''"
+            [theme]="material ? 'dp-material dp-main' : 'dp-main'"
             [(ngModel)]="date"
             (ngModelChange)="log($event)"
             [minDate]="validationMinDate"
@@ -136,7 +136,7 @@
                name="daytimePickerDir"
                #dateDirectivePicker="dpDayPicker"
                #daytimeDirectivePickerModel="ngModel"
-               [theme]="material ? 'dp-material' : ''"
+               [theme]="material ? 'dp-material dp-main' : 'dp-main'"
                mode="daytime"
                [(ngModel)]="date"
                (open)="opened()"
@@ -172,7 +172,7 @@
                         [required]="required"
                         [placeholder]="placeholder"
                         [config]="config"
-                        [theme]="material ? 'dp-material' : ''">
+                        [theme]="material ? 'dp-material dp-main' : 'dp-main'">
         </dp-date-picker>
         <div class="dp-validations" *ngIf="datePickerModel.errors">
           <div id="requiredValidation" *ngIf="datePickerModel.errors.required">required</div>
@@ -189,7 +189,7 @@
         <dp-day-calendar
             name="dayCalendar"
             #dayCalendar="ngModel"
-            [theme]="material ? 'dp-material' : ''"
+            [theme]="material ? 'dp-material dp-main' : 'dp-main'"
             [(ngModel)]="dates"
             (ngModelChange)="log($event)"
             [minDate]="validationMinDate"
@@ -210,7 +210,7 @@
                name="datePicker"
                #dateDirectivePicker="dpDayPicker"
                #dateDirectivePickerModel="ngModel"
-               [theme]="material ? 'dp-material' : ''"
+               [theme]="material ? 'dp-material dp-main' : 'dp-main'"
                [(ngModel)]="date"
                (open)="opened()"
                (close)="closed()"
@@ -235,7 +235,7 @@
           <input [dpDayPicker]="config"
                  name="datePicker"
                  #dateDirectivePicker="dpDayPicker"
-                 [theme]="material ? 'dp-material' : ''"
+                 [theme]="material ? 'dp-material dp-main' : 'dp-main'"
                  formControlName="datePicker"
                  [placeholder]="placeholder"
                  (onChange)="date = $event; log($event)"
@@ -276,7 +276,7 @@
                         [required]="required"
                         [placeholder]="placeholder"
                         [config]="config"
-                        [theme]="material ? 'dp-material' : ''">
+                        [theme]="material ? 'dp-material dp-main' : 'dp-main'">
         </dp-date-picker>
         <div class="dp-validations">
           <div id="monthPickerRequiredValidation" *ngIf="monthPicker.errors && monthPicker.errors.required">required
@@ -296,7 +296,7 @@
         <dp-month-calendar
             name="monthInline"
             #monthInline="ngModel"
-            [theme]="material ? 'dp-material' : ''"
+            [theme]="material ? 'dp-material dp-main' : 'dp-main'"
             [(ngModel)]="dates"
             (ngModelChange)="log($event)"
             [minDate]="validationMinDate"
@@ -321,7 +321,7 @@
                name="datePicker"
                #dateDirectivePicker="dpDayPicker"
                #dateDirectivePickerModel="ngModel"
-               [theme]="material ? 'dp-material' : ''"
+               [theme]="material ? 'dp-material dp-main' : 'dp-main'"
                mode="month"
                [(ngModel)]="date"
                (open)="opened()"
@@ -354,7 +354,7 @@
                         [required]="required"
                         [placeholder]="placeholder"
                         [config]="config"
-                        [theme]="material ? 'dp-material' : ''">
+                        [theme]="material ? 'dp-material dp-main' : 'dp-main'">
         </dp-date-picker>
         <div class="dp-validations">
           <div id="timePickerRequiredValidation" *ngIf="timePicker.errors && timePicker.errors.required">required
@@ -374,7 +374,7 @@
         <dp-time-select
             name="timeInline"
             #timeInline="ngModel"
-            [theme]="material ? 'dp-material' : ''"
+            [theme]="material ? 'dp-material dp-main' : 'dp-main'"
             [(ngModel)]="date"
             (ngModelChange)="log($event)"
             [minDate]="validationMinDate"
@@ -401,7 +401,7 @@
                name="timePickerDir"
                #dateDirectivePicker="dpDayPicker"
                #timeDirectivePickerModel="ngModel"
-               [theme]="material ? 'dp-material' : ''"
+               [theme]="material ? 'dp-material dp-main' : 'dp-main'"
                mode="time"
                (open)="opened()"
                (close)="closed()"

@@ -178,7 +178,8 @@ export class DayCalendarService {
       monthBtnFormatter: componentConfig.monthBtnFormatter,
       monthBtnCssClassCallback: componentConfig.monthBtnCssClassCallback,
       multipleYearsNavigateBy: componentConfig.multipleYearsNavigateBy,
-      showMultipleYearsNavigation: componentConfig.showMultipleYearsNavigation
+      showMultipleYearsNavigation: componentConfig.showMultipleYearsNavigation,
+      showGoToCurrent: componentConfig.showGoToCurrent
     });
   }
 

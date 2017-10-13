@@ -21,7 +21,7 @@ describe('format validation', () => {
     common(page.daytimeDirectiveMenu, page.daytimeDirectiveInput);
     common(page.dayPickerMenu, page.dayPickerInput);
     common(page.dayDirectiveMenu, page.dayDirectiveInput);
-    common(page.dayDirectiveReactiveMenu, page.dayReactiveDirectivePickerInput);
+    common(page.dayDirectiveReactiveMenu, page.dayDirectiveReactiveInput);
     common(page.monthPickerMenu, page.monthPickerInput);
     common(page.monthDirectiveMenu, page.monthDirectiveInput);
     common(page.timePickerMenu, page.timePickerInput);

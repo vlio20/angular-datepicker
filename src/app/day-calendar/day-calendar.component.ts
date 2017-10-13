@@ -69,12 +69,16 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
   _selected: Moment[];
   weeks: IDay[][];
   weekdays: Moment[];
-  currentDateView: Moment;
+  _currentDateView: Moment;
   inputValue: CalendarValue;
   inputValueType: ECalendarValue;
   validateFn: DateValidator;
   currentCalendarMode: ECalendarMode = ECalendarMode.Day;
   monthCalendarConfig: IMonthCalendarConfig;
+  _shouldShowCurrent: boolean = true;
+  navLabel: string;
+  showLeftNav: boolean;
+  showRightNav: boolean;
 
   api = {
     moveCalendarsBy: this.moveCalendarsBy.bind(this),
@@ -88,6 +92,19 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
 
   get selected(): Moment[] {
     return this._selected;
+  }
+
+  set currentDateView(current: Moment) {
+    this._currentDateView = current.clone();
+    this.weeks = this.dayCalendarService
+      .generateMonthArray(this.componentConfig, this._currentDateView, this.selected);
+    this.setLabel();
+    this.showLeftNav = this.dayCalendarService.shouldShowLeft(this.componentConfig.min, this.currentDateView);
+    this.showRightNav = this.dayCalendarService.shouldShowRight(this.componentConfig.max, this.currentDateView);
+  }
+
+  get currentDateView(): Moment {
+    return this._currentDateView;
   }
 
   constructor(public dayCalendarService: DayCalendarService,
@@ -107,12 +124,11 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
       ? this.utilsService.convertToMoment(this.displayDate, this.componentConfig.format).clone()
       : this.utilsService
         .getDefaultDisplayDate(this.currentDateView, this.selected, this.componentConfig.allowMultiSelect);
-    this.weeks = this.dayCalendarService
-      .generateMonthArray(this.componentConfig, this.currentDateView, this.selected);
     this.weekdays = this.dayCalendarService
       .generateWeekdays(this.componentConfig.firstDayOfWeek);
     this.inputValueType = this.utilsService.getInputType(this.inputValue, this.componentConfig.allowMultiSelect);
     this.monthCalendarConfig = this.dayCalendarService.getMonthCalendarConfig(this.componentConfig);
+    this._shouldShowCurrent = this.shouldShowCurrent();
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -138,8 +154,6 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
         .getInputType(this.inputValue, this.componentConfig.allowMultiSelect);
     } else {
       this.selected = [];
-      this.weeks = this.dayCalendarService
-        .generateMonthArray(this.componentConfig, this.currentDateView, this.selected);
     }
   }
 
@@ -191,10 +205,6 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
     this.onSelect.emit(day);
   }
 
-  getNavLabel(): string {
-    return this.dayCalendarService.getHeaderLabel(this.componentConfig, this.currentDateView);
-  }
-
   getDayBtnText(day: IDay): string {
     return this.dayCalendarService.getDayBtnText(this.componentConfig, day.date);
   }
@@ -216,27 +226,11 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
   }
 
   onLeftNav() {
-    this.currentDateView.subtract(1, 'month');
-    this.weeks = this.dayCalendarService
-      .generateMonthArray(this.componentConfig, this.currentDateView, this.selected);
+    this.moveCalendarsBy(this.currentDateView, -1, 'month');
   }
 
   onRightNav() {
-    this.currentDateView.add(1, 'month');
-    this.weeks = this.dayCalendarService
-      .generateMonthArray(this.componentConfig, this.currentDateView, this.selected);
-  }
-
-  shouldShowLeftNav(): boolean {
-    return this.dayCalendarService.shouldShowLeft(this.componentConfig.min, this.currentDateView);
-  }
-
-  shouldShowRightNav(): boolean {
-    return this.dayCalendarService.shouldShowRight(this.componentConfig.max, this.currentDateView);
-  }
-
-  isNavHeaderBtnClickable(): boolean {
-    return this.componentConfig.enableMonthSelector;
+    this.moveCalendarsBy(this.currentDateView, 1, 'month');
   }
 
   getWeekdayName(weekday: Moment): string {
@@ -257,14 +251,27 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
   monthSelected(month: IMonth) {
     this.currentDateView = month.date.clone();
     this.currentCalendarMode = ECalendarMode.Day;
-    this.weeks = this.dayCalendarService
-      .generateMonthArray(this.componentConfig, this.currentDateView, this.selected);
     this.onMonthSelect.emit(month);
   }
 
+  setLabel() {
+    this.navLabel = this.dayCalendarService.getHeaderLabel(this.componentConfig, this._currentDateView);
+  }
+
   moveCalendarsBy(current: Moment, amount: number, granularity: moment.unitOfTime.Base = 'month') {
-    const to = current.add(amount, granularity);
-    this.currentDateView = to;
-    this.weeks = this.dayCalendarService.generateMonthArray(this.componentConfig, to, this.selected);
+    this.currentDateView = current.clone().add(amount, granularity);
+  }
+
+  shouldShowCurrent(): boolean {
+    return this.utilsService.shouldShowCurrent(
+      this.componentConfig.showGoToCurrent,
+      'day',
+      this.componentConfig.min,
+      this.componentConfig.max
+    );
+  }
+
+  goToCurrent() {
+    this.currentDateView = moment();
   }
 }
