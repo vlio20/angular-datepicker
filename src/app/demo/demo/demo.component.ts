@@ -190,8 +190,6 @@ export class DemoComponent {
     onOpenDelay: 0,
     weekDayFormat: 'ddd',
     appendTo: document.body,
-    drops: 'down',
-    opens: 'right',
     showNearMonthDays: true,
     showWeekNumbers: false,
     enableMonthSelector: true,
