@@ -67,6 +67,10 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
   validateFn: DateValidator;
   _shouldShowCurrent: boolean = true;
   navLabel: string;
+  showLeftNav: boolean;
+  showRightNav: boolean;
+  showSecondaryLeftNav: boolean;
+  showSecondaryRightNav: boolean;
 
   set selected(selected: Moment[]) {
     this._selected = selected;
@@ -79,8 +83,13 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
 
   set currentDateView(current: Moment) {
     this._currentDateView = current.clone();
-    this.yearMonths = this.monthCalendarService.generateYear(this._currentDateView, this.selected);
-    this.setLabel();
+    this.yearMonths = this.monthCalendarService
+      .generateYear(this.componentConfig, this._currentDateView, this.selected);
+    this.navLabel = this.monthCalendarService.getHeaderLabel(this.componentConfig, this.currentDateView);
+    this.showLeftNav = this.monthCalendarService.shouldShowLeft(this.componentConfig.min, this._currentDateView);
+    this.showRightNav = this.monthCalendarService.shouldShowRight(this.componentConfig.max, this.currentDateView);
+    this.showSecondaryLeftNav = this.componentConfig.showMultipleYearsNavigation && this.showLeftNav;
+    this.showSecondaryRightNav = this.componentConfig.showMultipleYearsNavigation && this.showRightNav;
   }
 
   get currentDateView(): Moment {
@@ -125,7 +134,8 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
     if (value) {
       this.selected = this.utilsService
         .convertToMomentArray(value, this.componentConfig.format, this.componentConfig.allowMultiSelect);
-      this.yearMonths = this.monthCalendarService.generateYear(this.currentDateView, this.selected);
+      this.yearMonths = this.monthCalendarService
+        .generateYear(this.componentConfig, this.currentDateView, this.selected);
       this.inputValueType = this.utilsService.getInputType(this.inputValue, this.componentConfig.allowMultiSelect);
     }
   }
@@ -166,25 +176,17 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
     this.onChangeCallback(this.processOnChangeCallback(this.selected));
   }
 
-  isDisabledMonth(month: IMonth): boolean {
-    return this.monthCalendarService.isMonthDisabled(month, this.componentConfig);
-  }
-
   monthClicked(month: IMonth) {
     this.selected = this.utilsService
       .updateSelected(this.componentConfig.allowMultiSelect, this.selected, month, 'month');
     this.yearMonths = this.monthCalendarService
-      .generateYear(this.currentDateView, this.selected);
+      .generateYear(this.componentConfig, this.currentDateView, this.selected);
     this.onSelect.emit(month);
-  }
-
-  setLabel() {
-    this.navLabel = this.monthCalendarService.getHeaderLabel(this.componentConfig, this.currentDateView);
   }
 
   onLeftNav() {
     this.currentDateView = this.currentDateView.clone().subtract(1, 'year');
-    this.yearMonths = this.monthCalendarService.generateYear(this.currentDateView, this.selected);
+    this.yearMonths = this.monthCalendarService.generateYear(this.componentConfig, this.currentDateView, this.selected);
   }
 
   onLeftSecondaryNav() {
@@ -215,32 +217,8 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
     this.currentDateView = this.currentDateView.clone().add(navigateBy, 'year');
   }
 
-  shouldShowLeftNav(): boolean {
-    return this.monthCalendarService.shouldShowLeft(this.componentConfig.min, this.currentDateView);
-  }
-
-  shouldShowLeftSecondaryNav(): boolean {
-    return this.componentConfig.showMultipleYearsNavigation && this.shouldShowLeftNav();
-  }
-
-  shouldShowRightNav(): boolean {
-    return this.monthCalendarService.shouldShowRight(this.componentConfig.max, this.currentDateView);
-  }
-
-  shouldShowRightSecondaryNav(): boolean {
-    return this.componentConfig.showMultipleYearsNavigation && this.shouldShowRightNav();
-  }
-
-  isNavHeaderBtnClickable(): boolean {
-    return this.componentConfig.isNavHeaderBtnClickable;
-  }
-
   toggleCalendar() {
     this.onNavHeaderBtnClick.emit();
-  }
-
-  getMonthBtnText(month: IMonth): string {
-    return this.monthCalendarService.getMonthBtnText(this.componentConfig, month.date);
   }
 
   getMonthBtnCssClass(month: IMonth): {[klass: string]: boolean} {

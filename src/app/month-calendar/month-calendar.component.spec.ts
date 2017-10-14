@@ -29,17 +29,13 @@ describe('Component: MonthCalendarComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should check getMonthBtnText default value', () => {
-    expect(component.getMonthBtnText({
-      date: moment('05-04-2017', 'DD-MM-YYYY')
-    } as IMonth)).toEqual('Apr');
-  });
-
   describe('should have the right CSS classes for', () => {
     const defaultMonth: IMonth = {
       date: undefined,
       selected: false,
-      currentMonth: false
+      currentMonth: false,
+      disabled: false,
+      text: ''
     };
     const defaultCssClasses: { [klass: string]: boolean } = {
       'dp-selected': false,
