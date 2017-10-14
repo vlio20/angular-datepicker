@@ -1,3 +1,7 @@
+export {IDate} from './common/models/date.model';
+export {ECalendarMode} from './common/types/calendar-mode-enum';
+export {IDay} from './day-calendar/day.model';
+export {IMonth} from './month-calendar/month.model';
 export {ECalendarValue} from './common/types/calendar-value-enum';
 export {CalendarValue} from './common/types/calendar-value';
 export {IDayCalendarConfig} from './day-calendar/day-calendar-config.model';

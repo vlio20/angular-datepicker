@@ -1,6 +1,5 @@
 import {ECalendarValue} from '../common/types/calendar-value-enum';
 import {SingleCalendarValue} from '../common/types/single-calendar-value';
-import {ECalendarMode} from '../common/types/calendar-mode-enum';
 import {
   Component,
   EventEmitter,
@@ -58,9 +57,9 @@ export class TimeSelectComponent implements OnInit, OnChanges, ControlValueAcces
   @Input() minTime: Moment | string;
   @Input() maxTime: Moment | string;
   @HostBinding('class') @Input() theme: string;
+
   @Output() onChange: EventEmitter<IDate> = new EventEmitter();
 
-  CalendarType = ECalendarMode;
   isInited: boolean = false;
   componentConfig: ITimeSelectConfig;
   _selected: Moment;
@@ -131,7 +130,7 @@ export class TimeSelectComponent implements OnInit, OnChanges, ControlValueAcces
   registerOnChange(fn: any): void {
     this.onChangeCallback = fn;
   }
-
+  
   onChangeCallback(_: any) {
   };
 

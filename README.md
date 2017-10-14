@@ -51,11 +51,11 @@ Put the dp-date-picker component wherever you need it.
 
 ### Attributes (Output):  
 
-| Name                 | Type                                | Applies To                | Description                                                                                                                                                                                                                                        |
-|----------------------|:-----------------------------------:|:-------------------------:|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| onChange             | `CalendarValue`                     | All Pickers               | This event will be emitted on every valid value change, if you want to receive every value (valid and invalid) please use the native `ngModelChange` output.                                                                                                                                                                                      |                                                                                                                                                                                                   |
-
-
+| Name                 | Event Arguments                     | Applies To                | Description                                                                                                                                                      |
+|----------------------|:-----------------------------------:|:-------------------------:|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| onChange             | `CalendarValue`                     | All Pickers               | This event will be emitted on every valid value change, if you want to receive every value (valid and invalid) please use the native `ngModelChange` output.     |
+| open                 | `undefined`                         | All Pickers               | This event will be emitted when picker is opened.                                                                                                                |
+| close                | `CalendarValue`                     | All Pickers               | This event will be emitted when picker is closed.                                                                                                                |
 
 ### Configuration:  
 In order to provide configurations to the date-picker you need to pass it to the `dp-date-picker` component:  
@@ -168,6 +168,14 @@ i.e.
 | theme                | `String`            | `''`                                                                     | Theme is a class added to the popup container (and inner components) - this will allow styling of the calendar when it's appended to outer element (for example - body). There is a built in theme named dp-material, you can find it in the demo. |
 | config               | `IDayPickerConfig`  | See Below                                                                | Configuration object - see description below.                                                                                                                                                                                                      |
 
+### Attributes (Output):  
+
+| Name                 | Event Arguments                     |  Description                                                                                                                                                      |
+|----------------------|:-----------------------------------:|:------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| onSelect             | `IDay`                              |  This event will be emitted when a day is selected.                                                                                                               |
+| onMonthSelect        | `IMonth`                            |  This event will be emitted when a month is selected.                                                                                                             |
+| onNavHeaderBtnClick  | `ECalendarMode`                     |  This event will be emitted when the mode of the calendar switches form day to month and vise versa.                                                              |
+
 ### Configuration:  
 In order to provide configurations to the day-calendar you need to pass it to the `dp-day-calendar` component:  
 ```html
@@ -218,6 +226,14 @@ i.e.
 | theme                | `String`             | `''`                 | Theme is a class added to the popup container (and inner components) - this will allow styling of the calendar when it's appended to outer element (for example - body). There is a built in theme named dp-material, you can find it in the demo. |
 | config               | `IMonthPickerConfig` | See Below            | Configuration object - see description below.                                                                                                                                                                                                     |
 
+### Attributes (Output):  
+
+| Name                 | Event Arguments                     |  Description                                                                                                                                                      |
+|----------------------|:-----------------------------------:|:------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| onSelect             | `IMonth`                            |  This event will be emitted when a month is selected.                                                                                                             |
+| onNavHeaderBtnClick  | `null`                              |  This event will be emitted when the mode button, in the navigation section, was clicked.                                                                         |
+
+
 ### Configuration:  
 In order to provide configurations to the month-calendar you need to pass it to the `dp-month-calendar` component:  
 ```html
@@ -259,6 +275,13 @@ i.e.
 | theme                | `String`             | `''`                 | Theme is a class added to the popup container (and inner components) - this will allow styling of the calendar when it's appended to outer element (for example - body). There is a built in theme named dp-material, you can find it in the demo. |
 | config               | `ITimeSelectConfig`  | See Below            | Configuration object - see description below.                                                                                                                                                                                                      |
 
+### Attributes (Output):  
+
+| Name                 | Event Arguments                     |  Description                                                                                                                                                      |
+|----------------------|:-----------------------------------:|:------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| onChange             | `IDate`                             |  This event will be emitted when time is selected.                                                                                                                |
+
+
 ### Configuration:  
 In order to provide configurations to the time-select you need to pass it to the `dp-time-select` component:  
 ```html
@@ -299,6 +322,10 @@ i.e.
 | maxDate              | `Moment\|String`    | `undefined`                                                              | This is a validation rule, if the selected date will be after `maxDate` the containing form will be invalid. Note: if provided as string format configuration should be provided in the config object.                                             |
 | theme                | `String`            | `''`                                                                     | Theme is a class added to the popup container (and inner components) - this will allow styling of the calendar when it's appended to outer element (for example - body). There is a built in theme named dp-material, you can find it in the demo. |
 | config               | `IDatePickerConfig`  | See Below                                                                | Configuration object - see description below.                                                                                                                                                                                                      |
+
+| Name                 | Event Arguments                     |  Description                                                                                                                                                      |
+|----------------------|:-----------------------------------:|:------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| onChange             | `IDate`                             |  This event will be emitted when time is selected.                                                                                                                |
 
 ### Configuration:  
 In order to provide configurations to the day-time-calendar you need to pass it to the `dp-day-time-calendar` component:  
