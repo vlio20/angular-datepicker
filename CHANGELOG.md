@@ -11,7 +11,8 @@ All notable changes to this project will be documented in this file.
 - Moving go to current button inside the navigation component ([dd283c5](https://github.com/vlio20/angular-datepicker/commit/dd283c5)).
 
 ### Bug Fixed
-- none
+- Picker not always opens according to drops/opens ([c26d168](https://github.com/vlio20/angular-datepicker/commit/c26d168)) closes [#222](https://github.com/vlio20/angular-datepicker/issues/222)
+- More than one picker can be opened at the same time ([dd283c5](https://github.com/vlio20/angular-datepicker/commit/dd283c5)) closes [#223](https://github.com/vlio20/angular-datepicker/issues/223)
 
 ### Breaking Changes
 - Go to current button moved from input element to the navigation component ([dd283c5](https://github.com/vlio20/angular-datepicker/commit/dd283c5)).
@@ -32,6 +33,6 @@ All notable changes to this project will be documented in this file.
 - none
 
 ### Breaking Changes
-- default locale is now set with [`moment.locale()`](https://momentjs.com/docs/#/i18n/getting-locale/) instead of hard coded `en` ([ec692cd](https://github.com/vlio20/angular-datepicker/commit/ec692cd)) closes [#228](https://github.com/vlio20/angular-datepicker/issues/228) 
+- 29th October 2017 displayed twice [#235](https://github.com/vlio20/angular-datepicker/issues/235#issuecomment-336217634) 
 
 
