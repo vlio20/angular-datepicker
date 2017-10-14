@@ -1,11 +1,11 @@
 <div class="dp-month-calendar-container">
   <dp-calendar-nav
       [label]="navLabel"
-      [showLeftNav]="shouldShowLeftNav()"
-      [showLeftSecondaryNav]="shouldShowLeftSecondaryNav()"
-      [showRightNav]="shouldShowRightNav()"
-      [showRightSecondaryNav]="shouldShowRightSecondaryNav()"
-      [isLabelClickable]="isNavHeaderBtnClickable()"
+      [showLeftNav]="showLeftNav"
+      [showLeftSecondaryNav]="showLeftSecondaryNav"
+      [showRightNav]="showRightNav"
+      [showRightSecondaryNav]="showRightSecondaryNav"
+      [isLabelClickable]="componentConfig.isNavHeaderBtnClickable"
       [showGoToCurrent]="shouldShowCurrent()"
       [theme]="theme"
       (onLeftNav)="onLeftNav()"
@@ -21,10 +21,10 @@
       <button type="button"
               class="dp-calendar-month"
               *ngFor="let month of monthRow"
-              [disabled]="isDisabledMonth(month)"
+              [disabled]="month.disabled"
               [ngClass]="getMonthBtnCssClass(month)"
               (click)="monthClicked(month)">
-        {{getMonthBtnText(month)}}
+        {{month.text}}
       </button>
     </div>
   </div>

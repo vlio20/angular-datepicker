@@ -22,7 +22,7 @@ export class MonthCalendarService {
   }
 
   getConfig(config: IMonthCalendarConfig): IMonthCalendarConfig {
-    const _config = {
+    const _config: IMonthCalendarConfig = {
       ...this.DEFAULT_CONFIG,
       ...this.utilsService.clearUndefined(config)
     };
@@ -32,29 +32,33 @@ export class MonthCalendarService {
     return _config;
   }
 
-  generateYear(year: Moment, selected: Moment[] = null): IMonth[][] {
+  generateYear(config: IMonthCalendarConfig, year: Moment, selected: Moment[] = null): IMonth[][] {
     const index = year.clone().startOf('year');
 
     return this.utilsService.createArray(3).map(() => {
       return this.utilsService.createArray(4).map(() => {
+        const date = index.clone();
         const month = {
-          date: index.clone(),
+          date,
           selected: !!selected.find(s => index.isSame(s, 'month')),
-          currentMonth: index.isSame(moment(), 'month')
+          currentMonth: index.isSame(moment(), 'month'),
+          disabled: this.isMonthDisabled(date, config),
+          text: this.getMonthBtnText(config, date)
         };
 
         index.add(1, 'month');
+
         return month;
       });
     });
   }
 
-  isMonthDisabled(month: IMonth, config: IMonthCalendarConfig) {
-    if (config.min && month.date.isBefore(config.min, 'month')) {
+  isMonthDisabled(date: Moment, config: IMonthCalendarConfig) {
+    if (config.min && date.isBefore(config.min, 'month')) {
       return true;
     }
 
-    return !!(config.max && month.date.isAfter(config.max, 'month'));
+    return !!(config.max && date.isAfter(config.max, 'month'));
   }
 
   shouldShowLeft(min: Moment, currentMonthView: Moment): boolean {

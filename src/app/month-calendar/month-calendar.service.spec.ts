@@ -14,7 +14,7 @@ describe('Service: MonthCalendarService', () => {
   it('should check the generateYear method', inject([MonthCalendarService], (service: MonthCalendarService) => {
     const year = moment('14-01-1987', 'DD-MM-YYYY');
     const selected = moment('14-01-1987', 'DD-MM-YYYY');
-    const genYear = service.generateYear(year, [selected]);
+    const genYear = service.generateYear({}, year, [selected]);
 
     const current = year.clone().startOf('year');
     genYear.forEach((row) => {
@@ -36,22 +36,24 @@ describe('Service: MonthCalendarService', () => {
     const month: IMonth = {
       date: moment('09-04-2017', 'DD-MM-YYYY'),
       selected: false,
-      currentMonth: false
+      currentMonth: false,
+      disabled: false,
+      text: moment('09-04-2017', 'DD-MM-YYYY').format('MMM')
     };
     const config1: any = {
       min: month.date.clone().subtract(1, 'month'),
       max: month.date.clone().add(1, 'month')
     };
 
-    expect(service.isMonthDisabled(month, config1)).toBe(false);
+    expect(service.isMonthDisabled(month.date, config1)).toBe(false);
     month.date.subtract(1, 'month');
-    expect(service.isMonthDisabled(month, config1)).toBe(false);
+    expect(service.isMonthDisabled(month.date, config1)).toBe(false);
     month.date.subtract(1, 'month');
-    expect(service.isMonthDisabled(month, config1)).toBe(true);
+    expect(service.isMonthDisabled(month.date, config1)).toBe(true);
     month.date.add(3, 'month');
-    expect(service.isMonthDisabled(month, config1)).toBe(false);
+    expect(service.isMonthDisabled(month.date, config1)).toBe(false);
     month.date.add(1, 'month');
-    expect(service.isMonthDisabled(month, config1)).toBe(true);
+    expect(service.isMonthDisabled(month.date, config1)).toBe(true);
   }));
 
   it('should check getDayBtnText method',
@@ -70,6 +72,7 @@ describe('Service: MonthCalendarService', () => {
       (service: MonthCalendarService) => {
         const date = moment('05-04-2017', 'DD-MM-YYYY');
         expect(service.getMonthBtnCssClass({}, date)).toEqual('');
-        expect(service.getMonthBtnCssClass({monthBtnCssClassCallback: (m => 'class1 class2')}, date)).toEqual('class1 class2');
+        expect(service.getMonthBtnCssClass({monthBtnCssClassCallback: (m => 'class1 class2')}, date))
+          .toEqual('class1 class2');
       }));
 });

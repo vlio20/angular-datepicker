@@ -98,7 +98,7 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
     this._currentDateView = current.clone();
     this.weeks = this.dayCalendarService
       .generateMonthArray(this.componentConfig, this._currentDateView, this.selected);
-    this.setLabel();
+    this.navLabel = this.dayCalendarService.getHeaderLabel(this.componentConfig, this._currentDateView);
     this.showLeftNav = this.dayCalendarService.shouldShowLeft(this.componentConfig.min, this.currentDateView);
     this.showRightNav = this.dayCalendarService.shouldShowRight(this.componentConfig.max, this.currentDateView);
   }
@@ -252,10 +252,6 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
     this.currentDateView = month.date.clone();
     this.currentCalendarMode = ECalendarMode.Day;
     this.onMonthSelect.emit(month);
-  }
-
-  setLabel() {
-    this.navLabel = this.dayCalendarService.getHeaderLabel(this.componentConfig, this._currentDateView);
   }
 
   moveCalendarsBy(current: Moment, amount: number, granularity: moment.unitOfTime.Base = 'month') {

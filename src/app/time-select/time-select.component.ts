@@ -72,9 +72,28 @@ export class TimeSelectComponent implements OnInit, OnChanges, ControlValueAcces
   seconds: string;
   meridiem: string;
 
+  showDecHour: boolean;
+  showDecMinute: boolean;
+  showDecSecond: boolean;
+  showIncHour: boolean;
+  showIncMinute: boolean;
+  showIncSecond: boolean;
+  showToggleMeridiem: boolean;
+
   set selected(selected: Moment) {
     this._selected = selected;
     this.calculateTimeParts(this.selected);
+
+    this.showDecHour = this.timeSelectService.shouldShowDecrease(this.componentConfig, this._selected, 'hour');
+    this.showDecMinute = this.timeSelectService.shouldShowDecrease(this.componentConfig, this._selected, 'minute');
+    this.showDecSecond = this.timeSelectService.shouldShowDecrease(this.componentConfig, this._selected, 'second');
+
+    this.showIncHour = this.timeSelectService.shouldShowIncrease(this.componentConfig, this._selected, 'hour');
+    this.showIncMinute = this.timeSelectService.shouldShowIncrease(this.componentConfig, this._selected, 'minute');
+    this.showIncSecond = this.timeSelectService.shouldShowIncrease(this.componentConfig, this._selected, 'second');
+
+    this.showToggleMeridiem = this.timeSelectService.shouldShowToggleMeridiem(this.componentConfig, this._selected);
+
     this.onChangeCallback(this.processOnChangeCallback(selected));
   }
 
@@ -130,7 +149,7 @@ export class TimeSelectComponent implements OnInit, OnChanges, ControlValueAcces
   registerOnChange(fn: any): void {
     this.onChangeCallback = fn;
   }
-  
+
   onChangeCallback(_: any) {
   };
 
@@ -189,17 +208,5 @@ export class TimeSelectComponent implements OnInit, OnChanges, ControlValueAcces
     this.minutes = this.timeSelectService.getMinutes(this.componentConfig, time);
     this.seconds = this.timeSelectService.getSeconds(this.componentConfig, time);
     this.meridiem = this.timeSelectService.getMeridiem(this.componentConfig, time);
-  }
-
-  shouldShowDecrease(unit: TimeUnit): boolean {
-    return this.timeSelectService.shouldShowDecrease(this.componentConfig, this.selected, unit);
-  }
-
-  shouldShowIncrease(unit: TimeUnit): boolean {
-    return this.timeSelectService.shouldShowIncrease(this.componentConfig, this.selected, unit);
-  }
-
-  shouldShowToggleMeridiem(): boolean {
-    return this.timeSelectService.shouldShowToggleMeridiem(this.componentConfig, this.selected);
   }
 }

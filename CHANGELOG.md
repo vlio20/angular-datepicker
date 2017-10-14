@@ -10,6 +10,9 @@ All notable changes to this project will be documented in this file.
 ### UI/UX Changes
 - Moving go to current button inside the navigation component ([dd283c5](https://github.com/vlio20/angular-datepicker/commit/dd283c5)).
 
+### Improvements
+- Stop using getters in template ([???](https://github.com/vlio20/angular-datepicker/commit/???)) closes [#239](https://github.com/vlio20/angular-datepicker/issues/239)
+
 ### Bug Fixed
 - Add outputs of each component to docs ([9ee8035](https://github.com/vlio20/angular-datepicker/commit/9ee8035)) closes [#224](https://github.com/vlio20/angular-datepicker/issues/224)
 - More than one picker can be opened at the same time ([dd283c5](https://github.com/vlio20/angular-datepicker/commit/dd283c5)) closes [#223](https://github.com/vlio20/angular-datepicker/issues/223)
@@ -24,16 +27,5 @@ All notable changes to this project will be documented in this file.
 <a name="2.5.1"></a>
 # [2.5.1](https://github.com/vlio20/angular-datepicker/releases/tag/2.5.1) (2017-10-12)
 
-### Features
-- none
-
-### UI/UX Changes
-- none
-
 ### Bug Fixed
-- none
-
-### Breaking Changes
-- 29th October 2017 displayed twice [#235](https://github.com/vlio20/angular-datepicker/issues/235#issuecomment-336217634) 
-
-
+29th October 2017 displayed twice [#235](https://github.com/vlio20/angular-datepicker/issues/235#issuecomment-336217634)
