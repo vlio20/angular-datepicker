@@ -46,13 +46,13 @@ describe('Locales', () => {
 
     page.timePickerMenu.click();
     page.timePickerInput.click();
-    expect(page.meridiemDisplay.getText()).toMatch(/(בערב|בבוקר|לפני הצהריים|אחרי הצהריים)/);
+    expect(page.meridiemDisplay.getText()).toMatch(/(בערב|בבוקר|לפני הצהריים|אחרי הצהריים|לפנות בוקר)/);
 
     page.timeDirectiveMenu.click();
     page.timeSelectDirectiveInput.click();
-    expect(page.meridiemDisplay.getText()).toMatch(/(בערב|בבוקר|לפני הצהריים|אחרי הצהריים)/);
+    expect(page.meridiemDisplay.getText()).toMatch(/(בערב|בבוקר|לפני הצהריים|אחרי הצהריים|לפנות בוקר)/);
 
     page.timeInlineMenu.click();
-    expect(page.meridiemDisplayInline.getText()).toMatch(/(בערב|בבוקר|לפני הצהריים|אחרי הצהריים)/);
+    expect(page.meridiemDisplayInline.getText()).toMatch(/(בערב|בבוקר|לפני הצהריים|אחרי הצהריים|לפנות בוקר)/);
   });
 });
