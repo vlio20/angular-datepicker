@@ -254,11 +254,10 @@ export class UtilsService {
   }
 
   datesStringToStringArray(value: string): string[] {
-    return value.split(',').map(m => m.trim());
+    return (value || '').split(',').map(m => m.trim());
   }
 
-  getValidMomentArray(value: string,
-                      format: string): Moment[] {
+  getValidMomentArray(value: string, format: string): Moment[] {
     return this.datesStringToStringArray(value)
       .filter(d => this.isDateValid(d, format))
       .map(d => moment(d, format));
