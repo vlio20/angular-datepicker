@@ -27,12 +27,16 @@
            [ngClass]="{'dp-active-item': pickerMode == 'dayDirective'}">Day Picker directive</a>
       </li>
       <li>
-        <a id="dayDirectiveReactiveMenu" href="#" (click)="modeChanged('dayDirectiveReactive')"
+        <a id="dayDirectiveReactive" href="#" (click)="modeChanged('dayDirectiveReactive')"
            [ngClass]="{'dp-active-item': pickerMode == 'dayDirectiveReactive'}">Day Picker directive Reactive</a>
       </li>
       <li>
         <a id="monthPickerMenu" href="#" (click)="modeChanged('monthPicker')"
            [ngClass]="{'dp-active-item': pickerMode == 'monthPicker'}">Month Picker</a>
+      </li>
+      <li>
+        <a id="yearPickerMenu" href="#" (click)="modeChanged('yearPicker')"
+           [ngClass]="{'dp-active-item': pickerMode == 'yearPicker'}">Year Picker</a>
       </li>
       <li>
         <a id="monthInlineMenu" href="#" (click)="modeChanged('monthInline')"
@@ -62,14 +66,13 @@
                                              'dp-inline-day': pickerMode == 'dayInline',
                                              'dp-inline-month': pickerMode == 'monthInline',
                                              'dp-inline-time': pickerMode == 'timeInline',
+                                             'dp-inline-year': pickerMode == 'yearInline',
                                              'dp-inline-day-time': pickerMode == 'daytimeInline'}">
 
-    <form #donateForm class="dp-donate-btn" action="https://www.paypal.com/cgi-bin/webscr" method="post"
-          target="_blank">
+    <form #donateForm class="dp-donate-btn" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
       <input type="hidden" name="cmd" value="_s-xclick">
       <input type="hidden" name="hosted_button_id" value="8ZR2S5XYJ6WLJ">
-      <input (click)="donateClicked()" type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif"
-             border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+      <input (click)="donateClicked()" type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
       <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
     </form>
 
@@ -78,90 +81,13 @@
     <!--<div>{{form.form.dirty}}</div>-->
 
     <form #form="ngForm">
-      <div class="dp-picker-time-picker" *ngIf="pickerMode === 'daytimePicker'">
-        <dp-date-picker id="daytimePicker"
-                        name="daytimePicker"
-                        #datePicker
-                        #daytimePicker="ngModel"
-                        [(ngModel)]="date"
-                        (onChange)="log($event)"
-                        [mode]="'daytime'"
-                        [displayDate]="displayDate"
-                        (open)="opened()"
-                        (close)="closed()"
-                        [disabled]="disabled"
-                        [minDate]="validationMinDate"
-                        [maxDate]="validationMaxDate"
-                        [required]="required"
-                        [placeholder]="placeholder"
-                        [config]="config"
-                        [theme]="material ? 'dp-material' : ''">
-        </dp-date-picker>
-
-        <div class="dp-validations">
-          <div id="requiredValidation" *ngIf="daytimePicker.errors?.required">required</div>
-          <div id="formatValidation" *ngIf="daytimePicker.errors?.format">invalid format</div>
-          <div id="minDateValidation" *ngIf="daytimePicker.errors?.minDate">minDate invalid</div>
-          <div id="maxDateValidation" *ngIf="daytimePicker.errors?.maxDate">maxDate invalid</div>
-        </div>
-      </div>
-
-      <div class="dp-inline-day-time" *ngIf="pickerMode === 'daytimeInline'">
-        <dp-day-time-calendar
-            name="daytimeInline"
-            #daytimeInline="ngModel"
-            [theme]="material ? 'dp-material' : ''"
-            [(ngModel)]="date"
-            (ngModelChange)="log($event)"
-            [minDate]="validationMinDate"
-            [maxDate]="validationMaxDate"
-            [config]="config">
-        </dp-day-time-calendar>
-
-        <div class="dp-validations">
-          <div id="daytimeInlineRequiredValidation" *ngIf="daytimeInline.errors?.required">
-            required
-          </div>
-          <div id="daytimeInlineMinDateValidation" *ngIf="daytimeInline.errors?.minDate">minDate
-            invalid
-          </div>
-          <div id="daytimeInlineMaxDateValidation" *ngIf="daytimeInline.errors?.maxDate">maxDate
-            invalid
-          </div>
-        </div>
-      </div>
-
-      <div class="dp-picker-day-time-directive" id="daytimeDirective" *ngIf="pickerMode === 'daytimeDirective'">
-        <input [dpDayPicker]="config"
-               name="daytimePickerDir"
-               #dateDirectivePicker="dpDayPicker"
-               #daytimeDirectivePickerModel="ngModel"
-               [theme]="material ? 'dp-material' : ''"
-               mode="daytime"
-               [(ngModel)]="date"
-               (open)="opened()"
-               (close)="closed()"
-               [placeholder]="placeholder"
-               [minDate]="validationMinDate"
-               [maxDate]="validationMaxDate"
-               [disabled]="disabled"
-               [required]="required"
-               (onChange)="log($event)"/>
-        <div class="dp-validations">
-          <div id="requiredValidation" *ngIf="daytimeDirectivePickerModel.errors?.required">required</div>
-          <div id="formatValidation" *ngIf="daytimeDirectivePickerModel.errors?.format">invalid format</div>
-          <div *ngIf="daytimeDirectivePickerModel.errors?.minDate">minDate invalid</div>
-          <div *ngIf="daytimeDirectivePickerModel.errors?.maxDate">maxDate invalid</div>
-        </div>
-      </div>
-
       <div class="dp-picker-day" *ngIf="pickerMode === 'dayPicker'">
         <dp-date-picker id="datePicker"
                         name="datePicker"
                         #datePicker
                         #datePickerModel="ngModel"
                         [(ngModel)]="date"
-                        (onChange)="log($event)"
+                        (ngModelChange)="log($event)"
                         [mode]="'day'"
                         [displayDate]="displayDate"
                         [disabled]="disabled"
@@ -174,13 +100,12 @@
                         [config]="config"
                         [theme]="material ? 'dp-material' : ''">
         </dp-date-picker>
-        <div class="dp-validations" *ngIf="datePickerModel.errors">
-          <div id="requiredValidation" *ngIf="datePickerModel.errors.required">required</div>
-          <div id="formatValidation" *ngIf="datePickerModel.errors.format">invalid format
+        <div class="dp-validations">
+          <div id="requiredValidation" *ngIf="datePickerModel.errors && datePickerModel.errors.required">required</div>
+          <div *ngIf="datePickerModel.errors && datePickerModel.errors.format">format invalid</div>
+          <div id="minDateValidation" *ngIf="datePickerModel.errors && datePickerModel.errors.minDate">minDate invalid
           </div>
-          <div id="minDateValidation" *ngIf="datePickerModel.errors.minDate">minDate invalid
-          </div>
-          <div id="maxDateValidation" *ngIf="datePickerModel.errors.maxDate">maxDate invalid
+          <div id="maxDateValidation" *ngIf="datePickerModel.errors && datePickerModel.errors.maxDate">maxDate invalid
           </div>
         </div>
       </div>
@@ -219,44 +144,13 @@
                [maxDate]="validationMaxDate"
                [disabled]="disabled"
                [required]="required"
-               (onChange)="log($event)"/>
+               (ngModelChange)="log($event)"/>
         <div class="dp-validations">
           <div id="requiredValidation" *ngIf="dateDirectivePickerModel.errors?.required || false">required</div>
-          <div id="formatValidation" *ngIf="dateDirectivePickerModel.errors && dateDirectivePickerModel.errors.format">
-            invalid format
-          </div>
+          <div *ngIf="dateDirectivePickerModel.errors?.format || false">format invalid</div>
           <div *ngIf="dateDirectivePickerModel.errors?.minDate">minDate invalid</div>
           <div *ngIf="dateDirectivePickerModel.errors?.maxDate">maxDate invalid</div>
         </div>
-      </div>
-
-      <div class="dp-picker-day-directive" id="datePickerDirDayReactive" *ngIf="pickerMode === 'dayDirectiveReactive'">
-        <form [formGroup]="formGroup">
-          <input [dpDayPicker]="config"
-                 name="datePicker"
-                 #dateDirectivePicker="dpDayPicker"
-                 [theme]="material ? 'dp-material' : ''"
-                 formControlName="datePicker"
-                 [placeholder]="placeholder"
-                 (onChange)="date = $event; log($event)"
-                 [required]="required"
-                 (open)="opened()"
-                 (close)="closed()"/>
-          <div class="dp-validations" *ngIf="formGroup.get('datePicker').touched">
-            <div id="reactiveRequiredValidation"
-                 *ngIf="formGroup.get('datePicker').hasError('required')">
-              required
-            </div>
-            <div id="formatValidation" *ngIf="formGroup.get('datePicker').hasError('format')">
-              invalid format
-            </div>
-            <div id="reactiveMinDateValidation"
-                 *ngIf="formGroup.get('datePicker').hasError('minDate')">minDate invalid
-            </div>
-            <div id="reactiveMaxDateValidation" *ngIf="formGroup.get('datePicker').hasError('maxDate')">maxDate invalid
-            </div>
-          </div>
-        </form>
       </div>
 
       <div class="dp-picker-month" *ngIf="pickerMode === 'monthPicker'">
@@ -265,7 +159,7 @@
                         #datePicker
                         #monthPicker="ngModel"
                         [(ngModel)]="date"
-                        (onChange)="log($event)"
+                        (ngModelChange)="log($event)"
                         [mode]="'month'"
                         [displayDate]="displayDate"
                         (open)="opened()"
@@ -281,8 +175,7 @@
         <div class="dp-validations">
           <div id="monthPickerRequiredValidation" *ngIf="monthPicker.errors && monthPicker.errors.required">required
           </div>
-          <div id="formatValidation" *ngIf="monthPicker.errors && monthPicker.errors.format">invalid format
-          </div>
+          <div *ngIf="monthPicker.errors && monthPicker.errors.format">format invalid</div>
           <div id="monthPickerMinDateValidation" *ngIf="monthPicker.errors && monthPicker.errors.minDate">minDate
             invalid
           </div>
@@ -290,6 +183,28 @@
             invalid
           </div>
         </div>
+      </div>
+
+      <div class="dp-picker-year" *ngIf="pickerMode === 'yearPicker'">
+        <dp-date-picker id="yearPicker"
+                        name="yearPicker"
+                        #datePicker
+                        #monthPicker="ngModel"
+                        [(ngModel)]="date"
+                        (ngModelChange)="log($event)"
+                        [mode]="'year'"
+                        [displayDate]="displayDate"
+                        (open)="opened()"
+                        (close)="closed()"
+                        [disabled]="disabled"
+                        [minDate]="validationMinDate"
+                        [maxDate]="validationMaxDate"
+                        [required]="required"
+                        [placeholder]="placeholder"
+                        [config]="config"
+                        [theme]="material ? 'dp-material' : ''">
+        </dp-date-picker>
+        
       </div>
 
       <div class="dp-inline-month" *ngIf="pickerMode === 'monthInline'">
@@ -304,6 +219,7 @@
             [required]="required"
             [config]="config">
         </dp-month-calendar>
+
         <div class="dp-validations">
           <div id="monthInlineRequiredValidation" *ngIf="monthInline.errors && monthInline.errors.required">required
           </div>
@@ -316,35 +232,13 @@
         </div>
       </div>
 
-      <div class="dp-picker-month-directive" id="datePickerDirMonth" *ngIf="pickerMode === 'monthDirective'">
-        <input [dpDayPicker]="config"
-               name="datePicker"
-               #dateDirectivePicker="dpDayPicker"
-               #dateDirectivePickerModel="ngModel"
-               [theme]="material ? 'dp-material' : ''"
-               mode="month"
-               [(ngModel)]="date"
-               (open)="opened()"
-               (close)="closed()"
-               [placeholder]="placeholder"
-               [disabled]="disabled"
-               [required]="required"
-               (onChange)="log($event)"/>
-        <div class="dp-validations">
-          <div id="requiredValidation" *ngIf="dateDirectivePickerModel.errors?.required || false">required</div>
-          <div id="formatValidation" *ngIf="dateDirectivePickerModel.errors && dateDirectivePickerModel.errors.format">
-            invalid format
-          </div>
-        </div>
-      </div>
-
       <div class="dp-picker-time" *ngIf="pickerMode === 'timePicker'">
         <dp-date-picker id="timePicker"
                         name="timePicker"
                         #datePicker
                         #timePicker="ngModel"
                         [(ngModel)]="date"
-                        (onChange)="log($event)"
+                        (ngModelChange)="log($event)"
                         [mode]="'time'"
                         (open)="opened()"
                         (close)="closed()"
@@ -359,8 +253,7 @@
         <div class="dp-validations">
           <div id="timePickerRequiredValidation" *ngIf="timePicker.errors && timePicker.errors.required">required
           </div>
-          <div id="formatValidation" *ngIf="timePicker.errors && timePicker.errors.format">invalid format
-          </div>
+          <div *ngIf="timePicker.errors && timePicker.errors.format">format invalid</div>
           <div id="timePickerMinTimeValidation" *ngIf="timePicker.errors && timePicker.errors.minTime">minTime
             invalid
           </div>
@@ -396,6 +289,133 @@
         </div>
       </div>
 
+      <div class="dp-picker-time-picker" *ngIf="pickerMode === 'daytimePicker'">
+        <dp-date-picker id="daytimePicker"
+                        name="daytimePicker"
+                        #datePicker
+                        #daytimePicker="ngModel"
+                        [(ngModel)]="date"
+                        (ngModelChange)="log($event)"
+                        [mode]="'daytime'"
+                        [displayDate]="displayDate"
+                        (open)="opened()"
+                        (close)="closed()"
+                        [disabled]="disabled"
+                        [minDate]="validationMinDate"
+                        [maxDate]="validationMaxDate"
+                        [required]="required"
+                        [placeholder]="placeholder"
+                        [config]="config"
+                        [theme]="material ? 'dp-material' : ''">
+        </dp-date-picker>
+
+        <div class="dp-validations">
+          <div id="requiredValidation" *ngIf="daytimePicker.errors && daytimePicker.errors.required">required
+          </div>
+          <div *ngIf="daytimePicker.errors && daytimePicker.errors.format">format invalid</div>
+          <div id="minDateValidation" *ngIf="daytimePicker.errors && daytimePicker.errors.minDate">minDate
+            invalid
+          </div>
+          <div id="maxDateValidation" *ngIf="daytimePicker.errors && daytimePicker.errors.maxDate">maxDate
+            invalid
+          </div>
+        </div>
+      </div>
+
+      <div class="dp-inline-day-time" *ngIf="pickerMode === 'daytimeInline'">
+        <dp-day-time-calendar
+            name="daytimeInline"
+            #daytimeInline="ngModel"
+            [theme]="material ? 'dp-material' : ''"
+            [(ngModel)]="date"
+            (ngModelChange)="log($event)"
+            [minDate]="validationMinDate"
+            [maxDate]="validationMaxDate"
+            [config]="config">
+        </dp-day-time-calendar>
+
+        <div class="dp-validations">
+          <div id="daytimeInlineRequiredValidation" *ngIf="daytimeInline.errors && daytimeInline.errors.required">
+            required
+          </div>
+          <div id="daytimeInlineMinDateValidation" *ngIf="daytimeInline.errors && daytimeInline.errors.minDate">minDate
+            invalid
+          </div>
+          <div id="daytimeInlineMaxDateValidation" *ngIf="daytimeInline.errors && daytimeInline.errors.maxDate">maxDate
+            invalid
+          </div>
+        </div>
+      </div>
+
+      <div class="dp-picker-day-directive" id="datePickerDirDayReactive" *ngIf="pickerMode === 'dayDirectiveReactive'">
+        <form [formGroup]="formGroup">
+          <input [dpDayPicker]="config"
+                 name="datePicker"
+                 #dateDirectivePicker="dpDayPicker"
+                 [theme]="material ? 'dp-material' : ''"
+                 formControlName="datePicker"
+                 [placeholder]="placeholder"
+                 (ngModelChange)="date = $event; log($event)"
+                 [required]="required"
+                 (open)="opened()"
+                 (close)="closed()"/>
+          <div class="dp-validations">
+            <div id="reactiveRequiredValidation"
+                 *ngIf="formGroup.get('datePicker').hasError('required') && formGroup.get('datePicker').touched">
+              required
+            </div>
+            <div id="reactiveMinDateValidation"
+                 *ngIf="formGroup.get('datePicker').hasError('minDate') && formGroup.get('datePicker').touched">minDate
+              invalid
+            </div>
+            <div id="reactiveMaxDateValidation"
+                 *ngIf="formGroup.get('datePicker').hasError('maxDate') && formGroup.get('datePicker').touched">maxDate
+              invalid
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="dp-picker-month-directive" id="datePickerDirMonth" *ngIf="pickerMode === 'monthDirective'">
+        <input [dpDayPicker]="config"
+               name="datePicker"
+               #dateDirectivePicker="dpDayPicker"
+               #dateDirectivePickerModel="ngModel"
+               [theme]="material ? 'dp-material' : ''"
+               mode="month"
+               [(ngModel)]="date"
+               (open)="opened()"
+               (close)="closed()"
+               [placeholder]="placeholder"
+               [disabled]="disabled"
+               [required]="required"
+               (ngModelChange)="log($event)"/>
+        <div class="dp-validations">
+          <div id="requiredValidation" *ngIf="dateDirectivePickerModel.errors?.required || false">required</div>
+          <div *ngIf="dateDirectivePickerModel.errors?.format || false">format invalid</div>
+        </div>
+      </div>
+
+      <div class="dp-picker-year-directive" id="datePickerDirYear" *ngIf="pickerMode === 'yearDirective'">
+        <input [dpDayPicker]="config"
+               name="datePicker"
+               #dateDirectivePicker="dpDayPicker"
+               #dateDirectivePickerModel="ngModel"
+               [theme]="material ? 'dp-material' : ''"
+               mode="year"
+               [(ngModel)]="date"
+               (open)="opened()"
+               (close)="closed()"
+               [placeholder]="placeholder"
+               [disabled]="disabled"
+               [required]="required"
+               (ngModelChange)="log($event)"/>
+        <div class="dp-validations">
+          <div id="requiredValidation" *ngIf="dateDirectivePickerModel.errors?.required || false">required</div>
+          <div *ngIf="dateDirectivePickerModel.errors?.format || false">format invalid</div>
+        </div>
+      </div>
+
       <div class="dp-picker-time-directive" id="timePickerDirDay" *ngIf="pickerMode === 'timeDirective'">
         <input [dpDayPicker]="config"
                name="timePickerDir"
@@ -411,14 +431,36 @@
                [maxTime]="validationMaxTime"
                [disabled]="disabled"
                [required]="required"
-               (onChange)="log($event)"/>
+               (ngModelChange)="log($event)"/>
         <div class="dp-validations">
           <div id="requiredValidation" *ngIf="timeDirectivePickerModel.errors?.required || false">required</div>
-          <div id="formatValidation" *ngIf="timeDirectivePickerModel.errors && timeDirectivePickerModel.errors.format">
-            invalid format
-          </div>
+          <div *ngIf="timeDirectivePickerModel.errors?.format || false">format invalid</div>
           <div *ngIf="timeDirectivePickerModel.errors?.minTime">minTime invalid</div>
           <div *ngIf="timeDirectivePickerModel.errors?.maxTime">maxTime invalid</div>
+        </div>
+      </div>
+
+      <div class="dp-picker-day-time-directive" id="daytimeDirective" *ngIf="pickerMode === 'daytimeDirective'">
+        <input [dpDayPicker]="config"
+               name="daytimePickerDir"
+               #dateDirectivePicker="dpDayPicker"
+               #daytimeDirectivePickerModel="ngModel"
+               [theme]="material ? 'dp-material' : ''"
+               mode="daytime"
+               [(ngModel)]="date"
+               (open)="opened()"
+               (close)="closed()"
+               [placeholder]="placeholder"
+               [minDate]="validationMinDate"
+               [maxDate]="validationMaxDate"
+               [disabled]="disabled"
+               [required]="required"
+               (ngModelChange)="log($event)"/>
+        <div class="dp-validations">
+          <div id="requiredValidation" *ngIf="daytimeDirectivePickerModel.errors?.required || false">required</div>
+          <div *ngIf="daytimeDirectivePickerModel.errors?.format || false">format invalid</div>
+          <div *ngIf="daytimeDirectivePickerModel.errors?.minDate">minDate invalid</div>
+          <div *ngIf="daytimeDirectivePickerModel.errors?.maxDate">maxDate invalid</div>
         </div>
       </div>
     </form>
@@ -884,31 +926,6 @@
         </div>
       </div>
 
-      <div class="dp-option" *ngIf="isValidConfig('hideInputContainer')">
-        <span class="dp-option-header">
-          Hide Input Container (hideInputContainer):
-        </span>
-        <div class="dp-option-playground">
-          <label>Hidden
-            <input type="radio"
-                   id="hideInputRadio"
-                   [(ngModel)]="config.hideInputContainer"
-                   name="hideInputContainer"
-                   [value]="true"
-                   (ngModelChange)="configChanged('hideInputContainer', 'hidden')">
-          </label>
-          <label>Shown
-            <input type="radio"
-                   id="showInputRadio"
-                   [(ngModel)]="config.hideInputContainer"
-                   name="hideInputContainer"
-                   [value]="false"
-                   (ngModelChange)="configChanged('hideInputContainer', 'shown')">
-          </label>
-        </div>
-      </div>
-
-
       <div class="dp-option" *ngIf="isValidConfig('showNearMonthDays')">
         <span class="dp-option-header">
           Show near month days (showNearMonthDays):
@@ -1218,20 +1235,6 @@
                  type="text"
                  [(ngModel)]="config.multipleYearsNavigateBy"
                  (change)="configChanged('multipleYearsNavigateBy', config.multipleYearsNavigateBy)">
-        </div>
-      </div>
-
-
-      <div class="dp-option" *ngIf="isValidConfig('returnedValueType')">
-        <span class="dp-option-header">
-          Returned Value Type (returnedValueType):
-        </span>
-        <div class="dp-option-playground">
-          <select id="returnedValueType"
-                  [(ngModel)]="config.returnedValueType"
-                  (change)="configChanged('returnedValueType', config.returnedValueType)">
-            <option *ngFor="let type of dateTypes" [value]="type.value">{{type.name}}</option>
-          </select>
         </div>
       </div>
     </div>

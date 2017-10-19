@@ -14,6 +14,7 @@ export class DemoPage {
   datePickerPopup = $(this.popupSelector);
   dayCalendar = $(`${this.popupSelector} dp-day-calendar`);
   dayCalendarContainer = $(`${this.popupSelector} dp-day-calendar .dp-day-calendar-container`);
+  yearPickerInput = $('#yearPicker input');
   monthPickerInput = $('#monthPicker input');
   monthCalendar = $(`${this.popupSelector} dp-month-calendar`);
   monthWeeks = $$(`${this.popupSelector} .dp-calendar-week`);
@@ -60,7 +61,6 @@ export class DemoPage {
   enableRequiredValidationRadio = $('#enableRequiredRadio');
   disableRequiredValidationRadio = $('#disableRequiredRadio');
   requiredValidationMsg = $('#requiredValidation');
-  formatValidationMsg = $('#formatValidation');
   reactiveRequiredValidationMsg = $('#reactiveRequiredValidation');
   reactiveMinDateValidationMsg = $('#reactiveMinDateValidation');
   reactiveMaxDateValidationMsg = $('#reactiveMaxDateValidation');
@@ -107,8 +107,6 @@ export class DemoPage {
   showMultipleYearsNavigation = $('#showMultipleYearsNavigation');
   hideMultipleYearsNavigation = $('#hideMultipleYearsNavigation');
   multipleYearsNavigateBy = $('#multipleYearsNavigateBy');
-  showInputRadio = $('#showInputRadio');
-  hideInputRadio = $('#hideInputRadio');
 
   hourUpBtn = $(`${this.popupSelector} .dp-time-select-control-hours > .dp-time-select-control-up`);
   hourDownBtn = $(`${this.popupSelector} .dp-time-select-control-hours > .dp-time-select-control-down`);
@@ -131,8 +129,9 @@ export class DemoPage {
   dayPickerMenu = $('#dayPickerMenu');
   dayInlineMenu = $('#dayInlineMenu');
   dayDirectiveMenu = $('#dayDirectiveMenu');
-  dayDirectiveReactiveMenu = $('#dayDirectiveReactiveMenu');
+  dayDirectiveReactive = $('#dayDirectiveReactive');
   monthPickerMenu = $('#monthPickerMenu');
+  yearPickerMenu = $('#yearPickerMenu');
   monthInlineMenu = $('#monthInlineMenu');
   monthDirectiveMenu = $('#monthDirectiveMenu');
   timePickerMenu = $('#timePickerMenu');
@@ -148,10 +147,6 @@ export class DemoPage {
   clickOnBody() {
     this.body.click();
     this.body.click();
-  }
-
-  scrollIntoView(el, top = false) {
-    browser.executeScript(`arguments[0].scrollIntoView(${top})`, el.getWebElement());
   }
 
   clickOnDayButton(text: string) {

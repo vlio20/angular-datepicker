@@ -2,5 +2,6 @@ export enum ECalendarMode {
   Day,
   DayTime,
   Month,
-  Time
+  Time,
+  Year
 }

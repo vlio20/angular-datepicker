@@ -2,17 +2,15 @@ import debounce from '../../common/decorators/decorators';
 import {IDatePickerConfig} from '../../date-picker/date-picker-config.model';
 import {DatePickerComponent} from '../../date-picker/date-picker.component';
 import {DatePickerDirective} from '../../date-picker/date-picker.directive';
-import {Component, HostListener, ViewChild} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, HostListener, ViewChild} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import * as moment from 'moment';
 import {Moment} from 'moment';
 import {GaService} from '../services/ga/ga.service';
-import {ECalendarValue} from '../../common/types/calendar-value-enum';
 
 const GLOBAL_OPTION_KEYS = [
   'theme',
-  'locale',
-  'returnedValueType'
+  'locale'
 ];
 const PICKER_OPTION_KEYS = [
   'apiclose',
@@ -28,8 +26,7 @@ const PICKER_OPTION_KEYS = [
   'onOpenDelay',
   'opens',
   'placeholder',
-  'required',
-  'hideInputContainer'
+  'required'
 ];
 const DAY_PICKER_DIRECTIVE_OPTION_KEYS = [
   'allowMultiSelect',
@@ -47,6 +44,18 @@ const DAY_TIME_PICKER_OPTION_KEYS = [
 ];
 const TIME_PICKER_OPTION_KEYS = [
   ...PICKER_OPTION_KEYS
+];
+const YEAR_CALENDAR_OPTION_KEYS = [
+  'minValidation',
+  'maxValidation',
+  'required',
+  'max',
+  'min',
+  'yearBtnFormat',
+  'multipleYearsNavigateBy',
+  'showMultipleYearsNavigation',
+  'yearFormat',
+  ...GLOBAL_OPTION_KEYS
 ];
 const MONTH_CALENDAR_OPTION_KEYS = [
   'minValidation',
@@ -104,7 +113,8 @@ const DAY_TIME_CALENDAR_OPTION_KEYS = [
   selector: 'dp-demo',
   templateUrl: './demo.component.html',
   entryComponents: [DatePickerComponent],
-  styleUrls: ['./demo.component.less']
+  styleUrls: ['./demo.component.less'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DemoComponent {
   showDemo: boolean = true;
@@ -140,28 +150,6 @@ export class DemoComponent {
   validationMaxTime: Moment;
   placeholder: string = 'Choose a date...';
   displayDate: Moment;
-  dateTypes: {name: string, value: ECalendarValue}[] = [
-    {
-      name: 'Guess',
-      value: null
-    },
-    {
-      name: ECalendarValue[ECalendarValue.Moment],
-      value: ECalendarValue.Moment
-    },
-    {
-      name: ECalendarValue[ECalendarValue.MomentArr],
-      value: ECalendarValue.MomentArr
-    },
-    {
-      name: ECalendarValue[ECalendarValue.String],
-      value: ECalendarValue.String
-    },
-    {
-      name: ECalendarValue[ECalendarValue.StringArr],
-      value: ECalendarValue.StringArr
-    }
-  ];
 
   formGroup: FormGroup = new FormGroup({
     datePicker: new FormControl({value: this.date, disabled: this.disabled}, [
@@ -198,6 +186,7 @@ export class DemoComponent {
     showGoToCurrent: true,
     dayBtnFormat: 'DD',
     monthBtnFormat: 'MMM',
+    yearBtnFormat: 'YYYY',
     hours12Format: 'hh',
     hours24Format: 'HH',
     meridiemFormat: 'A',
@@ -210,13 +199,12 @@ export class DemoComponent {
     timeSeparator: ':',
     multipleYearsNavigateBy: 10,
     showMultipleYearsNavigation: false,
-    locale: 'en',
-    hideInputContainer: false,
-    returnedValueType: ECalendarValue.String
+    locale: 'en'
   };
   isAtTop: boolean = true;
 
-  constructor(private gaService: GaService) {
+  constructor(private gaService: GaService,
+              private cd: ChangeDetectorRef) {
   }
 
   @HostListener('document:scroll')
@@ -247,7 +235,7 @@ export class DemoComponent {
 
   configChanged(change: string = 'N/A', value: any = 'N/A') {
     this.config = {...this.config};
-
+    this.cd.markForCheck();
     this.gaService.emitEvent('ConfigChange', change, value);
 
     if (change === 'locale') {
@@ -291,6 +279,10 @@ export class DemoComponent {
         return [
             ...MONTH_CALENDAR_OPTION_KEYS
           ].indexOf(key) > -1;
+      case 'yearInline':
+            return [
+                ...YEAR_CALENDAR_OPTION_KEYS
+              ].indexOf(key) > -1;
       case 'timeInline':
         return [
             ...TIME_SELECT_OPTION_KEYS
@@ -305,7 +297,7 @@ export class DemoComponent {
             ...DAY_CALENDAR_OPTION_KEYS
           ].indexOf(key) > -1;
       case 'dayDirective':
-      case 'dayDirectiveReactiveMenu':
+      case 'dayDirectiveReactive':
         return [
             ...DAY_PICKER_DIRECTIVE_OPTION_KEYS,
             ...DAY_CALENDAR_OPTION_KEYS
@@ -315,6 +307,11 @@ export class DemoComponent {
             ...DAY_PICKER_OPTION_KEYS,
             ...MONTH_CALENDAR_OPTION_KEYS
           ].indexOf(key) > -1;
+     case 'yearPicker':
+            return [
+                ...DAY_PICKER_OPTION_KEYS,
+                ...YEAR_CALENDAR_OPTION_KEYS
+              ].indexOf(key) > -1;
       case 'monthDirective':
         return [
             ...DAY_PICKER_DIRECTIVE_OPTION_KEYS,
@@ -346,12 +343,14 @@ export class DemoComponent {
       case 'dayPicker':
       case 'dayInline':
       case 'dayDirective':
-      case 'dayDirectiveReactiveMenu':
+      case 'dayDirectiveReactive':
         return 'DD-MM-YYYY';
       case 'monthPicker':
       case 'monthInline':
       case 'monthDirective':
         return 'MMM, YYYY';
+      case 'yearPicker':
+        return 'YYYY';
       case 'timePicker':
       case 'timeInline':
       case 'timeDirective':
