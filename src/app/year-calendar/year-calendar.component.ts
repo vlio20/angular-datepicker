@@ -96,7 +96,6 @@ export class YearCalendarComponent implements OnInit, OnChanges, ControlValueAcc
   }
 
   init() {
-    console.log("year init");
     this.componentConfig = this.yearCalendarService.getConfig(this.config);
     this.selected = this.selected || [];
     this.currentDateView = this.displayDate

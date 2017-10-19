@@ -37,14 +37,14 @@ export class YearCalendarService {
 
     return this.utilsService.createArray(3).map(() => {
       return this.utilsService.createArray(4).map(() => {
-        const year = {
+        const yearObj = {
           date: index.clone(),
           selected: !!selected.find(s => index.isSame(s, 'year')),
           currentYear: index.isSame(moment(), 'year')
         };
 
         index.add(1, 'year');
-        return year;
+        return yearObj;
       });
     });
   }
@@ -77,7 +77,6 @@ export class YearCalendarService {
     if (config.yearBtnFormatter) {
       return config.yearBtnFormatter(year);
     }
-    console.log("getYearBtnText(" + year + ") format: " + config.yearBtnFormat);
     return year.format(config.yearBtnFormat);
   }
 
