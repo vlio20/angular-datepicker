@@ -124,6 +124,8 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
       ? this.utilsService.convertToMoment(this.displayDate, this.componentConfig.format).clone()
       : this.utilsService
         .getDefaultDisplayDate(this.currentDateView, this.selected, this.componentConfig.allowMultiSelect);
+    this.weekdays = this.dayCalendarService
+      .generateWeekdays(this.componentConfig.firstDayOfWeek);
     this.inputValueType = this.utilsService.getInputType(this.inputValue, this.componentConfig.allowMultiSelect);
     this.monthCalendarConfig = this.dayCalendarService.getMonthCalendarConfig(this.componentConfig);
     this._shouldShowCurrent = this.shouldShowCurrent();
