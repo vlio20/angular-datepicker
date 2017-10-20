@@ -3,7 +3,7 @@ import {WeekDays} from '../common/types/week-days.type';
 import {Moment} from 'moment';
 import {ECalendarValue} from '../common/types/calendar-value-enum';
 
-interface IConfig {
+export interface IConfig {
   isDayDisabledCallback?: (date: Moment) => boolean;
   isMonthDisabledCallback?: (date: Moment) => boolean;
   weekDayFormat?: string;

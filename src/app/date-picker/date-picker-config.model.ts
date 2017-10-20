@@ -3,7 +3,7 @@ import {IDayCalendarConfig, IDayCalendarConfigInternal} from '../day-calendar/da
 import {IMonthCalendarConfig, IMonthCalendarConfigInternal} from '../month-calendar/month-calendar-config';
 import {ITimeSelectConfig, ITimeSelectConfigInternal} from '../time-select/time-select-config.model';
 
-interface Config {
+export interface IConfig {
   closeOnSelect?: boolean;
   closeOnSelectDelay?: number;
   openOnFocus?: boolean;
@@ -17,14 +17,14 @@ interface Config {
   hideInputContainer?: boolean;
 }
 
-export interface IDatePickerConfig extends Config,
+export interface IDatePickerConfig extends IConfig,
                                            IDayCalendarConfig,
                                            IMonthCalendarConfig,
                                            ITimeSelectConfig {
 
 }
 
-export interface IDatePickerConfigInternal extends Config,
+export interface IDatePickerConfigInternal extends IConfig,
                                                    IDayCalendarConfigInternal,
                                                    IMonthCalendarConfigInternal,
                                                    ITimeSelectConfigInternal {

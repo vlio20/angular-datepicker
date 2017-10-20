@@ -2,7 +2,7 @@ import {Moment} from 'moment/moment';
 import {ICalendar, ICalendarInternal} from '../common/models/calendar.model';
 import {ECalendarValue} from '../common/types/calendar-value-enum';
 
-interface IConfig {
+export interface IConfig {
   hours12Format?: string;
   hours24Format?: string;
   maxTime?: Moment;
