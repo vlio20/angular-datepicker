@@ -14,7 +14,8 @@ All notable changes to this project will be documented in this file.
 - Stop using getters in template ([3858dde](https://github.com/vlio20/angular-datepicker/commit/3858dde)) closes [#239](https://github.com/vlio20/angular-datepicker/issues/239)
 
 ### Bug Fixed
-- `value.split` is not a function bug fix ([38f6ce2](https://github.com/vlio20/angular-datepicker/commit/38f6ce2)) closes [#224](https://github.com/vlio20/angular-datepicker/issues/245)
+- `max`/`min` date support for strings ([ad98d1b](https://github.com/vlio20/angular-datepicker/commit/ad98d1b)) closes [#250](https://github.com/vlio20/angular-datepicker/issues/250)
+- `value.split` is not a function bug fix ([38f6ce2](https://github.com/vlio20/angular-datepicker/commit/38f6ce2)) closes [#225](https://github.com/vlio20/angular-datepicker/issues/245)
 - Add outputs of each component to docs ([9ee8035](https://github.com/vlio20/angular-datepicker/commit/9ee8035)) closes [#224](https://github.com/vlio20/angular-datepicker/issues/224)
 - More than one picker can be opened at the same time ([dd283c5](https://github.com/vlio20/angular-datepicker/commit/dd283c5)) closes [#223](https://github.com/vlio20/angular-datepicker/issues/223)
 - Picker not always opens according to drops/opens ([c26d168](https://github.com/vlio20/angular-datepicker/commit/c26d168)) closes [#222](https://github.com/vlio20/angular-datepicker/issues/222)
