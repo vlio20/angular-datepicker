@@ -1,0 +1,66 @@
+@import '../common/styles/variables';
+
+& {
+  dp-year-calendar {
+    display: inline-block;
+
+    .dp-year-calendar-container {
+      background: @c-white;
+    }
+
+    .dp-calendar-wrapper {
+      border: 1px solid @c-black;
+    }
+
+    .dp-calendar-year {
+      box-sizing: border-box;
+      width: @basic-height * 7 / 4;
+      height: @basic-height * 7 / 4;
+      cursor: pointer;
+
+      &.dp-selected {
+        background: @c-primary;
+        color: @c-white;
+      }
+    }
+
+    &.dp-material {
+      .dp-calendar-weekday {
+        height: @basic-height - 5px;
+        width: @basic-height;
+        line-height: @basic-height - 5px;
+        background: @c-light-gray;
+        border: 1px solid @c-light-gray;
+      }
+
+      .dp-calendar-wrapper {
+        border: 1px solid @c-light-gray;
+      }
+
+      .dp-calendar-year {
+        box-sizing: border-box;
+        background: @c-white;
+        border-radius: 50%;
+        border: none;
+        outline: none;
+
+        &:hover {
+          background: @c-light-gray;
+        }
+      }
+
+      .dp-selected {
+        background: @c-primary;
+        color: @c-white;
+
+        &:hover {
+          background: @c-primary;
+        }
+      }
+
+      .dp-current-year {
+        border: 1px solid @c-primary;
+      }
+    }
+  }
+}
