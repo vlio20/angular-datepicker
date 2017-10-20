@@ -15,7 +15,7 @@ import {IMonth} from './month.model';
 import {MonthCalendarService} from './month-calendar.service';
 import * as moment from 'moment';
 import {Moment} from 'moment';
-import {IMonthCalendarConfig} from './month-calendar-config';
+import {IMonthCalendarConfig, IMonthCalendarConfigInternal} from './month-calendar-config';
 import {
   ControlValueAccessor,
   FormControl,
@@ -58,7 +58,7 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
   @Output() onNavHeaderBtnClick: EventEmitter<null> = new EventEmitter();
 
   isInited: boolean = false;
-  componentConfig: IMonthCalendarConfig;
+  componentConfig: IMonthCalendarConfigInternal;
   _selected: Moment[];
   yearMonths: IMonth[][];
   _currentDateView: Moment;

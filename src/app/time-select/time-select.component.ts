@@ -15,7 +15,7 @@ import {
 import {TimeSelectService, TimeUnit} from './time-select.service';
 import * as moment from 'moment';
 import {Moment} from 'moment';
-import {ITimeSelectConfig} from './time-select-config.model';
+import {ITimeSelectConfig, ITimeSelectConfigInternal} from './time-select-config.model';
 import {
   ControlValueAccessor,
   FormControl,
@@ -61,7 +61,7 @@ export class TimeSelectComponent implements OnInit, OnChanges, ControlValueAcces
   @Output() onChange: EventEmitter<IDate> = new EventEmitter();
 
   isInited: boolean = false;
-  componentConfig: ITimeSelectConfig;
+  componentConfig: ITimeSelectConfigInternal;
   _selected: Moment;
   inputValue: CalendarValue;
   inputValueType: ECalendarValue;

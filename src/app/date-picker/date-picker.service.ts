@@ -1,5 +1,5 @@
 import {EventEmitter, Injectable} from '@angular/core';
-import {IDatePickerConfig} from './date-picker-config.model';
+import {IDatePickerConfig, IDatePickerConfigInternal} from './date-picker-config.model';
 import * as moment from 'moment';
 import {Moment} from 'moment';
 import {UtilsService} from '../common/services/utils/utils.service';
@@ -12,7 +12,7 @@ import {CalendarMode} from '../common/types/calendar-mode';
 @Injectable()
 export class DatePickerService {
   readonly onPickerClosed: EventEmitter<null> = new EventEmitter();
-  private defaultConfig: IDatePickerConfig = {
+  private defaultConfig: IDatePickerConfigInternal = {
     closeOnSelect: true,
     closeOnSelectDelay: 100,
     format: 'DD-MM-YYYY',
@@ -33,21 +33,14 @@ export class DatePickerService {
   }
 
   // todo:: add unit tests
-  getConfig(config: IDatePickerConfig, mode: CalendarMode = 'daytime'): IDatePickerConfig {
-    const _config: IDatePickerConfig = {
+  getConfig(config: IDatePickerConfig, mode: CalendarMode = 'daytime'): IDatePickerConfigInternal {
+    const _config = <IDatePickerConfigInternal>{
       ...this.defaultConfig,
       format: this.getDefaultFormatByMode(mode),
       ...this.utilsService.clearUndefined(config)
     };
 
-    const {min, max, format} = _config;
-    if (min) {
-      _config.min = this.utilsService.convertToMoment(min, format);
-    }
-
-    if (max) {
-      _config.max = this.utilsService.convertToMoment(max, format);
-    }
+    this.utilsService.convertPropsToMoment(_config, _config.format, ['min', 'max']);
 
     if (config && config.allowMultiSelect && config.closeOnSelect === undefined) {
       _config.closeOnSelect = false;

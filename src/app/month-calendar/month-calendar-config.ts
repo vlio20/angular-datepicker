@@ -1,8 +1,8 @@
-import {locale, Moment} from 'moment';
-import {ICalendar} from '../common/models/calendar.model';
+import {Moment} from 'moment';
+import {ICalendar, ICalendarInternal} from '../common/models/calendar.model';
 import {ECalendarValue} from '../common/types/calendar-value-enum';
 
-export interface IMonthCalendarConfig extends ICalendar {
+interface IConfig {
   isMonthDisabledCallback?: (date: Moment) => boolean;
   allowMultiSelect?: boolean;
   yearFormat?: string;
@@ -16,4 +16,13 @@ export interface IMonthCalendarConfig extends ICalendar {
   showMultipleYearsNavigation?: boolean;
   returnedValueType?: ECalendarValue;
   showGoToCurrent?: boolean;
+}
+
+export interface IMonthCalendarConfig extends IConfig,
+                                              ICalendar {
+
+}
+
+export interface IMonthCalendarConfigInternal extends IConfig,
+                                                      ICalendarInternal {
 }

@@ -1,8 +1,8 @@
 import {Moment} from 'moment/moment';
-import {ICalendar} from '../common/models/calendar.model';
+import {ICalendar, ICalendarInternal} from '../common/models/calendar.model';
 import {ECalendarValue} from '../common/types/calendar-value-enum';
 
-export interface ITimeSelectConfig extends ICalendar {
+interface IConfig {
   hours12Format?: string;
   hours24Format?: string;
   maxTime?: Moment;
@@ -16,4 +16,11 @@ export interface ITimeSelectConfig extends ICalendar {
   showTwentyFourHours?: boolean;
   timeSeparator?: string;
   returnedValueType?: ECalendarValue;
+}
+
+export interface ITimeSelectConfig extends IConfig, ICalendar {
+}
+
+export interface ITimeSelectConfigInternal extends IConfig,
+                                                   ICalendarInternal {
 }
