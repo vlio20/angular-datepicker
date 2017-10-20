@@ -31,6 +31,15 @@
                          [theme]="theme">
       </dp-month-calendar>
 
+      <dp-year-calendar #yearCalendar
+                         *ngSwitchCase="'year'"
+                         [config]="dayCalendarConfig"
+                         [ngModel]="_selected"
+                         [displayDate]="currentDateView"
+                         (onSelect)="dateSelected($event, 'year')"
+                         [theme]="theme">
+      </dp-year-calendar>
+
       <dp-time-select #timeSelect
                       *ngSwitchCase="'time'"
                       [config]="timeSelectConfig"

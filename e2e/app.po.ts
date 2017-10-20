@@ -134,6 +134,7 @@ export class DemoPage {
   dayDirectiveMenu = $('#dayDirectiveMenu');
   dayDirectiveReactiveMenu = $('#dayDirectiveReactiveMenu');
   monthPickerMenu = $('#monthPickerMenu');
+  yearPickerMenu = $('#yearPickerMenu');
   monthInlineMenu = $('#monthInlineMenu');
   monthDirectiveMenu = $('#monthDirectiveMenu');
   timePickerMenu = $('#timePickerMenu');

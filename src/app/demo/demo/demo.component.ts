@@ -47,6 +47,19 @@ const DAY_TIME_PICKER_OPTION_KEYS = [
 const TIME_PICKER_OPTION_KEYS = [
   ...PICKER_OPTION_KEYS
 ];
+const YEAR_CALENDAR_OPTION_KEYS = [
+  'minValidation',
+  'maxValidation',
+  'required',
+  'max',
+  'min',
+  'yearBtnFormat',
+  'multipleYearsNavigateBy',
+  'showMultipleYearsNavigation',
+  'yearFormat',
+  'showGoToCurrent',
+  ...GLOBAL_OPTION_KEYS
+];
 const MONTH_CALENDAR_OPTION_KEYS = [
   'minValidation',
   'maxValidation',
@@ -197,6 +210,7 @@ export class DemoComponent {
     showGoToCurrent: true,
     dayBtnFormat: 'DD',
     monthBtnFormat: 'MMM',
+    yearBtnFormat: 'YYYY',
     hours12Format: 'hh',
     hours24Format: 'HH',
     meridiemFormat: 'A',
@@ -290,6 +304,10 @@ export class DemoComponent {
         return [
             ...MONTH_CALENDAR_OPTION_KEYS
           ].indexOf(key) > -1;
+      case 'yearInline':
+            return [
+                ...YEAR_CALENDAR_OPTION_KEYS
+              ].indexOf(key) > -1;
       case 'timeInline':
         return [
             ...TIME_SELECT_OPTION_KEYS
@@ -314,6 +332,11 @@ export class DemoComponent {
             ...DAY_PICKER_OPTION_KEYS,
             ...MONTH_CALENDAR_OPTION_KEYS
           ].indexOf(key) > -1;
+     case 'yearPicker':
+            return [
+                ...DAY_PICKER_OPTION_KEYS,
+                ...YEAR_CALENDAR_OPTION_KEYS
+              ].indexOf(key) > -1;
       case 'monthDirective':
         return [
             ...DAY_PICKER_DIRECTIVE_OPTION_KEYS,
@@ -351,6 +374,8 @@ export class DemoComponent {
       case 'monthInline':
       case 'monthDirective':
         return 'MMM, YYYY';
+      case 'yearPicker':
+        return 'YYYY';
       case 'timePicker':
       case 'timeInline':
       case 'timeDirective':
