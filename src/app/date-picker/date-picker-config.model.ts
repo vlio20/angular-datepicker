@@ -1,11 +1,9 @@
 import {TDrops, TOpens} from '../common/types/poistions.type';
-import {IDayCalendarConfig} from '../day-calendar/day-calendar-config.model';
-import {IMonthCalendarConfig} from '../month-calendar/month-calendar-config';
-import {ITimeSelectConfig} from '../time-select/time-select-config.model';
+import {IDayCalendarConfig, IDayCalendarConfigInternal} from '../day-calendar/day-calendar-config.model';
+import {IMonthCalendarConfig, IMonthCalendarConfigInternal} from '../month-calendar/month-calendar-config';
+import {ITimeSelectConfig, ITimeSelectConfigInternal} from '../time-select/time-select-config.model';
 
-export interface IDatePickerConfig extends IDayCalendarConfig,
-                                           IMonthCalendarConfig,
-                                           ITimeSelectConfig {
+export interface IConfig {
   closeOnSelect?: boolean;
   closeOnSelectDelay?: number;
   openOnFocus?: boolean;
@@ -17,4 +15,17 @@ export interface IDatePickerConfig extends IDayCalendarConfig,
   drops?: TDrops;
   opens?: TOpens;
   hideInputContainer?: boolean;
+}
+
+export interface IDatePickerConfig extends IConfig,
+                                           IDayCalendarConfig,
+                                           IMonthCalendarConfig,
+                                           ITimeSelectConfig {
+
+}
+
+export interface IDatePickerConfigInternal extends IConfig,
+                                                   IDayCalendarConfigInternal,
+                                                   IMonthCalendarConfigInternal,
+                                                   ITimeSelectConfigInternal {
 }

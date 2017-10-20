@@ -14,7 +14,7 @@ import {DayTimeCalendarService} from '../day-time-calendar/day-time-calendar.ser
 import {ITimeSelectConfig} from '../time-select/time-select-config.model';
 import {TimeSelectComponent} from '../time-select/time-select.component';
 import {TimeSelectService} from '../time-select/time-select.service';
-import {IDatePickerConfig} from './date-picker-config.model';
+import {IDatePickerConfig, IDatePickerConfigInternal} from './date-picker-config.model';
 import {IDpDayPickerApi} from './date-picker.api';
 import {DatePickerService} from './date-picker.service';
 import {
@@ -93,10 +93,9 @@ export class DatePickerComponent implements OnChanges,
 
   @ViewChild('container') calendarContainer: ElementRef;
   @ViewChild('dayCalendar') dayCalendarRef: DayCalendarComponent;
-  @ViewChild('monthCalendar') monthCalendarRef: DayCalendarComponent;
   @ViewChild('timeSelect') timeSelectRef: TimeSelectComponent;
 
-  componentConfig: IDatePickerConfig;
+  componentConfig: IDatePickerConfigInternal;
   dayCalendarConfig: IDayCalendarConfig;
   dayTimeCalendarConfig: IDayTimeCalendarConfig;
   timeSelectConfig: ITimeSelectConfig;

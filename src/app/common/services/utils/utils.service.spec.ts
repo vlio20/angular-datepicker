@@ -94,4 +94,11 @@ describe('Service: ObUtilsService', () => {
       moment().add(1, 'd'))
     ).toBeFalsy();
   }));
+
+  it('should convertPropsToMoment method', inject([UtilsService], (service: UtilsService) => {
+    const obj = {min: '14-01-1987', max: '14-01-1987'};
+    service.convertPropsToMoment(obj, 'DD-MM-YYYY', ['min', 'max']);
+    expect(moment.isMoment(obj.min)).toBeTruthy();
+    expect(moment.isMoment(obj.max)).toBeTruthy();
+  }));
 });
