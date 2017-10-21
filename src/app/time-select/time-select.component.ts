@@ -52,10 +52,10 @@ export class TimeSelectComponent implements OnInit, OnChanges, ControlValueAcces
 
   @Input() config: ITimeSelectConfig;
   @Input() displayDate: SingleCalendarValue;
-  @Input() minDate: Moment | string;
-  @Input() maxDate: Moment | string;
-  @Input() minTime: Moment | string;
-  @Input() maxTime: Moment | string;
+  @Input() minDate: SingleCalendarValue;
+  @Input() maxDate: SingleCalendarValue;
+  @Input() minTime: SingleCalendarValue;
+  @Input() maxTime: SingleCalendarValue;
   @HostBinding('class') @Input() theme: string;
 
   @Output() onChange: EventEmitter<IDate> = new EventEmitter();

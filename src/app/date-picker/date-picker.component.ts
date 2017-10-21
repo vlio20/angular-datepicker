@@ -82,10 +82,10 @@ export class DatePickerComponent implements OnChanges,
   @Input() disabled: boolean = false;
   @Input() displayDate: SingleCalendarValue;
   @HostBinding('class') @Input() theme: string;
-  @Input() minDate: Moment | string;
-  @Input() maxDate: Moment | string;
-  @Input() minTime: Moment | string;
-  @Input() maxTime: Moment | string;
+  @Input() minDate: SingleCalendarValue;
+  @Input() maxDate: SingleCalendarValue;
+  @Input() minTime: SingleCalendarValue;
+  @Input() maxTime: SingleCalendarValue;
 
   @Output() open = new EventEmitter<void>();
   @Output() close = new EventEmitter<void>();

@@ -1,8 +1,9 @@
 import {Moment} from 'moment';
+import {SingleCalendarValue} from '../types/single-calendar-value';
 
 export interface ICalendar {
   locale?: string;
-  min?: Moment | string;
+  min?: SingleCalendarValue;
   max?: Moment | string;
 }
 
