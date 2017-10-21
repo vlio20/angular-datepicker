@@ -427,6 +427,9 @@ export class DatePickerComponent implements OnChanges,
 
   ngOnDestroy() {
     this.handleInnerElementClickUnlisteners.forEach(ul => ul());
-    this.appendToElement.removeChild(this.calendarWrapper);
+
+    if (this.appendToElement) {
+      this.appendToElement.removeChild(this.calendarWrapper);
+    }
   }
 }
