@@ -7,16 +7,17 @@ This is a configurable date-picker build for Angular2 applications and uses Mome
 [DEMO](https://vlio20.github.io/angular-datepicker/)
 
 ## Screenshots
-DayTime:  
+
+### DayTime:  
 ![Imgur](https://i.imgur.com/NaOiqi7.png)
 
-Day:
+### Day:
 ![Imgur](https://i.imgur.com/XSyhhfv.png)
 
-Month:  
+### Month:  
 ![Imgur](https://i.imgur.com/NIlPCx1.png)
 
-Time:  
+### Time:  
 ![Imgur](https://i.imgur.com/y37UGkQ.png)
 
 ## Installation:
