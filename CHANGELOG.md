@@ -2,7 +2,7 @@
 All notable changes to this project will be documented in this file.
 
 <a name="2.6.0"></a>
-# [2.6.0] (2017-00-00)
+# [2.6.0] (2017-10-22)
 
 ### Features
 - Moving go to current button inside the navigation component, enables go to current in inline components ([dd283c5](https://github.com/vlio20/angular-datepicker/commit/dd283c5)).
@@ -11,6 +11,7 @@ All notable changes to this project will be documented in this file.
 - Moving go to current button inside the navigation component ([dd283c5](https://github.com/vlio20/angular-datepicker/commit/dd283c5)).
 
 ### Improvements
+- Min date as default when calendar opens ([5663b7a](https://github.com/vlio20/angular-datepicker/commit/5663b7a)) closes [#256](https://github.com/vlio20/angular-datepicker/issues/256)
 - Stop using getters in template ([3858dde](https://github.com/vlio20/angular-datepicker/commit/3858dde)) closes [#239](https://github.com/vlio20/angular-datepicker/issues/239)
 
 ### Bug Fixed
