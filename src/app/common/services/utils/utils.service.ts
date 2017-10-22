@@ -51,9 +51,14 @@ export class UtilsService {
   }
 
   // todo:: add unit test
-  getDefaultDisplayDate(def: Moment, selected: Moment[], allowMultiSelect: boolean): Moment {
-    if (def) {
-      return def.clone();
+  getDefaultDisplayDate(current: Moment,
+                        selected: Moment[],
+                        allowMultiSelect: boolean,
+                        minDate: Moment): Moment {
+    if (current) {
+      return current.clone();
+    } else if (minDate && minDate.isAfter(moment())) {
+      return minDate.clone();
     } else if (allowMultiSelect) {
       if (selected && selected[selected.length]) {
         return selected[selected.length].clone();

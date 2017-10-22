@@ -322,7 +322,12 @@ export class DatePickerComponent implements OnChanges,
     this.currentDateView = this.displayDate
       ? this.utilsService.convertToMoment(this.displayDate, this.componentConfig.format).clone()
       : this.utilsService
-        .getDefaultDisplayDate(this.currentDateView, this.selected, this.componentConfig.allowMultiSelect);
+        .getDefaultDisplayDate(
+          this.currentDateView,
+          this.selected,
+          this.componentConfig.allowMultiSelect,
+          this.componentConfig.min
+        );
     this.inputValueType = this.utilsService.getInputType(this.inputValue, this.componentConfig.allowMultiSelect);
     this.dayCalendarConfig = this.dayPickerService.getDayConfigService(this.componentConfig);
     this.dayTimeCalendarConfig = this.dayPickerService.getDayTimeConfigService(this.componentConfig);
@@ -371,7 +376,12 @@ export class DatePickerComponent implements OnChanges,
     if (this.dayPickerService.isValidInputDateValue(value, this.componentConfig)) {
       this.selected = this.dayPickerService.convertInputValueToMomentArray(value, this.componentConfig);
       this.currentDateView = this.selected.length
-        ? this.utilsService.getDefaultDisplayDate(null, this.selected, this.componentConfig.allowMultiSelect)
+        ? this.utilsService.getDefaultDisplayDate(
+          null,
+          this.selected,
+          this.componentConfig.allowMultiSelect,
+          this.componentConfig.min
+        )
         : this.currentDateView;
     } else {
       this._selected = this.utilsService
