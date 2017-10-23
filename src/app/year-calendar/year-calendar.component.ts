@@ -78,11 +78,6 @@ export class YearCalendarComponent implements OnInit, OnChanges, ControlValueAcc
   }
 
   get selected(): Moment[] {
-    this._selected = selected;
-    this.onChangeCallback(this.processOnChangeCallback(selected));
-  }
-
-  get selected(): Moment[] {
     return this._selected;
   }
 
@@ -131,7 +126,7 @@ export class YearCalendarComponent implements OnInit, OnChanges, ControlValueAcc
         .getDefaultDisplayDate(
           this.currentDateView,
           this.selected,
-          this.componentConfig.allowMultiSelect
+          this.componentConfig.allowMultiSelect,
           this.componentConfig.min
         );
     this.inputValueType = this.utilsService.getInputType(this.inputValue, this.componentConfig.allowMultiSelect);
