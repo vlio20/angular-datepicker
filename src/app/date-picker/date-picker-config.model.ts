@@ -21,6 +21,7 @@ export interface IConfig {
 export interface IDatePickerConfig extends IConfig,
                                            IDayCalendarConfig,
                                            IMonthCalendarConfig,
+                                           IYearCalendarConfig,
                                            ITimeSelectConfig {
 
 }
@@ -28,5 +29,6 @@ export interface IDatePickerConfig extends IConfig,
 export interface IDatePickerConfigInternal extends IConfig,
                                                    IDayCalendarConfigInternal,
                                                    IMonthCalendarConfigInternal,
+                                                   IYearCalendarConfigInternal,
                                                    ITimeSelectConfigInternal {
 }
