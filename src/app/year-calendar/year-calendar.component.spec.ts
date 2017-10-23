@@ -21,7 +21,7 @@ describe('Component: YearCalendarComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(YearCalendarComponent);
     component = fixture.componentInstance;
-    component.config = componentyearCalendarService.getConfig({});
+    component.config = component.yearCalendarService.getConfig({});
     fixture.detectChanges();
   });
 
