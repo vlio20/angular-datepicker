@@ -3,11 +3,11 @@ import * as moment from 'moment';
 import {Moment} from 'moment';
 import {UtilsService} from '../common/services/utils/utils.service';
 import {IYear} from './year.model';
-import {IYearCalendarConfig} from './year-calendar-config';
+import {IYearCalendarConfig, IYearCalendarConfigInternal} from './year-calendar-config';
 
 @Injectable()
 export class YearCalendarService {
-  readonly DEFAULT_CONFIG: IYearCalendarConfig = {
+  readonly DEFAULT_CONFIG: IYearCalendarConfigInternal = {
     allowMultiSelect: false,
     yearFormat: 'YYYY',
     format: 'YYYY',
@@ -21,11 +21,13 @@ export class YearCalendarService {
   constructor(private utilsService: UtilsService) {
   }
 
-  getConfig(config: IYearCalendarConfig): IYearCalendarConfig {
-    const _config: IYearCalendarConfig = {
+  getConfig(config: IYearCalendarConfig): IYearCalendarConfigInternal {
+    const _config = <IYearCalendarConfigInternal>{
       ...this.DEFAULT_CONFIG,
       ...this.utilsService.clearUndefined(config)
     };
+
+    this.utilsService.convertPropsToMoment(_config, _config.format, ['min', 'max']);
 
     moment.locale(_config.locale);
 
