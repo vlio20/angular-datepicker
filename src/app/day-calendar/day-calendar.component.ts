@@ -16,7 +16,7 @@ import {
 import {DayCalendarService} from './day-calendar.service';
 import * as moment from 'moment';
 import {Moment} from 'moment';
-import {IDayCalendarConfig} from './day-calendar-config.model';
+import {IDayCalendarConfig, IDayCalendarConfigInternal} from './day-calendar-config.model';
 import {IDay} from './day.model';
 import {
   ControlValueAccessor,
@@ -65,7 +65,7 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
 
   CalendarMode = ECalendarMode;
   isInited: boolean = false;
-  componentConfig: IDayCalendarConfig;
+  componentConfig: IDayCalendarConfigInternal;
   _selected: Moment[];
   weeks: IDay[][];
   weekdays: Moment[];
@@ -123,7 +123,7 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
     this.currentDateView = this.displayDate
       ? this.utilsService.convertToMoment(this.displayDate, this.componentConfig.format).clone()
       : this.utilsService
-        .getDefaultDisplayDate(this.currentDateView, this.selected, this.componentConfig.allowMultiSelect);
+        .getDefaultDisplayDate(this.currentDateView, this.selected, this.componentConfig.allowMultiSelect, this.componentConfig.min);
     this.weekdays = this.dayCalendarService
       .generateWeekdays(this.componentConfig.firstDayOfWeek);
     this.inputValueType = this.utilsService.getInputType(this.inputValue, this.componentConfig.allowMultiSelect);
@@ -191,10 +191,6 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
     );
 
     this.onChangeCallback(this.processOnChangeCallback(this.selected));
-  }
-
-  isDisabledDay(day: IDay) {
-    return this.dayCalendarService.isDateDisabled(day, this.componentConfig);
   }
 
   dayClicked(day: IDay) {

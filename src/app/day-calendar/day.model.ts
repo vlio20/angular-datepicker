@@ -5,6 +5,7 @@ export interface IDay extends IDate {
   prevMonth?: boolean;
   nextMonth?: boolean;
   currentDay?: boolean;
+  disabled?: boolean;
 }
 
 export interface IDayEvent {

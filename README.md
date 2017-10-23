@@ -7,11 +7,18 @@ This is a configurable date-picker build for Angular2 applications and uses Mome
 [DEMO](https://vlio20.github.io/angular-datepicker/)
 
 ## Screenshots
-![Imgur](http://i.imgur.com/4ZV7r5e.png)
 
-![Imgur](http://i.imgur.com/Kho8Joq.png)
+### DayTime:  
+![Imgur](https://i.imgur.com/NaOiqi7.png)
 
-![Imgur](http://imgur.com/uKklzbq.png)
+### Day:
+![Imgur](https://i.imgur.com/XSyhhfv.png)
+
+### Month:  
+![Imgur](https://i.imgur.com/NIlPCx1.png)
+
+### Time:  
+![Imgur](https://i.imgur.com/y37UGkQ.png)
 
 ## Installation:
 1. Download from npm:
@@ -38,7 +45,7 @@ Put the dp-date-picker component wherever you need it.
 | Name                 | Type                                | Default            | Applies To                | Description                                                                                                                                                                                                                                        |
 |----------------------|:-----------------------------------:|:------------------:|:-------------------------:|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | mode                 | `"day"\|"month"\|"time"\|"daytime"` | `"day"`            | All                       | The mode of the calender which will be displayed in the picker                                                                                                                                                                                     |
-| displayDate          | `Moment\|String`                    | current date       | `day\|month\|daytime`     | Indicates on what date to open the calendar                                                                                                                                                                                                        |
+| displayDate          | `Moment\|String`                    | current date       | `day\|month\|daytime`     | Indicates on what date to open the calendar on                                                                                                                                                                                                        |
 | disabled             | `Boolean`                           | `false`            | All                       | If set to true the input would be disabled                                                                                                                                                                                                         |
 | placeholder          | `String`                            | `""`               | All                       | The date-picker input placeholder                                                                                                                                                                                                                  |
 | required             | `Boolean`                           | `undefined`        | All                       | This is a validation rule, if there won't be any selected date then the containing form will be invalid.                                                                                                                                           |

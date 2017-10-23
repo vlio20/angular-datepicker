@@ -32,17 +32,14 @@ export class UtilsService {
     return new Array(size).fill(1);
   }
 
-  convertToMoment(date: SingleCalendarValue, format: string): Moment | null {
-    let retVal: Moment;
+  convertToMoment(date: SingleCalendarValue, format: string): Moment {
     if (!date) {
       return null;
     } else if (typeof date === 'string') {
-      retVal = moment(date, format);
+      return moment(date, format);
     } else {
-      retVal = date;
+      return date;
     }
-
-    return retVal;
   }
 
   isDateValid(date: string, format: string): boolean {
@@ -54,9 +51,14 @@ export class UtilsService {
   }
 
   // todo:: add unit test
-  getDefaultDisplayDate(def: Moment, selected: Moment[], allowMultiSelect: boolean): Moment {
-    if (def) {
-      return def.clone();
+  getDefaultDisplayDate(current: Moment,
+                        selected: Moment[],
+                        allowMultiSelect: boolean,
+                        minDate: Moment): Moment {
+    if (current) {
+      return current.clone();
+    } else if (minDate && minDate.isAfter(moment())) {
+      return minDate.clone();
     } else if (allowMultiSelect) {
       if (selected && selected[selected.length]) {
         return selected[selected.length].clone();
@@ -263,7 +265,10 @@ export class UtilsService {
       .map(d => moment(d, format));
   }
 
-  shouldShowCurrent(showGoToCurrent: boolean, mode: CalendarMode, min: Moment, max: Moment): boolean {
+  shouldShowCurrent(showGoToCurrent: boolean,
+                    mode: CalendarMode,
+                    min: Moment,
+                    max: Moment): boolean {
     return showGoToCurrent &&
       mode !== 'time' &&
       this.isDateInRange(moment(), min, max);
@@ -271,5 +276,13 @@ export class UtilsService {
 
   isDateInRange(date: Moment, from: Moment, to: Moment): boolean {
     return date.isBetween(from, to, 'day', '[]');
+  }
+
+  convertPropsToMoment(obj: {[key: string]: any}, format: string, props: string[]) {
+    props.forEach((prop) => {
+      if (obj.hasOwnProperty(prop)) {
+        obj[prop] = this.convertToMoment(obj[prop], format);
+      }
+    });
   }
 }

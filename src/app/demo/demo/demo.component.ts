@@ -8,18 +8,19 @@ import * as moment from 'moment';
 import {Moment} from 'moment';
 import {GaService} from '../services/ga/ga.service';
 import {ECalendarValue} from '../../common/types/calendar-value-enum';
+import {SingleCalendarValue} from '../../common/types/single-calendar-value';
 
 const GLOBAL_OPTION_KEYS = [
   'theme',
   'locale',
-  'returnedValueType'
+  'returnedValueType',
+  'displayDate'
 ];
 const PICKER_OPTION_KEYS = [
   'apiclose',
   'apiopen',
   'appendTo',
   'disabled',
-  'displayDate',
   'disableKeypress',
   'drops',
   'format',
@@ -153,7 +154,7 @@ export class DemoComponent {
   validationMinTime: Moment;
   validationMaxTime: Moment;
   placeholder: string = 'Choose a date...';
-  displayDate: Moment;
+  displayDate: Moment | string;
   dateTypes: {name: string, value: ECalendarValue}[] = [
     {
       name: 'Guess',

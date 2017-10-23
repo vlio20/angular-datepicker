@@ -15,7 +15,7 @@ import {IMonth} from './month.model';
 import {MonthCalendarService} from './month-calendar.service';
 import * as moment from 'moment';
 import {Moment} from 'moment';
-import {IMonthCalendarConfig} from './month-calendar-config';
+import {IMonthCalendarConfig, IMonthCalendarConfigInternal} from './month-calendar-config';
 import {
   ControlValueAccessor,
   FormControl,
@@ -58,7 +58,7 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
   @Output() onNavHeaderBtnClick: EventEmitter<null> = new EventEmitter();
 
   isInited: boolean = false;
-  componentConfig: IMonthCalendarConfig;
+  componentConfig: IMonthCalendarConfigInternal;
   _selected: Moment[];
   yearMonths: IMonth[][];
   _currentDateView: Moment;
@@ -123,7 +123,12 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
     this.currentDateView = this.displayDate
       ? this.displayDate
       : this.utilsService
-        .getDefaultDisplayDate(this.currentDateView, this.selected, this.componentConfig.allowMultiSelect);
+        .getDefaultDisplayDate(
+          this.currentDateView,
+          this.selected,
+          this.componentConfig.allowMultiSelect,
+          this.componentConfig.min
+        );
     this.inputValueType = this.utilsService.getInputType(this.inputValue, this.componentConfig.allowMultiSelect);
     this._shouldShowCurrent = this.shouldShowCurrent();
   }

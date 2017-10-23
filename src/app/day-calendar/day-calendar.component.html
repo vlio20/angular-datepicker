@@ -26,7 +26,7 @@
               class="dp-calendar-day"
               *ngFor="let day of week"
               (click)="dayClicked(day)"
-              [disabled]="isDisabledDay(day)"
+              [disabled]="day.disabled"
               [ngClass]="getDayBtnCssClass(day)">
         {{getDayBtnText(day)}}
       </button>

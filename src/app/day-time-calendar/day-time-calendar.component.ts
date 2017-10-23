@@ -55,8 +55,8 @@ export class DayTimeCalendarComponent implements OnInit, OnChanges, ControlValue
 
   @Input() config: IDayTimeCalendarConfig;
   @Input() displayDate: SingleCalendarValue;
-  @Input() minDate: Moment | string;
-  @Input() maxDate: Moment | string;
+  @Input() minDate: SingleCalendarValue;
+  @Input() maxDate: SingleCalendarValue;
   @HostBinding('class') @Input() theme: string;
 
   @Output() onChange: EventEmitter<IDate> = new EventEmitter();
