@@ -15,7 +15,7 @@ import {IYear} from './year.model';
 import {YearCalendarService} from './year-calendar.service';
 import * as moment from 'moment';
 import {Moment} from 'moment';
-import {IYearCalendarConfig} from './year-calendar-config';
+import {IYearCalendarConfig, IYearCalendarConfigInternal} from './year-calendar-config';
 import {
   ControlValueAccessor,
   FormControl,
@@ -53,11 +53,12 @@ export class YearCalendarComponent implements OnInit, OnChanges, ControlValueAcc
   @Input() minDate: Moment;
   @Input() maxDate: Moment;
   @HostBinding('class') @Input() theme: string;
+
   @Output() onSelect: EventEmitter<IYear> = new EventEmitter();
   @Output() onNavHeaderBtnClick: EventEmitter<null> = new EventEmitter();
 
   isInited: boolean = false;
-  componentConfig: IYearCalendarConfig;
+  componentConfig: IYearCalendarConfigInternal;
   _selected: Moment[];
   yearMatrix: IYear[][];
   _currentDateView: Moment;
@@ -72,6 +73,11 @@ export class YearCalendarComponent implements OnInit, OnChanges, ControlValueAcc
   showSecondaryRightNav: boolean;
 
   set selected(selected: Moment[]) {
+    this._selected = selected;
+    this.onChangeCallback(this.processOnChangeCallback(selected));
+  }
+
+  get selected(): Moment[] {
     this._selected = selected;
     this.onChangeCallback(this.processOnChangeCallback(selected));
   }
@@ -122,7 +128,12 @@ export class YearCalendarComponent implements OnInit, OnChanges, ControlValueAcc
     this.currentDateView = this.displayDate
       ? this.displayDate
       : this.utilsService
-        .getDefaultDisplayDate(this.currentDateView, this.selected, this.componentConfig.allowMultiSelect);
+        .getDefaultDisplayDate(
+          this.currentDateView,
+          this.selected,
+          this.componentConfig.allowMultiSelect
+          this.componentConfig.min
+        );
     this.inputValueType = this.utilsService.getInputType(this.inputValue, this.componentConfig.allowMultiSelect);
     this._shouldShowCurrent = this.shouldShowCurrent();
   }
