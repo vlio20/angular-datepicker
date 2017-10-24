@@ -44,7 +44,7 @@ export class YearCalendarService {
           date,
           selected: !!selected.find(s => index.isSame(s, 'year')),
           currentYear: index.isSame(moment(), 'year'),
-          disabled: false, // TODO: this fails to compile: this.isYearDisabled(date, config),
+          disabled: this.isYearDisabled(date, config),
           text: this.getYearBtnText(config, date)
         };
 
@@ -54,12 +54,12 @@ export class YearCalendarService {
     });
   }
 
-  isYearDisabled(year: IYear, config: IYearCalendarConfig) {
-    if (config.min && year.date.isBefore(config.min, 'year')) {
+  isYearDisabled(date: Moment, config: IYearCalendarConfig) {
+    if (config.min && date.isBefore(config.min, 'year')) {
       return true;
     }
 
-    return !!(config.max && year.date.isAfter(config.max, 'year'));
+    return !!(config.max && date.isAfter(config.max, 'year'));
   }
 
   shouldShowLeft(min: Moment, currentYearView: Moment): boolean {
@@ -71,11 +71,13 @@ export class YearCalendarService {
   }
 
   getHeaderLabel(config: IYearCalendarConfig, year: Moment): string {
+    return null;
+    /*
     if (config.yearFormatter) {
       return config.yearFormatter(year);
     }
-
     return year.format(config.yearFormat);
+    */
   }
 
   getYearBtnText(config: IYearCalendarConfig, year: Moment): string {
