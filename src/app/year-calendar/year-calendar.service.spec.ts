@@ -11,9 +11,6 @@ describe('Service: YearCalendarService', () => {
     });
   });
 
-
-
-
   it('should check getYearBtnCssClass method',
     inject([YearCalendarService],
       (service: YearCalendarService) => {

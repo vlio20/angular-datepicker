@@ -6,7 +6,6 @@ export interface IConfig {
   isYearDisabledCallback?: (date: Moment) => boolean;
   allowMultiSelect?: boolean;
   yearFormat?: string;
-  yearFormatter?: (month: Moment) => string;
   format?: string;
   isNavHeaderBtnClickable?: boolean;
   yearBtnFormat?: string;

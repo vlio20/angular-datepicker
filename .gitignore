@@ -36,3 +36,5 @@ testem.log
 Thumbs.db
 
 dist
+
+*.bak

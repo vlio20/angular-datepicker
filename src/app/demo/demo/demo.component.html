@@ -304,7 +304,7 @@
                         #monthPicker="ngModel"
                         [(ngModel)]="date"
                         (ngModelChange)="log($event)"
-                        [mode]="'year'"
+                        mode="year"
                         [displayDate]="displayDate"
                         (open)="opened()"
                         (close)="closed()"
@@ -316,7 +316,7 @@
                         [config]="config"
                         [theme]="material ? 'dp-material dp-main' : 'dp-main'">
         </dp-date-picker>
-        
+
       </div>
 
       <div class="dp-inline-month" *ngIf="pickerMode === 'monthInline'">

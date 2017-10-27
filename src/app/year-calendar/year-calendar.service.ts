@@ -49,6 +49,7 @@ export class YearCalendarService {
         };
 
         index.add(1, 'year');
+
         return _year;
       });
     });
@@ -70,20 +71,12 @@ export class YearCalendarService {
     return max ? max.isAfter(currentYearView, 'year') : true;
   }
 
-  getHeaderLabel(config: IYearCalendarConfig, year: Moment): string {
-    return null;
-    /*
-    if (config.yearFormatter) {
-      return config.yearFormatter(year);
-    }
-    return year.format(config.yearFormat);
-    */
-  }
 
   getYearBtnText(config: IYearCalendarConfig, year: Moment): string {
     if (config.yearBtnFormatter) {
       return config.yearBtnFormatter(year);
     }
+
     return year.format(config.yearBtnFormat);
   }
 

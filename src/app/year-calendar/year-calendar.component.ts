@@ -85,7 +85,6 @@ export class YearCalendarComponent implements OnInit, OnChanges, ControlValueAcc
     this._currentDateView = current.clone();
     this.yearMatrix = this.yearCalendarService
       .generateYear(this.componentConfig, this._currentDateView, this.selected);
-    this.navLabel = this.yearCalendarService.getHeaderLabel(this.componentConfig, this.currentDateView);
     this.showLeftNav = this.yearCalendarService.shouldShowLeft(this.componentConfig.min, this._currentDateView);
     this.showRightNav = this.yearCalendarService.shouldShowRight(this.componentConfig.max, this.currentDateView);
     this.showSecondaryLeftNav = this.componentConfig.showMultipleYearsNavigation && this.showLeftNav;
