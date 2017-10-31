@@ -183,11 +183,11 @@ describe('dpDayPicker dayPicker', () => {
 
   it('should check the first day of the week', () => {
     page.dayPickerInput.click();
-    expect(page.weekDayNames.getText()).toEqual(['Sun Mon Tue Wed Thu Fri Sat']);
+    expect(page.weekDayNames.getText()).toEqual(['SunMonTueWedThuFriSat']);
     page.clickOnBody();
     page.firstDayOfWeekMonday.click();
     page.dayPickerInput.click();
-    expect(page.weekDayNames.getText()).toEqual(['Mon Tue Wed Thu Fri Sat Sun']);
+    expect(page.weekDayNames.getText()).toEqual(['MonTueWedThuFriSatSun']);
   });
 
   it('should check month format', () => {
@@ -245,7 +245,7 @@ describe('dpDayPicker dayPicker', () => {
     page.weekDaysFormatInput.sendKeys('d');
 
     page.dayPickerInput.click();
-    expect(page.weekDayNames.getText()).toEqual(['0 1 2 3 4 5 6']);
+    expect(page.weekDayNames.getText()).toEqual(['0123456']);
   });
 
   it('should check dateFormat is working', () => {

@@ -13,25 +13,25 @@ describe('Locales', () => {
 
     page.daytimePickerMenu.click();
     page.daytimePickerInput.click();
-    expect(page.weekDayNames.getText()).toEqual(['א׳ ב׳ ג׳ ד׳ ה׳ ו׳ ש׳']);
+    expect(page.weekDayNames.getText()).toEqual(['א׳ב׳ג׳ד׳ה׳ו׳ש׳']);
 
     page.daytimeInlineMenu.click();
-    expect(page.weekDayInline.getText()).toEqual(['א׳ ב׳ ג׳ ד׳ ה׳ ו׳ ש׳']);
+    expect(page.weekDayInline.getText()).toEqual(['א׳ב׳ג׳ד׳ה׳ו׳ש׳']);
 
     page.daytimeDirectiveMenu.click();
     page.daytimeDirectiveInput.click();
-    expect(page.weekDayNames.getText()).toEqual(['א׳ ב׳ ג׳ ד׳ ה׳ ו׳ ש׳']);
+    expect(page.weekDayNames.getText()).toEqual(['א׳ב׳ג׳ד׳ה׳ו׳ש׳']);
 
     page.dayPickerMenu.click();
     page.dayPickerInput.click();
-    expect(page.weekDayNames.getText()).toEqual(['א׳ ב׳ ג׳ ד׳ ה׳ ו׳ ש׳']);
+    expect(page.weekDayNames.getText()).toEqual(['א׳ב׳ג׳ד׳ה׳ו׳ש׳']);
 
     page.dayInlineMenu.click();
-    expect(page.weekDayInline.getText()).toEqual(['א׳ ב׳ ג׳ ד׳ ה׳ ו׳ ש׳']);
+    expect(page.weekDayInline.getText()).toEqual(['א׳ב׳ג׳ד׳ה׳ו׳ש׳']);
 
     page.dayDirectiveMenu.click();
     page.dayDirectiveInput.click();
-    expect(page.weekDayNames.getText()).toEqual(['א׳ ב׳ ג׳ ד׳ ה׳ ו׳ ש׳']);
+    expect(page.weekDayNames.getText()).toEqual(['א׳ב׳ג׳ד׳ה׳ו׳ש׳']);
 
     page.monthPickerMenu.click();
     page.monthPickerInput.click();

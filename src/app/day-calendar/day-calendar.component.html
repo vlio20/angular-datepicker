@@ -16,19 +16,22 @@
        [ngClass]="{'dp-hide-near-month': !componentConfig.showNearMonthDays}">
     <div class="dp-weekdays">
       <span class="dp-calendar-weekday"
-            *ngFor="let weekday of weekdays">
-            {{getWeekdayName(weekday)}}
+            *ngFor="let weekday of weekdays"
+            [innerText]="getWeekdayName(weekday)">
       </span>
     </div>
     <div class="dp-calendar-week" *ngFor="let week of weeks">
-      <span *ngIf="componentConfig.showWeekNumbers" class="dp-week-number">{{week[0].date.isoWeek()}}</span>
+      <span class="dp-week-number"
+            *ngIf="componentConfig.showWeekNumbers"
+            [innerText]="week[0].date.isoWeek()">
+      </span>
       <button type="button"
               class="dp-calendar-day"
               *ngFor="let day of week"
               (click)="dayClicked(day)"
               [disabled]="day.disabled"
-              [ngClass]="getDayBtnCssClass(day)">
-        {{getDayBtnText(day)}}
+              [ngClass]="getDayBtnCssClass(day)"
+              [innerText]="getDayBtnText(day)">
       </button>
     </div>
   </div>
