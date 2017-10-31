@@ -1,11 +1,13 @@
 <div class="dp-calendar-nav-container">
   <div class="dp-nav-header">
-    <span [hidden]="isLabelClickable">{{label}}</span>
+    <span [hidden]="isLabelClickable"
+          [innerText]="label">
+    </span>
     <button type="button"
             class="dp-nav-header-btn"
             [hidden]="!isLabelClickable"
-            (click)="labelClicked()">
-      {{label}}
+            (click)="labelClicked()"
+            [innerText]="label">
     </button>
   </div>
 

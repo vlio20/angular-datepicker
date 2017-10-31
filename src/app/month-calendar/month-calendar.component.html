@@ -23,8 +23,8 @@
               *ngFor="let month of monthRow"
               [disabled]="month.disabled"
               [ngClass]="getMonthBtnCssClass(month)"
-              (click)="monthClicked(month)">
-        {{month.text}}
+              (click)="monthClicked(month)"
+              [innerText]="month.text">
       </button>
     </div>
   </div>
