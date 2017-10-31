@@ -231,7 +231,7 @@ export class DatePickerDirective implements OnInit {
       this.datePicker.init();
 
       if (this.datePicker.componentConfig.disableKeypress) {
-        this.elemRef.nativeElement.setAttribute('readonly');
+        this.elemRef.nativeElement.setAttribute('readonly', true);
       } else {
         this.elemRef.nativeElement.removeAttribute('readonly');
       }
