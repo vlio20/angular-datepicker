@@ -1,6 +1,12 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+<a name="2.6.1"></a>
+# [2.6.1] (???)
+
+### Bug Fixed
+- Go to current button not centered ([9b6dc99](https://github.com/vlio20/angular-datepicker/commit/9b6dc99)) closes [#275] - PR by @KevinJannis(https://github.com/KevinJannis)
+
 <a name="2.6.0"></a>
 # [2.6.0] (2017-10-22)
 
