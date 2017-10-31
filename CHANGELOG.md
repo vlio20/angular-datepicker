@@ -5,8 +5,7 @@ All notable changes to this project will be documented in this file.
 # [2.6.1] (???)
 
 ### Bug Fixed
-1c00e48
-- Go to current button not centered ([1c00e48](https://github.com/vlio20/angular-datepicker/commit/1c00e48)) closes [#267](https://github.com/vlio20/angular-datepicker/issues/267)
+- `disableKeypress` doesn't work on the directive ([1c00e48](https://github.com/vlio20/angular-datepicker/commit/1c00e48)) closes [#267](https://github.com/vlio20/angular-datepicker/issues/267)
 
 - Go to current button not centered ([9b6dc99](https://github.com/vlio20/angular-datepicker/commit/9b6dc99)) closes [#275](https://github.com/vlio20/angular-datepicker/issues/275) - PR by @KevinJannis(https://github.com/KevinJannis)
 
