@@ -17,7 +17,7 @@
                        *ngSwitchCase="'day'"
                        [config]="dayCalendarConfig"
                        [ngModel]="_selected"
-                       [displayDate]="currentDateView"
+                       [displayDate]="displayDate"
                        (onSelect)="dateSelected($event, 'day')"
                        [theme]="theme">
       </dp-day-calendar>
@@ -26,7 +26,7 @@
                          *ngSwitchCase="'month'"
                          [config]="dayCalendarConfig"
                          [ngModel]="_selected"
-                         [displayDate]="currentDateView"
+                         [displayDate]="displayDate"
                          (onSelect)="dateSelected($event, 'month')"
                          [theme]="theme">
       </dp-month-calendar>
@@ -42,7 +42,7 @@
       <dp-day-time-calendar #daytimeCalendar
                             *ngSwitchCase="'daytime'"
                             [config]="dayTimeCalendarConfig"
-                            [displayDate]="currentDateView"
+                            [displayDate]="displayDate"
                             [ngModel]="_selected && _selected[0]"
                             (onChange)="dateSelected($event, 'second', true)"
                             [theme]="theme">

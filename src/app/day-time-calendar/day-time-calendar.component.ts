@@ -8,7 +8,7 @@ import {
   Input,
   OnChanges,
   OnInit,
-  Output,
+  Output, SimpleChange,
   SimpleChanges,
   ViewEncapsulation
 } from '@angular/core';

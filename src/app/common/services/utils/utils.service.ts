@@ -1,12 +1,13 @@
 import {ECalendarValue} from '../../types/calendar-value-enum';
 import {SingleCalendarValue} from '../../types/single-calendar-value';
-import {Injectable} from '@angular/core';
+import {Injectable, SimpleChange} from '@angular/core';
 import * as moment from 'moment';
 import {Moment, unitOfTime} from 'moment';
 import {CalendarValue} from '../../types/calendar-value';
 import {IDate} from '../../models/date.model';
 import {CalendarMode} from '../../types/calendar-mode';
 import {DateValidator} from '../../types/validator.type';
+import {ICalendarInternal} from '../../models/calendar.model';
 
 export interface DateLimits {
   minDate?: SingleCalendarValue;
@@ -38,7 +39,7 @@ export class UtilsService {
     } else if (typeof date === 'string') {
       return moment(date, format);
     } else {
-      return date;
+      return date.clone();
     }
   }
 
@@ -99,9 +100,9 @@ export class UtilsService {
       case (ECalendarValue.StringArr):
         return (<string[]>value).map(v => v ? moment(v, format, true) : null).filter(Boolean);
       case (ECalendarValue.Moment):
-        return [<Moment>value];
+        return value ? [(<Moment>value).clone()] : [];
       case (ECalendarValue.MomentArr):
-        return <Moment[]>[].concat(value);
+        return (<Moment[]>value || []).map(v => v.clone());
       default:
         return [];
     }
@@ -117,9 +118,9 @@ export class UtilsService {
       case (ECalendarValue.StringArr):
         return value.filter(Boolean).map(v => v.format(format));
       case (ECalendarValue.Moment):
-        return value[0];
+        return value[0] ? value[0].clone() : value[0];
       case (ECalendarValue.MomentArr):
-        return value;
+        return value ? value.map(v => v.clone()) : value;
       default:
         return value;
     }
@@ -284,5 +285,23 @@ export class UtilsService {
         obj[prop] = this.convertToMoment(obj[prop], format);
       }
     });
+  }
+
+  shouldResetCurrentView<T extends ICalendarInternal>(prevConf: T, currentConf: T): boolean {
+    if (prevConf && currentConf) {
+      if (!prevConf.min && currentConf.min) {
+        return true;
+      } else if (prevConf.min && currentConf.min && !prevConf.min.isSame(currentConf.min, 'd')) {
+        return true;
+      } else if (!prevConf.max && currentConf.max) {
+        return true;
+      } else if (prevConf.max && currentConf.max && !prevConf.max.isSame(currentConf.max, 'd')) {
+        return true;
+      }
+
+      return false;
+    }
+
+    return false;
   }
 }

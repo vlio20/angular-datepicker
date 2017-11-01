@@ -7,7 +7,7 @@ import {
   Input,
   OnChanges,
   OnInit,
-  Output,
+  Output, SimpleChange,
   SimpleChanges,
   ViewEncapsulation
 } from '@angular/core';
@@ -27,6 +27,7 @@ import {
 import {CalendarValue} from '../common/types/calendar-value';
 import {UtilsService} from '../common/services/utils/utils.service';
 import {DateValidator} from '../common/types/validator.type';
+import {SingleCalendarValue} from '../common/types/single-calendar-value';
 
 @Component({
   selector: 'dp-month-calendar',
@@ -72,6 +73,11 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
   showSecondaryLeftNav: boolean;
   showSecondaryRightNav: boolean;
 
+  api = {
+    toggleCalendar: this.toggleCalendar.bind(this),
+    moveCalendarTo: this.moveCalendarTo.bind(this)
+  };
+
   set selected(selected: Moment[]) {
     this._selected = selected;
     this.onChangeCallback(this.processOnChangeCallback(selected));
@@ -108,7 +114,9 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
 
   ngOnChanges(changes: SimpleChanges) {
     if (this.isInited) {
-      const {minDate, maxDate} = changes;
+      const {minDate, maxDate, config} = changes;
+
+      this.handleConfigChange(config);
       this.init();
 
       if (minDate || maxDate) {
@@ -251,5 +259,20 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
 
   goToCurrent() {
     this.currentDateView = moment();
+  }
+
+  moveCalendarTo(to: SingleCalendarValue) {
+    this.currentDateView = this.utilsService.convertToMoment(to, this.componentConfig.format);
+  }
+
+  handleConfigChange(config: SimpleChange) {
+    if (config) {
+      const prevConf: IMonthCalendarConfigInternal = this.monthCalendarService.getConfig(config.previousValue);
+      const currentConf: IMonthCalendarConfigInternal = this.monthCalendarService.getConfig(config.currentValue);
+
+      if(this.utilsService.shouldResetCurrentView(prevConf, currentConf)) {
+        this._currentDateView = null;
+      }
+    }
   }
 }
