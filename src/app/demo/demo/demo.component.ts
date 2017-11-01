@@ -132,7 +132,6 @@ export class DemoComponent {
   pickerMode = 'daytimePicker';
 
   date: Moment;
-  date2: Moment;
   dates: Moment[] = [];
   material: boolean = true;
   required: boolean = false;
@@ -215,43 +214,6 @@ export class DemoComponent {
     hideInputContainer: false,
     returnedValueType: ECalendarValue.String
   };
-
-  config2: IDatePickerConfig = {
-    firstDayOfWeek: 'su',
-    monthFormat: 'MMM, YYYY',
-    disableKeypress: false,
-    allowMultiSelect: false,
-    closeOnSelect: undefined,
-    closeOnSelectDelay: 100,
-    openOnFocus: true,
-    openOnClick: true,
-    onOpenDelay: 0,
-    weekDayFormat: 'ddd',
-    appendTo: document.body,
-    showNearMonthDays: true,
-    showWeekNumbers: false,
-    enableMonthSelector: true,
-    yearFormat: 'YYYY',
-    showGoToCurrent: true,
-    dayBtnFormat: 'DD',
-    monthBtnFormat: 'MMM',
-    hours12Format: 'hh',
-    hours24Format: 'HH',
-    meridiemFormat: 'A',
-    minutesFormat: 'mm',
-    minutesInterval: 1,
-    secondsFormat: 'ss',
-    secondsInterval: 1,
-    showSeconds: false,
-    showTwentyFourHours: false,
-    timeSeparator: ':',
-    multipleYearsNavigateBy: 10,
-    showMultipleYearsNavigation: false,
-    locale: moment.locale(),
-    hideInputContainer: false,
-    returnedValueType: ECalendarValue.String
-  };
-
   isAtTop: boolean = true;
 
   constructor(private gaService: GaService) {
@@ -261,22 +223,6 @@ export class DemoComponent {
   @debounce(100)
   updateIsAtTop() {
     this.isAtTop = document.body.scrollTop === 0;
-  }
-
-  fromChanged(e) {
-    console.log(e);
-    this.config2 = {
-      ...this.config2,
-      min: e
-    };
-  }
-
-  toChanged(e) {
-    console.log(e);
-    this.config = {
-      ...this.config,
-      max: e
-    };
   }
 
   modeChanged(mode) {
