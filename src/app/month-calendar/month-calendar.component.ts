@@ -7,7 +7,8 @@ import {
   Input,
   OnChanges,
   OnInit,
-  Output, SimpleChange,
+  Output,
+  SimpleChange,
   SimpleChanges,
   ViewEncapsulation
 } from '@angular/core';
@@ -270,7 +271,7 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
       const prevConf: IMonthCalendarConfigInternal = this.monthCalendarService.getConfig(config.previousValue);
       const currentConf: IMonthCalendarConfigInternal = this.monthCalendarService.getConfig(config.currentValue);
 
-      if(this.utilsService.shouldResetCurrentView(prevConf, currentConf)) {
+      if (this.utilsService.shouldResetCurrentView(prevConf, currentConf)) {
         this._currentDateView = null;
       }
     }
