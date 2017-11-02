@@ -157,13 +157,14 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
     if (value) {
       this.selected = this.utilsService
         .convertToMomentArray(value, this.componentConfig.format, this.componentConfig.allowMultiSelect);
-      this.weeks = this.dayCalendarService
-        .generateMonthArray(this.componentConfig, this.currentDateView, this.selected);
       this.inputValueType = this.utilsService
         .getInputType(this.inputValue, this.componentConfig.allowMultiSelect);
     } else {
       this.selected = [];
     }
+
+    this.weeks = this.dayCalendarService
+      .generateMonthArray(this.componentConfig, this.currentDateView, this.selected);
   }
 
   registerOnChange(fn: any): void {
