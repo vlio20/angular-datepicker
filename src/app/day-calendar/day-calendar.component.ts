@@ -10,6 +10,7 @@ import {
   OnChanges,
   OnInit,
   Output,
+  SimpleChange,
   SimpleChanges,
   ViewEncapsulation
 } from '@angular/core';
@@ -82,7 +83,8 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
 
   api = {
     moveCalendarsBy: this.moveCalendarsBy.bind(this),
-    toggleCalendar: this.toggleCalendar.bind(this)
+    toggleCalendar: this.toggleCalendar.bind(this),
+    moveCalendarTo: this.moveCalendarTo.bind(this)
   };
 
   set selected(selected: Moment[]) {
@@ -123,7 +125,12 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
     this.currentDateView = this.displayDate
       ? this.utilsService.convertToMoment(this.displayDate, this.componentConfig.format).clone()
       : this.utilsService
-        .getDefaultDisplayDate(this.currentDateView, this.selected, this.componentConfig.allowMultiSelect, this.componentConfig.min);
+        .getDefaultDisplayDate(
+          this.currentDateView,
+          this.selected,
+          this.componentConfig.allowMultiSelect,
+          this.componentConfig.min
+        );
     this.weekdays = this.dayCalendarService
       .generateWeekdays(this.componentConfig.firstDayOfWeek);
     this.inputValueType = this.utilsService.getInputType(this.inputValue, this.componentConfig.allowMultiSelect);
@@ -133,7 +140,9 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
 
   ngOnChanges(changes: SimpleChanges) {
     if (this.isInited) {
-      const {minDate, maxDate} = changes;
+      const {minDate, maxDate, config} = changes;
+
+      this.handleConfigChange(config);
       this.init();
 
       if (minDate || maxDate) {
@@ -254,6 +263,12 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
     this.currentDateView = current.clone().add(amount, granularity);
   }
 
+  moveCalendarTo(to: SingleCalendarValue) {
+    if (to) {
+      this.currentDateView = this.utilsService.convertToMoment(to, this.componentConfig.format);
+    }
+  }
+
   shouldShowCurrent(): boolean {
     return this.utilsService.shouldShowCurrent(
       this.componentConfig.showGoToCurrent,
@@ -265,5 +280,16 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
 
   goToCurrent() {
     this.currentDateView = moment();
+  }
+
+  handleConfigChange(config: SimpleChange) {
+    if (config) {
+      const prevConf: IDayCalendarConfigInternal = this.dayCalendarService.getConfig(config.previousValue);
+      const currentConf: IDayCalendarConfigInternal = this.dayCalendarService.getConfig(config.currentValue);
+
+      if (this.utilsService.shouldResetCurrentView(prevConf, currentConf)) {
+        this._currentDateView = null;
+      }
+    }
   }
 }
