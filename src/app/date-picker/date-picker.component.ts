@@ -29,10 +29,10 @@ import {
   OnChanges,
   OnDestroy,
   OnInit,
-  Output,
+  Output, QueryList,
   Renderer,
   SimpleChanges,
-  ViewChild,
+  ViewChild, ViewChildren,
   ViewEncapsulation
 } from '@angular/core';
 import {
@@ -46,6 +46,8 @@ import {
 import * as moment from 'moment';
 import {Moment, unitOfTime} from 'moment';
 import {DateValidator} from '../common/types/validator.type';
+import {MonthCalendarComponent} from '../month-calendar/month-calendar.component';
+import {DayTimeCalendarComponent} from '../day-time-calendar/day-time-calendar.component';
 
 @Component({
   selector: 'dp-date-picker',
@@ -93,6 +95,8 @@ export class DatePickerComponent implements OnChanges,
 
   @ViewChild('container') calendarContainer: ElementRef;
   @ViewChild('dayCalendar') dayCalendarRef: DayCalendarComponent;
+  @ViewChild('monthCalendar') monthCalendarRef: MonthCalendarComponent;
+  @ViewChild('daytimeCalendar') dayTimeCalendarRef: DayTimeCalendarComponent;
   @ViewChild('timeSelect') timeSelectRef: TimeSelectComponent;
 
   componentConfig: IDatePickerConfigInternal;
@@ -105,7 +109,7 @@ export class DatePickerComponent implements OnChanges,
   inputValue: CalendarValue;
   inputValueType: ECalendarValue;
   isFocusedTrigger: boolean = false;
-  currentDateView: Moment;
+  _currentDateView: Moment;
   inputElementValue: string;
   calendarWrapper: HTMLElement;
   appendToElement: HTMLElement;
@@ -162,6 +166,26 @@ export class DatePickerComponent implements OnChanges,
     }
 
     this._areCalendarsShown = value;
+  }
+
+  get currentDateView(): Moment {
+    return this._currentDateView;
+  }
+
+  set currentDateView(date: Moment) {
+    this._currentDateView = date;
+
+    if (this.dayCalendarRef) {
+      this.dayCalendarRef.moveCalendarTo(date);
+    }
+
+    if (this.monthCalendarRef) {
+      this.monthCalendarRef.moveCalendarTo(date);
+    }
+
+    if (this.dayTimeCalendarRef) {
+      this.dayTimeCalendarRef.moveCalendarTo(date);
+    }
   }
 
   constructor(private dayPickerService: DatePickerService,
@@ -267,6 +291,7 @@ export class DatePickerComponent implements OnChanges,
   ngOnChanges(changes: SimpleChanges) {
     if (this.isInitialized) {
       const {minDate, maxDate, minTime, maxTime} = changes;
+
       this.init();
 
       if (minDate || maxDate || minTime || maxTime) {
@@ -394,10 +419,6 @@ export class DatePickerComponent implements OnChanges,
     return this.componentConfig.showGoToCurrent &&
       this.utilsService.isDateInRange(moment(), this.componentConfig.min, this.componentConfig.max) &&
       this.mode !== 'time';
-  }
-
-  moveToCurrent() {
-    this.currentDateView = moment();
   }
 
   dateSelected(date: IDate, granularity: unitOfTime.Base, ignoreClose?: boolean) {
