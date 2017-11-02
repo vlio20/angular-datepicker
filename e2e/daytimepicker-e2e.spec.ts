@@ -1,4 +1,5 @@
 import {DemoPage} from './app.po';
+import {browser} from 'protractor';
 
 describe('dpDayPicker daytimePicker', () => {
   let page: DemoPage;
@@ -60,5 +61,15 @@ describe('dpDayPicker daytimePicker', () => {
     expect(page.minuteUpBtn.getAttribute('disabled')).toBe(null);
     expect(page.meridiemUpBtn.getAttribute('disabled')).toBe('true');
     expect(page.meridiemDownBtn.getAttribute('disabled')).toBe('true');
+  });
+
+  it('should check that the max selectable option is working', () => {
+    page.daytimePickerInput.click();
+    page.daytimePickerInput.sendKeys('11-04-2017 09:08:07');
+    expect(page.selectedDays.count()).toEqual(1);
+    page.daytimePickerInput.clear();
+    page.daytimePickerInput.sendKeys(' ');
+
+    expect(page.selectedDays.count()).toEqual(0);
   });
 });
