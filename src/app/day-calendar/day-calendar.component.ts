@@ -264,7 +264,9 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
   }
 
   moveCalendarTo(to: SingleCalendarValue) {
-    this.currentDateView = this.utilsService.convertToMoment(to, this.componentConfig.format);
+    if (to) {
+      this.currentDateView = this.utilsService.convertToMoment(to, this.componentConfig.format);
+    }
   }
 
   shouldShowCurrent(): boolean {

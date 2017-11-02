@@ -263,7 +263,9 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
   }
 
   moveCalendarTo(to: SingleCalendarValue) {
-    this.currentDateView = this.utilsService.convertToMoment(to, this.componentConfig.format);
+    if (to) {
+      this.currentDateView = this.utilsService.convertToMoment(to, this.componentConfig.format);
+    }
   }
 
   handleConfigChange(config: SimpleChange) {
