@@ -9,7 +9,7 @@ import {
   OnChanges,
   OnInit,
   Output, SimpleChange,
-  SimpleChanges,
+  SimpleChanges, ViewChild,
   ViewEncapsulation
 } from '@angular/core';
 import {
@@ -29,6 +29,7 @@ import {TimeSelectService} from '../time-select/time-select.service';
 import {IDayTimeCalendarConfig} from './day-time-calendar-config.model';
 import {DayTimeCalendarService} from './day-time-calendar.service';
 import {DateValidator} from '../common/types/validator.type';
+import {DayCalendarComponent} from '../day-calendar/day-calendar.component';
 
 @Component({
   selector: 'dp-day-time-calendar',
@@ -60,6 +61,8 @@ export class DayTimeCalendarComponent implements OnInit, OnChanges, ControlValue
   @HostBinding('class') @Input() theme: string;
 
   @Output() onChange: EventEmitter<IDate> = new EventEmitter();
+
+  @ViewChild('dayCalendar') dayCalendarRef: DayCalendarComponent;
 
   isInited: boolean = false;
   componentConfig: IDayTimeCalendarConfig;
@@ -164,5 +167,11 @@ export class DayTimeCalendarComponent implements OnInit, OnChanges, ControlValue
 
   emitChange() {
     this.onChange.emit({date: this.selected, selected: false});
+  }
+
+  moveCalendarTo(to: SingleCalendarValue) {
+    if (to) {
+      this.dayCalendarRef.moveCalendarTo(to);
+    }
   }
 }
