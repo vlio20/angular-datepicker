@@ -2,7 +2,7 @@
 All notable changes to this project will be documented in this file.
 
 <a name="2.6.1"></a>
-# [2.6.1] (???)
+# [2.6.1] (2017-11-03)
 
 ### Bug Fixes
 - Hidden attribute not working on IE10 ([e4de3cb ](https://github.com/vlio20/angular-datepicker/commit/e4de3cb )) closes [#283](https://github.com/vlio20/angular-datepicker/issues/283) - PR by [@chrxs](https://github.com/chrxs)
