@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 # [2.6.1] (2017-11-03)
 
 ### Bug Fixes
-- Hidden attribute not working on IE10 ([e4de3cb ](https://github.com/vlio20/angular-datepicker/commit/e4de3cb )) closes [#283](https://github.com/vlio20/angular-datepicker/issues/283) - PR by [@chrxs](https://github.com/chrxs)
+- Hidden attribute not working on IE10 ([e4de3cb ](https://github.com/vlio20/angular-datepicker/commit/e4de3cb )) closes [#283](https://github.com/vlio20/angular-datepicker/issues/283) - PR by [@mrenou](https://github.com/mrenou)
 - Browser translate causes interpolates values to NOT update ([8f6d69e](https://github.com/vlio20/angular-datepicker/commit/8f6d69e)) closes [#277](https://github.com/vlio20/angular-datepicker/issues/277) - PR by [@chrxs](https://github.com/chrxs)
 - Clearing the input will remove the selected date ([5bfe724](https://github.com/vlio20/angular-datepicker/commit/5bfe724)) closes [#278](https://github.com/vlio20/angular-datepicker/issues/278)
 - Set `min` property dynamically ([969eb01](https://github.com/vlio20/angular-datepicker/commit/969eb01)) closes [#269](https://github.com/vlio20/angular-datepicker/issues/269)
