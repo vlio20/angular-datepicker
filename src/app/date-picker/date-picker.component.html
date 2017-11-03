@@ -1,5 +1,7 @@
 <div [ngClass]="{'dp-open': areCalendarsShown}">
-  <div [hidden]="componentConfig.hideInputContainer" class="dp-input-container">
+  <div class="dp-input-container"
+       [hidden]="componentConfig.hideInputContainer"
+       [attr.data-hidden]="componentConfig.hideInputContainer">
     <input type="text"
            class="dp-picker-input"
            [placeholder]="placeholder"
@@ -12,7 +14,8 @@
   <div #container>
     <div class="dp-popup {{theme}}"
          [ngSwitch]="mode"
-         [hidden]="!_areCalendarsShown">
+         [hidden]="!_areCalendarsShown"
+         [attr.data-hidden]="!_areCalendarsShown">
       <dp-day-calendar #dayCalendar
                        *ngSwitchCase="'day'"
                        [config]="dayCalendarConfig"
