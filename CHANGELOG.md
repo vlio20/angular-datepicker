@@ -5,6 +5,8 @@ All notable changes to this project will be documented in this file.
 # [2.6.1] (???)
 
 ### Bug Fixed
+- Browser translate causes interpolates values to NOT update ([8f6d69e](https://github.com/vlio20/angular-datepicker/commit/8f6d69e)) closes [#277](https://github.com/vlio20/angular-datepicker/issues/277)
+- Clearing the input will remove the selected date ([5bfe724](https://github.com/vlio20/angular-datepicker/commit/5bfe724)) closes [#278](https://github.com/vlio20/angular-datepicker/issues/278)
 - Set `min` property dynamically ([969eb01](https://github.com/vlio20/angular-datepicker/commit/969eb01)) closes [#269](https://github.com/vlio20/angular-datepicker/issues/269)
 - `disableKeypress` does not work on the directive ([1c00e48](https://github.com/vlio20/angular-datepicker/commit/1c00e48)) closes [#267](https://github.com/vlio20/angular-datepicker/issues/267)
 - Go to current button not centered ([9b6dc99](https://github.com/vlio20/angular-datepicker/commit/9b6dc99)) closes [#275](https://github.com/vlio20/angular-datepicker/issues/275) - PR by [@KevinJannis](https://github.com/KevinJannis)
