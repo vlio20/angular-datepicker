@@ -418,3 +418,15 @@ In order to provide configurations to the date-picker you need to pass it to the
 ```
 
 The `IDatePickerDirectiveConfig` is identical to [`IDatePickerConfig`](#configuration) above except that it lacks the `showGoToCurrent` property.
+
+## Compatibility
+
+### Internet Explorer 10:
+
+Internet explorer 10 doesn't support hidden attribut, but you can use a css rule on `data-hidden` to hide date picker components:
+
+```css
+[data-hidden="true"] {
+  display: none !important;
+}
+```
