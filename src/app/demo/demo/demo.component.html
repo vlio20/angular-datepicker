@@ -35,6 +35,10 @@
            [ngClass]="{'dp-active-item': pickerMode == 'monthPicker'}">Month Picker</a>
       </li>
       <li>
+        <a id="yearPickerMenu" href="#" (click)="modeChanged('yearPicker')"
+           [ngClass]="{'dp-active-item': pickerMode == 'yearPicker'}">Year Picker</a>
+      </li>
+      <li>
         <a id="monthInlineMenu" href="#" (click)="modeChanged('monthInline')"
            [ngClass]="{'dp-active-item': pickerMode == 'monthInline'}">Month Picker inline</a>
       </li>
@@ -62,6 +66,7 @@
                                              'dp-inline-day': pickerMode == 'dayInline',
                                              'dp-inline-month': pickerMode == 'monthInline',
                                              'dp-inline-time': pickerMode == 'timeInline',
+                                             'dp-inline-year': pickerMode == 'yearInline',
                                              'dp-inline-day-time': pickerMode == 'daytimeInline'}">
 
     <form #donateForm class="dp-donate-btn" action="https://www.paypal.com/cgi-bin/webscr" method="post"
@@ -290,6 +295,28 @@
             invalid
           </div>
         </div>
+      </div>
+
+      <div class="dp-picker-year" *ngIf="pickerMode === 'yearPicker'">
+        <dp-date-picker id="yearPicker"
+                        name="yearPicker"
+                        #datePicker
+                        #monthPicker="ngModel"
+                        [(ngModel)]="date"
+                        (ngModelChange)="log($event)"
+                        mode="year"
+                        [displayDate]="displayDate"
+                        (open)="opened()"
+                        (close)="closed()"
+                        [disabled]="disabled"
+                        [minDate]="validationMinDate"
+                        [maxDate]="validationMaxDate"
+                        [required]="required"
+                        [placeholder]="placeholder"
+                        [config]="config"
+                        [theme]="material ? 'dp-material dp-main' : 'dp-main'">
+        </dp-date-picker>
+
       </div>
 
       <div class="dp-inline-month" *ngIf="pickerMode === 'monthInline'">

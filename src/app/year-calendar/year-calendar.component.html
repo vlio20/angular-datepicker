@@ -1,0 +1,31 @@
+<div class="dp-year-calendar-container">
+  <dp-calendar-nav
+      [label]="navLabel"
+      [showLeftNav]="showLeftNav"
+      [showLeftSecondaryNav]="showSecondaryLeftNav"
+      [showRightNav]="showRightNav"
+      [showRightSecondaryNav]="showSecondaryRightNav"
+      [isLabelClickable]="componentConfig.isNavHeaderBtnClickable"
+      [showGoToCurrent]="shouldShowCurrent()"
+      [theme]="theme"
+      (onLeftNav)="onLeftNav()"
+      (onLeftSecondaryNav)="onLeftSecondaryNav()"
+      (onRightNav)="onRightNav()"
+      (onRightSecondaryNav)="onRightSecondaryNav()"
+      (onLabelClick)="toggleCalendar()"
+      (goToCurrent)="goToCurrent()">
+  </dp-calendar-nav>
+
+  <div class="dp-calendar-wrapper">
+    <div class="dp-year-row" *ngFor="let yearRow of yearMatrix">
+      <button type="button"
+              class="dp-calendar-year"
+              *ngFor="let year of yearRow"
+              [disabled]="year.disabled"
+              [ngClass]="getYearBtnCssClass(year)"
+              (click)="yearClicked(year)">
+        {{year.text}}
+      </button>
+    </div>
+  </div>
+</div>
