@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.org/vlio20/angular-datepicker.svg?branch=master)](https://travis-ci.org/vlio20/angular-datepicker)  
-[![npm version](https://badge.fury.io/js/ng2-date-picker.svg)](https://badge.fury.io/js/ng2-date-picker)
+[![Backers on Open Collective](https://opencollective.com/angular-datepicker/backers/badge.svg)](#backers) [![Sponsors on Open Collective](https://opencollective.com/angular-datepicker/sponsors/badge.svg)](#sponsors) [![npm version](https://badge.fury.io/js/ng2-date-picker.svg)](https://badge.fury.io/js/ng2-date-picker)
 [![Package Quality](http://npm.packagequality.com/shield/ng2-date-picker.svg)](http://packagequality.com/#?package=ng2-date-picker)
 
 # Date Picker
@@ -430,3 +430,33 @@ Internet explorer 10 doesn't support hidden attribut, but you can use a css rule
   display: none !important;
 }
 ```
+
+## Contributors
+
+This project exists thanks to all the people who contribute. [[Contribute]](CONTRIBUTING.md).
+<a href="graphs/contributors"><img src="https://opencollective.com/angular-datepicker/contributors.svg?width=890" /></a>
+
+
+## Backers
+
+Thank you to all our backers! 🙏 [[Become a backer](https://opencollective.com/angular-datepicker#backer)]
+
+<a href="https://opencollective.com/angular-datepicker#backers" target="_blank"><img src="https://opencollective.com/angular-datepicker/backers.svg?width=890"></a>
+
+
+## Sponsors
+
+Support this project by becoming a sponsor. Your logo will show up here with a link to your website. [[Become a sponsor](https://opencollective.com/angular-datepicker#sponsor)]
+
+<a href="https://opencollective.com/angular-datepicker/sponsor/0/website" target="_blank"><img src="https://opencollective.com/angular-datepicker/sponsor/0/avatar.svg"></a>
+<a href="https://opencollective.com/angular-datepicker/sponsor/1/website" target="_blank"><img src="https://opencollective.com/angular-datepicker/sponsor/1/avatar.svg"></a>
+<a href="https://opencollective.com/angular-datepicker/sponsor/2/website" target="_blank"><img src="https://opencollective.com/angular-datepicker/sponsor/2/avatar.svg"></a>
+<a href="https://opencollective.com/angular-datepicker/sponsor/3/website" target="_blank"><img src="https://opencollective.com/angular-datepicker/sponsor/3/avatar.svg"></a>
+<a href="https://opencollective.com/angular-datepicker/sponsor/4/website" target="_blank"><img src="https://opencollective.com/angular-datepicker/sponsor/4/avatar.svg"></a>
+<a href="https://opencollective.com/angular-datepicker/sponsor/5/website" target="_blank"><img src="https://opencollective.com/angular-datepicker/sponsor/5/avatar.svg"></a>
+<a href="https://opencollective.com/angular-datepicker/sponsor/6/website" target="_blank"><img src="https://opencollective.com/angular-datepicker/sponsor/6/avatar.svg"></a>
+<a href="https://opencollective.com/angular-datepicker/sponsor/7/website" target="_blank"><img src="https://opencollective.com/angular-datepicker/sponsor/7/avatar.svg"></a>
+<a href="https://opencollective.com/angular-datepicker/sponsor/8/website" target="_blank"><img src="https://opencollective.com/angular-datepicker/sponsor/8/avatar.svg"></a>
+<a href="https://opencollective.com/angular-datepicker/sponsor/9/website" target="_blank"><img src="https://opencollective.com/angular-datepicker/sponsor/9/avatar.svg"></a>
+
+
