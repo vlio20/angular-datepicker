@@ -16,7 +16,8 @@
     "build:index": "cd build-helpers && node index-maker.js",
     "build:prod": "node build.js && ngc && cp package.json bin",
     "release": "npm run build:prod && npm publish bin",
-    "pack": "cd bin && npm pack"
+    "pack": "cd bin && npm pack",
+    "postinstall": "opencollective postinstall"
   },
   "repository": {
     "type": "git",
@@ -35,7 +36,8 @@
     "angular-datepicker"
   ],
   "dependencies": {
-    "moment": "^2.17.1"
+    "moment": "^2.17.1",
+    "opencollective": "^1.0.3"
   },
   "devDependencies": {
     "@angular/cli": "^1.0.1",
@@ -76,5 +78,10 @@
   "angularCompilerOptions": {
     "skipTemplateCodegen": true,
     "strictMetadataEmit": true
+  },
+  "collective": {
+    "type": "opencollective",
+    "url": "https://opencollective.com/angular-datepicker",
+    "logo": "https://opencollective.com/opencollective/logo.txt"
   }
 }
