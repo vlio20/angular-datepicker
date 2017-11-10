@@ -29,10 +29,10 @@ import {
   OnChanges,
   OnDestroy,
   OnInit,
-  Output, QueryList,
+  Output,
   Renderer,
   SimpleChanges,
-  ViewChild, ViewChildren,
+  ViewChild,
   ViewEncapsulation
 } from '@angular/core';
 import {
@@ -209,7 +209,6 @@ export class DatePickerComponent implements OnChanges,
     }
   }
 
-  @HostListener('document:click')
   onBodyClick() {
     if (!this.hideStateHelper && this.areCalendarsShown) {
       this.hideCalendar();
@@ -218,7 +217,6 @@ export class DatePickerComponent implements OnChanges,
     this.hideStateHelper = false;
   }
 
-  @HostListener('document:scroll')
   @HostListener('window:resize')
   onScroll() {
     if (this.areCalendarsShown) {
@@ -448,7 +446,14 @@ export class DatePickerComponent implements OnChanges,
     this.globalListnersUnlisteners.push(
       this.renderer.listen(document, 'keydown', (e: KeyboardEvent) => {
         this.onKeyPress(e);
-      }));
+      }),
+      this.renderer.listen(document, 'scroll', () => {
+        this.onScroll();
+      }),
+      this.renderer.listen(document, 'click', () => {
+        this.onBodyClick();
+      })
+    );
   }
 
   stopGlobalListeners() {
