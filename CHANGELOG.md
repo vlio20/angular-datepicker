@@ -2,7 +2,7 @@
 All notable changes to this project will be documented in this file.
 
 <a name="2.6.2"></a>
-# [2.6.2] (???)
+# [2.6.2] (2017-11-11)
 
 ### Improvements
 - Removing document HostListeners to improve performance ([6324364](https://github.com/vlio20/angular-datepicker/commit/6324364 )) closes [#292](https://github.com/vlio20/angular-datepicker/issues/292) - PR by [@mrenou](https://github.com/mrenou)
