@@ -2,7 +2,7 @@ import {inject, TestBed} from '@angular/core/testing';
 import {TimeSelectService} from './time-select.service';
 import * as moment from 'moment';
 import {UtilsService} from '../common/services/utils/utils.service';
-import {ITimeSelectConfig} from './time-select-config.model';
+import {ITimeSelectConfigInternal} from './time-select-config.model';
 
 describe('Service: TimeSelectService', () => {
   beforeEach(() => {
@@ -11,7 +11,7 @@ describe('Service: TimeSelectService', () => {
     });
   });
 
-  const configBase: ITimeSelectConfig = {
+  const configBase: ITimeSelectConfigInternal = {
     hours12Format: 'h',
     hours24Format: 'H',
     minutesFormat: 'm',
