@@ -413,12 +413,6 @@ export class DatePickerComponent implements OnChanges,
     }
   }
 
-  shouldShowGoToCurrent(): boolean {
-    return this.componentConfig.showGoToCurrent &&
-      this.utilsService.isDateInRange(moment(), this.componentConfig.min, this.componentConfig.max) &&
-      this.mode !== 'time';
-  }
-
   dateSelected(date: IDate, granularity: unitOfTime.Base, ignoreClose?: boolean) {
     this.selected = this.utilsService
       .updateSelected(this.componentConfig.allowMultiSelect, this.selected, date, granularity);
