@@ -11,7 +11,7 @@ describe('dpDayPicker dayPicker', () => {
     page.navigateTo();
   });
 
-  fit('should check if go to current location btn is working as expected', () => {
+  it('should check if go to current location btn is working as expected', () => {
     const currentMonth = moment().format('MMM, YYYY');
     const currentYear = moment().format('YYYY');
     const prevMonth = moment().subtract(1, 'month').format('MMM, YYYY');
