@@ -19,8 +19,8 @@ describe('dpDayPicker dayPicker', () => {
 
     const commonDayCalendar = (menu: ElementFinder, input: ElementFinder) => {
       menu.click();
-      input.click();
       page.showGoToCurrentRadio.click();
+      input.click();
       expect(page.currentLocationBtn.isPresent()).toBe(true);
       expect(page.dayCalendarNavHeaderBtn.getText()).toEqual(currentMonth);
       page.dayCalendarLeftNavBtn.click();
@@ -45,8 +45,8 @@ describe('dpDayPicker dayPicker', () => {
 
     const commonMonth = (menu: ElementFinder, input?: ElementFinder) => {
       menu.click();
-      input.click();
       page.showGoToCurrentRadio.click();
+      input.click();
       expect(page.currentLocationBtn.isPresent()).toBe(true);
       expect(page.deyCalendarMonthNavHeader.getText()).toEqual(currentYear);
       page.monthCalendarLeftNavBtn.click();
