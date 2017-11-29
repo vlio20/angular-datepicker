@@ -1,6 +1,7 @@
 import {DemoPage} from './app.po';
 import {browser} from 'protractor';
 import * as moment from 'moment';
+import {Key} from 'selenium-webdriver';
 
 describe('dpDayPicker directive', () => {
   let page: DemoPage;
@@ -52,5 +53,16 @@ describe('dpDayPicker directive', () => {
     browser.waitForAngularEnabled(true);
     browser.sleep(1000);
     expect(page.datePickerPopup.isDisplayed()).toBe(true);
+  });
+
+  it('should allow input to be modified from beginning', () => {
+    page.dayDirectiveInput.sendKeys('10-04-2017');
+    page.dayDirectiveInput.sendKeys(Key.CONTROL, Key.HOME);
+    page.dayDirectiveInput.sendKeys(Key.DELETE);
+    page.dayDirectiveInput.sendKeys('2');
+    expect(page.dayDirectiveInput.getAttribute('value')).toBe('20-04-2017');
+    expect(page.selectedDays.count()).toBe(1);
+    expect(page.selectedDays.first().getText()).toBe('20');
+    expect(page.dayCalendarNavHeaderBtn.getText()).toBe('Apr, 2017');
   });
 });

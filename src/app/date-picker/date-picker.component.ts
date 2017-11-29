@@ -129,7 +129,7 @@ export class DatePickerComponent implements OnChanges,
       .convertFromMomentArray(this.componentConfig.format, selected, ECalendarValue.StringArr))
       .join(', ');
     const val = this.processOnChangeCallback(selected);
-    this.onChangeCallback(val);
+    this.onChangeCallback(val, false);
     this.onChange.emit(val);
   }
 
@@ -247,7 +247,7 @@ export class DatePickerComponent implements OnChanges,
     this.onChangeCallback = fn;
   }
 
-  onChangeCallback(_: any) {
+  onChangeCallback(_: any, changedByInput: boolean) {
   };
 
   registerOnTouched(fn: any): void {
@@ -277,7 +277,7 @@ export class DatePickerComponent implements OnChanges,
         minTime: this.minTime,
         maxTime: this.maxTime
       }, this.componentConfig.format, this.mode);
-    this.onChangeCallback(this.processOnChangeCallback(this.selected));
+    this.onChangeCallback(this.processOnChangeCallback(this.selected), false);
   }
 
   ngOnInit() {
@@ -409,7 +409,7 @@ export class DatePickerComponent implements OnChanges,
     } else {
       this._selected = this.utilsService
         .getValidMomentArray(value, this.componentConfig.format);
-      this.onChangeCallback(this.processOnChangeCallback(value));
+      this.onChangeCallback(this.processOnChangeCallback(value), true);
     }
   }
 
