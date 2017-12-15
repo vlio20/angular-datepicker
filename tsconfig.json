@@ -8,6 +8,10 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "skipLibCheck": true,
+    "types": [
+      "node",
+      "jasmine"
+    ],
     "lib": [
       "es2015",
       "dom"

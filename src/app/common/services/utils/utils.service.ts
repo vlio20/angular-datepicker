@@ -96,7 +96,7 @@ export class UtilsService {
   convertToMomentArray(value: CalendarValue, format: string, allowMultiSelect: boolean): Moment[] {
     switch (this.getInputType(value, allowMultiSelect)) {
       case (ECalendarValue.String):
-        return value ? [moment(value, format, true)] : [];
+        return value ? [moment(<string>value, format, true)] : [];
       case (ECalendarValue.StringArr):
         return (<string[]>value).map(v => v ? moment(v, format, true) : null).filter(Boolean);
       case (ECalendarValue.Moment):
