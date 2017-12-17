@@ -2,6 +2,8 @@ import {ECalendarValue} from '../common/types/calendar-value-enum';
 import {SingleCalendarValue} from '../common/types/single-calendar-value';
 import {ECalendarMode} from '../common/types/calendar-mode-enum';
 import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   EventEmitter,
   forwardRef,
@@ -38,6 +40,7 @@ import {DateValidator} from '../common/types/validator.type';
   templateUrl: 'day-calendar.component.html',
   styleUrls: ['day-calendar.component.less'],
   encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     DayCalendarService,
     {
@@ -109,8 +112,9 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
     return this._currentDateView;
   }
 
-  constructor(public dayCalendarService: DayCalendarService,
-              public utilsService: UtilsService) {
+  constructor(public readonly dayCalendarService: DayCalendarService,
+              public readonly utilsService: UtilsService,
+              public readonly cd: ChangeDetectorRef) {
   }
 
   ngOnInit() {
@@ -165,6 +169,8 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
 
     this.weeks = this.dayCalendarService
       .generateMonthArray(this.componentConfig, this.currentDateView, this.selected);
+
+    this.cd.markForCheck();
   }
 
   registerOnChange(fn: any): void {
@@ -252,6 +258,8 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
       this.currentCalendarMode = mode;
       this.onNavHeaderBtnClick.emit(mode);
     }
+
+    this.cd.markForCheck();
   }
 
   monthSelected(month: IMonth) {
@@ -262,12 +270,15 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
 
   moveCalendarsBy(current: Moment, amount: number, granularity: moment.unitOfTime.Base = 'month') {
     this.currentDateView = current.clone().add(amount, granularity);
+    this.cd.markForCheck();
   }
 
   moveCalendarTo(to: SingleCalendarValue) {
     if (to) {
       this.currentDateView = this.utilsService.convertToMoment(to, this.componentConfig.format);
     }
+
+    this.cd.markForCheck();
   }
 
   shouldShowCurrent(): boolean {
