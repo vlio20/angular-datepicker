@@ -43,7 +43,6 @@ import {
   ValidationErrors,
   Validator
 } from '@angular/forms';
-import * as moment from 'moment';
 import {Moment, unitOfTime} from 'moment';
 import {DateValidator} from '../common/types/validator.type';
 import {MonthCalendarComponent} from '../month-calendar/month-calendar.component';
@@ -127,7 +126,7 @@ export class DatePickerComponent implements OnChanges,
     this._selected = selected;
     this.inputElementValue = (<string[]>this.utilsService
       .convertFromMomentArray(this.componentConfig.format, selected, ECalendarValue.StringArr))
-      .join(', ');
+      .join(' | ');
     const val = this.processOnChangeCallback(selected);
     this.onChangeCallback(val, false);
     this.onChange.emit(val);
