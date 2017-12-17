@@ -1,10 +1,19 @@
-import {Component, EventEmitter, HostBinding, Input, Output, ViewEncapsulation} from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  HostBinding,
+  Input,
+  Output,
+  ViewEncapsulation
+} from '@angular/core';
 
 @Component({
   selector: 'dp-calendar-nav',
   templateUrl: './calendar-nav.component.html',
   styleUrls: ['./calendar-nav.component.less'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CalendarNavComponent {
   @Input() label: string;

@@ -1,6 +1,6 @@
 import {ECalendarValue} from '../../types/calendar-value-enum';
 import {SingleCalendarValue} from '../../types/single-calendar-value';
-import {Injectable, SimpleChange} from '@angular/core';
+import {Injectable} from '@angular/core';
 import * as moment from 'moment';
 import {Moment, unitOfTime} from 'moment';
 import {CalendarValue} from '../../types/calendar-value';
@@ -8,6 +8,7 @@ import {IDate} from '../../models/date.model';
 import {CalendarMode} from '../../types/calendar-mode';
 import {DateValidator} from '../../types/validator.type';
 import {ICalendarInternal} from '../../models/calendar.model';
+import {forEach} from '@angular/router/src/utils/collection';
 
 export interface DateLimits {
   minDate?: SingleCalendarValue;
@@ -257,7 +258,7 @@ export class UtilsService {
   }
 
   datesStringToStringArray(value: string): string[] {
-    return (value || '').split(',').map(m => m.trim());
+    return (value || '').split('|').map(m => m.trim()).filter(Boolean);
   }
 
   getValidMomentArray(value: string, format: string): Moment[] {
