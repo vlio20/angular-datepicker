@@ -34,6 +34,7 @@ describe('dpDayPicker dayPicker', () => {
   it('should check that the onOpenDelay is working', () => {
     page.onOpenDelayInput.clear();
     page.onOpenDelayInput.sendKeys(1000);
+    page.scrollIntoView(page.openBtn);
     page.openBtn.click();
     expect(page.datePickerPopup.isDisplayed()).toBe(true);
     page.clickOnBody();
@@ -266,14 +267,14 @@ describe('dpDayPicker dayPicker', () => {
     expect(page.selectedDays.count()).toBe(3);
     expect(page.datePickerPopup.isDisplayed()).toBe(true);
     expect(page.dayPickerInput.getAttribute('value')).toEqual(
-      `${moment().date(18).format('DD-MM-YYYY')}, ${moment().date(15).format('DD-MM-YYYY')}, ${moment().date(16)
+      `${moment().date(18).format('DD-MM-YYYY')} | ${moment().date(15).format('DD-MM-YYYY')} | ${moment().date(16)
         .format('DD-MM-YYYY')}`
     );
 
     page.clickOnDayButton('18');
     expect(page.selectedDays.count()).toBe(2);
     expect(page.dayPickerInput.getAttribute('value')).toEqual(
-      `${moment().date(15).format('DD-MM-YYYY')}, ${moment().date(16).format('DD-MM-YYYY')}`
+      `${moment().date(15).format('DD-MM-YYYY')} | ${moment().date(16).format('DD-MM-YYYY')}`
     );
   });
 

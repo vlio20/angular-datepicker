@@ -1,5 +1,6 @@
 import {ECalendarValue} from '../common/types/calendar-value-enum';
 import {
+  ChangeDetectionStrategy, ChangeDetectorRef,
   Component,
   EventEmitter,
   forwardRef,
@@ -35,6 +36,7 @@ import {SingleCalendarValue} from '../common/types/single-calendar-value';
   templateUrl: 'month-calendar.component.html',
   styleUrls: ['month-calendar.component.less'],
   encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     MonthCalendarService,
     {
@@ -103,8 +105,9 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
     return this._currentDateView;
   }
 
-  constructor(public monthCalendarService: MonthCalendarService,
-              public utilsService: UtilsService) {
+  constructor(public readonly monthCalendarService: MonthCalendarService,
+              public readonly utilsService: UtilsService,
+              public readonly cd: ChangeDetectorRef) {
   }
 
   ngOnInit() {
@@ -152,6 +155,8 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
         .generateYear(this.componentConfig, this.currentDateView, this.selected);
       this.inputValueType = this.utilsService.getInputType(this.inputValue, this.componentConfig.allowMultiSelect);
     }
+
+    this.cd.markForCheck();
   }
 
   registerOnChange(fn: any): void {

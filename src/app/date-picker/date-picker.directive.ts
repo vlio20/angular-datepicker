@@ -176,11 +176,11 @@ export class DatePickerDirective implements OnInit {
 
     let setup = true;
 
-    this.datePicker.registerOnChange((value) => {
+    this.datePicker.registerOnChange((value, changedByInput) => {
       if (value) {
         const isMultiselectEmpty = setup && Array.isArray(value) && !value.length;
 
-        if (!isMultiselectEmpty) {
+        if (!isMultiselectEmpty && !changedByInput) {
           this.formControl.control.setValue(this.datePicker.inputElementValue);
         }
       }
@@ -188,7 +188,9 @@ export class DatePickerDirective implements OnInit {
       const errors = this.datePicker.validateFn(value);
 
       if (!setup) {
-        this.formControl.control.markAsDirty(true);
+        this.formControl.control.markAsDirty({
+          onlySelf: true
+        });
       } else {
         setup = false;
       }
@@ -197,7 +199,9 @@ export class DatePickerDirective implements OnInit {
         if (errors.hasOwnProperty('format')) {
           const {given} = errors['format'];
           this.datePicker.inputElementValue = given;
-          this.formControl.control.setValue(given);
+          if (!changedByInput) {
+            this.formControl.control.setValue(given);
+          }
         }
 
         this.formControl.control.setErrors(errors);

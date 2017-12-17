@@ -101,4 +101,18 @@ describe('Service: ObUtilsService', () => {
     expect(moment.isMoment(obj.min)).toBeTruthy();
     expect(moment.isMoment(obj.max)).toBeTruthy();
   }));
+
+  it('should test datesStringToStringArray', inject([UtilsService], (service: UtilsService) => {
+    expect(service.datesStringToStringArray('')).toEqual([]);
+    expect(service.datesStringToStringArray('14-01-1984')).toEqual(['14-01-1984']);
+    expect(service.datesStringToStringArray('14-01-1984|15-01-1984'))
+      .toEqual(['14-01-1984', '15-01-1984']);
+
+    expect(service.datesStringToStringArray(''))
+      .toEqual([]);
+    expect(service.datesStringToStringArray('14,01-1984|15,01-1984'))
+      .toEqual(['14,01-1984', '15,01-1984']);
+    expect(service.datesStringToStringArray('14,01-1984| asdasd'))
+      .toEqual(['14,01-1984', 'asdasd']);
+  }));
 });
