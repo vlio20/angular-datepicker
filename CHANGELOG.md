@@ -8,7 +8,7 @@ All notable changes to this project will be documented in this file.
 - Prevent overriding of form control value from input updates ([c96f2 ](https://github.com/vlio20/angular-datepicker/commit/e4de3cb )) closes [#297](https://github.com/vlio20/angular-datepicker/issues/297) - PR by [@pklein](https://github.com/pklein)
 
 ## Breaking Changes
-- Multiselect delimiter changed to `|` instead of `,`
+- Multiselect delimiter changed to `|` instead of `,` ([8932f52](https://github.com/vlio20/angular-datepicker/commit/8932f52))
 
 <a name="2.6.2"></a>
 # [2.6.2] (2017-11-11)

@@ -267,7 +267,7 @@ describe('dpDayPicker dayPicker', () => {
     expect(page.selectedDays.count()).toBe(3);
     expect(page.datePickerPopup.isDisplayed()).toBe(true);
     expect(page.dayPickerInput.getAttribute('value')).toEqual(
-      `${moment().date(18).format('DD-MM-YYYY')} | ${moment().date(15).format('DD-MM-YYYY')}, ${moment().date(16)
+      `${moment().date(18).format('DD-MM-YYYY')} | ${moment().date(15).format('DD-MM-YYYY')} | ${moment().date(16)
         .format('DD-MM-YYYY')}`
     );
 
