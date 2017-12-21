@@ -375,8 +375,6 @@ export class DatePickerComponent implements OnChanges,
 
       this.isFocusedTrigger = false;
     }, this.componentConfig.onOpenDelay);
-
-    this.cd.markForCheck();
   }
 
   showCalendars() {

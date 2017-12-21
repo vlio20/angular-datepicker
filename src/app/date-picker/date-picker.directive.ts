@@ -42,6 +42,7 @@ export class DatePickerDirective implements OnInit {
   @Input('dpDayPicker') set config(config: IDatePickerDirectiveConfig) {
     this._config = this.service.getConfig(config, this.viewContainerRef.element, this.attachTo);
     this.updateDatepickerConfig();
+    this.markForCheck();
   }
 
   get attachTo(): ElementRef | string {
@@ -52,6 +53,7 @@ export class DatePickerDirective implements OnInit {
     this._attachTo = attachTo;
     this._config = this.service.getConfig(this.config, this.viewContainerRef.element, this.attachTo);
     this.updateDatepickerConfig();
+    this.markForCheck();
   }
 
   get theme(): string {
@@ -63,6 +65,8 @@ export class DatePickerDirective implements OnInit {
     if (this.datePicker) {
       this.datePicker.theme = theme;
     }
+
+    this.markForCheck();
   }
 
   get mode(): CalendarMode {
@@ -74,6 +78,8 @@ export class DatePickerDirective implements OnInit {
     if (this.datePicker) {
       this.datePicker.mode = mode;
     }
+
+    this.markForCheck();
   }
 
   @Input() set minDate(minDate: SingleCalendarValue) {
@@ -82,6 +88,8 @@ export class DatePickerDirective implements OnInit {
       this.datePicker.minDate = minDate;
       this.datePicker.ngOnInit();
     }
+
+    this.markForCheck();
   }
 
   get minDate(): SingleCalendarValue {
@@ -94,6 +102,8 @@ export class DatePickerDirective implements OnInit {
       this.datePicker.maxDate = maxDate;
       this.datePicker.ngOnInit();
     }
+
+    this.markForCheck();
   }
 
   get maxDate(): SingleCalendarValue {
@@ -106,6 +116,8 @@ export class DatePickerDirective implements OnInit {
       this.datePicker.minTime = minTime;
       this.datePicker.ngOnInit();
     }
+
+    this.markForCheck();
   }
 
   get minTime(): SingleCalendarValue {
@@ -118,6 +130,8 @@ export class DatePickerDirective implements OnInit {
       this.datePicker.maxTime = maxTime;
       this.datePicker.ngOnInit();
     }
+
+    this.markForCheck();
   }
 
   get maxTime(): SingleCalendarValue {
@@ -131,6 +145,8 @@ export class DatePickerDirective implements OnInit {
   @Input() set displayDate(displayDate: SingleCalendarValue) {
     this._displayDate = displayDate;
     this.updateDatepickerConfig();
+
+    this.markForCheck();
   }
 
   @Output() open = new EventEmitter<void>();
@@ -238,6 +254,12 @@ export class DatePickerDirective implements OnInit {
       } else {
         this.elemRef.nativeElement.removeAttribute('readonly');
       }
+    }
+  }
+
+  markForCheck() {
+    if (this.datePicker) {
+      this.datePicker.cd.markForCheck();
     }
   }
 }
