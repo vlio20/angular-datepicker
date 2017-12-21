@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 <a name="2.6.2"></a>
 # [2.7.0] (???)
 
+### Improvements
+- Change `changeDetectionStrategy` to `onPush` ([a592932](https://github.com/vlio20/angular-datepicker/commit/a592932), [728b342](https://github.com/vlio20/angular-datepicker/commit/728b342), [2fb7073](https://github.com/vlio20/angular-datepicker/commit/2fb7073)) closes closes [#325](https://github.com/vlio20/angular-datepicker/issues/325)
+- Upgrade to Angular 5 ([5abdae1](https://github.com/vlio20/angular-datepicker/commit/5abdae1)) closes closes [#315](https://github.com/vlio20/angular-datepicker/issues/315)
+- Upgrade angular-cli ([5abdae1](https://github.com/vlio20/angular-datepicker/commit/5abdae1))
+
 ### Bug Fixes
 - Prevent overriding of form control value from input updates ([c96f2 ](https://github.com/vlio20/angular-datepicker/commit/e4de3cb )) closes [#297](https://github.com/vlio20/angular-datepicker/issues/297) - PR by [@pklein](https://github.com/pklein)
 
