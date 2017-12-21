@@ -1,6 +1,8 @@
 import {ECalendarValue} from '../common/types/calendar-value-enum';
 import {SingleCalendarValue} from '../common/types/single-calendar-value';
 import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   EventEmitter,
   forwardRef,
@@ -34,6 +36,7 @@ import {DateValidator} from '../common/types/validator.type';
   templateUrl: 'time-select.component.html',
   styleUrls: ['time-select.component.less'],
   encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush
   providers: [
     TimeSelectService,
     {
@@ -106,7 +109,8 @@ export class TimeSelectComponent implements OnInit, OnChanges, ControlValueAcces
   };
 
   constructor(public timeSelectService: TimeSelectService,
-              public utilsService: UtilsService) {
+              public utilsService: UtilsService,
+              public cd: ChangeDetectorRef) {
   }
 
   ngOnInit() {
@@ -144,6 +148,8 @@ export class TimeSelectComponent implements OnInit, OnChanges, ControlValueAcces
           .getInputType(this.inputValue, false);
       }
     }
+
+    this.cd.markForCheck();
   }
 
   registerOnChange(fn: any): void {
@@ -201,6 +207,7 @@ export class TimeSelectComponent implements OnInit, OnChanges, ControlValueAcces
 
   emitChange() {
     this.onChange.emit({date: this.selected, selected: false});
+    this.cd.markForCheck();
   }
 
   calculateTimeParts(time: Moment) {
