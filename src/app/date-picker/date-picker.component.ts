@@ -18,7 +18,7 @@ import {IDatePickerConfig, IDatePickerConfigInternal} from './date-picker-config
 import {IDpDayPickerApi} from './date-picker.api';
 import {DatePickerService} from './date-picker.service';
 import {
-  AfterViewInit,
+  AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef,
   Component,
   ElementRef,
   EventEmitter,
@@ -53,6 +53,7 @@ import {DayTimeCalendarComponent} from '../day-time-calendar/day-time-calendar.c
   templateUrl: 'date-picker.component.html',
   styleUrls: ['date-picker.component.less'],
   encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     DatePickerService,
     DayTimeCalendarService,
@@ -191,7 +192,8 @@ export class DatePickerComponent implements OnChanges,
               private domHelper: DomHelper,
               private elemRef: ElementRef,
               private renderer: Renderer,
-              private utilsService: UtilsService) {
+              private utilsService: UtilsService,
+              public cd: ChangeDetectorRef) {
   }
 
   @HostListener('click')
@@ -240,6 +242,8 @@ export class DatePickerComponent implements OnChanges,
     } else {
       this.selected = [];
     }
+
+    this.cd.markForCheck();
   }
 
   registerOnChange(fn: any): void {
@@ -382,6 +386,7 @@ export class DatePickerComponent implements OnChanges,
     }
 
     this.open.emit();
+    this.cd.markForCheck();
   }
 
   hideCalendar() {
@@ -392,6 +397,7 @@ export class DatePickerComponent implements OnChanges,
     }
 
     this.close.emit();
+    this.cd.markForCheck();
   }
 
   onViewDateChange(value: string) {
