@@ -1,6 +1,8 @@
 import {ECalendarValue} from '../common/types/calendar-value-enum';
 import {SingleCalendarValue} from '../common/types/single-calendar-value';
 import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   EventEmitter,
   forwardRef,
@@ -8,8 +10,9 @@ import {
   Input,
   OnChanges,
   OnInit,
-  Output, SimpleChange,
-  SimpleChanges, ViewChild,
+  Output,
+  SimpleChanges,
+  ViewChild,
   ViewEncapsulation
 } from '@angular/core';
 import {
@@ -35,6 +38,7 @@ import {DayCalendarComponent} from '../day-calendar/day-calendar.component';
   selector: 'dp-day-time-calendar',
   templateUrl: 'day-time-calendar.component.html',
   styleUrls: ['day-time-calendar.component.less'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   providers: [
     DayTimeCalendarService,
@@ -81,7 +85,8 @@ export class DayTimeCalendarComponent implements OnInit, OnChanges, ControlValue
   }
 
   constructor(public dayTimeCalendarService: DayTimeCalendarService,
-              public utilsService: UtilsService) {
+              public utilsService: UtilsService,
+              public cd: ChangeDetectorRef) {
   }
 
   ngOnInit() {
@@ -117,6 +122,8 @@ export class DayTimeCalendarComponent implements OnInit, OnChanges, ControlValue
     } else {
       this.selected = null;
     }
+
+    this.cd.markForCheck();
   }
 
   registerOnChange(fn: any): void {
