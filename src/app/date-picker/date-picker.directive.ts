@@ -16,7 +16,6 @@ import {
   ViewContainerRef
 } from '@angular/core';
 import {NgControl} from '@angular/forms';
-import {Moment} from 'moment';
 import {CalendarValue} from '../common/types/calendar-value';
 import {SingleCalendarValue} from '../common/types/single-calendar-value';
 
