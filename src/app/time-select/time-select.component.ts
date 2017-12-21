@@ -36,7 +36,7 @@ import {DateValidator} from '../common/types/validator.type';
   templateUrl: 'time-select.component.html',
   styleUrls: ['time-select.component.less'],
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     TimeSelectService,
     {
