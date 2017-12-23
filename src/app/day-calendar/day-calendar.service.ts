@@ -20,7 +20,8 @@ export class DayCalendarService {
     monthFormat: 'MMM, YYYY',
     enableMonthSelector: true,
     locale: moment.locale(),
-    dayBtnFormat: 'DD'
+    dayBtnFormat: 'DD',
+    unSelectOnClick: true
   };
 
   constructor(private utilsService: UtilsService) {

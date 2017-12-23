@@ -1032,6 +1032,30 @@
         </div>
       </div>
 
+      <div class="dp-option" *ngIf="isValidConfig('unSelectOnClick')">
+        <span class="dp-option-header">
+          Allow un select selected date (unSelectOnClick):
+        </span>
+        <div class="dp-option-playground">
+          <label>Enabled
+            <input id="enableUnSelect"
+                   type="radio"
+                   [(ngModel)]="config.unSelectOnClick"
+                   name="unSelectOnClick"
+                   [value]="true"
+                   (ngModelChange)="configChanged('unSelectOnClick', 'true')">
+          </label>
+          <label>Disabled
+            <input id="disableUnSelect"
+                   type="radio"
+                   [(ngModel)]="config.unSelectOnClick"
+                   name="unSelectOnClick"
+                   [value]="false"
+                   (ngModelChange)="configChanged('showGoToCurrent', 'false')">
+          </label>
+        </div>
+      </div>
+
       <div class="dp-option" *ngIf="isValidConfig('dayBtnFormat')">
         <span class="dp-option-header">
           Day Button Format (dayBtnFormat):

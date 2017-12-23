@@ -28,6 +28,7 @@ export interface IConfig {
   showMultipleYearsNavigation?: boolean;
   returnedValueType?: ECalendarValue;
   showGoToCurrent?: boolean;
+  unSelectOnClick?: boolean;
 }
 
 export interface IDayCalendarConfig extends IConfig,
