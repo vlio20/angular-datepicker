@@ -3,6 +3,7 @@ import {$, $$, browser, by, element} from 'protractor';
 export class DemoPage {
   private popupSelector = '.dp-popup.dp-main';
   body = $('body');
+  emptyElem = $('.dp-menu-header');
   dayPickerInput = $('#datePicker input');
   timePickerInput = $('#timePicker input');
   daytimePickerInput = $('#daytimePicker input');
@@ -151,8 +152,7 @@ export class DemoPage {
   }
 
   clickOnBody() {
-    this.body.click();
-    this.body.click();
+    this.emptyElem.click();
   }
 
   scrollIntoView(el, top = false) {

@@ -1,6 +1,8 @@
 import {DemoPage} from './app.po';
 import * as moment from 'moment';
 import {browser} from 'protractor';
+import * as fs from 'fs';
+import {TestUtils} from './test-utils';
 
 describe('dpDayPicker timePicker', () => {
 
@@ -92,7 +94,6 @@ describe('dpDayPicker timePicker', () => {
       expect(page.selectedMonth.isPresent()).toEqual(false);
 
       page.clickOnBody();
-      browser.sleep(1000);
       page.scrollIntoView(page.disableUnselectSelected);
       page.disableUnselectSelected.click();
 
