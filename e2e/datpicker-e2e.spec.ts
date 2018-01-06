@@ -85,21 +85,22 @@ describe('dpDayPicker dayPicker', () => {
   });
 
   it('should disable/enable month selection', () => {
-    page.dayPickerInput.sendKeys('08-04-2017');
+    page.dayPickerInput.sendKeys('08-04-2018');
     page.dayPickerInput.click();
     expect(page.dayCalendarNavHeaderBtn.isPresent()).toBe(true);
     expect(page.dayCalendarContainer.isDisplayed()).toBe(true);
-    expect(page.dayCalendarNavHeaderBtn.getText()).toEqual('Apr, 2017');
+    expect(page.dayCalendarNavHeaderBtn.getText()).toEqual('Apr, 2018');
 
     page.dayCalendarNavHeaderBtn.click();
     expect(page.dayCalendarContainer.isPresent()).toBe(false);
     expect(page.monthCalendar.isPresent()).toBe(true);
-    expect(page.dayCalendarNavMonthHeaderBtn.getText()).toEqual('2017');
+    expect(page.dayCalendarNavMonthHeaderBtn.getText()).toEqual('2018');
+    expect(page.currentMonthCalendarBtn.getText()).toEqual(moment().format('MMM'));
     page.monthCalendarLeftNavBtn.click();
-    expect(page.dayCalendarNavMonthHeaderBtn.getText()).toEqual('2016');
+    expect(page.dayCalendarNavMonthHeaderBtn.getText()).toEqual('2017');
     expect(page.currentMonthCalendarBtn.isPresent()).toBe(false);
     page.monthCalendarRightNavBtn.click();
-    expect(page.dayCalendarNavMonthHeaderBtn.getText()).toEqual('2017');
+    expect(page.dayCalendarNavMonthHeaderBtn.getText()).toEqual('2018');
     expect(page.currentMonthCalendarBtn.getText()).toEqual(moment().format('MMM'));
 
     page.clickOnBody();
