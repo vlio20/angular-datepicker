@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file.
 <a name="2.6.2"></a>
 # [2.7.0] (???)
 
+### Features
+- `unSelectOnClick` was added, this will disable/enable unselection of already selected date ([45e15ac](https://github.com/vlio20/angular-datepicker/commit/45e15ac)) closes [#298](https://github.com/vlio20/angular-datepicker/issues/298)
+
 ### Improvements
 - Change `changeDetectionStrategy` to `onPush` ([a592932](https://github.com/vlio20/angular-datepicker/commit/a592932), [728b342](https://github.com/vlio20/angular-datepicker/commit/728b342), [2fb7073](https://github.com/vlio20/angular-datepicker/commit/2fb7073)) closes [#325](https://github.com/vlio20/angular-datepicker/issues/325)
 - Upgrade to Angular 5 ([5abdae1](https://github.com/vlio20/angular-datepicker/commit/5abdae1)) closes [#315](https://github.com/vlio20/angular-datepicker/issues/315)
