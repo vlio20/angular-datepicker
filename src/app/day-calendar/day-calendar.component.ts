@@ -210,6 +210,10 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
   }
 
   dayClicked(day: IDay) {
+    if (day.selected && !this.componentConfig.unSelectOnClick) {
+      return;
+    }
+
     this.selected = this.utilsService
       .updateSelected(this.componentConfig.allowMultiSelect, this.selected, day);
     this.weeks = this.dayCalendarService

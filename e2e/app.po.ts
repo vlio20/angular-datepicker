@@ -2,7 +2,7 @@ import {$, $$, browser, by, element} from 'protractor';
 
 export class DemoPage {
   private popupSelector = '.dp-popup.dp-main';
-  body = $('body');
+  emptyElem = $('.dp-place-holder');
   dayPickerInput = $('#datePicker input');
   timePickerInput = $('#timePicker input');
   daytimePickerInput = $('#daytimePicker input');
@@ -19,6 +19,8 @@ export class DemoPage {
   monthWeeks = $$(`${this.popupSelector} .dp-calendar-week`);
   calendarDays = $$(`${this.popupSelector} .dp-calendar-day`);
   selectedDays = $$(`${this.popupSelector} .dp-calendar-day.dp-selected`);
+  selectedDay = $(`.dp-calendar-day.dp-selected`);
+  selectedMonth = $(`.dp-calendar-month.dp-selected`);
   dayCalendarLeftNavBtn = $(`${this.popupSelector} .dp-calendar-nav-left`);
   dayCalendarLeftSecondaryNavBtn = $(`${this.popupSelector} .dp-calendar-secondary-nav-left`);
   dayCalendarRightNavBtn = $(`${this.popupSelector} .dp-calendar-nav-right`);
@@ -56,6 +58,8 @@ export class DemoPage {
   localeOptions = $('#locale');
   hideGoToCurrentRadio = $('#hideGoToCurrent');
   showGoToCurrentRadio = $('#showGoToCurrent');
+  enableUnselectSelected = $('#enableUnSelect');
+  disableUnselectSelected = $('#disableUnSelect');
   pickerEnabledRadio = $('#inputEnabledRadio');
   pickerDisabledRadio = $('#inputDisabledRadio');
   enableRequiredValidationRadio = $('#enableRequiredRadio');
@@ -147,8 +151,7 @@ export class DemoPage {
   }
 
   clickOnBody() {
-    this.body.click();
-    this.body.click();
+    this.emptyElem.click();
   }
 
   scrollIntoView(el, top = false) {
@@ -157,5 +160,17 @@ export class DemoPage {
 
   clickOnDayButton(text: string) {
     element(by.cssContainingText(`${this.popupSelector} .dp-calendar-day`, text)).click();
+  }
+
+  clickOnDayButtonInline(text: string) {
+    element(by.cssContainingText(`.dp-inline-day .dp-calendar-day`, text)).click();
+  }
+
+  clickOnMonthButton(text: string) {
+    element(by.cssContainingText(`${this.popupSelector} .dp-calendar-month`, text)).click();
+  }
+
+  clickOnMonthButtonInline(text: string) {
+    element(by.cssContainingText(`.dp-inline-month .dp-calendar-month`, text)).click();
   }
 }

@@ -55,6 +55,7 @@
            [ngClass]="{'dp-active-item': pickerMode == 'timeDirective'}">Time Picker directive</a>
       </li>
     </ul>
+    <div class="dp-place-holder"></div>
   </div>
 
   <div *ngIf="showDemo" class="dp-demo-container" [ngClass]="{'dp-not-top': !isAtTop,
@@ -1026,6 +1027,30 @@
                    type="radio"
                    [(ngModel)]="config.showGoToCurrent"
                    name="showGoToCurrent"
+                   [value]="false"
+                   (ngModelChange)="configChanged('showGoToCurrent', 'false')">
+          </label>
+        </div>
+      </div>
+
+      <div class="dp-option" *ngIf="isValidConfig('unSelectOnClick')">
+        <span class="dp-option-header">
+          Allow un select selected date (unSelectOnClick):
+        </span>
+        <div class="dp-option-playground">
+          <label>Enabled
+            <input id="enableUnSelect"
+                   type="radio"
+                   [(ngModel)]="config.unSelectOnClick"
+                   name="unSelectOnClick"
+                   [value]="true"
+                   (ngModelChange)="configChanged('unSelectOnClick', 'true')">
+          </label>
+          <label>Disabled
+            <input id="disableUnSelect"
+                   type="radio"
+                   [(ngModel)]="config.unSelectOnClick"
+                   name="unSelectOnClick"
                    [value]="false"
                    (ngModelChange)="configChanged('showGoToCurrent', 'false')">
           </label>

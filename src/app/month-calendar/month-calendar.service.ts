@@ -15,7 +15,8 @@ export class MonthCalendarService {
     monthBtnFormat: 'MMM',
     locale: moment.locale(),
     multipleYearsNavigateBy: 10,
-    showMultipleYearsNavigation: false
+    showMultipleYearsNavigation: false,
+    unSelectOnClick: true
   };
 
   constructor(private utilsService: UtilsService) {

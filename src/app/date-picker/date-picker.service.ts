@@ -77,7 +77,8 @@ export class DatePickerService {
       showMultipleYearsNavigation: pickerConfig.showMultipleYearsNavigation,
       locale: pickerConfig.locale,
       returnedValueType: pickerConfig.returnedValueType,
-      showGoToCurrent: pickerConfig.showGoToCurrent
+      showGoToCurrent: pickerConfig.showGoToCurrent,
+      unSelectOnClick: pickerConfig.unSelectOnClick
     };
   }
 

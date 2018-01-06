@@ -59,6 +59,7 @@ const MONTH_CALENDAR_OPTION_KEYS = [
   'showMultipleYearsNavigation',
   'yearFormat',
   'showGoToCurrent',
+  'unSelectOnClick',
   ...GLOBAL_OPTION_KEYS
 ];
 const DAY_CALENDAR_OPTION_KEYS = [
@@ -75,6 +76,7 @@ const DAY_CALENDAR_OPTION_KEYS = [
   'dayBtnFormat',
   'weekdayFormat',
   'showGoToCurrent',
+  'unSelectOnClick',
   ...MONTH_CALENDAR_OPTION_KEYS
 ];
 const TIME_SELECT_SHARED_OPTION_KEYS = [
@@ -212,7 +214,8 @@ export class DemoComponent {
     showMultipleYearsNavigation: false,
     locale: moment.locale(),
     hideInputContainer: false,
-    returnedValueType: ECalendarValue.String
+    returnedValueType: ECalendarValue.String,
+    unSelectOnClick: true
   };
   isAtTop: boolean = true;
 

@@ -1,6 +1,7 @@
 import {ECalendarValue} from '../common/types/calendar-value-enum';
 import {
-  ChangeDetectionStrategy, ChangeDetectorRef,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   EventEmitter,
   forwardRef,
@@ -196,6 +197,10 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
   }
 
   monthClicked(month: IMonth) {
+    if (month.selected && !this.componentConfig.unSelectOnClick) {
+      return;
+    }
+
     this.selected = this.utilsService
       .updateSelected(this.componentConfig.allowMultiSelect, this.selected, month, 'month');
     this.yearMonths = this.monthCalendarService
