@@ -2,8 +2,7 @@ import {$, $$, browser, by, element} from 'protractor';
 
 export class DemoPage {
   private popupSelector = '.dp-popup.dp-main';
-  body = $('body');
-  emptyElem = $('.dp-menu-header');
+  emptyElem = $('.dp-place-holder');
   dayPickerInput = $('#datePicker input');
   timePickerInput = $('#timePicker input');
   daytimePickerInput = $('#daytimePicker input');
