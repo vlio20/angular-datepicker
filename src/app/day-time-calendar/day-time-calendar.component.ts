@@ -65,6 +65,7 @@ export class DayTimeCalendarComponent implements OnInit, OnChanges, ControlValue
   @HostBinding('class') @Input() theme: string;
 
   @Output() onChange: EventEmitter<IDate> = new EventEmitter();
+  @Output() onGoToCurrent: EventEmitter<void> = new EventEmitter<void>();
 
   @ViewChild('dayCalendar') dayCalendarRef: DayCalendarComponent;
 

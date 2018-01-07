@@ -152,6 +152,7 @@ export class DatePickerDirective implements OnInit {
   @Output() open = new EventEmitter<void>();
   @Output() close = new EventEmitter<void>();
   @Output() onChange = new EventEmitter<CalendarValue>();
+  @Output() onGoToCurrent: EventEmitter<void> = new EventEmitter<void>();
 
   public datePicker: DatePickerComponent;
   public api: IDpDayPickerApi;
@@ -246,6 +247,7 @@ export class DatePickerDirective implements OnInit {
       this.datePicker.open = this.open;
       this.datePicker.close = this.close;
       this.datePicker.onChange = this.onChange;
+      this.datePicker.onGoToCurrent = this.onGoToCurrent;
 
       this.datePicker.init();
 

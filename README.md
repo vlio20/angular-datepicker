@@ -63,6 +63,7 @@ Put the dp-date-picker component wherever you need it.
 | onChange             | `CalendarValue`                     | All Pickers               | This event will be emitted on every valid value change, if you want to receive every value (valid and invalid) please use the native `ngModelChange` output.     |
 | open                 | `undefined`                         | All Pickers               | This event will be emitted when picker is opened.                                                                                                                |
 | close                | `CalendarValue`                     | All Pickers               | This event will be emitted when picker is closed.                                                                                                                |
+| onGoToCurrent        |                                     | All Pickers               | This event will be emitted when click on go to current in navigation.                                                                                                   |
 
 ### Configuration:  
 In order to provide configurations to the date-picker you need to pass it to the `dp-date-picker` component:  

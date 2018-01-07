@@ -128,4 +128,10 @@ describe('Component: DayCalendarComponent', () => {
       expect(component.getWeekdayName(moment())).toBe(moment().day().toString());
     });
   });
+
+  it('should emit event goToCurrent function called', () => {
+    spyOn(component.onGoToCurrent, 'emit');
+    component.goToCurrent();
+    expect(component.onGoToCurrent.emit).toHaveBeenCalled();
+  });
 });

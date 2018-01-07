@@ -22,7 +22,8 @@
                        [ngModel]="_selected"
                        [displayDate]="displayDate"
                        (onSelect)="dateSelected($event, 'day')"
-                       [theme]="theme">
+                       [theme]="theme"
+                       (onGoToCurrent)="onGoToCurrent.emit()">
       </dp-day-calendar>
 
       <dp-month-calendar #monthCalendar
@@ -31,7 +32,8 @@
                          [ngModel]="_selected"
                          [displayDate]="displayDate"
                          (onSelect)="dateSelected($event, 'month')"
-                         [theme]="theme">
+                         [theme]="theme"
+                         (onGoToCurrent)="onGoToCurrent.emit()">
       </dp-month-calendar>
 
       <dp-time-select #timeSelect
@@ -48,7 +50,8 @@
                             [displayDate]="displayDate"
                             [ngModel]="_selected && _selected[0]"
                             (onChange)="dateSelected($event, 'second', true)"
-                            [theme]="theme">
+                            [theme]="theme"
+                            (onGoToCurrent)="onGoToCurrent.emit()">
       </dp-day-time-calendar>
     </div>
   </div>

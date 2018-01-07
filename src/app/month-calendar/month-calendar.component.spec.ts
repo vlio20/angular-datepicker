@@ -72,5 +72,11 @@ describe('Component: MonthCalendarComponent', () => {
         'custom-class': true
       });
     });
+
+    it('should emit event goToCurrent function called', () => {
+      spyOn(component.onGoToCurrent, 'emit');
+      component.goToCurrent();
+      expect(component.onGoToCurrent.emit).toHaveBeenCalledWith();
+    });
   });
 });

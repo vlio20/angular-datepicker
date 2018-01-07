@@ -60,6 +60,7 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
 
   @Output() onSelect: EventEmitter<IMonth> = new EventEmitter();
   @Output() onNavHeaderBtnClick: EventEmitter<null> = new EventEmitter();
+  @Output() onGoToCurrent: EventEmitter<void> = new EventEmitter<void>();
 
   isInited: boolean = false;
   componentConfig: IMonthCalendarConfigInternal;
@@ -265,6 +266,7 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
 
   goToCurrent() {
     this.currentDateView = moment();
+    this.onGoToCurrent.emit();
   }
 
   moveCalendarTo(to: SingleCalendarValue) {

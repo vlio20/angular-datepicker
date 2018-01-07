@@ -3,6 +3,7 @@
                  [ngModel]="_selected"
                  [displayDate]="displayDate"
                  (onSelect)="dateSelected($event)"
+                 (onGoToCurrent)="onGoToCurrent.emit()"
                  [theme]="theme">
 </dp-day-calendar>
 <dp-time-select #timeSelect
