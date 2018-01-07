@@ -22,4 +22,13 @@ describe('CalendarNavComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should emit event when go to current click', () => {
+    const nativeElement = fixture.nativeElement;
+    const goToCurrent = nativeElement.querySelector('.dp-current-location-btn');
+
+    spyOn(component.onGoToCurrent, 'emit');
+    goToCurrent.dispatchEvent(new Event('click'));
+    expect(component.onGoToCurrent.emit).toHaveBeenCalledWith();
+  });
 });

@@ -66,6 +66,7 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
   @Output() onSelect: EventEmitter<IDay> = new EventEmitter();
   @Output() onMonthSelect: EventEmitter<IMonth> = new EventEmitter();
   @Output() onNavHeaderBtnClick: EventEmitter<ECalendarMode> = new EventEmitter();
+  @Output() onGoToCurrent: EventEmitter<void> = new EventEmitter<void>();
 
   CalendarMode = ECalendarMode;
   isInited: boolean = false;
@@ -296,6 +297,7 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
 
   goToCurrent() {
     this.currentDateView = moment();
+    this.onGoToCurrent.emit();
   }
 
   handleConfigChange(config: SimpleChange) {

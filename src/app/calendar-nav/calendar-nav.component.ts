@@ -34,7 +34,7 @@ export class CalendarNavComponent {
   @Output() onRightNav: EventEmitter<null> = new EventEmitter();
   @Output() onRightSecondaryNav: EventEmitter<null> = new EventEmitter();
   @Output() onLabelClick: EventEmitter<null> = new EventEmitter();
-  @Output() goToCurrent: EventEmitter<null> = new EventEmitter();
+  @Output() onGoToCurrent: EventEmitter<null> = new EventEmitter();
 
   leftNavClicked() {
     this.onLeftNav.emit();
