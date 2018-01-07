@@ -1,8 +1,17 @@
+import {FormsModule} from '@angular/forms';
 import {DatePickerComponent} from './date-picker.component';
 import {DayTimeCalendarComponent} from '../day-time-calendar/day-time-calendar.component';
 import {DayTimeCalendarService} from '../day-time-calendar/day-time-calendar.service';
 import {DomHelper} from '../common/services/dom-appender/dom-appender.service';
 import {CalendarMode} from '../common/types/calendar-mode';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {DayCalendarComponent} from '../day-calendar/day-calendar.component';
+import {TimeSelectComponent} from '../time-select/time-select.component';
+import {CalendarNavComponent} from '../calendar-nav/calendar-nav.component';
+import {MonthCalendarComponent} from '../month-calendar/month-calendar.component';
+import {DayCalendarService} from '../day-calendar/day-calendar.service';
+import {TimeSelectService} from '../time-select/time-select.service';
+import {UtilsService} from '../common/services/utils/utils.service';
 
 describe('Component: DatePickerComponent', () => {
   let component: DatePickerComponent;
@@ -14,7 +23,7 @@ describe('Component: DatePickerComponent', () => {
     fixture.detectChanges();
   };
 
-  beforeEach(async(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [ FormsModule ],
       declarations: [
@@ -33,7 +42,7 @@ describe('Component: DatePickerComponent', () => {
         DomHelper
       ]
     }).compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(DatePickerComponent);
