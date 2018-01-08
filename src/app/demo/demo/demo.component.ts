@@ -2,13 +2,12 @@ import debounce from '../../common/decorators/decorators';
 import {IDatePickerConfig} from '../../date-picker/date-picker-config.model';
 import {DatePickerComponent} from '../../date-picker/date-picker.component';
 import {DatePickerDirective} from '../../date-picker/date-picker.directive';
-import {Component, HostListener, ViewChild} from '@angular/core';
+import {Component, ContentChild, HostListener, ViewChild} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import * as moment from 'moment';
 import {Moment} from 'moment';
 import {GaService} from '../services/ga/ga.service';
 import {ECalendarValue} from '../../common/types/calendar-value-enum';
-import {SingleCalendarValue} from '../../common/types/single-calendar-value';
 
 const GLOBAL_OPTION_KEYS = [
   'theme',
@@ -37,12 +36,14 @@ const DAY_PICKER_DIRECTIVE_OPTION_KEYS = [
   'closeOnSelect',
   'closeOnSelectDelay',
   'showGoToCurrent',
+  'moveCalendarTo',
   ...PICKER_OPTION_KEYS
 ];
 const DAY_PICKER_OPTION_KEYS = [
   ...DAY_PICKER_DIRECTIVE_OPTION_KEYS
 ];
 const DAY_TIME_PICKER_OPTION_KEYS = [
+  'moveCalendarTo',
   ...PICKER_OPTION_KEYS
 ];
 const TIME_PICKER_OPTION_KEYS = [
@@ -60,6 +61,7 @@ const MONTH_CALENDAR_OPTION_KEYS = [
   'yearFormat',
   'showGoToCurrent',
   'unSelectOnClick',
+  'moveCalendarTo',
   ...GLOBAL_OPTION_KEYS
 ];
 const DAY_CALENDAR_OPTION_KEYS = [
@@ -77,6 +79,7 @@ const DAY_CALENDAR_OPTION_KEYS = [
   'weekdayFormat',
   'showGoToCurrent',
   'unSelectOnClick',
+  'moveCalendarTo',
   ...MONTH_CALENDAR_OPTION_KEYS
 ];
 const TIME_SELECT_SHARED_OPTION_KEYS = [
@@ -112,7 +115,7 @@ const DAY_TIME_CALENDAR_OPTION_KEYS = [
 })
 export class DemoComponent {
   showDemo: boolean = true;
-  @ViewChild('datePicker') datePicker: DatePickerComponent;
+  @ViewChild('dateComponent') dateComponent: DatePickerComponent;
   @ViewChild('donateForm') donateForm: any;
   @ViewChild('dateDirectivePicker') datePickerDirective: DatePickerDirective;
   demoFormat = 'DD-MM-YYYY';
@@ -259,8 +262,8 @@ export class DemoComponent {
   };
 
   openCalendar() {
-    if (this.datePicker) {
-      this.datePicker.api.open();
+    if (this.dateComponent) {
+      this.dateComponent.api.open();
     }
     if (this.datePickerDirective) {
       this.datePickerDirective.api.open();
@@ -268,8 +271,8 @@ export class DemoComponent {
   }
 
   closeCalendar() {
-    if (this.datePicker) {
-      this.datePicker.api.close();
+    if (this.dateComponent) {
+      this.dateComponent.api.close();
     }
     if (this.datePickerDirective) {
       this.datePickerDirective.api.close();
@@ -364,6 +367,10 @@ export class DemoComponent {
 
   log(item) {
     console.log(item);
+  }
+
+  moveCalendarTo() {
+    this.dateComponent.api.moveCalendarTo(moment('14-01-1987', this.demoFormat));
   }
 
   donateClicked() {

@@ -82,7 +82,7 @@
       <div class="dp-picker-time-picker" *ngIf="pickerMode === 'daytimePicker'">
         <dp-date-picker id="daytimePicker"
                         name="daytimePicker"
-                        #datePicker
+                        #dateComponent
                         #daytimePicker="ngModel"
                         [(ngModel)]="date"
                         (onChange)="log($event)"
@@ -110,6 +110,7 @@
       <div class="dp-inline-day-time" *ngIf="pickerMode === 'daytimeInline'">
         <dp-day-time-calendar
             name="daytimeInline"
+            #dateComponent
             #daytimeInline="ngModel"
             [theme]="material ? 'dp-material dp-main' : 'dp-main'"
             [(ngModel)]="date"
@@ -135,6 +136,7 @@
       <div class="dp-picker-day-time-directive" id="daytimeDirective" *ngIf="pickerMode === 'daytimeDirective'">
         <input [dpDayPicker]="config"
                name="daytimePickerDir"
+               #dateComponent="dpDayPicker"
                #dateDirectivePicker="dpDayPicker"
                #daytimeDirectivePickerModel="ngModel"
                [theme]="material ? 'dp-material dp-main' : 'dp-main'"
@@ -159,8 +161,8 @@
       <div class="dp-picker-day" *ngIf="pickerMode === 'dayPicker'">
         <dp-date-picker id="datePicker"
                         name="datePicker"
-                        #datePicker
-                        #datePickerModel="ngModel"
+                        #dateComponent
+                        #dateComponentModel="ngModel"
                         [(ngModel)]="date"
                         (onChange)="log($event)"
                         [mode]="'day'"
@@ -175,7 +177,7 @@
                         [config]="config"
                         [theme]="material ? 'dp-material dp-main' : 'dp-main'">
         </dp-date-picker>
-        <div class="dp-validations" *ngIf="datePickerModel.errors">
+        <div class="dp-validations" *ngIf="datePickerModel?.errors">
           <div id="requiredValidation" *ngIf="datePickerModel.errors.required">required</div>
           <div id="formatValidation" *ngIf="datePickerModel.errors.format">invalid format
           </div>
@@ -189,6 +191,7 @@
       <div class="dp-inline-day" *ngIf="pickerMode === 'dayInline'">
         <dp-day-calendar
             name="dayCalendar"
+            #dateComponent
             #dayCalendar="ngModel"
             [theme]="material ? 'dp-material dp-main' : 'dp-main'"
             [(ngModel)]="dates"
@@ -209,6 +212,7 @@
       <div class="dp-picker-day-directive" id="dayDirective" *ngIf="pickerMode === 'dayDirective'">
         <input [dpDayPicker]="config"
                name="datePicker"
+               #dateComponent="dpDayPicker"
                #dateDirectivePicker="dpDayPicker"
                #dateDirectivePickerModel="ngModel"
                [theme]="material ? 'dp-material dp-main' : 'dp-main'"
@@ -235,6 +239,7 @@
         <form [formGroup]="formGroup">
           <input [dpDayPicker]="config"
                  name="datePicker"
+                 #dateComponent="dpDayPicker"
                  #dateDirectivePicker="dpDayPicker"
                  [theme]="material ? 'dp-material dp-main' : 'dp-main'"
                  formControlName="datePicker"
@@ -263,7 +268,7 @@
       <div class="dp-picker-month" *ngIf="pickerMode === 'monthPicker'">
         <dp-date-picker id="monthPicker"
                         name="monthPicker"
-                        #datePicker
+                        #dateComponent
                         #monthPicker="ngModel"
                         [(ngModel)]="date"
                         (onChange)="log($event)"
@@ -296,6 +301,7 @@
       <div class="dp-inline-month" *ngIf="pickerMode === 'monthInline'">
         <dp-month-calendar
             name="monthInline"
+            #dateComponent
             #monthInline="ngModel"
             [theme]="material ? 'dp-material dp-main' : 'dp-main'"
             [(ngModel)]="dates"
@@ -320,6 +326,7 @@
       <div class="dp-picker-month-directive" id="datePickerDirMonth" *ngIf="pickerMode === 'monthDirective'">
         <input [dpDayPicker]="config"
                name="datePicker"
+               #dateComponent="dpDayPicker"
                #dateDirectivePicker="dpDayPicker"
                #dateDirectivePickerModel="ngModel"
                [theme]="material ? 'dp-material dp-main' : 'dp-main'"
@@ -342,7 +349,7 @@
       <div class="dp-picker-time" *ngIf="pickerMode === 'timePicker'">
         <dp-date-picker id="timePicker"
                         name="timePicker"
-                        #datePicker
+                        #dateComponent
                         #timePicker="ngModel"
                         [(ngModel)]="date"
                         (onChange)="log($event)"
@@ -374,6 +381,7 @@
       <div class="dp-inline-time" *ngIf="pickerMode === 'timeInline'">
         <dp-time-select
             name="timeInline"
+            #dateComponent
             #timeInline="ngModel"
             [theme]="material ? 'dp-material dp-main' : 'dp-main'"
             [(ngModel)]="date"
@@ -400,6 +408,7 @@
       <div class="dp-picker-time-directive" id="timePickerDirDay" *ngIf="pickerMode === 'timeDirective'">
         <input [dpDayPicker]="config"
                name="timePickerDir"
+               #dateComponent="dpDayPicker"
                #dateDirectivePicker="dpDayPicker"
                #timeDirectivePickerModel="ngModel"
                [theme]="material ? 'dp-material dp-main' : 'dp-main'"
@@ -1295,6 +1304,15 @@
         </span>
         <div class="dp-option-playground">
           <button (click)="closeCalendar()">Close</button>
+        </div>
+      </div>
+
+      <div class="dp-option" *ngIf="isValidConfig('moveCalendarTo')">
+        <span class="dp-option-header">
+          Move (api.moveCalendarTo('14-01-1987')):
+        </span>
+        <div class="dp-option-playground">
+          <button id="moveCalendarTo" (click)="moveCalendarTo()">Move</button>
         </div>
       </div>
     </div>

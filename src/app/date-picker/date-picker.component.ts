@@ -121,7 +121,8 @@ export class DatePickerComponent implements OnChanges,
   validateFn: DateValidator;
   api: IDpDayPickerApi = {
     open: this.showCalendars.bind(this),
-    close: this.hideCalendar.bind(this)
+    close: this.hideCalendar.bind(this),
+    moveCalendarTo: this.moveCalendarTo.bind(this)
   };
 
   set selected(selected: Moment[]) {
@@ -189,12 +190,12 @@ export class DatePickerComponent implements OnChanges,
     }
   }
 
-  constructor(private dayPickerService: DatePickerService,
-              private domHelper: DomHelper,
-              private elemRef: ElementRef,
-              private renderer: Renderer,
-              private utilsService: UtilsService,
-              public cd: ChangeDetectorRef) {
+  constructor(private readonly dayPickerService: DatePickerService,
+              private readonly domHelper: DomHelper,
+              private readonly elemRef: ElementRef,
+              private readonly renderer: Renderer,
+              private readonly utilsService: UtilsService,
+              public readonly cd: ChangeDetectorRef) {
   }
 
   @HostListener('click')
@@ -440,6 +441,11 @@ export class DatePickerComponent implements OnChanges,
         this.hideCalendar();
         break;
     }
+  }
+
+  moveCalendarTo(date: SingleCalendarValue) {
+    const momentDate = this.utilsService.convertToMoment(date, this.componentConfig.format);
+    this.currentDateView = momentDate;
   }
 
   startGlobalListeners() {
