@@ -221,6 +221,14 @@ Here are the available configurations:
 
 You can use the `<dp-month-calendar>` component to display the calendar widget without an associated input box.
 
+Here is the list of APIs:  
+
+| Name                 | Signature                                                                           | Description                      |
+|----------------------|:-----------------------------------------------------------------------------------:|----------------------------------|
+| moveCalendarsBy      | `(current: Moment, amount: number, granularity: moment.unitOfTime.Base) => void`    | Moves calendar by given amount   |
+| moveCalendarTo       | `(to: Moment \| String) => void`                                                    | Moves calendar to specific date  |
+| toggleCalendarMode   | `(mode: day \| month) => void`                                                      | Changes clander mode day/month   |
+
 i.e.
 ```html
 <dp-month-calendar [(ngModel)]="selectedDate" [config]="config"></dp-month-calendar>

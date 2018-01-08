@@ -87,8 +87,8 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
 
   api = {
     moveCalendarsBy: this.moveCalendarsBy.bind(this),
-    toggleCalendar: this.toggleCalendar.bind(this),
-    moveCalendarTo: this.moveCalendarTo.bind(this)
+    moveCalendarTo: this.moveCalendarTo.bind(this),
+    toggleCalendarMode: this.toggleCalendarMode.bind(this)
   };
 
   set selected(selected: Moment[]) {
@@ -258,7 +258,7 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
     return weekday.format(this.componentConfig.weekDayFormat);
   }
 
-  toggleCalendar(mode: ECalendarMode) {
+  toggleCalendarMode(mode: ECalendarMode) {
     if (this.currentCalendarMode !== mode) {
       this.currentCalendarMode = mode;
       this.onNavHeaderBtnClick.emit(mode);

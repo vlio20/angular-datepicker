@@ -79,7 +79,7 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
   showSecondaryRightNav: boolean;
 
   api = {
-    toggleCalendar: this.toggleCalendar.bind(this),
+    toggleCalendar: this.toggleCalendarMode.bind(this),
     moveCalendarTo: this.moveCalendarTo.bind(this)
   };
 
@@ -242,7 +242,7 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
     this.currentDateView = this.currentDateView.clone().add(navigateBy, 'year');
   }
 
-  toggleCalendar() {
+  toggleCalendarMode() {
     this.onNavHeaderBtnClick.emit();
   }
 

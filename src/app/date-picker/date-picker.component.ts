@@ -394,7 +394,7 @@ export class DatePickerComponent implements OnChanges,
     this.areCalendarsShown = false;
 
     if (this.dayCalendarRef) {
-      this.dayCalendarRef.api.toggleCalendar(ECalendarMode.Day);
+      this.dayCalendarRef.api.toggleCalendarMode(ECalendarMode.Day);
     }
 
     this.close.emit();
