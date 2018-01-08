@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file.
 # [2.7.0] (???)
 
 ### Features
+- `goToCurrent` event was added when go to current button is clicked ([c39080e](https://github.com/vlio20/angular-datepicker/commit/c39080e)) closes [#328](https://github.com/vlio20/angular-datepicker/issues/328) - PR by [@justtal](https://github.com/justtal)
 - `unSelectOnClick` was added, this will disable/enable unselection of already selected date ([45e15ac](https://github.com/vlio20/angular-datepicker/commit/45e15ac)) closes [#298](https://github.com/vlio20/angular-datepicker/issues/298)
 
 ### Improvements
@@ -13,7 +14,8 @@ All notable changes to this project will be documented in this file.
 - Upgrade angular-cli ([5abdae1](https://github.com/vlio20/angular-datepicker/commit/5abdae1))
 
 ### Bug Fixes
-- Prevent overriding of form control value from input updates ([c96f2 ](https://github.com/vlio20/angular-datepicker/commit/e4de3cb )) closes [#297](https://github.com/vlio20/angular-datepicker/issues/297) - PR by [@pklein](https://github.com/pklein)
+- Updating docs for showing day-calendar api ([c5533de](https://github.com/vlio20/angular-datepicker/commit/c5533de)) closes [#312](https://github.com/vlio20/angular-datepicker/issues/312)
+- Prevent overriding of form control value from input updates ([c96f2](https://github.com/vlio20/angular-datepicker/commit/c96f2)) closes [#297](https://github.com/vlio20/angular-datepicker/issues/297) - PR by [@pklein](https://github.com/pklein)
 
 ### Breaking Changes
 - Multiselect delimiter changed to `|` instead of `,` ([8932f52](https://github.com/vlio20/angular-datepicker/commit/8932f52))
@@ -22,13 +24,13 @@ All notable changes to this project will be documented in this file.
 # [2.6.2] (2017-11-11)
 
 ### Improvements
-- Removing document HostListeners to improve performance ([6324364](https://github.com/vlio20/angular-datepicker/commit/6324364 )) closes [#292](https://github.com/vlio20/angular-datepicker/issues/292) - PR by [@mrenou](https://github.com/mrenou)
+- Removing document HostListeners to improve performance ([6324364](https://github.com/vlio20/angular-datepicker/commit/6324364)) closes [#292](https://github.com/vlio20/angular-datepicker/issues/292) - PR by [@mrenou](https://github.com/mrenou)
 
 <a name="2.6.1"></a>
 # [2.6.1] (2017-11-03)
 
 ### Bug Fixes
-- Hidden attribute not working on IE10 ([e4de3cb ](https://github.com/vlio20/angular-datepicker/commit/e4de3cb )) closes [#283](https://github.com/vlio20/angular-datepicker/issues/283) - PR by [@mrenou](https://github.com/mrenou)
+- Hidden attribute not working on IE10 ([e4de3cb ](https://github.com/vlio20/angular-datepicker/commit/e4de3cb)) closes [#283](https://github.com/vlio20/angular-datepicker/issues/283) - PR by [@mrenou](https://github.com/mrenou)
 - Browser translate causes interpolates values to NOT update ([8f6d69e](https://github.com/vlio20/angular-datepicker/commit/8f6d69e)) closes [#277](https://github.com/vlio20/angular-datepicker/issues/277) - PR by [@chrxs](https://github.com/chrxs)
 - Clearing the input will remove the selected date ([5bfe724](https://github.com/vlio20/angular-datepicker/commit/5bfe724)) closes [#278](https://github.com/vlio20/angular-datepicker/issues/278)
 - Set `min` property dynamically ([969eb01](https://github.com/vlio20/angular-datepicker/commit/969eb01)) closes [#269](https://github.com/vlio20/angular-datepicker/issues/269)
