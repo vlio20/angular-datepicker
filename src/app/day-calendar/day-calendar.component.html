@@ -8,7 +8,7 @@
       [theme]="theme"
       (onLeftNav)="onLeftNav()"
       (onRightNav)="onRightNav()"
-      (onLabelClick)="toggleCalendar(CalendarMode.Month)"
+      (onLabelClick)="toggleCalendarMode(CalendarMode.Month)"
       (onGoToCurrent)="goToCurrent()">
   </dp-calendar-nav>
 
@@ -43,5 +43,5 @@
     [displayDate]="_currentDateView"
     [theme]="theme"
     (onSelect)="monthSelected($event)"
-    (onNavHeaderBtnClick)="toggleCalendar(CalendarMode.Day)">
+    (onNavHeaderBtnClick)="toggleCalendarMode(CalendarMode.Day)">
 </dp-month-calendar>
