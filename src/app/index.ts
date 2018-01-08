@@ -1,4 +1,3 @@
-export {ECalendarMode} from './common/types/calendar-mode-enum';
 export {SingleCalendarValue} from './common/types/single-calendar-value';
 export {IDate} from './common/models/date.model';
 export {ECalendarMode} from './common/types/calendar-mode-enum';
