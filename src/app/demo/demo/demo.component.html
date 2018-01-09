@@ -162,7 +162,7 @@
         <dp-date-picker id="datePicker"
                         name="datePicker"
                         #dateComponent
-                        #dateComponentModel="ngModel"
+                        #datePickerModel="ngModel"
                         [(ngModel)]="date"
                         (onChange)="log($event)"
                         [mode]="'day'"
@@ -177,13 +177,13 @@
                         [config]="config"
                         [theme]="material ? 'dp-material dp-main' : 'dp-main'">
         </dp-date-picker>
-        <div class="dp-validations" *ngIf="datePickerModel?.errors">
-          <div id="requiredValidation" *ngIf="datePickerModel.errors.required">required</div>
-          <div id="formatValidation" *ngIf="datePickerModel.errors.format">invalid format
+        <div class="dp-validations">
+          <div id="requiredValidation" *ngIf="datePickerModel.errors?.required">required</div>
+          <div id="formatValidation" *ngIf="datePickerModel.errors?.format">invalid format
           </div>
-          <div id="minDateValidation" *ngIf="datePickerModel.errors.minDate">minDate invalid
+          <div id="minDateValidation" *ngIf="datePickerModel.errors?.minDate">minDate invalid
           </div>
-          <div id="maxDateValidation" *ngIf="datePickerModel.errors.maxDate">maxDate invalid
+          <div id="maxDateValidation" *ngIf="datePickerModel.errors?.maxDate">maxDate invalid
           </div>
         </div>
       </div>
