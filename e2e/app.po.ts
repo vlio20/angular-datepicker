@@ -43,9 +43,12 @@ export class DemoPage {
   showWeekNumbersRadio = $('#showWeekNumbersRadio');
   hideWeekNumbersRadio = $('#hideWeekNumbersRadio');
   weekNumbers = $$(`${this.popupSelector} .dp-week-number`);
-  deyCalendarNavHeader = $(`${this.popupSelector} .dp-nav-header`);
   dayCalendarNavHeaderBtn = $(`${this.popupSelector} .dp-nav-header-btn`);
   deyCalendarMonthNavHeader = $(`${this.popupSelector} dp-month-calendar .dp-nav-header`);
+  dayTimeCalendarNavHeaderBtnInline = $(`dp-day-time-calendar .dp-nav-header-btn`);
+  dayCalendarNavHeaderBtnInline = $(`dp-day-calendar .dp-nav-header-btn`);
+  monthCalendarNavHeaderInline = $(`dp-month-calendar .dp-nav-header`);
+  navHeader = $(`${this.popupSelector} .dp-nav-header`);
   dayCalendarNavMonthHeaderBtn = $(`${this.popupSelector} dp-month-calendar .dp-nav-header-btn`);
   calendarDisabledDays = $$(`${this.popupSelector} .dp-calendar-day[disabled]`);
   calendarFirstDayOfMonth = $$(`${this.popupSelector} .dp-current-month`).get(0);
@@ -145,6 +148,7 @@ export class DemoPage {
   timeDirectiveMenu = $('#timeDirectiveMenu');
 
   openBtn = $('#openBtn');
+  moveCalendarTo = $('#moveCalendarTo');
 
   navigateTo() {
     return browser.get('/');

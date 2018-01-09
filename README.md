@@ -151,13 +151,14 @@ class MyContainer {
     }
 }  
 ```
+
 Here is the list of APIs:  
 
-| Name                 | Signature       | Description            |
-|----------------------|:---------------:|------------------------|
-| open                 | `() => void`    | Opens the date picker  |
-| close                | `() => void`    | Closes the date picker |
-
+| Name                 | Signature                          | Description                      |
+|----------------------|:----------------------------------:|----------------------------------|
+| open                 | `() => void`                       | Opens the date picker            |
+| close                | `() => void`                       | Closes the date picker           |
+| moveCalendarTo       | `(to: Moment \| String) => void`   | Moves calendar to specific date  |
 
 ## Inline - Day Calendar
 
@@ -220,15 +221,6 @@ Here are the available configurations:
 ## Inline - Month Calendar
 
 You can use the `<dp-month-calendar>` component to display the calendar widget without an associated input box.
-
-Here is the list of APIs:  
-
-| Name                 | Signature                                                                           | Description                      |
-|----------------------|:-----------------------------------------------------------------------------------:|----------------------------------|
-| moveCalendarsBy      | `(current: Moment, amount: number, granularity: moment.unitOfTime.Base) => void`    | Moves calendar by given amount   |
-| moveCalendarTo       | `(to: Moment \| String) => void`                                                    | Moves calendar to specific date  |
-| toggleCalendarMode   | `(mode: day \| month) => void`                                                      | Changes clander mode day/month   |
-
 i.e.
 ```html
 <dp-month-calendar [(ngModel)]="selectedDate" [config]="config"></dp-month-calendar>
@@ -272,6 +264,14 @@ Here are the available configurations:
 | monthBtnCssClassCallback    | `(Moment) => String` | `undefined`                                                               | Callback which can add custom CSS classes to the month button in the calendar. Multiple classes can be returned with a space between them.                                                                                                                                    |
 | showMultipleYearsNavigation | `boolean`            | `false`                                                                   | If set to `true` will show buttons to navigate by multiple years (10 by default)                                                                                                                                                                                              |
 | multipleYearsNavigateBy     | `number`             | `10`                                                                      | Number of years to navigate when showMultipleYearsNavigation is `true`                                                                                                                                                                                                        |
+
+Here is the list of APIs:  
+
+| Name                 | Signature                                                                           | Description                      |
+|----------------------|:-----------------------------------------------------------------------------------:|----------------------------------|
+| moveCalendarsBy      | `(current: Moment, amount: number, granularity: moment.unitOfTime.Base) => void`    | Moves calendar by given amount   |
+| moveCalendarTo       | `(to: Moment \| String) => void`                                                    | Moves calendar to specific date  |
+| toggleCalendarMode   | `(mode: day \| month) => void`                                                      | Changes clander mode day/month   |
 
 
 ## Inline - Time Select
@@ -428,6 +428,12 @@ In order to provide configurations to the date-picker you need to pass it to the
 ```
 
 The `IDatePickerDirectiveConfig` is identical to [`IDatePickerConfig`](#configuration) above except that it lacks the `showGoToCurrent` property.
+
+Here is the list of APIs:  
+
+| Name                 | Signature                          | Description                      |
+|----------------------|:----------------------------------:|----------------------------------|
+| moveCalendarTo       | `(to: Moment \| String) => void`   | Moves calendar to specific date  |
 
 ## Compatibility
 

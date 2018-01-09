@@ -85,6 +85,10 @@ export class DayTimeCalendarComponent implements OnInit, OnChanges, ControlValue
     return this._selected;
   }
 
+  api = {
+    moveCalendarTo: this.moveCalendarTo.bind(this)
+  };
+
   constructor(public dayTimeCalendarService: DayTimeCalendarService,
               public utilsService: UtilsService,
               public cd: ChangeDetectorRef) {
