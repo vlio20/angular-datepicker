@@ -264,8 +264,7 @@ export class DemoComponent {
   openCalendar() {
     if (this.dateComponent) {
       this.dateComponent.api.open();
-    }
-    if (this.datePickerDirective) {
+    } else if (this.datePickerDirective) {
       this.datePickerDirective.api.open();
     }
   }
@@ -273,8 +272,7 @@ export class DemoComponent {
   closeCalendar() {
     if (this.dateComponent) {
       this.dateComponent.api.close();
-    }
-    if (this.datePickerDirective) {
+    } else if (this.datePickerDirective) {
       this.datePickerDirective.api.close();
     }
   }
