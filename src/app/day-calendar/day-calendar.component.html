@@ -6,8 +6,8 @@
       [isLabelClickable]="componentConfig.enableMonthSelector"
       [showGoToCurrent]="_shouldShowCurrent"
       [theme]="theme"
-      (onLeftNav)="onLeftNav()"
-      (onRightNav)="onRightNav()"
+      (onLeftNav)="onLeftNavClick()"
+      (onRightNav)="onRightNavClick()"
       (onLabelClick)="toggleCalendarMode(CalendarMode.Month)"
       (onGoToCurrent)="goToCurrent()">
   </dp-calendar-nav>
@@ -43,5 +43,9 @@
     [displayDate]="_currentDateView"
     [theme]="theme"
     (onSelect)="monthSelected($event)"
-    (onNavHeaderBtnClick)="toggleCalendarMode(CalendarMode.Day)">
+    (onNavHeaderBtnClick)="toggleCalendarMode(CalendarMode.Day)"
+    (onLeftNav)="onMonthCalendarLeftClick($event)"
+    (onRightNav)="onMonthCalendarRightClick($event)"
+    (onLeftSecondaryNav)="onMonthCalendarSecondaryLeftClick($event)"
+    (onRightSecondaryNav)="onMonthCalendarSecondaryRightClick($event)">
 </dp-month-calendar>

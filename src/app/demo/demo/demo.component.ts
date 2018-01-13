@@ -8,6 +8,7 @@ import * as moment from 'moment';
 import {Moment} from 'moment';
 import {GaService} from '../services/ga/ga.service';
 import {ECalendarValue} from '../../common/types/calendar-value-enum';
+import {INavEvent} from '../../common/models/navigation-event.model';
 
 const GLOBAL_OPTION_KEYS = [
   'theme',
@@ -365,6 +366,14 @@ export class DemoComponent {
 
   log(item) {
     console.log(item);
+  }
+
+  onLeftNav(change: INavEvent) {
+    console.log('left nav', change);
+  }
+
+  onRightNav(change: INavEvent) {
+    console.log('right nav', change);
   }
 
   moveCalendarTo() {

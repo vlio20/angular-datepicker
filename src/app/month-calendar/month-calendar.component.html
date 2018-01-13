@@ -8,10 +8,10 @@
       [isLabelClickable]="componentConfig.isNavHeaderBtnClickable"
       [showGoToCurrent]="shouldShowCurrent()"
       [theme]="theme"
-      (onLeftNav)="onLeftNav()"
-      (onLeftSecondaryNav)="onLeftSecondaryNav()"
-      (onRightNav)="onRightNav()"
-      (onRightSecondaryNav)="onRightSecondaryNav()"
+      (onLeftNav)="onLeftNavClick()"
+      (onLeftSecondaryNav)="onLeftSecondaryNavClick()"
+      (onRightNav)="onRightNavClick()"
+      (onRightSecondaryNav)="onRightSecondaryNavClick()"
       (onLabelClick)="toggleCalendarMode()"
       (onGoToCurrent)="goToCurrent()">
   </dp-calendar-nav>

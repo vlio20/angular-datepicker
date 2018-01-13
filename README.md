@@ -63,7 +63,9 @@ Put the dp-date-picker component wherever you need it.
 | onChange             | `CalendarValue`                     | All Pickers               | This event will be emitted on every valid value change, if you want to receive every value (valid and invalid) please use the native `ngModelChange` output.     |
 | open                 | `undefined`                         | All Pickers               | This event will be emitted when picker is opened.                                                                                                                |
 | close                | `CalendarValue`                     | All Pickers               | This event will be emitted when picker is closed.                                                                                                                |
-| onGoToCurrent        |                                     | All Pickers               | This event will be emitted when click on go to current in navigation.                                                                                                   |
+| onGoToCurrent        | void                                | All Pickers               | This event will be emitted when click was made on go to current button.                                                                                          |
+| onLeftNav            | void                                | All Pickers               | This event will be emitted when click was made on left navigation button.                                                                                        |
+| onRightNav           | void                                | All Pickers               | This event will be emitted when click was made on right navigation button.                                                                                       |
 
 ### Configuration:  
 In order to provide configurations to the date-picker you need to pass it to the `dp-date-picker` component:  
@@ -182,9 +184,12 @@ i.e.
 
 | Name                 | Event Arguments                     |  Description                                                                                                                                                      |
 |----------------------|:-----------------------------------:|:------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| onSelect             | `IDay`                              |  This event will be emitted when a day is selected.                                                                                                               |
-| onMonthSelect        | `IMonth`                            |  This event will be emitted when a month is selected.                                                                                                             |
-| onNavHeaderBtnClick  | `ECalendarMode`                     |  This event will be emitted when the mode of the calendar switches form day to month and vise versa.                                                              |
+| onSelect             | `IDay`                              | This event will be emitted when a day is selected.                                                                                                                |
+| onMonthSelect        | `IMonth`                            | This event will be emitted when a month is selected.                                                                                                              |
+| onNavHeaderBtnClick  | `ECalendarMode`                     | This event will be emitted when the mode of the calendar switches form day to month and vise versa.                                                               |
+| onGoToCurrent        | void                                | This event will be emitted when click was made on go to current button.                                                                                           |
+| onLeftNav            | void                                | This event will be emitted when click was made on left navigation button.                                                                                         |
+| onRightNav           | void                                | This event will be emitted when click was made on right navigation button.                                                                                        |
 
 ### Configuration:  
 In order to provide configurations to the day-calendar you need to pass it to the `dp-day-calendar` component:  
@@ -239,8 +244,11 @@ i.e.
 
 | Name                 | Event Arguments                     |  Description                                                                                                                                                      |
 |----------------------|:-----------------------------------:|:------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| onSelect             | `IMonth`                            |  This event will be emitted when a month is selected.                                                                                                             |
-| onNavHeaderBtnClick  | `null`                              |  This event will be emitted when the mode button, in the navigation section, was clicked.                                                                         |
+| onSelect             | `IMonth`                            | This event will be emitted when a month is selected.                                                                                                              |
+| onNavHeaderBtnClick  | `null`                              | This event will be emitted when the mode button, in the navigation section, was clicked.                                                                          |
+| onGoToCurrent        | void                                | This event will be emitted when click was made on go to current button.                                                                                           |
+| onLeftNav            | void                                | This event will be emitted when click was made on left navigation button.                                                                                         |
+| onRightNav           | void                                | This event will be emitted when click was made on right navigation button.                                                                                        |
 
 
 ### Configuration:  
@@ -340,9 +348,14 @@ i.e.
 | theme                | `String`            | `''`                                                                     | Theme is a class added to the popup container (and inner components) - this will allow styling of the calendar when it's appended to outer element (for example - body). There is a built in theme named dp-material, you can find it in the demo. |
 | config               | `IDatePickerConfig`  | See Below                                                                | Configuration object - see description below.                                                                                                                                                                                                      |
 
+### Attributes (Output):  
+
 | Name                 | Event Arguments                     |  Description                                                                                                                                                      |
 |----------------------|:-----------------------------------:|:------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | onChange             | `IDate`                             |  This event will be emitted when time is selected.                                                                                                                |
+| onGoToCurrent        | void                                | This event will be emitted when click was made on go to current button.                                                                                           |
+| onLeftNav            | void                                | This event will be emitted when click was made on left navigation button.                                                                                         |
+| onRightNav           | void                                | This event will be emitted when click was made on right navigation button.                                                                                        |
 
 ### Configuration:  
 In order to provide configurations to the day-time-calendar you need to pass it to the `dp-day-time-calendar` component:  
