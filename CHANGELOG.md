@@ -1,10 +1,11 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-<a name="2.6.2"></a>
-# [2.7.0] (???)
+<a name="2.7.0"></a>
+# [2.7.0] (2018-01-13)
 
 ### Features
+- Navigation events are now dispatched from all relevant components ([2552889](https://github.com/vlio20/angular-datepicker/commit/2552889)) closes [#329](https://github.com/vlio20/angular-datepicker/issues/329)
 - `moveCalendarTo` was added to all components api ([349d48c](https://github.com/vlio20/angular-datepicker/commit/349d48c)) closes [#306](https://github.com/vlio20/angular-datepicker/issues/306)
 - `goToCurrent` event was added when go to current button is clicked ([c39080e](https://github.com/vlio20/angular-datepicker/commit/c39080e)) closes [#328](https://github.com/vlio20/angular-datepicker/issues/328) - PR by [@justtal](https://github.com/justtal)
 - `unSelectOnClick` was added, this will disable/enable unselection of already selected date ([45e15ac](https://github.com/vlio20/angular-datepicker/commit/45e15ac)) closes [#298](https://github.com/vlio20/angular-datepicker/issues/298)
