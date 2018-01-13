@@ -47,6 +47,7 @@ import {Moment, unitOfTime} from 'moment';
 import {DateValidator} from '../common/types/validator.type';
 import {MonthCalendarComponent} from '../month-calendar/month-calendar.component';
 import {DayTimeCalendarComponent} from '../day-time-calendar/day-time-calendar.component';
+import {INavEvent} from '../common/models/navigation-event.model';
 
 @Component({
   selector: 'dp-date-picker',
@@ -92,7 +93,9 @@ export class DatePickerComponent implements OnChanges,
   @Output() open = new EventEmitter<void>();
   @Output() close = new EventEmitter<void>();
   @Output() onChange = new EventEmitter<CalendarValue>();
-  @Output() onGoToCurrent: EventEmitter<void> = new EventEmitter<void>();
+  @Output() onGoToCurrent: EventEmitter<void> = new EventEmitter();
+  @Output() onLeftNav: EventEmitter<INavEvent> = new EventEmitter();
+  @Output() onRightNav: EventEmitter<INavEvent> = new EventEmitter();
 
   @ViewChild('container') calendarContainer: ElementRef;
   @ViewChild('dayCalendar') dayCalendarRef: DayCalendarComponent;
@@ -446,6 +449,14 @@ export class DatePickerComponent implements OnChanges,
   moveCalendarTo(date: SingleCalendarValue) {
     const momentDate = this.utilsService.convertToMoment(date, this.componentConfig.format);
     this.currentDateView = momentDate;
+  }
+
+  onLeftNavClick(change: INavEvent) {
+    this.onLeftNav.emit(change);
+  }
+
+  onRightNavClick(change: INavEvent) {
+    this.onRightNav.emit(change);
   }
 
   startGlobalListeners() {

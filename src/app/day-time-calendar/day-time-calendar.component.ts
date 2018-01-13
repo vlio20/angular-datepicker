@@ -33,6 +33,7 @@ import {IDayTimeCalendarConfig} from './day-time-calendar-config.model';
 import {DayTimeCalendarService} from './day-time-calendar.service';
 import {DateValidator} from '../common/types/validator.type';
 import {DayCalendarComponent} from '../day-calendar/day-calendar.component';
+import {INavEvent} from '../common/models/navigation-event.model';
 
 @Component({
   selector: 'dp-day-time-calendar',
@@ -65,7 +66,9 @@ export class DayTimeCalendarComponent implements OnInit, OnChanges, ControlValue
   @HostBinding('class') @Input() theme: string;
 
   @Output() onChange: EventEmitter<IDate> = new EventEmitter();
-  @Output() onGoToCurrent: EventEmitter<void> = new EventEmitter<void>();
+  @Output() onGoToCurrent: EventEmitter<void> = new EventEmitter();
+  @Output() onLeftNav: EventEmitter<INavEvent> = new EventEmitter();
+  @Output() onRightNav: EventEmitter<INavEvent> = new EventEmitter();
 
   @ViewChild('dayCalendar') dayCalendarRef: DayCalendarComponent;
 
@@ -185,5 +188,13 @@ export class DayTimeCalendarComponent implements OnInit, OnChanges, ControlValue
     if (to) {
       this.dayCalendarRef.moveCalendarTo(to);
     }
+  }
+
+  onLeftNavClick(change: INavEvent) {
+    this.onLeftNav.emit(change);
+  }
+
+  onRightNavClick(change: INavEvent) {
+    this.onRightNav.emit(change);
   }
 }

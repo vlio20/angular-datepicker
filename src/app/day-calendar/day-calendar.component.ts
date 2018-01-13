@@ -34,6 +34,7 @@ import {UtilsService} from '../common/services/utils/utils.service';
 import {IMonthCalendarConfig} from '../month-calendar/month-calendar-config';
 import {IMonth} from '../month-calendar/month.model';
 import {DateValidator} from '../common/types/validator.type';
+import {INavEvent} from '../common/models/navigation-event.model';
 
 @Component({
   selector: 'dp-day-calendar',
@@ -66,7 +67,9 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
   @Output() onSelect: EventEmitter<IDay> = new EventEmitter();
   @Output() onMonthSelect: EventEmitter<IMonth> = new EventEmitter();
   @Output() onNavHeaderBtnClick: EventEmitter<ECalendarMode> = new EventEmitter();
-  @Output() onGoToCurrent: EventEmitter<void> = new EventEmitter<void>();
+  @Output() onGoToCurrent: EventEmitter<void> = new EventEmitter();
+  @Output() onLeftNav: EventEmitter<INavEvent> = new EventEmitter();
+  @Output() onRightNav: EventEmitter<INavEvent> = new EventEmitter();
 
   CalendarMode = ECalendarMode;
   isInited: boolean = false;
@@ -242,12 +245,34 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
     return cssClasses;
   }
 
-  onLeftNav() {
+  onLeftNavClick() {
+    const from = this.currentDateView.clone();
     this.moveCalendarsBy(this.currentDateView, -1, 'month');
+    const to = this.currentDateView.clone();
+    this.onLeftNav.emit({from, to});
   }
 
-  onRightNav() {
+  onRightNavClick() {
+    const from = this.currentDateView.clone();
     this.moveCalendarsBy(this.currentDateView, 1, 'month');
+    const to = this.currentDateView.clone();
+    this.onRightNav.emit({from, to});
+  }
+
+  onMonthCalendarLeftClick(change: INavEvent) {
+    this.onLeftNav.emit(change);
+  }
+
+  onMonthCalendarRightClick(change: INavEvent) {
+    this.onRightNav.emit(change);
+  }
+
+  onMonthCalendarSecondaryLeftClick(change: INavEvent) {
+    this.onRightNav.emit(change);
+  }
+
+  onMonthCalendarSecondaryRightClick(change: INavEvent) {
+    this.onLeftNav.emit(change);
   }
 
   getWeekdayName(weekday: Moment): string {

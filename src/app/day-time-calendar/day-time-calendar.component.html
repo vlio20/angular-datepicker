@@ -1,10 +1,12 @@
 <dp-day-calendar #dayCalendar
                  [config]="componentConfig"
                  [ngModel]="_selected"
+                 [theme]="theme"
                  [displayDate]="displayDate"
                  (onSelect)="dateSelected($event)"
                  (onGoToCurrent)="onGoToCurrent.emit()"
-                 [theme]="theme">
+                 (onLeftNav)="onLeftNavClick($event)"
+                 (onRightNav)="onRightNavClick($event)">
 </dp-day-calendar>
 <dp-time-select #timeSelect
                 [config]="componentConfig"

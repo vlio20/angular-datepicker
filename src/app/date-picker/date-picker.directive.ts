@@ -18,6 +18,7 @@ import {
 import {NgControl} from '@angular/forms';
 import {CalendarValue} from '../common/types/calendar-value';
 import {SingleCalendarValue} from '../common/types/single-calendar-value';
+import {INavEvent} from '../common/models/navigation-event.model';
 
 @Directive({
   exportAs: 'dpDayPicker',
@@ -152,7 +153,9 @@ export class DatePickerDirective implements OnInit {
   @Output() open = new EventEmitter<void>();
   @Output() close = new EventEmitter<void>();
   @Output() onChange = new EventEmitter<CalendarValue>();
-  @Output() onGoToCurrent: EventEmitter<void> = new EventEmitter<void>();
+  @Output() onGoToCurrent: EventEmitter<void> = new EventEmitter();
+  @Output() onLeftNav: EventEmitter<INavEvent> = new EventEmitter();
+  @Output() onRightNav: EventEmitter<INavEvent> = new EventEmitter();
 
   public datePicker: DatePickerComponent;
   public api: IDpDayPickerApi;
@@ -248,6 +251,8 @@ export class DatePickerDirective implements OnInit {
       this.datePicker.close = this.close;
       this.datePicker.onChange = this.onChange;
       this.datePicker.onGoToCurrent = this.onGoToCurrent;
+      this.datePicker.onLeftNav = this.onLeftNav;
+      this.datePicker.onRightNav = this.onRightNav;
 
       this.datePicker.init();
 

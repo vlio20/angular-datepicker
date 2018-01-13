@@ -90,6 +90,8 @@
                         [displayDate]="displayDate"
                         (open)="opened()"
                         (close)="closed()"
+                        (onLeftNav)="onLeftNav($event)"
+                        (onRightNav)="onRightNav($event)"
                         [disabled]="disabled"
                         [minDate]="validationMinDate"
                         [maxDate]="validationMaxDate"
@@ -117,7 +119,9 @@
             (ngModelChange)="log($event)"
             [minDate]="validationMinDate"
             [maxDate]="validationMaxDate"
-            [config]="config">
+            [config]="config"
+            (onLeftNav)="onLeftNav($event)"
+            (onRightNav)="onRightNav($event)">
         </dp-day-time-calendar>
 
         <div class="dp-validations">
@@ -149,7 +153,9 @@
                [maxDate]="validationMaxDate"
                [disabled]="disabled"
                [required]="required"
-               (onChange)="log($event)"/>
+               (onChange)="log($event)"
+               (onLeftNav)="onLeftNav($event)"
+               (onRightNav)="onRightNav($event)"/>
         <div class="dp-validations">
           <div id="requiredValidation" *ngIf="daytimeDirectivePickerModel.errors?.required">required</div>
           <div id="formatValidation" *ngIf="daytimeDirectivePickerModel.errors?.format">invalid format</div>
@@ -175,7 +181,9 @@
                         [required]="required"
                         [placeholder]="placeholder"
                         [config]="config"
-                        [theme]="material ? 'dp-material dp-main' : 'dp-main'">
+                        [theme]="material ? 'dp-material dp-main' : 'dp-main'"
+                        (onLeftNav)="onLeftNav($event)"
+                        (onRightNav)="onRightNav($event)">
         </dp-date-picker>
         <div class="dp-validations">
           <div id="requiredValidation" *ngIf="datePickerModel.errors?.required">required</div>
@@ -199,7 +207,9 @@
             [minDate]="validationMinDate"
             [maxDate]="validationMaxDate"
             [required]="required"
-            [config]="config">
+            [config]="config"
+            (onLeftNav)="onLeftNav($event)"
+            (onRightNav)="onRightNav($event)">
         </dp-day-calendar>
 
         <div class="dp-validations">
@@ -224,7 +234,9 @@
                [maxDate]="validationMaxDate"
                [disabled]="disabled"
                [required]="required"
-               (onChange)="log($event)"/>
+               (onChange)="log($event)"
+               (onLeftNav)="onLeftNav($event)"
+               (onRightNav)="onRightNav($event)"/>
         <div class="dp-validations">
           <div id="requiredValidation" *ngIf="dateDirectivePickerModel.errors?.required || false">required</div>
           <div id="formatValidation" *ngIf="dateDirectivePickerModel.errors && dateDirectivePickerModel.errors.format">
@@ -247,7 +259,9 @@
                  (onChange)="date = $event; log($event)"
                  [required]="required"
                  (open)="opened()"
-                 (close)="closed()"/>
+                 (close)="closed()"
+                 (onLeftNav)="onLeftNav($event)"
+                 (onRightNav)="onRightNav($event)"/>
           <div class="dp-validations" *ngIf="formGroup.get('datePicker').touched">
             <div id="reactiveRequiredValidation"
                  *ngIf="formGroup.get('datePicker').hasError('required')">
@@ -282,7 +296,9 @@
                         [required]="required"
                         [placeholder]="placeholder"
                         [config]="config"
-                        [theme]="material ? 'dp-material dp-main' : 'dp-main'">
+                        [theme]="material ? 'dp-material dp-main' : 'dp-main'"
+                        (onLeftNav)="onLeftNav($event)"
+                        (onRightNav)="onRightNav($event)">
         </dp-date-picker>
         <div class="dp-validations">
           <div id="monthPickerRequiredValidation" *ngIf="monthPicker.errors && monthPicker.errors.required">required
@@ -309,7 +325,9 @@
             [minDate]="validationMinDate"
             [maxDate]="validationMaxDate"
             [required]="required"
-            [config]="config">
+            [config]="config"
+            (onLeftNav)="onLeftNav($event)"
+            (onRightNav)="onRightNav($event)">
         </dp-month-calendar>
         <div class="dp-validations">
           <div id="monthInlineRequiredValidation" *ngIf="monthInline.errors && monthInline.errors.required">required
@@ -337,7 +355,9 @@
                [placeholder]="placeholder"
                [disabled]="disabled"
                [required]="required"
-               (onChange)="log($event)"/>
+               (onChange)="log($event)"
+               (onLeftNav)="onLeftNav($event)"
+               (onRightNav)="onRightNav($event)"/>
         <div class="dp-validations">
           <div id="requiredValidation" *ngIf="dateDirectivePickerModel.errors?.required || false">required</div>
           <div id="formatValidation" *ngIf="dateDirectivePickerModel.errors && dateDirectivePickerModel.errors.format">
