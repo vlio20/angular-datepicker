@@ -26,6 +26,7 @@
   ],
   "angularCompilerOptions": {
     "genDir": "aot",
+    "debug": true,
     "strictMetadataEmit": true
   }
 }
