@@ -3,7 +3,7 @@
   "author": "Vlad Ioffe",
   "version": "2.7.2",
   "license": "MIT",
-  "main": "prebuild/app/index",
+  "main": "index.js",
   "scripts": {
     "ng": "ng",
     "start": "ng serve -o",

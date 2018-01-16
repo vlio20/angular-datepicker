@@ -27,6 +27,7 @@
   "angularCompilerOptions": {
     "genDir": "aot",
     "debug": true,
+    "skipTemplateCodegen": true,
     "strictMetadataEmit": true
   }
 }
