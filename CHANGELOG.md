@@ -1,8 +1,8 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-<a name="2.7.2"></a>
-# [2.7.2] (2018-01-13)
+<a name="2.7.3"></a>
+# [2.7.3] (2018-01-13)
 
 ### Features
 - Navigation events are now dispatched from all relevant components ([2552889](https://github.com/vlio20/angular-datepicker/commit/2552889)) closes [#329](https://github.com/vlio20/angular-datepicker/issues/329)
