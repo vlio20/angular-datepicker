@@ -34,13 +34,26 @@ export class DayTimeCalendarService {
     return _config;
   }
 
-  updateDay(current: Moment, day: Moment): Moment {
+  updateDay(current: Moment, day: Moment, config: IDayTimeCalendarConfig): Moment {
     const time = current ? current : moment();
-    return moment(day.format(DAY_FORMAT) + time.format(TIME_FORMAT), COMBINED_FORMAT);
+    let updated = moment(day.format(DAY_FORMAT) + time.format(TIME_FORMAT), COMBINED_FORMAT)
+
+    if (config.min) {
+      const min = <Moment>config.min;
+      updated = min.isAfter(updated) ? min : updated;
+    }
+
+    if (config.max) {
+      const max = <Moment>config.max;
+      updated = max.isBefore(updated) ? max : updated;
+    }
+
+    return updated;
   }
 
   updateTime(current: Moment, time: Moment): Moment {
     const day = current ? current : moment();
+
     return moment(day.format(DAY_FORMAT) + time.format(TIME_FORMAT), COMBINED_FORMAT);
   }
 }
