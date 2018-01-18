@@ -1,6 +1,11 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+<a name="2.7.4"></a>
+# [2.7.4] (???)
+### Bug Fixes
+- Fixing disabled dates when selecting past/future time from current day  ([c5533de](https://github.com/vlio20/angular-datepicker/commit/c5533de)) closes [#340](https://github.com/vlio20/angular-datepicker/issues/340)
+
 <a name="2.7.3"></a>
 # [2.7.3] (2018-01-13)
 
