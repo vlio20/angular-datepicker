@@ -1,8 +1,9 @@
 import {Injectable} from '@angular/core';
-import * as moment from 'moment';
+import * as momentNs from 'moment';
 import {Moment} from 'moment';
 import {UtilsService} from '../common/services/utils/utils.service';
 import {ITimeSelectConfig, ITimeSelectConfigInternal} from './time-select-config.model';
+const moment = momentNs;
 
 export type TimeUnit = 'hour' | 'minute' | 'second';
 export const FIRST_PM_HOUR = 12;
