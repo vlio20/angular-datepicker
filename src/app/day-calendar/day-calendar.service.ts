@@ -1,11 +1,12 @@
 import {Injectable} from '@angular/core';
-import * as moment from 'moment';
+import * as momentNs from 'moment';
 import {Moment} from 'moment';
 import {WeekDays} from '../common/types/week-days.type';
 import {UtilsService} from '../common/services/utils/utils.service';
 import {IDay} from './day.model';
 import {IDayCalendarConfig, IDayCalendarConfigInternal} from './day-calendar-config.model';
 import {IMonthCalendarConfig} from '../month-calendar/month-calendar-config';
+const moment = momentNs;
 
 @Injectable()
 export class DayCalendarService {

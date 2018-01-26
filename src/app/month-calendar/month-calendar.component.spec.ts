@@ -3,9 +3,10 @@ import {MonthCalendarComponent} from './month-calendar.component';
 import {UtilsService} from '../common/services/utils/utils.service';
 import {CalendarNavComponent} from '../calendar-nav/calendar-nav.component';
 import {MonthCalendarService} from './month-calendar.service';
-import * as moment from 'moment';
-import {IMonth} from './month.model';
+import * as momentNs from 'moment';
 import {Moment} from 'moment';
+import {IMonth} from './month.model';
+const moment = momentNs;
 
 describe('Component: MonthCalendarComponent', () => {
   let component: MonthCalendarComponent;
@@ -37,7 +38,7 @@ describe('Component: MonthCalendarComponent', () => {
       disabled: false,
       text: ''
     };
-    const defaultCssClasses: { [klass: string]: boolean } = {
+    const defaultCssClasses: {[klass: string]: boolean} = {
       'dp-selected': false,
       'dp-current-month': false
     };
