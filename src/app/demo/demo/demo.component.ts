@@ -2,13 +2,14 @@ import debounce from '../../common/decorators/decorators';
 import {IDatePickerConfig} from '../../date-picker/date-picker-config.model';
 import {DatePickerComponent} from '../../date-picker/date-picker.component';
 import {DatePickerDirective} from '../../date-picker/date-picker.directive';
-import {Component, ContentChild, HostListener, ViewChild} from '@angular/core';
+import {Component, HostListener, ViewChild} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import * as moment from 'moment';
+import * as momentNs from 'moment';
 import {Moment} from 'moment';
 import {GaService} from '../services/ga/ga.service';
 import {ECalendarValue} from '../../common/types/calendar-value-enum';
 import {INavEvent} from '../../common/models/navigation-event.model';
+const moment = momentNs;
 
 const GLOBAL_OPTION_KEYS = [
   'theme',

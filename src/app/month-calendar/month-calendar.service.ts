@@ -1,9 +1,10 @@
 import {Injectable} from '@angular/core';
-import * as moment from 'moment';
+import * as momentNs from 'moment';
 import {Moment} from 'moment';
 import {UtilsService} from '../common/services/utils/utils.service';
 import {IMonth} from './month.model';
 import {IMonthCalendarConfig, IMonthCalendarConfigInternal} from './month-calendar-config';
+const moment = momentNs;
 
 @Injectable()
 export class MonthCalendarService {

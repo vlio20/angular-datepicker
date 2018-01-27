@@ -1,11 +1,12 @@
 import {Injectable} from '@angular/core';
-import * as moment from 'moment';
+import * as momentNs from 'moment';
 import {Moment} from 'moment';
 
 import {UtilsService} from '../common/services/utils/utils.service';
 import {DayCalendarService} from '../day-calendar/day-calendar.service';
 import {TimeSelectService} from '../time-select/time-select.service';
 import {IDayTimeCalendarConfig} from './day-time-calendar-config.model';
+const moment = momentNs;
 
 const DAY_FORMAT = 'YYYYMMDD';
 const TIME_FORMAT = 'HH:mm:ss';

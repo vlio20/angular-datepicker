@@ -1,14 +1,14 @@
 import {ECalendarValue} from '../../types/calendar-value-enum';
 import {SingleCalendarValue} from '../../types/single-calendar-value';
 import {Injectable} from '@angular/core';
-import * as moment from 'moment';
+import * as momentNs from 'moment';
 import {Moment, unitOfTime} from 'moment';
 import {CalendarValue} from '../../types/calendar-value';
 import {IDate} from '../../models/date.model';
 import {CalendarMode} from '../../types/calendar-mode';
 import {DateValidator} from '../../types/validator.type';
 import {ICalendarInternal} from '../../models/calendar.model';
-import {forEach} from '@angular/router/src/utils/collection';
+const moment = momentNs;
 
 export interface DateLimits {
   minDate?: SingleCalendarValue;
