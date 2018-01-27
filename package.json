@@ -1,7 +1,7 @@
 {
   "name": "ng2-date-picker",
   "author": "Vlad Ioffe",
-  "version": "2.7.4",
+  "version": "2.7.4-alpha",
   "license": "MIT",
   "main": "index.js",
   "scripts": {
