@@ -17,8 +17,8 @@ import {
   ViewEncapsulation
 } from '@angular/core';
 import {DayCalendarService} from './day-calendar.service';
-import * as moment from 'moment';
-import {Moment} from 'moment';
+import * as momentNs from 'moment';
+import {Moment, unitOfTime} from 'moment';
 import {IDayCalendarConfig, IDayCalendarConfigInternal} from './day-calendar-config.model';
 import {IDay} from './day.model';
 import {
@@ -35,6 +35,7 @@ import {IMonthCalendarConfig} from '../month-calendar/month-calendar-config';
 import {IMonth} from '../month-calendar/month.model';
 import {DateValidator} from '../common/types/validator.type';
 import {INavEvent} from '../common/models/navigation-event.model';
+const moment = momentNs;
 
 @Component({
   selector: 'dp-day-calendar',
@@ -298,7 +299,7 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
     this.onMonthSelect.emit(month);
   }
 
-  moveCalendarsBy(current: Moment, amount: number, granularity: moment.unitOfTime.Base = 'month') {
+  moveCalendarsBy(current: Moment, amount: number, granularity: unitOfTime.Base = 'month') {
     this.currentDateView = current.clone().add(amount, granularity);
     this.cd.markForCheck();
   }

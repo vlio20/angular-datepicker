@@ -1,7 +1,7 @@
 {
   "name": "ng2-date-picker",
   "author": "Vlad Ioffe",
-  "version": "2.7.3",
+  "version": "2.7.4",
   "license": "MIT",
   "main": "index.js",
   "scripts": {
@@ -12,9 +12,9 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "e2e:headless": "ng e2e -- headless",
-    "build:demo": "rm -rf dist/ && ng build --prod --aot=false --bh /angular-datepicker/ && npm run build:index",
     "build:index": "cd build-helpers && node index-maker.js",
-    "build:prod": "node build.js && ngc && cp package.json bin",
+    "build:demo": "rm -rf dist/ && ng build --prod --aot=false --bh /angular-datepicker/ && npm run build:index",
+    "build:prod": "ng-packagr -p package.json",
     "release": "npm run build:prod && npm publish bin",
     "pack": "cd bin && npm pack",
     "postinstall": "opencollective postinstall"
@@ -65,6 +65,7 @@
     "karma-jasmine-html-reporter": "^0.2.2",
     "less": "^2.7.2",
     "ncp": "^2.0.0",
+    "ng-packagr": "^1.6.0",
     "protractor": "~5.1.0",
     "rimraf": "^2.6.1",
     "rxjs": "^5.1.0",
@@ -79,9 +80,13 @@
     "skipTemplateCodegen": true,
     "strictMetadataEmit": true
   },
-  "collective": {
-    "type": "opencollective",
-    "url": "https://opencollective.com/angular-datepicker",
-    "logo": "https://opencollective.com/opencollective/logo.txt"
+  "ngPackage": {
+    "lib": {
+      "entryFile": "src/app/index.ts",
+      "externals": {
+        "moment": "moment"
+      }
+    },
+    "dest": "bin"
   }
 }
