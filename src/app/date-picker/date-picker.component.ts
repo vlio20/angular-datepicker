@@ -93,6 +93,7 @@ export class DatePickerComponent implements OnChanges,
   @Output() open = new EventEmitter<void>();
   @Output() close = new EventEmitter<void>();
   @Output() onChange = new EventEmitter<CalendarValue>();
+  @Output() onBlur = new EventEmitter<CalenderValue>();
   @Output() onGoToCurrent: EventEmitter<void> = new EventEmitter();
   @Output() onLeftNav: EventEmitter<INavEvent> = new EventEmitter();
   @Output() onRightNav: EventEmitter<INavEvent> = new EventEmitter();
@@ -380,6 +381,10 @@ export class DatePickerComponent implements OnChanges,
 
       this.isFocusedTrigger = false;
     }, this.componentConfig.onOpenDelay);
+  }
+
+  inputBlurred(value: string) {
+    this.onBlur.emit(value);
   }
 
   showCalendars() {
