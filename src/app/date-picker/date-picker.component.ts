@@ -93,7 +93,7 @@ export class DatePickerComponent implements OnChanges,
   @Output() open = new EventEmitter<void>();
   @Output() close = new EventEmitter<void>();
   @Output() onChange = new EventEmitter<CalendarValue>();
-  @Output() onBlur = new EventEmitter<CalenderValue>();
+  @Output() onBlur = new EventEmitter<CalendarValue>();
   @Output() onGoToCurrent: EventEmitter<void> = new EventEmitter();
   @Output() onLeftNav: EventEmitter<INavEvent> = new EventEmitter();
   @Output() onRightNav: EventEmitter<INavEvent> = new EventEmitter();
