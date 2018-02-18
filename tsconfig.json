@@ -17,9 +17,6 @@
       "dom"
     ]
   },
-  "include": [
-    "prebuild/app/index.ts"
-  ],
   "exclude": [
     "node_modules",
     "**/*.spec.ts"
