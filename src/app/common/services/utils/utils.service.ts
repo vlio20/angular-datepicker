@@ -8,6 +8,7 @@ import {IDate} from '../../models/date.model';
 import {CalendarMode} from '../../types/calendar-mode';
 import {DateValidator} from '../../types/validator.type';
 import {ICalendarInternal} from '../../models/calendar.model';
+
 const moment = momentNs;
 
 export interface DateLimits {
@@ -125,6 +126,28 @@ export class UtilsService {
       default:
         return value;
     }
+  }
+
+  convertToString(value: CalendarValue, format: string): string {
+    let tmpVal: string[];
+
+    if (typeof value === 'string') {
+      tmpVal = [value];
+    } else if (Array.isArray(value)) {
+      if (value.length) {
+        tmpVal = (<SingleCalendarValue[]>value).map((v) => {
+          return this.convertToMoment(v, format).format(format);
+        });
+      } else {
+        tmpVal = <string[]>value;
+      }
+    } else if (moment.isMoment(value)) {
+      tmpVal = [value.format(format)];
+    } else {
+      return '';
+    }
+
+    return tmpVal.filter(Boolean).join(' | ');
   }
 
   // todo:: add unit test
