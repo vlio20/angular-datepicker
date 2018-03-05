@@ -23,10 +23,18 @@ export class DatePickerDirectiveService {
     const _config: IDatePickerDirectiveConfig = {...config};
     _config.hideInputContainer = true;
 
-    if (baseElement) {
+    let native;
+
+    if (config.inputElementContainer) {
+      native = this.utilsService.getNativeElement(config.inputElementContainer);
+    } else {
+      native = baseElement ? baseElement.nativeElement : null;
+    }
+
+    if (native) {
       _config.inputElementContainer = attachTo
-        ? this.convertToHTMLElement(attachTo, baseElement.nativeElement)
-        : baseElement.nativeElement;
+        ? this.convertToHTMLElement(attachTo, native)
+        : native;
     }
 
     return _config;

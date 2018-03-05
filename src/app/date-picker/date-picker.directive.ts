@@ -19,6 +19,8 @@ import {NgControl} from '@angular/forms';
 import {CalendarValue} from '../common/types/calendar-value';
 import {SingleCalendarValue} from '../common/types/single-calendar-value';
 import {INavEvent} from '../common/models/navigation-event.model';
+import {UtilsService} from '../common/services/utils/utils.service';
+import {ECalendarValue} from '../common/types/calendar-value-enum';
 
 @Directive({
   exportAs: 'dpDayPicker',
@@ -164,7 +166,8 @@ export class DatePickerDirective implements OnInit {
               public elemRef: ElementRef,
               public componentFactoryResolver: ComponentFactoryResolver,
               public service: DatePickerDirectiveService,
-              @Optional() public formControl: NgControl) {
+              @Optional() public formControl: NgControl,
+              public utilsService: UtilsService) {
   }
 
   ngOnInit(): void {
@@ -189,7 +192,8 @@ export class DatePickerDirective implements OnInit {
 
     this.formControl.valueChanges.subscribe((value) => {
       if (value !== this.datePicker.inputElementValue) {
-        this.datePicker.onViewDateChange(value);
+        const strVal = this.utilsService.convertToString(value, this.datePicker.componentConfig.format);
+        this.datePicker.onViewDateChange(strVal);
       }
     });
 
