@@ -1,13 +1,15 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-<a name="2.7.4"></a>
-# [2.7.4] (???)
+<a name="2.7.5"></a>
+# [2.7.5] (???)
 ### Bug Fixes
-- Fixing disabled dates when selecting past/future time from current day  ([18db1ca](https://github.com/vlio20/angular-datepicker/commit/18db1ca)) closes [#340](https://github.com/vlio20/angular-datepicker/issues/340)
+- Fixing `inputElementContainer` which did not work on directive + added to docs ([???](https://github.com/vlio20/angular-datepicker/commit/???)) closes [#359](https://github.com/vlio20/angular-datepicker/issues/359)
+- Fixing Not able to bind to moment, getting TypeError: `(value || "").split is not a function` ([19cee2d](https://github.com/vlio20/angular-datepicker/commit/19cee2d)) closes [#355](https://github.com/vlio20/angular-datepicker/issues/355)
 
-<a name="2.7.3"></a>
-# [2.7.3] (2018-01-13)
+<a name="2.7.4"></a>
+# [2.7.4] (2018-01-13)
+- Fixing disabled dates when selecting past/future time from current day  ([18db1ca](https://github.com/vlio20/angular-datepicker/commit/18db1ca)) closes [#340](https://github.com/vlio20/angular-datepicker/issues/340)
 
 ### Features
 - Navigation events are now dispatched from all relevant components ([2552889](https://github.com/vlio20/angular-datepicker/commit/2552889)) closes [#329](https://github.com/vlio20/angular-datepicker/issues/329)

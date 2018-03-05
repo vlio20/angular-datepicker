@@ -328,4 +328,14 @@ export class UtilsService {
 
     return false;
   }
+
+  getNativeElement(elem: HTMLElement | string): HTMLElement {
+    if (!elem) {
+      return null;
+    } else if (typeof elem === 'string') {
+      return <HTMLElement>document.querySelector(elem);
+    } else {
+      return elem;
+    }
+  }
 }

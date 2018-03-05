@@ -11,7 +11,7 @@ export interface IConfig {
   onOpenDelay?: number;
   disableKeypress?: boolean;
   appendTo?: string | HTMLElement;
-  inputElementContainer?: HTMLElement;
+  inputElementContainer?: HTMLElement | string;
   drops?: TDrops;
   opens?: TOpens;
   hideInputContainer?: boolean;
