@@ -2,7 +2,7 @@
 All notable changes to this project will be documented in this file.
 
 <a name="2.7.5"></a>
-# [2.7.5] (???)
+# [2.7.5] (2018-03-05)
 ### Bug Fixes
 - Adding documentation for `showGoToCurrent` ([b3e3728](https://github.com/vlio20/angular-datepicker/commit/b3e3728)) closes [#357](https://github.com/vlio20/angular-datepicker/issues/357)
 - Fixing `inputElementContainer` which did not work on directive + added to docs ([6344b38](https://github.com/vlio20/angular-datepicker/commit/6344b38)) closes [#359](https://github.com/vlio20/angular-datepicker/issues/359)
