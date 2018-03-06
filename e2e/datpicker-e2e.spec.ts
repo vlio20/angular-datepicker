@@ -20,6 +20,11 @@ describe('dpDayPicker dayPicker', () => {
     expect(page.datePickerPopup.isDisplayed()).toBe(true);
     page.clickOnBody();
     expect(page.datePickerPopup.isDisplayed()).toBe(false);
+
+    page.showOnOutsideClick.click();
+    page.dayPickerInput.click();
+    page.clickOnBody();
+    expect(page.datePickerPopup.isDisplayed()).toBe(true);
   });
 
   it('should check that the theme is added and removed', () => {

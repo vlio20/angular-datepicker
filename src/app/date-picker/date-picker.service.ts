@@ -25,7 +25,8 @@ export class DatePickerService {
     showWeekNumbers: false,
     enableMonthSelector: true,
     showGoToCurrent: true,
-    locale: moment.locale()
+    locale: moment.locale(),
+    hideOnOutsideClick: true
   };
 
   constructor(private utilsService: UtilsService,

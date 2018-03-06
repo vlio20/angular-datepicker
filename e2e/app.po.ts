@@ -118,6 +118,9 @@ export class DemoPage {
   showInputRadio = $('#showInputRadio');
   hideInputRadio = $('#hideInputRadio');
 
+  showOnOutsideClick = $('#showOnOutsideClick');
+  hideOnOutsideClick = $('#hideOnOutsideClick');
+
   hourUpBtn = $(`${this.popupSelector} .dp-time-select-control-hours > .dp-time-select-control-up`);
   hourDownBtn = $(`${this.popupSelector} .dp-time-select-control-hours > .dp-time-select-control-down`);
   hourDisplay = $(`${this.popupSelector} .dp-time-select-display-hours`);

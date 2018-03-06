@@ -15,6 +15,7 @@ export interface IConfig {
   drops?: TDrops;
   opens?: TOpens;
   hideInputContainer?: boolean;
+  hideOnOutsideClick?: boolean;
 }
 
 export interface IDatePickerConfig extends IConfig,
