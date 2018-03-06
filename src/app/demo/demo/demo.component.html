@@ -1062,6 +1062,30 @@
         </div>
       </div>
 
+      <div class="dp-option" *ngIf="isValidConfig('hideOnOutsideClick')">
+        <span class="dp-option-header">
+          Hide on outside click (hideOnOutsideClick):
+        </span>
+        <div class="dp-option-playground">
+          <label>Enabled
+            <input id="hideOnOutsideClick"
+                   type="radio"
+                   [(ngModel)]="config.hideOnOutsideClick"
+                   name="hideOnOutsideClick"
+                   [value]="true"
+                   (ngModelChange)="configChanged('hideOnOutsideClick', 'true')">
+          </label>
+          <label>Disabled
+            <input id="showOnOutsideClick"
+                   type="radio"
+                   [(ngModel)]="config.hideOnOutsideClick"
+                   name="hideOnOutsideClick"
+                   [value]="false"
+                   (ngModelChange)="configChanged('hideOnOutsideClick', 'false')">
+          </label>
+        </div>
+      </div>
+
       <div class="dp-option" *ngIf="isValidConfig('unSelectOnClick')">
         <span class="dp-option-header">
           Allow un select selected date (unSelectOnClick):

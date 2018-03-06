@@ -1,6 +1,11 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+<a name="2.8.0"></a>
+# [2.8.0] (???)
+### Features
+- Show/Hide the picker popup after click outside of the component `hideOnOutsideClick` ([???](https://github.com/vlio20/angular-datepicker/commit/???)) closes [#362](https://github.com/vlio20/angular-datepicker/issues/362)
+
 <a name="2.7.5"></a>
 # [2.7.5] (2018-03-05)
 ### Bug Fixes

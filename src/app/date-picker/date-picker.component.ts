@@ -18,7 +18,9 @@ import {IDatePickerConfig, IDatePickerConfigInternal} from './date-picker-config
 import {IDpDayPickerApi} from './date-picker.api';
 import {DatePickerService} from './date-picker.service';
 import {
-  AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef,
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   ElementRef,
   EventEmitter,
@@ -216,11 +218,13 @@ export class DatePickerComponent implements OnChanges,
   }
 
   onBodyClick() {
-    if (!this.hideStateHelper && this.areCalendarsShown) {
-      this.hideCalendar();
-    }
+    if (this.componentConfig.hideOnOutsideClick) {
+      if (!this.hideStateHelper && this.areCalendarsShown) {
+        this.hideCalendar();
+      }
 
-    this.hideStateHelper = false;
+      this.hideStateHelper = false;
+    }
   }
 
   @HostListener('window:resize')
