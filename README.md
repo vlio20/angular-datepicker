@@ -8,10 +8,10 @@ This is a configurable date-picker build for Angular2 applications and uses Mome
 
 ## Screenshots
 
-### DayTime:  
+### Day:  
 ![Imgur](https://i.imgur.com/NaOiqi7.png)
 
-### Day:
+### DayTime:
 ![Imgur](https://i.imgur.com/XSyhhfv.png)
 
 ### Month:  

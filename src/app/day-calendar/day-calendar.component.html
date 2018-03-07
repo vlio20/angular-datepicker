@@ -28,6 +28,7 @@
       <button type="button"
               class="dp-calendar-day"
               *ngFor="let day of week"
+              [attr.data-date]="day.date.format(componentConfig.format)"
               (click)="dayClicked(day)"
               [disabled]="day.disabled"
               [ngClass]="getDayBtnCssClass(day)"
