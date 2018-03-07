@@ -21,6 +21,7 @@
       <button type="button"
               class="dp-calendar-month"
               *ngFor="let month of monthRow"
+              [attr.data-date]="month.date.format(componentConfig.format)"
               [disabled]="month.disabled"
               [ngClass]="getMonthBtnCssClass(month)"
               (click)="monthClicked(month)"

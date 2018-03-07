@@ -19,8 +19,7 @@ import {NgControl} from '@angular/forms';
 import {CalendarValue} from '../common/types/calendar-value';
 import {SingleCalendarValue} from '../common/types/single-calendar-value';
 import {INavEvent} from '../common/models/navigation-event.model';
-import {UtilsService} from '../common/services/utils/utils.service';
-import {ECalendarValue} from '../common/types/calendar-value-enum';
+import {UtilsService} from '../common/services/utils/utils.service'
 
 @Directive({
   exportAs: 'dpDayPicker',

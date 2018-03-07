@@ -31,7 +31,8 @@ const PICKER_OPTION_KEYS = [
   'opens',
   'placeholder',
   'required',
-  'hideInputContainer'
+  'hideInputContainer',
+  'hideOnOutsideClick'
 ];
 const DAY_PICKER_DIRECTIVE_OPTION_KEYS = [
   'allowMultiSelect',
@@ -220,7 +221,8 @@ export class DemoComponent {
     locale: moment.locale(),
     hideInputContainer: false,
     returnedValueType: ECalendarValue.String,
-    unSelectOnClick: true
+    unSelectOnClick: true,
+    hideOnOutsideClick: true
   };
   isAtTop: boolean = true;
 
