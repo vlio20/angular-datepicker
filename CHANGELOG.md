@@ -2,10 +2,10 @@
 All notable changes to this project will be documented in this file.
 
 <a name="2.8.0"></a>
-# [2.8.0] (???)
+# [2.8.0] (2018-03-07)
 ### Features
-- Add `data-date` attribute to each date button ([???](https://github.com/vlio20/angular-datepicker/commit/???)) closes [#367](https://github.com/vlio20/angular-datepicker/issues/367)
-- Show/Hide the picker popup after click outside of the component `hideOnOutsideClick` ([???](https://github.com/vlio20/angular-datepicker/commit/???)) closes [#362](https://github.com/vlio20/angular-datepicker/issues/362)
+- Add `data-date` attribute to each date button ([052b6a8d](https://github.com/vlio20/angular-datepicker/commit/052b6a8d)) closes [#367](https://github.com/vlio20/angular-datepicker/issues/367)
+- Show/Hide the picker popup after click outside of the component `hideOnOutsideClick` ([362](https://github.com/vlio20/angular-datepicker/commit/362)) closes [#362](https://github.com/vlio20/angular-datepicker/issues/362)
 
 <a name="2.7.5"></a>
 # [2.7.5] (2018-03-05)
