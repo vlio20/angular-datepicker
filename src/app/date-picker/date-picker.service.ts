@@ -8,6 +8,7 @@ import {TimeSelectService} from '../time-select/time-select.service';
 import {DayTimeCalendarService} from '../day-time-calendar/day-time-calendar.service';
 import {ITimeSelectConfig} from '../time-select/time-select-config.model';
 import {CalendarMode} from '../common/types/calendar-mode';
+import {CalendarValue} from '../common/types/calendar-value';
 const moment = momentNs;
 
 @Injectable()

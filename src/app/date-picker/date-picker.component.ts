@@ -409,9 +409,10 @@ export class DatePickerComponent implements OnChanges,
     this.cd.markForCheck();
   }
 
-  onViewDateChange(value: string) {
-    if (this.dayPickerService.isValidInputDateValue(value, this.componentConfig)) {
-      this.selected = this.dayPickerService.convertInputValueToMomentArray(value, this.componentConfig);
+  onViewDateChange(value: CalendarValue) {
+    const strVal = value ? this.utilsService.convertToString(value, this.componentConfig.format) : '';
+    if (this.dayPickerService.isValidInputDateValue(strVal, this.componentConfig)) {
+      this.selected = this.dayPickerService.convertInputValueToMomentArray(strVal, this.componentConfig);
       this.currentDateView = this.selected.length
         ? this.utilsService.getDefaultDisplayDate(
           null,
@@ -422,8 +423,8 @@ export class DatePickerComponent implements OnChanges,
         : this.currentDateView;
     } else {
       this._selected = this.utilsService
-        .getValidMomentArray(value, this.componentConfig.format);
-      this.onChangeCallback(this.processOnChangeCallback(value), true);
+        .getValidMomentArray(strVal, this.componentConfig.format);
+      this.onChangeCallback(this.processOnChangeCallback(strVal), true);
     }
   }
 
