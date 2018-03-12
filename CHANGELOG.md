@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 <a name="2.8.1"></a>
 # [2.8.1] (2018-03-12)
 ### Bug Fixes
-- Resolving moment value in Reactive form ([6055041](https://github.com/vlio20/angular-datepicker/commit/6055041)) closes [#371](https://github.com/vlio20/angular-datepicker/issues/371)
+- Resolving moment value in Reactive form ([git ](https://github.com/vlio20/angular-datepicker/commit/6055041)) closes [#371](https://github.com/vlio20/angular-datepicker/issues/371)
 
 # [2.8.0] (2018-03-07)
 ### Features
