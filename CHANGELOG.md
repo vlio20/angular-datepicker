@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 ### Bug Fixes
 - Resolving moment value in Reactive form ([git ](https://github.com/vlio20/angular-datepicker/commit/6055041)) closes [#371](https://github.com/vlio20/angular-datepicker/issues/371)
 
+<a name="2.8.0"></a>
 # [2.8.0] (2018-03-07)
 ### Features
 - Add `data-date` attribute to each date button ([052b6a8d](https://github.com/vlio20/angular-datepicker/commit/052b6a8d)) closes [#367](https://github.com/vlio20/angular-datepicker/issues/367)
