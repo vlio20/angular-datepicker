@@ -16,8 +16,7 @@
     "build:demo": "rm -rf dist/ && ng build --prod --aot=false --bh /angular-datepicker/ && npm run build:index",
     "build:prod": "ng-packagr -p package.json",
     "release": "npm run build:prod && npm publish bin",
-    "pack": "cd bin && npm pack",
-    "postinstall": "opencollective postinstall"
+    "pack": "cd bin && npm pack"
   },
   "repository": {
     "type": "git",
