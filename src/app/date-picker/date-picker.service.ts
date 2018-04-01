@@ -82,7 +82,7 @@ export class DatePickerService {
       returnedValueType: pickerConfig.returnedValueType,
       showGoToCurrent: pickerConfig.showGoToCurrent,
       unSelectOnClick: pickerConfig.unSelectOnClick,
-      monthInRow: pickerConfig.monthInRow,
+      monthInRow: pickerConfig.monthInRow
     };
   }
 

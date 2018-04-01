@@ -38,7 +38,7 @@ export class MonthCalendarService {
 
   generateYear(config: IMonthCalendarConfig, year: Moment, selected: Moment[] = null): IMonth[][] {
     const index = year.clone().startOf('year');
-    const inRow = config.monthInRow && 12 % config.monthInRow == 0 ? config.monthInRow : 4;
+    const inRow = config.monthInRow && 12 % config.monthInRow === 0 ? config.monthInRow : 4;
     return this.utilsService.createArray(12 / inRow).map(() => {
       return this.utilsService.createArray(inRow).map(() => {
         const date = index.clone();
