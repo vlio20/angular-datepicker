@@ -15,6 +15,7 @@ export interface IConfig {
   allowMultiSelect?: boolean;
   monthFormat?: string;
   monthFormatter?: (month: Moment) => string;
+  monthInRow?: 2 | 3 | 4 | 6
   enableMonthSelector?: boolean;
   yearFormat?: string;
   yearFormatter?: (year: Moment) => string;
