@@ -224,7 +224,7 @@ export class DemoComponent {
     returnedValueType: ECalendarValue.String,
     unSelectOnClick: true,
     hideOnOutsideClick: true,
-    monthInRow: 3,
+    monthInRow: 3
   };
   isAtTop: boolean = true;
 
