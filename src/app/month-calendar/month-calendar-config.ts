@@ -12,6 +12,7 @@ export interface IConfig {
   monthBtnFormat?: string;
   monthBtnFormatter?: (day: Moment) => string;
   monthBtnCssClassCallback?: (day: Moment) => string;
+  monthInRow?: 2 | 3 | 4 | 6;
   multipleYearsNavigateBy?: number;
   showMultipleYearsNavigation?: boolean;
   returnedValueType?: ECalendarValue;

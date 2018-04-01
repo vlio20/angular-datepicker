@@ -65,6 +65,7 @@ const MONTH_CALENDAR_OPTION_KEYS = [
   'showGoToCurrent',
   'unSelectOnClick',
   'moveCalendarTo',
+  'monthInRow',
   ...GLOBAL_OPTION_KEYS
 ];
 const DAY_CALENDAR_OPTION_KEYS = [
@@ -222,7 +223,8 @@ export class DemoComponent {
     hideInputContainer: false,
     returnedValueType: ECalendarValue.String,
     unSelectOnClick: true,
-    hideOnOutsideClick: true
+    hideOnOutsideClick: true,
+    monthInRow: 3,
   };
   isAtTop: boolean = true;
 
