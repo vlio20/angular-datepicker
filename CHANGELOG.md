@@ -2,12 +2,12 @@
 All notable changes to this project will be documented in this file.
 
 <a name="2.9.0"></a>
-# [2.9.0] (???)
+# [2.9.0] (2018-04-15)
 ### Features
-- On Select Output event  ([???](https://github.com/vlio20/angular-datepicker/commit/???)) closes [#389](https://github.com/vlio20/angular-datepicker/issues/389)
+- On Select Output event  ([a8bdf56](https://github.com/vlio20/angular-datepicker/commit/a8bdf56)) closes [#389](https://github.com/vlio20/angular-datepicker/issues/389)
 
 ### Improvements
-- Moving to node 8  ([???](https://github.com/vlio20/angular-datepicker/commit/???)) closes [#391](https://github.com/vlio20/angular-datepicker/issues/391)
+- Moving to node 8  ([cddc2ba](https://github.com/vlio20/angular-datepicker/commit/cddc2ba)) closes [#391](https://github.com/vlio20/angular-datepicker/issues/391)
 
 <a name="2.8.1"></a>
 # [2.8.1] (2018-03-13)
