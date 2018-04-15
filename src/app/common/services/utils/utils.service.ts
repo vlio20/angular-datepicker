@@ -164,13 +164,12 @@ export class UtilsService {
                  currentlySelected: Moment[],
                  date: IDate,
                  granularity: unitOfTime.Base = 'day'): Moment[] {
-    const isSelected = !date.selected;
     if (isMultiple) {
-      return isSelected
+      return !date.selected
         ? currentlySelected.concat([date.date])
         : currentlySelected.filter(d => !d.isSame(date.date, granularity));
     } else {
-      return isSelected ? [date.date] : [];
+      return !date.selected ? [date.date] : [];
     }
   }
 
