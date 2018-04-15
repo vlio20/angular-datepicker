@@ -157,6 +157,29 @@ class MyContainer {
 }  
 ```
 
+If you want to use API with [`Directive`](#directive) - you can do it by using `#dateDirectivePicker`, like below:
+```ts
+import {Component, ViewChild} from '@angular/core';
+import {DatePickerDirective} from 'ng2-date-picker';
+
+@Component({
+selector: 'my-container',
+template: `
+<div>
+    <input #dateDirectivePicker="dpDayPicker">
+    <button (click)="close()"></button>
+</div>
+`
+});
+class MyContainer {
+    @ViewChild('dateDirectivePicker') datePickerDirective: DatePickerDirective;
+	
+    close() {
+         this.datePickerDirective.api.close();
+    }
+}  
+```
+
 Here is the list of APIs:  
 
 | Name                 | Signature                          | Description                      |
