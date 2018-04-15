@@ -9,7 +9,7 @@ import {Moment} from 'moment';
 import {GaService} from '../services/ga/ga.service';
 import {ECalendarValue} from '../../common/types/calendar-value-enum';
 import {INavEvent} from '../../common/models/navigation-event.model';
-import {ISelectionEvent} from '../../';
+import {ISelectionEvent} from '../../common/types/selection-evet.model';
 const moment = momentNs;
 
 const GLOBAL_OPTION_KEYS = [
