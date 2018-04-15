@@ -13,7 +13,7 @@ describe('dpDayPicker reactive directive', () => {
     page.dayDirectiveReactiveMenu.click();
   });
 
-  it('should check that the popup appended to body', () => {
+  xit('should check that the popup appended to body', () => {
     page.dayDirectiveReactiveInput.click();
     expect(page.datePickerPopup.isDisplayed()).toBe(true);
     page.clickOnBody();
