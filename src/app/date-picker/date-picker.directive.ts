@@ -20,6 +20,7 @@ import {CalendarValue} from '../common/types/calendar-value';
 import {SingleCalendarValue} from '../common/types/single-calendar-value';
 import {INavEvent} from '../common/models/navigation-event.model';
 import {UtilsService} from '../common/services/utils/utils.service'
+import {ISelectionEvent} from '../common/types/selection-evet.model';
 
 @Directive({
   exportAs: 'dpDayPicker',
@@ -157,6 +158,7 @@ export class DatePickerDirective implements OnInit {
   @Output() onGoToCurrent: EventEmitter<void> = new EventEmitter();
   @Output() onLeftNav: EventEmitter<INavEvent> = new EventEmitter();
   @Output() onRightNav: EventEmitter<INavEvent> = new EventEmitter();
+  @Output() onSelect: EventEmitter<ISelectionEvent> = new EventEmitter();
 
   public datePicker: DatePickerComponent;
   public api: IDpDayPickerApi;
@@ -256,6 +258,7 @@ export class DatePickerDirective implements OnInit {
       this.datePicker.onGoToCurrent = this.onGoToCurrent;
       this.datePicker.onLeftNav = this.onLeftNav;
       this.datePicker.onRightNav = this.onRightNav;
+      this.datePicker.onSelect = this.onSelect;
 
       this.datePicker.init();
 

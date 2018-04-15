@@ -9,6 +9,7 @@ import {Moment} from 'moment';
 import {GaService} from '../services/ga/ga.service';
 import {ECalendarValue} from '../../common/types/calendar-value-enum';
 import {INavEvent} from '../../common/models/navigation-event.model';
+import {ISelectionEvent} from '../../common/types/selection-evet.model';
 const moment = momentNs;
 
 const GLOBAL_OPTION_KEYS = [
@@ -386,5 +387,9 @@ export class DemoComponent {
   donateClicked() {
     this.gaService.emitEvent('donate', 'clicked');
     this.donateForm.nativeElement.submit();
+  }
+
+  onSelect(data: ISelectionEvent) {
+    console.log(data);
   }
 }

@@ -66,6 +66,7 @@ Put the dp-date-picker component wherever you need it.
 | onGoToCurrent        | void                                | All Pickers               | This event will be emitted when click was made on go to current button.                                                                                          |
 | onLeftNav            | void                                | All Pickers               | This event will be emitted when click was made on left navigation button.                                                                                        |
 | onRightNav           | void                                | All Pickers               | This event will be emitted when click was made on right navigation button.                                                                                       |
+| onSelect             | ISelectionEvent                     | All Pickers               | This event will be emitted when a date was selected via click or input change (with appropriate indication)                                                      |
 
 ### Configuration:  
 In order to provide configurations to the date-picker you need to pass it to the `dp-date-picker` component:  

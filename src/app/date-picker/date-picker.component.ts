@@ -50,6 +50,8 @@ import {DateValidator} from '../common/types/validator.type';
 import {MonthCalendarComponent} from '../month-calendar/month-calendar.component';
 import {DayTimeCalendarComponent} from '../day-time-calendar/day-time-calendar.component';
 import {INavEvent} from '../common/models/navigation-event.model';
+import {SelectEvent} from '../common/types/selection-evet.enum.';
+import {ISelectionEvent} from '../common/types/selection-evet.model';
 
 @Component({
   selector: 'dp-date-picker',
@@ -98,6 +100,7 @@ export class DatePickerComponent implements OnChanges,
   @Output() onGoToCurrent: EventEmitter<void> = new EventEmitter();
   @Output() onLeftNav: EventEmitter<INavEvent> = new EventEmitter();
   @Output() onRightNav: EventEmitter<INavEvent> = new EventEmitter();
+  @Output() onSelect: EventEmitter<ISelectionEvent> = new EventEmitter();
 
   @ViewChild('container') calendarContainer: ElementRef;
   @ViewChild('dayCalendar') dayCalendarRef: DayCalendarComponent;
@@ -421,6 +424,12 @@ export class DatePickerComponent implements OnChanges,
           this.componentConfig.min
         )
         : this.currentDateView;
+
+      this.onSelect.emit({
+        date: strVal,
+        type: SelectEvent.INPUT,
+        granularity: null
+      })
     } else {
       this._selected = this.utilsService
         .getValidMomentArray(strVal, this.componentConfig.format);
@@ -428,12 +437,18 @@ export class DatePickerComponent implements OnChanges,
     }
   }
 
-  dateSelected(date: IDate, granularity: unitOfTime.Base, ignoreClose?: boolean) {
+  dateSelected(date: IDate, granularity: unitOfTime.Base, type: SelectEvent, ignoreClose?: boolean) {
     this.selected = this.utilsService
       .updateSelected(this.componentConfig.allowMultiSelect, this.selected, date, granularity);
     if (!ignoreClose) {
       this.onDateClick();
     }
+
+    this.onSelect.emit({
+      date: date.date,
+      granularity,
+      type
+    });
   }
 
   onDateClick() {

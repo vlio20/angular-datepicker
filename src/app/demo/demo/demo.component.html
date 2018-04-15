@@ -92,6 +92,7 @@
                         (close)="closed()"
                         (onLeftNav)="onLeftNav($event)"
                         (onRightNav)="onRightNav($event)"
+                        (onSelect)="onSelect($event)"
                         [disabled]="disabled"
                         [minDate]="validationMinDate"
                         [maxDate]="validationMaxDate"
@@ -120,6 +121,7 @@
             [minDate]="validationMinDate"
             [maxDate]="validationMaxDate"
             [config]="config"
+            (onSelect)="onSelect($event)"
             (onLeftNav)="onLeftNav($event)"
             (onRightNav)="onRightNav($event)">
         </dp-day-time-calendar>
@@ -153,6 +155,7 @@
                [maxDate]="validationMaxDate"
                [disabled]="disabled"
                [required]="required"
+               (onSelect)="onSelect($event)"
                (onChange)="log($event)"
                (onLeftNav)="onLeftNav($event)"
                (onRightNav)="onRightNav($event)"/>
@@ -182,6 +185,7 @@
                         [placeholder]="placeholder"
                         [config]="config"
                         [theme]="material ? 'dp-material dp-main' : 'dp-main'"
+                        (onSelect)="onSelect($event)"
                         (onLeftNav)="onLeftNav($event)"
                         (onRightNav)="onRightNav($event)">
         </dp-date-picker>
@@ -208,6 +212,7 @@
             [maxDate]="validationMaxDate"
             [required]="required"
             [config]="config"
+            (onSelect)="onSelect($event)"
             (onLeftNav)="onLeftNav($event)"
             (onRightNav)="onRightNav($event)">
         </dp-day-calendar>
@@ -234,6 +239,7 @@
                [maxDate]="validationMaxDate"
                [disabled]="disabled"
                [required]="required"
+               (onSelect)="onSelect($event)"
                (onChange)="log($event)"
                (onLeftNav)="onLeftNav($event)"
                (onRightNav)="onRightNav($event)"/>
@@ -258,6 +264,7 @@
                  [placeholder]="placeholder"
                  (onChange)="date = $event; log($event)"
                  [required]="required"
+                 (onSelect)="onSelect($event)"
                  (open)="opened()"
                  (close)="closed()"
                  (onLeftNav)="onLeftNav($event)"
@@ -297,6 +304,7 @@
                         [placeholder]="placeholder"
                         [config]="config"
                         [theme]="material ? 'dp-material dp-main' : 'dp-main'"
+                        (onSelect)="onSelect($event)"
                         (onLeftNav)="onLeftNav($event)"
                         (onRightNav)="onRightNav($event)">
         </dp-date-picker>
@@ -326,6 +334,7 @@
             [maxDate]="validationMaxDate"
             [required]="required"
             [config]="config"
+            (onSelect)="onSelect($event)"
             (onLeftNav)="onLeftNav($event)"
             (onRightNav)="onRightNav($event)">
         </dp-month-calendar>
@@ -356,6 +365,7 @@
                [disabled]="disabled"
                [required]="required"
                (onChange)="log($event)"
+               (onSelect)="onSelect($event)"
                (onLeftNav)="onLeftNav($event)"
                (onRightNav)="onRightNav($event)"/>
         <div class="dp-validations">
@@ -376,6 +386,7 @@
                         [mode]="'time'"
                         (open)="opened()"
                         (close)="closed()"
+                        (onSelect)="onSelect($event)"
                         [disabled]="disabled"
                         [minTime]="validationMinTime"
                         [maxTime]="validationMaxTime"
@@ -406,6 +417,7 @@
             [theme]="material ? 'dp-material dp-main' : 'dp-main'"
             [(ngModel)]="date"
             (ngModelChange)="log($event)"
+            (onSelect)="onSelect($event)"
             [minDate]="validationMinDate"
             [maxDate]="validationMaxDate"
             [minTime]="validationMinTime"
@@ -435,6 +447,7 @@
                mode="time"
                (open)="opened()"
                (close)="closed()"
+               (onSelect)="onSelect($event)"
                [(ngModel)]="date"
                [placeholder]="placeholder"
                [minTime]="validationMinTime"
