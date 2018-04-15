@@ -1,7 +1,7 @@
 {
   "name": "ng2-date-picker",
   "author": "Vlad Ioffe",
-  "version": "2.8.0",
+  "version": "2.8.1",
   "license": "MIT",
   "main": "index.js",
   "scripts": {
@@ -16,8 +16,7 @@
     "build:demo": "rm -rf dist/ && ng build --prod --aot=false --bh /angular-datepicker/ && npm run build:index",
     "build:prod": "ng-packagr -p package.json",
     "release": "npm run build:prod && npm publish bin",
-    "pack": "cd bin && npm pack",
-    "postinstall": "opencollective postinstall"
+    "pack": "cd bin && npm pack"
   },
   "repository": {
     "type": "git",
@@ -36,8 +35,7 @@
     "angular-datepicker"
   ],
   "dependencies": {
-    "moment": "^2.17.1",
-    "opencollective": "^1.0.3"
+    "moment": "^2.17.1"
   },
   "devDependencies": {
     "@angular/cli": "^1.6.1",
