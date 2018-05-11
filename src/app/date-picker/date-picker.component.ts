@@ -127,6 +127,7 @@ export class DatePickerComponent implements OnChanges,
   handleInnerElementClickUnlisteners: Function[] = [];
   globalListnersUnlisteners: Function[] = [];
   validateFn: DateValidator;
+  SelectEvent = SelectEvent;
   api: IDpDayPickerApi = {
     open: this.showCalendars.bind(this),
     close: this.hideCalendar.bind(this),
@@ -435,6 +436,8 @@ export class DatePickerComponent implements OnChanges,
         .getValidMomentArray(strVal, this.componentConfig.format);
       this.onChangeCallback(this.processOnChangeCallback(strVal), true);
     }
+
+    this.dateSelected(new Date() as any, 'year', SelectEvent.SELECTION)
   }
 
   dateSelected(date: IDate, granularity: unitOfTime.Base, type: SelectEvent, ignoreClose?: boolean) {
