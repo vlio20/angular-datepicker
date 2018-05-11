@@ -29,8 +29,8 @@ before_install:
 
 before_script:
 - npm run lint
-- npm test -- --single-run --no-progress --browser=ChromeNoSandbox
-- npm run e2e:headless -- --no-progress --config=protractor-ci.conf.js
+- npm test -- --watch=false --no-progress
+- npm run e2e:headless
 
 script:
 - npm run build:demo
