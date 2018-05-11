@@ -11,7 +11,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "e2e:headless": "ng e2e -- headless",
+    "e2e:headless": "ng e2e --headless",
     "build:index": "cd build-helpers && node index-maker.js",
     "build:demo":
       "rm -rf dist/ && ng build --prod --aot=false --bh /angular-datepicker/ && npm run build:index",
