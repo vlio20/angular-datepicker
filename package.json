@@ -13,7 +13,8 @@
     "e2e": "ng e2e",
     "e2e:headless": "ng e2e -- headless",
     "build:index": "cd build-helpers && node index-maker.js",
-    "build:demo": "rm -rf dist/ && ng build --prod --aot=false --bh /angular-datepicker/ && npm run build:index",
+    "build:demo":
+      "rm -rf dist/ && ng build --prod --aot=false --bh /angular-datepicker/ && npm run build:index",
     "build:prod": "ng-packagr -p package.json",
     "release": "npm run build:prod && npm publish bin",
     "pack": "cd bin && npm pack"
@@ -38,17 +39,18 @@
     "moment": "^2.17.1"
   },
   "devDependencies": {
-    "@angular/cli": "^1.6.1",
-    "@angular/common": "^5.1.1",
-    "@angular/compiler": "^5.1.1",
-    "@angular/compiler-cli": "^5.1.1",
-    "@angular/core": "^5.1.1",
-    "@angular/forms": "^5.1.1",
-    "@angular/platform-browser": "^5.1.1",
-    "@angular/platform-browser-dynamic": "^5.1.1",
-    "@angular/router": "^5.1.1",
+    "@angular/cli": "6.0.1",
+    "@angular/common": "6.0.1",
+    "@angular/compiler": "6.0.1",
+    "@angular/compiler-cli": "6.0.1",
+    "@angular/core": "6.0.1",
+    "@angular/forms": "6.0.1",
+    "@angular/platform-browser": "6.0.1",
+    "@angular/platform-browser-dynamic": "6.0.1",
+    "@angular/router": "6.0.1",
     "@types/google.analytics": "0.0.33",
-    "@types/jasmine": "https://registry.npmjs.org/@types/jasmine/-/jasmine-2.5.38.tgz",
+    "@types/jasmine":
+      "https://registry.npmjs.org/@types/jasmine/-/jasmine-2.5.38.tgz",
     "@types/node": "https://registry.npmjs.org/@types/node/-/node-6.0.94.tgz",
     "classlist.js": "^1.1.20150312",
     "codelyzer": "^4.0.2",
@@ -63,16 +65,17 @@
     "karma-jasmine-html-reporter": "^0.2.2",
     "less": "^2.7.2",
     "ncp": "^2.0.0",
-    "ng-packagr": "^2.4.2",
+    "ng-packagr": "^3.0.0-rc.4",
     "protractor": "~5.1.0",
     "rimraf": "^2.6.1",
-    "rxjs": "^5.1.0",
+    "rxjs": "^6.1.0",
     "ts-node": "^4.0.2",
     "tslint": "~5.8.0",
-    "typescript": "~2.4.2",
+    "typescript": "2.7.2",
     "uglify-js": "^2.8.12",
     "web-animations-js": "^2.2.5",
-    "zone.js": "^0.8.4"
+    "zone.js": "^0.8.26",
+    "@angular-devkit/build-angular": "~0.6.1"
   },
   "angularCompilerOptions": {
     "skipTemplateCodegen": true,
@@ -86,9 +89,7 @@
       }
     },
     "dest": "bin",
-    "whitelistedNonPeerDependencies": [
-      "moment"
-    ]
+    "whitelistedNonPeerDependencies": ["moment"]
   },
   "dependencies": {
     "moment": "^2.22.1"
