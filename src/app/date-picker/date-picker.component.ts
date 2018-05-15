@@ -127,7 +127,6 @@ export class DatePickerComponent implements OnChanges,
   handleInnerElementClickUnlisteners: Function[] = [];
   globalListnersUnlisteners: Function[] = [];
   validateFn: DateValidator;
-  SelectEvent = SelectEvent;
   api: IDpDayPickerApi = {
     open: this.showCalendars.bind(this),
     close: this.hideCalendar.bind(this),
