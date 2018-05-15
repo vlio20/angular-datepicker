@@ -133,6 +133,7 @@ export class DatePickerComponent implements OnChanges,
     close: this.hideCalendar.bind(this),
     moveCalendarTo: this.moveCalendarTo.bind(this)
   };
+  selectEvent = SelectEvent;
 
   set selected(selected: Moment[]) {
     this._selected = selected;

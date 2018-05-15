@@ -22,7 +22,7 @@
                        [ngModel]="_selected"
                        [displayDate]="displayDate"
                        [theme]="theme"
-                       (onSelect)="dateSelected($event, 'day', SelectEvent.SELECTION)"
+                       (onSelect)="dateSelected($event, 'day', SelectEvent.SELECTION, false)"
                        (onGoToCurrent)="onGoToCurrent.emit()"
                        (onLeftNav)="onLeftNavClick($event)"
                        (onRightNav)="onRightNavClick($event)">
@@ -34,7 +34,7 @@
                          [ngModel]="_selected"
                          [displayDate]="displayDate"
                          [theme]="theme"
-                         (onSelect)="dateSelected($event, 'month', SelectEvent.SELECTION)"
+                         (onSelect)="dateSelected($event, 'month', SelectEvent.SELECTION, false)"
                          (onGoToCurrent)="onGoToCurrent.emit()"
                          (onLeftNav)="onLeftNavClick($event)"
                          (onRightNav)="onRightNavClick($event)">
