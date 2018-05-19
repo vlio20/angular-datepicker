@@ -22,7 +22,7 @@
                        [ngModel]="_selected"
                        [displayDate]="displayDate"
                        [theme]="theme"
-                       (onSelect)="dateSelected($event, 'day', 'selection')"
+                       (onSelect)="dateSelected($event, 'day', selectEvent.SELECTION, false)"
                        (onGoToCurrent)="onGoToCurrent.emit()"
                        (onLeftNav)="onLeftNavClick($event)"
                        (onRightNav)="onRightNavClick($event)">
@@ -34,7 +34,7 @@
                          [ngModel]="_selected"
                          [displayDate]="displayDate"
                          [theme]="theme"
-                         (onSelect)="dateSelected($event, 'month', 'selection')"
+                         (onSelect)="dateSelected($event, 'month', selectEvent.SELECTION, false)"
                          (onGoToCurrent)="onGoToCurrent.emit()"
                          (onLeftNav)="onLeftNavClick($event)"
                          (onRightNav)="onRightNavClick($event)">
@@ -44,7 +44,7 @@
                       *ngSwitchCase="'time'"
                       [config]="timeSelectConfig"
                       [ngModel]="_selected && _selected[0]"
-                      (onChange)="dateSelected($event, 'second', 'selection', true)"
+                      (onChange)="dateSelected($event, 'second', selectEvent.SELECTION, true)"
                       [theme]="theme">
       </dp-time-select>
 
@@ -54,7 +54,7 @@
                             [displayDate]="displayDate"
                             [ngModel]="_selected && _selected[0]"
                             [theme]="theme"
-                            (onChange)="dateSelected($event, 'second', 'selection', true)"
+                            (onChange)="dateSelected($event, 'second', selectEvent.SELECTION, true)"
                             (onGoToCurrent)="onGoToCurrent.emit()"
                             (onLeftNav)="onLeftNavClick($event)"
                             (onRightNav)="onRightNavClick($event)">

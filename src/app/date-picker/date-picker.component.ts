@@ -132,6 +132,7 @@ export class DatePickerComponent implements OnChanges,
     close: this.hideCalendar.bind(this),
     moveCalendarTo: this.moveCalendarTo.bind(this)
   };
+  selectEvent = SelectEvent;
 
   set selected(selected: Moment[]) {
     this._selected = selected;
@@ -435,6 +436,8 @@ export class DatePickerComponent implements OnChanges,
         .getValidMomentArray(strVal, this.componentConfig.format);
       this.onChangeCallback(this.processOnChangeCallback(strVal), true);
     }
+
+    this.dateSelected(new Date() as any, 'year', SelectEvent.SELECTION)
   }
 
   dateSelected(date: IDate, granularity: unitOfTime.Base, type: SelectEvent, ignoreClose?: boolean) {
