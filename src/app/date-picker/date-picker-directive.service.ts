@@ -7,7 +7,7 @@ export class DatePickerDirectiveService {
   constructor(public utilsService: UtilsService) {
   }
 
-  convertToHTMLElement(attachTo: ElementRef | string, baseElement: HTMLElement): HTMLElement {
+  convertToHTMLElement(attachTo: ElementRef | string, baseElement: HTMLElement): HTMLElement | string {
     if (typeof attachTo === 'string') {
       return this.utilsService.closestParent(baseElement, attachTo);
     } else if (attachTo) {

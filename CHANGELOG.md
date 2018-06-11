@@ -1,3 +1,20 @@
+<a name="2.9.0"></a>
+# [2.9.0](https://github.com/vlio20/angular-datepicker/compare/2.3.1...2.9.0) (2018-06-11)
+
+
+### Bug Fixes
+
+* date picker popup top alignment issue ([#171](https://github.com/vlio20/angular-datepicker/issues/171)) ([e918d37](https://github.com/vlio20/angular-datepicker/commit/e918d37))
+* **build:** Fix build with skipTemplateCodegen ([#337](https://github.com/vlio20/angular-datepicker/issues/337)) ([abfc847](https://github.com/vlio20/angular-datepicker/commit/abfc847)), closes [#336](https://github.com/vlio20/angular-datepicker/issues/336)
+
+
+### Features
+
+* **date-picker:** Add OnPush change detection strategy ([#207](https://github.com/vlio20/angular-datepicker/issues/207)) ([ae3e3ec](https://github.com/vlio20/angular-datepicker/commit/ae3e3ec))
+* support angular v6 ([78db920](https://github.com/vlio20/angular-datepicker/commit/78db920))
+
+
+
 # Changelog
 All notable changes to this project will be documented in this file.
 

@@ -1,6 +1,7 @@
 import {inject, TestBed} from '@angular/core/testing';
 import {DatePickerDirectiveService} from './date-picker-directive.service';
 import {UtilsService} from '../common/services/utils/utils.service';
+import { IDatePickerDirectiveConfig } from './date-picker-directive-config.model';
 
 describe('Service: DatePickerDirective', () => {
   beforeEach(() => {
@@ -40,7 +41,7 @@ describe('Service: DatePickerDirective', () => {
 
       const fakeElement = {};
       const config3 = service.getConfig({allowMultiSelect: true}, {nativeElement: fakeElement});
-      expect(config3).toEqual({
+      expect(config3).toEqual(<IDatePickerDirectiveConfig>{
         allowMultiSelect: true,
         hideInputContainer: true,
         inputElementContainer: fakeElement
@@ -50,7 +51,7 @@ describe('Service: DatePickerDirective', () => {
       const fakeAttachElementRef = {nativeElement: {}};
       const fakeElementRef = {nativeElement: fakeElement};
       const config4 = service.getConfig({allowMultiSelect: true}, fakeElementRef, fakeAttachElementRef);
-      expect(config4).toEqual({
+      expect(config4).toEqual(<IDatePickerDirectiveConfig>{
         allowMultiSelect: true,
         hideInputContainer: true,
         inputElementContainer: 'fakeElement'
@@ -58,7 +59,7 @@ describe('Service: DatePickerDirective', () => {
       expect(service.convertToHTMLElement).toHaveBeenCalledWith(fakeAttachElementRef, fakeElement);
 
       const config5 = service.getConfig({allowMultiSelect: true}, fakeElementRef, 'someSelector');
-      expect(config5).toEqual({
+      expect(config5).toEqual(<IDatePickerDirectiveConfig>{
         allowMultiSelect: true,
         hideInputContainer: true,
         inputElementContainer: 'fakeElement'
