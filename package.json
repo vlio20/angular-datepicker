@@ -38,6 +38,7 @@
     "moment": "^2.17.1"
   },
   "devDependencies": {
+    "@angular-devkit/build-angular": "~0.6.1",
     "@angular/cli": "6.0.1",
     "@angular/common": "6.0.1",
     "@angular/compiler": "6.0.1",
@@ -48,6 +49,7 @@
     "@angular/platform-browser-dynamic": "6.0.1",
     "@angular/router": "6.0.1",
     "@types/google.analytics": "0.0.33",
+    "@types/jasmine": "^2.8.8",
     "classlist.js": "^1.1.20150312",
     "codelyzer": "^4.0.2",
     "core-js": "^2.4.1",
@@ -70,8 +72,7 @@
     "typescript": "2.7.2",
     "uglify-js": "^2.8.12",
     "web-animations-js": "^2.2.5",
-    "zone.js": "^0.8.26",
-    "@angular-devkit/build-angular": "~0.6.1"
+    "zone.js": "^0.8.26"
   },
   "angularCompilerOptions": {
     "skipTemplateCodegen": true,
