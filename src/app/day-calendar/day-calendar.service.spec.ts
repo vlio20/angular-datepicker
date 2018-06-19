@@ -26,11 +26,11 @@ describe('Service: Calendar', () => {
   it('should check the generateDaysMap method', inject([DayCalendarService],
     (service: DayCalendarService) => {
       expect(service.generateDaysMap('su'))
-        .toEqual({'su': 0, 'mo': 1, 'tu': 2, 'we': 3, 'th': 4, 'fr': 5, 'sa': 6});
+        .toEqual(<any>{'su': 0, 'mo': 1, 'tu': 2, 'we': 3, 'th': 4, 'fr': 5, 'sa': 6});
       expect(service.generateDaysMap('mo'))
-        .toEqual({'mo': 0, 'tu': 1, 'we': 2, 'th': 3, 'fr': 4, 'sa': 5, 'su': 6});
+        .toEqual(<any>{'mo': 0, 'tu': 1, 'we': 2, 'th': 3, 'fr': 4, 'sa': 5, 'su': 6});
       expect(service.generateDaysMap('we'))
-        .toEqual({'we': 0, 'th': 1, 'fr': 2, 'sa': 3, 'su': 4, 'mo': 5, 'tu': 6});
+        .toEqual(<any>{'we': 0, 'th': 1, 'fr': 2, 'sa': 3, 'su': 4, 'mo': 5, 'tu': 6});
     }
   ));
 

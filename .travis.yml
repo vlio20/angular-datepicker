@@ -2,7 +2,7 @@ sudo: required
 dist: trusty
 language: node_js
 node_js:
-  - '6.11.1'
+  - '8.11.1'
 
 cache:
   directories:
@@ -29,7 +29,7 @@ before_install:
 
 before_script:
 - npm run lint
-- npm test -- -watch=false
+- npm test -- --watch=false --no-progress
 - npm run e2e:headless
 
 script:
