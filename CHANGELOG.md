@@ -1,6 +1,11 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+<a name="2.10.0"></a>
+# [2.10.0] (2018-06-19)
+### Features
+- Angular 6 upgrade  ([370c060](https://github.com/vlio20/angular-datepicker/commit/370c060)) closes [#403](https://github.com/vlio20/angular-datepicker/issues/403)
+
 <a name="2.9.0"></a>
 # [2.9.0] (2018-04-15)
 ### Features
