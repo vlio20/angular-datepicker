@@ -15,10 +15,11 @@ describe('Service: MonthCalendarService', () => {
   it('should check the generateYear method', inject([MonthCalendarService], (service: MonthCalendarService) => {
     const year = moment('14-01-1987', 'DD-MM-YYYY');
     const selected = moment('14-01-1987', 'DD-MM-YYYY');
-    const genYear = service.generateYear({}, year, [selected]);
+    const genYear = service.generateYear({ monthInRow: 3 }, year, [selected]);
 
     const current = year.clone().startOf('year');
     genYear.forEach((row) => {
+      expect(row.length).toBe(3);
       row.forEach((month) => {
         expect(month.date.isSame(current, 'month')).toBe(true);
         if (month.date.format('MMM') === 'Jan') {
