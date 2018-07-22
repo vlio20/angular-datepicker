@@ -8,8 +8,8 @@ This is a configurable date-picker build for Angular2 applications and uses Mome
 [DEMO](https://vlio20.github.io/angular-datepicker/)  
   
 # Support  
-This component is 100% Open Source, but if you want you issues to be resolved more quickly you might want to promote it via    
-my gig on [Fiverr](https://www.fiverr.com/vladioffe/add-features-and-fix-bugs?arrived_from_manage_gigs=true&display_share=true). This way I will give higher priority to your bugfix/feather request.   
+This component is 100% Open Source, but if you want your issues to be resolved more quickly, you might want to promote it via    
+my gig on [Fiverr](https://www.fiverr.com/vladioffe/add-features-and-fix-bugs?arrived_from_manage_gigs=true&display_share=true). This way I will give a higher priority for your bug/feather request.   
 <a href="https://www.fiverr.com/vladioffe/add-features-and-fix-bugs?arrived_from_manage_gigs=true&display_share=true" target="_blank">
   <img src="https://assetsv2.fiverrcdn.com/assets/v2_globals/fiverr-logo-new-green-9e65bddddfd33dfcf7e06fc1e51a5bc5.png" width="200px">
 </a>
