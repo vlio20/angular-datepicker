@@ -380,13 +380,14 @@ export class DatePickerComponent implements OnChanges,
 
     this.isFocusedTrigger = true;
     setTimeout(() => {
-      this.hideStateHelper = false;
-
       if (!this.areCalendarsShown) {
         this.showCalendars();
       }
 
+      this.hideStateHelper = false;
+
       this.isFocusedTrigger = false;
+      this.cd.markForCheck();
     }, this.componentConfig.onOpenDelay);
   }
 
