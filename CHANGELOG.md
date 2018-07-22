@@ -4,17 +4,18 @@ All notable changes to this project will be documented in this file.
 <a name="2.10.0"></a>
 # [2.10.1] (2018-07-??)
 ### Bug Fixes
-- TAB click and then unfocusing  ([d42d5b2](https://github.com/vlio20/angular-datepicker/commit/d42d5b2)) closes [#377](https://github.com/vlio20/angular-datepicker/issues/377)
+- Not bind initial formatted value ([d389c96](https://github.com/vlio20/angular-datepicker/commit/d389c96)) closes [#384](https://github.com/vlio20/angular-datepicker/issues/384)
+- TAB click and then unfocusing ([d42d5b2](https://github.com/vlio20/angular-datepicker/commit/d42d5b2)) closes [#377](https://github.com/vlio20/angular-datepicker/issues/377)
 
 <a name="2.10.0"></a>
 # [2.10.0] (2018-06-19)
 ### Features
-- Angular 6 upgrade  ([370c060](https://github.com/vlio20/angular-datepicker/commit/370c060)) closes [#403](https://github.com/vlio20/angular-datepicker/issues/403)
+- Angular 6 upgrade ([370c060](https://github.com/vlio20/angular-datepicker/commit/370c060)) closes [#403](https://github.com/vlio20/angular-datepicker/issues/403)
 
 <a name="2.9.0"></a>
 # [2.9.0] (2018-04-15)
 ### Features
-- On Select Output event  ([a8bdf56](https://github.com/vlio20/angular-datepicker/commit/a8bdf56)) closes [#389](https://github.com/vlio20/angular-datepicker/issues/389)
+- On Select Output event ([a8bdf56](https://github.com/vlio20/angular-datepicker/commit/a8bdf56)) closes [#389](https://github.com/vlio20/angular-datepicker/issues/389)
 
 ### Improvements
 - Moving to node 8  ([cddc2ba](https://github.com/vlio20/angular-datepicker/commit/cddc2ba)) closes [#391](https://github.com/vlio20/angular-datepicker/issues/391)
