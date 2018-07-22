@@ -2,6 +2,11 @@
 All notable changes to this project will be documented in this file.
 
 <a name="2.10.0"></a>
+# [2.10.1] (2018-07-??)
+### Bug Fixes
+- TAB click and then unfocusing  ([d42d5b2](https://github.com/vlio20/angular-datepicker/commit/d42d5b2)) closes [#377](https://github.com/vlio20/angular-datepicker/issues/377)
+
+<a name="2.10.0"></a>
 # [2.10.0] (2018-06-19)
 ### Features
 - Angular 6 upgrade  ([370c060](https://github.com/vlio20/angular-datepicker/commit/370c060)) closes [#403](https://github.com/vlio20/angular-datepicker/issues/403)
