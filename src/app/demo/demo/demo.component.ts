@@ -392,4 +392,8 @@ export class DemoComponent {
   onSelect(data: ISelectionEvent) {
     console.log(data);
   }
+
+  trackFiver(): void {
+    this.gaService.emitEvent('fiverr', 'clicked');
+  }
 }

@@ -65,7 +65,10 @@
                                              'dp-inline-time': pickerMode == 'timeInline',
                                              'dp-inline-day-time': pickerMode == 'daytimeInline'}">
 
-    <form #donateForm class="dp-donate-btn" action="https://www.paypal.com/cgi-bin/webscr" method="post"
+    <form #donateForm
+          class="dp-donate-btn"
+          action="https://www.paypal.com/cgi-bin/webscr"
+          method="post"
           target="_blank">
       <input type="hidden" name="cmd" value="_s-xclick">
       <input type="hidden" name="hosted_button_id" value="8ZR2S5XYJ6WLJ">
@@ -73,6 +76,16 @@
              border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
       <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
     </form>
+
+    <div class="dp-fiverr">
+      <span>For faster support:</span>
+      <a href="https://www.fiverr.com/vladioffe/add-features-and-fix-bugs?arrived_from_manage_gigs=true&display_share=true"
+         (click)="trackFiver()"
+         target="_blank">
+        <img
+            src="https://assetsv2.fiverrcdn.com/assets/v2_globals/fiverr-logo-new-green-9e65bddddfd33dfcf7e06fc1e51a5bc5.png">
+      </a>
+    </div>
 
     <h2 class="dp-page-header">Angular Date/Time/Month Picker</h2>
 
