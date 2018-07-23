@@ -2,7 +2,7 @@
 All notable changes to this project will be documented in this file.
 
 <a name="2.10.0"></a>
-# [2.10.1] (2018-07-22)
+# [2.10.1] (2018-07-23)
 ### Bug Fixes
 - Not bind initial formatted value ([d389c96](https://github.com/vlio20/angular-datepicker/commit/d389c96)) closes [#384](https://github.com/vlio20/angular-datepicker/issues/384)
 - TAB click and then unfocusing ([d42d5b2](https://github.com/vlio20/angular-datepicker/commit/d42d5b2)) closes [#377](https://github.com/vlio20/angular-datepicker/issues/377)
