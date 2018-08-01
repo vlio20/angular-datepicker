@@ -124,7 +124,7 @@ export class DatePickerComponent implements OnChanges,
   inputElementContainer: HTMLElement;
   popupElem: HTMLElement;
   handleInnerElementClickUnlisteners: Function[] = [];
-  globalListnersUnlisteners: Function[] = [];
+  globalListenersUnlisteners: Function[] = [];
   validateFn: DateValidator;
   api: IDpDayPickerApi = {
     open: this.showCalendars.bind(this),
@@ -480,7 +480,7 @@ export class DatePickerComponent implements OnChanges,
   }
 
   startGlobalListeners() {
-    this.globalListnersUnlisteners.push(
+    this.globalListenersUnlisteners.push(
       this.renderer.listen(document, 'keydown', (e: KeyboardEvent) => {
         this.onKeyPress(e);
       }),
@@ -494,8 +494,8 @@ export class DatePickerComponent implements OnChanges,
   }
 
   stopGlobalListeners() {
-    this.globalListnersUnlisteners.forEach((ul) => ul());
-    this.globalListnersUnlisteners = [];
+    this.globalListenersUnlisteners.forEach((ul) => ul());
+    this.globalListenersUnlisteners = [];
   }
 
   ngOnDestroy() {
