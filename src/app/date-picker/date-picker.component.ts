@@ -266,6 +266,11 @@ export class DatePickerComponent implements OnChanges,
   }
 
   registerOnTouched(fn: any): void {
+    this.onTouchedCallback = fn;
+  }
+
+  onTouchedCallback() {
+
   }
 
   validate(formControl: FormControl): ValidationErrors {
@@ -387,6 +392,10 @@ export class DatePickerComponent implements OnChanges,
       this.isFocusedTrigger = false;
       this.cd.markForCheck();
     }, this.componentConfig.onOpenDelay);
+  }
+
+  inputBlurred() {
+    this.onTouchedCallback();
   }
 
   showCalendars() {
