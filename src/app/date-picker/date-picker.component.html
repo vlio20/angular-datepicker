@@ -8,6 +8,7 @@
            [ngModel]="inputElementValue"
            (ngModelChange)="onViewDateChange($event)"
            (focus)="inputFocused()"
+           (blur)="inputBlurred()"
            [readonly]="componentConfig.disableKeypress"
            [disabled]="disabled"/>
   </div>
