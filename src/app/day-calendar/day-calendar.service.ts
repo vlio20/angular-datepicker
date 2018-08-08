@@ -6,6 +6,7 @@ import {UtilsService} from '../common/services/utils/utils.service';
 import {IDay} from './day.model';
 import {IDayCalendarConfig, IDayCalendarConfigInternal} from './day-calendar-config.model';
 import {IMonthCalendarConfig} from '../month-calendar/month-calendar-config';
+
 const moment = momentNs;
 
 @Injectable()
@@ -85,10 +86,6 @@ export class DayCalendarService {
           disabled: this.isDateDisabled(current, config)
         });
         current.add(1, 'day');
-
-        if (current.format('HH') !== '00') {
-          current.startOf('day').add(1, 'day');
-        }
 
         return array;
       }, []);

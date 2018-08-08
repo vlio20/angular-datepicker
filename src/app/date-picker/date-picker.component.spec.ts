@@ -12,6 +12,7 @@ import {MonthCalendarComponent} from '../month-calendar/month-calendar.component
 import {DayCalendarService} from '../day-calendar/day-calendar.service';
 import {TimeSelectService} from '../time-select/time-select.service';
 import {UtilsService} from '../common/services/utils/utils.service';
+import {By} from '@angular/platform-browser';
 
 describe('Component: DatePickerComponent', () => {
   let component: DatePickerComponent;
@@ -76,5 +77,16 @@ describe('Component: DatePickerComponent', () => {
     spyOn(component.onGoToCurrent, 'emit');
     component.dayTimeCalendarRef.onGoToCurrent.emit();
     expect(component.onGoToCurrent.emit).toHaveBeenCalledWith();
+  });
+
+  it('should call onTouched when input is blurred', () => {
+    setComponentMode('day');
+    spyOn(component, 'onTouchedCallback');
+    component.registerOnTouched(component.onTouchedCallback);
+
+    const inputElement = fixture.debugElement.query(By.css('.dp-picker-input'));
+    inputElement.triggerEventHandler('blur', {});
+
+    expect(component.onTouchedCallback).toHaveBeenCalledWith();
   });
 });
