@@ -1,7 +1,12 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-<a name="2.10.0"></a>
+<a name="2.10.2"></a>
+# [2.10.2] (???)
+### Bug Fixes
+- The datepicker does not update `ng-untouched` class after user selects date string ([86ba0a6](https://github.com/vlio20/angular-datepicker/commit/86ba0a6)) closes [#426](https://github.com/vlio20/angular-datepicker/issues/426) - PR by [@JLHwung](https://github.com/JLHwung)
+
+<a name="2.10.1"></a>
 # [2.10.1] (2018-07-22)
 ### Bug Fixes
 - Not bind initial formatted value ([d389c96](https://github.com/vlio20/angular-datepicker/commit/d389c96)) closes [#384](https://github.com/vlio20/angular-datepicker/issues/384)
