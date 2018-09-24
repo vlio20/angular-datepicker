@@ -178,7 +178,9 @@ i.e.
 <dp-day-calendar [(ngModel)]="selectedDate" [config]="config"></dp-day-calendar>  
 ```  
   
-### Attributes: | Name                 | Type                | Default                                                                  | Description                                                                                                                                                                                                                                        |  
+### Attributes: 
+
+| Name                 | Type                | Default                                                                  | Description                                                                                                                                                                                                                                        |  
 |----------------------|:-------------------:|:------------------------------------------------------------------------:|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|  
 | required             | `Boolean`           | `undefined`                                                              | This is a validation rule, if there won't be any selected date then the containing form will be invalid.                                                                                                                                           |  
 | minDate              | `Moment\|String`    | `undefined`                                                              | This is a validation rule, if the selected date will be before `minDate` the containing form will be invalid. Note: if provided as string format configuration should be provided in the config object.                                            |  
@@ -235,7 +237,9 @@ i.e.
 <dp-month-calendar [(ngModel)]="selectedDate" [config]="config"></dp-month-calendar>  
 ```  
   
-### Attributes: | Name                 | Type                 | Default              | Description                                                                                                                                                                                                                                        |  
+### Attributes: 
+
+| Name                 | Type                 | Default              | Description                                                                                                                                                                                                                                        |  
 |----------------------|:--------------------:|:--------------------:|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|  
 | required             | `Boolean`            | `undefined`          | This is a validation rule, if there won't be any selected date then the containing form will be invalid.                                                                                                                                           |  
 | minDate              | `Moment\|String`     | `undefined`          | This is a validation rule, if the selected date will be before `minDate` the containing form will be invalid. Note: if provided as string format configuration should be provided in the config object.                                            |  
@@ -292,7 +296,9 @@ i.e.
 <dp-time-select [(ngModel)]="selectedDate" [config]="config"></dp-time-select>  
 ```  
   
-### Attributes: | Name                 | Type                 | Default              | Description                                                                                                                                                                                                                                        |  
+### Attributes: 
+
+| Name                 | Type                 | Default              | Description                                                                                                                                                                                                                                        |  
 |----------------------|:--------------------:|:--------------------:|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|  
 | required             | `Boolean`            | `undefined`          | This is a validation rule, if there won't be any selected date then the containing form will be invalid.                                                                                                                                           |  
 | minTime              | `Moment\|String`     | `undefined`          | This is a validation rule, if the selected date will be before `minTime` the containing form will be invalid. Note: if provided as string format configuration should be provided in the config object.                                            |  
