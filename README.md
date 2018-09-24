@@ -337,7 +337,9 @@ i.e.
 <dp-day-time-calendar [(ngModel)]="selectedDate" [config]="config"></dp-day-time-calendar>  
 ```  
   
-### Attributes: | Name                 | Type                | Default                                                                  | Description                                                                                                                                                                                                                                        |  
+### Attributes: 
+
+| Name                 | Type                | Default                                                                  | Description                                                                                                                                                                                                                                        |  
 |----------------------|:-------------------:|:------------------------------------------------------------------------:|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|  
 | required             | `Boolean`           | `undefined`                                                              | This is a validation rule, if there won't be any selected date then the containing form will be invalid.                                                                                                                                           |  
 | minDate              | `Moment\|String`    | `undefined`                                                              | This is a validation rule, if the selected date will be before `minDate` the containing form will be invalid. Note: if provided as string format configuration should be provided in the config object.                                            |  
@@ -420,7 +422,9 @@ or with `@angular/material`:
  <input mdInput name="someName" [(ngModel)]="selectedDate" [dpDayPicker]="config" theme="dp-material" attachTo=".mat-input-wrapper" /></md-input-container>  
 ```  
   
-### Attributes: | Name                 | Type                                      | Default       | Description                                                                                                                                                                                                                                        |  
+### Attributes: 
+
+| Name                 | Type                                      | Default       | Description                                                                                                                                                                                                                                        |  
 |----------------------|:-----------------------------------------:|:-------------:|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|  
 | mode                 | `'day'\|'month'\|'time'\|'daytime'`       | `'day'`       | the type of the calender which will be displayed in the picker                                                                                                                                                                                     |  
 | attachTo             | `ElementRef\|String`                      | `undefined`   | the element used to position the picker.  If `attachTo` is a `String`, it is used as a css selector to match any parent of the directive's host component.  If `attachTo` is `undefined`, the host component itself is used.                       |  
