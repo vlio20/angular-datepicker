@@ -28,10 +28,14 @@ my gig on [Fiverr](https://www.fiverr.com/vladioffe/add-features-and-fix-bugs?ar
   
 ## Installation:  
 1. Download from npm:  
-`npm install ng2-date-picker --save` 2. import the `DpDatePickerModule` module:    
- `import {DpDatePickerModule} from 'ng2-date-picker';` 3. Add `DpDatePickerModule` to your module imports:    
+`npm install ng2-date-picker --save` 
+2. Import the `DpDatePickerModule` module:    
+ `import {DpDatePickerModule} from 'ng2-date-picker';` 
+ 3. Add `DpDatePickerModule` to your module imports:    
+
 ```ts  
- @NgModule({ ... imports: [ ... DpDatePickerModule ] })```  
+ @NgModule({ ... imports: [ ... DpDatePickerModule ] })
+ ```  
   
 ## Usage  
 Put the dp-date-picker component wherever you need it.  
@@ -63,10 +67,12 @@ Put the dp-date-picker component wherever you need it.
 | onRightNav           | void                                | All Pickers               | This event will be emitted when click was made on right navigation button.                                                                                       |  
 | onSelect             | ISelectionEvent                     | All Pickers               | This event will be emitted when a date was selected via click or input change (with appropriate indication)                                                      |  
   
-### Configuration: In order to provide configurations to the date-picker you need to pass it to the `dp-date-picker` component:    
+### Configuration: In order to provide configurations to the date-picker you need to pass it to the `dp-date-picker` component:   
+
 ```html  
 <dp-date-picker [(ngModel)]="selectedDate" [config]="datePickerConfig"></dp-date-picker>  
-```  
+```
+
 Here are the available configurations:    
   
 | Name                        | Type                  | Default                                                                   | Applies To                | Description                                                                                                                                                                                                                                                                   |  
