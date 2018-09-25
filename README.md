@@ -28,10 +28,14 @@ my gig on [Fiverr](https://www.fiverr.com/vladioffe/add-features-and-fix-bugs?ar
   
 ## Installation:  
 1. Download from npm:  
-`npm install ng2-date-picker --save` 2. import the `DpDatePickerModule` module:    
- `import {DpDatePickerModule} from 'ng2-date-picker';` 3. Add `DpDatePickerModule` to your module imports:    
+`npm install ng2-date-picker --save` 
+2. Import the `DpDatePickerModule` module:    
+ `import {DpDatePickerModule} from 'ng2-date-picker';` 
+ 3. Add `DpDatePickerModule` to your module imports:    
+
 ```ts  
- @NgModule({ ... imports: [ ... DpDatePickerModule ] })```  
+ @NgModule({ ... imports: [ ... DpDatePickerModule ] })
+ ```  
   
 ## Usage  
 Put the dp-date-picker component wherever you need it.  
@@ -63,10 +67,12 @@ Put the dp-date-picker component wherever you need it.
 | onRightNav           | void                                | All Pickers               | This event will be emitted when click was made on right navigation button.                                                                                       |  
 | onSelect             | ISelectionEvent                     | All Pickers               | This event will be emitted when a date was selected via click or input change (with appropriate indication)                                                      |  
   
-### Configuration: In order to provide configurations to the date-picker you need to pass it to the `dp-date-picker` component:    
+### Configuration: In order to provide configurations to the date-picker you need to pass it to the `dp-date-picker` component:   
+
 ```html  
 <dp-date-picker [(ngModel)]="selectedDate" [config]="datePickerConfig"></dp-date-picker>  
-```  
+```
+
 Here are the available configurations:    
   
 | Name                        | Type                  | Default                                                                   | Applies To                | Description                                                                                                                                                                                                                                                                   |  
@@ -172,7 +178,9 @@ i.e.
 <dp-day-calendar [(ngModel)]="selectedDate" [config]="config"></dp-day-calendar>  
 ```  
   
-### Attributes: | Name                 | Type                | Default                                                                  | Description                                                                                                                                                                                                                                        |  
+### Attributes: 
+
+| Name                 | Type                | Default                                                                  | Description                                                                                                                                                                                                                                        |  
 |----------------------|:-------------------:|:------------------------------------------------------------------------:|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|  
 | required             | `Boolean`           | `undefined`                                                              | This is a validation rule, if there won't be any selected date then the containing form will be invalid.                                                                                                                                           |  
 | minDate              | `Moment\|String`    | `undefined`                                                              | This is a validation rule, if the selected date will be before `minDate` the containing form will be invalid. Note: if provided as string format configuration should be provided in the config object.                                            |  
@@ -229,7 +237,9 @@ i.e.
 <dp-month-calendar [(ngModel)]="selectedDate" [config]="config"></dp-month-calendar>  
 ```  
   
-### Attributes: | Name                 | Type                 | Default              | Description                                                                                                                                                                                                                                        |  
+### Attributes: 
+
+| Name                 | Type                 | Default              | Description                                                                                                                                                                                                                                        |  
 |----------------------|:--------------------:|:--------------------:|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|  
 | required             | `Boolean`            | `undefined`          | This is a validation rule, if there won't be any selected date then the containing form will be invalid.                                                                                                                                           |  
 | minDate              | `Moment\|String`     | `undefined`          | This is a validation rule, if the selected date will be before `minDate` the containing form will be invalid. Note: if provided as string format configuration should be provided in the config object.                                            |  
@@ -286,7 +296,9 @@ i.e.
 <dp-time-select [(ngModel)]="selectedDate" [config]="config"></dp-time-select>  
 ```  
   
-### Attributes: | Name                 | Type                 | Default              | Description                                                                                                                                                                                                                                        |  
+### Attributes: 
+
+| Name                 | Type                 | Default              | Description                                                                                                                                                                                                                                        |  
 |----------------------|:--------------------:|:--------------------:|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|  
 | required             | `Boolean`            | `undefined`          | This is a validation rule, if there won't be any selected date then the containing form will be invalid.                                                                                                                                           |  
 | minTime              | `Moment\|String`     | `undefined`          | This is a validation rule, if the selected date will be before `minTime` the containing form will be invalid. Note: if provided as string format configuration should be provided in the config object.                                            |  
@@ -331,7 +343,9 @@ i.e.
 <dp-day-time-calendar [(ngModel)]="selectedDate" [config]="config"></dp-day-time-calendar>  
 ```  
   
-### Attributes: | Name                 | Type                | Default                                                                  | Description                                                                                                                                                                                                                                        |  
+### Attributes: 
+
+| Name                 | Type                | Default                                                                  | Description                                                                                                                                                                                                                                        |  
 |----------------------|:-------------------:|:------------------------------------------------------------------------:|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|  
 | required             | `Boolean`           | `undefined`                                                              | This is a validation rule, if there won't be any selected date then the containing form will be invalid.                                                                                                                                           |  
 | minDate              | `Moment\|String`    | `undefined`                                                              | This is a validation rule, if the selected date will be before `minDate` the containing form will be invalid. Note: if provided as string format configuration should be provided in the config object.                                            |  
@@ -414,7 +428,9 @@ or with `@angular/material`:
  <input mdInput name="someName" [(ngModel)]="selectedDate" [dpDayPicker]="config" theme="dp-material" attachTo=".mat-input-wrapper" /></md-input-container>  
 ```  
   
-### Attributes: | Name                 | Type                                      | Default       | Description                                                                                                                                                                                                                                        |  
+### Attributes: 
+
+| Name                 | Type                                      | Default       | Description                                                                                                                                                                                                                                        |  
 |----------------------|:-----------------------------------------:|:-------------:|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|  
 | mode                 | `'day'\|'month'\|'time'\|'daytime'`       | `'day'`       | the type of the calender which will be displayed in the picker                                                                                                                                                                                     |  
 | attachTo             | `ElementRef\|String`                      | `undefined`   | the element used to position the picker.  If `attachTo` is a `String`, it is used as a css selector to match any parent of the directive's host component.  If `attachTo` is `undefined`, the host component itself is used.                       |  
