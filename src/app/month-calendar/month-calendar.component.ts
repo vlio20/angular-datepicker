@@ -162,6 +162,10 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
       this.yearMonths = this.monthCalendarService
         .generateYear(this.componentConfig, this.currentDateView, this.selected);
       this.inputValueType = this.utilsService.getInputType(this.inputValue, this.componentConfig.allowMultiSelect);
+    } else {
+      this.selected = [];
+      this.yearMonths = this.monthCalendarService
+        .generateYear(this.componentConfig, this.currentDateView, this.selected);
     }
 
     this.cd.markForCheck();
