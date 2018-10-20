@@ -29,6 +29,7 @@ describe('dpDayPicker timePicker', () => {
   });
 
   it('should check if max time validation is working', () => {
+    page.maxTimeValidationPickerInput.click();
     page.maxTimeValidationPickerInput.clear();
     expect(page.timePickerMaxTimeValidationMsg.isPresent()).toBe(false);
     page.maxTimeValidationPickerInput.clear();
