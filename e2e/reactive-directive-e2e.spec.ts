@@ -46,6 +46,7 @@ describe('dpDayPicker reactive directive', () => {
   });
 
   it('should check if enable/disable required validation is working', () => {
+    page.dayDirectiveReactiveInput.click();
     page.dayDirectiveReactiveInput.clear();
     expect(page.reactiveRequiredValidationMsg.isPresent()).toBe(false);
     page.enableRequiredValidationRadio.click();

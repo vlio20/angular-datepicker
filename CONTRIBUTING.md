@@ -17,7 +17,8 @@ Working on your first Pull Request? You can learn how from this *free* series, [
 
 ## Submitting code
 
-Any code change should be submitted as a pull request. The description should explain what the code does and give steps to execute it. The pull request should also contain tests.
+Any code change should be submitted as a pull request to the "next" branch. The description should explain what the code does and give steps to execute it. The pull request should also contain tests (unit/e2e).
+Also, before submitting a PR please make sure to open an issue for it.
 
 ## Code review process
 
@@ -34,8 +35,6 @@ Anyone can file an expense. If the expense makes sense for the development of th
 If you have any questions, create an [issue](issue) (protip: do a quick search first to see if someone else didn't ask the same question before!).
 You can also reach us at hello@angular-datepicker.opencollective.com.
 
-## Credits
-
 ### Contributors
 
 Thank you to all the people who have already contributed to angular-datepicker!
@@ -47,21 +46,3 @@ Thank you to all the people who have already contributed to angular-datepicker!
 Thank you to all our backers! [[Become a backer](https://opencollective.com/angular-datepicker#backer)]
 
 <a href="https://opencollective.com/angular-datepicker#backers" target="_blank"><img src="https://opencollective.com/angular-datepicker/backers.svg?width=890"></a>
-
-
-### Sponsors
-
-Thank you to all our sponsors! (please ask your company to also support this open source project by [becoming a sponsor](https://opencollective.com/angular-datepicker#sponsor))
-
-<a href="https://opencollective.com/angular-datepicker/sponsor/0/website" target="_blank"><img src="https://opencollective.com/angular-datepicker/sponsor/0/avatar.svg"></a>
-<a href="https://opencollective.com/angular-datepicker/sponsor/1/website" target="_blank"><img src="https://opencollective.com/angular-datepicker/sponsor/1/avatar.svg"></a>
-<a href="https://opencollective.com/angular-datepicker/sponsor/2/website" target="_blank"><img src="https://opencollective.com/angular-datepicker/sponsor/2/avatar.svg"></a>
-<a href="https://opencollective.com/angular-datepicker/sponsor/3/website" target="_blank"><img src="https://opencollective.com/angular-datepicker/sponsor/3/avatar.svg"></a>
-<a href="https://opencollective.com/angular-datepicker/sponsor/4/website" target="_blank"><img src="https://opencollective.com/angular-datepicker/sponsor/4/avatar.svg"></a>
-<a href="https://opencollective.com/angular-datepicker/sponsor/5/website" target="_blank"><img src="https://opencollective.com/angular-datepicker/sponsor/5/avatar.svg"></a>
-<a href="https://opencollective.com/angular-datepicker/sponsor/6/website" target="_blank"><img src="https://opencollective.com/angular-datepicker/sponsor/6/avatar.svg"></a>
-<a href="https://opencollective.com/angular-datepicker/sponsor/7/website" target="_blank"><img src="https://opencollective.com/angular-datepicker/sponsor/7/avatar.svg"></a>
-<a href="https://opencollective.com/angular-datepicker/sponsor/8/website" target="_blank"><img src="https://opencollective.com/angular-datepicker/sponsor/8/avatar.svg"></a>
-<a href="https://opencollective.com/angular-datepicker/sponsor/9/website" target="_blank"><img src="https://opencollective.com/angular-datepicker/sponsor/9/avatar.svg"></a>
-
-<!-- This `CONTRIBUTING.md` is based on @nayafia's template https://github.com/nayafia/contributing-template -->
