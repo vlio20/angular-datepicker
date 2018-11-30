@@ -10,113 +10,113 @@ describe('dpDayPicker timePicker', () => {
     page.navigateTo();
   });
 
-  it('should make sure unSelectOnClick feature works as expected for day calendar', () => {
+  it('should make sure unSelectOnClick feature works as expected for day calendar', async () => {
     const dayRunner = async (menuItem, input, isPicker) => {
       const date = moment();
-      const dayClick = () => {
+      const dayClick = async () => {
         if (isPicker) {
-          page.clickOnDayButton(date.format('DD'));
+          await page.clickOnDayButton(date.format('DD'));
         } else {
-          page.clickOnDayButtonInline(date.format('DD'));
+          await page.clickOnDayButtonInline(date.format('DD'));
         }
       };
 
-      menuItem.click();
-      page.enableUnselectSelected.click();
+      await menuItem.click();
+      await page.enableUnselectSelected.click();
 
       if (isPicker) {
-        page.scrollIntoView(page.noCloseOnSelect);
-        page.noCloseOnSelect.click();
-        input.click();
+        await page.scrollIntoView(page.noCloseOnSelect);
+        await page.noCloseOnSelect.click();
+        await input.click();
       }
 
-      dayClick();
+      await dayClick();
       expect(await page.selectedDay.isPresent()).toEqual(true);
-      dayClick();
+      await dayClick();
       expect(await page.selectedDay.isPresent()).toEqual(false);
 
-      page.clickOnBody();
+      await page.clickOnBody();
 
-      page.disableUnselectSelected.click();
+      await page.disableUnselectSelected.click();
 
       if (isPicker) {
-        input.click();
+        await input.click();
       }
 
-      dayClick();
+      await dayClick();
 
       expect(await page.selectedDay.isPresent()).toEqual(true);
 
-      dayClick();
+      await dayClick();
       expect(await page.selectedDay.isPresent()).toEqual(true);
 
-      page.enableUnselectSelected.click();
+      await page.enableUnselectSelected.click();
 
       if (isPicker) {
-        input.click();
+        await input.click();
       }
 
-      dayClick();
+      await dayClick();
       expect(await page.selectedDay.isPresent()).toEqual(false);
     };
 
-    dayRunner(page.dayPickerMenu, page.dayPickerInput, true);
-    dayRunner(page.dayDirectiveMenu, page.dayDirectiveInput, true);
-    dayRunner(page.dayInlineMenu, null, false);
+    await dayRunner(page.dayPickerMenu, page.dayPickerInput, true);
+    await dayRunner(page.dayDirectiveMenu, page.dayDirectiveInput, true);
+    await dayRunner(page.dayInlineMenu, null, false);
   });
 
-  it('should make sure unSelectOnClick feature works as expected for month calendar', () => {
+  it('should make sure unSelectOnClick feature works as expected for month calendar', async () => {
     const monthRunner = async (menuItem, input, isPicker) => {
       const date = moment();
-      const dayClick = () => {
+      const dayClick = async () => {
         if (isPicker) {
-          page.clickOnMonthButton(date.format('MMM'));
+          await page.clickOnMonthButton(date.format('MMM'));
         } else {
-          page.clickOnMonthButtonInline(date.format('MMM'));
+          await page.clickOnMonthButtonInline(date.format('MMM'));
         }
       };
 
-      menuItem.click();
-      page.enableUnselectSelected.click();
+      await menuItem.click();
+      await page.enableUnselectSelected.click();
 
       if (isPicker) {
-        page.scrollIntoView(page.noCloseOnSelect);
-        page.noCloseOnSelect.click();
-        input.click();
+        await page.scrollIntoView(page.noCloseOnSelect);
+        await page.noCloseOnSelect.click();
+        await input.click();
       }
 
-      dayClick();
+      await dayClick();
       expect(await page.selectedMonth.isPresent()).toEqual(true);
-      dayClick();
+      await dayClick();
       expect(await page.selectedMonth.isPresent()).toEqual(false);
 
-      page.clickOnBody();
-      page.scrollIntoView(page.disableUnselectSelected);
-      page.disableUnselectSelected.click();
+      await page.clickOnBody();
+      await page.scrollIntoView(page.disableUnselectSelected);
+      await page.disableUnselectSelected.click();
 
       if (isPicker) {
-        input.click();
+        await input.click();
       }
 
-      dayClick();
+      await dayClick();
 
       expect(await page.selectedMonth.isPresent()).toEqual(true);
 
-      dayClick();
+      await dayClick();
       expect(await page.selectedMonth.isPresent()).toEqual(true);
 
-      page.enableUnselectSelected.click();
+      await page.enableUnselectSelected.click();
 
       if (isPicker) {
-        input.click();
+        await input.click();
       }
 
-      dayClick();
+      await dayClick();
       expect(await page.selectedMonth.isPresent()).toEqual(false);
     };
 
-    monthRunner(page.monthPickerMenu, page.monthPickerInput, true);
-    monthRunner(page.monthDirectiveMenu, page.monthDirectiveInput, true);
-    monthRunner(page.monthInlineMenu, null, false);
+    await monthRunner(page.monthPickerMenu, page.monthPickerInput, true);
+    await monthRunner(page.monthDirectiveMenu, page.monthDirectiveInput, true);
+    await monthRunner(page.monthInlineMenu, null, false);
   });
 });
