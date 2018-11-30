@@ -12,65 +12,65 @@ describe('dpDayPicker timePicker', () => {
     page.dateFormatInput.sendKeys('HH:mm:ss');
   });
 
-  it('should check if min time validation is working', () => {
+  it('should check if min time validation is working', async () => {
     page.minTimeValidationPickerInput.clear();
-    expect(page.timePickerMinTimeValidationMsg.isPresent()).toBe(false);
+    expect(await page.timePickerMinTimeValidationMsg.isPresent()).toBe(false);
     page.minTimeValidationPickerInput.clear();
     page.minTimeValidationPickerInput.sendKeys('10:11:12');
     page.timePickerInput.click();
     page.timePickerInput.clear();
     page.timePickerInput.sendKeys('09:00:00');
     page.clickOnBody();
-    expect(page.timePickerMinTimeValidationMsg.getText()).toEqual('minTime invalid');
+    expect(await page.timePickerMinTimeValidationMsg.getText()).toEqual('minTime invalid');
     page.minTimeValidationPickerInput.clear();
     page.minTimeValidationPickerInput.sendKeys('08:07:06');
     page.clickOnBody();
-    expect(page.timePickerMinTimeValidationMsg.isPresent()).toBe(false);
+    expect(await page.timePickerMinTimeValidationMsg.isPresent()).toBe(false);
   });
 
-  it('should check if max time validation is working', () => {
+  it('should check if max time validation is working', async () => {
     page.maxTimeValidationPickerInput.click();
     page.maxTimeValidationPickerInput.clear();
-    expect(page.timePickerMaxTimeValidationMsg.isPresent()).toBe(false);
+    expect(await page.timePickerMaxTimeValidationMsg.isPresent()).toBe(false);
     page.maxTimeValidationPickerInput.clear();
     page.maxTimeValidationPickerInput.sendKeys('08:07:06');
     page.timePickerInput.click();
     page.timePickerInput.clear();
     page.timePickerInput.sendKeys('09:00:00');
     page.clickOnBody();
-    expect(page.timePickerMaxTimeValidationMsg.getText()).toEqual('maxTime invalid');
+    expect(await page.timePickerMaxTimeValidationMsg.getText()).toEqual('maxTime invalid');
     page.maxTimeValidationPickerInput.clear();
     page.maxTimeValidationPickerInput.sendKeys('10:11:12');
-    expect(page.timePickerMaxTimeValidationMsg.isPresent()).toBe(false);
+    expect(await page.timePickerMaxTimeValidationMsg.isPresent()).toBe(false);
   });
 
-  it('should check that the min selectable time option is working', () => {
+  it('should check that the min selectable time option is working', async () => {
     page.minTimeInput.click();
     page.minTimeInput.clear();
     page.minTimeInput.sendKeys('08:07:06');
     page.timePickerInput.click();
     page.timePickerInput.clear();
     page.timePickerInput.sendKeys('09:00:00');
-    expect(page.hourDownBtn.getAttribute('disabled')).toEqual('true');
-    expect(page.minuteDownBtn.getAttribute('disabled')).toBe(null);
-    expect(page.meridiemUpBtn.getAttribute('disabled')).toBe(null);
-    expect(page.meridiemDownBtn.getAttribute('disabled')).toBe(null);
+    expect(await page.hourDownBtn.getAttribute('disabled')).toEqual('true');
+    expect(await page.minuteDownBtn.getAttribute('disabled')).toBe(null);
+    expect(await page.meridiemUpBtn.getAttribute('disabled')).toBe(null);
+    expect(await page.meridiemDownBtn.getAttribute('disabled')).toBe(null);
   });
 
-  it('should check that the max selectable time option is working', () => {
+  it('should check that the max selectable time option is working', async () => {
     page.maxTimeInput.click();
     page.maxTimeInput.clear();
     page.maxTimeInput.sendKeys('09:07:06');
     page.timePickerInput.click();
     page.timePickerInput.clear();
     page.timePickerInput.sendKeys('09:00:00');
-    expect(page.hourUpBtn.getAttribute('disabled')).toEqual('true');
-    expect(page.minuteUpBtn.getAttribute('disabled')).toBe(null);
-    expect(page.meridiemUpBtn.getAttribute('disabled')).toEqual('true');
-    expect(page.meridiemDownBtn.getAttribute('disabled')).toEqual('true');
+    expect(await page.hourUpBtn.getAttribute('disabled')).toEqual('true');
+    expect(await page.minuteUpBtn.getAttribute('disabled')).toBe(null);
+    expect(await page.meridiemUpBtn.getAttribute('disabled')).toEqual('true');
+    expect(await page.meridiemDownBtn.getAttribute('disabled')).toEqual('true');
   });
 
-  it('should check that the 12 hour time format options work', () => {
+  it('should check that the 12 hour time format options work', async () => {
     page.showSeconds.click();
     page.hours12FormatInput.clear();
     page.hours12FormatInput.sendKeys('h');
@@ -85,14 +85,14 @@ describe('dpDayPicker timePicker', () => {
     page.timePickerInput.click();
     page.timePickerInput.clear();
     page.timePickerInput.sendKeys('09:08:07');
-    expect(page.hourDisplay.getText()).toEqual('9');
-    expect(page.minuteDisplay.getText()).toEqual('8');
-    expect(page.secondDisplay.getText()).toEqual('7');
-    expect(page.meridiemDisplay.getText()).toEqual('am');
-    expect(page.timeSeparatorDisplay.getText()).toEqual('-');
+    expect(await page.hourDisplay.getText()).toEqual('9');
+    expect(await page.minuteDisplay.getText()).toEqual('8');
+    expect(await page.secondDisplay.getText()).toEqual('7');
+    expect(await page.meridiemDisplay.getText()).toEqual('am');
+    expect(await page.timeSeparatorDisplay.getText()).toEqual('-');
   });
 
-  it('should check that the 24 hour time format options work', () => {
+  it('should check that the 24 hour time format options work', async () => {
     page.showTwentyFourHours.click();
     page.showSeconds.click();
     page.hours24FormatInput.clear();
@@ -106,13 +106,13 @@ describe('dpDayPicker timePicker', () => {
     page.timePickerInput.click();
     page.timePickerInput.clear();
     page.timePickerInput.sendKeys('09:08:07');
-    expect(page.hourDisplay.getText()).toEqual('9');
-    expect(page.minuteDisplay.getText()).toEqual('8');
-    expect(page.secondDisplay.getText()).toEqual('7');
-    expect(page.timeSeparatorDisplay.getText()).toEqual('-');
+    expect(await page.hourDisplay.getText()).toEqual('9');
+    expect(await page.minuteDisplay.getText()).toEqual('8');
+    expect(await page.secondDisplay.getText()).toEqual('7');
+    expect(await page.timeSeparatorDisplay.getText()).toEqual('-');
   });
 
-  it('should check that the interval options work', () => {
+  it('should check that the interval options work', async () => {
     page.showSeconds.click();
     page.minutesIntervalInput.clear();
     page.minutesIntervalInput.sendKeys('6');
@@ -122,16 +122,16 @@ describe('dpDayPicker timePicker', () => {
     page.timePickerInput.clear();
     page.timePickerInput.sendKeys('09:08:07');
     page.minuteUpBtn.click();
-    expect(page.minuteDisplay.getText()).toEqual('14');
-    expect(page.timePickerInput.getAttribute('value')).toEqual('09:14:07');
+    expect(await page.minuteDisplay.getText()).toEqual('14');
+    expect(await page.timePickerInput.getAttribute('value')).toEqual('09:14:07');
     page.minuteDownBtn.click();
-    expect(page.minuteDisplay.getText()).toEqual('08');
-    expect(page.timePickerInput.getAttribute('value')).toEqual('09:08:07');
+    expect(await page.minuteDisplay.getText()).toEqual('08');
+    expect(await page.timePickerInput.getAttribute('value')).toEqual('09:08:07');
     page.secondUpBtn.click();
-    expect(page.secondDisplay.getText()).toEqual('14');
-    expect(page.timePickerInput.getAttribute('value')).toEqual('09:08:14');
+    expect(await page.secondDisplay.getText()).toEqual('14');
+    expect(await page.timePickerInput.getAttribute('value')).toEqual('09:08:14');
     page.secondDownBtn.click();
-    expect(page.secondDisplay.getText()).toEqual('07');
-    expect(page.timePickerInput.getAttribute('value')).toEqual('09:08:07');
+    expect(await page.secondDisplay.getText()).toEqual('07');
+    expect(await page.timePickerInput.getAttribute('value')).toEqual('09:08:07');
   });
 });

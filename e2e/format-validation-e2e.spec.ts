@@ -9,11 +9,11 @@ describe('format validation', () => {
   });
 
   it('should check that the format validation is working', () => {
-    const common = (menu, input) => {
+    const common = async (menu, input) => {
       menu.click();
       input.sendKeys('lmaldlad');
       page.clickOnBody();
-      expect(page.formatValidationMsg.getText()).toBe('invalid format');
+      expect(await page.formatValidationMsg.getText()).toBe('invalid format');
       input.clear();
     };
 

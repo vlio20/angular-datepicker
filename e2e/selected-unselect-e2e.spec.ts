@@ -1,8 +1,5 @@
 import {DemoPage} from './app.po';
 import * as moment from 'moment';
-import {browser} from 'protractor';
-import * as fs from 'fs';
-import {TestUtils} from './test-utils';
 
 describe('dpDayPicker timePicker', () => {
 
@@ -14,7 +11,7 @@ describe('dpDayPicker timePicker', () => {
   });
 
   it('should make sure unSelectOnClick feature works as expected for day calendar', () => {
-    const dayRunner = (menuItem, input, isPicker) => {
+    const dayRunner = async (menuItem, input, isPicker) => {
       const date = moment();
       const dayClick = () => {
         if (isPicker) {
@@ -34,9 +31,9 @@ describe('dpDayPicker timePicker', () => {
       }
 
       dayClick();
-      expect(page.selectedDay.isPresent()).toEqual(true);
+      expect(await page.selectedDay.isPresent()).toEqual(true);
       dayClick();
-      expect(page.selectedDay.isPresent()).toEqual(false);
+      expect(await page.selectedDay.isPresent()).toEqual(false);
 
       page.clickOnBody();
 
@@ -48,10 +45,10 @@ describe('dpDayPicker timePicker', () => {
 
       dayClick();
 
-      expect(page.selectedDay.isPresent()).toEqual(true);
+      expect(await page.selectedDay.isPresent()).toEqual(true);
 
       dayClick();
-      expect(page.selectedDay.isPresent()).toEqual(true);
+      expect(await page.selectedDay.isPresent()).toEqual(true);
 
       page.enableUnselectSelected.click();
 
@@ -60,7 +57,7 @@ describe('dpDayPicker timePicker', () => {
       }
 
       dayClick();
-      expect(page.selectedDay.isPresent()).toEqual(false);
+      expect(await page.selectedDay.isPresent()).toEqual(false);
     };
 
     dayRunner(page.dayPickerMenu, page.dayPickerInput, true);
@@ -69,7 +66,7 @@ describe('dpDayPicker timePicker', () => {
   });
 
   it('should make sure unSelectOnClick feature works as expected for month calendar', () => {
-    const monthRunner = (menuItem, input, isPicker) => {
+    const monthRunner = async (menuItem, input, isPicker) => {
       const date = moment();
       const dayClick = () => {
         if (isPicker) {
@@ -89,9 +86,9 @@ describe('dpDayPicker timePicker', () => {
       }
 
       dayClick();
-      expect(page.selectedMonth.isPresent()).toEqual(true);
+      expect(await page.selectedMonth.isPresent()).toEqual(true);
       dayClick();
-      expect(page.selectedMonth.isPresent()).toEqual(false);
+      expect(await page.selectedMonth.isPresent()).toEqual(false);
 
       page.clickOnBody();
       page.scrollIntoView(page.disableUnselectSelected);
@@ -103,10 +100,10 @@ describe('dpDayPicker timePicker', () => {
 
       dayClick();
 
-      expect(page.selectedMonth.isPresent()).toEqual(true);
+      expect(await page.selectedMonth.isPresent()).toEqual(true);
 
       dayClick();
-      expect(page.selectedMonth.isPresent()).toEqual(true);
+      expect(await page.selectedMonth.isPresent()).toEqual(true);
 
       page.enableUnselectSelected.click();
 
@@ -115,7 +112,7 @@ describe('dpDayPicker timePicker', () => {
       }
 
       dayClick();
-      expect(page.selectedMonth.isPresent()).toEqual(false);
+      expect(await page.selectedMonth.isPresent()).toEqual(false);
     };
 
     monthRunner(page.monthPickerMenu, page.monthPickerInput, true);

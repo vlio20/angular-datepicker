@@ -10,7 +10,7 @@ describe('Move to date api', () => {
   });
 
   it('should move to date API on day', () => {
-    const runner = (menuItem, input, isPicker, cont) => {
+    const runner = async (menuItem, input, isPicker, cont) => {
       menuItem.click();
       page.moveCalendarTo.click();
 
@@ -18,7 +18,7 @@ describe('Move to date api', () => {
         input.click();
       }
 
-      expect(cont.getText()).toContain('1987');
+      expect(await cont.getText()).toContain('1987');
     };
 
     runner(page.dayPickerMenu, page.dayPickerInput, true, page.dayCalendarNavHeaderBtn);

@@ -10,17 +10,17 @@ describe('dpDayPicker configuration', () => {
     page.daytimePickerMenu.click();
   });
 
-  it('openOnClick = false, should not open picker when clicked', () => {
+  it('openOnClick = false, should not open picker when clicked', async () => {
     page.openOnClickRadioOff.click();
     page.openOnFocusRadioOff.click();
     page.daytimePickerInput.click();
-    expect(page.datePickerPopup.isDisplayed()).toBe(false);
+    expect(await page.datePickerPopup.isDisplayed()).toBe(false);
   });
 
-  it('openOnClick = true, should open picker when clicked', () => {
+  it('openOnClick = true, should open picker when clicked', async () => {
     page.openOnClickRadioOn.click();
     page.openOnFocusRadioOff.click();
     page.daytimePickerInput.click();
-    expect(page.datePickerPopup.isDisplayed()).toBe(true);
+    expect(await page.datePickerPopup.isDisplayed()).toBe(true);
   });
 });
