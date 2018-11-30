@@ -57,7 +57,7 @@ export class DayCalendarService {
       map[day] = index;
 
       return map;
-    }, <{[key: number]: string}>{});
+    }, <{[key: string]: number}>{});
   }
 
   generateMonthArray(config: IDayCalendarConfigInternal, month: Moment, selected: Moment[]): IDay[][] {

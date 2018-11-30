@@ -158,26 +158,26 @@ export class DemoPage {
   }
 
   clickOnBody() {
-    this.emptyElem.click();
+    return this.emptyElem.click();
   }
 
   scrollIntoView(el, top = false) {
-    browser.executeScript(`arguments[0].scrollIntoView(${top})`, el.getWebElement());
+    return browser.executeScript(`arguments[0].scrollIntoView(${top})`, el.getWebElement());
   }
 
   clickOnDayButton(text: string) {
-    element(by.cssContainingText(`${this.popupSelector} .dp-calendar-day`, text)).click();
+    return element(by.cssContainingText(`${this.popupSelector} .dp-calendar-day`, text)).click();
   }
 
   clickOnDayButtonInline(text: string) {
-    element(by.cssContainingText(`.dp-inline-day .dp-calendar-day`, text)).click();
+    return element(by.cssContainingText(`.dp-inline-day .dp-calendar-day`, text)).click();
   }
 
   clickOnMonthButton(text: string) {
-    element(by.cssContainingText(`${this.popupSelector} .dp-calendar-month`, text)).click();
+    return element(by.cssContainingText(`${this.popupSelector} .dp-calendar-month`, text)).click();
   }
 
   clickOnMonthButtonInline(text: string) {
-    element(by.cssContainingText(`.dp-inline-month .dp-calendar-month`, text)).click();
+    return element(by.cssContainingText(`.dp-inline-month .dp-calendar-month`, text)).click();
   }
 }

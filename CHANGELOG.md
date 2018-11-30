@@ -1,6 +1,11 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+<a name="2.11.0"></a>
+# [2.11.0] (2018-11-27)
+### Improvements
+- Angular 7 upgrade ([???](https://github.com/vlio20/angular-datepicker/commit/???)) closes [#434](https://github.com/vlio20/angular-datepicker/issues/434)
+
 <a name="2.10.2"></a>
 # [2.10.2] (2018-08-08)
 ### Bug Fixes

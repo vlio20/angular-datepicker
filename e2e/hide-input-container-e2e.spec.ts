@@ -8,9 +8,9 @@ describe('hideInputContainer', () => {
     page.navigateTo();
   });
 
-  it('should hide/show InputContainer datetimepicker', () => {
-    expect(page.daytimePickerInput.isDisplayed()).toBe(true);
+  it('should hide/show InputContainer datetimepicker', async () => {
+    expect(await page.daytimePickerInput.isDisplayed()).toBe(true);
     page.hideInputRadio.click();
-    expect(page.daytimePickerInput.isDisplayed()).toBe(false);
+    expect(await page.daytimePickerInput.isDisplayed()).toBe(false);
   });
 });
