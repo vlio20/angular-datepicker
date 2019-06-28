@@ -1,6 +1,11 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+<a name="2.12.0"></a>
+# [2.12.0] (2019-06-28)
+### Improvements
+- Angular 8 upgrade ([4c28f8a](https://github.com/vlio20/angular-datepicker/commit/4c28f8a)) closes [#451](https://github.com/vlio20/angular-datepicker/issues/451)
+
 <a name="2.11.0"></a>
 # [2.11.0] (2018-11-30)
 ### Improvements
