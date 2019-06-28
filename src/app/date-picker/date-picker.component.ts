@@ -102,11 +102,11 @@ export class DatePickerComponent implements OnChanges,
   @Output() onRightNav: EventEmitter<INavEvent> = new EventEmitter();
   @Output() onSelect: EventEmitter<ISelectionEvent> = new EventEmitter();
 
-  @ViewChild('container') calendarContainer: ElementRef;
-  @ViewChild('dayCalendar') dayCalendarRef: DayCalendarComponent;
-  @ViewChild('monthCalendar') monthCalendarRef: MonthCalendarComponent;
-  @ViewChild('daytimeCalendar') dayTimeCalendarRef: DayTimeCalendarComponent;
-  @ViewChild('timeSelect') timeSelectRef: TimeSelectComponent;
+  @ViewChild('container', {static: false}) calendarContainer: ElementRef;
+  @ViewChild('dayCalendar', {static: false}) dayCalendarRef: DayCalendarComponent;
+  @ViewChild('monthCalendar', {static: false}) monthCalendarRef: MonthCalendarComponent;
+  @ViewChild('daytimeCalendar', {static: false}) dayTimeCalendarRef: DayTimeCalendarComponent;
+  @ViewChild('timeSelect', {static: false}) timeSelectRef: TimeSelectComponent;
 
   componentConfig: IDatePickerConfigInternal;
   dayCalendarConfig: IDayCalendarConfig;

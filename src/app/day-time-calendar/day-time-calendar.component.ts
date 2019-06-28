@@ -70,7 +70,7 @@ export class DayTimeCalendarComponent implements OnInit, OnChanges, ControlValue
   @Output() onLeftNav: EventEmitter<INavEvent> = new EventEmitter();
   @Output() onRightNav: EventEmitter<INavEvent> = new EventEmitter();
 
-  @ViewChild('dayCalendar') dayCalendarRef: DayCalendarComponent;
+  @ViewChild('dayCalendar', {static: false}) dayCalendarRef: DayCalendarComponent;
 
   isInited: boolean = false;
   componentConfig: IDayTimeCalendarConfig;
