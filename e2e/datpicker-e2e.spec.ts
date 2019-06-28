@@ -100,13 +100,12 @@ describe('dpDayPicker dayPicker', () => {
     expect(await page.dayCalendarContainer.isPresent()).toBe(false);
     expect(await page.monthCalendar.isPresent()).toBe(true);
     expect(await page.dayCalendarNavMonthHeaderBtn.getText()).toEqual('2018');
-    expect(await page.currentMonthCalendarBtn.getText()).toEqual(moment().format('MMM'));
+
     page.monthCalendarLeftNavBtn.click();
     expect(await page.dayCalendarNavMonthHeaderBtn.getText()).toEqual('2017');
     expect(await page.currentMonthCalendarBtn.isPresent()).toBe(false);
     page.monthCalendarRightNavBtn.click();
     expect(await page.dayCalendarNavMonthHeaderBtn.getText()).toEqual('2018');
-    expect(await page.currentMonthCalendarBtn.getText()).toEqual(moment().format('MMM'));
 
     page.clickOnBody();
     page.dayPickerInput.click();
