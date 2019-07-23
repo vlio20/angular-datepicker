@@ -58,6 +58,10 @@ export class MonthCalendarService {
   }
 
   isMonthDisabled(date: Moment, config: IMonthCalendarConfig) {
+    if (config.isMonthDisabledCallback) {
+      return config.isMonthDisabledCallback(date);
+    }
+
     if (config.min && date.isBefore(config.min, 'month')) {
       return true;
     }
