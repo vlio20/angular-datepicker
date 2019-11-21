@@ -61,6 +61,7 @@ export class DayTimeCalendarComponent implements OnInit, OnChanges, ControlValue
 
   @Input() config: IDayTimeCalendarConfig;
   @Input() displayDate: SingleCalendarValue;
+  @Input() isMonthFirst: boolean;
   @Input() minDate: SingleCalendarValue;
   @Input() maxDate: SingleCalendarValue;
   @HostBinding('class') @Input() theme: string;

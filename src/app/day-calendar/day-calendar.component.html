@@ -1,4 +1,4 @@
-<div class="dp-day-calendar-container" *ngIf="currentCalendarMode ===  CalendarMode.Day">
+<div class="dp-day-calendar-container" *ngIf="(currentCalendarMode === CalendarMode.Day) && (monthIsSelect || !isMonthFirst)">
   <dp-calendar-nav
       [label]="navLabel"
       [showLeftNav]="showLeftNav"
@@ -39,7 +39,7 @@
 </div>
 
 <dp-month-calendar
-    *ngIf="currentCalendarMode ===  CalendarMode.Month"
+    *ngIf="(currentCalendarMode === CalendarMode.Month) || (!monthIsSelect && isMonthFirst)"
     [config]="monthCalendarConfig"
     [displayDate]="_currentDateView"
     [theme]="theme"
