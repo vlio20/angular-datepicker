@@ -19,6 +19,7 @@
          [attr.data-hidden]="!_areCalendarsShown">
       <dp-day-calendar #dayCalendar
                        *ngSwitchCase="'day'"
+                       [isMonthFirst]="isMonthFirst"
                        [config]="dayCalendarConfig"
                        [ngModel]="_selected"
                        [displayDate]="displayDate"
@@ -53,6 +54,7 @@
                             *ngSwitchCase="'daytime'"
                             [config]="dayTimeCalendarConfig"
                             [displayDate]="displayDate"
+                            [isMonthFirst]="isMonthFirst"
                             [ngModel]="_selected && _selected[0]"
                             [theme]="theme"
                             (onChange)="dateSelected($event, 'second', selectEvent.SELECTION, true)"

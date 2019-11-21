@@ -21,20 +21,14 @@ import * as momentNs from 'moment';
 import {Moment, unitOfTime} from 'moment';
 import {IDayCalendarConfig, IDayCalendarConfigInternal} from './day-calendar-config.model';
 import {IDay} from './day.model';
-import {
-  ControlValueAccessor,
-  FormControl,
-  NG_VALIDATORS,
-  NG_VALUE_ACCESSOR,
-  ValidationErrors,
-  Validator
-} from '@angular/forms';
+import {ControlValueAccessor, FormControl, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator} from '@angular/forms';
 import {CalendarValue} from '../common/types/calendar-value';
 import {UtilsService} from '../common/services/utils/utils.service';
 import {IMonthCalendarConfig} from '../month-calendar/month-calendar-config';
 import {IMonth} from '../month-calendar/month.model';
 import {DateValidator} from '../common/types/validator.type';
 import {INavEvent} from '../common/models/navigation-event.model';
+
 const moment = momentNs;
 
 @Component({
@@ -61,6 +55,7 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
 
   @Input() config: IDayCalendarConfig;
   @Input() displayDate: SingleCalendarValue;
+  @Input() isMonthFirst: boolean;
   @Input() minDate: Moment;
   @Input() maxDate: Moment;
   @HostBinding('class') @Input() theme: string;
@@ -85,6 +80,7 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
   currentCalendarMode: ECalendarMode = ECalendarMode.Day;
   monthCalendarConfig: IMonthCalendarConfig;
   _shouldShowCurrent: boolean = true;
+  monthIsSelect: boolean = false;
   navLabel: string;
   showLeftNav: boolean;
   showRightNav: boolean;
@@ -97,6 +93,11 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
 
   set selected(selected: Moment[]) {
     this._selected = selected;
+
+    if (!selected.length) {
+      this.monthIsSelect = false;
+    }
+
     this.onChangeCallback(this.processOnChangeCallback(selected));
   }
 
@@ -145,6 +146,10 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
     this.inputValueType = this.utilsService.getInputType(this.inputValue, this.componentConfig.allowMultiSelect);
     this.monthCalendarConfig = this.dayCalendarService.getMonthCalendarConfig(this.componentConfig);
     this._shouldShowCurrent = this.shouldShowCurrent();
+
+    if (!this.isMonthFirst) {
+      this.monthIsSelect = true;
+    }
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -296,6 +301,7 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
   monthSelected(month: IMonth) {
     this.currentDateView = month.date.clone();
     this.currentCalendarMode = ECalendarMode.Day;
+    this.monthIsSelect = true;
     this.onMonthSelect.emit(month);
   }
 

@@ -1,6 +1,7 @@
 <dp-day-calendar #dayCalendar
                  [config]="componentConfig"
                  [ngModel]="_selected"
+                 [isMonthFirst]="isMonthFirst"
                  [theme]="theme"
                  [displayDate]="displayDate"
                  (onSelect)="dateSelected($event)"
