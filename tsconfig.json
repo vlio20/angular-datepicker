@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "module": "esnext",
     "target": "es5",
     "outDir": "bin",
     "sourceMap": true,

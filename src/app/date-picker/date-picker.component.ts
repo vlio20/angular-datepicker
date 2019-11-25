@@ -32,7 +32,7 @@ import {
   OnDestroy,
   OnInit,
   Output,
-  Renderer,
+  Renderer2,
   SimpleChanges,
   ViewChild,
   ViewEncapsulation
@@ -102,11 +102,11 @@ export class DatePickerComponent implements OnChanges,
   @Output() onRightNav: EventEmitter<INavEvent> = new EventEmitter();
   @Output() onSelect: EventEmitter<ISelectionEvent> = new EventEmitter();
 
-  @ViewChild('container', {static: false}) calendarContainer: ElementRef;
-  @ViewChild('dayCalendar', {static: false}) dayCalendarRef: DayCalendarComponent;
-  @ViewChild('monthCalendar', {static: false}) monthCalendarRef: MonthCalendarComponent;
-  @ViewChild('daytimeCalendar', {static: false}) dayTimeCalendarRef: DayTimeCalendarComponent;
-  @ViewChild('timeSelect', {static: false}) timeSelectRef: TimeSelectComponent;
+  @ViewChild('container') calendarContainer: ElementRef;
+  @ViewChild('dayCalendar') dayCalendarRef: DayCalendarComponent;
+  @ViewChild('monthCalendar') monthCalendarRef: MonthCalendarComponent;
+  @ViewChild('daytimeCalendar') dayTimeCalendarRef: DayTimeCalendarComponent;
+  @ViewChild('timeSelect') timeSelectRef: TimeSelectComponent;
 
   componentConfig: IDatePickerConfigInternal;
   dayCalendarConfig: IDayCalendarConfig;
@@ -201,7 +201,7 @@ export class DatePickerComponent implements OnChanges,
   constructor(private readonly dayPickerService: DatePickerService,
               private readonly domHelper: DomHelper,
               private readonly elemRef: ElementRef,
-              private readonly renderer: Renderer,
+              private readonly renderer: Renderer2,
               private readonly utilsService: UtilsService,
               public readonly cd: ChangeDetectorRef) {
   }
@@ -355,8 +355,8 @@ export class DatePickerComponent implements OnChanges,
   handleInnerElementClick(element: HTMLElement) {
     this.handleInnerElementClickUnlisteners.push(
       this.renderer.listen(element, 'click', () => {
-        this.hideStateHelper = true;
-      })
+    this.hideStateHelper = true;
+})
     );
   }
 
@@ -491,14 +491,14 @@ export class DatePickerComponent implements OnChanges,
   startGlobalListeners() {
     this.globalListenersUnlisteners.push(
       this.renderer.listen(document, 'keydown', (e: KeyboardEvent) => {
-        this.onKeyPress(e);
-      }),
+    this.onKeyPress(e);
+}),
       this.renderer.listen(document, 'scroll', () => {
-        this.onScroll();
-      }),
+    this.onScroll();
+}),
       this.renderer.listen(document, 'click', () => {
-        this.onBodyClick();
-      })
+    this.onBodyClick();
+})
     );
   }
 
