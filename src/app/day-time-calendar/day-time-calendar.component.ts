@@ -34,6 +34,7 @@ import {DayTimeCalendarService} from './day-time-calendar.service';
 import {DateValidator} from '../common/types/validator.type';
 import {DayCalendarComponent} from '../day-calendar/day-calendar.component';
 import {INavEvent} from '../common/models/navigation-event.model';
+import {CalendarTypeDisplayFirst} from '../common/types/calendar-type-display-first';
 
 @Component({
   selector: 'dp-day-time-calendar',
@@ -61,7 +62,7 @@ export class DayTimeCalendarComponent implements OnInit, OnChanges, ControlValue
 
   @Input() config: IDayTimeCalendarConfig;
   @Input() displayDate: SingleCalendarValue;
-  @Input() isMonthFirst: boolean;
+  @Input() calendarTypeDisplayFirst: CalendarTypeDisplayFirst;
   @Input() minDate: SingleCalendarValue;
   @Input() maxDate: SingleCalendarValue;
   @HostBinding('class') @Input() theme: string;
