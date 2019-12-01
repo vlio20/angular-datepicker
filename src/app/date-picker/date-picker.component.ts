@@ -52,6 +52,8 @@ import {DayTimeCalendarComponent} from '../day-time-calendar/day-time-calendar.c
 import {INavEvent} from '../common/models/navigation-event.model';
 import {SelectEvent} from '../common/types/selection-evet.enum.';
 import {ISelectionEvent} from '../common/types/selection-evet.model';
+import {CalendarTypeDisplayFirst} from '../common/types/calendar-type-display-first';
+import {CalendarNavComponent} from '../calendar-nav/calendar-nav.component';
 
 @Component({
   selector: 'dp-date-picker',
@@ -85,7 +87,7 @@ export class DatePickerComponent implements OnChanges,
   isInitialized: boolean = false;
   @Input() config: IDatePickerConfig;
   @Input() mode: CalendarMode = 'day';
-  @Input() isMonthFirst: boolean = false;
+  @Input() calendarTypeDisplayFirst: CalendarTypeDisplayFirst = 'month';
   @Input() placeholder: string = '';
   @Input() disabled: boolean = false;
   @Input() displayDate: SingleCalendarValue;
