@@ -10,6 +10,7 @@ import {GaService} from '../services/ga/ga.service';
 import {ECalendarValue} from '../../common/types/calendar-value-enum';
 import {INavEvent} from '../../common/models/navigation-event.model';
 import {ISelectionEvent} from '../../common/types/selection-evet.model';
+import {CalendarTypeDisplayFirst} from '../../common/types/calendar-type-display-first';
 const moment = momentNs;
 
 const GLOBAL_OPTION_KEYS = [
@@ -150,7 +151,9 @@ export class DemoComponent {
   validationMinTime: Moment;
   validationMaxTime: Moment;
   placeholder: string = 'Choose a date...';
+  calendarTypeDisplayFirst: CalendarTypeDisplayFirst = 'day';
   displayDate: Moment | string;
+  calendarTypeDisplayFirstValues: Array<String> = ['day', 'month'];
   dateTypes: {name: string, value: ECalendarValue}[] = [
     {
       name: 'Guess',

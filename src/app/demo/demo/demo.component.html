@@ -106,6 +106,7 @@
                         (onSelect)="onSelect($event)"
                         [disabled]="disabled"
                         [minDate]="validationMinDate"
+                        [calendarTypeDisplayFirst]="calendarTypeDisplayFirst"
                         [maxDate]="validationMaxDate"
                         [required]="required"
                         [placeholder]="placeholder"
@@ -193,6 +194,7 @@
                         [minDate]="validationMinDate"
                         [maxDate]="validationMaxDate"
                         [required]="required"
+                        [calendarTypeDisplayFirst]="calendarTypeDisplayFirst"
                         [placeholder]="placeholder"
                         [config]="config"
                         [theme]="material ? 'dp-material dp-main' : 'dp-main'"
@@ -627,6 +629,17 @@
         </div>
       </div>
 
+      <div class="dp-option" *ngIf="isValidConfig('firstDayOfWeek')">
+        <span class="dp-option-header">
+          Type of calendar to be displayed first (calendarTypeDisplayFirst):
+        </span>
+        <div class="dp-option-playground">
+          <select id="calendarTypeDisplayFirst"
+                  [(ngModel)]="calendarTypeDisplayFirst">
+            <option *ngFor="let value of calendarTypeDisplayFirstValues" [value]="value">{{value}}</option>
+          </select>
+        </div>
+      </div>
     </div>
 
     <div class="dp-configs">
@@ -977,7 +990,6 @@
           </label>
         </div>
       </div>
-
 
       <div class="dp-option" *ngIf="isValidConfig('showNearMonthDays')">
         <span class="dp-option-header">
@@ -1338,7 +1350,6 @@
                  (change)="configChanged('multipleYearsNavigateBy', config.multipleYearsNavigateBy)">
         </div>
       </div>
-
 
       <div class="dp-option" *ngIf="isValidConfig('returnedValueType')">
         <span class="dp-option-header">

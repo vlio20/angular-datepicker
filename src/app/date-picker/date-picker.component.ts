@@ -87,7 +87,7 @@ export class DatePickerComponent implements OnChanges,
   isInitialized: boolean = false;
   @Input() config: IDatePickerConfig;
   @Input() mode: CalendarMode = 'day';
-  @Input() calendarTypeDisplayFirst: CalendarTypeDisplayFirst = 'month';
+  @Input() calendarTypeDisplayFirst: CalendarTypeDisplayFirst = 'day';
   @Input() placeholder: string = '';
   @Input() disabled: boolean = false;
   @Input() displayDate: SingleCalendarValue;
