@@ -1,6 +1,6 @@
 import {DemoPage} from './app.po';
 
-describe('dpDayPicker timePicker', () => {
+fdescribe('dpDayPicker timePicker', () => {
   let page: DemoPage;
 
   beforeEach(async () => {
