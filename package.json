@@ -37,8 +37,9 @@
   ],
   "peerDependencies": {},
   "devDependencies": {
-    "@angular-devkit/build-angular": "~0.800.6",
-    "@angular-devkit/core": "8.0.6",
+    "@angular-devkit/build-angular": "0.803.20",
+    "@angular-devkit/build-ng-packagr": "^0.803.20",
+    "@angular-devkit/core": "8.3.20",
     "@angular/cli": "^8.3.20",
     "@angular/common": "8.0.3",
     "@angular/compiler": "8.0.3",
@@ -83,10 +84,7 @@
   },
   "ngPackage": {
     "lib": {
-      "entryFile": "src/app/index.ts",
-      "externals": {
-        "moment": "moment"
-      }
+      "entryFile": "src/app/index.ts"
     },
     "dest": "bin",
     "whitelistedNonPeerDependencies": [
