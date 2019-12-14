@@ -183,6 +183,6 @@ export class DemoPage {
   }
 
   waitUntilPresent(elem: ElementFinder) {
-    browser.wait(ExpectedConditions.presenceOf(elem), 5000, 'Element taking too long to appear in the DOM');
+    return browser.wait(ExpectedConditions.presenceOf(elem), 5000, 'Element taking too long to appear in the DOM');
   }
 }
