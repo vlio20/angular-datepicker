@@ -60,10 +60,34 @@ const moment = momentNs;
 })
 export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAccessor, Validator {
 
+  get selected(): Moment[] {
+    return this._selected;
+  }
+
+  set selected(selected: Moment[]) {
+    this._selected = selected;
+    this.onChangeCallback(this.processOnChangeCallback(selected));
+  }
+
+  get currentDateView(): Moment {
+    return this._currentDateView;
+  }
+
+  set currentDateView(current: Moment) {
+    this._currentDateView = current.clone();
+    this.weeks = this.dayCalendarService
+      .generateMonthArray(this.componentConfig, this._currentDateView, this.selected);
+    this.navLabel = this.dayCalendarService.getHeaderLabel(this.componentConfig, this._currentDateView);
+    this.showLeftNav = this.dayCalendarService.shouldShowLeft(this.componentConfig.min, this.currentDateView);
+    this.showRightNav = this.dayCalendarService.shouldShowRight(this.componentConfig.max, this.currentDateView);
+  }
+  ;
+
   @Input() config: IDayCalendarConfig;
   @Input() displayDate: SingleCalendarValue;
   @Input() minDate: Moment;
   @Input() maxDate: Moment;
+  
   @HostBinding('class') @Input() theme: string;
 
   @Output() onSelect: EventEmitter<IDay> = new EventEmitter();
@@ -93,35 +117,13 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
     toggleCalendarMode: this.toggleCalendarMode.bind(this)
   };
 
-  constructor(public readonly dayCalendarService: DayCalendarService,
-              public readonly utilsService: UtilsService,
-              public readonly cd: ChangeDetectorRef) {
-  }
-
   _selected: Moment[];
-
-  get selected(): Moment[] {
-    return this._selected;
-  }
-
-  set selected(selected: Moment[]) {
-    this._selected = selected;
-    this.onChangeCallback(this.processOnChangeCallback(selected));
-  }
 
   _currentDateView: Moment;
 
-  get currentDateView(): Moment {
-    return this._currentDateView;
-  }
-
-  set currentDateView(current: Moment) {
-    this._currentDateView = current.clone();
-    this.weeks = this.dayCalendarService
-      .generateMonthArray(this.componentConfig, this._currentDateView, this.selected);
-    this.navLabel = this.dayCalendarService.getHeaderLabel(this.componentConfig, this._currentDateView);
-    this.showLeftNav = this.dayCalendarService.shouldShowLeft(this.componentConfig.min, this.currentDateView);
-    this.showRightNav = this.dayCalendarService.shouldShowRight(this.componentConfig.max, this.currentDateView);
+  constructor(public readonly dayCalendarService: DayCalendarService,
+              public readonly utilsService: UtilsService,
+              public readonly cd: ChangeDetectorRef) {
   }
 
   ngOnInit() {
@@ -185,7 +187,7 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
   }
 
   onChangeCallback(_: any) {
-  };
+  }
 
   registerOnTouched(fn: any): void {
   }

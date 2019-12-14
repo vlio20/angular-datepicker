@@ -28,25 +28,6 @@ import {ISelectionEvent} from '../common/types/selection-evet.model';
   selector: '[dpDayPicker]'
 })
 export class DatePickerDirective implements OnInit {
-  @Output() open = new EventEmitter<void>();
-  @Output() close = new EventEmitter<void>();
-  @Output() onChange = new EventEmitter<CalendarValue>();
-  @Output() onGoToCurrent: EventEmitter<void> = new EventEmitter();
-  @Output() onLeftNav: EventEmitter<INavEvent> = new EventEmitter();
-  @Output() onRightNav: EventEmitter<INavEvent> = new EventEmitter();
-  @Output() onSelect: EventEmitter<ISelectionEvent> = new EventEmitter();
-  public datePicker: DatePickerComponent;
-  public api: IDpDayPickerApi;
-
-  constructor(public viewContainerRef: ViewContainerRef,
-              public elemRef: ElementRef,
-              public componentFactoryResolver: ComponentFactoryResolver,
-              public service: DatePickerDirectiveService,
-              @Optional() public formControl: NgControl,
-              public utilsService: UtilsService) {
-  }
-
-  private _config: IDatePickerDirectiveConfig;
 
   get config(): IDatePickerDirectiveConfig {
     return this._config;
@@ -58,8 +39,6 @@ export class DatePickerDirective implements OnInit {
     this.markForCheck();
   }
 
-  private _attachTo: ElementRef | string;
-
   get attachTo(): ElementRef | string {
     return this._attachTo;
   }
@@ -70,8 +49,6 @@ export class DatePickerDirective implements OnInit {
     this.updateDatepickerConfig();
     this.markForCheck();
   }
-
-  private _theme: string;
 
   get theme(): string {
     return this._theme;
@@ -86,8 +63,6 @@ export class DatePickerDirective implements OnInit {
     this.markForCheck();
   }
 
-  private _mode: CalendarMode = 'day';
-
   get mode(): CalendarMode {
     return this._mode;
   }
@@ -100,8 +75,6 @@ export class DatePickerDirective implements OnInit {
 
     this.markForCheck();
   }
-
-  private _minDate: SingleCalendarValue;
 
   get minDate(): SingleCalendarValue {
     return this._minDate;
@@ -117,8 +90,6 @@ export class DatePickerDirective implements OnInit {
     this.markForCheck();
   }
 
-  private _maxDate: SingleCalendarValue;
-
   get maxDate(): SingleCalendarValue {
     return this._maxDate;
   }
@@ -132,8 +103,6 @@ export class DatePickerDirective implements OnInit {
 
     this.markForCheck();
   }
-
-  private _minTime: SingleCalendarValue;
 
   get minTime(): SingleCalendarValue {
     return this._minTime;
@@ -149,8 +118,6 @@ export class DatePickerDirective implements OnInit {
     this.markForCheck();
   }
 
-  private _maxTime: SingleCalendarValue;
-
   get maxTime(): SingleCalendarValue {
     return this._maxTime;
   }
@@ -165,8 +132,6 @@ export class DatePickerDirective implements OnInit {
     this.markForCheck();
   }
 
-  private _displayDate: SingleCalendarValue;
-
   get displayDate(): SingleCalendarValue {
     return this._displayDate;
   }
@@ -176,6 +141,43 @@ export class DatePickerDirective implements OnInit {
     this.updateDatepickerConfig();
 
     this.markForCheck();
+  }
+
+  @Output() open = new EventEmitter<void>();
+  @Output() close = new EventEmitter<void>();
+  @Output() onChange = new EventEmitter<CalendarValue>();
+  @Output() onGoToCurrent: EventEmitter<void> = new EventEmitter();
+  @Output() onLeftNav: EventEmitter<INavEvent> = new EventEmitter();
+  @Output() onRightNav: EventEmitter<INavEvent> = new EventEmitter();
+  @Output() onSelect: EventEmitter<ISelectionEvent> = new EventEmitter();
+
+  datePicker: DatePickerComponent;
+  api: IDpDayPickerApi;
+
+  private _config: IDatePickerDirectiveConfig;
+
+  private _attachTo: ElementRef | string;
+
+  private _theme: string;
+
+  private _mode: CalendarMode = 'day';
+
+  private _minDate: SingleCalendarValue;
+
+  private _maxDate: SingleCalendarValue;
+
+  private _minTime: SingleCalendarValue;
+
+  private _maxTime: SingleCalendarValue;
+
+  private _displayDate: SingleCalendarValue;
+
+  constructor(public viewContainerRef: ViewContainerRef,
+              public elemRef: ElementRef,
+              public componentFactoryResolver: ComponentFactoryResolver,
+              public service: DatePickerDirectiveService,
+              @Optional() public formControl: NgControl,
+              public utilsService: UtilsService) {
   }
 
   ngOnInit(): void {
