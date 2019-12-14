@@ -1,6 +1,6 @@
 import {DemoPage} from './app.po';
 
-fdescribe('dpDayPicker timePicker', () => {
+describe('dpDayPicker timePicker', () => {
   let page: DemoPage;
 
   beforeEach(async () => {
@@ -10,18 +10,18 @@ fdescribe('dpDayPicker timePicker', () => {
     await page.timePickerMenu.click();
     await page.dateFormatInput.clear();
     await page.dateFormatInput.sendKeys('HH:mm:ss');
+    await page.clickOnBody();
   });
 
-  it('should check if min time validation is working', async () => {
+  fit('should check if min time validation is working', async () => {
     await page.minTimeValidationPickerInput.clear();
     expect(await page.timePickerMinTimeValidationMsg.isPresent()).toBe(false);
     await page.minTimeValidationPickerInput.clear();
-    await page.minTimeValidationPickerInput.sendKeys('10:11:12');
+    await page.minTimeValidationPickerInput.sendKeys('10:00:00');
     await page.timePickerInput.click();
     await page.timePickerInput.clear();
     await page.timePickerInput.sendKeys('09:00:00');
     await page.clickOnBody();
-    await page.waitUntilPresent(page.timePickerMinTimeValidationMsg);
     expect(await page.timePickerMinTimeValidationMsg.isPresent()).toBe(true);
     expect(await page.timePickerMinTimeValidationMsg.getText()).toEqual('minTime invalid');
     await page.minTimeValidationPickerInput.clear();
