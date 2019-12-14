@@ -32,7 +32,7 @@ import {
   OnDestroy,
   OnInit,
   Output,
-  Renderer,
+  Renderer2,
   SimpleChanges,
   ViewChild,
   ViewEncapsulation
@@ -136,7 +136,7 @@ export class DatePickerComponent implements OnChanges,
   set selected(selected: Moment[]) {
     this._selected = selected;
     this.inputElementValue = (<string[]>this.utilsService
-                                            .convertFromMomentArray(this.componentConfig.format, selected, ECalendarValue.StringArr))
+      .convertFromMomentArray(this.componentConfig.format, selected, ECalendarValue.StringArr))
       .join(' | ');
     const val = this.processOnChangeCallback(selected);
     this.onChangeCallback(val, false);
@@ -201,7 +201,7 @@ export class DatePickerComponent implements OnChanges,
   constructor(private readonly dayPickerService: DatePickerService,
               private readonly domHelper: DomHelper,
               private readonly elemRef: ElementRef,
-              private readonly renderer: Renderer,
+              private readonly renderer: Renderer2,
               private readonly utilsService: UtilsService,
               public readonly cd: ChangeDetectorRef) {
   }
@@ -249,7 +249,7 @@ export class DatePickerComponent implements OnChanges,
 
     if (value || value === '') {
       this.selected = this.utilsService
-                          .convertToMomentArray(value, this.componentConfig.format, this.componentConfig.allowMultiSelect);
+        .convertToMomentArray(value, this.componentConfig.format, this.componentConfig.allowMultiSelect);
       this.init();
     } else {
       this.selected = [];
@@ -327,7 +327,7 @@ export class DatePickerComponent implements OnChanges,
   }
 
   setElementPositionInDom(): void {
-    this.calendarWrapper = <HTMLElement> this.calendarContainer.nativeElement;
+    this.calendarWrapper = <HTMLElement>this.calendarContainer.nativeElement;
     this.setInputElementContainer();
     this.popupElem = this.elemRef.nativeElement.querySelector('.dp-popup');
     this.handleInnerElementClick(this.popupElem);
@@ -365,12 +365,12 @@ export class DatePickerComponent implements OnChanges,
     this.currentDateView = this.displayDate
       ? this.utilsService.convertToMoment(this.displayDate, this.componentConfig.format).clone()
       : this.utilsService
-            .getDefaultDisplayDate(
-              this.currentDateView,
-              this.selected,
-              this.componentConfig.allowMultiSelect,
-              this.componentConfig.min
-            );
+        .getDefaultDisplayDate(
+          this.currentDateView,
+          this.selected,
+          this.componentConfig.allowMultiSelect,
+          this.componentConfig.min
+        );
     this.dayCalendarConfig = this.dayPickerService.getDayConfigService(this.componentConfig);
     this.dayTimeCalendarConfig = this.dayPickerService.getDayTimeConfigService(this.componentConfig);
     this.timeSelectConfig = this.dayPickerService.getTimeConfigService(this.componentConfig);
@@ -441,14 +441,14 @@ export class DatePickerComponent implements OnChanges,
       })
     } else {
       this._selected = this.utilsService
-                           .getValidMomentArray(strVal, this.componentConfig.format);
+        .getValidMomentArray(strVal, this.componentConfig.format);
       this.onChangeCallback(this.processOnChangeCallback(strVal), true);
     }
   }
 
   dateSelected(date: IDate, granularity: unitOfTime.Base, type: SelectEvent, ignoreClose?: boolean) {
     this.selected = this.utilsService
-                        .updateSelected(this.componentConfig.allowMultiSelect, this.selected, date, granularity);
+      .updateSelected(this.componentConfig.allowMultiSelect, this.selected, date, granularity);
     if (!ignoreClose) {
       this.onDateClick();
     }
