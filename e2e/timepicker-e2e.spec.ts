@@ -3,28 +3,28 @@ import {DemoPage} from './app.po';
 describe('dpDayPicker timePicker', () => {
   let page: DemoPage;
 
-  beforeEach(() => {
+  beforeEach(async () => {
     page = new DemoPage();
-    page.navigateTo();
+    await page.navigateTo();
 
-    page.timePickerMenu.click();
-    page.dateFormatInput.clear();
-    page.dateFormatInput.sendKeys('HH:mm:ss');
+    await page.timePickerMenu.click();
+    await page.dateFormatInput.clear();
+    await page.dateFormatInput.sendKeys('HH:mm:ss');
   });
 
   it('should check if min time validation is working', async () => {
-    page.minTimeValidationPickerInput.clear();
+    await page.minTimeValidationPickerInput.clear();
     expect(await page.timePickerMinTimeValidationMsg.isPresent()).toBe(false);
-    page.minTimeValidationPickerInput.clear();
-    page.minTimeValidationPickerInput.sendKeys('10:11:12');
-    page.timePickerInput.click();
-    page.timePickerInput.clear();
-    page.timePickerInput.sendKeys('09:00:00');
-    page.clickOnBody();
+    await page.minTimeValidationPickerInput.clear();
+    await page.minTimeValidationPickerInput.sendKeys('10:11:12');
+    await page.timePickerInput.click();
+    await page.timePickerInput.clear();
+    await page.timePickerInput.sendKeys('09:00:00');
+    await page.clickOnBody();
     expect(await page.timePickerMinTimeValidationMsg.getText()).toEqual('minTime invalid');
-    page.minTimeValidationPickerInput.clear();
-    page.minTimeValidationPickerInput.sendKeys('08:07:06');
-    page.clickOnBody();
+    await page.minTimeValidationPickerInput.clear();
+    await page.minTimeValidationPickerInput.sendKeys('08:07:06');
+    await page.clickOnBody();
     expect(await page.timePickerMinTimeValidationMsg.isPresent()).toBe(false);
   });
 
