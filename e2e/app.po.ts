@@ -1,4 +1,5 @@
-import {$, $$, browser, by, element} from 'protractor';
+import {$, $$, browser, by, element, ElementFinder, ExpectedConditions} from 'protractor';
+
 
 export class DemoPage {
   private popupSelector = '.dp-popup.dp-main';
@@ -179,5 +180,9 @@ export class DemoPage {
 
   clickOnMonthButtonInline(text: string) {
     return element(by.cssContainingText(`.dp-inline-month .dp-calendar-month`, text)).click();
+  }
+
+  waitUntilPresent(elem: ElementFinder) {
+    browser.wait(ExpectedConditions.presenceOf(elem), 5000, 'Element taking too long to appear in the DOM');
   }
 }

@@ -21,6 +21,7 @@ fdescribe('dpDayPicker timePicker', () => {
     await page.timePickerInput.clear();
     await page.timePickerInput.sendKeys('09:00:00');
     await page.clickOnBody();
+    await page.waitUntilPresent(page.timePickerMinTimeValidationMsg);
     expect(await page.timePickerMinTimeValidationMsg.isPresent()).toBe(true);
     expect(await page.timePickerMinTimeValidationMsg.getText()).toEqual('minTime invalid');
     await page.minTimeValidationPickerInput.clear();
