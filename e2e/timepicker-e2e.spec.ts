@@ -13,7 +13,7 @@ describe('dpDayPicker timePicker', () => {
     await page.clickOnBody();
   });
 
-  fit('should check if min time validation is working', async () => {
+  it('should check if min time validation is working', async () => {
     await page.minTimeValidationPickerInput.click();
     await page.minTimeValidationPickerInput.clear();
     expect(await page.timePickerMinTimeValidationMsg.isPresent()).toBe(false);
