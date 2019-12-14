@@ -12,8 +12,8 @@ exports.config = {
   ],
   capabilities: {
     browserName: 'chrome',
-    shardTestFiles: true,
-    maxInstances: 5,
+    shardTestFiles: headless,
+    maxInstances: headless ? 5 : 1,
     chromeOptions: {
       args: headless ? [
         '--headless',
@@ -34,6 +34,6 @@ exports.config = {
     jasmine.getEnv().addReporter(
       new SpecReporter({spec: {displayStacktrace: true}}));
 
-    require('ts-node').register({ project: 'e2e/tsconfig.e2e.json' });
+    require('ts-node').register({project: 'e2e/tsconfig.e2e.json'});
   }
 };
