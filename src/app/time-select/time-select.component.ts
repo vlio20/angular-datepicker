@@ -30,6 +30,7 @@ import {CalendarValue} from '../common/types/calendar-value';
 import {UtilsService} from '../common/services/utils/utils.service';
 import {IDate} from '../common/models/date.model';
 import {DateValidator} from '../common/types/validator.type';
+
 const moment = momentNs;
 
 @Component({
@@ -66,16 +67,13 @@ export class TimeSelectComponent implements OnInit, OnChanges, ControlValueAcces
 
   isInited: boolean = false;
   componentConfig: ITimeSelectConfigInternal;
-  _selected: Moment;
   inputValue: CalendarValue;
   inputValueType: ECalendarValue;
   validateFn: DateValidator;
-
   hours: string;
   minutes: string;
   seconds: string;
   meridiem: string;
-
   showDecHour: boolean;
   showDecMinute: boolean;
   showDecSecond: boolean;
@@ -83,6 +81,20 @@ export class TimeSelectComponent implements OnInit, OnChanges, ControlValueAcces
   showIncMinute: boolean;
   showIncSecond: boolean;
   showToggleMeridiem: boolean;
+  api = {
+    triggerChange: this.emitChange.bind(this)
+  };
+
+  constructor(public timeSelectService: TimeSelectService,
+              public utilsService: UtilsService,
+              public cd: ChangeDetectorRef) {
+  }
+
+  _selected: Moment;
+
+  get selected(): Moment {
+    return this._selected;
+  }
 
   set selected(selected: Moment) {
     this._selected = selected;
@@ -99,19 +111,6 @@ export class TimeSelectComponent implements OnInit, OnChanges, ControlValueAcces
     this.showToggleMeridiem = this.timeSelectService.shouldShowToggleMeridiem(this.componentConfig, this._selected);
 
     this.onChangeCallback(this.processOnChangeCallback(selected));
-  }
-
-  get selected(): Moment {
-    return this._selected;
-  }
-
-  api = {
-    triggerChange: this.emitChange.bind(this)
-  };
-
-  constructor(public timeSelectService: TimeSelectService,
-              public utilsService: UtilsService,
-              public cd: ChangeDetectorRef) {
   }
 
   ngOnInit() {

@@ -1,62 +1,62 @@
 <ul class="dp-time-select-controls">
   <li class="dp-time-select-control dp-time-select-control-hours">
-    <button type="button"
-            class="dp-time-select-control-up"
+    <button (click)="increase('hour')"
             [disabled]="!showIncHour"
-            (click)="increase('hour')">
+            class="dp-time-select-control-up"
+            type="button">
     </button>
-    <span class="dp-time-select-display-hours"
-          [innerText]="hours">
+    <span [innerText]="hours"
+          class="dp-time-select-display-hours">
     </span>
-    <button type="button"
-            class="dp-time-select-control-down"
+    <button (click)="decrease('hour')"
             [disabled]="!showDecHour"
-            (click)="decrease('hour')"></button>
+            class="dp-time-select-control-down"
+            type="button"></button>
   </li>
-  <li class="dp-time-select-control dp-time-select-separator"
-      [innerText]="componentConfig.timeSeparator">
+  <li [innerText]="componentConfig.timeSeparator"
+      class="dp-time-select-control dp-time-select-separator">
   </li>
   <li class="dp-time-select-control dp-time-select-control-minutes">
-    <button type="button"
-            class="dp-time-select-control-up"
+    <button (click)="increase('minute')"
             [disabled]="!showIncMinute"
-            (click)="increase('minute')"></button>
-    <span class="dp-time-select-display-minutes"
-          [innerText]="minutes">
+            class="dp-time-select-control-up"
+            type="button"></button>
+    <span [innerText]="minutes"
+          class="dp-time-select-display-minutes">
     </span>
-    <button type="button"
+    <button (click)="decrease('minute')"
             [disabled]="!showDecMinute" class="dp-time-select-control-down"
-            (click)="decrease('minute')"></button>
+            type="button"></button>
   </li>
   <ng-container *ngIf="componentConfig.showSeconds">
-    <li class="dp-time-select-control dp-time-select-separator"
-        [innerText]="componentConfig.timeSeparator">
+    <li [innerText]="componentConfig.timeSeparator"
+        class="dp-time-select-control dp-time-select-separator">
     </li>
     <li class="dp-time-select-control dp-time-select-control-seconds">
-      <button type="button"
-              class="dp-time-select-control-up"
+      <button (click)="increase('second')"
               [disabled]="!showIncSecond"
-              (click)="increase('second')"></button>
-      <span class="dp-time-select-display-seconds"
-            [innerText]="seconds">
+              class="dp-time-select-control-up"
+              type="button"></button>
+      <span [innerText]="seconds"
+            class="dp-time-select-display-seconds">
       </span>
-      <button type="button"
-              class="dp-time-select-control-down"
+      <button (click)="decrease('second')"
               [disabled]="!showDecSecond"
-              (click)="decrease('second')"></button>
+              class="dp-time-select-control-down"
+              type="button"></button>
     </li>
   </ng-container>
-  <li class="dp-time-select-control dp-time-select-control-meridiem" *ngIf="!componentConfig.showTwentyFourHours">
-    <button type="button"
+  <li *ngIf="!componentConfig.showTwentyFourHours" class="dp-time-select-control dp-time-select-control-meridiem">
+    <button (click)="toggleMeridiem()"
+            [disabled]="!showToggleMeridiem"
             class="dp-time-select-control-up"
-            [disabled]="!showToggleMeridiem"
-            (click)="toggleMeridiem()"></button>
-    <span class="dp-time-select-display-meridiem"
-          [innerText]="meridiem">
+            type="button"></button>
+    <span [innerText]="meridiem"
+          class="dp-time-select-display-meridiem">
     </span>
-    <button type="button"
-            class="dp-time-select-control-down"
+    <button (click)="toggleMeridiem()"
             [disabled]="!showToggleMeridiem"
-            (click)="toggleMeridiem()"></button>
+            class="dp-time-select-control-down"
+            type="button"></button>
   </li>
 </ul>

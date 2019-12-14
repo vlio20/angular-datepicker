@@ -5,6 +5,7 @@ import * as momentNs from 'moment';
 import {TimeSelectComponent} from './time-select.component';
 import {TimeSelectService} from './time-select.service';
 import {MonthCalendarComponent} from '../month-calendar/month-calendar.component';
+
 const moment = momentNs;
 
 describe('Component: TimeSelectComponent', () => {

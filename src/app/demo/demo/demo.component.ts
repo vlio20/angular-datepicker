@@ -10,6 +10,7 @@ import {GaService} from '../services/ga/ga.service';
 import {ECalendarValue} from '../../common/types/calendar-value-enum';
 import {INavEvent} from '../../common/models/navigation-event.model';
 import {ISelectionEvent} from '../../common/types/selection-evet.model';
+
 const moment = momentNs;
 
 const GLOBAL_OPTION_KEYS = [
@@ -173,21 +174,6 @@ export class DemoComponent {
       value: ECalendarValue.StringArr
     }
   ];
-
-  formGroup: FormGroup = new FormGroup({
-    datePicker: new FormControl({value: this.date, disabled: this.disabled}, [
-      this.required ? Validators.required : () => undefined,
-      control => this.validationMinDate && this.config &&
-      moment(control.value, this.config.format || this.getDefaultFormatByMode(this.pickerMode))
-        .isBefore(this.validationMinDate)
-        ? {minDate: 'minDate Invalid'} : undefined,
-      control => this.validationMaxDate && this.config &&
-      moment(control.value, this.config.format || this.getDefaultFormatByMode(this.pickerMode))
-        .isAfter(this.validationMaxDate)
-        ? {maxDate: 'maxDate Invalid'} : undefined
-    ])
-  });
-
   config: IDatePickerConfig = {
     firstDayOfWeek: 'su',
     monthFormat: 'MMM, YYYY',
@@ -225,6 +211,19 @@ export class DemoComponent {
     unSelectOnClick: true,
     hideOnOutsideClick: true
   };
+  formGroup: FormGroup = new FormGroup({
+    datePicker: new FormControl({value: this.date, disabled: this.disabled}, [
+      this.required ? Validators.required : () => undefined,
+      control => this.validationMinDate && this.config &&
+      moment(control.value, this.config.format || this.getDefaultFormatByMode(this.pickerMode))
+        .isBefore(this.validationMinDate)
+        ? {minDate: 'minDate Invalid'} : undefined,
+      control => this.validationMaxDate && this.config &&
+      moment(control.value, this.config.format || this.getDefaultFormatByMode(this.pickerMode))
+        .isAfter(this.validationMaxDate)
+        ? {maxDate: 'maxDate Invalid'} : undefined
+    ])
+  });
   isAtTop: boolean = true;
 
   constructor(private gaService: GaService) {
@@ -294,77 +293,55 @@ export class DemoComponent {
     switch (this.pickerMode) {
       case 'dayInline':
         return [
-            ...DAY_CALENDAR_OPTION_KEYS
-          ].indexOf(key) > -1;
+          ...DAY_CALENDAR_OPTION_KEYS
+        ].indexOf(key) > -1;
       case 'monthInline':
         return [
-            ...MONTH_CALENDAR_OPTION_KEYS
-          ].indexOf(key) > -1;
+          ...MONTH_CALENDAR_OPTION_KEYS
+        ].indexOf(key) > -1;
       case 'timeInline':
         return [
-            ...TIME_SELECT_OPTION_KEYS
-          ].indexOf(key) > -1;
+          ...TIME_SELECT_OPTION_KEYS
+        ].indexOf(key) > -1;
       case 'daytimeInline':
         return [
-            ...DAY_TIME_CALENDAR_OPTION_KEYS
-          ].indexOf(key) > -1;
+          ...DAY_TIME_CALENDAR_OPTION_KEYS
+        ].indexOf(key) > -1;
       case 'dayPicker':
         return [
-            ...DAY_PICKER_OPTION_KEYS,
-            ...DAY_CALENDAR_OPTION_KEYS
-          ].indexOf(key) > -1;
+          ...DAY_PICKER_OPTION_KEYS,
+          ...DAY_CALENDAR_OPTION_KEYS
+        ].indexOf(key) > -1;
       case 'dayDirective':
       case 'dayDirectiveReactiveMenu':
         return [
-            ...DAY_PICKER_DIRECTIVE_OPTION_KEYS,
-            ...DAY_CALENDAR_OPTION_KEYS
-          ].indexOf(key) > -1;
+          ...DAY_PICKER_DIRECTIVE_OPTION_KEYS,
+          ...DAY_CALENDAR_OPTION_KEYS
+        ].indexOf(key) > -1;
       case 'monthPicker':
         return [
-            ...DAY_PICKER_OPTION_KEYS,
-            ...MONTH_CALENDAR_OPTION_KEYS
-          ].indexOf(key) > -1;
+          ...DAY_PICKER_OPTION_KEYS,
+          ...MONTH_CALENDAR_OPTION_KEYS
+        ].indexOf(key) > -1;
       case 'monthDirective':
         return [
-            ...DAY_PICKER_DIRECTIVE_OPTION_KEYS,
-            ...MONTH_CALENDAR_OPTION_KEYS
-          ].indexOf(key) > -1;
+          ...DAY_PICKER_DIRECTIVE_OPTION_KEYS,
+          ...MONTH_CALENDAR_OPTION_KEYS
+        ].indexOf(key) > -1;
       case 'timePicker':
       case 'timeDirective':
         return [
-            ...TIME_PICKER_OPTION_KEYS,
-            ...TIME_SELECT_OPTION_KEYS
-          ].indexOf(key) > -1;
+          ...TIME_PICKER_OPTION_KEYS,
+          ...TIME_SELECT_OPTION_KEYS
+        ].indexOf(key) > -1;
       case 'daytimePicker':
       case 'daytimeDirective':
         return [
-            ...DAY_TIME_PICKER_OPTION_KEYS,
-            ...DAY_TIME_CALENDAR_OPTION_KEYS
-          ].indexOf(key) > -1;
+          ...DAY_TIME_PICKER_OPTION_KEYS,
+          ...DAY_TIME_CALENDAR_OPTION_KEYS
+        ].indexOf(key) > -1;
       default:
         return true;
-    }
-  }
-
-  private getDefaultFormatByMode(mode: string): string {
-    switch (mode) {
-      case 'daytimePicker':
-      case 'daytimeInline':
-      case 'daytimeDirective':
-        return 'DD-MM-YYYY HH:mm:ss';
-      case 'dayPicker':
-      case 'dayInline':
-      case 'dayDirective':
-      case 'dayDirectiveReactiveMenu':
-        return 'DD-MM-YYYY';
-      case 'monthPicker':
-      case 'monthInline':
-      case 'monthDirective':
-        return 'MMM, YYYY';
-      case 'timePicker':
-      case 'timeInline':
-      case 'timeDirective':
-        return 'HH:mm:ss';
     }
   }
 
@@ -395,5 +372,27 @@ export class DemoComponent {
 
   trackFiver(): void {
     this.gaService.emitEvent('fiverr', 'clicked');
+  }
+
+  private getDefaultFormatByMode(mode: string): string {
+    switch (mode) {
+      case 'daytimePicker':
+      case 'daytimeInline':
+      case 'daytimeDirective':
+        return 'DD-MM-YYYY HH:mm:ss';
+      case 'dayPicker':
+      case 'dayInline':
+      case 'dayDirective':
+      case 'dayDirectiveReactiveMenu':
+        return 'DD-MM-YYYY';
+      case 'monthPicker':
+      case 'monthInline':
+      case 'monthDirective':
+        return 'MMM, YYYY';
+      case 'timePicker':
+      case 'timeInline':
+      case 'timeDirective':
+        return 'HH:mm:ss';
+    }
   }
 }

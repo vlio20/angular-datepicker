@@ -18,7 +18,7 @@ describe('Component: DatePickerComponent', () => {
   let component: DatePickerComponent;
   let fixture: ComponentFixture<DatePickerComponent>;
 
-  const setComponentMode = function(mode: CalendarMode) {
+  const setComponentMode = function (mode: CalendarMode) {
     component.mode = mode;
     component.init();
     fixture.detectChanges();
@@ -26,7 +26,7 @@ describe('Component: DatePickerComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ FormsModule ],
+      imports: [FormsModule],
       declarations: [
         DatePickerComponent,
         DayTimeCalendarComponent,

@@ -74,20 +74,9 @@ export class DayTimeCalendarComponent implements OnInit, OnChanges, ControlValue
 
   isInited: boolean = false;
   componentConfig: IDayTimeCalendarConfig;
-  _selected: Moment;
   inputValue: CalendarValue;
   inputValueType: ECalendarValue;
   validateFn: DateValidator;
-
-  set selected(selected: Moment) {
-    this._selected = selected;
-    this.onChangeCallback(this.processOnChangeCallback(selected));
-  }
-
-  get selected(): Moment {
-    return this._selected;
-  }
-
   api = {
     moveCalendarTo: this.moveCalendarTo.bind(this)
   };
@@ -95,6 +84,17 @@ export class DayTimeCalendarComponent implements OnInit, OnChanges, ControlValue
   constructor(public dayTimeCalendarService: DayTimeCalendarService,
               public utilsService: UtilsService,
               public cd: ChangeDetectorRef) {
+  }
+
+  _selected: Moment;
+
+  get selected(): Moment {
+    return this._selected;
+  }
+
+  set selected(selected: Moment) {
+    this._selected = selected;
+    this.onChangeCallback(this.processOnChangeCallback(selected));
   }
 
   ngOnInit() {

@@ -35,6 +35,7 @@ import {IMonthCalendarConfig} from '../month-calendar/month-calendar-config';
 import {IMonth} from '../month-calendar/month.model';
 import {DateValidator} from '../common/types/validator.type';
 import {INavEvent} from '../common/models/navigation-event.model';
+
 const moment = momentNs;
 
 @Component({
@@ -75,10 +76,8 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
   CalendarMode = ECalendarMode;
   isInited: boolean = false;
   componentConfig: IDayCalendarConfigInternal;
-  _selected: Moment[];
   weeks: IDay[][];
   weekdays: Moment[];
-  _currentDateView: Moment;
   inputValue: CalendarValue;
   inputValueType: ECalendarValue;
   validateFn: DateValidator;
@@ -88,20 +87,32 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
   navLabel: string;
   showLeftNav: boolean;
   showRightNav: boolean;
-
   api = {
     moveCalendarsBy: this.moveCalendarsBy.bind(this),
     moveCalendarTo: this.moveCalendarTo.bind(this),
     toggleCalendarMode: this.toggleCalendarMode.bind(this)
   };
 
+  constructor(public readonly dayCalendarService: DayCalendarService,
+              public readonly utilsService: UtilsService,
+              public readonly cd: ChangeDetectorRef) {
+  }
+
+  _selected: Moment[];
+
+  get selected(): Moment[] {
+    return this._selected;
+  }
+
   set selected(selected: Moment[]) {
     this._selected = selected;
     this.onChangeCallback(this.processOnChangeCallback(selected));
   }
 
-  get selected(): Moment[] {
-    return this._selected;
+  _currentDateView: Moment;
+
+  get currentDateView(): Moment {
+    return this._currentDateView;
   }
 
   set currentDateView(current: Moment) {
@@ -111,15 +122,6 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
     this.navLabel = this.dayCalendarService.getHeaderLabel(this.componentConfig, this._currentDateView);
     this.showLeftNav = this.dayCalendarService.shouldShowLeft(this.componentConfig.min, this.currentDateView);
     this.showRightNav = this.dayCalendarService.shouldShowRight(this.componentConfig.max, this.currentDateView);
-  }
-
-  get currentDateView(): Moment {
-    return this._currentDateView;
-  }
-
-  constructor(public readonly dayCalendarService: DayCalendarService,
-              public readonly utilsService: UtilsService,
-              public readonly cd: ChangeDetectorRef) {
   }
 
   ngOnInit() {

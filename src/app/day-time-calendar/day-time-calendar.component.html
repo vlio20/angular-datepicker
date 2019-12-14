@@ -1,16 +1,16 @@
 <dp-day-calendar #dayCalendar
-                 [config]="componentConfig"
-                 [ngModel]="_selected"
-                 [theme]="theme"
-                 [displayDate]="displayDate"
-                 (onSelect)="dateSelected($event)"
                  (onGoToCurrent)="onGoToCurrent.emit()"
                  (onLeftNav)="onLeftNavClick($event)"
-                 (onRightNav)="onRightNavClick($event)">
+                 (onRightNav)="onRightNavClick($event)"
+                 (onSelect)="dateSelected($event)"
+                 [config]="componentConfig"
+                 [displayDate]="displayDate"
+                 [ngModel]="_selected"
+                 [theme]="theme">
 </dp-day-calendar>
 <dp-time-select #timeSelect
+                (onChange)="timeChange($event)"
                 [config]="componentConfig"
                 [ngModel]="_selected"
-                (onChange)="timeChange($event)"
                 [theme]="theme">
 </dp-time-select>

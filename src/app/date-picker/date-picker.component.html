@@ -1,64 +1,64 @@
 <div [ngClass]="{'dp-open': areCalendarsShown}">
-  <div class="dp-input-container"
+  <div [attr.data-hidden]="componentConfig.hideInputContainer"
        [hidden]="componentConfig.hideInputContainer"
-       [attr.data-hidden]="componentConfig.hideInputContainer">
-    <input type="text"
-           class="dp-picker-input"
-           [placeholder]="placeholder"
-           [ngModel]="inputElementValue"
-           (ngModelChange)="onViewDateChange($event)"
+       class="dp-input-container">
+    <input (blur)="inputBlurred()"
            (focus)="inputFocused()"
-           (blur)="inputBlurred()"
+           (ngModelChange)="onViewDateChange($event)"
+           [disabled]="disabled"
+           [ngModel]="inputElementValue"
+           [placeholder]="placeholder"
            [readonly]="componentConfig.disableKeypress"
-           [disabled]="disabled"/>
+           class="dp-picker-input"
+           type="text"/>
   </div>
   <div #container>
-    <div class="dp-popup {{theme}}"
-         [ngSwitch]="mode"
+    <div [attr.data-hidden]="!_areCalendarsShown"
          [hidden]="!_areCalendarsShown"
-         [attr.data-hidden]="!_areCalendarsShown">
+         [ngSwitch]="mode"
+         class="dp-popup {{theme}}">
       <dp-day-calendar #dayCalendar
-                       *ngSwitchCase="'day'"
-                       [config]="dayCalendarConfig"
-                       [ngModel]="_selected"
-                       [displayDate]="displayDate"
-                       [theme]="theme"
-                       (onSelect)="dateSelected($event, 'day', selectEvent.SELECTION, false)"
                        (onGoToCurrent)="onGoToCurrent.emit()"
                        (onLeftNav)="onLeftNavClick($event)"
-                       (onRightNav)="onRightNavClick($event)">
+                       (onRightNav)="onRightNavClick($event)"
+                       (onSelect)="dateSelected($event, 'day', selectEvent.SELECTION, false)"
+                       *ngSwitchCase="'day'"
+                       [config]="dayCalendarConfig"
+                       [displayDate]="displayDate"
+                       [ngModel]="_selected"
+                       [theme]="theme">
       </dp-day-calendar>
 
       <dp-month-calendar #monthCalendar
-                         *ngSwitchCase="'month'"
-                         [config]="dayCalendarConfig"
-                         [ngModel]="_selected"
-                         [displayDate]="displayDate"
-                         [theme]="theme"
-                         (onSelect)="dateSelected($event, 'month', selectEvent.SELECTION, false)"
                          (onGoToCurrent)="onGoToCurrent.emit()"
                          (onLeftNav)="onLeftNavClick($event)"
-                         (onRightNav)="onRightNavClick($event)">
+                         (onRightNav)="onRightNavClick($event)"
+                         (onSelect)="dateSelected($event, 'month', selectEvent.SELECTION, false)"
+                         *ngSwitchCase="'month'"
+                         [config]="dayCalendarConfig"
+                         [displayDate]="displayDate"
+                         [ngModel]="_selected"
+                         [theme]="theme">
       </dp-month-calendar>
 
       <dp-time-select #timeSelect
+                      (onChange)="dateSelected($event, 'second', selectEvent.SELECTION, true)"
                       *ngSwitchCase="'time'"
                       [config]="timeSelectConfig"
                       [ngModel]="_selected && _selected[0]"
-                      (onChange)="dateSelected($event, 'second', selectEvent.SELECTION, true)"
                       [theme]="theme">
       </dp-time-select>
 
       <dp-day-time-calendar #daytimeCalendar
+                            (onChange)="dateSelected($event, 'second', selectEvent.SELECTION, true)"
+                            (onGoToCurrent)="onGoToCurrent.emit()"
+                            (onLeftNav)="onLeftNavClick($event)"
+                            (onRightNav)="onRightNavClick($event)"
                             *ngSwitchCase="'daytime'"
                             [config]="dayTimeCalendarConfig"
                             [displayDate]="displayDate"
                             [ngModel]="_selected && _selected[0]"
-                            [theme]="theme"
-                            (onChange)="dateSelected($event, 'second', selectEvent.SELECTION, true)"
-                            (onGoToCurrent)="onGoToCurrent.emit()"
-                            (onLeftNav)="onLeftNavClick($event)"
-                            (onRightNav)="onRightNavClick($event)">
+                            [theme]="theme">
       </dp-day-time-calendar>
     </div>
   </div>

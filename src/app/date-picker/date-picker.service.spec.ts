@@ -6,6 +6,7 @@ import {UtilsService} from '../common/services/utils/utils.service';
 import {DayTimeCalendarService} from '../day-time-calendar/day-time-calendar.service';
 import {DayCalendarService} from '../day-calendar/day-calendar.service';
 import {TimeSelectService} from '../time-select/time-select.service';
+
 const moment = momentNs;
 
 describe('Service: DatePicker', () => {

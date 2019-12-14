@@ -112,12 +112,9 @@ export class DatePickerComponent implements OnChanges,
   dayCalendarConfig: IDayCalendarConfig;
   dayTimeCalendarConfig: IDayTimeCalendarConfig;
   timeSelectConfig: ITimeSelectConfig;
-  _areCalendarsShown: boolean = false;
   hideStateHelper: boolean = false;
-  _selected: Moment[] = [];
   inputValue: CalendarValue;
   isFocusedTrigger: boolean = false;
-  _currentDateView: Moment;
   inputElementValue: string;
   calendarWrapper: HTMLElement;
   appendToElement: HTMLElement;
@@ -133,30 +130,18 @@ export class DatePickerComponent implements OnChanges,
   };
   selectEvent = SelectEvent;
 
-  set selected(selected: Moment[]) {
-    this._selected = selected;
-    this.inputElementValue = (<string[]>this.utilsService
-      .convertFromMomentArray(this.componentConfig.format, selected, ECalendarValue.StringArr))
-      .join(' | ');
-    const val = this.processOnChangeCallback(selected);
-    this.onChangeCallback(val, false);
-    this.onChange.emit(val);
+  constructor(private readonly dayPickerService: DatePickerService,
+              private readonly domHelper: DomHelper,
+              private readonly elemRef: ElementRef,
+              private readonly renderer: Renderer2,
+              private readonly utilsService: UtilsService,
+              public readonly cd: ChangeDetectorRef) {
   }
 
-  get selected(): Moment[] {
-    return this._selected;
-  }
+  _areCalendarsShown: boolean = false;
 
   get areCalendarsShown(): boolean {
     return this._areCalendarsShown;
-  }
-
-  get openOnFocus(): boolean {
-    return this.componentConfig.openOnFocus;
-  }
-
-  get openOnClick(): boolean {
-    return this.componentConfig.openOnClick;
   }
 
   set areCalendarsShown(value: boolean) {
@@ -178,6 +163,24 @@ export class DatePickerComponent implements OnChanges,
     this._areCalendarsShown = value;
   }
 
+  _selected: Moment[] = [];
+
+  get selected(): Moment[] {
+    return this._selected;
+  }
+
+  set selected(selected: Moment[]) {
+    this._selected = selected;
+    this.inputElementValue = (<string[]>this.utilsService
+      .convertFromMomentArray(this.componentConfig.format, selected, ECalendarValue.StringArr))
+      .join(' | ');
+    const val = this.processOnChangeCallback(selected);
+    this.onChangeCallback(val, false);
+    this.onChange.emit(val);
+  }
+
+  _currentDateView: Moment;
+
   get currentDateView(): Moment {
     return this._currentDateView;
   }
@@ -198,12 +201,12 @@ export class DatePickerComponent implements OnChanges,
     }
   }
 
-  constructor(private readonly dayPickerService: DatePickerService,
-              private readonly domHelper: DomHelper,
-              private readonly elemRef: ElementRef,
-              private readonly renderer: Renderer2,
-              private readonly utilsService: UtilsService,
-              public readonly cd: ChangeDetectorRef) {
+  get openOnFocus(): boolean {
+    return this.componentConfig.openOnFocus;
+  }
+
+  get openOnClick(): boolean {
+    return this.componentConfig.openOnClick;
   }
 
   @HostListener('click')

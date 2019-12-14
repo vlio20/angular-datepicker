@@ -32,6 +32,7 @@ import {UtilsService} from '../common/services/utils/utils.service';
 import {DateValidator} from '../common/types/validator.type';
 import {SingleCalendarValue} from '../common/types/single-calendar-value';
 import {INavEvent} from '../common/models/navigation-event.model';
+
 const moment = momentNs;
 
 @Component({
@@ -71,9 +72,7 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
 
   isInited: boolean = false;
   componentConfig: IMonthCalendarConfigInternal;
-  _selected: Moment[];
   yearMonths: IMonth[][];
-  _currentDateView: Moment;
   inputValue: CalendarValue;
   inputValueType: ECalendarValue;
   validateFn: DateValidator;
@@ -83,19 +82,31 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
   showRightNav: boolean;
   showSecondaryLeftNav: boolean;
   showSecondaryRightNav: boolean;
-
   api = {
     toggleCalendar: this.toggleCalendarMode.bind(this),
     moveCalendarTo: this.moveCalendarTo.bind(this)
   };
+
+  constructor(public readonly monthCalendarService: MonthCalendarService,
+              public readonly utilsService: UtilsService,
+              public readonly cd: ChangeDetectorRef) {
+  }
+
+  _selected: Moment[];
+
+  get selected(): Moment[] {
+    return this._selected;
+  }
 
   set selected(selected: Moment[]) {
     this._selected = selected;
     this.onChangeCallback(this.processOnChangeCallback(selected));
   }
 
-  get selected(): Moment[] {
-    return this._selected;
+  _currentDateView: Moment;
+
+  get currentDateView(): Moment {
+    return this._currentDateView;
   }
 
   set currentDateView(current: Moment) {
@@ -107,15 +118,6 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
     this.showRightNav = this.monthCalendarService.shouldShowRight(this.componentConfig.max, this.currentDateView);
     this.showSecondaryLeftNav = this.componentConfig.showMultipleYearsNavigation && this.showLeftNav;
     this.showSecondaryRightNav = this.componentConfig.showMultipleYearsNavigation && this.showRightNav;
-  }
-
-  get currentDateView(): Moment {
-    return this._currentDateView;
-  }
-
-  constructor(public readonly monthCalendarService: MonthCalendarService,
-              public readonly utilsService: UtilsService,
-              public readonly cd: ChangeDetectorRef) {
   }
 
   ngOnInit() {
