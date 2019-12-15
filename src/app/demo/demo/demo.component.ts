@@ -139,7 +139,7 @@ export class DemoComponent {
     'ss', 'sv', 'sw', 'ta', 'te', 'tet', 'th', 'tl-ph', 'tlh', 'tr', 'tzl',
     'tzm-latn', 'tzm', 'uk', 'ur', 'uz-latn', 'uz', 'vi', 'x-pseudo', 'yo', 'zh-cn', 'zh-hk', 'zh-tw'
   ];
-  pickerMode = 'dayDirectiveReactive';
+  pickerMode = 'daytimePicker';
 
   date: Moment;
   dates: Moment[] = [];

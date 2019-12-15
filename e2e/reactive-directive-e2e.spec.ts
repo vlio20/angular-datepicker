@@ -8,8 +8,6 @@ describe('dpDayPicker reactive directive', () => {
     page = new DemoPage();
     await page.navigateTo();
 
-    await page.dateFormatInput.clear();
-    await page.dateFormatInput.sendKeys('DD-MM-YYYY');
     await page.dayDirectiveReactiveMenu.click();
   });
 
@@ -29,7 +27,8 @@ describe('dpDayPicker reactive directive', () => {
     expect(await page.datePickerPopup.getAttribute('class')).toContain('dp-material');
   });
 
-  it('should check that the onOpenDelay is working', async () => {
+  it('should check that the onOpenDelay is not taking effect when called via api', async () => {
+    await page.scrollIntoView(page.onOpenDelayInput);
     await page.onOpenDelayInput.clear();
     await page.onOpenDelayInput.sendKeys(1000);
     await page.scrollIntoView(page.openBtn);

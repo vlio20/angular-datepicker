@@ -11,7 +11,8 @@
            id="daytimeInlineMenu">Day Time Picker inline</a>
       </li>
       <li>
-        <a (click)="modeChanged('daytimeDirective')" [ngClass]="{'dp-active-item': pickerMode == 'daytimeDirective'}" href="#"
+        <a (click)="modeChanged('daytimeDirective')" [ngClass]="{'dp-active-item': pickerMode == 'daytimeDirective'}"
+           href="#"
            id="daytimeDirectiveMenu">Day Time Picker directive</a>
       </li>
       <li>
@@ -27,7 +28,8 @@
            id="dayDirectiveMenu">Day Picker directive</a>
       </li>
       <li>
-        <a (click)="modeChanged('dayDirectiveReactive')" [ngClass]="{'dp-active-item': pickerMode == 'dayDirectiveReactive'}" href="#"
+        <a (click)="modeChanged('dayDirectiveReactive')"
+           [ngClass]="{'dp-active-item': pickerMode == 'dayDirectiveReactive'}" href="#"
            id="dayDirectiveReactiveMenu">Day Picker directive Reactive</a>
       </li>
       <li>
@@ -39,7 +41,8 @@
            id="monthInlineMenu">Month Picker inline</a>
       </li>
       <li>
-        <a (click)="modeChanged('monthDirective')" [ngClass]="{'dp-active-item': pickerMode == 'monthDirective'}" href="#"
+        <a (click)="modeChanged('monthDirective')" [ngClass]="{'dp-active-item': pickerMode == 'monthDirective'}"
+           href="#"
            id="monthDirectiveMenu">Month Picker directive</a>
       </li>
       <li>
@@ -63,7 +66,8 @@
                                              'dp-inline-day': pickerMode == 'dayInline',
                                              'dp-inline-month': pickerMode == 'monthInline',
                                              'dp-inline-time': pickerMode == 'timeInline',
-                                             'dp-inline-day-time': pickerMode == 'daytimeInline'}" class="dp-demo-container">
+                                             'dp-inline-day-time': pickerMode == 'daytimeInline'}"
+       class="dp-demo-container">
 
     <form #donateForm
           action="https://www.paypal.com/cgi-bin/webscr"
@@ -123,18 +127,18 @@
 
       <div *ngIf="pickerMode === 'daytimeInline'" class="dp-inline-day-time">
         <dp-day-time-calendar
-            #dateComponent
-            #daytimeInline="ngModel"
-            (ngModelChange)="log($event)"
-            (onLeftNav)="onLeftNav($event)"
-            (onRightNav)="onRightNav($event)"
-            (onSelect)="onSelect($event)"
-            [(ngModel)]="date"
-            [config]="config"
-            [maxDate]="validationMaxDate"
-            [minDate]="validationMinDate"
-            [theme]="material ? 'dp-material dp-main' : 'dp-main'"
-            name="daytimeInline">
+          #dateComponent
+          #daytimeInline="ngModel"
+          (ngModelChange)="log($event)"
+          (onLeftNav)="onLeftNav($event)"
+          (onRightNav)="onRightNav($event)"
+          (onSelect)="onSelect($event)"
+          [(ngModel)]="date"
+          [config]="config"
+          [maxDate]="validationMaxDate"
+          [minDate]="validationMinDate"
+          [theme]="material ? 'dp-material dp-main' : 'dp-main'"
+          name="daytimeInline">
         </dp-day-time-calendar>
 
         <div class="dp-validations">
@@ -213,19 +217,19 @@
 
       <div *ngIf="pickerMode === 'dayInline'" class="dp-inline-day">
         <dp-day-calendar
-            #dateComponent
-            #dayCalendar="ngModel"
-            (ngModelChange)="log($event)"
-            (onLeftNav)="onLeftNav($event)"
-            (onRightNav)="onRightNav($event)"
-            (onSelect)="onSelect($event)"
-            [(ngModel)]="dates"
-            [config]="config"
-            [maxDate]="validationMaxDate"
-            [minDate]="validationMinDate"
-            [required]="required"
-            [theme]="material ? 'dp-material dp-main' : 'dp-main'"
-            name="dayCalendar">
+          #dateComponent
+          #dayCalendar="ngModel"
+          (ngModelChange)="log($event)"
+          (onLeftNav)="onLeftNav($event)"
+          (onRightNav)="onRightNav($event)"
+          (onSelect)="onSelect($event)"
+          [(ngModel)]="dates"
+          [config]="config"
+          [maxDate]="validationMaxDate"
+          [minDate]="validationMinDate"
+          [required]="required"
+          [theme]="material ? 'dp-material dp-main' : 'dp-main'"
+          name="dayCalendar">
         </dp-day-calendar>
 
         <div class="dp-validations">
@@ -266,7 +270,9 @@
 
       <div *ngIf="pickerMode === 'dayDirectiveReactive'" class="dp-picker-day-directive" id="datePickerDirDayReactive">
         <form [formGroup]="formGroup">
-          <input (close)="closed()"
+          <input #dateComponent="dpDayPicker"
+                 #dateDirectivePicker="dpDayPicker"
+                 (close)="closed()"
                  (onChange)="date = $event; log($event)"
                  (onLeftNav)="onLeftNav($event)"
                  (onRightNav)="onRightNav($event)"
@@ -333,19 +339,19 @@
 
       <div *ngIf="pickerMode === 'monthInline'" class="dp-inline-month">
         <dp-month-calendar
-            #dateComponent
-            #monthInline="ngModel"
-            (ngModelChange)="log($event)"
-            (onLeftNav)="onLeftNav($event)"
-            (onRightNav)="onRightNav($event)"
-            (onSelect)="onSelect($event)"
-            [(ngModel)]="dates"
-            [config]="config"
-            [maxDate]="validationMaxDate"
-            [minDate]="validationMinDate"
-            [required]="required"
-            [theme]="material ? 'dp-material dp-main' : 'dp-main'"
-            name="monthInline">
+          #dateComponent
+          #monthInline="ngModel"
+          (ngModelChange)="log($event)"
+          (onLeftNav)="onLeftNav($event)"
+          (onRightNav)="onRightNav($event)"
+          (onSelect)="onSelect($event)"
+          [(ngModel)]="dates"
+          [config]="config"
+          [maxDate]="validationMaxDate"
+          [minDate]="validationMinDate"
+          [required]="required"
+          [theme]="material ? 'dp-material dp-main' : 'dp-main'"
+          name="monthInline">
         </dp-month-calendar>
         <div class="dp-validations">
           <div *ngIf="monthInline.errors && monthInline.errors.required" id="monthInlineRequiredValidation">required
@@ -420,18 +426,18 @@
 
       <div *ngIf="pickerMode === 'timeInline'" class="dp-inline-time">
         <dp-time-select
-            #dateComponent
-            #timeInline="ngModel"
-            (ngModelChange)="log($event)"
-            (onSelect)="onSelect($event)"
-            [(ngModel)]="date"
-            [config]="config"
-            [maxDate]="validationMaxDate"
-            [maxTime]="validationMaxTime"
-            [minDate]="validationMinDate"
-            [minTime]="validationMinTime"
-            [theme]="material ? 'dp-material dp-main' : 'dp-main'"
-            name="timeInline">
+          #dateComponent
+          #timeInline="ngModel"
+          (ngModelChange)="log($event)"
+          (onSelect)="onSelect($event)"
+          [(ngModel)]="date"
+          [config]="config"
+          [maxDate]="validationMaxDate"
+          [maxTime]="validationMaxTime"
+          [minDate]="validationMinDate"
+          [minTime]="validationMinTime"
+          [theme]="material ? 'dp-material dp-main' : 'dp-main'"
+          name="timeInline">
         </dp-time-select>
 
         <div class="dp-validations">
@@ -490,7 +496,8 @@
                                            'dp-inline-day': pickerMode == 'dayInline',
                                            'dp-inline-month': pickerMode == 'monthInline',
                                            'dp-inline-time': pickerMode == 'timeInline',
-                                           'dp-inline-day-time': pickerMode == 'daytimeInline'}" class="dp-page-content">
+                                           'dp-inline-day-time': pickerMode == 'daytimeInline'}"
+       class="dp-page-content">
     <div class="dp-attributes">
       <h3 class="dp-options-section">Attribute options</h3>
       <div *ngIf="isValidConfig('theme')" class="dp-option">
@@ -531,7 +538,8 @@
                    name="required" type="radio">
           </label>
           <label>Not Required
-            <input (ngModelChange)="validatorsChanged()" [(ngModel)]="required" [value]="false" id="disableRequiredRadio"
+            <input (ngModelChange)="validatorsChanged()" [(ngModel)]="required" [value]="false"
+                   id="disableRequiredRadio"
                    name="required" type="radio">
           </label>
         </div>
@@ -888,7 +896,8 @@
                    type="radio">
           </label>
           <label>Enabled
-            <input (ngModelChange)="configChanged('disableKeypress', 'false')" [(ngModel)]="config.disableKeypress" [value]="false" name="disableKeypress"
+            <input (ngModelChange)="configChanged('disableKeypress', 'false')" [(ngModel)]="config.disableKeypress"
+                   [value]="false" name="disableKeypress"
                    type="radio">
           </label>
         </div>

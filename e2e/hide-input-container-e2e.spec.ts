@@ -3,14 +3,14 @@ import {DemoPage} from './app.po';
 describe('hideInputContainer', () => {
   let page: DemoPage;
 
-  beforeEach(() => {
+  beforeEach(async () => {
     page = new DemoPage();
-    page.navigateTo();
+    await page.navigateTo();
   });
 
   it('should hide/show InputContainer datetimepicker', async () => {
     expect(await page.daytimePickerInput.isDisplayed()).toBe(true);
-    page.hideInputRadio.click();
+    await page.hideInputRadio.click();
     expect(await page.daytimePickerInput.isDisplayed()).toBe(false);
   });
 });
