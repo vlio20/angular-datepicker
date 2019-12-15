@@ -26,6 +26,6 @@
     "debug": true,
     "skipTemplateCodegen": true,
     "strictMetadataEmit": true,
-    "enableIvy": true
+    "enableIvy": false
   }
 }

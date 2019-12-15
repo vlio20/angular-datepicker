@@ -139,7 +139,7 @@ export class DemoComponent {
     'ss', 'sv', 'sw', 'ta', 'te', 'tet', 'th', 'tl-ph', 'tlh', 'tr', 'tzl',
     'tzm-latn', 'tzm', 'uk', 'ur', 'uz-latn', 'uz', 'vi', 'x-pseudo', 'yo', 'zh-cn', 'zh-hk', 'zh-tw'
   ];
-  pickerMode = 'daytimePicker';
+  pickerMode = 'dayDirectiveReactive';
 
   date: Moment;
   dates: Moment[] = [];
@@ -226,7 +226,7 @@ export class DemoComponent {
   });
   isAtTop: boolean = true;
 
-  constructor(private gaService: GaService) {
+  constructor(private readonly gaService: GaService) {
   }
 
   @HostListener('document:scroll')

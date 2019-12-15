@@ -266,9 +266,7 @@
 
       <div *ngIf="pickerMode === 'dayDirectiveReactive'" class="dp-picker-day-directive" id="datePickerDirDayReactive">
         <form [formGroup]="formGroup">
-          <input #dateComponent="dpDayPicker"
-                 #dateDirectivePicker="dpDayPicker"
-                 (close)="closed()"
+          <input (close)="closed()"
                  (onChange)="date = $event; log($event)"
                  (onLeftNav)="onLeftNav($event)"
                  (onRightNav)="onRightNav($event)"
