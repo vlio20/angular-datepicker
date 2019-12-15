@@ -1,6 +1,5 @@
 import {DemoPage} from './app.po';
 import {browser} from 'protractor';
-import {not} from 'rxjs/internal-compatibility';
 
 describe('dpDayPicker reactive directive', () => {
   let page: DemoPage;
@@ -68,7 +67,7 @@ describe('dpDayPicker reactive directive', () => {
     expect(await page.reactiveMinDateValidationMsg.isPresent()).toBe(false);
   });
 
-  fit('should check if max date validation is working', async () => {
+  it('should check if max date validation is working', async () => {
     await page.maxDateValidationPickerInput.clear();
     expect(await page.reactiveMaxDateValidationMsg.isPresent()).toBe(false);
     await page.maxDateValidationPickerInput.sendKeys('11-04-2017');
@@ -76,8 +75,8 @@ describe('dpDayPicker reactive directive', () => {
     await page.clickOnBody();
     expect(await page.reactiveMaxDateValidationMsg.getText()).toEqual('maxDate invalid');
     await page.maxDateValidationPickerInput.clear();
-    await page.maxDateValidationPickerInput.sendKeys('12-04-2017');
-    await browser.sleep(500000);
+    await page.maxDateValidationPickerInput.sendKeys('13-04-2017');
+    await page.clickOnBody();
     expect(await page.reactiveMaxDateValidationMsg.isPresent()).toBe(false);
   });
 });
