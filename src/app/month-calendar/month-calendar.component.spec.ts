@@ -6,6 +6,7 @@ import {MonthCalendarService} from './month-calendar.service';
 import * as momentNs from 'moment';
 import {Moment} from 'moment';
 import {IMonth} from './month.model';
+
 const moment = momentNs;
 
 describe('Component: MonthCalendarComponent', () => {

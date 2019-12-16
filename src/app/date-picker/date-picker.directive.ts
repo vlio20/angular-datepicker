@@ -28,15 +28,6 @@ import {ISelectionEvent} from '../common/types/selection-evet.model';
   selector: '[dpDayPicker]'
 })
 export class DatePickerDirective implements OnInit {
-  private _config: IDatePickerDirectiveConfig;
-  private _attachTo: ElementRef | string;
-  private _theme: string;
-  private _mode: CalendarMode = 'day';
-  private _minDate: SingleCalendarValue;
-  private _maxDate: SingleCalendarValue;
-  private _minTime: SingleCalendarValue;
-  private _maxTime: SingleCalendarValue;
-  private _displayDate: SingleCalendarValue;
 
   get config(): IDatePickerDirectiveConfig {
     return this._config;
@@ -85,6 +76,10 @@ export class DatePickerDirective implements OnInit {
     this.markForCheck();
   }
 
+  get minDate(): SingleCalendarValue {
+    return this._minDate;
+  }
+
   @Input() set minDate(minDate: SingleCalendarValue) {
     this._minDate = minDate;
     if (this.datePicker) {
@@ -95,8 +90,8 @@ export class DatePickerDirective implements OnInit {
     this.markForCheck();
   }
 
-  get minDate(): SingleCalendarValue {
-    return this._minDate;
+  get maxDate(): SingleCalendarValue {
+    return this._maxDate;
   }
 
   @Input() set maxDate(maxDate: SingleCalendarValue) {
@@ -109,8 +104,8 @@ export class DatePickerDirective implements OnInit {
     this.markForCheck();
   }
 
-  get maxDate(): SingleCalendarValue {
-    return this._maxDate;
+  get minTime(): SingleCalendarValue {
+    return this._minTime;
   }
 
   @Input() set minTime(minTime: SingleCalendarValue) {
@@ -123,8 +118,8 @@ export class DatePickerDirective implements OnInit {
     this.markForCheck();
   }
 
-  get minTime(): SingleCalendarValue {
-    return this._minTime;
+  get maxTime(): SingleCalendarValue {
+    return this._maxTime;
   }
 
   @Input() set maxTime(maxTime: SingleCalendarValue) {
@@ -135,10 +130,6 @@ export class DatePickerDirective implements OnInit {
     }
 
     this.markForCheck();
-  }
-
-  get maxTime(): SingleCalendarValue {
-    return this._maxTime;
   }
 
   get displayDate(): SingleCalendarValue {
@@ -160,8 +151,26 @@ export class DatePickerDirective implements OnInit {
   @Output() onRightNav: EventEmitter<INavEvent> = new EventEmitter();
   @Output() onSelect: EventEmitter<ISelectionEvent> = new EventEmitter();
 
-  public datePicker: DatePickerComponent;
-  public api: IDpDayPickerApi;
+  datePicker: DatePickerComponent;
+  api: IDpDayPickerApi;
+
+  private _config: IDatePickerDirectiveConfig;
+
+  private _attachTo: ElementRef | string;
+
+  private _theme: string;
+
+  private _mode: CalendarMode = 'day';
+
+  private _minDate: SingleCalendarValue;
+
+  private _maxDate: SingleCalendarValue;
+
+  private _minTime: SingleCalendarValue;
+
+  private _maxTime: SingleCalendarValue;
+
+  private _displayDate: SingleCalendarValue;
 
   constructor(public viewContainerRef: ViewContainerRef,
               public elemRef: ElementRef,
@@ -243,6 +252,12 @@ export class DatePickerDirective implements OnInit {
     this.datePicker.inputFocused();
   }
 
+  markForCheck() {
+    if (this.datePicker) {
+      this.datePicker.cd.markForCheck();
+    }
+  }
+
   private updateDatepickerConfig() {
     if (this.datePicker) {
       this.datePicker.minDate = this.minDate;
@@ -267,12 +282,6 @@ export class DatePickerDirective implements OnInit {
       } else {
         this.elemRef.nativeElement.removeAttribute('readonly');
       }
-    }
-  }
-
-  markForCheck() {
-    if (this.datePicker) {
-      this.datePicker.cd.markForCheck();
     }
   }
 }

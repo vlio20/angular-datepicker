@@ -3,6 +3,7 @@ import * as momentNs from 'moment';
 import {Moment} from 'moment';
 import {UtilsService} from '../common/services/utils/utils.service';
 import {ITimeSelectConfig, ITimeSelectConfigInternal} from './time-select-config.model';
+
 const moment = momentNs;
 
 export type TimeUnit = 'hour' | 'minute' | 'second';
@@ -108,7 +109,6 @@ export class TimeSelectService {
     if (!config.min && !config.minTime) {
       return true;
     }
-    ;
     const newTime = this.decrease(config, time, unit);
 
     return (!config.min || config.min.isSameOrBefore(newTime))
@@ -119,7 +119,6 @@ export class TimeSelectService {
     if (!config.max && !config.maxTime) {
       return true;
     }
-    ;
     const newTime = this.increase(config, time, unit);
 
     return (!config.max || config.max.isSameOrAfter(newTime))

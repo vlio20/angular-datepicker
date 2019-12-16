@@ -11,7 +11,6 @@ const moment = momentNs;
 
 @Injectable()
 export class DayCalendarService {
-  private readonly DAYS = ['su', 'mo', 'tu', 'we', 'th', 'fr', 'sa'];
   readonly DEFAULT_CONFIG: IDayCalendarConfig = {
     showNearMonthDays: true,
     showWeekNumbers: false,
@@ -25,16 +24,9 @@ export class DayCalendarService {
     dayBtnFormat: 'DD',
     unSelectOnClick: true
   };
+  private readonly DAYS = ['su', 'mo', 'tu', 'we', 'th', 'fr', 'sa'];
 
   constructor(private utilsService: UtilsService) {
-  }
-
-  private removeNearMonthWeeks(currentMonth: Moment, monthArray: IDay[][]): IDay[][] {
-    if (monthArray[monthArray.length - 1].find((day) => day.date.isSame(currentMonth, 'month'))) {
-      return monthArray;
-    } else {
-      return monthArray.slice(0, -1);
-    }
   }
 
   getConfig(config: IDayCalendarConfig): IDayCalendarConfigInternal {
@@ -202,5 +194,13 @@ export class DayCalendarService {
     }
 
     return '';
+  }
+
+  private removeNearMonthWeeks(currentMonth: Moment, monthArray: IDay[][]): IDay[][] {
+    if (monthArray[monthArray.length - 1].find((day) => day.date.isSame(currentMonth, 'month'))) {
+      return monthArray;
+    } else {
+      return monthArray.slice(0, -1);
+    }
   }
 }

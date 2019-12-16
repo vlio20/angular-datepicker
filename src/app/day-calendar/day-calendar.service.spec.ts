@@ -4,6 +4,7 @@ import * as momentNs from 'moment';
 import {Moment} from 'moment';
 import {UtilsService} from '../common/services/utils/utils.service';
 import {IDayCalendarConfigInternal} from './day-calendar-config.model';
+
 const moment = momentNs;
 
 describe('Service: Calendar', () => {

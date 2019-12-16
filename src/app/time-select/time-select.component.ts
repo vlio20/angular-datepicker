@@ -30,6 +30,7 @@ import {CalendarValue} from '../common/types/calendar-value';
 import {UtilsService} from '../common/services/utils/utils.service';
 import {IDate} from '../common/models/date.model';
 import {DateValidator} from '../common/types/validator.type';
+
 const moment = momentNs;
 
 @Component({
@@ -54,35 +55,9 @@ const moment = momentNs;
 })
 export class TimeSelectComponent implements OnInit, OnChanges, ControlValueAccessor, Validator {
 
-  @Input() config: ITimeSelectConfig;
-  @Input() displayDate: SingleCalendarValue;
-  @Input() minDate: SingleCalendarValue;
-  @Input() maxDate: SingleCalendarValue;
-  @Input() minTime: SingleCalendarValue;
-  @Input() maxTime: SingleCalendarValue;
-  @HostBinding('class') @Input() theme: string;
-
-  @Output() onChange: EventEmitter<IDate> = new EventEmitter();
-
-  isInited: boolean = false;
-  componentConfig: ITimeSelectConfigInternal;
-  _selected: Moment;
-  inputValue: CalendarValue;
-  inputValueType: ECalendarValue;
-  validateFn: DateValidator;
-
-  hours: string;
-  minutes: string;
-  seconds: string;
-  meridiem: string;
-
-  showDecHour: boolean;
-  showDecMinute: boolean;
-  showDecSecond: boolean;
-  showIncHour: boolean;
-  showIncMinute: boolean;
-  showIncSecond: boolean;
-  showToggleMeridiem: boolean;
+  get selected(): Moment {
+    return this._selected;
+  }
 
   set selected(selected: Moment) {
     this._selected = selected;
@@ -100,14 +75,39 @@ export class TimeSelectComponent implements OnInit, OnChanges, ControlValueAcces
 
     this.onChangeCallback(this.processOnChangeCallback(selected));
   }
+  ;
 
-  get selected(): Moment {
-    return this._selected;
-  }
+  @Input() config: ITimeSelectConfig;
+  @Input() displayDate: SingleCalendarValue;
+  @Input() minDate: SingleCalendarValue;
+  @Input() maxDate: SingleCalendarValue;
+  @Input() minTime: SingleCalendarValue;
+  @Input() maxTime: SingleCalendarValue;
+  @HostBinding('class') @Input() theme: string;
 
+  @Output() onChange: EventEmitter<IDate> = new EventEmitter();
+
+  isInited: boolean = false;
+  componentConfig: ITimeSelectConfigInternal;
+  inputValue: CalendarValue;
+  inputValueType: ECalendarValue;
+  validateFn: DateValidator;
+  hours: string;
+  minutes: string;
+  seconds: string;
+  meridiem: string;
+  showDecHour: boolean;
+  showDecMinute: boolean;
+  showDecSecond: boolean;
+  showIncHour: boolean;
+  showIncMinute: boolean;
+  showIncSecond: boolean;
+  showToggleMeridiem: boolean;
   api = {
     triggerChange: this.emitChange.bind(this)
   };
+
+  _selected: Moment;
 
   constructor(public timeSelectService: TimeSelectService,
               public utilsService: UtilsService,
@@ -158,7 +158,7 @@ export class TimeSelectComponent implements OnInit, OnChanges, ControlValueAcces
   }
 
   onChangeCallback(_: any) {
-  };
+  }
 
   registerOnTouched(fn: any): void {
   }
