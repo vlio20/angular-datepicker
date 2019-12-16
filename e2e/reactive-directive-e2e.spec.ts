@@ -8,6 +8,8 @@ describe('dpDayPicker reactive directive', () => {
     page = new DemoPage();
     await page.navigateTo();
 
+    await page.dateFormatInput.clear();
+    await page.dateFormatInput.sendKeys('DD-MM-YYYY');
     await page.dayDirectiveReactiveMenu.click();
   });
 
@@ -53,7 +55,6 @@ describe('dpDayPicker reactive directive', () => {
     await page.disableRequiredValidationRadio.click();
     expect(await page.reactiveRequiredValidationMsg.isPresent()).toBe(false);
   });
-
   it('should check if min date validation is working', async () => {
     await page.minDateValidationPickerInput.clear();
     expect(await page.reactiveMinDateValidationMsg.isPresent()).toBe(false);
