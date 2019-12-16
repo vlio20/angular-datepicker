@@ -32,6 +32,7 @@ import {UtilsService} from '../common/services/utils/utils.service';
 import {DateValidator} from '../common/types/validator.type';
 import {SingleCalendarValue} from '../common/types/single-calendar-value';
 import {INavEvent} from '../common/models/navigation-event.model';
+
 const moment = momentNs;
 
 @Component({
@@ -55,6 +56,31 @@ const moment = momentNs;
   ]
 })
 export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAccessor, Validator {
+
+  get selected(): Moment[] {
+    return this._selected;
+  }
+
+  set selected(selected: Moment[]) {
+    this._selected = selected;
+    this.onChangeCallback(this.processOnChangeCallback(selected));
+  }
+
+  get currentDateView(): Moment {
+    return this._currentDateView;
+  }
+
+  set currentDateView(current: Moment) {
+    this._currentDateView = current.clone();
+    this.yearMonths = this.monthCalendarService
+      .generateYear(this.componentConfig, this._currentDateView, this.selected);
+    this.navLabel = this.monthCalendarService.getHeaderLabel(this.componentConfig, this.currentDateView);
+    this.showLeftNav = this.monthCalendarService.shouldShowLeft(this.componentConfig.min, this._currentDateView);
+    this.showRightNav = this.monthCalendarService.shouldShowRight(this.componentConfig.max, this.currentDateView);
+    this.showSecondaryLeftNav = this.componentConfig.showMultipleYearsNavigation && this.showLeftNav;
+    this.showSecondaryRightNav = this.componentConfig.showMultipleYearsNavigation && this.showRightNav;
+  }
+
   @Input() config: IMonthCalendarConfig;
   @Input() displayDate: Moment;
   @Input() minDate: Moment;
@@ -71,9 +97,7 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
 
   isInited: boolean = false;
   componentConfig: IMonthCalendarConfigInternal;
-  _selected: Moment[];
   yearMonths: IMonth[][];
-  _currentDateView: Moment;
   inputValue: CalendarValue;
   inputValueType: ECalendarValue;
   validateFn: DateValidator;
@@ -83,35 +107,14 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
   showRightNav: boolean;
   showSecondaryLeftNav: boolean;
   showSecondaryRightNav: boolean;
-
   api = {
     toggleCalendar: this.toggleCalendarMode.bind(this),
     moveCalendarTo: this.moveCalendarTo.bind(this)
   };
 
-  set selected(selected: Moment[]) {
-    this._selected = selected;
-    this.onChangeCallback(this.processOnChangeCallback(selected));
-  }
+  _selected: Moment[];
 
-  get selected(): Moment[] {
-    return this._selected;
-  }
-
-  set currentDateView(current: Moment) {
-    this._currentDateView = current.clone();
-    this.yearMonths = this.monthCalendarService
-      .generateYear(this.componentConfig, this._currentDateView, this.selected);
-    this.navLabel = this.monthCalendarService.getHeaderLabel(this.componentConfig, this.currentDateView);
-    this.showLeftNav = this.monthCalendarService.shouldShowLeft(this.componentConfig.min, this._currentDateView);
-    this.showRightNav = this.monthCalendarService.shouldShowRight(this.componentConfig.max, this.currentDateView);
-    this.showSecondaryLeftNav = this.componentConfig.showMultipleYearsNavigation && this.showLeftNav;
-    this.showSecondaryRightNav = this.componentConfig.showMultipleYearsNavigation && this.showRightNav;
-  }
-
-  get currentDateView(): Moment {
-    return this._currentDateView;
-  }
+  _currentDateView: Moment;
 
   constructor(public readonly monthCalendarService: MonthCalendarService,
               public readonly utilsService: UtilsService,
@@ -176,7 +179,7 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
   }
 
   onChangeCallback(_: any) {
-  };
+  }
 
   registerOnTouched(fn: any): void {
   }

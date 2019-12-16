@@ -1,52 +1,52 @@
 <div class="dp-calendar-nav-container">
   <div class="dp-nav-header">
-    <span [hidden]="isLabelClickable"
-          [attr.data-hidden]="isLabelClickable"
+    <span [attr.data-hidden]="isLabelClickable"
+          [hidden]="isLabelClickable"
           [innerText]="label">
     </span>
-    <button type="button"
-            class="dp-nav-header-btn"
-            [hidden]="!isLabelClickable"
+    <button (click)="labelClicked()"
             [attr.data-hidden]="!isLabelClickable"
-            (click)="labelClicked()"
-            [innerText]="label">
+            [hidden]="!isLabelClickable"
+            [innerText]="label"
+            class="dp-nav-header-btn"
+            type="button">
     </button>
   </div>
 
   <div class="dp-nav-btns-container">
     <div class="dp-calendar-nav-container-left">
-      <button type="button"
-              class="dp-calendar-secondary-nav-left"
+      <button (click)="leftSecondaryNavClicked()"
               *ngIf="showLeftSecondaryNav"
               [disabled]="leftSecondaryNavDisabled"
-              (click)="leftSecondaryNavClicked()">
+              class="dp-calendar-secondary-nav-left"
+              type="button">
       </button>
-      <button type="button"
-              class="dp-calendar-nav-left"
-              [hidden]="!showLeftNav"
+      <button (click)="leftNavClicked()"
               [attr.data-hidden]="!showLeftNav"
               [disabled]="leftNavDisabled"
-              (click)="leftNavClicked()">
+              [hidden]="!showLeftNav"
+              class="dp-calendar-nav-left"
+              type="button">
       </button>
     </div>
-    <button type="button"
-            class="dp-current-location-btn"
+    <button (click)="onGoToCurrent.emit()"
             *ngIf="showGoToCurrent"
-            (click)="onGoToCurrent.emit()">
+            class="dp-current-location-btn"
+            type="button">
     </button>
     <div class="dp-calendar-nav-container-right">
-      <button type="button"
-              class="dp-calendar-nav-right"
-              [hidden]="!showRightNav"
+      <button (click)="rightNavClicked()"
               [attr.data-hidden]="!showRightNav"
               [disabled]="rightNavDisabled"
-              (click)="rightNavClicked()">
+              [hidden]="!showRightNav"
+              class="dp-calendar-nav-right"
+              type="button">
       </button>
-      <button type="button"
-              class="dp-calendar-secondary-nav-right"
+      <button (click)="rightSecondaryNavClicked()"
               *ngIf="showRightSecondaryNav"
               [disabled]="rightSecondaryNavDisabled"
-              (click)="rightSecondaryNavClicked()">
+              class="dp-calendar-secondary-nav-right"
+              type="button">
       </button>
     </div>
   </div>

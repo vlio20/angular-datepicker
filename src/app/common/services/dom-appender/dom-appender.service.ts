@@ -1,7 +1,9 @@
 import {Injectable} from '@angular/core';
 import {TDrops, TOpens} from '../../types/poistions.type';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class DomHelper {
 
   private static setYAxisPosition(element: HTMLElement, container: HTMLElement, anchor: HTMLElement, drops: TDrops) {

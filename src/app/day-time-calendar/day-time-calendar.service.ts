@@ -6,6 +6,7 @@ import {UtilsService} from '../common/services/utils/utils.service';
 import {DayCalendarService} from '../day-calendar/day-calendar.service';
 import {TimeSelectService} from '../time-select/time-select.service';
 import {IDayTimeCalendarConfig} from './day-time-calendar-config.model';
+
 const moment = momentNs;
 
 const DAY_FORMAT = 'YYYYMMDD';
@@ -37,7 +38,7 @@ export class DayTimeCalendarService {
 
   updateDay(current: Moment, day: Moment, config: IDayTimeCalendarConfig): Moment {
     const time = current ? current : moment();
-    let updated = moment(day.format(DAY_FORMAT) + time.format(TIME_FORMAT), COMBINED_FORMAT)
+    let updated = moment(day.format(DAY_FORMAT) + time.format(TIME_FORMAT), COMBINED_FORMAT);
 
     if (config.min) {
       const min = <Moment>config.min;

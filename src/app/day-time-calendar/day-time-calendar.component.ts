@@ -59,6 +59,16 @@ import {INavEvent} from '../common/models/navigation-event.model';
 })
 export class DayTimeCalendarComponent implements OnInit, OnChanges, ControlValueAccessor, Validator {
 
+  get selected(): Moment {
+    return this._selected;
+  }
+
+  set selected(selected: Moment) {
+    this._selected = selected;
+    this.onChangeCallback(this.processOnChangeCallback(selected));
+  }
+  ;
+
   @Input() config: IDayTimeCalendarConfig;
   @Input() displayDate: SingleCalendarValue;
   @Input() minDate: SingleCalendarValue;
@@ -74,23 +84,14 @@ export class DayTimeCalendarComponent implements OnInit, OnChanges, ControlValue
 
   isInited: boolean = false;
   componentConfig: IDayTimeCalendarConfig;
-  _selected: Moment;
   inputValue: CalendarValue;
   inputValueType: ECalendarValue;
   validateFn: DateValidator;
-
-  set selected(selected: Moment) {
-    this._selected = selected;
-    this.onChangeCallback(this.processOnChangeCallback(selected));
-  }
-
-  get selected(): Moment {
-    return this._selected;
-  }
-
   api = {
     moveCalendarTo: this.moveCalendarTo.bind(this)
   };
+
+  _selected: Moment;
 
   constructor(public dayTimeCalendarService: DayTimeCalendarService,
               public utilsService: UtilsService,
@@ -139,7 +140,7 @@ export class DayTimeCalendarComponent implements OnInit, OnChanges, ControlValue
   }
 
   onChangeCallback(_: any) {
-  };
+  }
 
   registerOnTouched(fn: any): void {
   }

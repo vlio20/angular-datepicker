@@ -4,6 +4,7 @@ import {Moment} from 'moment';
 import {UtilsService} from '../common/services/utils/utils.service';
 import {IMonth} from './month.model';
 import {IMonthCalendarConfig, IMonthCalendarConfigInternal} from './month-calendar-config';
+
 const moment = momentNs;
 
 @Injectable()

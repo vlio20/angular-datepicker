@@ -32,7 +32,7 @@ import {
   OnDestroy,
   OnInit,
   Output,
-  Renderer,
+  Renderer2,
   SimpleChanges,
   ViewChild,
   ViewEncapsulation
@@ -82,7 +82,74 @@ export class DatePickerComponent implements OnChanges,
                                             ControlValueAccessor,
                                             Validator,
                                             OnDestroy {
+
+  get areCalendarsShown(): boolean {
+    return this._areCalendarsShown;
+  }
+
+  set areCalendarsShown(value: boolean) {
+    if (value) {
+      this.startGlobalListeners();
+      this.domHelper.appendElementToPosition({
+        container: this.appendToElement,
+        element: this.calendarWrapper,
+        anchor: this.inputElementContainer,
+        dimElem: this.popupElem,
+        drops: this.componentConfig.drops,
+        opens: this.componentConfig.opens
+      });
+    } else {
+      this.stopGlobalListeners();
+      this.dayPickerService.pickerClosed();
+    }
+
+    this._areCalendarsShown = value;
+  }
+
+  get selected(): Moment[] {
+    return this._selected;
+  }
+
+  set selected(selected: Moment[]) {
+    this._selected = selected;
+    this.inputElementValue = (<string[]>this.utilsService
+      .convertFromMomentArray(this.componentConfig.format, selected, ECalendarValue.StringArr))
+      .join(' | ');
+    const val = this.processOnChangeCallback(selected);
+    this.onChangeCallback(val, false);
+    this.onChange.emit(val);
+  }
+
+  get currentDateView(): Moment {
+    return this._currentDateView;
+  }
+
+  set currentDateView(date: Moment) {
+    this._currentDateView = date;
+
+    if (this.dayCalendarRef) {
+      this.dayCalendarRef.moveCalendarTo(date);
+    }
+
+    if (this.monthCalendarRef) {
+      this.monthCalendarRef.moveCalendarTo(date);
+    }
+
+    if (this.dayTimeCalendarRef) {
+      this.dayTimeCalendarRef.moveCalendarTo(date);
+    }
+  }
+
+  get openOnFocus(): boolean {
+    return this.componentConfig.openOnFocus;
+  }
+
+  get openOnClick(): boolean {
+    return this.componentConfig.openOnClick;
+  }
+
   isInitialized: boolean = false;
+
   @Input() config: IDatePickerConfig;
   @Input() mode: CalendarMode = 'day';
   @Input() placeholder: string = '';
@@ -112,12 +179,9 @@ export class DatePickerComponent implements OnChanges,
   dayCalendarConfig: IDayCalendarConfig;
   dayTimeCalendarConfig: IDayTimeCalendarConfig;
   timeSelectConfig: ITimeSelectConfig;
-  _areCalendarsShown: boolean = false;
   hideStateHelper: boolean = false;
-  _selected: Moment[] = [];
   inputValue: CalendarValue;
   isFocusedTrigger: boolean = false;
-  _currentDateView: Moment;
   inputElementValue: string;
   calendarWrapper: HTMLElement;
   appendToElement: HTMLElement;
@@ -133,75 +197,16 @@ export class DatePickerComponent implements OnChanges,
   };
   selectEvent = SelectEvent;
 
-  set selected(selected: Moment[]) {
-    this._selected = selected;
-    this.inputElementValue = (<string[]>this.utilsService
-                                            .convertFromMomentArray(this.componentConfig.format, selected, ECalendarValue.StringArr))
-      .join(' | ');
-    const val = this.processOnChangeCallback(selected);
-    this.onChangeCallback(val, false);
-    this.onChange.emit(val);
-  }
+  _areCalendarsShown: boolean = false;
 
-  get selected(): Moment[] {
-    return this._selected;
-  }
+  _selected: Moment[] = [];
 
-  get areCalendarsShown(): boolean {
-    return this._areCalendarsShown;
-  }
-
-  get openOnFocus(): boolean {
-    return this.componentConfig.openOnFocus;
-  }
-
-  get openOnClick(): boolean {
-    return this.componentConfig.openOnClick;
-  }
-
-  set areCalendarsShown(value: boolean) {
-    if (value) {
-      this.startGlobalListeners();
-      this.domHelper.appendElementToPosition({
-        container: this.appendToElement,
-        element: this.calendarWrapper,
-        anchor: this.inputElementContainer,
-        dimElem: this.popupElem,
-        drops: this.componentConfig.drops,
-        opens: this.componentConfig.opens
-      });
-    } else {
-      this.stopGlobalListeners();
-      this.dayPickerService.pickerClosed();
-    }
-
-    this._areCalendarsShown = value;
-  }
-
-  get currentDateView(): Moment {
-    return this._currentDateView;
-  }
-
-  set currentDateView(date: Moment) {
-    this._currentDateView = date;
-
-    if (this.dayCalendarRef) {
-      this.dayCalendarRef.moveCalendarTo(date);
-    }
-
-    if (this.monthCalendarRef) {
-      this.monthCalendarRef.moveCalendarTo(date);
-    }
-
-    if (this.dayTimeCalendarRef) {
-      this.dayTimeCalendarRef.moveCalendarTo(date);
-    }
-  }
+  _currentDateView: Moment;
 
   constructor(private readonly dayPickerService: DatePickerService,
               private readonly domHelper: DomHelper,
               private readonly elemRef: ElementRef,
-              private readonly renderer: Renderer,
+              private readonly renderer: Renderer2,
               private readonly utilsService: UtilsService,
               public readonly cd: ChangeDetectorRef) {
   }
@@ -249,7 +254,7 @@ export class DatePickerComponent implements OnChanges,
 
     if (value || value === '') {
       this.selected = this.utilsService
-                          .convertToMomentArray(value, this.componentConfig.format, this.componentConfig.allowMultiSelect);
+        .convertToMomentArray(value, this.componentConfig.format, this.componentConfig.allowMultiSelect);
       this.init();
     } else {
       this.selected = [];
@@ -327,7 +332,7 @@ export class DatePickerComponent implements OnChanges,
   }
 
   setElementPositionInDom(): void {
-    this.calendarWrapper = <HTMLElement> this.calendarContainer.nativeElement;
+    this.calendarWrapper = <HTMLElement>this.calendarContainer.nativeElement;
     this.setInputElementContainer();
     this.popupElem = this.elemRef.nativeElement.querySelector('.dp-popup');
     this.handleInnerElementClick(this.popupElem);
@@ -365,12 +370,12 @@ export class DatePickerComponent implements OnChanges,
     this.currentDateView = this.displayDate
       ? this.utilsService.convertToMoment(this.displayDate, this.componentConfig.format).clone()
       : this.utilsService
-            .getDefaultDisplayDate(
-              this.currentDateView,
-              this.selected,
-              this.componentConfig.allowMultiSelect,
-              this.componentConfig.min
-            );
+        .getDefaultDisplayDate(
+          this.currentDateView,
+          this.selected,
+          this.componentConfig.allowMultiSelect,
+          this.componentConfig.min
+        );
     this.dayCalendarConfig = this.dayPickerService.getDayConfigService(this.componentConfig);
     this.dayTimeCalendarConfig = this.dayPickerService.getDayTimeConfigService(this.componentConfig);
     this.timeSelectConfig = this.dayPickerService.getTimeConfigService(this.componentConfig);
@@ -441,14 +446,14 @@ export class DatePickerComponent implements OnChanges,
       })
     } else {
       this._selected = this.utilsService
-                           .getValidMomentArray(strVal, this.componentConfig.format);
+        .getValidMomentArray(strVal, this.componentConfig.format);
       this.onChangeCallback(this.processOnChangeCallback(strVal), true);
     }
   }
 
   dateSelected(date: IDate, granularity: unitOfTime.Base, type: SelectEvent, ignoreClose?: boolean) {
     this.selected = this.utilsService
-                        .updateSelected(this.componentConfig.allowMultiSelect, this.selected, date, granularity);
+      .updateSelected(this.componentConfig.allowMultiSelect, this.selected, date, granularity);
     if (!ignoreClose) {
       this.onDateClick();
     }

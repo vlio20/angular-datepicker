@@ -1,82 +1,82 @@
 import {DemoPage} from './app.po';
 import {browser} from 'protractor';
-import {not} from 'rxjs/internal-compatibility';
 
 describe('dpDayPicker reactive directive', () => {
   let page: DemoPage;
 
-  beforeEach(() => {
+  beforeEach(async () => {
     page = new DemoPage();
-    page.navigateTo();
+    await page.navigateTo();
 
-    page.dateFormatInput.clear();
-    page.dateFormatInput.sendKeys('DD-MM-YYYY');
-    page.dayDirectiveReactiveMenu.click();
+    await page.dateFormatInput.clear();
+    await page.dateFormatInput.sendKeys('DD-MM-YYYY');
+    await page.dayDirectiveReactiveMenu.click();
   });
 
   xit('should check that the popup appended to body', async () => {
-    page.dayDirectiveReactiveInput.click();
+    await page.dayDirectiveReactiveInput.click();
     expect(await page.datePickerPopup.isDisplayed()).toBe(true);
-    page.clickOnBody();
+    await page.clickOnBody();
     expect(await page.datePickerPopup.isDisplayed()).toBe(false);
   });
 
   it('should check that the theme is added and removed', async () => {
-    page.themeOnRadio.click();
+    await page.themeOnRadio.click();
     expect(await page.datePickerPopup.getAttribute('class')).toContain('dp-material');
-    page.themeOffRadio.click();
+    await page.themeOffRadio.click();
     expect(await page.datePickerPopup.getAttribute('class')).not.toContain('dp-material');
-    page.themeOnRadio.click();
+    await page.themeOnRadio.click();
     expect(await page.datePickerPopup.getAttribute('class')).toContain('dp-material');
   });
 
-  it('should check that the onOpenDelay is working', async () => {
-    page.onOpenDelayInput.clear();
-    page.onOpenDelayInput.sendKeys(1000);
-    page.scrollIntoView(page.openBtn);
-    page.openBtn.click();
+  it('should check that the onOpenDelay is not taking effect when called via api', async () => {
+    await page.scrollIntoView(page.onOpenDelayInput);
+    await page.onOpenDelayInput.clear();
+    await page.onOpenDelayInput.sendKeys(1000);
+    await page.scrollIntoView(page.openBtn);
+    await page.openBtn.click();
     expect(await page.datePickerPopup.isDisplayed()).toBe(true);
-    page.clickOnBody();
-    browser.sleep(200);
-    browser.waitForAngularEnabled(false);
-    page.dayDirectiveReactiveInput.click();
+    await page.clickOnBody();
+    await browser.sleep(200);
+    await browser.waitForAngularEnabled(false);
+    await page.dayDirectiveReactiveInput.click();
     expect(await page.datePickerPopup.isDisplayed()).toBe(false);
-    browser.waitForAngularEnabled(true);
-    browser.sleep(1000);
+    await browser.waitForAngularEnabled(true);
+    await browser.sleep(1000);
     expect(await page.datePickerPopup.isDisplayed()).toBe(true);
   });
 
   it('should check if enable/disable required validation is working', async () => {
-    page.dayDirectiveReactiveInput.click();
-    page.dayDirectiveReactiveInput.clear();
+    await page.dayDirectiveReactiveInput.click();
+    await page.dayDirectiveReactiveInput.clear();
     expect(await page.reactiveRequiredValidationMsg.isPresent()).toBe(false);
-    page.enableRequiredValidationRadio.click();
+    await page.enableRequiredValidationRadio.click();
     expect(await page.reactiveRequiredValidationMsg.getText()).toEqual('required');
-    page.disableRequiredValidationRadio.click();
+    await page.disableRequiredValidationRadio.click();
     expect(await page.reactiveRequiredValidationMsg.isPresent()).toBe(false);
   });
-
   it('should check if min date validation is working', async () => {
-    page.minDateValidationPickerInput.clear();
+    await page.minDateValidationPickerInput.clear();
     expect(await page.reactiveMinDateValidationMsg.isPresent()).toBe(false);
-    page.minDateValidationPickerInput.sendKeys('11-04-2017');
-    page.dayDirectiveReactiveInput.sendKeys('10-04-2017');
-    page.clickOnBody();
+    await page.minDateValidationPickerInput.sendKeys('11-04-2017');
+    await page.dayDirectiveReactiveInput.sendKeys('10-04-2017');
+    await page.clickOnBody();
     expect(await page.reactiveMinDateValidationMsg.getText()).toEqual('minDate invalid');
-    page.minDateValidationPickerInput.clear();
-    page.minDateValidationPickerInput.sendKeys('10-04-2017');
+    await page.minDateValidationPickerInput.clear();
+    await page.minDateValidationPickerInput.sendKeys('10-04-2017');
     expect(await page.reactiveMinDateValidationMsg.isPresent()).toBe(false);
   });
 
   it('should check if max date validation is working', async () => {
-    page.maxDateValidationPickerInput.clear();
+    await page.maxDateValidationPickerInput.clear();
     expect(await page.reactiveMaxDateValidationMsg.isPresent()).toBe(false);
-    page.maxDateValidationPickerInput.sendKeys('11-04-2017');
-    page.dayDirectiveReactiveInput.sendKeys('12-04-2017');
-    page.clickOnBody();
+    await page.maxDateValidationPickerInput.sendKeys('11-04-2017');
+    await page.dayDirectiveReactiveInput.sendKeys('12-04-2017');
+    await page.clickOnBody();
     expect(await page.reactiveMaxDateValidationMsg.getText()).toEqual('maxDate invalid');
-    page.maxDateValidationPickerInput.clear();
-    page.maxDateValidationPickerInput.sendKeys('12-04-2017');
+    await page.maxDateValidationPickerInput.clear();
+    await page.maxDateValidationPickerInput.sendKeys('13-04-2017');
+    await page.clickOnBody();
     expect(await page.reactiveMaxDateValidationMsg.isPresent()).toBe(false);
   });
 });

@@ -7,6 +7,7 @@ import {DayCalendarComponent} from './day-calendar.component';
 import {DayCalendarService} from './day-calendar.service';
 import {MonthCalendarComponent} from '../month-calendar/month-calendar.component';
 import {IDay} from './day.model';
+
 const moment = momentNs;
 
 describe('Component: DayCalendarComponent', () => {

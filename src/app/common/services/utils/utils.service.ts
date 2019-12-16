@@ -18,7 +18,9 @@ export interface DateLimits {
   maxTime?: SingleCalendarValue;
 }
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class UtilsService {
   static debounce(func: Function, wait: number) {
     let timeout;

@@ -25,6 +25,7 @@
     "genDir": "aot",
     "debug": true,
     "skipTemplateCodegen": true,
-    "strictMetadataEmit": true
+    "strictMetadataEmit": true,
+    "enableIvy": false
   }
 }
