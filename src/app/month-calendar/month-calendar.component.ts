@@ -121,13 +121,13 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
               public readonly cd: ChangeDetectorRef) {
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.isInited = true;
     this.init();
     this.initValidators();
   }
 
-  ngOnChanges(changes: SimpleChanges) {
+  ngOnChanges(changes: SimpleChanges): void {
     if (this.isInited) {
       const {minDate, maxDate, config} = changes;
 
@@ -140,7 +140,7 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
     }
   }
 
-  init() {
+  init(): void {
     this.componentConfig = this.monthCalendarService.getConfig(this.config);
     this.selected = this.selected || [];
     this.currentDateView = this.displayDate
@@ -178,7 +178,7 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
     this.onChangeCallback = fn;
   }
 
-  onChangeCallback(_: any) {
+  onChangeCallback(_: any): void {
   }
 
   registerOnTouched(fn: any): void {
@@ -200,7 +200,7 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
     );
   }
 
-  initValidators() {
+  initValidators(): void {
     this.validateFn = this.validateFn = this.utilsService.createValidator(
       {minDate: this.minDate, maxDate: this.maxDate},
       this.componentConfig.format,
@@ -210,7 +210,7 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
     this.onChangeCallback(this.processOnChangeCallback(this.selected));
   }
 
-  monthClicked(month: IMonth) {
+  monthClicked(month: IMonth): void {
     if (month.selected && !this.componentConfig.unSelectOnClick) {
       return;
     }
@@ -230,7 +230,7 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
     this.onLeftNav.emit({from, to});
   }
 
-  onLeftSecondaryNavClick() {
+  onLeftSecondaryNavClick(): void {
     let navigateBy = this.componentConfig.multipleYearsNavigateBy;
     const isOutsideRange = this.componentConfig.min &&
       this.currentDateView.year() - this.componentConfig.min.year() < navigateBy;
@@ -245,14 +245,14 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
     this.onLeftSecondaryNav.emit({from, to});
   }
 
-  onRightNavClick() {
+  onRightNavClick(): void {
     const from = this.currentDateView.clone();
     this.currentDateView = this.currentDateView.clone().add(1, 'year');
     const to = this.currentDateView.clone();
     this.onRightNav.emit({from, to});
   }
 
-  onRightSecondaryNavClick() {
+  onRightSecondaryNavClick(): void {
     let navigateBy = this.componentConfig.multipleYearsNavigateBy;
     const isOutsideRange = this.componentConfig.max &&
       this.componentConfig.max.year() - this.currentDateView.year() < navigateBy;
@@ -267,7 +267,7 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
     this.onRightSecondaryNav.emit({from, to});
   }
 
-  toggleCalendarMode() {
+  toggleCalendarMode(): void {
     this.onNavHeaderBtnClick.emit();
   }
 
@@ -294,19 +294,19 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
     );
   }
 
-  goToCurrent() {
+  goToCurrent(): void {
     this.currentDateView = moment();
     this.onGoToCurrent.emit();
   }
 
-  moveCalendarTo(to: SingleCalendarValue) {
+  moveCalendarTo(to: SingleCalendarValue): void {
     if (to) {
       this.currentDateView = this.utilsService.convertToMoment(to, this.componentConfig.format);
       this.cd.markForCheck();
     }
   }
 
-  handleConfigChange(config: SimpleChange) {
+  handleConfigChange(config: SimpleChange): void {
     if (config) {
       const prevConf: IMonthCalendarConfigInternal = this.monthCalendarService.getConfig(config.previousValue);
       const currentConf: IMonthCalendarConfigInternal = this.monthCalendarService.getConfig(config.currentValue);

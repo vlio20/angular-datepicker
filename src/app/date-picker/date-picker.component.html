@@ -18,11 +18,11 @@
          [ngSwitch]="mode"
          class="dp-popup {{theme}}">
       <dp-day-calendar #dayCalendar
+                       *ngSwitchCase="'day'"
                        (onGoToCurrent)="onGoToCurrent.emit()"
                        (onLeftNav)="onLeftNavClick($event)"
                        (onRightNav)="onRightNavClick($event)"
                        (onSelect)="dateSelected($event, 'day', selectEvent.SELECTION, false)"
-                       *ngSwitchCase="'day'"
                        [config]="dayCalendarConfig"
                        [displayDate]="displayDate"
                        [ngModel]="_selected"
@@ -30,11 +30,11 @@
       </dp-day-calendar>
 
       <dp-month-calendar #monthCalendar
+                         *ngSwitchCase="'month'"
                          (onGoToCurrent)="onGoToCurrent.emit()"
                          (onLeftNav)="onLeftNavClick($event)"
                          (onRightNav)="onRightNavClick($event)"
                          (onSelect)="dateSelected($event, 'month', selectEvent.SELECTION, false)"
-                         *ngSwitchCase="'month'"
                          [config]="dayCalendarConfig"
                          [displayDate]="displayDate"
                          [ngModel]="_selected"
@@ -42,19 +42,19 @@
       </dp-month-calendar>
 
       <dp-time-select #timeSelect
-                      (onChange)="dateSelected($event, 'second', selectEvent.SELECTION, true)"
                       *ngSwitchCase="'time'"
+                      (onChange)="dateSelected($event, 'second', selectEvent.SELECTION, true)"
                       [config]="timeSelectConfig"
                       [ngModel]="_selected && _selected[0]"
                       [theme]="theme">
       </dp-time-select>
 
       <dp-day-time-calendar #daytimeCalendar
+                            *ngSwitchCase="'daytime'"
                             (onChange)="dateSelected($event, 'second', selectEvent.SELECTION, true)"
                             (onGoToCurrent)="onGoToCurrent.emit()"
                             (onLeftNav)="onLeftNavClick($event)"
                             (onRightNav)="onRightNavClick($event)"
-                            *ngSwitchCase="'daytime'"
                             [config]="dayTimeCalendarConfig"
                             [displayDate]="displayDate"
                             [ngModel]="_selected && _selected[0]"
