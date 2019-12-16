@@ -39,13 +39,14 @@
 </div>
 
 <dp-month-calendar
+    *ngIf="currentCalendarMode ===  CalendarMode.Month"
     (onLeftNav)="onMonthCalendarLeftClick($event)"
     (onLeftSecondaryNav)="onMonthCalendarSecondaryLeftClick($event)"
     (onNavHeaderBtnClick)="toggleCalendarMode(CalendarMode.Day)"
     (onRightNav)="onMonthCalendarRightClick($event)"
     (onRightSecondaryNav)="onMonthCalendarSecondaryRightClick($event)"
     (onSelect)="monthSelected($event)"
-    *ngIf="currentCalendarMode ===  CalendarMode.Month"
+    [ngModel]="_selected"
     [config]="monthCalendarConfig"
     [displayDate]="_currentDateView"
     [theme]="theme">
