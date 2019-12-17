@@ -275,7 +275,6 @@ export class DatePickerComponent implements OnChanges,
   }
 
   onTouchedCallback() {
-
   }
 
   validate(formControl: FormControl): ValidationErrors {
@@ -329,6 +328,7 @@ export class DatePickerComponent implements OnChanges,
 
   setDisabledState(isDisabled: boolean): void {
     this.disabled = isDisabled;
+    this.cd.markForCheck();
   }
 
   setElementPositionInDom(): void {
