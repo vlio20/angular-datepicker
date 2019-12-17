@@ -80,7 +80,6 @@ export class DatePickerComponent implements OnChanges,
                                             OnInit,
                                             AfterViewInit,
                                             ControlValueAccessor,
-
                                             Validator,
                                             OnDestroy {
 
