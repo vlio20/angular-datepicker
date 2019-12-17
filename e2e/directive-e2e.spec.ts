@@ -57,9 +57,11 @@ describe('dpDayPicker directive', () => {
 
   it('should allow input to be modified from beginning', async () => {
     page.dayDirectiveInput.sendKeys('10-04-2017');
+
     for (let i = 0; i < 11; i++) {
       page.dayDirectiveInput.sendKeys(Key.LEFT);
     }
+
     page.dayDirectiveInput.sendKeys(Key.DELETE);
     page.dayDirectiveInput.sendKeys('2');
     expect(await page.dayDirectiveInput.getAttribute('value')).toBe('20-04-2017');

@@ -61,13 +61,14 @@
     <div class="dp-place-holder"></div>
   </div>
 
-  <div *ngIf="showDemo" [ngClass]="{'dp-not-top': !isAtTop,
-                                             'dp-inline': pickerMode.endsWith('Inline'),
-                                             'dp-inline-day': pickerMode == 'dayInline',
-                                             'dp-inline-month': pickerMode == 'monthInline',
-                                             'dp-inline-time': pickerMode == 'timeInline',
-                                             'dp-inline-day-time': pickerMode == 'daytimeInline'}"
-       class="dp-demo-container">
+  <div *ngIf="showDemo"
+       class="dp-demo-container"
+       [ngClass]="{'dp-not-top': !isAtTop,
+                   'dp-inline': pickerMode.endsWith('Inline'),
+                   'dp-inline-day': pickerMode == 'dayInline',
+                   'dp-inline-month': pickerMode == 'monthInline',
+                   'dp-inline-time': pickerMode == 'timeInline',
+                   'dp-inline-day-time': pickerMode == 'daytimeInline'}">
 
     <form #donateForm
           action="https://www.paypal.com/cgi-bin/webscr"
@@ -94,18 +95,18 @@
     <h2 class="dp-page-header">Angular Date/Time/Month Picker</h2>
 
     <form #form="ngForm">
-      <div *ngIf="pickerMode === 'daytimePicker'" class="dp-picker-time-picker">
+      <div *ngIf="pickerMode === 'daytimePicker'"
+           [formGroup]="formGroup"
+           class="dp-picker-time-picker">
         <dp-date-picker #dateComponent
-                        #daytimePicker="ngModel"
                         (close)="closed()"
                         (onChange)="log($event)"
                         (onLeftNav)="onLeftNav($event)"
                         (onRightNav)="onRightNav($event)"
                         (onSelect)="onSelect($event)"
                         (open)="opened()"
-                        [(ngModel)]="date"
+                        formControlName="datePicker"
                         [config]="config"
-                        [disabled]="disabled"
                         [displayDate]="displayDate"
                         [maxDate]="validationMaxDate"
                         [minDate]="validationMinDate"
@@ -118,10 +119,10 @@
         </dp-date-picker>
 
         <div class="dp-validations">
-          <div *ngIf="daytimePicker.errors?.required" id="requiredValidation">required</div>
-          <div *ngIf="daytimePicker.errors?.format" id="formatValidation">invalid format</div>
-          <div *ngIf="daytimePicker.errors?.minDate" id="minDateValidation">minDate invalid</div>
-          <div *ngIf="daytimePicker.errors?.maxDate" id="maxDateValidation">maxDate invalid</div>
+          <div *ngIf="formGroup.get('datePicker').errors?.required" id="requiredValidation">required</div>
+          <div *ngIf="formGroup.get('datePicker').errors?.format" id="formatValidation">invalid format</div>
+          <div *ngIf="formGroup.get('datePicker').errors?.minDate" id="minDateValidation">minDate invalid</div>
+          <div *ngIf="formGroup.get('datePicker').errors?.maxDate" id="maxDateValidation">maxDate invalid</div>
         </div>
       </div>
 
@@ -520,10 +521,20 @@
       </span>
         <div class="dp-option-playground">
           <label>Enabled
-            <input [(ngModel)]="disabled" [value]="false" id="inputEnabledRadio" name="disabled" type="radio">
+            <input [(ngModel)]="disabled"
+                   [value]="false"
+                   id="inputEnabledRadio"
+                   name="disabled"
+                   type="radio"
+                   (ngModelChange)="toggleDisabled($event)">
           </label>
           <label>Disabled
-            <input [(ngModel)]="disabled" [value]="true" id="inputDisabledRadio" name="disabled" type="radio">
+            <input [(ngModel)]="disabled"
+                   [value]="true"
+                   id="inputDisabledRadio"
+                   name="disabled"
+                   type="radio"
+                   (ngModelChange)="toggleDisabled($event)">
           </label>
         </div>
       </div>

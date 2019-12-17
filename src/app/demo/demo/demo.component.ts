@@ -374,6 +374,10 @@ export class DemoComponent {
     this.gaService.emitEvent('fiverr', 'clicked');
   }
 
+  toggleDisabled(disabled: boolean) {
+    disabled ? this.formGroup.disable() : this.formGroup.enable()
+  }
+
   private getDefaultFormatByMode(mode: string): string {
     switch (mode) {
       case 'daytimePicker':
