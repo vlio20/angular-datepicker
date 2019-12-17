@@ -94,8 +94,10 @@
 
     <h2 class="dp-page-header">Angular Date/Time/Month Picker</h2>
 
-    <form [formGroup]="formGroup">
-      <div *ngIf="pickerMode === 'daytimePicker'" class="dp-picker-time-picker">
+    <form #form="ngForm">
+      <div *ngIf="pickerMode === 'daytimePicker'"
+           [formGroup]="formGroup"
+           class="dp-picker-time-picker">
         <dp-date-picker #dateComponent
                         (close)="closed()"
                         (onChange)="log($event)"
