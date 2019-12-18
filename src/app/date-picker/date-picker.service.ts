@@ -60,6 +60,7 @@ export class DatePickerService {
       max: pickerConfig.max,
       isDayDisabledCallback: pickerConfig.isDayDisabledCallback,
       weekDayFormat: pickerConfig.weekDayFormat,
+      weekDayFormatter: pickerConfig.weekDayFormatter,
       showNearMonthDays: pickerConfig.showNearMonthDays,
       showWeekNumbers: pickerConfig.showWeekNumbers,
       firstDayOfWeek: pickerConfig.firstDayOfWeek,
