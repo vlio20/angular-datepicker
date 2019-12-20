@@ -2,7 +2,7 @@ import debounce from '../../common/decorators/decorators';
 import {IDatePickerConfig} from '../../date-picker/date-picker-config.model';
 import {DatePickerComponent} from '../../date-picker/date-picker.component';
 import {DatePickerDirective} from '../../date-picker/date-picker.directive';
-import {Component, HostListener, ViewChild} from '@angular/core';
+import {Component, HostListener, OnInit, ViewChild} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import * as momentNs from 'moment';
 import {Moment} from 'moment';
@@ -118,7 +118,7 @@ const DAY_TIME_CALENDAR_OPTION_KEYS = [
   entryComponents: [DatePickerComponent],
   styleUrls: ['./demo.component.less']
 })
-export class DemoComponent {
+export class DemoComponent implements OnInit {
   showDemo: boolean = true;
   @ViewChild('dateComponent', {static: false}) dateComponent: DatePickerComponent;
   @ViewChild('donateForm', {static: false}) donateForm: any;
@@ -211,22 +211,15 @@ export class DemoComponent {
     unSelectOnClick: true,
     hideOnOutsideClick: true
   };
-  formGroup: FormGroup = new FormGroup({
-    datePicker: new FormControl({value: this.date, disabled: this.disabled}, [
-      this.required ? Validators.required : () => undefined,
-      control => this.validationMinDate && this.config &&
-      moment(control.value, this.config.format || this.getDefaultFormatByMode(this.pickerMode))
-        .isBefore(this.validationMinDate)
-        ? {minDate: 'minDate Invalid'} : undefined,
-      control => this.validationMaxDate && this.config &&
-      moment(control.value, this.config.format || this.getDefaultFormatByMode(this.pickerMode))
-        .isAfter(this.validationMaxDate)
-        ? {maxDate: 'maxDate Invalid'} : undefined
-    ])
-  });
+
+  formGroup: FormGroup ;
   isAtTop: boolean = true;
 
   constructor(private readonly gaService: GaService) {
+  }
+
+  ngOnInit(): void {
+    this.formGroup = this.buildForm();
   }
 
   @HostListener('document:scroll')
@@ -239,6 +232,7 @@ export class DemoComponent {
     this.pickerMode = mode;
     this.config.hideInputContainer = false;
     this.config.inputElementContainer = undefined;
+    this.formGroup = this.buildForm();
     this.formGroup.get('datePicker').setValue(this.date);
 
     this.gaService.emitEvent('Navigation', mode);
@@ -346,7 +340,7 @@ export class DemoComponent {
   }
 
   log(item) {
-    console.log(item);
+    // console.log(item);
   }
 
   onLeftNav(change: INavEvent) {
@@ -376,6 +370,24 @@ export class DemoComponent {
 
   toggleDisabled(disabled: boolean) {
     disabled ? this.formGroup.disable() : this.formGroup.enable()
+  }
+
+  private buildForm(): FormGroup {
+    return new FormGroup({
+      datePicker: new FormControl({value: this.date, disabled: this.disabled}, [
+        this.required ? Validators.required : () => undefined,
+        (control) => {
+          return this.validationMinDate && this.config &&
+          moment(control.value, this.config.format || this.getDefaultFormatByMode(this.pickerMode))
+            .isBefore(this.validationMinDate)
+            ? {minDate: 'minDate Invalid'} : undefined
+        },
+        control => this.validationMaxDate && this.config &&
+        moment(control.value, this.config.format || this.getDefaultFormatByMode(this.pickerMode))
+          .isAfter(this.validationMaxDate)
+          ? {maxDate: 'maxDate Invalid'} : undefined
+      ])
+    });
   }
 
   private getDefaultFormatByMode(mode: string): string {

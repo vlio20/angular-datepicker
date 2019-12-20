@@ -62,13 +62,13 @@
   </div>
 
   <div *ngIf="showDemo"
-       class="dp-demo-container"
        [ngClass]="{'dp-not-top': !isAtTop,
                    'dp-inline': pickerMode.endsWith('Inline'),
                    'dp-inline-day': pickerMode == 'dayInline',
                    'dp-inline-month': pickerMode == 'monthInline',
                    'dp-inline-time': pickerMode == 'timeInline',
-                   'dp-inline-day-time': pickerMode == 'daytimeInline'}">
+                   'dp-inline-day-time': pickerMode == 'daytimeInline'}"
+       class="dp-demo-container">
 
     <form #donateForm
           action="https://www.paypal.com/cgi-bin/webscr"
@@ -105,15 +105,15 @@
                         (onRightNav)="onRightNav($event)"
                         (onSelect)="onSelect($event)"
                         (open)="opened()"
-                        formControlName="datePicker"
                         [config]="config"
                         [displayDate]="displayDate"
                         [maxDate]="validationMaxDate"
                         [minDate]="validationMinDate"
                         [mode]="'daytime'"
-                        [placeholder]="placeholder"
+                        [placeholder]="placeholder"s
                         [required]="required"
                         [theme]="material ? 'dp-material dp-main' : 'dp-main'"
+                        [formControl]="formGroup.get('datePicker')"
                         id="daytimePicker"
                         name="daytimePicker">
         </dp-date-picker>
@@ -283,7 +283,7 @@
                  [placeholder]="placeholder"
                  [required]="required"
                  [theme]="material ? 'dp-material dp-main' : 'dp-main'"
-                 formControlName="datePicker"
+                 [formControl]="formGroup.get('datePicker')"
                  name="datePicker"/>
           <div *ngIf="formGroup.get('datePicker').touched" class="dp-validations">
             <div *ngIf="formGroup.get('datePicker').hasError('required')"
@@ -521,20 +521,20 @@
       </span>
         <div class="dp-option-playground">
           <label>Enabled
-            <input [(ngModel)]="disabled"
+            <input (ngModelChange)="toggleDisabled($event)"
+                   [(ngModel)]="disabled"
                    [value]="false"
                    id="inputEnabledRadio"
                    name="disabled"
-                   type="radio"
-                   (ngModelChange)="toggleDisabled($event)">
+                   type="radio">
           </label>
           <label>Disabled
-            <input [(ngModel)]="disabled"
+            <input (ngModelChange)="toggleDisabled($event)"
+                   [(ngModel)]="disabled"
                    [value]="true"
                    id="inputDisabledRadio"
                    name="disabled"
-                   type="radio"
-                   (ngModelChange)="toggleDisabled($event)">
+                   type="radio">
           </label>
         </div>
       </div>
