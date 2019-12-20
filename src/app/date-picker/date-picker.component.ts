@@ -83,6 +83,14 @@ export class DatePickerComponent implements OnChanges,
                                             Validator,
                                             OnDestroy {
 
+  get openOnFocus(): boolean {
+    return this.componentConfig.openOnFocus;
+  }
+
+  get openOnClick(): boolean {
+    return this.componentConfig.openOnClick;
+  }
+
   get areCalendarsShown(): boolean {
     return this._areCalendarsShown;
   }
@@ -140,16 +148,7 @@ export class DatePickerComponent implements OnChanges,
     }
   }
 
-  get openOnFocus(): boolean {
-    return this.componentConfig.openOnFocus;
-  }
-
-  get openOnClick(): boolean {
-    return this.componentConfig.openOnClick;
-  }
-
   isInitialized: boolean = false;
-
   @Input() config: IDatePickerConfig;
   @Input() mode: CalendarMode = 'day';
   @Input() placeholder: string = '';
@@ -160,7 +159,6 @@ export class DatePickerComponent implements OnChanges,
   @Input() maxDate: SingleCalendarValue;
   @Input() minTime: SingleCalendarValue;
   @Input() maxTime: SingleCalendarValue;
-
   @Output() open = new EventEmitter<void>();
   @Output() close = new EventEmitter<void>();
   @Output() onChange = new EventEmitter<CalendarValue>();
@@ -168,13 +166,11 @@ export class DatePickerComponent implements OnChanges,
   @Output() onLeftNav: EventEmitter<INavEvent> = new EventEmitter();
   @Output() onRightNav: EventEmitter<INavEvent> = new EventEmitter();
   @Output() onSelect: EventEmitter<ISelectionEvent> = new EventEmitter();
-
   @ViewChild('container', {static: false}) calendarContainer: ElementRef;
   @ViewChild('dayCalendar', {static: false}) dayCalendarRef: DayCalendarComponent;
   @ViewChild('monthCalendar', {static: false}) monthCalendarRef: MonthCalendarComponent;
   @ViewChild('daytimeCalendar', {static: false}) dayTimeCalendarRef: DayTimeCalendarComponent;
   @ViewChild('timeSelect', {static: false}) timeSelectRef: TimeSelectComponent;
-
   componentConfig: IDatePickerConfigInternal;
   dayCalendarConfig: IDayCalendarConfig;
   dayTimeCalendarConfig: IDayTimeCalendarConfig;
@@ -301,24 +297,18 @@ export class DatePickerComponent implements OnChanges,
         minTime: this.minTime,
         maxTime: this.maxTime
       }, this.componentConfig.format, this.mode);
+
     this.onChangeCallback(this.processOnChangeCallback(this.selected), false);
   }
 
   ngOnInit(): void {
     this.isInitialized = true;
     this.init();
-    this.initValidators();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (this.isInitialized) {
-      const {minDate, maxDate, minTime, maxTime} = changes;
-
       this.init();
-
-      if (minDate || maxDate || minTime || maxTime) {
-        this.initValidators();
-      }
     }
   }
 
@@ -379,6 +369,7 @@ export class DatePickerComponent implements OnChanges,
     this.dayCalendarConfig = this.dayPickerService.getDayConfigService(this.componentConfig);
     this.dayTimeCalendarConfig = this.dayPickerService.getDayTimeConfigService(this.componentConfig);
     this.timeSelectConfig = this.dayPickerService.getTimeConfigService(this.componentConfig);
+    this.initValidators();
   }
 
   inputFocused() {

@@ -150,7 +150,6 @@ export class DatePickerDirective implements OnInit {
   @Output() onLeftNav: EventEmitter<INavEvent> = new EventEmitter();
   @Output() onRightNav: EventEmitter<INavEvent> = new EventEmitter();
   @Output() onSelect: EventEmitter<ISelectionEvent> = new EventEmitter();
-
   datePicker: DatePickerComponent;
   api: IDpDayPickerApi;
 
