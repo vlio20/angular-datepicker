@@ -185,4 +185,9 @@ export class DemoPage {
   waitUntilPresent(elem: ElementFinder) {
     return browser.wait(ExpectedConditions.presenceOf(elem), 5000, 'Element taking too long to appear in the DOM');
   }
+
+  async setInputValue(input: ElementFinder, val: string): Promise<void> {
+    await input.clear();
+    await input.sendKeys(val);
+  }
 }

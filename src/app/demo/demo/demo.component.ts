@@ -211,19 +211,8 @@ export class DemoComponent {
     unSelectOnClick: true,
     hideOnOutsideClick: true
   };
-  formGroup: FormGroup = new FormGroup({
-    datePicker: new FormControl({value: this.date, disabled: this.disabled}, [
-      this.required ? Validators.required : () => undefined,
-      control => this.validationMinDate && this.config &&
-      moment(control.value, this.config.format || this.getDefaultFormatByMode(this.pickerMode))
-        .isBefore(this.validationMinDate)
-        ? {minDate: 'minDate Invalid'} : undefined,
-      control => this.validationMaxDate && this.config &&
-      moment(control.value, this.config.format || this.getDefaultFormatByMode(this.pickerMode))
-        .isAfter(this.validationMaxDate)
-        ? {maxDate: 'maxDate Invalid'} : undefined
-    ])
-  });
+
+  formGroup: FormGroup = this.buildForm();
   isAtTop: boolean = true;
 
   constructor(private readonly gaService: GaService) {
@@ -239,6 +228,7 @@ export class DemoComponent {
     this.pickerMode = mode;
     this.config.hideInputContainer = false;
     this.config.inputElementContainer = undefined;
+    this.formGroup = this.buildForm();
     this.formGroup.get('datePicker').setValue(this.date);
 
     this.gaService.emitEvent('Navigation', mode);
@@ -346,7 +336,7 @@ export class DemoComponent {
   }
 
   log(item) {
-    console.log(item);
+    // console.log(item);
   }
 
   onLeftNav(change: INavEvent) {
@@ -376,6 +366,24 @@ export class DemoComponent {
 
   toggleDisabled(disabled: boolean) {
     disabled ? this.formGroup.disable() : this.formGroup.enable()
+  }
+
+  private buildForm(): FormGroup {
+    return new FormGroup({
+      datePicker: new FormControl({value: this.date, disabled: this.disabled}, [
+        this.required ? Validators.required : () => undefined,
+        (control) => {
+          return this.validationMinDate && this.config &&
+          moment(control.value, this.config.format || this.getDefaultFormatByMode(this.pickerMode))
+            .isBefore(this.validationMinDate)
+            ? {minDate: 'minDate Invalid'} : undefined
+        },
+        control => this.validationMaxDate && this.config &&
+        moment(control.value, this.config.format || this.getDefaultFormatByMode(this.pickerMode))
+          .isAfter(this.validationMaxDate)
+          ? {maxDate: 'maxDate Invalid'} : undefined
+      ])
+    });
   }
 
   private getDefaultFormatByMode(mode: string): string {

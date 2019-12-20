@@ -86,7 +86,6 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
   @Input() minDate: Moment;
   @Input() maxDate: Moment;
   @HostBinding('class') @Input() theme: string;
-
   @Output() onSelect: EventEmitter<IMonth> = new EventEmitter();
   @Output() onNavHeaderBtnClick: EventEmitter<null> = new EventEmitter();
   @Output() onGoToCurrent: EventEmitter<void> = new EventEmitter();
@@ -94,7 +93,6 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
   @Output() onRightNav: EventEmitter<INavEvent> = new EventEmitter();
   @Output() onLeftSecondaryNav: EventEmitter<INavEvent> = new EventEmitter();
   @Output() onRightSecondaryNav: EventEmitter<INavEvent> = new EventEmitter();
-
   isInited: boolean = false;
   componentConfig: IMonthCalendarConfigInternal;
   yearMonths: IMonth[][];

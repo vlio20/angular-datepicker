@@ -74,14 +74,11 @@ export class DayTimeCalendarComponent implements OnInit, OnChanges, ControlValue
   @Input() minDate: SingleCalendarValue;
   @Input() maxDate: SingleCalendarValue;
   @HostBinding('class') @Input() theme: string;
-
   @Output() onChange: EventEmitter<IDate> = new EventEmitter();
   @Output() onGoToCurrent: EventEmitter<void> = new EventEmitter();
   @Output() onLeftNav: EventEmitter<INavEvent> = new EventEmitter();
   @Output() onRightNav: EventEmitter<INavEvent> = new EventEmitter();
-
   @ViewChild('dayCalendar', {static: false}) dayCalendarRef: DayCalendarComponent;
-
   isInited: boolean = false;
   componentConfig: IDayTimeCalendarConfig;
   inputValue: CalendarValue;
