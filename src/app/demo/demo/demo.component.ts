@@ -2,7 +2,7 @@ import debounce from '../../common/decorators/decorators';
 import {IDatePickerConfig} from '../../date-picker/date-picker-config.model';
 import {DatePickerComponent} from '../../date-picker/date-picker.component';
 import {DatePickerDirective} from '../../date-picker/date-picker.directive';
-import {Component, HostListener, ViewChild} from '@angular/core';
+import {Component, HostListener, OnInit, ViewChild} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import * as momentNs from 'moment';
 import {Moment} from 'moment';
@@ -118,7 +118,7 @@ const DAY_TIME_CALENDAR_OPTION_KEYS = [
   entryComponents: [DatePickerComponent],
   styleUrls: ['./demo.component.less']
 })
-export class DemoComponent {
+export class DemoComponent implements OnInit {
   showDemo: boolean = true;
   @ViewChild('dateComponent', {static: false}) dateComponent: DatePickerComponent;
   @ViewChild('donateForm', {static: false}) donateForm: any;
@@ -212,10 +212,15 @@ export class DemoComponent {
     hideOnOutsideClick: true
   };
 
-  formGroup: FormGroup = this.buildForm();
+  formGroup: FormGroup;
   isAtTop: boolean = true;
 
   constructor(private readonly gaService: GaService) {
+    this.formGroup = this.buildForm();
+  }
+
+  ngOnInit(): void {
+    this.formGroup = this.buildForm();
   }
 
   @HostListener('document:scroll')

@@ -110,10 +110,10 @@
                         [maxDate]="validationMaxDate"
                         [minDate]="validationMinDate"
                         [mode]="'daytime'"
-                        [placeholder]="placeholder"
+                        [placeholder]="placeholder"s
                         [required]="required"
                         [theme]="material ? 'dp-material dp-main' : 'dp-main'"
-                        formControlName="datePicker"
+                        [formControl]="formGroup.get('datePicker')"
                         id="daytimePicker"
                         name="daytimePicker">
         </dp-date-picker>
@@ -283,7 +283,7 @@
                  [placeholder]="placeholder"
                  [required]="required"
                  [theme]="material ? 'dp-material dp-main' : 'dp-main'"
-                 formControlName="datePicker"
+                 [formControl]="formGroup.get('datePicker')"
                  name="datePicker"/>
           <div *ngIf="formGroup.get('datePicker').touched" class="dp-validations">
             <div *ngIf="formGroup.get('datePicker').hasError('required')"
