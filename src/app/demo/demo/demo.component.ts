@@ -212,11 +212,10 @@ export class DemoComponent implements OnInit {
     hideOnOutsideClick: true
   };
 
-  formGroup: FormGroup;
+  formGroup: FormGroup ;
   isAtTop: boolean = true;
 
   constructor(private readonly gaService: GaService) {
-    this.formGroup = this.buildForm();
   }
 
   ngOnInit(): void {
