@@ -26,7 +26,7 @@ describe('Component: DayCalendarComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(DayCalendarComponent);
     component = fixture.componentInstance;
-    component.DEF_CONF = component.dayCalendarService.getConfig({});
+    component.config = component.dayCalendarService.getConfig({});
     fixture.detectChanges();
   });
 

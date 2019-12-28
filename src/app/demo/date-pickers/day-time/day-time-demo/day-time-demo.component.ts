@@ -8,6 +8,5 @@ import {FormControl} from '@angular/forms';
   styleUrls: ['./day-time-demo.component.less']
 })
 export class DayTimeDemoComponent extends DateComponent {
-
   control = new FormControl();
 }

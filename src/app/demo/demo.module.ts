@@ -9,7 +9,7 @@ import {DpDatePickerModule} from '../date-picker.module';
 import {GaService} from './services/ga/ga.service';
 import {ConfigFormComponent} from './config-form/config-form.component';
 import {DayTimeDemoComponent} from './date-pickers/day-time/day-time-demo/day-time-demo.component';
-import {DayTimeInlineComponent} from './date-pickers/day-time/day-time-inline/day-time-inline.component';
+import {DayTimeInlineDemoComponent} from './date-pickers/day-time/day-time-inline-demo/day-time-inline-demo.component';
 
 @NgModule({
   imports: [
@@ -33,7 +33,7 @@ import {DayTimeInlineComponent} from './date-pickers/day-time/day-time-inline/da
           },
           {
             path: 'daytimeInline',
-            component: DayTimeInlineComponent
+            component: DayTimeInlineDemoComponent
           }
         ]
       },
@@ -48,7 +48,7 @@ import {DayTimeInlineComponent} from './date-pickers/day-time/day-time-inline/da
     DemoComponent,
     ConfigFormComponent,
     DayTimeDemoComponent,
-    DayTimeInlineComponent
+    DayTimeInlineDemoComponent
   ],
   entryComponents: [
     DatePickerComponent
