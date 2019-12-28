@@ -19,12 +19,27 @@
 
     .dp-date-input-container {
       position: sticky;
+      min-height: 85px;
       top: 0;
       display: flex;
       justify-content: center;
       padding: 20px 0;
       background: white;
       z-index: 10;
+
+      &.dp-inline {
+        min-height: 360px;
+      }
+
+      .dp-form-item {
+        display: flex;
+        flex-direction: column;
+
+        .dp-validations {
+          color: red;
+          font-size: 12px;
+        }
+      }
     }
 
     dp-config-form {
