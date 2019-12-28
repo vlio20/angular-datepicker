@@ -36,7 +36,7 @@ describe('Component: DayTimeCalendarComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(DayTimeCalendarComponent);
     component = fixture.componentInstance;
-    component.config = component.dayTimeCalendarService.getConfig({});
+    component.DEF_CONF = component.dayTimeCalendarService.getConfig({});
     fixture.detectChanges();
   });
 

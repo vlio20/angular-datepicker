@@ -7,6 +7,9 @@ import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {DpDatePickerModule} from '../date-picker.module';
 import {GaService} from './services/ga/ga.service';
+import {ConfigFormComponent} from './config-form/config-form.component';
+import {DayTimeDemoComponent} from './date-pickers/day-time/day-time-demo/day-time-demo.component';
+import {DayTimeInlineComponent} from './date-pickers/day-time/day-time-inline/day-time-inline.component';
 
 @NgModule({
   imports: [
@@ -16,14 +19,36 @@ import {GaService} from './services/ga/ga.service';
     DpDatePickerModule,
     RouterModule.forRoot([
       {
+        path: '',
+        component: DemoComponent,
+        children: [
+          {
+            path: '',
+            redirectTo: 'daytimePicker',
+            pathMatch: 'full'
+          },
+          {
+            path: 'daytimePicker',
+            component: DayTimeDemoComponent
+          },
+          {
+            path: 'daytimeInline',
+            component: DayTimeInlineComponent
+          }
+        ]
+      },
+      {
         path: '**',
-        component: DemoComponent
+        redirectTo: ''
       }
     ])
   ],
   declarations: [
     DemoRootComponent,
-    DemoComponent
+    DemoComponent,
+    ConfigFormComponent,
+    DayTimeDemoComponent,
+    DayTimeInlineComponent
   ],
   entryComponents: [
     DatePickerComponent

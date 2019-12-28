@@ -2,5 +2,33 @@
   html, body {
     margin: 0;
     padding: 0;
+    font-family: 'Roboto', sans-serif;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  .dp-date-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 72px);
+    overflow: auto;
+    margin: 0 -20px;
+    padding: 0 20px;
+
+    .dp-date-input-container {
+      position: sticky;
+      top: 0;
+      display: flex;
+      justify-content: center;
+      padding: 20px 0;
+      background: white;
+      z-index: 10;
+    }
+
+    dp-config-form {
+      flex: 1;
+    }
   }
 }

@@ -1,9 +1,6 @@
 @import '../../common/styles/variables';
 
 & {
-  :host {
-    font-family: 'Roboto', sans-serif;
-  }
 
   @stickyHeight: 120px;
   @stickyHeightInlineDay: 340px;
@@ -13,55 +10,21 @@
   @menuWidth: 200px;
 
   .dp-demo-page {
-    padding: 5px;
-    margin-left: @menuWidth;
-  }
-
-  .dp-donate-btn {
-    position: absolute;
-    left: 20px;
-    top: 20px;
-  }
-
-  .dp-fiverr {
-    position: absolute;
-    left: 20px;
-    top: 50px;
     display: flex;
-    align-items: center;
-
-    span {
-      font-weight: 600;
-      font-size: 15px;
-      margin-right: 5px;
-    }
-
-    img {
-      width: 50px;
-    }
-  }
-
-  .dp-github-container {
-    position: absolute;
-    right: 20px;
-    top: 20px;
   }
 
   .dp-menu {
-    .dp-menu-header {
-      padding-left: 10px;
-      padding-bottom: 10px;
-      color: @c-white;
-    }
-
-    position: fixed;
-    top: 0;
-    left: 0;
     height: 100vh;
     width: @menuWidth;
     background: @c-primary;
     z-index: 100;
     overflow: auto;
+
+    .dp-menu-header {
+      padding-left: 10px;
+      padding-bottom: 10px;
+      color: @c-white;
+    }
 
     ul {
       list-style-type: none;
@@ -87,20 +50,38 @@
     }
   }
 
-  .dp-page-header {
-    font-weight: 700;
+  .dp-main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+
+    .dp-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      padding: 20px;
+      background-color: #348498;
+
+      .dp-header {
+        font-size: 24px;
+        font-weight: 600;
+        color: white;
+      }
+
+      dp-donate-btn {
+        display: inline-block;
+      }
+    }
+
+    .dp-component-wrapper {
+      flex: 1;
+      padding: 0 20px;
+    }
   }
 
   .dp-demo-container {
-    position: fixed;
-    top: 0;
-    left: @menuWidth;
-    right: 0;
-    height: @stickyHeight;
-    text-align: center;
-    background: lighten(@c-primary, 50%);;
-    z-index: 10;
-
     &.dp-not-top {
       box-shadow: 0 2px 6px 1px @c-light-gray;
     }
@@ -124,12 +105,6 @@
 
   .dp-inline {
     display: inline-block;
-  }
-
-  .dp-attributes, .dp-configs, .dp-api {
-    width: 33%;
-    display: inline-block;
-    vertical-align: top;
   }
 
   .dp-option {

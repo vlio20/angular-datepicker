@@ -22,7 +22,7 @@ describe('Component: TimeSelectComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(TimeSelectComponent);
     component = fixture.componentInstance;
-    component.config = component.timeSelectService.getConfig({});
+    component.DEF_CONF = component.timeSelectService.getConfig({});
     fixture.detectChanges();
   });
 
