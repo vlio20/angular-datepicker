@@ -23,7 +23,7 @@ describe('Component: MonthCalendarComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(MonthCalendarComponent);
     component = fixture.componentInstance;
-    component.DEF_CONF = component.monthCalendarService.getConfig({});
+    component.config = component.monthCalendarService.getConfig({});
     fixture.detectChanges();
   });
 
