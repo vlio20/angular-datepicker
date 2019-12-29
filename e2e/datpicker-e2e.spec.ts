@@ -149,7 +149,6 @@ describe('dpDayPicker dayPicker', () => {
     await page.clickOnBody();
     expect(await page.requiredValidationMsg.isPresent()).toBe(false);
     await page.enableRequiredValidationRadio.click();
-    browser.sleep(600000);
     expect(await page.requiredValidationMsg.getText()).toEqual('required');
     await page.disableRequiredValidationRadio.click();
     expect(await page.requiredValidationMsg.isPresent()).toBe(false);
