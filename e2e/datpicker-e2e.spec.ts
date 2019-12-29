@@ -62,15 +62,14 @@ describe('dpDayPicker dayPicker', () => {
     await page.dayPickerInput.click();
     expect(await page.monthWeeks.count()).toBe(6);
 
-    await page.dayPickerInput.clear();
-    await page.dayPickerInput.sendKeys('27-04-2017');
+    await page.setInputValue(page.dayPickerInput, '27-04-2017');
     await page.hideNearMonthDaysRadio.click();
     await page.dayPickerInput.click();
     expect(await page.monthWeeks.count()).toBe(6);
   });
 
   it('should show/hide week number according to configuration', async () => {
-    await page.dayPickerInput.sendKeys('28-03-2017');
+    await page.setInputValue(page.dayPickerInput, '28-03-2017');
     await page.dayPickerInput.click();
     expect(await page.weekNumbers.count()).toBe(0);
     await page.showWeekNumbersRadio.click();
