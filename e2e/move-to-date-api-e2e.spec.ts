@@ -1,5 +1,4 @@
 import {DemoPage} from './app.po';
-import {browser} from 'protractor';
 
 describe('Move to date api', () => {
 

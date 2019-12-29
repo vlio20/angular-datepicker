@@ -158,11 +158,12 @@ describe('dpDayPicker dayPicker', () => {
   it('should check if min date validation is working', async () => {
     await page.minDateValidationPickerInput.clear();
     expect(await page.minDateValidationMsg.isPresent()).toBe(false);
-    await page.minDateValidationPickerInput.sendKeys('11-04-2017');
-    await page.dayPickerInput.sendKeys('10-04-2017');
+    await page.setInputValue(page.minDateValidationPickerInput, '11-04-2017');
+    await page.setInputValue(page.dayPickerInput, '10-04-2017');
     expect(await page.minDateValidationMsg.getText()).toEqual('minDate invalid');
     await page.minDateValidationPickerInput.clear();
     await page.minDateValidationPickerInput.sendKeys('10-04-2017');
+    await page.setInputValue(page.minDateValidationPickerInput, '10-04-2017');
     expect(await page.minDateValidationMsg.isPresent()).toBe(false);
   });
 
@@ -203,17 +204,15 @@ describe('dpDayPicker dayPicker', () => {
   });
 
   it('should check that the min selectable option is working', async () => {
-    await page.minSelectableInput.clear();
-    await page.minSelectableInput.sendKeys('11-04-2017');
-    await page.dayPickerInput.sendKeys('17-04-2017');
+    await page.setInputValue(page.minSelectableInput, '11-04-2017');
+    await page.setInputValue(page.dayPickerInput, '17-04-2017');
     await page.dayPickerInput.click();
     expect(await page.calendarDisabledDays.count()).toBe(16);
   });
 
   it('should check that the max selectable option is working', async () => {
-    await page.maxSelectableInput.clear();
-    await page.maxSelectableInput.sendKeys('11-04-2017');
-    await page.dayPickerInput.sendKeys('12-04-2017');
+    await page.setInputValue(page.maxSelectableInput, '11-04-2017');
+    await page.setInputValue(page.dayPickerInput, '12-04-2017');
     await page.dayPickerInput.click();
     expect(await page.calendarDisabledDays.count()).toBe(25);
   });
@@ -229,14 +228,14 @@ describe('dpDayPicker dayPicker', () => {
   });
 
   it('should check that the close delay is working', async () => {
-    await page.closeDelayInput.clear();
-    await page.closeDelayInput.sendKeys(1000);
+    await page.setInputValue(page.closeDelayInput, '1000');
     await page.dayPickerInput.click();
     await page.clickOnDayButton('15');
+    await browser.waitForAngularEnabled(false);
     expect(await page.datePickerPopup.isDisplayed()).toBe(true);
-    browser.sleep(200);
+    await browser.sleep(200);
     expect(await page.datePickerPopup.isDisplayed()).toBe(true);
-    browser.sleep(600);
+    await browser.sleep(900);
     expect(await page.datePickerPopup.isDisplayed()).toBe(false);
   });
 
