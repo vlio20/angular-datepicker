@@ -43,13 +43,18 @@
       </span>
       <div class="dp-option-playground">
         <label>Required
-          <input [formControl]="requireValidation" [value]="true" id="enableRequiredRadio"
-                 name="required" type="radio">
+          <input id="enableRequiredRadio"
+                 [formControl]="requireValidation"
+                 [value]="true"
+                 name="required"
+                 type="radio">
         </label>
         <label>Not Required
-          <input [formControl]="requireValidation" [value]="false"
-                 id="disableRequiredRadio"
-                 name="required" type="radio">
+          <input id="disableRequiredRadio"
+                 [formControl]="requireValidation"
+                 [value]="false"
+                 name="required"
+                 type="radio">
         </label>
       </div>
     </div>

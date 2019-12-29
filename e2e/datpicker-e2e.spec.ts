@@ -9,9 +9,6 @@ describe('dpDayPicker dayPicker', () => {
   beforeEach(async () => {
     page = new DemoPage();
     await page.navigateTo();
-
-    await page.dateFormatInput.clear();
-    await page.dateFormatInput.sendKeys('DD-MM-YYYY');
     await page.dayPickerMenu.click();
   });
 
@@ -44,10 +41,8 @@ describe('dpDayPicker dayPicker', () => {
     expect(await page.datePickerPopup.isDisplayed()).toBe(true);
     await page.clickOnBody();
     browser.sleep(200);
-    browser.waitForAngularEnabled(false);
     await page.dayPickerInput.click();
     expect(await page.datePickerPopup.isDisplayed()).toBe(false);
-    browser.waitForAngularEnabled(true);
     browser.sleep(1000);
     expect(await page.datePickerPopup.isDisplayed()).toBe(true);
   });
@@ -90,7 +85,7 @@ describe('dpDayPicker dayPicker', () => {
   });
 
   it('should disable/enable month selection', async () => {
-    await page.dayPickerInput.sendKeys('08-04-2018');
+    await page.setInputValue(page.dayPickerInput, '08-04-2018');
     await page.dayPickerInput.click();
     expect(await page.dayCalendarNavHeaderBtn.isPresent()).toBe(true);
     expect(await page.dayCalendarContainer.isDisplayed()).toBe(true);
@@ -124,7 +119,7 @@ describe('dpDayPicker dayPicker', () => {
   });
 
   it('should change year format', async () => {
-    await page.dayPickerInput.sendKeys('08-04-2017');
+    await page.setInputValue(page.dayPickerInput, '08-04-2017');
     await page.dayPickerInput.click();
     await page.dayCalendarNavHeaderBtn.click();
     expect(await page.dayCalendarNavMonthHeaderBtn.getText()).toEqual('2017');
@@ -151,8 +146,10 @@ describe('dpDayPicker dayPicker', () => {
 
   it('should check if enable/disable required validation is working', async () => {
     await page.dayPickerInput.clear();
+    await page.clickOnBody();
     expect(await page.requiredValidationMsg.isPresent()).toBe(false);
     await page.enableRequiredValidationRadio.click();
+    browser.sleep(600000);
     expect(await page.requiredValidationMsg.getText()).toEqual('required');
     await page.disableRequiredValidationRadio.click();
     expect(await page.requiredValidationMsg.isPresent()).toBe(false);
@@ -236,12 +233,10 @@ describe('dpDayPicker dayPicker', () => {
     await page.closeDelayInput.sendKeys(1000);
     await page.dayPickerInput.click();
     await page.clickOnDayButton('15');
-    browser.waitForAngularEnabled(false);
     expect(await page.datePickerPopup.isDisplayed()).toBe(true);
     browser.sleep(200);
     expect(await page.datePickerPopup.isDisplayed()).toBe(true);
     browser.sleep(600);
-    browser.waitForAngularEnabled(true);
     expect(await page.datePickerPopup.isDisplayed()).toBe(false);
   });
 

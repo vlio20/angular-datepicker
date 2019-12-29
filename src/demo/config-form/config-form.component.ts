@@ -169,7 +169,7 @@ export class ConfigFormComponent implements OnInit {
   displayDate = new FormControl(null);
   material = new FormControl(true);
   disabled = new FormControl(false);
-  requireValidation = new FormControl(true);
+  requireValidation = new FormControl(false);
   minValidation = new FormControl();
   maxValidation = new FormControl();
   minTimeValidation = new FormControl();

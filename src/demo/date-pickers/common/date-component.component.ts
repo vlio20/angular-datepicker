@@ -4,10 +4,12 @@ import * as moment from 'moment';
 import {Moment} from 'moment';
 import {DatePickerComponent, ISelectionEvent} from '../../../lib';
 import {ViewChild} from '@angular/core';
-import {FormControl, Validators} from '@angular/forms';
+import {FormControl, ValidatorFn, Validators} from '@angular/forms';
 
 export abstract class DateComponent {
   @ViewChild('dateComponent', {static: false}) datePicker: DatePickerComponent;
+
+  control: FormControl;
 
   config = DEF_CONF;
   date = moment();
@@ -35,10 +37,13 @@ export abstract class DateComponent {
 
   onDisabledChange(disabled: boolean): void {
     this.disabled = disabled;
+    disabled ? this.control.disable() : this.control.enable();
   }
 
   onRequireValidationChange(required: boolean): void {
     this.required = required;
+    this.control.setValidators(this.getValidations(this.config.format));
+    this.control.updateValueAndValidity();
   }
 
   onMinValidationChange($event: Moment): void {
@@ -105,7 +110,11 @@ export abstract class DateComponent {
   }
 
   protected buildForm(format: string): FormControl {
-    return new FormControl({value: this.date, disabled: this.disabled}, [
+    return new FormControl({value: this.date, disabled: this.disabled}, this.getValidations(format));
+  }
+
+  private getValidations(format: string): ValidatorFn[] {
+    return [
       this.required ? Validators.required : () => undefined,
       (control) => {
         return this.validationMinDate && this.config &&
@@ -117,6 +126,6 @@ export abstract class DateComponent {
       moment(control.value, this.config.format || format)
         .isAfter(this.validationMaxDate)
         ? {maxDate: 'maxDate Invalid'} : undefined
-    ]);
+    ];
   }
 }
