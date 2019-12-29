@@ -56,14 +56,17 @@ describe('dpDayPicker directive', () => {
   });
 
   it('should allow input to be modified from beginning', async () => {
-    page.dayDirectiveInput.sendKeys('10-04-2017');
+    await page.setInputValue(page.dayDirectiveInput, '10-04-2017')
+    const proms = [];
 
     for (let i = 0; i < 11; i++) {
-      page.dayDirectiveInput.sendKeys(Key.LEFT);
+      proms.push(page.dayDirectiveInput.sendKeys(Key.LEFT));
     }
 
-    page.dayDirectiveInput.sendKeys(Key.DELETE);
-    page.dayDirectiveInput.sendKeys('2');
+    await Promise.all(proms);
+
+    await page.dayDirectiveInput.sendKeys(Key.DELETE);
+    await page.dayDirectiveInput.sendKeys('2');
     expect(await page.dayDirectiveInput.getAttribute('value')).toBe('20-04-2017');
     expect(await page.selectedDays.count()).toBe(1);
     expect(await page.selectedDays.first().getText()).toBe('20');
