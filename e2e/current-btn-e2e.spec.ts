@@ -64,7 +64,6 @@ describe('dpDayPicker dayPicker', () => {
 
     await commonDayCalendar(page.dayPickerMenu, page.dayPickerInput);
     await commonDayCalendar(page.dayDirectiveMenu, page.dayDirectiveInput);
-    await commonDayCalendar(page.dayDirectiveReactiveMenu, page.dayDirectiveReactiveInput);
 
     await commonMonth(page.monthPickerMenu, page.monthPickerInput);
     await commonMonth(page.monthDirectiveMenu, page.monthDirectiveInput);

@@ -9,7 +9,6 @@ export class DemoPage {
   daytimePickerInput = $('picker input');
   daytimeDirectiveInput = $('#picker input');
   dayDirectiveInput = $('#picker input');
-  dayDirectiveReactiveInput = $('#datePickerDirDayReactive input');
   monthDirectiveInput = $('#picker input');
   timeSelectDirectiveInput = $('#picker input');
   datePickerPopup = $(this.popupSelector);
@@ -143,7 +142,6 @@ export class DemoPage {
   dayPickerMenu = $('#dayPickerMenu');
   dayInlineMenu = $('#dayInlineMenu');
   dayDirectiveMenu = $('#dayDirectiveMenu');
-  dayDirectiveReactiveMenu = $('#dayDirectiveReactiveMenu');
   monthPickerMenu = $('#monthPickerMenu');
   monthInlineMenu = $('#monthInlineMenu');
   monthDirectiveMenu = $('#monthDirectiveMenu');

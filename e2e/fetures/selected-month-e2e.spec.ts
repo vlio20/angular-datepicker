@@ -30,14 +30,4 @@ describe('selected-month', () => {
     await page.dayCalendarNavHeaderBtn.click();
     expect(await page.selectedMonth.getText()).toEqual('Apr');
   });
-
-  it('should work on reactive day picker', async () => {
-    await page.dayDirectiveReactiveMenu.click();
-    await page.dayDirectiveReactiveInput.click();
-    await page.dayDirectiveReactiveInput.clear();
-    await page.dayDirectiveReactiveInput.sendKeys('10-04-2017');
-
-    await page.dayCalendarNavHeaderBtn.click();
-    expect(await page.selectedMonth.getText()).toEqual('Apr');
-  });
 });

@@ -22,18 +22,6 @@ describe('format changed validation', () => {
     expect(await page.formatValidationMsg.isPresent()).toBeFalsy();
   });
 
-  it('should hide validation on date time directive picker', async () => {
-    await page.dayDirectiveReactiveMenu.click();
-    await page.setInputValue(page.dateFormatInput, 'DD-MM');
-    await page.setInputValue(page.dayDirectiveReactiveInput, '10-04-2017');
-    await page.clickOnBody();
-    expect(await page.formatValidationMsg.isPresent()).toBeTruthy();
-    await page.setInputValue(page.dateFormatInput, 'DD-MM-YYYY');
-    await page.setInputValue(page.dayDirectiveReactiveInput, '10-04-2017');
-    await page.clickOnBody();
-    expect(await page.formatValidationMsg.isPresent()).toBeFalsy();
-  });
-
   it('should hide validation on day picker', async () => {
     await page.dayPickerMenu.click();
     await page.setInputValue(page.dateFormatInput, 'DD-MM');
