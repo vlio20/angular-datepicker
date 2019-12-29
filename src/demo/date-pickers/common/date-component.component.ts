@@ -1,5 +1,4 @@
 import {INavEvent} from '../../../lib/common/models/navigation-event.model';
-import {DEF_CONF} from './conts/consts';
 import * as moment from 'moment';
 import {Moment} from 'moment';
 import {DatePickerComponent, ISelectionEvent} from '../../../lib';
@@ -11,7 +10,7 @@ export abstract class DateComponent {
 
   control: FormControl;
 
-  config = DEF_CONF;
+  abstract config;
   date = moment();
   material: boolean = true;
   required: boolean = false;
@@ -42,24 +41,33 @@ export abstract class DateComponent {
 
   onRequireValidationChange(required: boolean): void {
     this.required = required;
-    this.control.setValidators(this.getValidations(this.config.format));
+    console.log(this.required, this.config.format);
+    this.control.setValidators(this.getValidations());
     this.control.updateValueAndValidity();
   }
 
   onMinValidationChange($event: Moment): void {
     this.validationMinDate = $event;
+    this.control.setValidators(this.getValidations());
+    this.control.updateValueAndValidity();
   }
 
   onMaxValidationChange($event: Moment): void {
     this.validationMaxDate = $event;
+    this.control.setValidators(this.getValidations());
+    this.control.updateValueAndValidity();
   }
 
   onMinTimeValidationChange($event: Moment): void {
     this.validationMinTime = $event;
+    this.control.setValidators(this.getValidations());
+    this.control.updateValueAndValidity();
   }
 
   onMaxTimeValidationChange($event: Moment): void {
     this.validationMaxTime = $event;
+    this.control.setValidators(this.getValidations());
+    this.control.updateValueAndValidity();
   }
 
   onPlaceholderChange(placeholder: string): void {
@@ -109,23 +117,23 @@ export abstract class DateComponent {
     // console.log(item);
   }
 
-  protected buildForm(format: string): FormControl {
-    return new FormControl({value: this.date, disabled: this.disabled}, this.getValidations(format));
+  protected buildForm(): FormControl {
+    return new FormControl({value: this.date, disabled: this.disabled}, this.getValidations());
   }
 
-  private getValidations(format: string): ValidatorFn[] {
+  private getValidations(): ValidatorFn[] {
     return [
       this.required ? Validators.required : () => undefined,
       (control) => {
         return this.validationMinDate && this.config &&
-        moment(control.value, this.config.format || format)
+        moment(control.value, this.config.format)
           .isBefore(this.validationMinDate)
           ? {minDate: 'minDate Invalid'} : undefined
       },
       control => this.validationMaxDate && this.config &&
-      moment(control.value, this.config.format || format)
+      moment(control.value, this.config.format)
         .isAfter(this.validationMaxDate)
         ? {maxDate: 'maxDate Invalid'} : undefined
-    ];
+    ].filter(Boolean);
   }
 }

@@ -146,7 +146,7 @@ describe('dpDayPicker dayPicker', () => {
   });
 
   it('should check if enable/disable required validation is working', async () => {
-    await page.dayPickerInput.clear();
+    await page.clearInput(page.dayPickerInput)
     await page.clickOnBody();
     expect(await page.requiredValidationMsg.isPresent()).toBe(false);
     await page.enableRequiredValidationRadio.click();

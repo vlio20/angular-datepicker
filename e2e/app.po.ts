@@ -1,4 +1,4 @@
-import {$, $$, browser, by, element, ElementFinder, ExpectedConditions} from 'protractor';
+import {$, $$, browser, by, element, ElementFinder, ExpectedConditions, protractor} from 'protractor';
 
 export class DemoPage {
   private popupSelector = '.dp-popup.dp-main';
@@ -163,6 +163,16 @@ export class DemoPage {
 
   waitUntilPresent(elem: ElementFinder) {
     return browser.wait(ExpectedConditions.presenceOf(elem), 5000, 'Element taking too long to appear in the DOM');
+  }
+
+  async clearInput(elem: ElementFinder): Promise<void> {
+    const keys = (await elem.getAttribute('value')).length;
+    const tmpArr = [...Array(keys)].map(() => 0);
+    await elem.click();
+
+    for (const _ of tmpArr) {
+      await elem.sendKeys(protractor.Key.BACK_SPACE);
+    }
   }
 
   async setInputValue(input: ElementFinder, val: string): Promise<void> {

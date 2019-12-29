@@ -1,36 +1,38 @@
 import {DemoPage} from './app.po';
+import {browser} from 'protractor';
 
 describe('Move to date api', () => {
 
   let page: DemoPage;
 
-  beforeEach(() => {
+  beforeEach(async () => {
     page = new DemoPage();
-    page.navigateTo();
+    await page.navigateTo();
   });
 
-  it('should move to date API on day', () => {
+  it('should move to date API on day', async () => {
     const runner = async (menuItem, input, isPicker, cont) => {
-      menuItem.click();
-      page.moveCalendarTo.click();
+      await menuItem.click();
+      await page.moveCalendarTo.click();
 
       if (isPicker) {
         input.click();
       }
 
+      browser.sleep(50000)
       expect(await cont.getText()).toContain('1987');
     };
 
-    runner(page.dayPickerMenu, page.dayPickerInput, true, page.dayCalendarNavHeaderBtn);
-    runner(page.dayDirectiveMenu, page.dayDirectiveInput, true, page.dayCalendarNavHeaderBtn);
-    runner(page.dayInlineMenu, null, false, page.dayCalendarNavHeaderBtnInline);
+    await runner(page.dayPickerMenu, page.dayPickerInput, true, page.dayCalendarNavHeaderBtn);
+    await runner(page.dayDirectiveMenu, page.dayDirectiveInput, true, page.dayCalendarNavHeaderBtn);
+    await runner(page.dayInlineMenu, null, false, page.dayCalendarNavHeaderBtnInline);
 
-    runner(page.daytimePickerMenu, page.daytimePickerInput, true, page.dayCalendarNavHeaderBtn);
-    runner(page.daytimeDirectiveMenu, page.daytimeDirectiveInput, true, page.dayCalendarNavHeaderBtn);
-    runner(page.daytimeInlineMenu, null, false, page.dayTimeCalendarNavHeaderBtnInline);
-
-    runner(page.monthPickerMenu, page.monthPickerInput, true, page.navHeader);
-    runner(page.monthDirectiveMenu, page.monthDirectiveInput, true, page.navHeader);
-    runner(page.monthInlineMenu, null, false, page.monthCalendarNavHeaderInline);
+    await runner(page.daytimePickerMenu, page.daytimePickerInput, true, page.dayCalendarNavHeaderBtn);
+    await runner(page.daytimeDirectiveMenu, page.daytimeDirectiveInput, true, page.dayCalendarNavHeaderBtn);
+    await runner(page.daytimeInlineMenu, null, false, page.dayTimeCalendarNavHeaderBtnInline);
+    //
+    await runner(page.monthPickerMenu, page.monthPickerInput, true, page.navHeader);
+    await runner(page.monthDirectiveMenu, page.monthDirectiveInput, true, page.navHeader);
+    await runner(page.monthInlineMenu, null, false, page.monthCalendarNavHeaderInline);
   });
 });
