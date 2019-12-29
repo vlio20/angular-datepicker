@@ -258,7 +258,7 @@ describe('dpDayPicker dayPicker', () => {
   it('should check allow multiselect is working', async () => {
     await page.enableMultiselect.click();
     await page.dayPickerInput.click();
-    await page.dayPickerInput.sendKeys(moment().date(18).format('DD-MM-YYYY'));
+    await page.setInputValue(page.dayPickerInput, moment().date(18).format('DD-MM-YYYY'));
 
     await page.clickOnDayButton('15');
     await page.clickOnDayButton('16');
