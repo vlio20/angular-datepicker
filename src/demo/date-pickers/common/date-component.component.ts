@@ -1,12 +1,13 @@
 import {INavEvent} from '../../../lib/common/models/navigation-event.model';
 import * as moment from 'moment';
 import {Moment} from 'moment';
-import {DatePickerComponent, ISelectionEvent} from '../../../lib';
+import {DatePickerComponent, DatePickerDirective, ISelectionEvent} from '../../../lib';
 import {ViewChild} from '@angular/core';
 import {FormControl, ValidatorFn, Validators} from '@angular/forms';
 
 export abstract class DateComponent {
-  @ViewChild('dateComponent', {static: false}) datePicker: DatePickerComponent;
+  @ViewChild('dateComponent', {static: false}) dateComponent: DatePickerComponent;
+  @ViewChild(DatePickerDirective, {static: false}) dateDirective: DatePickerDirective;
 
   control: FormControl;
 
@@ -82,15 +83,15 @@ export abstract class DateComponent {
   }
 
   openCalendar(): void {
-    this.datePicker.api.open();
+    (this.dateComponent || this.dateDirective).api.open();
   }
 
   closeCalendar(): void {
-    this.datePicker.api.close();
+    (this.dateComponent || this.dateDirective).api.close();
   }
 
   moveCalendarTo($event: Moment): void {
-    this.datePicker.api.moveCalendarTo($event);
+    (this.dateComponent || this.dateDirective).api.moveCalendarTo($event);
   }
 
   onLeftNav(change: INavEvent) {

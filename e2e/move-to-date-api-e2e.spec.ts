@@ -19,7 +19,6 @@ describe('Move to date api', () => {
         input.click();
       }
 
-      browser.sleep(50000)
       expect(await cont.getText()).toContain('1987');
     };
 
@@ -30,7 +29,7 @@ describe('Move to date api', () => {
     await runner(page.daytimePickerMenu, page.daytimePickerInput, true, page.dayCalendarNavHeaderBtn);
     await runner(page.daytimeDirectiveMenu, page.daytimeDirectiveInput, true, page.dayCalendarNavHeaderBtn);
     await runner(page.daytimeInlineMenu, null, false, page.dayTimeCalendarNavHeaderBtnInline);
-    //
+
     await runner(page.monthPickerMenu, page.monthPickerInput, true, page.navHeader);
     await runner(page.monthDirectiveMenu, page.monthDirectiveInput, true, page.navHeader);
     await runner(page.monthInlineMenu, null, false, page.monthCalendarNavHeaderInline);

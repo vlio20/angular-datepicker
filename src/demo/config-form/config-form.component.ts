@@ -320,7 +320,7 @@ export class ConfigFormComponent implements OnInit {
   }
 
   moveCalendar(): void {
-    this.moveCalendarTo.emit(moment('14-01-1987', this.format.value));
+    this.moveCalendarTo.emit(moment('14-01-1987', 'DD-MM-YYYY'));
   }
 
   private initListeners(): void {
