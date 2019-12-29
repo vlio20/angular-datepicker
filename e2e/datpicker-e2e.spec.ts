@@ -34,22 +34,24 @@ describe('dpDayPicker dayPicker', () => {
   });
 
   it('should check that the onOpenDelay is working', async () => {
-    await page.onOpenDelayInput.clear();
-    await page.onOpenDelayInput.sendKeys(1000);
+    expect(await page.datePickerPopup.isDisplayed()).toBe(false);
+
+    await page.setInputValue(page.onOpenDelayInput, '1000');
     await page.scrollIntoView(await page.openBtn);
     await page.openBtn.click();
     expect(await page.datePickerPopup.isDisplayed()).toBe(true);
     await page.clickOnBody();
     browser.sleep(200);
+    await browser.waitForAngularEnabled(false);
     await page.dayPickerInput.click();
     expect(await page.datePickerPopup.isDisplayed()).toBe(false);
+    await browser.waitForAngularEnabled(true);
     browser.sleep(1000);
     expect(await page.datePickerPopup.isDisplayed()).toBe(true);
   });
 
   it('should check that the showNearMonthDays is working as expected', async () => {
-    await page.dayPickerInput.clear();
-    await page.dayPickerInput.sendKeys('27-03-2017');
+    await page.setInputValue(page.dayPickerInput, '27-03-2017');
     await page.dayPickerInput.click();
     expect(await page.monthWeeks.count()).toBe(6);
     await page.hideNearMonthDaysRadio.click();

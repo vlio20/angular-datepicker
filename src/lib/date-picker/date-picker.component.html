@@ -13,8 +13,8 @@
            type="text"/>
   </div>
   <div #container>
-    <div [attr.data-hidden]="!_areCalendarsShown"
-         [hidden]="!_areCalendarsShown"
+    <div [attr.data-hidden]="!areCalendarsShown"
+         [hidden]="!areCalendarsShown"
          [ngSwitch]="mode"
          class="dp-popup {{theme}}">
       <dp-day-calendar #dayCalendar
@@ -37,7 +37,7 @@
                          *ngSwitchCase="'month'"
                          [config]="dayCalendarConfig"
                          [displayDate]="displayDate"
-                         [ngModel]="_selected"
+                         [ngModel]="selected"
                          [theme]="theme">
       </dp-month-calendar>
 
@@ -45,7 +45,7 @@
                       (onChange)="dateSelected($event, 'second', selectEvent.SELECTION, true)"
                       *ngSwitchCase="'time'"
                       [config]="timeSelectConfig"
-                      [ngModel]="_selected && _selected[0]"
+                      [ngModel]="selected && selected[0]"
                       [theme]="theme">
       </dp-time-select>
 
@@ -57,7 +57,7 @@
                             *ngSwitchCase="'daytime'"
                             [config]="dayTimeCalendarConfig"
                             [displayDate]="displayDate"
-                            [ngModel]="_selected && _selected[0]"
+                            [ngModel]="selected && selected[0]"
                             [theme]="theme">
       </dp-day-time-calendar>
     </div>
