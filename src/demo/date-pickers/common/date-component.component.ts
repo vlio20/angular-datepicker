@@ -7,7 +7,7 @@ import {ViewChild} from '@angular/core';
 import {FormControl, Validators} from '@angular/forms';
 
 export abstract class DateComponent {
-  @ViewChild('component', {static: false}) datePicker: DatePickerComponent;
+  @ViewChild('dateComponent', {static: false}) datePicker: DatePickerComponent;
 
   config = DEF_CONF;
   date = moment();
