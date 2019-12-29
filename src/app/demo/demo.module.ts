@@ -11,6 +11,9 @@ import {ConfigFormComponent} from './config-form/config-form.component';
 import {DayTimeDemoComponent} from './date-pickers/day-time/day-time-demo/day-time-demo.component';
 import {DayTimeInlineDemoComponent} from './date-pickers/day-time/day-time-inline-demo/day-time-inline-demo.component';
 import {DayTimeDirectiveDemoComponent} from './date-pickers/day-time/day-time-directive-demo/day-time-directive-demo.component';
+import {DayDemoComponent} from './date-pickers/day/day-demo/day-demo.component';
+import {DayInlineDemoComponent} from './date-pickers/day/day-inline-demo/day-inline-demo.component';
+import {DayDirectiveDemoComponent} from './date-pickers/day/day-directive-demo/day-directive-demo.component';
 
 @NgModule({
   imports: [
@@ -39,6 +42,18 @@ import {DayTimeDirectiveDemoComponent} from './date-pickers/day-time/day-time-di
           {
             path: 'daytimeDirective',
             component: DayTimeDirectiveDemoComponent
+          },
+          {
+            path: 'daytPicker',
+            component: DayDemoComponent
+          },
+          {
+            path: 'dayInline',
+            component: DayInlineDemoComponent
+          },
+          {
+            path: 'dayDirective',
+            component: DayDirectiveDemoComponent
           }
         ]
       },
@@ -54,7 +69,10 @@ import {DayTimeDirectiveDemoComponent} from './date-pickers/day-time/day-time-di
     ConfigFormComponent,
     DayTimeDemoComponent,
     DayTimeInlineDemoComponent,
-    DayTimeDirectiveDemoComponent
+    DayTimeDirectiveDemoComponent,
+    DayDemoComponent,
+    DayInlineDemoComponent,
+    DayDirectiveDemoComponent
   ],
   entryComponents: [
     DatePickerComponent

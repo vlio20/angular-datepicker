@@ -1,24 +1,21 @@
 <div class="dp-date-wrapper">
-  <div class="dp-date-input-container">
+  <div class="dp-date-input-container dp-inline">
     <div class="dp-form-item">
-      <dp-date-picker id="picker"
-                      #dateComponent
-                      (close)="closed()"
-                      (onChange)="log($event)"
-                      (onLeftNav)="onLeftNav($event)"
-                      (onRightNav)="onRightNav($event)"
-                      (onSelect)="onSelect($event)"
-                      (open)="opened()"
-                      [config]="config"
-                      [displayDate]="displayDate"
-                      [maxDate]="validationMaxDate"
-                      [minDate]="validationMinDate"
-                      [mode]="'daytime'"
-                      [placeholder]="placeholder" s
-                      [required]="required"
-                      [theme]="material ? 'dp-material dp-main' : 'dp-main'"
-                      [formControl]="control">
-      </dp-date-picker>
+      <dp-day-calendar id="picker"
+                            #dateComponent
+                            (close)="closed()"
+                            (onChange)="log($event)"
+                            (onLeftNav)="onLeftNav($event)"
+                            (onRightNav)="onRightNav($event)"
+                            (onSelect)="onSelect($event)"
+                            [config]="config"
+                            [displayDate]="displayDate"
+                            [maxDate]="validationMaxDate"
+                            [minDate]="validationMinDate"
+                            [required]="required"
+                            [theme]="material ? 'dp-material dp-main' : 'dp-main'"
+                            [formControl]="control">
+      </dp-day-calendar>
 
       <div class="dp-validations">
         <div *ngIf="control.errors?.required" id="requiredValidation">required</div>
@@ -30,7 +27,7 @@
   </div>
 
   <dp-config-form #component
-                  pickerMode="dateTime"
+                  pickerMode="dayInline"
                   [config]="config"
                   (onDisplayDateChange)="onDisplayDateChange($event)"
                   (onMaterialThemeChange)="onMaterialThemeChange($event)"
