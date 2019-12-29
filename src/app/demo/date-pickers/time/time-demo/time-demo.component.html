@@ -1,23 +1,24 @@
 <div class="dp-date-wrapper">
   <div class="dp-date-input-container">
     <div class="dp-form-item">
-      <input id="picker"
-             [dpDayPicker]="config"
-             #dateDirective
-             (close)="closed()"
-             (onChange)="log($event)"
-             (onLeftNav)="onLeftNav($event)"
-             (onRightNav)="onRightNav($event)"
-             (onSelect)="onSelect($event)"
-             (open)="opened()"
-             [displayDate]="displayDate"
-             [maxDate]="validationMaxDate"
-             [minDate]="validationMinDate"
-             [mode]="'daytime'"
-             [placeholder]="placeholder"
-             [required]="required"
-             [theme]="material ? 'dp-material dp-main' : 'dp-main'"
-             [formControl]="control">
+      <dp-date-picker id="picker"
+                      #dateComponent
+                      (close)="closed()"
+                      (onChange)="log($event)"
+                      (onLeftNav)="onLeftNav($event)"
+                      (onRightNav)="onRightNav($event)"
+                      (onSelect)="onSelect($event)"
+                      (open)="opened()"
+                      [config]="config"
+                      [displayDate]="displayDate"
+                      [maxDate]="validationMaxDate"
+                      [minDate]="validationMinDate"
+                      [mode]="'time'"
+                      [placeholder]="placeholder"
+                      [required]="required"
+                      [theme]="material ? 'dp-material dp-main' : 'dp-main'"
+                      [formControl]="control">
+      </dp-date-picker>
 
       <div class="dp-validations">
         <div *ngIf="control.errors?.required" id="requiredValidation">required</div>
@@ -29,7 +30,7 @@
   </div>
 
   <dp-config-form #component
-                  pickerMode="dateTime"
+                  pickerMode="timePicker"
                   [config]="config"
                   (onDisplayDateChange)="onDisplayDateChange($event)"
                   (onMaterialThemeChange)="onMaterialThemeChange($event)"

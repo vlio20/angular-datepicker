@@ -17,6 +17,9 @@ import {DayDirectiveDemoComponent} from './date-pickers/day/day-directive-demo/d
 import {MonthDemoComponent} from './date-pickers/month/month-demo/month-demo.component';
 import {MonthDirectiveDemoComponent} from './date-pickers/month/month-directive-demo/month-directive-demo.component';
 import {MonthInlineDemoComponent} from './date-pickers/month/month-inline/month-inline-demo.component';
+import {TimeDemoComponent} from './date-pickers/time/time-demo/time-demo.component';
+import {TimeInlineDemoComponent} from './date-pickers/time/time-inline-demo/time-inline-demo.component';
+import {TimeDirectiveDemoComponent} from './date-pickers/time/time-directive-demo/time-directive-demo.component';
 
 @NgModule({
   imports: [
@@ -69,6 +72,18 @@ import {MonthInlineDemoComponent} from './date-pickers/month/month-inline/month-
           {
             path: 'monthDirective',
             component: DayDirectiveDemoComponent
+          },
+          {
+            path: 'timePicker',
+            component: TimeDemoComponent
+          },
+          {
+            path: 'timeInline',
+            component: TimeInlineDemoComponent
+          },
+          {
+            path: 'timeDirective',
+            component: TimeDirectiveDemoComponent
           }
         ]
       },
@@ -90,7 +105,10 @@ import {MonthInlineDemoComponent} from './date-pickers/month/month-inline/month-
     DayDirectiveDemoComponent,
     MonthDemoComponent,
     MonthInlineDemoComponent,
-    MonthDirectiveDemoComponent
+    MonthDirectiveDemoComponent,
+    TimeDemoComponent,
+    TimeInlineDemoComponent,
+    TimeDirectiveDemoComponent
   ],
   entryComponents: [
     DatePickerComponent

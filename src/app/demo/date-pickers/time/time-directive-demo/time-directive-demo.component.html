@@ -13,7 +13,7 @@
              [displayDate]="displayDate"
              [maxDate]="validationMaxDate"
              [minDate]="validationMinDate"
-             [mode]="'daytime'"
+             [mode]="'time'"
              [placeholder]="placeholder"
              [required]="required"
              [theme]="material ? 'dp-material dp-main' : 'dp-main'"
@@ -29,7 +29,7 @@
   </div>
 
   <dp-config-form #component
-                  pickerMode="dateTime"
+                  pickerMode="timeDirective"
                   [config]="config"
                   (onDisplayDateChange)="onDisplayDateChange($event)"
                   (onMaterialThemeChange)="onMaterialThemeChange($event)"
