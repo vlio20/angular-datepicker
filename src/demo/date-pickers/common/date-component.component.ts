@@ -4,6 +4,7 @@ import * as moment from 'moment';
 import {Moment} from 'moment';
 import {DatePickerComponent, ISelectionEvent} from '../../../lib';
 import {ViewChild} from '@angular/core';
+import {FormControl, Validators} from '@angular/forms';
 
 export abstract class DateComponent {
   @ViewChild('component', {static: false}) datePicker: DatePickerComponent;
@@ -101,5 +102,21 @@ export abstract class DateComponent {
 
   log(item) {
     // console.log(item);
+  }
+
+  protected buildForm(format: string): FormControl {
+    return new FormControl({value: this.date, disabled: this.disabled}, [
+      this.required ? Validators.required : () => undefined,
+      (control) => {
+        return this.validationMinDate && this.config &&
+        moment(control.value, this.config.format || format)
+          .isBefore(this.validationMinDate)
+          ? {minDate: 'minDate Invalid'} : undefined
+      },
+      control => this.validationMaxDate && this.config &&
+      moment(control.value, this.config.format || format)
+        .isAfter(this.validationMaxDate)
+        ? {maxDate: 'maxDate Invalid'} : undefined
+    ]);
   }
 }

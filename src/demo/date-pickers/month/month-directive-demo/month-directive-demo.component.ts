@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {DateComponent} from '../../common/date-component.component';
 import {FormControl} from '@angular/forms';
 
@@ -7,6 +7,10 @@ import {FormControl} from '@angular/forms';
   templateUrl: './month-directive-demo.component.html',
   styleUrls: ['./month-directive-demo.component.less']
 })
-export class MonthDirectiveDemoComponent extends DateComponent {
-  control = new FormControl();
+export class MonthDirectiveDemoComponent extends DateComponent implements OnInit {
+  control: FormControl;
+
+  ngOnInit(): void {
+    this.control = this.buildForm('MMM, YYYY');
+  }
 }

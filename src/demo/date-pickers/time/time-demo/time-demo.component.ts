@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {DateComponent} from '../../common/date-component.component';
 import {FormControl} from '@angular/forms';
 
@@ -7,6 +7,10 @@ import {FormControl} from '@angular/forms';
   templateUrl: './time-demo.component.html',
   styleUrls: ['./time-demo.component.less']
 })
-export class TimeDemoComponent extends DateComponent {
-  control = new FormControl();
+export class TimeDemoComponent extends DateComponent implements OnInit {
+  control: FormControl;
+
+  ngOnInit(): void {
+    this.control = this.buildForm('HH:mm:ss');
+  }
 }

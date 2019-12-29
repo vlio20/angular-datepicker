@@ -366,6 +366,12 @@ export class ConfigFormComponent implements OnInit {
       });
     });
 
+    this.format.valueChanges.subscribe((val) => {
+      this.onConfigChange.emit({
+        format: val
+      });
+    });
+
     this.firstDayOfWeek.valueChanges.subscribe((val) => {
       this.onConfigChange.emit({
         firstDayOfWeek: val
@@ -605,12 +611,10 @@ export class ConfigFormComponent implements OnInit {
     switch (mode) {
       case 'daytimePicker':
       case 'daytimeInline':
-      case 'daytimeDirective':
         return 'DD-MM-YYYY HH:mm:ss';
       case 'dayPicker':
       case 'dayInline':
       case 'dayDirective':
-      case 'dayDirectiveReactiveMenu':
         return 'DD-MM-YYYY';
       case 'monthPicker':
       case 'monthInline':

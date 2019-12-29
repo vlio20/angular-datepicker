@@ -8,7 +8,7 @@ describe('format changed validation', () => {
     await page.navigateTo();
   });
 
-  fit('should hide validation on date time picker', async () => {
+  it('should hide validation on date time picker', async () => {
     await page.daytimePickerMenu.click();
     await page.setInputValue(page.dateFormatInput, 'DD-MM-YYYY');
     await page.setInputValue(page.daytimePickerInput, '10-04-2017 09:08:07');
