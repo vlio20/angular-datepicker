@@ -6,10 +6,10 @@ export class DemoPage {
   dayPickerInput = $('#picker input');
   timePickerInput = $('#picker input');
   daytimePickerInput = $('#picker input');
-  daytimeDirectiveInput = $('#picker input');
-  dayDirectiveInput = $('#picker input');
-  monthDirectiveInput = $('#picker input');
-  timeSelectDirectiveInput = $('#picker input');
+  daytimeDirectiveInput = $('input#picker');
+  dayDirectiveInput = $('input#picker');
+  monthDirectiveInput = $('input#picker');
+  timeSelectDirectiveInput = $('input#picker');
   datePickerPopup = $(this.popupSelector);
   dayCalendarContainer = $(`${this.popupSelector} dp-day-calendar .dp-day-calendar-container`);
   monthPickerInput = $('#picker input');

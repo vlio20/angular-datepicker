@@ -71,7 +71,7 @@ import {TimeDirectiveDemoComponent} from './date-pickers/time/time-directive-dem
           },
           {
             path: 'monthDirective',
-            component: DayDirectiveDemoComponent
+            component: MonthDirectiveDemoComponent
           },
           {
             path: 'timePicker',
