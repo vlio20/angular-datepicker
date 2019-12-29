@@ -1,8 +1,8 @@
-import {INavEvent} from '../../../common/models/navigation-event.model';
+import {INavEvent} from '../../../lib/common/models/navigation-event.model';
 import {DEF_CONF} from './conts/consts';
 import * as moment from 'moment';
 import {Moment} from 'moment';
-import {DatePickerComponent, ISelectionEvent} from '../../..';
+import {DatePickerComponent, ISelectionEvent} from '../../../lib';
 import {ViewChild} from '@angular/core';
 
 export abstract class DateComponent {

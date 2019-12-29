@@ -1,4 +1,4 @@
-import {ECalendarValue, IDatePickerConfig} from '../../../..';
+import {ECalendarValue, IDatePickerConfig} from '../../../../lib';
 import * as moment from 'moment';
 
 export const DEF_CONF: IDatePickerConfig = {

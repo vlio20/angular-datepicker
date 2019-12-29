@@ -2,7 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import * as moment from 'moment';
 import {Moment} from 'moment';
 import {FormControl} from '@angular/forms';
-import {ECalendarValue, IDatePickerConfig} from '../..';
+import {ECalendarValue, IDatePickerConfig} from '../../lib';
 
 const GLOBAL_OPTION_KEYS = [
   'theme',
