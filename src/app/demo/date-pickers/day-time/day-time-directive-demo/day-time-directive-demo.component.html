@@ -1,23 +1,23 @@
 <div class="dp-date-wrapper">
   <div class="dp-date-input-container">
     <div class="dp-form-item">
-      <input
-          [dpDayPicker]="config"
-          #dateDirective
-          (close)="closed()"
-          (onChange)="log($event)"
-          (onLeftNav)="onLeftNav($event)"
-          (onRightNav)="onRightNav($event)"
-          (onSelect)="onSelect($event)"
-          (open)="opened()"
-          [displayDate]="displayDate"
-          [maxDate]="validationMaxDate"
-          [minDate]="validationMinDate"
-          [mode]="'daytime'"
-          [placeholder]="placeholder" s
-          [required]="required"
-          [theme]="material ? 'dp-material dp-main' : 'dp-main'"
-          [formControl]="control">
+      <input id="picker"
+             [dpDayPicker]="config"
+             #dateDirective
+             (close)="closed()"
+             (onChange)="log($event)"
+             (onLeftNav)="onLeftNav($event)"
+             (onRightNav)="onRightNav($event)"
+             (onSelect)="onSelect($event)"
+             (open)="opened()"
+             [displayDate]="displayDate"
+             [maxDate]="validationMaxDate"
+             [minDate]="validationMinDate"
+             [mode]="'daytime'"
+             [placeholder]="placeholder" s
+             [required]="required"
+             [theme]="material ? 'dp-material dp-main' : 'dp-main'"
+             [formControl]="control">
 
       <div class="dp-validations">
         <div *ngIf="control.errors?.required" id="requiredValidation">required</div>

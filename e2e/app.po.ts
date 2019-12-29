@@ -4,8 +4,8 @@ import {$, $$, browser, by, element, ElementFinder, ExpectedConditions} from 'pr
 export class DemoPage {
   private popupSelector = '.dp-popup.dp-main';
   emptyElem = $('.dp-place-holder');
-  dayPickerInput = $('#datePicker input');
-  timePickerInput = $('#timePicker input');
+  dayPickerInput = $('#picker input');
+  timePickerInput = $('#picker input');
   daytimePickerInput = $('#daytimePicker input');
   daytimeDirectiveInput = $('#daytimeDirective input');
   dayDirectiveInput = $('#dayDirective input');
