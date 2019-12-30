@@ -150,7 +150,7 @@ export class DemoPage {
   }
 
   clickOnDayButtonInline(text: string) {
-    return element(by.cssContainingText(`.dp-inline-day .dp-calendar-day`, text)).click();
+    return element(by.cssContainingText(`.dp-calendar-day`, text)).click();
   }
 
   clickOnMonthButton(text: string) {
@@ -158,7 +158,7 @@ export class DemoPage {
   }
 
   clickOnMonthButtonInline(text: string) {
-    return element(by.cssContainingText(`.dp-inline-month .dp-calendar-month`, text)).click();
+    return element(by.cssContainingText(`.dp-calendar-month`, text)).click();
   }
 
   waitUntilPresent(elem: ElementFinder) {

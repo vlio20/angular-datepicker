@@ -1,4 +1,4 @@
-import {DemoPage} from './app.po';
+import {DemoPage} from '../app.po';
 import * as moment from 'moment';
 
 describe('dpDayPicker timePicker', () => {
@@ -27,7 +27,10 @@ describe('dpDayPicker timePicker', () => {
       if (isPicker) {
         await page.scrollIntoView(page.noCloseOnSelect);
         await page.noCloseOnSelect.click();
+        await page.clearInput(input);
         await input.click();
+      } else {
+        await page.clickOnDayButtonInline(date.format('DD'));
       }
 
       await dayClick();
@@ -68,7 +71,7 @@ describe('dpDayPicker timePicker', () => {
   it('should make sure unSelectOnClick feature works as expected for month calendar', async () => {
     const monthRunner = async (menuItem, input, isPicker) => {
       const date = moment();
-      const dayClick = async () => {
+      const monthClick = async () => {
         if (isPicker) {
           await page.clickOnMonthButton(date.format('MMM'));
         } else {
@@ -82,12 +85,15 @@ describe('dpDayPicker timePicker', () => {
       if (isPicker) {
         await page.scrollIntoView(page.noCloseOnSelect);
         await page.noCloseOnSelect.click();
+        await page.clearInput(input);
         await input.click();
+      } else {
+        await page.clickOnMonthButtonInline(date.format('MMM'));
       }
 
-      await dayClick();
+      await monthClick();
       expect(await page.selectedMonth.isPresent()).toEqual(true);
-      await dayClick();
+      await monthClick();
       expect(await page.selectedMonth.isPresent()).toEqual(false);
 
       await page.clickOnBody();
@@ -98,11 +104,11 @@ describe('dpDayPicker timePicker', () => {
         await input.click();
       }
 
-      await dayClick();
+      await monthClick();
 
       expect(await page.selectedMonth.isPresent()).toEqual(true);
 
-      await dayClick();
+      await monthClick();
       expect(await page.selectedMonth.isPresent()).toEqual(true);
 
       await page.enableUnselectSelected.click();
@@ -111,7 +117,7 @@ describe('dpDayPicker timePicker', () => {
         await input.click();
       }
 
-      await dayClick();
+      await monthClick();
       expect(await page.selectedMonth.isPresent()).toEqual(false);
     };
 
