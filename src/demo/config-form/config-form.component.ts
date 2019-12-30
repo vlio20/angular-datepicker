@@ -148,6 +148,8 @@ export class ConfigFormComponent implements OnInit {
     }
   ];
 
+  localFormat: string;
+
   @Input() pickerMode: string;
   @Input() config: IDatePickerConfig;
 
@@ -219,6 +221,8 @@ export class ConfigFormComponent implements OnInit {
   returnedValueType: FormControl;
 
   ngOnInit() {
+    this.localFormat = this.getDefaultFormatByMode(this.pickerMode);
+
     this.format = new FormControl(this.getDefaultFormatByMode(this.pickerMode));
     this.locale = new FormControl(this.config.locale);
     this.firstDayOfWeek = new FormControl(this.config.firstDayOfWeek);
