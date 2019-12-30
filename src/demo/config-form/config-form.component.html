@@ -65,6 +65,7 @@
         </span>
       <div class="dp-option-playground">
         <dp-date-picker [formControl]="minValidation"
+                        [config]="{format: config.format}"
                         [mode]="pickerMode.startsWith('daytime') ? 'daytime' : 'day'"
                         id="minDatePicker"
                         placeholder="Select a min date"
@@ -79,6 +80,7 @@
         </span>
       <div class="dp-option-playground">
         <dp-date-picker [formControl]="maxValidation"
+                        [config]="{format: config.format}"
                         [mode]="pickerMode.startsWith('daytime') ? 'daytime' : 'day'"
                         id="maxDatePicker"
                         placeholder="Select a max date"
