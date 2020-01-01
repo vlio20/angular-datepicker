@@ -194,10 +194,10 @@ export class DatePickerComponent implements OnChanges,
   selectEvent = SelectEvent;
 
   _areCalendarsShown: boolean = false;
-
   _selected: Moment[] = [];
-
   _currentDateView: Moment;
+
+  private onOpenDelayTimeoutHandler;
 
   constructor(private readonly dayPickerService: DatePickerService,
               private readonly domHelper: DomHelper,
@@ -377,8 +377,9 @@ export class DatePickerComponent implements OnChanges,
       return;
     }
 
+    clearTimeout(this.onOpenDelayTimeoutHandler);
     this.isFocusedTrigger = true;
-    setTimeout(() => {
+    this.onOpenDelayTimeoutHandler = setTimeout(() => {
       if (!this.areCalendarsShown) {
         this.showCalendars();
       }
@@ -391,6 +392,7 @@ export class DatePickerComponent implements OnChanges,
   }
 
   inputBlurred() {
+    clearTimeout(this.onOpenDelayTimeoutHandler);
     this.onTouchedCallback();
   }
 
