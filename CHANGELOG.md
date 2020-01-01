@@ -1,6 +1,22 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+<a name="8.0.0"></a>
+# [8.0.0] (2020-01-01)
+
+### Bug Fixes
+- Selected month styling not present on day pickers ([d076f16](https://github.com/vlio20/angular-datepicker/commit/d076f16)) closes [#462](https://github.com/vlio20/angular-datepicker/issues/462)
+- Disabled state in reactive form not working ([5e18e22](https://github.com/vlio20/angular-datepicker/commit/5e18e22)) closes [#416](https://github.com/vlio20/angular-datepicker/issues/416)
+- Validator using old format ([faa2d99](https://github.com/vlio20/angular-datepicker/commit/faa2d99)) closes [#405](https://github.com/vlio20/angular-datepicker/issues/405)
+- weekDayFormatter doesn't work in day mode ([b09964c](https://github.com/vlio20/angular-datepicker/commit/b09964c)) closes [#415](https://github.com/vlio20/angular-datepicker/issues/415)
+
+### Improvements
+- Demo page refactoring ([4601b91](https://github.com/vlio20/angular-datepicker/commit/4601b91)) closes [#474](https://github.com/vlio20/angular-datepicker/issues/474)
+- Angular 8 packages updates ([d076f16](https://github.com/vlio20/angular-datepicker/commit/d076f16)) closes [#467](https://github.com/vlio20/angular-datepicker/issues/467)
+
+### Breaking changes
+- Stop using Renderer and replacing it with Renderer2 ([d076f16](https://github.com/vlio20/angular-datepicker/commit/d076f16)) closes [#469](https://github.com/vlio20/angular-datepicker/issues/469)
+
 <a name="2.12.0"></a>
 # [2.12.0] (2019-06-28)
 ### Improvements
