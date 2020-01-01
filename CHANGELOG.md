@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 # [8.1.0] (???)
 
 ### Bug Fixes
-- Selected month styling not present on day pickers ([???](https://github.com/vlio20/angular-datepicker/commit/???)) closes [#480](https://github.com/vlio20/angular-datepicker/issues/480)
+- Add debounce on open delay ([???](https://github.com/vlio20/angular-datepicker/commit/???)) closes [#480](https://github.com/vlio20/angular-datepicker/issues/480)
 
 <a name="8.0.0"></a>
 # [8.0.0] (2020-01-01)
