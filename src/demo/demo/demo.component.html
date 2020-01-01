@@ -1,0 +1,101 @@
+<div class="dp-demo-page">
+  <div class="dp-menu">
+    <h3 class="dp-menu-header">Components</h3>
+    <ul>
+      <li>
+        <a id="daytimePickerMenu" [routerLink]="['/daytimePicker']" routerLinkActive="dp-active-item">
+          Day Time Picker
+        </a>
+      </li>
+      <li>
+        <a id="daytimeInlineMenu" [routerLink]="['/daytimeInline']" routerLinkActive="dp-active-item">
+          Day Time Picker inline
+        </a>
+      </li>
+      <li>
+        <a id="daytimeDirectiveMenu" [routerLink]="['/daytimeDirective']" routerLinkActive="dp-active-item">
+          Day Time Picker directive
+        </a>
+      </li>
+      <li>
+        <a id="dayPickerMenu" [routerLink]="['/dayPicker']" routerLinkActive="dp-active-item">
+          Day Picker
+        </a>
+      </li>
+      <li>
+        <a id="dayInlineMenu" [routerLink]="['/dayInline']" routerLinkActive="dp-active-item">
+          Day Picker inline
+        </a>
+      </li>
+      <li>
+        <a id="dayDirectiveMenu" [routerLink]="['/dayDirective']" routerLinkActive="dp-active-item">
+          Day Picker directive</a>
+      </li>
+      <li>
+        <a id="monthPickerMenu" [routerLink]="['/monthPicker']" routerLinkActive="dp-active-item">
+          Month Picker
+        </a>
+      </li>
+      <li>
+        <a id="monthInlineMenu" [routerLink]="['/monthInline']" routerLinkActive="dp-active-item">
+          Month Picker inline
+        </a>
+      </li>
+      <li>
+        <a id="monthDirectiveMenu" [routerLink]="['/monthDirective']" routerLinkActive="dp-active-item">
+          Month Picker directive
+        </a>
+      </li>
+      <li>
+        <a id="timePickerMenu" [routerLink]="['/timePicker']" routerLinkActive="dp-active-item">
+          Time Picker
+        </a>
+      </li>
+      <li>
+        <a id="timeInlineMenu" [routerLink]="['/timeInline']" routerLinkActive="dp-active-item">
+          Time Picker inline
+        </a>
+      </li>
+      <li>
+        <a id="timeDirectiveMenu" [routerLink]="['/timeDirective']" routerLinkActive="dp-active-item">
+          Time Picker directive
+        </a>
+      </li>
+    </ul>
+    <div class="dp-place-holder"></div>
+  </div>
+
+  <div class="dp-main-content">
+
+    <div class="dp-toolbar">
+      <form #donateForm
+            action="https://www.paypal.com/cgi-bin/webscr"
+            class="dp-donate-btn"
+            method="post"
+            target="_blank">
+        <input name="cmd" type="hidden" value="_s-xclick">
+        <input name="hosted_button_id" type="hidden" value="8ZR2S5XYJ6WLJ">
+        <input (click)="donateClicked()" alt="PayPal - The safer, easier way to pay online!" border="0"
+               name="submit" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" type="image">
+        <img alt="" border="0" height="1" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1">
+      </form>
+
+      <span class="dp-header">ng2-date-picker</span>
+
+      <div class="dp-github-container">
+        <a aria-label="Star vlio20/angular-datepicker on GitHub"
+           class="github-button"
+           data-show-count="true"
+           data-size="large"
+           href="https://github.com/vlio20/angular-datepicker">
+          Star
+        </a>
+      </div>
+    </div>
+
+    <div class="dp-component-wrapper">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+
+</div>

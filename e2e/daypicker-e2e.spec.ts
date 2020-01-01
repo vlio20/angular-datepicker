@@ -1,47 +1,42 @@
 import {DemoPage} from './app.po';
 
-describe('dpDayPicker daytimePicker', () => {
+describe('dpDayPicker dayPicker', () => {
   let page: DemoPage;
 
-  beforeEach(() => {
+  beforeEach(async () => {
     page = new DemoPage();
-    page.navigateTo();
-
-    page.dateFormatInput.clear();
-    page.dateFormatInput.sendKeys('DD-MM-YYYY HH:mm:ss');
-    page.daytimePickerMenu.click();
+    await page.navigateTo();
   });
 
   it('should check if min date validation is working', async () => {
-    page.minDateValidationPickerInput.clear();
+    await page.minDateValidationPickerInput.clear();
     expect(await page.minDateValidationMsg.isPresent()).toBe(false);
-    page.minDateValidationPickerInput.sendKeys('10-04-2017 10:08:07');
-    page.daytimePickerInput.sendKeys('10-04-2017 09:08:07');
+    await page.setInputValue(page.minDateValidationPickerInput, '10-04-2017 10:08:07');
+    await page.setInputValue(page.daytimePickerInput, '09-04-2017 10:08:07');
+    await page.clickOnBody();
     expect(await page.minDateValidationMsg.getText()).toEqual('minDate invalid');
-    page.minDateValidationPickerInput.clear();
-    page.minDateValidationPickerInput.sendKeys('10-04-2017 09:08:07');
+    await page.setInputValue(page.minDateValidationPickerInput, '08-04-2017 09:08:07');
+    await page.clickOnBody();
     expect(await page.minDateValidationMsg.isPresent()).toBe(false);
   });
 
   it('should check if max date validation is working', async () => {
-    page.maxDateValidationPickerInput.clear();
+    await page.maxDateValidationPickerInput.clear();
     expect(await page.maxDateValidationMsg.isPresent()).toBe(false);
-    page.maxDateValidationPickerInput.sendKeys('12-04-2017 08:08:07');
-    page.daytimePickerInput.sendKeys('12-04-2017 09:08:07');
+    await page.maxDateValidationPickerInput.sendKeys('12-04-2017 08:08:07');
+    await page.daytimePickerInput.sendKeys('12-04-2017 09:08:07');
     expect(await page.maxDateValidationMsg.getText()).toEqual('maxDate invalid');
-    page.maxDateValidationPickerInput.clear();
-    page.maxDateValidationPickerInput.sendKeys('12-04-2017 09:08:07');
+    await page.maxDateValidationPickerInput.clear();
+    await page.maxDateValidationPickerInput.sendKeys('12-04-2017 09:08:07');
     expect(await page.maxDateValidationMsg.isPresent()).toBe(false);
   });
 
   it('should check that the min selectable option is working', async () => {
-    page.minSelectableInput.clear();
-    page.minSelectableInput.sendKeys('11-04-2017 09:08:07');
-    page.daytimePickerInput.sendKeys('17-04-2017 09:08:07');
-    page.daytimePickerInput.click();
+    await page.setInputValue(page.minSelectableInput, '11-04-2017 09:08:07');
+    await page.setInputValue(page.daytimePickerInput, '17-04-2017 09:08:07');
+    await page.daytimePickerInput.click();
     expect(await page.calendarDisabledDays.count()).toBe(16);
-    page.daytimePickerInput.clear();
-    page.daytimePickerInput.sendKeys('11-04-2017 09:18:07');
+    await page.setInputValue(page.daytimePickerInput, '11-04-2017 09:18:07');
     expect(await page.hourDownBtn.getAttribute('disabled')).toEqual('true');
     expect(await page.minuteDownBtn.getAttribute('disabled')).toBe(null);
     expect(await page.meridiemUpBtn.getAttribute('disabled')).toBe(null);
@@ -49,13 +44,12 @@ describe('dpDayPicker daytimePicker', () => {
   });
 
   it('should check that the max selectable option is working', async () => {
-    page.maxSelectableInput.clear();
-    page.maxSelectableInput.sendKeys('11-04-2017 09:08:07');
-    page.daytimePickerInput.sendKeys('12-04-2017 09:08:07');
-    page.daytimePickerInput.click();
+    await page.setInputValue(page.maxSelectableInput, '11-04-2017 09:08:07');
+    await page.setInputValue(page.daytimePickerInput, '12-04-2017 09:08:07');
+    await page.daytimePickerInput.click();
     expect(await page.calendarDisabledDays.count()).toBe(25);
-    page.daytimePickerInput.clear();
-    page.daytimePickerInput.sendKeys('11-04-2017 09:06:07');
+    await page.daytimePickerInput.clear();
+    await page.daytimePickerInput.sendKeys('11-04-2017 09:06:07');
     expect(await page.hourUpBtn.getAttribute('disabled')).toEqual('true');
     expect(await page.minuteUpBtn.getAttribute('disabled')).toBe(null);
     expect(await page.meridiemUpBtn.getAttribute('disabled')).toBe('true');

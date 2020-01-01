@@ -1,0 +1,148 @@
+@import '../../lib/common/styles/variables';
+
+& {
+
+  @stickyHeight: 120px;
+  @stickyHeightInlineDay: 340px;
+  @stickyHeightInlineMonth: 280px;
+  @stickyHeightInlineTime: 180px;
+  @stickyHeightInlineDayTime: 420px;
+  @menuWidth: 200px;
+
+  .dp-demo-page {
+    display: flex;
+  }
+
+  .dp-menu {
+    height: 100vh;
+    width: @menuWidth;
+    background: @c-primary;
+    z-index: 100;
+    overflow: auto;
+
+    .dp-menu-header {
+      padding-left: 10px;
+      padding-bottom: 10px;
+      color: @c-white;
+    }
+
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+
+      li {
+        height: 50px;
+
+        a {
+          display: flex;
+          height: 100%;
+          align-items: center;
+          padding-left: 10px;
+          text-decoration: none;
+          color: @c-white;
+
+          &:hover, &.dp-active-item {
+            background: darken(@c-primary, 20%);
+          }
+        }
+      }
+    }
+  }
+
+  .dp-main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+
+    .dp-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      padding: 20px;
+      background-color: #348498;
+
+      .dp-header {
+        font-size: 24px;
+        font-weight: 600;
+        color: white;
+      }
+
+      dp-donate-btn {
+        display: inline-block;
+      }
+    }
+
+    .dp-component-wrapper {
+      flex: 1;
+      padding: 0 20px;
+    }
+  }
+
+  .dp-demo-container {
+    &.dp-not-top {
+      box-shadow: 0 2px 6px 1px @c-light-gray;
+    }
+
+    &.dp-inline-day {
+      height: @stickyHeightInlineDay;
+    }
+
+    &.dp-inline-month {
+      height: @stickyHeightInlineMonth;
+    }
+
+    &.dp-inline-time {
+      height: @stickyHeightInlineTime;
+    }
+
+    &.dp-inline-day-time {
+      height: @stickyHeightInlineDayTime;
+    }
+  }
+
+  .dp-inline {
+    display: inline-block;
+  }
+
+  .dp-option {
+    padding: 10px;
+
+    &:nth-child(odd) {
+      background: fade(@c-light-gray, 30);
+    }
+  }
+
+  .dp-week-days {
+    input {
+      width: 37px;
+    }
+  }
+
+  .dp-page-content {
+    margin-top: @stickyHeight;
+
+    &.dp-inline-day {
+      margin-top: @stickyHeightInlineDay;
+    }
+
+    &.dp-inline-month {
+      margin-top: @stickyHeightInlineMonth;
+    }
+
+    &.dp-inline-time {
+      margin-top: @stickyHeightInlineTime;
+    }
+
+    &.dp-inline-day-time {
+      margin-top: @stickyHeightInlineDayTime;
+    }
+  }
+
+  .dp-place-holder {
+    width: 1px;
+    height: 1px;
+  }
+}

@@ -84,7 +84,10 @@
   },
   "ngPackage": {
     "lib": {
-      "entryFile": "src/app/index.ts"
+      "entryFile": "src/lib/index.ts",
+      "umdModuleIds": {
+        "moment": "moment"
+      }
     },
     "dest": "bin",
     "whitelistedNonPeerDependencies": [

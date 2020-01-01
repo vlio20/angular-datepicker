@@ -8,41 +8,34 @@ describe('dpDayPicker timePicker', () => {
     await page.navigateTo();
 
     await page.timePickerMenu.click();
-    await page.dateFormatInput.clear();
-    await page.dateFormatInput.sendKeys('HH:mm:ss');
     await page.clickOnBody();
   });
 
   it('should check if min time validation is working', async () => {
-    await page.minTimeValidationPickerInput.click();
-    await page.minTimeValidationPickerInput.clear();
-    expect(await page.timePickerMinTimeValidationMsg.isPresent()).toBe(false);
-    await page.minTimeValidationPickerInput.sendKeys('10:00:00');
-    await page.timePickerInput.click();
-    await page.timePickerInput.clear();
-    await page.timePickerInput.sendKeys('09:00:00');
+    expect(await page.minDateValidationMsg.isPresent()).toBe(false);
+    await page.setInputValue(page.minTimeValidationPickerInput, '10:00:00');
+    await page.setInputValue(page.timePickerInput, '09:00:00');
     await page.clickOnBody();
-    expect(await page.timePickerMinTimeValidationMsg.getText()).toEqual('minTime invalid');
-    await page.minTimeValidationPickerInput.clear();
-    await page.minTimeValidationPickerInput.sendKeys('08:07:06');
+    expect(await page.minDateValidationMsg.getText()).toEqual('minDate invalid');
+    await page.setInputValue(page.minTimeValidationPickerInput, '08:07:06');
     await page.clickOnBody();
-    expect(await page.timePickerMinTimeValidationMsg.isPresent()).toBe(false);
+    expect(await page.minDateValidationMsg.isPresent()).toBe(false);
   });
 
   it('should check if max time validation is working', async () => {
     page.maxTimeValidationPickerInput.click();
     page.maxTimeValidationPickerInput.clear();
-    expect(await page.timePickerMaxTimeValidationMsg.isPresent()).toBe(false);
+    expect(await page.maxDateValidationMsg.isPresent()).toBe(false);
     page.maxTimeValidationPickerInput.clear();
     page.maxTimeValidationPickerInput.sendKeys('08:07:06');
     page.timePickerInput.click();
     page.timePickerInput.clear();
     page.timePickerInput.sendKeys('09:00:00');
     page.clickOnBody();
-    expect(await page.timePickerMaxTimeValidationMsg.getText()).toEqual('maxTime invalid');
+    expect(await page.maxDateValidationMsg.getText()).toEqual('maxDate invalid');
     page.maxTimeValidationPickerInput.clear();
     page.maxTimeValidationPickerInput.sendKeys('10:11:12');
-    expect(await page.timePickerMaxTimeValidationMsg.isPresent()).toBe(false);
+    expect(await page.maxDateValidationMsg.isPresent()).toBe(false);
   });
 
   it('should check that the min selectable time option is working', async () => {
