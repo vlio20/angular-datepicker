@@ -1,17 +1,8 @@
 # Date Picker  
-This is a configurable date-picker build for Angular2 applications and uses MomentJS as its dependency.     
+This is a configurable date-picker build for Angular applications.     
 [DEMO](https://vlio20.github.io/angular-datepicker/)  
 
-[![npm version](https://badge.fury.io/js/ng2-date-picker.svg)](https://badge.fury.io/js/ng2-date-picker)  
-[![Build Status](https://travis-ci.org/vlio20/angular-datepicker.svg?branch=master)](https://travis-ci.org/vlio20/angular-datepicker)    
-[![Package Quality](http://npm.packagequality.com/shield/ng2-date-picker.svg)](http://packagequality.com/#?package=ng2-date-picker)
-  
-# Support  
-This component is 100% Open Source, but if you want your issues to be resolved more quickly, you might want to promote it via  my gig on [Fiverr](https://www.fiverr.com/vladioffe/add-features-and-fix-bugs?arrived_from_manage_gigs=true&display_share=true). This way I will give a higher priority for your bug/feather request.   
-<a href="https://www.fiverr.com/vladioffe/add-features-and-fix-bugs?arrived_from_manage_gigs=true&display_share=true" target="_blank">
-  <img src="https://yt3.ggpht.com/a/AGF-l7-_HVoWft9RKtkKGYCSKADlZMTGp4hSCxfzmQ=s900-mo-c-c0xffffffff-rj-k-no" width="200px">
-</a>
-
+[![npm version](https://badge.fury.io/js/ng2-date-picker.svg)](https://badge.fury.io/js/ng2-date-picker) [![Build Status](https://travis-ci.org/vlio20/angular-datepicker.svg?branch=master)](https://travis-ci.org/vlio20/angular-datepicker) [![Package Quality](http://npm.packagequality.com/shield/ng2-date-picker.svg)](http://packagequality.com/#?package=ng2-date-picker)
   
 ## Screenshots  
   
