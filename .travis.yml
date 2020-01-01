@@ -30,7 +30,7 @@ before_install:
 before_script:
 - npm run lint
 - npm test -- --watch=false
-- npm run e2e
+- npm run e2e:headless
 
 script:
 - npm run build:demo
