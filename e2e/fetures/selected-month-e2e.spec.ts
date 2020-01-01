@@ -13,9 +13,8 @@ describe('selected-month', () => {
 
   it('should work on date time picker', async () => {
     await page.daytimePickerMenu.click();
-    await page.dateFormatInput.clear();
-    await page.dateFormatInput.sendKeys('DD-MM-YYYY HH:mm:ss');
-    await page.daytimePickerInput.sendKeys('10-04-2017 09:08:07');
+    await page.setInputValue(page.dateFormatInput, 'DD-MM-YYYY HH:mm:ss');
+    await page.setInputValue(page.daytimePickerInput, '10-04-2017 09:08:07');
 
     await page.dayCalendarNavHeaderBtn.click();
     expect(await page.selectedMonth.getText()).toEqual('Apr');

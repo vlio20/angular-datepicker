@@ -61,8 +61,6 @@ export class DemoPage {
   disableRequiredValidationRadio = $('#disableRequiredRadio');
   requiredValidationMsg = $('#requiredValidation');
   formatValidationMsg = $('#formatValidation');
-  timePickerMinTimeValidationMsg = $('#timePickerMinTimeValidation');
-  timePickerMaxTimeValidationMsg = $('#timePickerMaxTimeValidation');
   minDateValidationPickerInput = $('#minDatePicker input');
   minDateValidationMsg = $('#minDateValidation');
   maxDateValidationPickerInput = $('#maxDatePicker input');
@@ -166,6 +164,7 @@ export class DemoPage {
   }
 
   async clearInput(elem: ElementFinder): Promise<void> {
+    await elem.click();
     const keys = (await elem.getAttribute('value')).length;
     const tmpArr = [...Array(keys)].map(() => 0);
     await elem.click();
