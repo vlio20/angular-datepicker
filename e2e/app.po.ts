@@ -98,7 +98,8 @@ export class DemoPage {
   hideInputRadio = $('#hideInputRadio');
 
   showOnOutsideClick = $('#showOnOutsideClick');
-  hideOnOutsideClick = $('#hideOnOutsideClick');
+  enableCloseOnEnter = $('#enableCloseOnEnter');
+  disableCloseOnEnter = $('#disableCloseOnEnter');
 
   hourUpBtn = $(`${this.popupSelector} .dp-time-select-control-hours > .dp-time-select-control-up`);
   hourDownBtn = $(`${this.popupSelector} .dp-time-select-control-hours > .dp-time-select-control-down`);

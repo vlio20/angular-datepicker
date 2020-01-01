@@ -797,6 +797,28 @@
         </select>
       </div>
     </div>
+
+    <div *ngIf="isValidConfig('closeOnEnter')" class="dp-option">
+        <span class="dp-option-header">
+          Close On Enter (closeOnEnter):
+        </span>
+      <div class="dp-option-playground">
+        <label>Enabled
+          <input id="enableCloseOnEnter"
+                 [formControl]="closeOnEnter"
+                 [value]="true"
+                 name="closeOnEnter"
+                 type="radio">
+        </label>
+        <label>Disabled
+          <input id="disableCloseOnEnter"
+                 [formControl]="closeOnEnter"
+                 [value]="false"
+                 name="closeOnEnter"
+                 type="radio">
+        </label>
+      </div>
+    </div>
   </div>
 
   <div class="dp-api">
