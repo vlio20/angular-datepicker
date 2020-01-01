@@ -3,6 +3,9 @@ All notable changes to this project will be documented in this file.
 <a name="8.0.0"></a>
 # [8.1.0] (???)
 
+### Features
+- Close popup on enter ([???](https://github.com/vlio20/angular-datepicker/commit/???)) closes [#438](https://github.com/vlio20/angular-datepicker/issues/438)
+
 ### Bug Fixes
 - Add debounce on open delay ([???](https://github.com/vlio20/angular-datepicker/commit/???)) closes [#480](https://github.com/vlio20/angular-datepicker/issues/480)
 
