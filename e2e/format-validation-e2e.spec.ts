@@ -21,7 +21,6 @@ describe('format validation', () => {
     await common(page.daytimeDirectiveMenu, page.daytimeDirectiveInput);
     await common(page.dayPickerMenu, page.dayPickerInput);
     await common(page.dayDirectiveMenu, page.dayDirectiveInput);
-    await common(page.dayDirectiveReactiveMenu, page.dayDirectiveReactiveInput);
     await common(page.monthPickerMenu, page.monthPickerInput);
     await common(page.monthDirectiveMenu, page.monthDirectiveInput);
     await common(page.timePickerMenu, page.timePickerInput);

@@ -3,24 +3,24 @@ import {DemoPage} from './app.po';
 describe('dpDayPicker configuration', () => {
   let page: DemoPage;
 
-  beforeEach(() => {
+  beforeEach(async () => {
     page = new DemoPage();
     page.navigateTo();
 
-    page.daytimePickerMenu.click();
+    await page.daytimePickerMenu.click();
   });
 
   it('openOnClick = false, should not open picker when clicked', async () => {
-    page.openOnClickRadioOff.click();
-    page.openOnFocusRadioOff.click();
-    page.daytimePickerInput.click();
+    await page.openOnClickRadioOff.click();
+    await page.openOnFocusRadioOff.click();
+    await page.daytimePickerInput.click();
     expect(await page.datePickerPopup.isDisplayed()).toBe(false);
   });
 
   it('openOnClick = true, should open picker when clicked', async () => {
-    page.openOnClickRadioOn.click();
-    page.openOnFocusRadioOff.click();
-    page.daytimePickerInput.click();
+    await page.openOnClickRadioOn.click();
+    await page.openOnFocusRadioOff.click();
+    await page.daytimePickerInput.click();
     expect(await page.datePickerPopup.isDisplayed()).toBe(true);
   });
 });

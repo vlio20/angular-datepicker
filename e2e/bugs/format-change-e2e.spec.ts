@@ -1,5 +1,4 @@
 import {DemoPage} from '../app.po';
-import {browser} from 'protractor';
 
 describe('format changed validation', () => {
   let page: DemoPage;
@@ -14,22 +13,9 @@ describe('format changed validation', () => {
     await page.setInputValue(page.dateFormatInput, 'DD-MM-YYYY');
     await page.setInputValue(page.daytimePickerInput, '10-04-2017 09:08:07');
     await page.clickOnBody();
-    browser.sleep(50000);
     expect(await page.formatValidationMsg.isPresent()).toBeTruthy();
     await page.setInputValue(page.dateFormatInput, 'DD-MM-YYYY HH:mm:ss');
     await page.setInputValue(page.daytimePickerInput, '10-04-2017 09:08:07');
-    await page.clickOnBody();
-    expect(await page.formatValidationMsg.isPresent()).toBeFalsy();
-  });
-
-  it('should hide validation on date time directive picker', async () => {
-    await page.dayDirectiveReactiveMenu.click();
-    await page.setInputValue(page.dateFormatInput, 'DD-MM');
-    await page.setInputValue(page.dayDirectiveReactiveInput, '10-04-2017');
-    await page.clickOnBody();
-    expect(await page.formatValidationMsg.isPresent()).toBeTruthy();
-    await page.setInputValue(page.dateFormatInput, 'DD-MM-YYYY');
-    await page.setInputValue(page.dayDirectiveReactiveInput, '10-04-2017');
     await page.clickOnBody();
     expect(await page.formatValidationMsg.isPresent()).toBeFalsy();
   });
