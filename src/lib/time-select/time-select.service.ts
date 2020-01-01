@@ -25,7 +25,7 @@ export class TimeSelectService {
     locale: moment.locale()
   };
 
-  constructor(private utilsService: UtilsService) {
+  constructor(private readonly utilsService: UtilsService) {
   }
 
   getConfig(config: ITimeSelectConfig): ITimeSelectConfigInternal {
