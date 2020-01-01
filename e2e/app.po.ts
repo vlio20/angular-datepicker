@@ -171,12 +171,16 @@ export class DemoPage {
     await elem.click();
 
     for (const _ of tmpArr) {
+      await elem.sendKeys(protractor.Key.ARROW_RIGHT);
+    }
+
+    for (const _ of tmpArr) {
       await elem.sendKeys(protractor.Key.BACK_SPACE);
     }
   }
 
   async setInputValue(input: ElementFinder, val: string): Promise<void> {
-    await input.clear();
+    await this.clearInput(input);
     await input.sendKeys(val);
   }
 }

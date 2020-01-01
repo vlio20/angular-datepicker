@@ -64,6 +64,7 @@
           Min-Date Validation (minDate):
         </span>
       <div class="dp-option-playground">
+        {{pickerMode}}
         <dp-date-picker [formControl]="minValidation"
                         [config]="{format: localFormat}"
                         [mode]="pickerMode.startsWith('daytime') ? 'daytime' : 'day'"
