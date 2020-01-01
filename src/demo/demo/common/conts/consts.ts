@@ -1,4 +1,4 @@
-import {ECalendarValue, IDatePickerConfig} from '../../../../../lib';
+import {ECalendarValue, IDatePickerConfig} from '../../../../lib';
 import * as moment from 'moment';
 
 export const DEF_CONF: IDatePickerConfig = {
@@ -11,6 +11,7 @@ export const DEF_CONF: IDatePickerConfig = {
   openOnFocus: true,
   openOnClick: true,
   onOpenDelay: 0,
+  closeOnEnter: true,
   weekDayFormat: 'ddd',
   appendTo: document.body,
   showNearMonthDays: true,

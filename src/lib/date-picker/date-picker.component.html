@@ -5,6 +5,7 @@
     <input (blur)="inputBlurred()"
            (focus)="inputFocused()"
            (ngModelChange)="onViewDateChange($event)"
+           (keydown.enter)="componentConfig.closeOnEnter && hideCalendar()"
            [disabled]="disabled"
            [ngModel]="inputElementValue"
            [placeholder]="placeholder"
