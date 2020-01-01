@@ -21,7 +21,6 @@ export interface IConfig {
 
 export interface IMonthCalendarConfig extends IConfig,
                                               ICalendar {
-
 }
 
 export interface IMonthCalendarConfigInternal extends IConfig,

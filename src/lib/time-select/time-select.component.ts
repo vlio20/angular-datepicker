@@ -11,6 +11,7 @@ import {
   OnChanges,
   OnInit,
   Output,
+  SimpleChange,
   SimpleChanges,
   ViewEncapsulation
 } from '@angular/core';
@@ -30,6 +31,7 @@ import {CalendarValue} from '../common/types/calendar-value';
 import {UtilsService} from '../common/services/utils/utils.service';
 import {IDate} from '../common/models/date.model';
 import {DateValidator} from '../common/types/validator.type';
+import {IDayCalendarConfigInternal} from '../day-calendar/day-calendar-config.model';
 
 const moment = momentNs;
 
@@ -75,7 +77,6 @@ export class TimeSelectComponent implements OnInit, OnChanges, ControlValueAcces
 
     this.onChangeCallback(this.processOnChangeCallback(selected));
   }
-  ;
 
   @Input() config: ITimeSelectConfig;
   @Input() displayDate: SingleCalendarValue;
@@ -132,6 +133,8 @@ export class TimeSelectComponent implements OnInit, OnChanges, ControlValueAcces
       if (minDate || maxDate || minTime || maxTime) {
         this.initValidators();
       }
+
+      this.handleConfigChange(changes.config);
     }
   }
 
@@ -140,7 +143,10 @@ export class TimeSelectComponent implements OnInit, OnChanges, ControlValueAcces
 
     if (value) {
       const momentValue = this.utilsService
-        .convertToMomentArray(value, this.timeSelectService.getTimeFormat(this.componentConfig), false)[0];
+        .convertToMomentArray(value, {
+          allowMultiSelect: false,
+          format: this.timeSelectService.getTimeFormat(this.componentConfig)
+        })[0];
       if (momentValue.isValid()) {
         this.selected = momentValue;
         this.inputValueType = this.utilsService
@@ -214,5 +220,16 @@ export class TimeSelectComponent implements OnInit, OnChanges, ControlValueAcces
     this.minutes = this.timeSelectService.getMinutes(this.componentConfig, time);
     this.seconds = this.timeSelectService.getSeconds(this.componentConfig, time);
     this.meridiem = this.timeSelectService.getMeridiem(this.componentConfig, time);
+  }
+
+  private handleConfigChange(config: SimpleChange) {
+    if (config) {
+      const prevConf: IDayCalendarConfigInternal = this.timeSelectService.getConfig(config.previousValue);
+      const currentConf: IDayCalendarConfigInternal = this.timeSelectService.getConfig(config.currentValue);
+
+      if (prevConf.locale !== currentConf.locale) {
+        this.selected = this.selected.clone().locale(currentConf.locale);
+      }
+    }
   }
 }

@@ -111,7 +111,6 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
   };
 
   _selected: Moment[];
-
   _currentDateView: Moment;
 
   constructor(public readonly monthCalendarService: MonthCalendarService,
@@ -159,7 +158,7 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
 
     if (value) {
       this.selected = this.utilsService
-        .convertToMomentArray(value, this.componentConfig.format, this.componentConfig.allowMultiSelect);
+        .convertToMomentArray(value, this.componentConfig);
       this.yearMonths = this.monthCalendarService
         .generateYear(this.componentConfig, this.currentDateView, this.selected);
       this.inputValueType = this.utilsService.getInputType(this.inputValue, this.componentConfig.allowMultiSelect);
@@ -311,6 +310,14 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
 
       if (this.utilsService.shouldResetCurrentView(prevConf, currentConf)) {
         this._currentDateView = null;
+      }
+
+      if (prevConf.locale !== currentConf.locale) {
+        if (this.currentDateView) {
+          this.currentDateView.locale(currentConf.locale)
+        }
+
+        (this.selected || []).forEach((m) => m.locale(currentConf.locale));
       }
     }
   }

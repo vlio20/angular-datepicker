@@ -169,6 +169,7 @@ export class DayCalendarService {
       format: componentConfig.format,
       isNavHeaderBtnClickable: true,
       allowMultiSelect: false,
+      locale: componentConfig.locale,
       yearFormat: componentConfig.yearFormat,
       yearFormatter: componentConfig.yearFormatter,
       monthBtnFormat: componentConfig.monthBtnFormat,

@@ -31,7 +31,6 @@ export class MonthCalendarService {
     };
 
     this.utilsService.convertPropsToMoment(_config, _config.format, ['min', 'max']);
-
     moment.locale(_config.locale);
 
     return _config;

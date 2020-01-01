@@ -250,7 +250,7 @@ export class DatePickerComponent implements OnChanges,
 
     if (value || value === '') {
       this.selected = this.utilsService
-        .convertToMomentArray(value, this.componentConfig.format, this.componentConfig.allowMultiSelect);
+        .convertToMomentArray(value, this.componentConfig);
       this.init();
     } else {
       this.selected = [];

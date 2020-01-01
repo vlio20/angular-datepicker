@@ -42,7 +42,6 @@ export abstract class DateComponent {
 
   onRequireValidationChange(required: boolean): void {
     this.required = required;
-    console.log(this.required, this.config.format);
     this.control.setValidators(this.getValidations());
     this.control.updateValueAndValidity();
   }

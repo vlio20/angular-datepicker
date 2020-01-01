@@ -24,7 +24,7 @@ export class DemoPage {
   monthCalendarLeftNavBtn = $(`${this.popupSelector} dp-month-calendar .dp-calendar-nav-left`);
   monthCalendarRightNavBtn = $(`${this.popupSelector} dp-month-calendar .dp-calendar-nav-right`);
   weekDayNames = $$(`${this.popupSelector} .dp-weekdays`);
-  weekDayInline = $$(`.dp-demo-container .dp-weekdays`);
+  weekDayInline = $$(`.dp-inline .dp-weekdays`);
   currentLocationBtn = $(`${this.popupSelector} .dp-current-location-btn`);
   themeOnRadio = $('#themeOn');
   themeOffRadio = $('#themeOff');
@@ -46,7 +46,7 @@ export class DemoPage {
   calendarDisabledDays = $$(`${this.popupSelector} .dp-calendar-day[disabled]`);
   calendarFirstDayOfMonth = $$(`${this.popupSelector} .dp-current-month`).get(0);
   calendarFirstMonthOfYear = $$(`${this.popupSelector} dp-month-calendar .dp-calendar-month`).get(0);
-  calendarFirstMonthOfYearInline = $$(`.dp-demo-container dp-month-calendar .dp-calendar-month`).get(0);
+  calendarFirstMonthOfYearInline = $$(`.dp-inline dp-month-calendar .dp-calendar-month`).get(0);
 
   currentMonthCalendarBtn = $(`${this.popupSelector} dp-month-calendar .dp-current-month`);
   disableMonthSelector = $('#disableMonthSelector');
@@ -114,7 +114,7 @@ export class DemoPage {
   meridiemUpBtn = $(`${this.popupSelector} .dp-time-select-control-meridiem > .dp-time-select-control-up`);
   meridiemDownBtn = $(`${this.popupSelector} .dp-time-select-control-meridiem > .dp-time-select-control-down`);
   meridiemDisplay = $(`${this.popupSelector} .dp-time-select-display-meridiem`);
-  meridiemDisplayInline = $(`.dp-demo-container .dp-time-select-display-meridiem`);
+  meridiemDisplayInline = $(`.dp-inline .dp-time-select-display-meridiem`);
   timeSeparatorDisplay = $(`${this.popupSelector} .dp-time-select-separator:nth-child(2)`);
 
   daytimePickerMenu = $('#daytimePickerMenu');

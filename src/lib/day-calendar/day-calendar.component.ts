@@ -115,7 +115,6 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
   };
 
   _selected: Moment[];
-
   _currentDateView: Moment;
 
   constructor(public readonly dayCalendarService: DayCalendarService,
@@ -166,7 +165,7 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
 
     if (value) {
       this.selected = this.utilsService
-        .convertToMomentArray(value, this.componentConfig.format, this.componentConfig.allowMultiSelect);
+        .convertToMomentArray(value, this.componentConfig);
       this.inputValueType = this.utilsService
         .getInputType(this.inputValue, this.componentConfig.allowMultiSelect);
     } else {
@@ -334,6 +333,14 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
 
       if (this.utilsService.shouldResetCurrentView(prevConf, currentConf)) {
         this._currentDateView = null;
+      }
+
+      if (prevConf.locale !== currentConf.locale) {
+        if (this.currentDateView) {
+          this.currentDateView.locale(currentConf.locale);
+        }
+
+        this.selected.forEach(m => m.locale(currentConf.locale));
       }
     }
   }

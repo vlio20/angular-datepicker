@@ -111,7 +111,7 @@ export class DatePickerService {
     value = value ? value : '';
     const datesStrArr: string[] = this.utilsService.datesStringToStringArray(value);
 
-    return this.utilsService.convertToMomentArray(datesStrArr, config.format, config.allowMultiSelect);
+    return this.utilsService.convertToMomentArray(datesStrArr, config);
   }
 
   private getDefaultFormatByMode(mode: CalendarMode): string {

@@ -97,19 +97,27 @@ export class UtilsService {
   }
 
   // todo:: add unit test
-  convertToMomentArray(value: CalendarValue, format: string, allowMultiSelect: boolean): Moment[] {
-    switch (this.getInputType(value, allowMultiSelect)) {
+  convertToMomentArray(value: CalendarValue,
+                       config: {allowMultiSelect?: boolean, format?: string}): Moment[] {
+    let retVal: Moment[];
+    switch (this.getInputType(value, config.allowMultiSelect)) {
       case (ECalendarValue.String):
-        return value ? [moment(<string>value, format, true)] : [];
+        retVal = value ? [moment(<string>value, config.format, true)] : [];
+        break;
       case (ECalendarValue.StringArr):
-        return (<string[]>value).map(v => v ? moment(v, format, true) : null).filter(Boolean);
+        retVal = (<string[]>value).map(v => v ? moment(v, config.format, true) : null).filter(Boolean);
+        break;
       case (ECalendarValue.Moment):
-        return value ? [(<Moment>value).clone()] : [];
+        retVal = value ? [(<Moment>value).clone()] : [];
+        break;
       case (ECalendarValue.MomentArr):
-        return (<Moment[]>value || []).map(v => v.clone());
+        retVal = (<Moment[]>value || []).map(v => v.clone());
+        break;
       default:
-        return [];
+        retVal = [];
     }
+
+    return retVal;
   }
 
   // todo:: add unit test
@@ -257,7 +265,10 @@ export class UtilsService {
     return (inputVal: CalendarValue) => {
       isValid = true;
 
-      value = this.convertToMomentArray(inputVal, format, true).filter(Boolean);
+      value = this.convertToMomentArray(inputVal, {
+        format,
+        allowMultiSelect: true
+      }).filter(Boolean);
 
       if (!value.every(val => val.isValid())) {
         return {
