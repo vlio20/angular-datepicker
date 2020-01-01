@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {DateComponent} from '../../common/date-component.component';
+import {DateComponent} from '../../../common/date-component.component';
 import {FormControl} from '@angular/forms';
 import {IDatePickerConfig} from '../../../../../lib';
-import {DEF_CONF} from '../../common/conts/consts';
+import {DEF_CONF} from '../../../common/conts/consts';
 
 @Component({
   selector: 'dp-month-demo',

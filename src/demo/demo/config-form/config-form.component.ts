@@ -25,7 +25,8 @@ const PICKER_OPTION_KEYS = [
   'placeholder',
   'required',
   'hideInputContainer',
-  'hideOnOutsideClick'
+  'hideOnOutsideClick',
+  'closeOnEnter'
 ];
 const DAY_PICKER_DIRECTIVE_OPTION_KEYS = [
   'allowMultiSelect',
@@ -219,6 +220,7 @@ export class ConfigFormComponent implements OnInit {
   showMultipleYearsNavigation: FormControl;
   multipleYearsNavigateBy: FormControl;
   returnedValueType: FormControl;
+  closeOnEnter: FormControl;
 
   ngOnInit() {
     this.localFormat = this.getDefaultFormatByMode(this.pickerMode);
@@ -264,6 +266,7 @@ export class ConfigFormComponent implements OnInit {
     this.showMultipleYearsNavigation = new FormControl(this.config.showMultipleYearsNavigation);
     this.multipleYearsNavigateBy = new FormControl(this.config.multipleYearsNavigateBy);
     this.returnedValueType = new FormControl(this.config.returnedValueType);
+    this.closeOnEnter = new FormControl(this.config.closeOnEnter);
     this.initListeners();
   }
 
@@ -607,6 +610,12 @@ export class ConfigFormComponent implements OnInit {
     this.returnedValueType.valueChanges.subscribe((val) => {
       this.onConfigChange.emit({
         returnedValueType: val
+      });
+    });
+
+    this.closeOnEnter.valueChanges.subscribe((val) => {
+      this.onConfigChange.emit({
+        closeOnEnter: val
       });
     });
   }

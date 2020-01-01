@@ -251,6 +251,13 @@ export class DatePickerDirective implements OnInit {
     this.datePicker.inputFocused();
   }
 
+  @HostListener('keydown.enter')
+  onEnter() {
+    if (this.datePicker.componentConfig.closeOnEnter) {
+      this.datePicker.hideCalendar();
+    }
+  }
+
   markForCheck() {
     if (this.datePicker) {
       this.datePicker.cd.markForCheck();
