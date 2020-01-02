@@ -18,7 +18,8 @@ export class MonthCalendarService {
     locale: moment.locale(),
     multipleYearsNavigateBy: 10,
     showMultipleYearsNavigation: false,
-    unSelectOnClick: true
+    unSelectOnClick: true,
+    numOfMonthRows: 3
   };
 
   constructor(private utilsService: UtilsService) {
@@ -30,6 +31,8 @@ export class MonthCalendarService {
       ...this.utilsService.clearUndefined(config)
     };
 
+    this.validateConfig(_config);
+
     this.utilsService.convertPropsToMoment(_config, _config.format, ['min', 'max']);
     moment.locale(_config.locale);
 
@@ -39,8 +42,8 @@ export class MonthCalendarService {
   generateYear(config: IMonthCalendarConfig, year: Moment, selected: Moment[] = null): IMonth[][] {
     const index = year.clone().startOf('year');
 
-    return this.utilsService.createArray(3).map(() => {
-      return this.utilsService.createArray(4).map(() => {
+    return this.utilsService.createArray(config.numOfMonthRows).map(() => {
+      return this.utilsService.createArray(12 / config.numOfMonthRows).map(() => {
         const date = index.clone();
         const month = {
           date,
@@ -95,5 +98,11 @@ export class MonthCalendarService {
     }
 
     return '';
+  }
+
+  private validateConfig(config: IMonthCalendarConfigInternal): void {
+    if (config.numOfMonthRows < 1 || config.numOfMonthRows > 12 || !Number.isInteger(12 / config.numOfMonthRows)) {
+      throw new Error('numOfMonthRows has to be between 1 - 12 and divide 12 to integer');
+    }
   }
 }
