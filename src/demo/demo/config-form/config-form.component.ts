@@ -59,6 +59,7 @@ const MONTH_CALENDAR_OPTION_KEYS = [
   'showGoToCurrent',
   'unSelectOnClick',
   'moveCalendarTo',
+  'numOfMonthRows',
   ...GLOBAL_OPTION_KEYS
 ];
 const DAY_CALENDAR_OPTION_KEYS = [
@@ -221,6 +222,7 @@ export class ConfigFormComponent implements OnInit {
   multipleYearsNavigateBy: FormControl;
   returnedValueType: FormControl;
   closeOnEnter: FormControl;
+  numOfMonthRows: FormControl;
 
   ngOnInit() {
     this.localFormat = this.getDefaultFormatByMode(this.pickerMode);
@@ -267,6 +269,7 @@ export class ConfigFormComponent implements OnInit {
     this.multipleYearsNavigateBy = new FormControl(this.config.multipleYearsNavigateBy);
     this.returnedValueType = new FormControl(this.config.returnedValueType);
     this.closeOnEnter = new FormControl(this.config.closeOnEnter);
+    this.numOfMonthRows = new FormControl(this.config.numOfMonthRows);
     this.initListeners();
   }
 
@@ -616,6 +619,12 @@ export class ConfigFormComponent implements OnInit {
     this.closeOnEnter.valueChanges.subscribe((val) => {
       this.onConfigChange.emit({
         closeOnEnter: val
+      });
+    });
+
+    this.numOfMonthRows.valueChanges.subscribe((val) => {
+      this.onConfigChange.emit({
+        numOfMonthRows: val
       });
     });
   }
