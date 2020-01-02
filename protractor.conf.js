@@ -2,8 +2,8 @@
 // https://github.com/angular/protractor/blob/master/lib/config.ts
 
 const {SpecReporter} = require('jasmine-spec-reporter');
-const args = process.argv;
-const headless = args.indexOf('headless') !== -1;
+
+const headless = process.env.HEADLESS === 'true';
 
 exports.config = {
   allScriptsTimeout: 120000,
