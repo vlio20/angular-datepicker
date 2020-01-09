@@ -20,7 +20,7 @@ import {CalendarValue} from '../common/types/calendar-value';
 import {SingleCalendarValue} from '../common/types/single-calendar-value';
 import {INavEvent} from '../common/models/navigation-event.model';
 import {UtilsService} from '../common/services/utils/utils.service'
-import {ISelectionEvent} from '../common/types/selection-evet.model';
+import {ISelectionEvent} from '../common/types/selection-event.model';
 
 @Directive({
   exportAs: 'dpDayPicker',

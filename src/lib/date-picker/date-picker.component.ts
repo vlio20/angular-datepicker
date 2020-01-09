@@ -50,8 +50,8 @@ import {DateValidator} from '../common/types/validator.type';
 import {MonthCalendarComponent} from '../month-calendar/month-calendar.component';
 import {DayTimeCalendarComponent} from '../day-time-calendar/day-time-calendar.component';
 import {INavEvent} from '../common/models/navigation-event.model';
-import {SelectEvent} from '../common/types/selection-evet.enum.';
-import {ISelectionEvent} from '../common/types/selection-evet.model';
+import {SelectEvent} from '../common/types/selection-event.enum';
+import {ISelectionEvent} from '../common/types/selection-event.model';
 
 @Component({
   selector: 'dp-date-picker',
