@@ -12,7 +12,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e --port 3200",
     "e2e:quick": "ng e2e --dev-server-target --webdriverUpdate=false",
-    "e2e:headless": "ng e2e -- headless",
+    "e2e:headless": "HEADLESS=true ng e2e",
     "build:index": "cd build-helpers && node index-maker.js",
     "build:demo": "rm -rf dist/ && ng build --prod --base-href /angular-datepicker/ && npm run build:index",
     "build:prod": "ng-packagr -p package.json",

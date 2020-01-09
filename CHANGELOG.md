@@ -1,5 +1,14 @@
 # Changelog
 All notable changes to this project will be documented in this file.
+<a name="8.0.0"></a>
+# [8.1.0] (???)
+
+### Features
+- Add number of rows to month calendar ([???](https://github.com/vlio20/angular-datepicker/commit/???)) closes [#387](https://github.com/vlio20/angular-datepicker/issues/387)
+- Close popup on enter ([???](https://github.com/vlio20/angular-datepicker/commit/???)) closes [#438](https://github.com/vlio20/angular-datepicker/issues/438)
+
+### Bug Fixes
+- Add debounce on open delay ([???](https://github.com/vlio20/angular-datepicker/commit/???)) closes [#480](https://github.com/vlio20/angular-datepicker/issues/480)
 
 <a name="8.0.0"></a>
 # [8.0.0] (2020-01-01)

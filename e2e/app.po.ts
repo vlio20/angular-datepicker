@@ -98,7 +98,8 @@ export class DemoPage {
   hideInputRadio = $('#hideInputRadio');
 
   showOnOutsideClick = $('#showOnOutsideClick');
-  hideOnOutsideClick = $('#hideOnOutsideClick');
+  enableCloseOnEnter = $('#enableCloseOnEnter');
+  disableCloseOnEnter = $('#disableCloseOnEnter');
 
   hourUpBtn = $(`${this.popupSelector} .dp-time-select-control-hours > .dp-time-select-control-up`);
   hourDownBtn = $(`${this.popupSelector} .dp-time-select-control-hours > .dp-time-select-control-down`);
@@ -114,6 +115,8 @@ export class DemoPage {
   meridiemDisplay = $(`${this.popupSelector} .dp-time-select-display-meridiem`);
   meridiemDisplayInline = $(`.dp-inline .dp-time-select-display-meridiem`);
   timeSeparatorDisplay = $(`${this.popupSelector} .dp-time-select-separator:nth-child(2)`);
+  monthRows = $$('.dp-months-row');
+  numOfMonthRowsToggle2 = $('#numOfMonthRows2');
 
   daytimePickerMenu = $('#daytimePickerMenu');
   daytimeInlineMenu = $('#daytimeInlineMenu');

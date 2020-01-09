@@ -16,8 +16,7 @@ import {
   ViewContainerRef
 } from '@angular/core';
 import {NgControl} from '@angular/forms';
-import {CalendarValue} from '../common/types/calendar-value';
-import {SingleCalendarValue} from '../common/types/single-calendar-value';
+import {CalendarValue, ISelectionEvent, SingleCalendarValue} from '..';
 import {INavEvent} from '../common/models/navigation-event.model';
 import {UtilsService} from '../common/services/utils/utils.service'
 import {ISelectionEvent} from '../common/types/selection-event.model';
@@ -249,6 +248,13 @@ export class DatePickerDirective implements OnInit {
   @HostListener('focus')
   onFocus() {
     this.datePicker.inputFocused();
+  }
+
+  @HostListener('keydown.enter')
+  onEnter() {
+    if (this.datePicker.componentConfig.closeOnEnter) {
+      this.datePicker.hideCalendar();
+    }
   }
 
   markForCheck() {

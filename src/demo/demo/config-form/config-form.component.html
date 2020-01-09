@@ -797,6 +797,78 @@
         </select>
       </div>
     </div>
+
+    <div *ngIf="isValidConfig('closeOnEnter')" class="dp-option">
+        <span class="dp-option-header">
+          Close On Enter (closeOnEnter):
+        </span>
+      <div class="dp-option-playground">
+        <label>Enabled
+          <input id="enableCloseOnEnter"
+                 [formControl]="closeOnEnter"
+                 [value]="true"
+                 name="closeOnEnter"
+                 type="radio">
+        </label>
+        <label>Disabled
+          <input id="disableCloseOnEnter"
+                 [formControl]="closeOnEnter"
+                 [value]="false"
+                 name="closeOnEnter"
+                 type="radio">
+        </label>
+      </div>
+    </div>
+
+    <div *ngIf="isValidConfig('numOfMonthRows')" class="dp-option">
+        <span class="dp-option-header">
+          Number of Month rows (numOfMonthRows):
+        </span>
+      <div class="dp-option-playground">
+        <label>1
+          <input id="numOfMonthRows1"
+                 [formControl]="numOfMonthRows"
+                 [value]="1"
+                 name="numOfMonthRows"
+                 type="radio">
+        </label>
+        <label>2
+          <input id="numOfMonthRows2"
+                 [formControl]="numOfMonthRows"
+                 [value]="2"
+                 name="numOfMonthRows"
+                 type="radio">
+        </label>
+        <label>3
+          <input id="numOfMonthRows3"
+                 [formControl]="numOfMonthRows"
+                 [value]="3"
+                 name="numOfMonthRows"
+                 type="radio">
+        </label>
+        <label>4
+          <input id="numOfMonthRows4"
+                 [formControl]="numOfMonthRows"
+                 [value]="4"
+                 name="numOfMonthRows"
+                 type="radio">
+        </label>
+        <label>6
+          <input id="numOfMonthRows6"
+                 [formControl]="numOfMonthRows"
+                 [value]="6"
+                 name="numOfMonthRows"
+                 type="radio">
+        </label>
+        <label>12
+          <input id="numOfMonthRows12"
+                 [formControl]="numOfMonthRows"
+                 [value]="12"
+                 name="numOfMonthRows"
+                 type="radio">
+        </label>
+      </div>
+    </div>
   </div>
 
   <div class="dp-api">

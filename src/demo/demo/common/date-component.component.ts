@@ -1,7 +1,7 @@
-import {INavEvent} from '../../../../lib/common/models/navigation-event.model';
+import {INavEvent} from '../../../lib/common/models/navigation-event.model';
 import * as moment from 'moment';
 import {Moment} from 'moment';
-import {DatePickerComponent, DatePickerDirective, ISelectionEvent} from '../../../../lib';
+import {DatePickerComponent, DatePickerDirective, ISelectionEvent} from '../../../lib';
 import {ViewChild} from '@angular/core';
 import {FormControl, ValidatorFn, Validators} from '@angular/forms';
 

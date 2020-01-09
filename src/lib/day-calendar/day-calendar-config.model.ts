@@ -29,6 +29,7 @@ export interface IConfig {
   returnedValueType?: ECalendarValue;
   showGoToCurrent?: boolean;
   unSelectOnClick?: boolean;
+  numOfMonthRows?: number;
 }
 
 export interface IDayCalendarConfig extends IConfig,
