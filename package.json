@@ -38,10 +38,10 @@
   ],
   "peerDependencies": {},
   "devDependencies": {
-    "@angular-devkit/build-angular": "^0.803.21",
-    "@angular-devkit/build-ng-packagr": "^0.803.20",
+    "@angular-devkit/build-angular": "^0.803.25",
+    "@angular-devkit/build-ng-packagr": "^0.803.25",
     "@angular-devkit/core": "8.3.20",
-    "@angular/cli": "^8.3.20",
+    "@angular/cli": "^8.3.25",
     "@angular/common": "8.2.14",
     "@angular/compiler": "8.2.14",
     "@angular/compiler-cli": "8.2.14",

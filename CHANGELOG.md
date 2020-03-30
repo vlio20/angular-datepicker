@@ -1,7 +1,10 @@
 # Changelog
 All notable changes to this project will be documented in this file.
-<a name="8.0.0"></a>
-# [8.1.0] (???)
+<a name="9.0.0"></a>
+# [9.0.0] (???)
+
+### Improvements
+- Update to Angular 9 ([???](https://github.com/vlio20/angular-datepicker/commit/???)) closes [#493](https://github.com/vlio20/angular-datepicker/issues/493)
 
 ### Features
 - Add number of rows to month calendar ([???](https://github.com/vlio20/angular-datepicker/commit/???)) closes [#387](https://github.com/vlio20/angular-datepicker/issues/387)
