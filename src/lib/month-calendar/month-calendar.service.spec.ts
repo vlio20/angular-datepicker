@@ -1,8 +1,7 @@
 import {inject, TestBed} from '@angular/core/testing';
 import * as momentNs from 'moment';
-import {UtilsService} from '../common/services/utils/utils.service';
+import {IDateCell, UtilsService} from '../common/services/utils/utils.service';
 import {MonthCalendarService} from './month-calendar.service';
-import {IMonth} from './month.model';
 
 const moment = momentNs;
 
@@ -28,7 +27,7 @@ describe('Service: MonthCalendarService', () => {
           } else {
             expect(month.selected).toBe(false);
           }
-          expect(month.currentMonth).toBe(false);
+          expect(month.current).toBe(false);
 
           current.add(1, 'month');
         });
@@ -48,10 +47,10 @@ describe('Service: MonthCalendarService', () => {
 
   it('should check the isDateDisabled method',
     inject([MonthCalendarService], (service: MonthCalendarService) => {
-      const month: IMonth = {
+      const month: IDateCell = {
         date: moment('09-04-2017', 'DD-MM-YYYY'),
         selected: false,
-        currentMonth: false,
+        current: false,
         disabled: false,
         text: moment('09-04-2017', 'DD-MM-YYYY').format('MMM')
       };

@@ -350,4 +350,53 @@ export class UtilsService {
       return elem;
     }
   }
+
+  generateCalendar<T>({
+                        numOfRows,
+                        numOfCells,
+                        isDisabledCb,
+                        getBtnTextCb,
+                        selected,
+                        config,
+                        startDate,
+                        granularity
+                      }: IGenCalendarParams<T>): IDateCell[][] {
+    const index = startDate.clone();
+
+    return this.createArray(numOfRows).map(() => {
+      return this.createArray(numOfCells / numOfRows).map(() => {
+        const date = index.clone();
+        const month = {
+          date,
+          selected: !!selected.find(s => index.isSame(s, granularity)),
+          current: index.isSame(moment(), granularity),
+          disabled: isDisabledCb(date, config),
+          text: getBtnTextCb(config, date)
+        };
+
+        index.add(1, 'month');
+
+        return month;
+      });
+    });
+  }
+}
+
+export interface IGenCalendarParams<T> {
+  startDate: Moment;
+  numOfRows: number;
+  numOfCells: number;
+  isDisabledCb: (date: Moment, config: T) => boolean;
+  getBtnTextCb: (config: T, date: Moment) => string;
+  selected: Moment[];
+  config: T;
+  granularity: 'year' | 'month';
+}
+
+export interface IDateCell {
+  date: Moment;
+  selected: boolean;
+  current: boolean;
+  disabled: boolean
+  text: string;
 }

@@ -1,10 +1,9 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {MonthCalendarComponent} from './month-calendar.component';
-import {UtilsService} from '../common/services/utils/utils.service';
+import {IDateCell, UtilsService} from '../common/services/utils/utils.service';
 import {CalendarNavComponent} from '../calendar-nav/calendar-nav.component';
 import {MonthCalendarService} from './month-calendar.service';
 import {Moment} from 'moment';
-import {IMonth} from './month.model';
 
 describe('Component: MonthCalendarComponent', () => {
   let component: MonthCalendarComponent;
@@ -29,10 +28,10 @@ describe('Component: MonthCalendarComponent', () => {
   });
 
   describe('should have the right CSS classes for', () => {
-    const defaultMonth: IMonth = {
+    const defaultMonth: IDateCell = {
       date: undefined,
       selected: false,
-      currentMonth: false,
+      current: false,
       disabled: false,
       text: ''
     };
@@ -45,7 +44,7 @@ describe('Component: MonthCalendarComponent', () => {
       expect(component.getMonthBtnCssClass({
         ...defaultMonth,
         selected: true
-      } as IMonth)).toEqual({
+      } as IDateCell)).toEqual({
         ...defaultCssClasses,
         'dp-selected': true
       });
@@ -55,7 +54,7 @@ describe('Component: MonthCalendarComponent', () => {
       expect(component.getMonthBtnCssClass({
         ...defaultMonth,
         currentMonth: true
-      } as IMonth)).toEqual({
+      } as IDateCell)).toEqual({
         ...defaultCssClasses,
         'dp-current-month': true
       });
@@ -66,7 +65,7 @@ describe('Component: MonthCalendarComponent', () => {
 
       expect(component.getMonthBtnCssClass({
         ...defaultMonth
-      } as IMonth)).toEqual({
+      } as IDateCell)).toEqual({
         ...defaultCssClasses,
         'custom-class': true
       });

@@ -182,7 +182,7 @@ i.e.
 | Name                 | Event Arguments                     |  Description                                                                                                                                                      |  
 |----------------------|:-----------------------------------:|:------------------------------------------------------------------------------------------------------------------------------------------------------------------|  
 | onSelect             | `IDay`                              | This event will be emitted when a day is selected.                                                                                                                |  
-| onMonthSelect        | `IMonth`                            | This event will be emitted when a month is selected.                                                                                                              |  
+| onMonthSelect        | `IDateCell`                            | This event will be emitted when a month is selected.                                                                                                              |  
 | onNavHeaderBtnClick  | `ECalendarMode`                     | This event will be emitted when the mode of the calendar switches form day to month and vise versa.                                                               |  
 | onGoToCurrent        | void                                | This event will be emitted when click was made on go to current button.                                                                                           |  
 | onLeftNav            | void                                | This event will be emitted when click was made on left navigation button.                                                                                         |  
@@ -241,7 +241,7 @@ i.e.
 ### Attributes (Output):   
 | Name                 | Event Arguments                     |  Description                                                                                                                                                      |  
 |----------------------|:-----------------------------------:|:------------------------------------------------------------------------------------------------------------------------------------------------------------------|  
-| onSelect             | `IMonth`                            | This event will be emitted when a month is selected.                                                                                                              |  
+| onSelect             | `IDateCell`                            | This event will be emitted when a month is selected.                                                                                                              |  
 | onNavHeaderBtnClick  | `null`                              | This event will be emitted when the mode button, in the navigation section, was clicked.                                                                          |  
 | onGoToCurrent        | void                                | This event will be emitted when click was made on go to current button.                                                                                           |  
 | onLeftNav            | void                                | This event will be emitted when click was made on left navigation button.                                                                                         |  

@@ -14,7 +14,6 @@ import {
   SimpleChanges,
   ViewEncapsulation
 } from '@angular/core';
-import {IMonth} from './month.model';
 import {MonthCalendarService} from './month-calendar.service';
 import * as momentNs from 'moment';
 import {Moment} from 'moment';
@@ -28,7 +27,7 @@ import {
   Validator
 } from '@angular/forms';
 import {CalendarValue} from '../common/types/calendar-value';
-import {UtilsService} from '../common/services/utils/utils.service';
+import {IDateCell, UtilsService} from '../common/services/utils/utils.service';
 import {DateValidator} from '../common/types/validator.type';
 import {SingleCalendarValue} from '../common/types/single-calendar-value';
 import {INavEvent} from '../common/models/navigation-event.model';
@@ -86,7 +85,7 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
   @Input() minDate: Moment;
   @Input() maxDate: Moment;
   @HostBinding('class') @Input() theme: string;
-  @Output() onSelect: EventEmitter<IMonth> = new EventEmitter();
+  @Output() onSelect: EventEmitter<IDateCell> = new EventEmitter();
   @Output() onNavHeaderBtnClick: EventEmitter<null> = new EventEmitter();
   @Output() onGoToCurrent: EventEmitter<void> = new EventEmitter();
   @Output() onLeftNav: EventEmitter<INavEvent> = new EventEmitter();
@@ -95,7 +94,7 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
   @Output() onRightSecondaryNav: EventEmitter<INavEvent> = new EventEmitter();
   isInited: boolean = false;
   componentConfig: IMonthCalendarConfigInternal;
-  yearMonths: IMonth[][];
+  yearMonths: IDateCell[][];
   inputValue: CalendarValue;
   inputValueType: ECalendarValue;
   validateFn: DateValidator;
@@ -207,7 +206,7 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
     this.onChangeCallback(this.processOnChangeCallback(this.selected));
   }
 
-  monthClicked(month: IMonth): void {
+  monthClicked(month: IDateCell): void {
     if (month.selected && !this.componentConfig.unSelectOnClick) {
       return;
     }
@@ -268,10 +267,10 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
     this.onNavHeaderBtnClick.emit();
   }
 
-  getMonthBtnCssClass(month: IMonth): {[klass: string]: boolean} {
+  getMonthBtnCssClass(month: IDateCell): {[klass: string]: boolean} {
     const cssClass: {[klass: string]: boolean} = {
       'dp-selected': month.selected,
-      'dp-current-month': month.currentMonth
+      'dp-current-month': month.current
     };
     const customCssClass: string = this.monthCalendarService.getMonthBtnCssClass(this.componentConfig, month.date);
 

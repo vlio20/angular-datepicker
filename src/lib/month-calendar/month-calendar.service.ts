@@ -1,8 +1,7 @@
 import {Injectable} from '@angular/core';
 import * as momentNs from 'moment';
 import {Moment} from 'moment';
-import {UtilsService} from '../common/services/utils/utils.service';
-import {IMonth} from './month.model';
+import {IDateCell, UtilsService} from '../common/services/utils/utils.service';
 import {IMonthCalendarConfig, IMonthCalendarConfigInternal} from './month-calendar-config';
 
 const moment = momentNs;
@@ -39,24 +38,16 @@ export class MonthCalendarService {
     return _config;
   }
 
-  generateYear(config: IMonthCalendarConfig, year: Moment, selected: Moment[] = null): IMonth[][] {
-    const index = year.clone().startOf('year');
-
-    return this.utilsService.createArray(config.numOfMonthRows).map(() => {
-      return this.utilsService.createArray(12 / config.numOfMonthRows).map(() => {
-        const date = index.clone();
-        const month = {
-          date,
-          selected: !!selected.find(s => index.isSame(s, 'month')),
-          currentMonth: index.isSame(moment(), 'month'),
-          disabled: this.isMonthDisabled(date, config),
-          text: this.getMonthBtnText(config, date)
-        };
-
-        index.add(1, 'month');
-
-        return month;
-      });
+  generateYear(config: IMonthCalendarConfig, year: Moment, selected: Moment[] = null): IDateCell[][] {
+    return this.utilsService.generateCalendar<IMonthCalendarConfig>({
+      numOfRows: config.numOfMonthRows,
+      numOfCells: 12,
+      isDisabledCb: this.isMonthDisabled,
+      getBtnTextCb: this.getMonthBtnText,
+      selected,
+      config,
+      startDate: year.clone().startOf('year'),
+      granularity: 'month'
     });
   }
 

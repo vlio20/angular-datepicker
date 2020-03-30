@@ -30,9 +30,8 @@ import {
   Validator
 } from '@angular/forms';
 import {CalendarValue} from '../common/types/calendar-value';
-import {UtilsService} from '../common/services/utils/utils.service';
+import {IDateCell, UtilsService} from '../common/services/utils/utils.service';
 import {IMonthCalendarConfig} from '../month-calendar/month-calendar-config';
-import {IMonth} from '../month-calendar/month.model';
 import {DateValidator} from '../common/types/validator.type';
 import {INavEvent} from '../common/models/navigation-event.model';
 
@@ -89,7 +88,7 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
   @Input() maxDate: Moment;
   @HostBinding('class') @Input() theme: string;
   @Output() onSelect: EventEmitter<IDay> = new EventEmitter();
-  @Output() onMonthSelect: EventEmitter<IMonth> = new EventEmitter();
+  @Output() onMonthSelect: EventEmitter<IDateCell> = new EventEmitter();
   @Output() onNavHeaderBtnClick: EventEmitter<ECalendarMode> = new EventEmitter();
   @Output() onGoToCurrent: EventEmitter<void> = new EventEmitter();
   @Output() onLeftNav: EventEmitter<INavEvent> = new EventEmitter();
@@ -293,7 +292,7 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
     this.cd.markForCheck();
   }
 
-  monthSelected(month: IMonth) {
+  monthSelected(month: IDateCell) {
     this.currentDateView = month.date.clone();
     this.currentCalendarMode = ECalendarMode.Day;
     this.onMonthSelect.emit(month);
