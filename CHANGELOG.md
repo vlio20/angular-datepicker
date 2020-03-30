@@ -1,17 +1,17 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 <a name="9.0.0"></a>
-# [9.0.0] (???)
+# [9.0.0] (2020-03-30)
 
 ### Improvements
-- Update to Angular 9 ([???](https://github.com/vlio20/angular-datepicker/commit/???)) closes [#493](https://github.com/vlio20/angular-datepicker/issues/493)
+- Update to Angular 9 ([6b47ce4](https://github.com/vlio20/angular-datepicker/commit/6b47ce4)) closes [#493](https://github.com/vlio20/angular-datepicker/issues/493)
 
 ### Features
-- Add number of rows to month calendar ([???](https://github.com/vlio20/angular-datepicker/commit/???)) closes [#387](https://github.com/vlio20/angular-datepicker/issues/387)
-- Close popup on enter ([???](https://github.com/vlio20/angular-datepicker/commit/???)) closes [#438](https://github.com/vlio20/angular-datepicker/issues/438)
+- Add number of rows to month calendar ([5702231](https://github.com/vlio20/angular-datepicker/commit/5702231)) closes [#387](https://github.com/vlio20/angular-datepicker/issues/387)
+- Close popup on enter ([da0fe4d](https://github.com/vlio20/angular-datepicker/commit/da0fe4d)) closes [#438](https://github.com/vlio20/angular-datepicker/issues/438)
 
 ### Bug Fixes
-- Add debounce on open delay ([???](https://github.com/vlio20/angular-datepicker/commit/???)) closes [#480](https://github.com/vlio20/angular-datepicker/issues/480)
+- Add debounce on open delay ([cd86edb](https://github.com/vlio20/angular-datepicker/commit/cd86edb)) closes [#480](https://github.com/vlio20/angular-datepicker/issues/480)
 
 <a name="8.0.0"></a>
 # [8.0.0] (2020-01-01)
