@@ -120,9 +120,9 @@ const DAY_TIME_CALENDAR_OPTION_KEYS = [
 })
 export class DemoComponent implements OnInit {
   showDemo: boolean = true;
-  @ViewChild('dateComponent', {static: false}) dateComponent: DatePickerComponent;
-  @ViewChild('donateForm', {static: false}) donateForm: any;
-  @ViewChild('dateDirectivePicker', {static: false}) datePickerDirective: DatePickerDirective;
+  @ViewChild('dateComponent') dateComponent: DatePickerComponent;
+  @ViewChild('donateForm') donateForm: any;
+  @ViewChild('dateDirectivePicker') datePickerDirective: DatePickerDirective;
   demoFormat = 'DD-MM-YYYY';
   readonly DAYS = ['su', 'mo', 'tu', 'we', 'th', 'fr', 'sa'];
   readonly LANGS = [
