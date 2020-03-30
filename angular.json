@@ -16,7 +16,7 @@
             "main": "src/main.ts",
             "tsConfig": "src/tsconfig.app.json",
             "polyfills": "src/polyfills.ts",
-            "aot": false,
+            "aot": true,
             "assets": [
               "src/assets",
               "src/favicon.ico"
@@ -28,12 +28,17 @@
           },
           "configurations": {
             "production": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -120,7 +125,7 @@
   "schematics": {
     "@schematics/angular:component": {
       "prefix": "dp",
-      "styleext": "less"
+      "style": "less"
     },
     "@schematics/angular:directive": {
       "prefix": "dp"

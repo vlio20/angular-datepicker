@@ -6,8 +6,8 @@ import {ViewChild} from '@angular/core';
 import {FormControl, ValidatorFn, Validators} from '@angular/forms';
 
 export abstract class DateComponent {
-  @ViewChild('dateComponent', {static: false}) dateComponent: DatePickerComponent;
-  @ViewChild(DatePickerDirective, {static: false}) dateDirective: DatePickerDirective;
+  @ViewChild('dateComponent') dateComponent: DatePickerComponent;
+  @ViewChild(DatePickerDirective) dateDirective: DatePickerDirective;
 
   control: FormControl;
 
