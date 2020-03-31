@@ -1,7 +1,7 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 <a name="9.0.0"></a>
-# [9.0.0] (2020-03-30)
+# [9.0.0] (2020-03-31)
 
 ### Improvements
 - Update to Angular 9 ([6b47ce4](https://github.com/vlio20/angular-datepicker/commit/6b47ce4)) closes [#493](https://github.com/vlio20/angular-datepicker/issues/493)
