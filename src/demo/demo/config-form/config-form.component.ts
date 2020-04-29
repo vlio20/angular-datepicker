@@ -53,8 +53,8 @@ const MONTH_CALENDAR_OPTION_KEYS = [
   'max',
   'min',
   'monthBtnFormat',
-  'multipleYearsNavigateBy',
-  'showMultipleYearsNavigation',
+  'secondaryNavigationStep',
+  'showSecondaryNavigation',
   'yearFormat',
   'showGoToCurrent',
   'unSelectOnClick',
@@ -218,8 +218,8 @@ export class ConfigFormComponent implements OnInit {
   showSeconds: FormControl;
   showTwentyFourHours: FormControl;
   timeSeparator: FormControl;
-  showMultipleYearsNavigation: FormControl;
-  multipleYearsNavigateBy: FormControl;
+  showSecondaryNavigation: FormControl;
+  secondaryNavigationStep: FormControl;
   returnedValueType: FormControl;
   closeOnEnter: FormControl;
   numOfMonthRows: FormControl;
@@ -265,8 +265,8 @@ export class ConfigFormComponent implements OnInit {
     this.showSeconds = new FormControl(this.config.showSeconds);
     this.showTwentyFourHours = new FormControl(this.config.showTwentyFourHours);
     this.timeSeparator = new FormControl(this.config.timeSeparator);
-    this.showMultipleYearsNavigation = new FormControl(this.config.showMultipleYearsNavigation);
-    this.multipleYearsNavigateBy = new FormControl(this.config.multipleYearsNavigateBy);
+    this.showSecondaryNavigation = new FormControl(this.config.showSecondaryNavigation);
+    this.secondaryNavigationStep = new FormControl(this.config.secondaryNavigationStep);
     this.returnedValueType = new FormControl(this.config.returnedValueType);
     this.closeOnEnter = new FormControl(this.config.closeOnEnter);
     this.numOfMonthRows = new FormControl(this.config.numOfMonthRows);
@@ -598,15 +598,15 @@ export class ConfigFormComponent implements OnInit {
       });
     });
 
-    this.showMultipleYearsNavigation.valueChanges.subscribe((val) => {
+    this.showSecondaryNavigation.valueChanges.subscribe((val) => {
       this.onConfigChange.emit({
-        showMultipleYearsNavigation: val
+        showSecondaryNavigation: val
       });
     });
 
-    this.multipleYearsNavigateBy.valueChanges.subscribe((val) => {
+    this.secondaryNavigationStep.valueChanges.subscribe((val) => {
       this.onConfigChange.emit({
-        multipleYearsNavigateBy: val
+        secondaryNavigationStep: val
       });
     });
 

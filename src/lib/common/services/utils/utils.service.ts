@@ -8,6 +8,7 @@ import {IDate} from '../../models/date.model';
 import {CalendarMode} from '../../types/calendar-mode';
 import {DateValidator} from '../../types/validator.type';
 import {ICalendarInternal} from '../../models/calendar.model';
+import { IDayCalendarConfigInternal } from '../../../day-calendar/day-calendar-config.model';
 
 const moment = momentNs;
 
@@ -321,6 +322,21 @@ export class UtilsService {
         obj[prop] = this.convertToMoment(obj[prop], format);
       }
     });
+  }
+
+  handleDeprecatedParameters(config: {[key: string]: any}) {
+    if (config.showMultipleYearsNavigation !== null && config.showMultipleYearsNavigation !== undefined) {
+      console.warn('ng2-date-picker: Warning, showMultipleYearsNavigation parameter is deprecated'
+                 + ' and will be removed in a further release. Please use showSecondaryNavigation parameter instead');
+      config.showSecondaryNavigation = config.showMultipleYearsNavigation;
+      delete config.showMultipleYearsNavigation;
+    }
+    if (config.multipleYearsNavigateBy !== null && config.multipleYearsNavigateBy !== undefined) {
+      console.warn('ng2-date-picker: Warning, multipleYearsNavigateBy parameter is deprecated'
+                 + ' and will be removed in a further release. Please use secondaryNavigationStep parameter instead');
+      config.secondaryNavigationStep = config.multipleYearsNavigateBy;
+      delete config.multipleYearsNavigateBy;
+    }
   }
 
   shouldResetCurrentView<T extends ICalendarInternal>(prevConf: T, currentConf: T): boolean {

@@ -13,7 +13,8 @@ export class DayTimeDemoComponent extends DateComponent implements OnInit {
   control: FormControl;
   config: IDatePickerConfig = {
     ...DEF_CONF,
-    format: 'DD-MM-YYYY HH:mm:ss'
+    format: 'DD-MM-YYYY HH:mm:ss',
+    secondaryNavigationStep: 12
   };
 
   ngOnInit(): void {

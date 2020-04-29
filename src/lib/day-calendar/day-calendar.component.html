@@ -3,12 +3,16 @@
       (onGoToCurrent)="goToCurrent()"
       (onLabelClick)="toggleCalendarMode(CalendarMode.Month)"
       (onLeftNav)="onLeftNavClick()"
+      (onLeftSecondaryNav)="onLeftSecondaryNavClick()"
       (onRightNav)="onRightNavClick()"
+      (onRightSecondaryNav)="onRightSecondaryNavClick()"
       [isLabelClickable]="componentConfig.enableMonthSelector"
       [label]="navLabel"
       [showGoToCurrent]="_shouldShowCurrent"
       [showLeftNav]="showLeftNav"
+      [showLeftSecondaryNav]="showSecondaryLeftNav"
       [showRightNav]="showRightNav"
+      [showRightSecondaryNav]="showSecondaryRightNav"
       [theme]="theme">
   </dp-calendar-nav>
 

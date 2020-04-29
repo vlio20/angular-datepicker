@@ -13,7 +13,8 @@ export class MonthInlineDemoComponent extends DateComponent implements OnInit {
   control: FormControl;
   config: IDatePickerConfig = {
     ...DEF_CONF,
-    format: 'MMM, YYYY'
+    format: 'MMM, YYYY',
+    secondaryNavigationStep: 10
   };
 
   ngOnInit(): void {

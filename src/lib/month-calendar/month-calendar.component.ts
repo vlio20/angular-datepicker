@@ -77,8 +77,8 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
     this.navLabel = this.monthCalendarService.getHeaderLabel(this.componentConfig, this.currentDateView);
     this.showLeftNav = this.monthCalendarService.shouldShowLeft(this.componentConfig.min, this._currentDateView);
     this.showRightNav = this.monthCalendarService.shouldShowRight(this.componentConfig.max, this.currentDateView);
-    this.showSecondaryLeftNav = this.componentConfig.showMultipleYearsNavigation && this.showLeftNav;
-    this.showSecondaryRightNav = this.componentConfig.showMultipleYearsNavigation && this.showRightNav;
+    this.showSecondaryLeftNav = this.componentConfig.showSecondaryNavigation && this.showLeftNav;
+    this.showSecondaryRightNav = this.componentConfig.showSecondaryNavigation && this.showRightNav;
   }
 
   @Input() config: IMonthCalendarConfig;
@@ -228,7 +228,7 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
   }
 
   onLeftSecondaryNavClick(): void {
-    let navigateBy = this.componentConfig.multipleYearsNavigateBy;
+    let navigateBy = this.componentConfig.secondaryNavigationStep;
     const isOutsideRange = this.componentConfig.min &&
       this.currentDateView.year() - this.componentConfig.min.year() < navigateBy;
 
@@ -250,7 +250,7 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
   }
 
   onRightSecondaryNavClick(): void {
-    let navigateBy = this.componentConfig.multipleYearsNavigateBy;
+    let navigateBy = this.componentConfig.secondaryNavigationStep;
     const isOutsideRange = this.componentConfig.max &&
       this.componentConfig.max.year() - this.currentDateView.year() < navigateBy;
 

@@ -753,35 +753,35 @@
       </div>
     </div>
 
-    <div *ngIf="isValidConfig('showMultipleYearsNavigation')" class="dp-option">
+    <div *ngIf="isValidConfig('showSecondaryNavigation')" class="dp-option">
         <span class="dp-option-header">
-          Show multiple years navigation buttons (showMultipleYearsNavigation):
+          Show multiple steps navigation buttons (showSecondaryNavigation):
         </span>
       <div class="dp-option-playground">
         <label>Enabled
-          <input id="showMultipleYearsNavigation"
-                 [formControl]="showMultipleYearsNavigation"
+          <input id="showSecondaryNavigation"
+                 [formControl]="showSecondaryNavigation"
                  [value]="true"
-                 name="showMultipleYearsNavigation"
+                 name="showSecondaryNavigation"
                  type="radio">
         </label>
         <label>Disabled
-          <input id="hideMultipleYearsNavigation"
-                 [formControl]="showMultipleYearsNavigation"
+          <input id="hideSecondaryNavigation"
+                 [formControl]="showSecondaryNavigation"
                  [value]="false"
-                 name="showMultipleYearsNavigation"
+                 name="showSecondaryNavigation"
                  type="radio">
         </label>
       </div>
     </div>
 
-    <div *ngIf="isValidConfig('showMultipleYearsNavigation')" class="dp-option">
+    <div *ngIf="isValidConfig('showSecondaryNavigation')" class="dp-option">
         <span class="dp-option-header">
-          Multiple years navigate by (multipleYearsNavigateBy):
+          Step to navigate using the secondary navigation button (secondaryNavigationStep):
         </span>
       <div class="dp-option-playground">
-        <input id="multipleYearsNavigateBy"
-               [formControl]="multipleYearsNavigateBy">
+        <input id="secondaryNavigationStep"
+               [formControl]="secondaryNavigationStep">
       </div>
     </div>
 

@@ -138,4 +138,42 @@ describe('Component: DayCalendarComponent', () => {
     component.goToCurrent();
     expect(component.onGoToCurrent.emit).toHaveBeenCalled();
   });
+
+  it('should not display secondary navigation button when not asked to', () => {
+    const currentDate = moment();
+    component.currentDateView = currentDate; // updates showLeftNav && showLeftSecondaryNav
+    expect(component.showSecondaryLeftNav).toBeFalsy();
+  })
+
+  it('should display secondary navigation button when true in config', () => {
+    const currentDate = moment();
+    component.componentConfig.showSecondaryNavigation = true;
+
+    component.currentDateView = currentDate; // updates showLeftNav && showLeftSecondaryNav
+    expect(component.showSecondaryLeftNav).toBeTruthy();
+  })
+
+  it('should not display secondary navigation button when primary button is not displayed', () => {
+    const currentDate = moment();
+    component.componentConfig.min = currentDate.clone();
+    component.componentConfig.showSecondaryNavigation = true;
+
+    component.currentDateView = currentDate; // updates showLeftNav && showLeftSecondaryNav
+
+    expect(component.showSecondaryLeftNav).toBeFalsy();
+  })
+
+  it('should navigate to min date if secondaryStep is too big', () => {
+    const currentDate = moment();
+    const minDate = currentDate.clone().subtract('4', 'month');
+    component.componentConfig.min = minDate;
+    component.componentConfig.showSecondaryNavigation = true;
+    component.componentConfig.secondaryNavigationStep = 10;
+
+    component.currentDateView = currentDate; // updates showLeftNav && showLeftSecondaryNav
+
+    component.onLeftSecondaryNavClick();
+
+    expect(component.currentDateView.format('YYYY-MM-DD')).toEqual(minDate.format('YYYY-MM-DD'));
+  })
 });
