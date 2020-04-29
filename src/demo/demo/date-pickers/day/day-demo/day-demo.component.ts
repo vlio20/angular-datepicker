@@ -18,7 +18,6 @@ export class DayDemoComponent extends DateComponent implements OnInit {
   };
 
   ngOnInit(): void {
-    console.log('Hello');
     this.control = this.buildForm();
   }
 }
