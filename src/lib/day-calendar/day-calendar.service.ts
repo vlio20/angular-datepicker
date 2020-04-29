@@ -33,7 +33,7 @@ export class DayCalendarService {
   getConfig(config: IDayCalendarConfig): IDayCalendarConfigInternal {
     const _config = <IDayCalendarConfigInternal>{
       ...this.DEFAULT_CONFIG,
-      ...this.utilsService.clearUndefined(config),
+      ...this.utilsService.clearUndefined(config)
     };
 
     this.utilsService.convertPropsToMoment(_config, _config.format, ['min', 'max']);
