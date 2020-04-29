@@ -1,5 +1,4 @@
 import {DemoPage} from './app.po';
-import {browser} from 'protractor';
 
 describe('format validation', () => {
   let page: DemoPage;
@@ -14,7 +13,6 @@ describe('format validation', () => {
       await menu.click();
       await input.sendKeys('lmaldlad');
       await page.clickOnBody();
-      await browser.sleep(200);
       expect(await page.formatValidationMsg.getText()).toBe('invalid format');
       await input.clear();
     };
