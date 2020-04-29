@@ -31,6 +31,7 @@ export class DayTimeCalendarService {
       ...this.dayCalendarService.getConfig(config)
     };
 
+    this.utilsService.handleDeprecatedParameters(_config);
     moment.locale(config.locale);
 
     return _config;

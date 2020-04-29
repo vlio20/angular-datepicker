@@ -42,7 +42,9 @@ export class DemoPage {
   dayCalendarNavHeaderBtnInline = $(`dp-day-calendar#picker .dp-nav-header-btn`);
   monthCalendarNavHeaderInline = $(`dp-month-calendar#picker .dp-nav-header`);
   navHeader = $(`${this.popupSelector} .dp-nav-header`);
+  dayCalendarNavMonthHeaderSpan = $(`${this.popupSelector} dp-month-calendar .dp-nav-header span`);
   dayCalendarNavMonthHeaderBtn = $(`${this.popupSelector} dp-month-calendar .dp-nav-header-btn`);
+  dayCalendarNavDayHeaderBtn = $(`${this.popupSelector} dp-day-calendar .dp-nav-header-btn`);
   calendarDisabledDays = $$(`${this.popupSelector} .dp-calendar-day[disabled]`);
   calendarFirstDayOfMonth = $$(`${this.popupSelector} .dp-current-month`).get(0);
   calendarFirstMonthOfYear = $$(`${this.popupSelector} dp-month-calendar .dp-calendar-month`).get(0);

@@ -16,8 +16,8 @@ export class MonthCalendarService {
     isNavHeaderBtnClickable: false,
     monthBtnFormat: 'MMM',
     locale: moment.locale(),
-    multipleYearsNavigateBy: 10,
-    showMultipleYearsNavigation: false,
+    showSecondaryNavigation: false,
+    secondaryNavigationStep: 10,
     unSelectOnClick: true,
     numOfMonthRows: 3
   };
@@ -34,6 +34,7 @@ export class MonthCalendarService {
     this.validateConfig(_config);
 
     this.utilsService.convertPropsToMoment(_config, _config.format, ['min', 'max']);
+    this.utilsService.handleDeprecatedParameters(_config);
     moment.locale(_config.locale);
 
     return _config;

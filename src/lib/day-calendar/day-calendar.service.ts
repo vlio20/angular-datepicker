@@ -22,7 +22,8 @@ export class DayCalendarService {
     enableMonthSelector: true,
     locale: moment.locale(),
     dayBtnFormat: 'DD',
-    unSelectOnClick: true
+    unSelectOnClick: true,
+    secondaryNavigationStep: 12
   };
   private readonly DAYS = ['su', 'mo', 'tu', 'we', 'th', 'fr', 'sa'];
 
@@ -32,10 +33,11 @@ export class DayCalendarService {
   getConfig(config: IDayCalendarConfig): IDayCalendarConfigInternal {
     const _config = <IDayCalendarConfigInternal>{
       ...this.DEFAULT_CONFIG,
-      ...this.utilsService.clearUndefined(config)
+      ...this.utilsService.clearUndefined(config),
     };
 
     this.utilsService.convertPropsToMoment(_config, _config.format, ['min', 'max']);
+    this.utilsService.handleDeprecatedParameters(_config);
 
     moment.locale(_config.locale);
 
@@ -175,8 +177,7 @@ export class DayCalendarService {
       monthBtnFormat: componentConfig.monthBtnFormat,
       monthBtnFormatter: componentConfig.monthBtnFormatter,
       monthBtnCssClassCallback: componentConfig.monthBtnCssClassCallback,
-      multipleYearsNavigateBy: componentConfig.multipleYearsNavigateBy,
-      showMultipleYearsNavigation: componentConfig.showMultipleYearsNavigation,
+      showSecondaryNavigation: false,
       showGoToCurrent: componentConfig.showGoToCurrent,
       numOfMonthRows: componentConfig.numOfMonthRows
     });

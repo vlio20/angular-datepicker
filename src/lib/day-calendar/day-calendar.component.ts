@@ -80,6 +80,8 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
     this.navLabel = this.dayCalendarService.getHeaderLabel(this.componentConfig, this._currentDateView);
     this.showLeftNav = this.dayCalendarService.shouldShowLeft(this.componentConfig.min, this.currentDateView);
     this.showRightNav = this.dayCalendarService.shouldShowRight(this.componentConfig.max, this.currentDateView);
+    this.showSecondaryLeftNav = this.componentConfig.showSecondaryNavigation && this.showLeftNav;
+    this.showSecondaryRightNav = this.componentConfig.showSecondaryNavigation && this.showRightNav;
   }
   ;
 
@@ -94,6 +96,8 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
   @Output() onGoToCurrent: EventEmitter<void> = new EventEmitter();
   @Output() onLeftNav: EventEmitter<INavEvent> = new EventEmitter();
   @Output() onRightNav: EventEmitter<INavEvent> = new EventEmitter();
+  @Output() onLeftSecondaryNav: EventEmitter<INavEvent> = new EventEmitter();
+  @Output() onRightSecondaryNav: EventEmitter<INavEvent> = new EventEmitter();
   CalendarMode = ECalendarMode;
   isInited: boolean = false;
   componentConfig: IDayCalendarConfigInternal;
@@ -108,6 +112,8 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
   navLabel: string;
   showLeftNav: boolean;
   showRightNav: boolean;
+  showSecondaryLeftNav: boolean;
+  showSecondaryRightNav: boolean;
   api = {
     moveCalendarsBy: this.moveCalendarsBy.bind(this),
     moveCalendarTo: this.moveCalendarTo.bind(this),
@@ -253,11 +259,55 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
     this.onLeftNav.emit({from, to});
   }
 
+  onLeftSecondaryNavClick(): void {
+    let navigateBy = this.componentConfig.secondaryNavigationStep;
+
+    let targetDate = this.currentDateView.clone().subtract(navigateBy, 'month');
+    if (this.componentConfig.min) {
+      const yearsDiff = targetDate.year() - this.componentConfig.min.year();
+      const monthsDiff = targetDate.month() - this.componentConfig.min.month();
+      const isOutsideRange =  (yearsDiff * 12) + monthsDiff < 0;
+
+      if (isOutsideRange) {
+        navigateBy = (this.currentDateView.year() - this.componentConfig.min.year()) * 12
+                   + (this.currentDateView.month() - this.componentConfig.min.month());
+        targetDate = this.currentDateView.clone().subtract(navigateBy, 'month');
+      }
+    }
+
+    const from = this.currentDateView.clone();
+    this.currentDateView = targetDate;
+    const to = this.currentDateView.clone();
+    this.onLeftSecondaryNav.emit({from, to});
+  }
+
   onRightNavClick() {
     const from = this.currentDateView.clone();
     this.moveCalendarsBy(this.currentDateView, 1, 'month');
     const to = this.currentDateView.clone();
     this.onRightNav.emit({from, to});
+  }
+
+  onRightSecondaryNavClick(): void {
+    let navigateBy = this.componentConfig.secondaryNavigationStep;
+    let targetDate = this.currentDateView.clone().add(navigateBy, 'month');
+
+    if (this.componentConfig.max) {
+      const yearsDiff = targetDate.year() - this.componentConfig.max.year();
+      const monthsDiff = targetDate.month() - this.componentConfig.max.month();
+      const isOutsideRange =  (yearsDiff * 12) + monthsDiff > 0;
+
+      if (isOutsideRange) {
+        navigateBy = (this.componentConfig.max.year() - this.currentDateView.year()) * 12
+                   + (this.componentConfig.max.month() - this.currentDateView.month());
+        targetDate = this.currentDateView.clone().add(navigateBy, 'month');
+      }
+    }
+
+    const from = this.currentDateView.clone();
+    this.currentDateView = targetDate;
+    const to = this.currentDateView.clone();
+    this.onRightSecondaryNav.emit({from, to});
   }
 
   onMonthCalendarLeftClick(change: INavEvent) {

@@ -1,4 +1,5 @@
 import {DemoPage} from './app.po';
+import * as moment from 'moment';
 
 describe('dpDayPicker dayPicker', () => {
   let page: DemoPage;
@@ -54,5 +55,34 @@ describe('dpDayPicker dayPicker', () => {
     expect(await page.minuteUpBtn.getAttribute('disabled')).toBe(null);
     expect(await page.meridiemUpBtn.getAttribute('disabled')).toBe('true');
     expect(await page.meridiemDownBtn.getAttribute('disabled')).toBe('true');
+  });
+
+  it('should check showSecondaryNavigation is working', async () => {
+    const currentTime = moment(); // store current time, to avoid having multiple different "current time"
+    await page.dayPickerMenu.click(); // choose day view
+    await page.dayPickerInput.click(); // open calendar
+    // showSecondaryNavigation is off
+    expect(await page.dayCalendarLeftSecondaryNavBtn.isPresent()).toBe(false);
+    expect(await page.dayCalendarRightSecondaryNavBtn.isPresent()).toBe(false);
+    await page.dayCalendarNavHeaderBtn.click(); // shows month view of the calendar
+    expect(await page.dayCalendarLeftSecondaryNavBtn.isPresent()).toBe(false);
+    expect(await page.dayCalendarRightSecondaryNavBtn.isPresent()).toBe(false);
+    await page.dayCalendarNavHeaderBtn.click(); // hide month view of the calendar
+
+    await page.showSecondaryNavigation.click(); // enables showSecondaryNavigation
+    await page.secondaryNavigationStep.clear();
+    await page.secondaryNavigationStep.sendKeys('20'); // set step
+    await page.dayPickerInput.click(); // open calendar
+    await page.dayCalendarLeftSecondaryNavBtn.click(); // click left secondary navigation button (-20 months)
+    expect(await page.dayCalendarNavDayHeaderBtn.getText()).toEqual(currentTime.clone().subtract(20, 'month').format('MMM, YYYY'));
+
+    await page.dayCalendarRightSecondaryNavBtn.click();
+    await page.dayCalendarRightSecondaryNavBtn.click();
+    expect(await page.dayCalendarNavDayHeaderBtn.getText()).toEqual(currentTime.clone().add(20, 'month').format('MMM, YYYY'));
+
+    await page.dayCalendarNavHeaderBtn.click(); // shows month view of the calendar
+    // no button on month view, even if showSecondaryNavigation is enabled
+    expect(await page.dayCalendarLeftSecondaryNavBtn.isPresent()).toBe(false);
+    expect(await page.dayCalendarRightSecondaryNavBtn.isPresent()).toBe(false);
   });
 });

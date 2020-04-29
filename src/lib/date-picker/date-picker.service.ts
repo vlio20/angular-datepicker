@@ -45,6 +45,7 @@ export class DatePickerService {
     };
 
     this.utilsService.convertPropsToMoment(_config, _config.format, ['min', 'max']);
+    this.utilsService.handleDeprecatedParameters(_config);
 
     if (config && config.allowMultiSelect && config.closeOnSelect === undefined) {
       _config.closeOnSelect = false;
@@ -78,8 +79,8 @@ export class DatePickerService {
       monthBtnFormat: pickerConfig.monthBtnFormat,
       monthBtnFormatter: pickerConfig.monthBtnFormatter,
       monthBtnCssClassCallback: pickerConfig.monthBtnCssClassCallback,
-      multipleYearsNavigateBy: pickerConfig.multipleYearsNavigateBy,
-      showMultipleYearsNavigation: pickerConfig.showMultipleYearsNavigation,
+      secondaryNavigationStep: pickerConfig.secondaryNavigationStep,
+      showSecondaryNavigation: pickerConfig.showSecondaryNavigation,
       locale: pickerConfig.locale,
       returnedValueType: pickerConfig.returnedValueType,
       showGoToCurrent: pickerConfig.showGoToCurrent,
