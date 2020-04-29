@@ -38,9 +38,9 @@ export class DemoPage {
   weekNumbers = $$(`${this.popupSelector} .dp-week-number`);
   dayCalendarNavHeaderBtn = $(`${this.popupSelector} .dp-nav-header-btn`);
   deyCalendarMonthNavHeader = $(`${this.popupSelector} dp-month-calendar .dp-nav-header`);
-  dayTimeCalendarNavHeaderBtnInline = $(`dp-day-time-calendar .dp-nav-header-btn`);
-  dayCalendarNavHeaderBtnInline = $(`dp-day-calendar .dp-nav-header-btn`);
-  monthCalendarNavHeaderInline = $(`dp-month-calendar .dp-nav-header`);
+  dayTimeCalendarNavHeaderBtnInline = $(`dp-day-time-calendar#picker .dp-nav-header-btn`);
+  dayCalendarNavHeaderBtnInline = $(`dp-day-calendar#picker .dp-nav-header-btn`);
+  monthCalendarNavHeaderInline = $(`dp-month-calendar#picker .dp-nav-header`);
   navHeader = $(`${this.popupSelector} .dp-nav-header`);
   dayCalendarNavMonthHeaderBtn = $(`${this.popupSelector} dp-month-calendar .dp-nav-header-btn`);
   calendarDisabledDays = $$(`${this.popupSelector} .dp-calendar-day[disabled]`);
@@ -93,8 +93,8 @@ export class DemoPage {
   showSeconds = $('#showSeconds');
   showTwentyFourHours = $('#showTwentyFourHours');
   timeSeparatorInput = $('#timeSeparator');
-  showMultipleYearsNavigation = $('#showMultipleYearsNavigation');
-  multipleYearsNavigateBy = $('#multipleYearsNavigateBy');
+  showSecondaryNavigation = $('#showSecondaryNavigation');
+  secondaryNavigationStep = $('#secondaryNavigationStep');
   hideInputRadio = $('#hideInputRadio');
 
   showOnOutsideClick = $('#showOnOutsideClick');
@@ -147,11 +147,11 @@ export class DemoPage {
   }
 
   clickOnDayButton(text: string) {
-    return element(by.cssContainingText(`${this.popupSelector} .dp-calendar-day`, text)).click();
+    return element(by.cssContainingText(`${this.popupSelector} .dp-calendar-day.dp-current-month`, text)).click();
   }
 
   clickOnDayButtonInline(text: string) {
-    return element(by.cssContainingText(`.dp-calendar-day`, text)).click();
+    return element(by.cssContainingText(`#picker .dp-calendar-day.dp-current-month`, text)).click();
   }
 
   clickOnMonthButton(text: string) {
@@ -159,7 +159,7 @@ export class DemoPage {
   }
 
   clickOnMonthButtonInline(text: string) {
-    return element(by.cssContainingText(`.dp-calendar-month`, text)).click();
+    return element(by.cssContainingText(`#picker .dp-calendar-month`, text)).click();
   }
 
   waitUntilPresent(elem: ElementFinder) {
