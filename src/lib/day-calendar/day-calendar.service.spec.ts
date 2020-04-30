@@ -176,4 +176,21 @@ describe('Service: Calendar', () => {
         expect(service.getDayBtnCssClass({dayBtnCssClassCallback: (m => 'class1 class2')}, date))
           .toEqual('class1 class2');
       }));
+
+  it('should navigate to min date if secondaryStep is too big',
+    inject([DayCalendarService],
+      (service: DayCalendarService) => {
+        const currentDate = moment();
+        const minDate = currentDate.clone().subtract('4', 'month');
+
+        const config: IDayCalendarConfigInternal = {
+          min: minDate,
+          showSecondaryNavigationDayView: true,
+          secondaryNavigationStepDayView: 10
+        };
+
+        const targetDate = service.computeDateAfterLeftSecondaryNav(config, currentDate);
+
+        expect(targetDate.format('YYYY-MM-DD')).toEqual(minDate.format('YYYY-MM-DD'));
+    }));
 });

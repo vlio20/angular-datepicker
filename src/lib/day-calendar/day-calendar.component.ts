@@ -258,20 +258,7 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
   }
 
   onLeftSecondaryNavClick(): void {
-    let navigateBy = this.componentConfig.secondaryNavigationStepDayView;
-
-    let targetDate = this.currentDateView.clone().subtract(navigateBy, 'month');
-    if (this.componentConfig.min) {
-      const yearsDiff = targetDate.year() - this.componentConfig.min.year();
-      const monthsDiff = targetDate.month() - this.componentConfig.min.month();
-      const isOutsideRange =  (yearsDiff * 12) + monthsDiff < 0;
-
-      if (isOutsideRange) {
-        navigateBy = (this.currentDateView.year() - this.componentConfig.min.year()) * 12
-                   + (this.currentDateView.month() - this.componentConfig.min.month());
-        targetDate = this.currentDateView.clone().subtract(navigateBy, 'month');
-      }
-    }
+    const targetDate = this.dayCalendarService.computeDateAfterLeftSecondaryNav(this.componentConfig, this.currentDateView);
 
     const from = this.currentDateView.clone();
     this.currentDateView = targetDate;
@@ -287,20 +274,7 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
   }
 
   onRightSecondaryNavClick(): void {
-    let navigateBy = this.componentConfig.secondaryNavigationStepDayView;
-    let targetDate = this.currentDateView.clone().add(navigateBy, 'month');
-
-    if (this.componentConfig.max) {
-      const yearsDiff = targetDate.year() - this.componentConfig.max.year();
-      const monthsDiff = targetDate.month() - this.componentConfig.max.month();
-      const isOutsideRange =  (yearsDiff * 12) + monthsDiff > 0;
-
-      if (isOutsideRange) {
-        navigateBy = (this.componentConfig.max.year() - this.currentDateView.year()) * 12
-                   + (this.componentConfig.max.month() - this.currentDateView.month());
-        targetDate = this.currentDateView.clone().add(navigateBy, 'month');
-      }
-    }
+    const targetDate = this.dayCalendarService.computeDateAfterRightSecondaryNav(this.componentConfig, this.currentDateView);
 
     const from = this.currentDateView.clone();
     this.currentDateView = targetDate;
