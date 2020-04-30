@@ -14,7 +14,7 @@ export class MonthDemoComponent extends DateComponent implements OnInit {
   config: IDatePickerConfig = {
     ...DEF_CONF,
     format: 'MMM, YYYY',
-    secondaryNavigationStep: 10
+    secondaryNavigationStepMonthView: 10
   };
 
   ngOnInit(): void {

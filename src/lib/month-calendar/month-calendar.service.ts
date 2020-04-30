@@ -16,8 +16,8 @@ export class MonthCalendarService {
     isNavHeaderBtnClickable: false,
     monthBtnFormat: 'MMM',
     locale: moment.locale(),
-    showSecondaryNavigation: false,
-    secondaryNavigationStep: 10,
+    showSecondaryNavigationMonthView: false,
+    secondaryNavigationStepMonthView: 10,
     unSelectOnClick: true,
     numOfMonthRows: 3
   };

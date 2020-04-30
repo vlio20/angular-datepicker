@@ -77,8 +77,8 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
     this.navLabel = this.monthCalendarService.getHeaderLabel(this.componentConfig, this.currentDateView);
     this.showLeftNav = this.monthCalendarService.shouldShowLeft(this.componentConfig.min, this._currentDateView);
     this.showRightNav = this.monthCalendarService.shouldShowRight(this.componentConfig.max, this.currentDateView);
-    this.showSecondaryLeftNav = this.componentConfig.showSecondaryNavigation && this.showLeftNav;
-    this.showSecondaryRightNav = this.componentConfig.showSecondaryNavigation && this.showRightNav;
+    this.showSecondaryLeftNav = this.componentConfig.showSecondaryNavigationMonthView && this.showLeftNav;
+    this.showSecondaryRightNav = this.componentConfig.showSecondaryNavigationMonthView && this.showRightNav;
   }
 
   @Input() config: IMonthCalendarConfig;
@@ -91,8 +91,6 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
   @Output() onGoToCurrent: EventEmitter<void> = new EventEmitter();
   @Output() onLeftNav: EventEmitter<INavEvent> = new EventEmitter();
   @Output() onRightNav: EventEmitter<INavEvent> = new EventEmitter();
-  @Output() onLeftSecondaryNav: EventEmitter<INavEvent> = new EventEmitter();
-  @Output() onRightSecondaryNav: EventEmitter<INavEvent> = new EventEmitter();
   isInited: boolean = false;
   componentConfig: IMonthCalendarConfigInternal;
   yearMonths: IMonth[][];
@@ -228,7 +226,7 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
   }
 
   onLeftSecondaryNavClick(): void {
-    let navigateBy = this.componentConfig.secondaryNavigationStep;
+    let navigateBy = this.componentConfig.secondaryNavigationStepMonthView;
     const isOutsideRange = this.componentConfig.min &&
       this.currentDateView.year() - this.componentConfig.min.year() < navigateBy;
 
@@ -239,7 +237,7 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
     const from = this.currentDateView.clone();
     this.currentDateView = this.currentDateView.clone().subtract(navigateBy, 'year');
     const to = this.currentDateView.clone();
-    this.onLeftSecondaryNav.emit({from, to});
+    this.onLeftNav.emit({from, to});
   }
 
   onRightNavClick(): void {
@@ -250,7 +248,7 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
   }
 
   onRightSecondaryNavClick(): void {
-    let navigateBy = this.componentConfig.secondaryNavigationStep;
+    let navigateBy = this.componentConfig.secondaryNavigationStepMonthView;
     const isOutsideRange = this.componentConfig.max &&
       this.componentConfig.max.year() - this.currentDateView.year() < navigateBy;
 
@@ -261,7 +259,7 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
     const from = this.currentDateView.clone();
     this.currentDateView = this.currentDateView.clone().add(navigateBy, 'year');
     const to = this.currentDateView.clone();
-    this.onRightSecondaryNav.emit({from, to});
+    this.onRightNav.emit({from, to});
   }
 
   toggleCalendarMode(): void {

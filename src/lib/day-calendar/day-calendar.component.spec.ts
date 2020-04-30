@@ -147,7 +147,7 @@ describe('Component: DayCalendarComponent', () => {
 
   it('should display secondary navigation button when true in config', () => {
     const currentDate = moment();
-    component.componentConfig.showSecondaryNavigation = true;
+    component.componentConfig.showSecondaryNavigationDayView = true;
 
     component.currentDateView = currentDate; // updates showLeftNav && showLeftSecondaryNav
     expect(component.showSecondaryLeftNav).toBeTruthy();
@@ -156,7 +156,7 @@ describe('Component: DayCalendarComponent', () => {
   it('should not display secondary navigation button when primary button is not displayed', () => {
     const currentDate = moment();
     component.componentConfig.min = currentDate.clone();
-    component.componentConfig.showSecondaryNavigation = true;
+    component.componentConfig.showSecondaryNavigationDayView = true;
 
     component.currentDateView = currentDate; // updates showLeftNav && showLeftSecondaryNav
 
@@ -167,8 +167,8 @@ describe('Component: DayCalendarComponent', () => {
     const currentDate = moment();
     const minDate = currentDate.clone().subtract('4', 'month');
     component.componentConfig.min = minDate;
-    component.componentConfig.showSecondaryNavigation = true;
-    component.componentConfig.secondaryNavigationStep = 10;
+    component.componentConfig.showSecondaryNavigationDayView = true;
+    component.componentConfig.secondaryNavigationStepDayView = 10;
 
     component.currentDateView = currentDate; // updates showLeftNav && showLeftSecondaryNav
 

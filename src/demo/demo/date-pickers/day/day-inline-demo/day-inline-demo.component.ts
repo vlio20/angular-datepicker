@@ -14,7 +14,8 @@ export class DayInlineDemoComponent extends DateComponent implements OnInit {
   config: IDatePickerConfig = {
     ...DEF_CONF,
     format: 'DD-MM-YYYY',
-    secondaryNavigationStep: 12
+    secondaryNavigationStepDayView: 12,
+    secondaryNavigationStepMonthView: 10
   };
 
   ngOnInit(): void {

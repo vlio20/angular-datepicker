@@ -95,8 +95,11 @@ export class DemoPage {
   showSeconds = $('#showSeconds');
   showTwentyFourHours = $('#showTwentyFourHours');
   timeSeparatorInput = $('#timeSeparator');
-  showSecondaryNavigation = $('#showSecondaryNavigation');
-  secondaryNavigationStep = $('#secondaryNavigationStep');
+  showSecondaryNavigationMonthView = $('#showSecondaryNavigationMonthView');
+  secondaryNavigationStepMonthView = $('#secondaryNavigationStepMonthView');
+  showSecondaryNavigationDayView = $('#showSecondaryNavigationDayView');
+  hideSecondaryNavigationDayView = $('#hideSecondaryNavigationDayView');
+  secondaryNavigationStepDayView = $('#secondaryNavigationStepDayView');
   hideInputRadio = $('#hideInputRadio');
 
   showOnOutsideClick = $('#showOnOutsideClick');

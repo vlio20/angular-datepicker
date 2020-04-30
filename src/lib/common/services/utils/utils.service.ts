@@ -327,14 +327,14 @@ export class UtilsService {
   handleDeprecatedParameters(config: {[key: string]: any}) {
     if (config.showMultipleYearsNavigation !== null && config.showMultipleYearsNavigation !== undefined) {
       console.warn('ng2-date-picker: Warning, showMultipleYearsNavigation parameter is deprecated'
-                 + ' and will be removed in a further release. Please use showSecondaryNavigation parameter instead');
-      config.showSecondaryNavigation = config.showMultipleYearsNavigation;
+                 + ' and will be removed in a further release. Please use showSecondaryNavigationMonthView parameter instead');
+      config.showSecondaryNavigationMonthView = config.showMultipleYearsNavigation;
       delete config.showMultipleYearsNavigation;
     }
     if (config.multipleYearsNavigateBy !== null && config.multipleYearsNavigateBy !== undefined) {
       console.warn('ng2-date-picker: Warning, multipleYearsNavigateBy parameter is deprecated'
-                 + ' and will be removed in a further release. Please use secondaryNavigationStep parameter instead');
-      config.secondaryNavigationStep = config.multipleYearsNavigateBy;
+                 + ' and will be removed in a further release. Please use secondaryNavigationStepMonthView parameter instead');
+      config.secondaryNavigationStepMonthView = config.multipleYearsNavigateBy;
       delete config.multipleYearsNavigateBy;
     }
   }

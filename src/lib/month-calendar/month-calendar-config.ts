@@ -13,8 +13,10 @@ export interface IConfig {
   monthBtnFormatter?: (day: Moment) => string;
   numOfMonthRows?: number;
   monthBtnCssClassCallback?: (day: Moment) => string;
-  secondaryNavigationStep?: number;
-  showSecondaryNavigation?: boolean;
+  secondaryNavigationStepDayView?: number;
+  showSecondaryNavigationDayView?: boolean;
+  secondaryNavigationStepMonthView?: number;
+  showSecondaryNavigationMonthView?: boolean;
   returnedValueType?: ECalendarValue;
   showGoToCurrent?: boolean;
   unSelectOnClick?: boolean;
