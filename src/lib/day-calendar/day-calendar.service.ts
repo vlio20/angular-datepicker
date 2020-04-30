@@ -11,6 +11,8 @@ const moment = momentNs;
 
 @Injectable()
 export class DayCalendarService {
+
+
   readonly DEFAULT_CONFIG: IDayCalendarConfig = {
     showNearMonthDays: true,
     showWeekNumbers: false,
@@ -199,6 +201,42 @@ export class DayCalendarService {
     }
 
     return '';
+  }
+
+  computeDateAfterLeftSecondaryNav(componentConfig: IDayCalendarConfigInternal, currentDateView: momentNs.Moment) {
+    let navigateBy = componentConfig.secondaryNavigationStepDayView;
+    let targetDate = currentDateView.clone().subtract(navigateBy, 'month');
+
+    if (componentConfig.min) {
+      const yearsDiff = targetDate.year() - componentConfig.min.year();
+      const monthsDiff = targetDate.month() - componentConfig.min.month();
+      const isOutsideRange = (yearsDiff * 12) + monthsDiff < 0;
+
+      if (isOutsideRange) {
+        navigateBy = (currentDateView.year() - componentConfig.min.year()) * 12
+                   + (currentDateView.month() - componentConfig.min.month());
+        targetDate = currentDateView.clone().subtract(navigateBy, 'month');
+      }
+    }
+    return targetDate;
+  }
+
+  computeDateAfterRightSecondaryNav(componentConfig: IDayCalendarConfigInternal, currentDateView: momentNs.Moment) {
+    let navigateBy = componentConfig.secondaryNavigationStepDayView;
+    let targetDate = currentDateView.clone().add(navigateBy, 'month');
+
+    if (componentConfig.max) {
+      const yearsDiff = targetDate.year() - componentConfig.max.year();
+      const monthsDiff = targetDate.month() - componentConfig.max.month();
+      const isOutsideRange =  (yearsDiff * 12) + monthsDiff > 0;
+
+      if (isOutsideRange) {
+        navigateBy = (componentConfig.max.year() - currentDateView.year()) * 12
+                   + (componentConfig.max.month() - currentDateView.month());
+        targetDate = currentDateView.clone().add(navigateBy, 'month');
+      }
+    }
+    return targetDate;
   }
 
   private removeNearMonthWeeks(currentMonth: Moment, monthArray: IDay[][]): IDay[][] {
