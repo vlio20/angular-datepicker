@@ -14,7 +14,8 @@ export class DayTimeDirectiveDemoComponent extends DateComponent implements OnIn
   config: IDatePickerConfig = {
     ...DEF_CONF,
     format: 'DD-MM-YYYY HH:mm:ss',
-    secondaryNavigationStep: 12
+    secondaryNavigationStepDayView: 12,
+    secondaryNavigationStepMonthView: 10
   };
 
   ngOnInit(): void {

@@ -23,7 +23,8 @@ export class DayCalendarService {
     locale: moment.locale(),
     dayBtnFormat: 'DD',
     unSelectOnClick: true,
-    secondaryNavigationStep: 12
+    secondaryNavigationStepDayView: 12,
+    secondaryNavigationStepMonthView: 10
   };
   private readonly DAYS = ['su', 'mo', 'tu', 'we', 'th', 'fr', 'sa'];
 
@@ -177,7 +178,8 @@ export class DayCalendarService {
       monthBtnFormat: componentConfig.monthBtnFormat,
       monthBtnFormatter: componentConfig.monthBtnFormatter,
       monthBtnCssClassCallback: componentConfig.monthBtnCssClassCallback,
-      showSecondaryNavigation: false,
+      showSecondaryNavigationMonthView: componentConfig.showSecondaryNavigationMonthView,
+      secondaryNavigationStepMonthView: componentConfig.secondaryNavigationStepMonthView,
       showGoToCurrent: componentConfig.showGoToCurrent,
       numOfMonthRows: componentConfig.numOfMonthRows
     });

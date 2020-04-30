@@ -53,8 +53,8 @@ const MONTH_CALENDAR_OPTION_KEYS = [
   'max',
   'min',
   'monthBtnFormat',
-  'secondaryNavigationStep',
-  'showSecondaryNavigation',
+  'secondaryNavigationStepMonthView',
+  'showSecondaryNavigationMonthView',
   'yearFormat',
   'showGoToCurrent',
   'unSelectOnClick',
@@ -78,6 +78,8 @@ const DAY_CALENDAR_OPTION_KEYS = [
   'showGoToCurrent',
   'unSelectOnClick',
   'moveCalendarTo',
+  'secondaryNavigationStepDayView',
+  'showSecondaryNavigationDayView',
   ...MONTH_CALENDAR_OPTION_KEYS
 ];
 const TIME_SELECT_SHARED_OPTION_KEYS = [
@@ -218,8 +220,10 @@ export class ConfigFormComponent implements OnInit {
   showSeconds: FormControl;
   showTwentyFourHours: FormControl;
   timeSeparator: FormControl;
-  showSecondaryNavigation: FormControl;
-  secondaryNavigationStep: FormControl;
+  showSecondaryNavigationMonthView: FormControl;
+  secondaryNavigationStepMonthView: FormControl;
+  showSecondaryNavigationDayView: FormControl;
+  secondaryNavigationStepDayView: FormControl;
   returnedValueType: FormControl;
   closeOnEnter: FormControl;
   numOfMonthRows: FormControl;
@@ -265,8 +269,10 @@ export class ConfigFormComponent implements OnInit {
     this.showSeconds = new FormControl(this.config.showSeconds);
     this.showTwentyFourHours = new FormControl(this.config.showTwentyFourHours);
     this.timeSeparator = new FormControl(this.config.timeSeparator);
-    this.showSecondaryNavigation = new FormControl(this.config.showSecondaryNavigation);
-    this.secondaryNavigationStep = new FormControl(this.config.secondaryNavigationStep);
+    this.showSecondaryNavigationMonthView = new FormControl(this.config.showSecondaryNavigationMonthView);
+    this.secondaryNavigationStepMonthView = new FormControl(this.config.secondaryNavigationStepMonthView);
+    this.showSecondaryNavigationDayView = new FormControl(this.config.showSecondaryNavigationDayView);
+    this.secondaryNavigationStepDayView = new FormControl(this.config.secondaryNavigationStepDayView);
     this.returnedValueType = new FormControl(this.config.returnedValueType);
     this.closeOnEnter = new FormControl(this.config.closeOnEnter);
     this.numOfMonthRows = new FormControl(this.config.numOfMonthRows);
@@ -598,15 +604,27 @@ export class ConfigFormComponent implements OnInit {
       });
     });
 
-    this.showSecondaryNavigation.valueChanges.subscribe((val) => {
+    this.showSecondaryNavigationMonthView.valueChanges.subscribe((val) => {
       this.onConfigChange.emit({
-        showSecondaryNavigation: val
+        showSecondaryNavigationMonthView: val
       });
     });
 
-    this.secondaryNavigationStep.valueChanges.subscribe((val) => {
+    this.secondaryNavigationStepMonthView.valueChanges.subscribe((val) => {
       this.onConfigChange.emit({
-        secondaryNavigationStep: val
+        secondaryNavigationStepMonthView: val
+      });
+    });
+
+    this.showSecondaryNavigationDayView.valueChanges.subscribe((val) => {
+      this.onConfigChange.emit({
+        showSecondaryNavigationDayView: val
+      });
+    });
+
+    this.secondaryNavigationStepDayView.valueChanges.subscribe((val) => {
+      this.onConfigChange.emit({
+        secondaryNavigationStepDayView: val
       });
     });
 

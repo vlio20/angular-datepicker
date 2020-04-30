@@ -753,35 +753,67 @@
       </div>
     </div>
 
-    <div *ngIf="isValidConfig('showSecondaryNavigation')" class="dp-option">
+    <div *ngIf="isValidConfig('showSecondaryNavigationMonthView')" class="dp-option">
         <span class="dp-option-header">
-          Show multiple steps navigation buttons (showSecondaryNavigation):
+          Show multiple years navigation buttons in the month view (showSecondaryNavigationMonthView):
         </span>
       <div class="dp-option-playground">
         <label>Enabled
-          <input id="showSecondaryNavigation"
-                 [formControl]="showSecondaryNavigation"
+          <input id="showSecondaryNavigationMonthView"
+                 [formControl]="showSecondaryNavigationMonthView"
                  [value]="true"
-                 name="showSecondaryNavigation"
+                 name="showSecondaryNavigationMonthView"
                  type="radio">
         </label>
         <label>Disabled
-          <input id="hideSecondaryNavigation"
-                 [formControl]="showSecondaryNavigation"
+          <input id="hideSecondaryNavigationMonthView"
+                 [formControl]="showSecondaryNavigationMonthView"
                  [value]="false"
-                 name="showSecondaryNavigation"
+                 name="showSecondaryNavigationMonthView"
                  type="radio">
         </label>
       </div>
     </div>
 
-    <div *ngIf="isValidConfig('showSecondaryNavigation')" class="dp-option">
+    <div *ngIf="isValidConfig('showSecondaryNavigationMonthView')" class="dp-option">
         <span class="dp-option-header">
-          Step to navigate using the secondary navigation button (secondaryNavigationStep):
+          Number of years to navigate using the secondary navigation button (secondaryNavigationStepMonthView):
         </span>
       <div class="dp-option-playground">
-        <input id="secondaryNavigationStep"
-               [formControl]="secondaryNavigationStep">
+        <input id="secondaryNavigationStepMonthView"
+               [formControl]="secondaryNavigationStepMonthView">
+      </div>
+    </div>
+
+    <div *ngIf="isValidConfig('showSecondaryNavigationDayView')" class="dp-option">
+        <span class="dp-option-header">
+          Show multiple months navigation buttons in the day view (showSecondaryNavigationDayView):
+        </span>
+      <div class="dp-option-playground">
+        <label>Enabled
+          <input id="showSecondaryNavigationDayView"
+                 [formControl]="showSecondaryNavigationDayView"
+                 [value]="true"
+                 name="showSecondaryNavigationDayView"
+                 type="radio">
+        </label>
+        <label>Disabled
+          <input id="hideSecondaryNavigationDayView"
+                 [formControl]="showSecondaryNavigationDayView"
+                 [value]="false"
+                 name="showSecondaryNavigationDayView"
+                 type="radio">
+        </label>
+      </div>
+    </div>
+
+    <div *ngIf="isValidConfig('showSecondaryNavigationDayView')" class="dp-option">
+        <span class="dp-option-header">
+          Number of month to navigate using the secondary navigation button (secondaryNavigationStepDayView):
+        </span>
+      <div class="dp-option-playground">
+        <input id="secondaryNavigationStepDayView"
+               [formControl]="secondaryNavigationStepDayView">
       </div>
     </div>
 

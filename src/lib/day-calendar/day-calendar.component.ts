@@ -80,8 +80,8 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
     this.navLabel = this.dayCalendarService.getHeaderLabel(this.componentConfig, this._currentDateView);
     this.showLeftNav = this.dayCalendarService.shouldShowLeft(this.componentConfig.min, this.currentDateView);
     this.showRightNav = this.dayCalendarService.shouldShowRight(this.componentConfig.max, this.currentDateView);
-    this.showSecondaryLeftNav = this.componentConfig.showSecondaryNavigation && this.showLeftNav;
-    this.showSecondaryRightNav = this.componentConfig.showSecondaryNavigation && this.showRightNav;
+    this.showSecondaryLeftNav = this.componentConfig.showSecondaryNavigationDayView && this.showLeftNav;
+    this.showSecondaryRightNav = this.componentConfig.showSecondaryNavigationDayView && this.showRightNav;
   }
   ;
 
@@ -96,8 +96,6 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
   @Output() onGoToCurrent: EventEmitter<void> = new EventEmitter();
   @Output() onLeftNav: EventEmitter<INavEvent> = new EventEmitter();
   @Output() onRightNav: EventEmitter<INavEvent> = new EventEmitter();
-  @Output() onLeftSecondaryNav: EventEmitter<INavEvent> = new EventEmitter();
-  @Output() onRightSecondaryNav: EventEmitter<INavEvent> = new EventEmitter();
   CalendarMode = ECalendarMode;
   isInited: boolean = false;
   componentConfig: IDayCalendarConfigInternal;
@@ -260,7 +258,7 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
   }
 
   onLeftSecondaryNavClick(): void {
-    let navigateBy = this.componentConfig.secondaryNavigationStep;
+    let navigateBy = this.componentConfig.secondaryNavigationStepDayView;
 
     let targetDate = this.currentDateView.clone().subtract(navigateBy, 'month');
     if (this.componentConfig.min) {
@@ -278,7 +276,7 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
     const from = this.currentDateView.clone();
     this.currentDateView = targetDate;
     const to = this.currentDateView.clone();
-    this.onLeftSecondaryNav.emit({from, to});
+    this.onLeftNav.emit({from, to});
   }
 
   onRightNavClick() {
@@ -289,7 +287,7 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
   }
 
   onRightSecondaryNavClick(): void {
-    let navigateBy = this.componentConfig.secondaryNavigationStep;
+    let navigateBy = this.componentConfig.secondaryNavigationStepDayView;
     let targetDate = this.currentDateView.clone().add(navigateBy, 'month');
 
     if (this.componentConfig.max) {
@@ -307,7 +305,7 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
     const from = this.currentDateView.clone();
     this.currentDateView = targetDate;
     const to = this.currentDateView.clone();
-    this.onRightSecondaryNav.emit({from, to});
+    this.onRightNav.emit({from, to});
   }
 
   onMonthCalendarLeftClick(change: INavEvent) {

@@ -61,8 +61,8 @@ const MONTH_CALENDAR_OPTION_KEYS = [
   'max',
   'min',
   'monthBtnFormat',
-  'secondaryNavigationStep',
-  'showSecondaryNavigation',
+  'secondaryNavigationStepMonthView',
+  'showSecondaryNavigationMonthView',
   'yearFormat',
   'showGoToCurrent',
   'unSelectOnClick',
@@ -85,6 +85,8 @@ const DAY_CALENDAR_OPTION_KEYS = [
   'showGoToCurrent',
   'unSelectOnClick',
   'moveCalendarTo',
+  'secondaryNavigationStepDayView',
+  'showSecondaryNavigationDayView',
   ...MONTH_CALENDAR_OPTION_KEYS
 ];
 const TIME_SELECT_SHARED_OPTION_KEYS = [
@@ -203,8 +205,10 @@ export class DemoComponent implements OnInit {
     showSeconds: false,
     showTwentyFourHours: false,
     timeSeparator: ':',
-    secondaryNavigationStep: 10,
-    showSecondaryNavigation: false,
+    secondaryNavigationStepMonthView: 10,
+    showSecondaryNavigationMonthView: false,
+    secondaryNavigationStepDayView: 12,
+    showSecondaryNavigationDayView: false,
     locale: moment.locale(),
     hideInputContainer: false,
     returnedValueType: ECalendarValue.String,

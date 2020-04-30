@@ -26,8 +26,10 @@ export interface IConfig {
   monthBtnCssClassCallback?: (day: Moment) => string;
   multipleYearsNavigateBy?: number; // deprecated warning
   showMultipleYearsNavigation?: boolean; // deprecated warning
-  secondaryNavigationStep?: number;
-  showSecondaryNavigation?: boolean;
+  secondaryNavigationStepDayView?: number;
+  showSecondaryNavigationDayView?: boolean;
+  secondaryNavigationStepMonthView?: number;
+  showSecondaryNavigationMonthView?: boolean;
   returnedValueType?: ECalendarValue;
   showGoToCurrent?: boolean;
   unSelectOnClick?: boolean;

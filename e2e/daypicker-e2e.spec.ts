@@ -57,32 +57,65 @@ describe('dpDayPicker dayPicker', () => {
     expect(await page.meridiemDownBtn.getAttribute('disabled')).toBe('true');
   });
 
-  it('should check showSecondaryNavigation is working', async () => {
-    const currentTime = moment(); // store current time, to avoid having multiple different "current time"
-    await page.dayPickerMenu.click(); // choose day view
-    await page.dayPickerInput.click(); // open calendar
-    // showSecondaryNavigation is off
-    expect(await page.dayCalendarLeftSecondaryNavBtn.isPresent()).toBe(false);
-    expect(await page.dayCalendarRightSecondaryNavBtn.isPresent()).toBe(false);
-    await page.dayCalendarNavHeaderBtn.click(); // shows month view of the calendar
-    expect(await page.dayCalendarLeftSecondaryNavBtn.isPresent()).toBe(false);
-    expect(await page.dayCalendarRightSecondaryNavBtn.isPresent()).toBe(false);
-    await page.dayCalendarNavHeaderBtn.click(); // hide month view of the calendar
+  it('should check showSecondaryNavigationDayView and showSecondaryNavigationMonthView are working together', async () => {
+    const currentTime = moment();
+    await page.dayPickerMenu.click();
+    await page.dayPickerInput.click();
 
-    await page.showSecondaryNavigation.click(); // enables showSecondaryNavigation
-    await page.secondaryNavigationStep.clear();
-    await page.secondaryNavigationStep.sendKeys('20'); // set step
-    await page.dayPickerInput.click(); // open calendar
-    await page.dayCalendarLeftSecondaryNavBtn.click(); // click left secondary navigation button (-20 months)
+    expect(await page.dayCalendarLeftSecondaryNavBtn.isPresent()).toBe(false);
+    expect(await page.dayCalendarRightSecondaryNavBtn.isPresent()).toBe(false);
+    await page.dayCalendarNavHeaderBtn.click();
+    expect(await page.dayCalendarLeftSecondaryNavBtn.isPresent()).toBe(false);
+    expect(await page.dayCalendarRightSecondaryNavBtn.isPresent()).toBe(false);
+    await page.dayCalendarNavHeaderBtn.click();
+
+    await page.scrollIntoView(await page.showSecondaryNavigationDayView);
+    await page.showSecondaryNavigationDayView.click();
+    await page.secondaryNavigationStepDayView.clear();
+    await page.secondaryNavigationStepDayView.sendKeys('20');
+    await page.dayPickerInput.click();
+    expect(await page.dayCalendarLeftSecondaryNavBtn.isPresent()).toBe(true);
+    expect(await page.dayCalendarRightSecondaryNavBtn.isPresent()).toBe(true);
+    await page.dayCalendarLeftSecondaryNavBtn.click();
     expect(await page.dayCalendarNavDayHeaderBtn.getText()).toEqual(currentTime.clone().subtract(20, 'month').format('MMM, YYYY'));
-
     await page.dayCalendarRightSecondaryNavBtn.click();
     await page.dayCalendarRightSecondaryNavBtn.click();
     expect(await page.dayCalendarNavDayHeaderBtn.getText()).toEqual(currentTime.clone().add(20, 'month').format('MMM, YYYY'));
 
-    await page.dayCalendarNavHeaderBtn.click(); // shows month view of the calendar
-    // no button on month view, even if showSecondaryNavigation is enabled
+    await page.dayCalendarNavHeaderBtn.click();
     expect(await page.dayCalendarLeftSecondaryNavBtn.isPresent()).toBe(false);
     expect(await page.dayCalendarRightSecondaryNavBtn.isPresent()).toBe(false);
+    await page.dayCalendarNavHeaderBtn.click();
+    await page.clickOnBody();
+
+
+    await page.scrollIntoView(await page.showSecondaryNavigationMonthView);
+    await page.showSecondaryNavigationMonthView.click();
+    await page.dayPickerInput.click();
+    expect(await page.dayCalendarLeftSecondaryNavBtn.isPresent()).toBe(true);
+    expect(await page.dayCalendarRightSecondaryNavBtn.isPresent()).toBe(true);
+    await page.dayCalendarNavHeaderBtn.click();
+    expect(await page.dayCalendarLeftSecondaryNavBtn.isPresent()).toBe(true);
+    expect(await page.dayCalendarRightSecondaryNavBtn.isPresent()).toBe(true);
+    await page.dayCalendarNavHeaderBtn.click();
+    await page.clickOnBody();
+
+    await page.setInputValue(page.daytimePickerInput, currentTime.format('DD-MM-YYYY'));
+    await page.scrollIntoView(await page.hideSecondaryNavigationDayView);
+    await page.hideSecondaryNavigationDayView.click();
+    await page.secondaryNavigationStepMonthView.clear();
+    await page.secondaryNavigationStepMonthView.sendKeys('25');
+    await page.dayPickerInput.click();
+    expect(await page.dayCalendarLeftSecondaryNavBtn.isPresent()).toBe(false);
+    expect(await page.dayCalendarRightSecondaryNavBtn.isPresent()).toBe(false);
+    await page.dayCalendarNavHeaderBtn.click();
+    expect(await page.dayCalendarLeftSecondaryNavBtn.isPresent()).toBe(true);
+    expect(await page.dayCalendarRightSecondaryNavBtn.isPresent()).toBe(true);
+    await page.dayCalendarLeftSecondaryNavBtn.click();
+    expect(await page.dayCalendarNavDayHeaderBtn.getText()).toEqual(currentTime.clone().subtract(25, 'year').format('YYYY'));
+    await page.dayCalendarRightSecondaryNavBtn.click();
+    await page.dayCalendarRightSecondaryNavBtn.click();
+    expect(await page.dayCalendarNavDayHeaderBtn.getText()).toEqual(currentTime.clone().add(25, 'year').format('YYYY'));
+    await page.dayCalendarNavHeaderBtn.click();
   });
 });

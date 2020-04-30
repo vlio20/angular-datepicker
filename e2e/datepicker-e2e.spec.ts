@@ -291,27 +291,24 @@ describe('dpDayPicker dayPicker', () => {
     expect(await page.calendarFirstMonthOfYear.getText()).toEqual('1');
   });
 
-  it('should check showSecondaryNavigation is working', async () => {
-    const currentTime = moment(); // store current time, to avoid having multiple different "current time"
-    await page.monthPickerMenu.click(); // choose month view
-    await page.dayPickerInput.click(); // open calendar
+  it('should check showSecondaryNavigationMonthView is working', async () => {
+    const currentTime = moment();
+    await page.monthPickerMenu.click();
+    await page.dayPickerInput.click();
 
-    // showSecondaryNavigation is off
     expect(await page.dayCalendarLeftSecondaryNavBtn.isPresent()).toBe(false);
     expect(await page.dayCalendarRightSecondaryNavBtn.isPresent()).toBe(false);
 
-    await page.showSecondaryNavigation.click(); // enables showSecondaryNavigation
-    // showSecondaryNavigation is on
-    await page.secondaryNavigationStep.clear();
-    await page.secondaryNavigationStep.sendKeys('20'); // set step
-    await page.dayPickerInput.click(); // open calendar
-    await page.dayCalendarLeftSecondaryNavBtn.click(); // click left secondary navigation button (-20 years)
+    await page.showSecondaryNavigationMonthView.click();
+    await page.secondaryNavigationStepMonthView.clear();
+    await page.secondaryNavigationStepMonthView.sendKeys('20');
+    await page.dayPickerInput.click();
+    await page.dayCalendarLeftSecondaryNavBtn.click();
 
-    // use dayCalendarNavMonthHeaderSpan because dayCalendarNavMonthHeaderBtn is hidden, and is returned as empty text.
     expect(await page.dayCalendarNavMonthHeaderSpan.getText()).toEqual(currentTime.clone().subtract(20, 'year').format('YYYY'));
 
-    await page.dayCalendarRightSecondaryNavBtn.click(); // click right secondary navigation button (+10 years)
-    await page.dayCalendarRightSecondaryNavBtn.click(); // click right secondary navigation button (+10 years)
+    await page.dayCalendarRightSecondaryNavBtn.click();
+    await page.dayCalendarRightSecondaryNavBtn.click();
     expect(await page.dayCalendarNavMonthHeaderSpan.getText()).toEqual(currentTime.clone().add(20, 'year').format('YYYY'));
   });
 });
