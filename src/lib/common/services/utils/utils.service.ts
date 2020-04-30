@@ -8,7 +8,6 @@ import {IDate} from '../../models/date.model';
 import {CalendarMode} from '../../types/calendar-mode';
 import {DateValidator} from '../../types/validator.type';
 import {ICalendarInternal} from '../../models/calendar.model';
-import { IDayCalendarConfigInternal } from '../../../day-calendar/day-calendar-config.model';
 
 const moment = momentNs;
 
