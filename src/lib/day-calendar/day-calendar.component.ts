@@ -80,8 +80,8 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
     this.navLabel = this.dayCalendarService.getHeaderLabel(this.componentConfig, this._currentDateView);
     this.showLeftNav = this.dayCalendarService.shouldShowLeft(this.componentConfig.min, this.currentDateView);
     this.showRightNav = this.dayCalendarService.shouldShowRight(this.componentConfig.max, this.currentDateView);
-    this.showSecondaryLeftNav = this.componentConfig.showSecondaryNavigationDayView && this.showLeftNav;
-    this.showSecondaryRightNav = this.componentConfig.showSecondaryNavigationDayView && this.showRightNav;
+    this.showSecondaryLeftNav = this.componentConfig.showSecondaryNavigationDayView;
+    this.showSecondaryRightNav = this.componentConfig.showSecondaryNavigationDayView;
   }
   ;
 

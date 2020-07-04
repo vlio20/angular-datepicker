@@ -14,10 +14,12 @@
   </div>
 
   <div class="dp-nav-btns-container">
-    <div class="dp-calendar-nav-container-left">
+    <div class="dp-calendar-nav-container-left" [ngClass]="{'dp-calendar-nav-container-two-buttons': showLeftSecondaryNav}">
       <button (click)="leftSecondaryNavClicked()"
               *ngIf="showLeftSecondaryNav"
+              [attr.data-hidden]="!showLeftNav"
               [disabled]="leftSecondaryNavDisabled"
+              [hidden]="!showLeftNav"
               class="dp-calendar-secondary-nav-left"
               type="button">
       </button>
@@ -34,7 +36,7 @@
             class="dp-current-location-btn"
             type="button">
     </button>
-    <div class="dp-calendar-nav-container-right">
+    <div class="dp-calendar-nav-container-right" [ngClass]="{'dp-calendar-nav-container-two-buttons': showRightSecondaryNav}">
       <button (click)="rightNavClicked()"
               [attr.data-hidden]="!showRightNav"
               [disabled]="rightNavDisabled"
@@ -44,7 +46,9 @@
       </button>
       <button (click)="rightSecondaryNavClicked()"
               *ngIf="showRightSecondaryNav"
+              [attr.data-hidden]="!showRightNav"
               [disabled]="rightSecondaryNavDisabled"
+              [hidden]="!showRightNav"
               class="dp-calendar-secondary-nav-right"
               type="button">
       </button>

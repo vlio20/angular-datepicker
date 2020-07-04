@@ -77,8 +77,8 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
     this.navLabel = this.monthCalendarService.getHeaderLabel(this.componentConfig, this.currentDateView);
     this.showLeftNav = this.monthCalendarService.shouldShowLeft(this.componentConfig.min, this._currentDateView);
     this.showRightNav = this.monthCalendarService.shouldShowRight(this.componentConfig.max, this.currentDateView);
-    this.showSecondaryLeftNav = this.componentConfig.showSecondaryNavigationMonthView && this.showLeftNav;
-    this.showSecondaryRightNav = this.componentConfig.showSecondaryNavigationMonthView && this.showRightNav;
+    this.showSecondaryLeftNav = this.componentConfig.showSecondaryNavigationMonthView;
+    this.showSecondaryRightNav = this.componentConfig.showSecondaryNavigationMonthView;
   }
 
   @Input() config: IMonthCalendarConfig;
