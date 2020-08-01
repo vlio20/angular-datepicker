@@ -10,7 +10,7 @@
       "dom"
     ],
     "outDir": "../out-tsc/spec",
-    "module": "esnext",
+    "module": "es2020",
     "target": "es6",
     "baseUrl": "",
     "types": [
