@@ -23,7 +23,8 @@ before_install:
   - sudo apt-get update
   - sudo apt-get install -y libappindicator1 fonts-liberation
   - wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-  - sudo dpkg -i google-chrome*.deb
+  - sudo dpkg --install chrome-remote-desktop_current_amd64.deb
+  - sudo apt install --assume-yes --fix-broken
   - sleep 3
   - "/sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -ac -screen 0 1280x1024x16"
 
