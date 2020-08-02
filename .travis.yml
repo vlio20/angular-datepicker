@@ -23,6 +23,9 @@ before_install:
   - sh -e /etc/init.d/xvfb start
   - sudo apt-get update
   - sudo apt-get install -y libappindicator1 fonts-liberation
+  - LATEST_CHROMEDRIVER_VERSION=`curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE"`
+  - curl "https://chromedriver.storage.googleapis.com/${LATEST_CHROMEDRIVER_VERSION}/chromedriver_linux64.zip" -O
+  - unzip chromedriver_linux64.zip -d ~/bin
 #  - wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 #  - sudo apt-get update
 #  - sudo apt-get install google-chrome-stable --allow-unauthenticated -y
