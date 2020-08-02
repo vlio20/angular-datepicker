@@ -9,6 +9,7 @@ cache:
     - node_modules
 
 addons:
+  chrome: stable
 apt:
   sources:
     - google-chrome
@@ -22,9 +23,9 @@ before_install:
   - sh -e /etc/init.d/xvfb start
   - sudo apt-get update
   - sudo apt-get install -y libappindicator1 fonts-liberation
-  - wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-  - sudo apt-get update
-  - sudo apt-get install google-chrome-stable --allow-unauthenticated -y
+#  - wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+#  - sudo apt-get update
+#  - sudo apt-get install google-chrome-stable --allow-unauthenticated -y
   - sleep 3
   - "/sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -ac -screen 0 1280x1024x16"
 
