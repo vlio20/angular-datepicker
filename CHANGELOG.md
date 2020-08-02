@@ -1,7 +1,7 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-<a name="9.0.0"></a>
+<a name="10.0.0"></a>
 # [10.0.0] (2020-08-02)
 
 ### Improvements
