@@ -11,8 +11,11 @@ describe('format validation', () => {
   it('should check that the format validation is working', async () => {
     const common = async (menu, input) => {
       await menu.click();
+      await input.click();
+      await input.clear();
       await input.sendKeys('lmaldlad');
       await page.clickOnBody();
+
       expect(await page.formatValidationMsg.getText()).toBe('invalid format');
       await input.clear();
     };

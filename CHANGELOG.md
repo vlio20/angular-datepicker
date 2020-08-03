@@ -1,5 +1,15 @@
 # Changelog
 All notable changes to this project will be documented in this file.
+
+<a name="10.0.0"></a>
+# [10.0.0] (2020-08-02)
+
+### Improvements
+- Update to Angular 10 ([2030363](https://github.com/vlio20/angular-datepicker/commit/2030363)) closes [#508](https://github.com/vlio20/angular-datepicker/issues/508)
+
+### Bug Fixes
+- Add debounce on open delay ([abe1cfb](https://github.com/vlio20/angular-datepicker/commit/abe1cfb)) closes [#514](https://github.com/vlio20/angular-datepicker/issues/514)
+
 <a name="9.0.0"></a>
 # [9.0.0] (2020-03-31)
 

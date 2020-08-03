@@ -2,9 +2,10 @@ import {INavEvent} from '../../../lib/common/models/navigation-event.model';
 import * as moment from 'moment';
 import {Moment} from 'moment';
 import {DatePickerComponent, DatePickerDirective, ISelectionEvent} from '../../../lib';
-import {ViewChild} from '@angular/core';
+import { ViewChild, Directive } from '@angular/core';
 import {FormControl, ValidatorFn, Validators} from '@angular/forms';
 
+@Directive()
 export abstract class DateComponent {
   @ViewChild('dateComponent') dateComponent: DatePickerComponent;
   @ViewChild(DatePickerDirective) dateDirective: DatePickerDirective;

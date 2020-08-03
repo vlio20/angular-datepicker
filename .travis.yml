@@ -9,11 +9,10 @@ cache:
     - node_modules
 
 addons:
-apt:
-  sources:
-    - google-chrome
-  packages:
-    - google-chrome-stable
+  chrome: stable
+  apt:
+    packages:
+      - dpkg
 
 before_install:
   - export CHROME_BIN=/usr/bin/google-chrome
@@ -22,8 +21,6 @@ before_install:
   - sh -e /etc/init.d/xvfb start
   - sudo apt-get update
   - sudo apt-get install -y libappindicator1 fonts-liberation
-  - wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-  - sudo dpkg -i google-chrome*.deb
   - sleep 3
   - "/sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -ac -screen 0 1280x1024x16"
 
