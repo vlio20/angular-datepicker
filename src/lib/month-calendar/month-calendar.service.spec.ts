@@ -1,5 +1,6 @@
 import {inject, TestBed} from '@angular/core/testing';
 import * as momentNs from 'moment';
+import {Moment} from 'moment';
 import {UtilsService} from '../common/services/utils/utils.service';
 import {MonthCalendarService} from './month-calendar.service';
 import {IMonth} from './month.model';
@@ -69,6 +70,34 @@ describe('Service: MonthCalendarService', () => {
       expect(service.isMonthDisabled(month.date, config1)).toBe(false);
       month.date.add(1, 'month');
       expect(service.isMonthDisabled(month.date, config1)).toBe(true);
+    }));
+
+  it('should check the isDateDisabled when isMonthDisabledCallback provided',
+    inject([MonthCalendarService], (service: MonthCalendarService) => {
+      const month: IMonth = {
+        date: moment('01`-01-2017', 'DD-MM-YYYY'),
+        selected: false,
+        currentMonth: false,
+        disabled: false,
+        text: moment('01-01-2017', 'DD-MM-YYYY').format('MMM')
+      };
+      const config1: any = {
+        isMonthDisabledCallback: (m: Moment) => {
+          return m.get('M') % 2 === 0;
+        }
+      };
+
+      for (let i = 0; i < 12; i++) {
+        console.log(month.date.get('M'), i % 2, service.isMonthDisabled(month.date, config1));
+
+        if (i % 2 === 0) {
+          expect(service.isMonthDisabled(month.date, config1)).toBe(true);
+        } else {
+          expect(service.isMonthDisabled(month.date, config1)).toBe(false);
+        }
+
+        month.date.add(1, 'month');
+      }
     }));
 
   it('should check getDayBtnText method',
