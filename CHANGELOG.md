@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 # [10.0.1] (2020-11-10)
 
 ### Bug Fixes
-- Removing momentJS deep import ([0e77c88](https://github.com/vlio20/angular-datepicker/commit/0e77c88)) closes [#522](https://github.com/vlio20/angular-datepicker/issues/522)
+- Enabling isMonthDisabledCallback ([0e77c88](https://github.com/vlio20/angular-datepicker/commit/0e77c88)) closes [#522](https://github.com/vlio20/angular-datepicker/issues/522)
 
 <a name="10.0.0"></a>
 # [10.0.0] (2020-08-03)
