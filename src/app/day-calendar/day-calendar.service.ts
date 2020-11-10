@@ -182,6 +182,7 @@ export class DayCalendarService {
       monthBtnFormat: componentConfig.monthBtnFormat,
       monthBtnFormatter: componentConfig.monthBtnFormatter,
       monthBtnCssClassCallback: componentConfig.monthBtnCssClassCallback,
+      isMonthDisabledCallback: componentConfig.isMonthDisabledCallback,
       multipleYearsNavigateBy: componentConfig.multipleYearsNavigateBy,
       showMultipleYearsNavigation: componentConfig.showMultipleYearsNavigation,
       showGoToCurrent: componentConfig.showGoToCurrent
