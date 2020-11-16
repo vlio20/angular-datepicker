@@ -8,14 +8,18 @@ Supports latest (Angular 9) version. For older versions please checkout CHANGELO
   
 ## Screenshots  
   
-### Day: ![Imgur](https://i.imgur.com/NaOiqi7.png)  
+### Day: 
+![Imgur](https://i.imgur.com/NaOiqi7.png)  
   
-### DayTime:  
+### DayTime:     
 ![Imgur](https://i.imgur.com/XSyhhfv.png)  
   
-### Month: ![Imgur](https://i.imgur.com/NIlPCx1.png)  
+### Month:     
+![Imgur](https://i.imgur.com/NIlPCx1.png)  
   
-### Time: ![Imgur](https://i.imgur.com/y37UGkQ.png)  
+### Time:    
+![Imgur](https://i.imgur.com/y37UGkQ.png)  
+
   
 ## Installation:  
 1. Download from npm:  
@@ -27,6 +31,20 @@ Supports latest (Angular 9) version. For older versions please checkout CHANGELO
 ```ts  
  @NgModule({ ... imports: [ ... DpDatePickerModule ] })
  ```  
+
+## Contributors  
+  
+This project exists thanks to all the people who contribute. [[Contribute]](CONTRIBUTING.md).  
+<a href="graphs/contributors"><img src="https://opencollective.com/angular-datepicker/contributors.svg?width=890" /></a>  
+  
+  
+## Backers  
+  
+Thank you to all our backers! 🙏 [[Become a backer](https://opencollective.com/angular-datepicker#backer)]  
+<a href="https://opencollective.com/angular-datepicker/baker/0/website" target="_blank"><img src="https://opencollective.com/angular-datepicker/baker/0/avatar.svg"></a>
+
+<a href="https://opencollective.com/angular-datepicker#backers" target="_blank"><img src="https://opencollective.com/angular-datepicker/backers.svg?width=890"></a>  
+
   
 ## Usage  
 Put the dp-date-picker component wherever you need it.  
@@ -454,19 +472,7 @@ Internet explorer 10 doesn't support hidden attribut, but you can use a css rule
 ```css  
 [data-hidden="true"] {  
  display: none !important;}  
-```  
-  
-## Contributors  
-  
-This project exists thanks to all the people who contribute. [[Contribute]](CONTRIBUTING.md).  
-<a href="graphs/contributors"><img src="https://opencollective.com/angular-datepicker/contributors.svg?width=890" /></a>  
-  
-  
-## Backers  
-  
-Thank you to all our backers! 🙏 [[Become a backer](https://opencollective.com/angular-datepicker#backer)]  
-  
-<a href="https://opencollective.com/angular-datepicker#backers" target="_blank"><img src="https://opencollective.com/angular-datepicker/backers.svg?width=890"></a>  
+``` 
   
   
 ## Sponsors  
