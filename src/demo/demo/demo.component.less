@@ -77,6 +77,9 @@
 
     .dp-component-wrapper {
       flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
       padding: 0 20px;
     }
   }
@@ -144,5 +147,26 @@
   .dp-place-holder {
     width: 1px;
     height: 1px;
+  }
+}
+
+.dp-donation-bar {
+  min-height: 118px;
+  padding: 10px 20px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.dp-router-wrapper {
+  flex: 1;
+}
+
+::ng-deep {
+  .dp-date-input-container {
+    margin: 0 -20px;
+    padding: 0 20px;
+    box-shadow: 0px 2px 6px -4px black;
   }
 }

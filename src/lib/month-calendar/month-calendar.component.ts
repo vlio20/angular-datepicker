@@ -57,30 +57,6 @@ const moment = momentNs;
 })
 export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAccessor, Validator {
 
-  get selected(): Moment[] {
-    return this._selected;
-  }
-
-  set selected(selected: Moment[]) {
-    this._selected = selected;
-    this.onChangeCallback(this.processOnChangeCallback(selected));
-  }
-
-  get currentDateView(): Moment {
-    return this._currentDateView;
-  }
-
-  set currentDateView(current: Moment) {
-    this._currentDateView = current.clone();
-    this.yearMonths = this.monthCalendarService
-      .generateYear(this.componentConfig, this._currentDateView, this.selected);
-    this.navLabel = this.monthCalendarService.getHeaderLabel(this.componentConfig, this.currentDateView);
-    this.showLeftNav = this.monthCalendarService.shouldShowLeft(this.componentConfig.min, this._currentDateView);
-    this.showRightNav = this.monthCalendarService.shouldShowRight(this.componentConfig.max, this.currentDateView);
-    this.showSecondaryLeftNav = this.componentConfig.showMultipleYearsNavigation && this.showLeftNav;
-    this.showSecondaryRightNav = this.componentConfig.showMultipleYearsNavigation && this.showRightNav;
-  }
-
   @Input() config: IMonthCalendarConfig;
   @Input() displayDate: Moment;
   @Input() minDate: Moment;
@@ -110,12 +86,37 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
     moveCalendarTo: this.moveCalendarTo.bind(this)
   };
 
-  _selected: Moment[];
-  _currentDateView: Moment;
-
   constructor(public readonly monthCalendarService: MonthCalendarService,
               public readonly utilsService: UtilsService,
               public readonly cd: ChangeDetectorRef) {
+  }
+
+  _selected: Moment[];
+
+  get selected(): Moment[] {
+    return this._selected;
+  }
+
+  set selected(selected: Moment[]) {
+    this._selected = selected;
+    this.onChangeCallback(this.processOnChangeCallback(selected));
+  }
+
+  _currentDateView: Moment;
+
+  get currentDateView(): Moment {
+    return this._currentDateView;
+  }
+
+  set currentDateView(current: Moment) {
+    this._currentDateView = current.clone();
+    this.yearMonths = this.monthCalendarService
+      .generateYear(this.componentConfig, this._currentDateView, this.selected);
+    this.navLabel = this.monthCalendarService.getHeaderLabel(this.componentConfig, this.currentDateView);
+    this.showLeftNav = this.monthCalendarService.shouldShowLeft(this.componentConfig.min, this._currentDateView);
+    this.showRightNav = this.monthCalendarService.shouldShowRight(this.componentConfig.max, this.currentDateView);
+    this.showSecondaryLeftNav = this.componentConfig.showMultipleYearsNavigation && this.showLeftNav;
+    this.showSecondaryRightNav = this.componentConfig.showMultipleYearsNavigation && this.showRightNav;
   }
 
   ngOnInit(): void {

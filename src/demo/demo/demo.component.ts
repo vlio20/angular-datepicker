@@ -212,7 +212,7 @@ export class DemoComponent implements OnInit {
     hideOnOutsideClick: true
   };
 
-  formGroup: FormGroup ;
+  formGroup: FormGroup;
   isAtTop: boolean = true;
 
   constructor(private readonly gaService: GaService) {
@@ -358,6 +358,10 @@ export class DemoComponent implements OnInit {
   donateClicked() {
     this.gaService.emitEvent('donate', 'clicked');
     this.donateForm.nativeElement.submit();
+  }
+
+  becomeABackerClicked() {
+    this.gaService.emitEvent('becomeABacker', 'clicked');
   }
 
   onSelect(data: ISelectionEvent) {

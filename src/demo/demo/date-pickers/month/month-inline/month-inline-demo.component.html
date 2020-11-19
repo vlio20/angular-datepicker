@@ -1,8 +1,7 @@
 <div class="dp-date-wrapper">
   <div class="dp-date-input-container dp-inline">
     <div class="dp-form-item">
-      <dp-month-calendar id="picker"
-                         #dateComponent
+      <dp-month-calendar #dateComponent
                          (close)="closed()"
                          (onChange)="log($event)"
                          (onLeftNav)="onLeftNav($event)"
@@ -10,11 +9,12 @@
                          (onSelect)="onSelect($event)"
                          [config]="config"
                          [displayDate]="displayDate"
+                         [formControl]="control"
                          [maxDate]="validationMaxDate"
                          [minDate]="validationMinDate"
                          [required]="required"
                          [theme]="material ? 'dp-material dp-main' : 'dp-main'"
-                         [formControl]="control">
+                         id="picker">
       </dp-month-calendar>
 
       <div class="dp-validations">
@@ -27,20 +27,20 @@
   </div>
 
   <dp-config-form #component
-                  pickerMode="monthInline"
-                  [config]="config"
+                  (closeCalendar)="closeCalendar()"
+                  (moveCalendarTo)="moveCalendarTo($event)"
+                  (onConfigChange)="onConfigChange($event)"
+                  (onDisabledChange)="onDisabledChange($event)"
                   (onDisplayDateChange)="onDisplayDateChange($event)"
                   (onMaterialThemeChange)="onMaterialThemeChange($event)"
-                  (onDisabledChange)="onDisabledChange($event)"
-                  (onRequireValidationChange)="onRequireValidationChange($event)"
-                  (onMinValidationChange)="onMinValidationChange($event)"
+                  (onMaxTimeValidationChange)="onMaxTimeValidationChange($event)"
                   (onMaxValidationChange)="onMaxValidationChange($event)"
                   (onMinTimeValidationChange)="onMinTimeValidationChange($event)"
-                  (onMaxTimeValidationChange)="onMaxTimeValidationChange($event)"
+                  (onMinValidationChange)="onMinValidationChange($event)"
                   (onPlaceholderChange)="onPlaceholderChange($event)"
-                  (onConfigChange)="onConfigChange($event)"
+                  (onRequireValidationChange)="onRequireValidationChange($event)"
                   (openCalendar)="openCalendar()"
-                  (closeCalendar)="closeCalendar()"
-                  (moveCalendarTo)="moveCalendarTo($event)">
+                  [config]="config"
+                  pickerMode="monthInline">
   </dp-config-form>
 </div>

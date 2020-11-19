@@ -12,7 +12,7 @@ describe('dpDayPicker dayPicker', () => {
     await page.dayPickerMenu.click();
   });
 
-  xit('should check that the popup appended to body', async () => {
+  it('should check that the popup appended to body', async () => {
     await page.dayPickerInput.click();
     expect(await page.datePickerPopup.isDisplayed()).toBe(true);
     await page.clickOnBody();
@@ -36,8 +36,8 @@ describe('dpDayPicker dayPicker', () => {
   it('should check that the onOpenDelay is working', async () => {
     expect(await page.datePickerPopup.isDisplayed()).toBe(false);
 
+    await page.scrollIntoView(page.onOpenDelayInput, true);
     await page.setInputValue(page.onOpenDelayInput, '1000');
-    await page.scrollIntoView(await page.openBtn);
     await page.openBtn.click();
     expect(await page.datePickerPopup.isDisplayed()).toBe(true);
     await page.clickOnBody();
@@ -221,6 +221,7 @@ describe('dpDayPicker dayPicker', () => {
     await page.dayPickerInput.click();
     await page.clickOnDayButton('15');
     expect(await page.datePickerPopup.isDisplayed()).toBe(false);
+    await page.scrollIntoView(page.noCloseOnSelect, true);
     await page.noCloseOnSelect.click();
     await page.dayPickerInput.click();
     await page.clickOnDayButton('16');
@@ -228,6 +229,7 @@ describe('dpDayPicker dayPicker', () => {
   });
 
   it('should check that the close delay is working', async () => {
+    await page.scrollIntoView(page.closeDelayInput, true);
     await page.setInputValue(page.closeDelayInput, '1000');
     await page.dayPickerInput.click();
     await page.clickOnDayButton('15');
@@ -240,8 +242,8 @@ describe('dpDayPicker dayPicker', () => {
   });
 
   it('should check weekday names', async () => {
-    await page.weekDaysFormatInput.clear();
-    await page.weekDaysFormatInput.sendKeys('d');
+    await page.scrollIntoView(page.weekDaysFormatInput, true);
+    await page.setInputValue(await page.weekDaysFormatInput, 'd');
 
     await page.dayPickerInput.click();
     expect(await page.weekDayNames.getText()).toEqual(['0123456']);

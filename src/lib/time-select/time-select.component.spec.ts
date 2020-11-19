@@ -1,4 +1,4 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 import {UtilsService} from '../common/services/utils/utils.service';
 import {CalendarNavComponent} from '../calendar-nav/calendar-nav.component';
 import * as momentNs from 'moment';
@@ -12,7 +12,7 @@ describe('Component: TimeSelectComponent', () => {
   let component: TimeSelectComponent;
   let fixture: ComponentFixture<TimeSelectComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [TimeSelectComponent, CalendarNavComponent, MonthCalendarComponent],
       providers: [TimeSelectService, UtilsService]
