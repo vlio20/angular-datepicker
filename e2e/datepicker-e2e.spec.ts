@@ -36,8 +36,8 @@ describe('dpDayPicker dayPicker', () => {
   it('should check that the onOpenDelay is working', async () => {
     expect(await page.datePickerPopup.isDisplayed()).toBe(false);
 
+    await page.scrollIntoView(page.onOpenDelayInput, true);
     await page.setInputValue(page.onOpenDelayInput, '1000');
-    await page.scrollIntoView(await page.openBtn);
     await page.openBtn.click();
     expect(await page.datePickerPopup.isDisplayed()).toBe(true);
     await page.clickOnBody();
@@ -242,8 +242,8 @@ describe('dpDayPicker dayPicker', () => {
   });
 
   it('should check weekday names', async () => {
-    await page.weekDaysFormatInput.clear();
-    await page.weekDaysFormatInput.sendKeys('d');
+    await page.scrollIntoView(page.weekDaysFormatInput, true);
+    await page.setInputValue(await page.weekDaysFormatInput, 'd');
 
     await page.dayPickerInput.click();
     expect(await page.weekDayNames.getText()).toEqual(['0123456']);
