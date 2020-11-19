@@ -368,14 +368,6 @@ export class DemoComponent implements OnInit {
     console.log(data);
   }
 
-  trackFiver(): void {
-    this.gaService.emitEvent('fiverr', 'clicked');
-  }
-
-  toggleDisabled(disabled: boolean) {
-    disabled ? this.formGroup.disable() : this.formGroup.enable()
-  }
-
   private buildForm(): FormGroup {
     return new FormGroup({
       datePicker: new FormControl({value: this.date, disabled: this.disabled}, [
