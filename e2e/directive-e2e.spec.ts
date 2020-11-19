@@ -40,9 +40,8 @@ describe('dpDayPicker directive', () => {
   });
 
   it('should check that the onOpenDelay is working', async () => {
-    await page.onOpenDelayInput.clear();
-    await page.onOpenDelayInput.sendKeys(1000);
-    await page.scrollIntoView(page.openBtn);
+    await page.scrollIntoView(page.openBtn, true);
+    await page.setInputValue(page.onOpenDelayInput, '1000');
     await page.openBtn.click();
     expect(await page.datePickerPopup.isDisplayed()).toBe(true);
     await page.clickOnBody();
