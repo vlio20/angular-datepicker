@@ -21,16 +21,16 @@
       </span>
       <div class="dp-option-playground">
         <label>Enabled
-          <input id="inputEnabledRadio"
-                 [formControl]="disabled"
+          <input [formControl]="disabled"
                  [value]="false"
+                 id="inputEnabledRadio"
                  name="disabled"
                  type="radio">
         </label>
         <label>Disabled
-          <input id="inputDisabledRadio"
-                 [formControl]="disabled"
+          <input [formControl]="disabled"
                  [value]="true"
+                 id="inputDisabledRadio"
                  name="disabled"
                  type="radio">
         </label>
@@ -43,16 +43,16 @@
       </span>
       <div class="dp-option-playground">
         <label>Required
-          <input id="enableRequiredRadio"
-                 [formControl]="requireValidation"
+          <input [formControl]="requireValidation"
                  [value]="true"
+                 id="enableRequiredRadio"
                  name="required"
                  type="radio">
         </label>
         <label>Not Required
-          <input id="disableRequiredRadio"
-                 [formControl]="requireValidation"
+          <input [formControl]="requireValidation"
                  [value]="false"
+                 id="disableRequiredRadio"
                  name="required"
                  type="radio">
         </label>
@@ -65,8 +65,8 @@
         </span>
       <div class="dp-option-playground">
         {{pickerMode}}
-        <dp-date-picker [formControl]="minValidation"
-                        [config]="{format: localFormat}"
+        <dp-date-picker [config]="{format: localFormat}"
+                        [formControl]="minValidation"
                         [mode]="pickerMode.startsWith('daytime') ? 'daytime' : 'day'"
                         id="minDatePicker"
                         placeholder="Select a min date"
@@ -80,8 +80,8 @@
           Max-Date Validation (maxDate):
         </span>
       <div class="dp-option-playground">
-        <dp-date-picker [formControl]="maxValidation"
-                        [config]="{format: localFormat}"
+        <dp-date-picker [config]="{format: localFormat}"
+                        [formControl]="maxValidation"
                         [mode]="pickerMode.startsWith('daytime') ? 'daytime' : 'day'"
                         id="maxDatePicker"
                         placeholder="Select a max date"
@@ -95,8 +95,8 @@
           Display Date (displayDate):
         </span>
       <div class="dp-option-playground">
-        <dp-date-picker id="displayDate"
-                        [formControl]="displayDate"
+        <dp-date-picker [formControl]="displayDate"
+                        id="displayDate"
                         mode="day"
                         placeholder="Select a display date"
                         theme="dp-material">
@@ -109,8 +109,8 @@
         Min-Time Validation (minTime):
       </span>
       <div class="dp-option-playground">
-        <dp-date-picker [formControl]="minTimeValidation"
-                        [config]="{format: 'HH:mm:ss'}"
+        <dp-date-picker [config]="{format: 'HH:mm:ss'}"
+                        [formControl]="minTimeValidation"
                         id="minTimeValidation"
                         mode="time"
                         placeholder="Select a min time"
@@ -124,8 +124,8 @@
         Max-Time Validation (maxTime):
       </span>
       <div class="dp-option-playground">
-        <dp-date-picker [formControl]="maxTimeValidation"
-                        [config]="{format: 'HH:mm:ss'}"
+        <dp-date-picker [config]="{format: 'HH:mm:ss'}"
+                        [formControl]="maxTimeValidation"
                         id="maxTimeValidation"
                         mode="time"
                         placeholder="Select a max time"
@@ -165,8 +165,8 @@
           First Day of The week (firstDayOfWeek):
         </span>
       <div class="dp-option-playground">
-        <select id="firstDayOfWeekSelect"
-                [formControl]="firstDayOfWeek">
+        <select [formControl]="firstDayOfWeek"
+                id="firstDayOfWeekSelect">
           <option *ngFor="let day of DAYS" [value]="day"> {{day}}</option>
         </select>
       </div>
@@ -177,8 +177,8 @@
           Date Format (format):
         </span>
       <div class="dp-option-playground">
-        <input id="dateFormat"
-               [formControl]="format">
+        <input [formControl]="format"
+               id="dateFormat">
       </div>
     </div>
 
@@ -187,8 +187,8 @@
           Month Format (monthFormat):
         </span>
       <div class="dp-option-playground">
-        <input id="monthFormatInput"
-               [formControl]="monthFormat">
+        <input [formControl]="monthFormat"
+               id="monthFormatInput">
       </div>
     </div>
 
@@ -197,10 +197,10 @@
           Min Selectable Date (min):
         </span>
       <div class="dp-option-playground">
-        <dp-date-picker id="minSelectable"
+        <dp-date-picker [config]="{format: localFormat}"
                         [formControl]="min"
-                        [config]="{format: localFormat}"
                         [mode]="pickerMode.startsWith('daytime') ? 'daytime' : 'day'"
+                        id="minSelectable"
                         placeholder="Select a min date"
                         theme="dp-material">
         </dp-date-picker>
@@ -212,10 +212,10 @@
           Max Selectable Date (max):
         </span>
       <div class="dp-option-playground">
-        <dp-date-picker id="maxSelectable"
+        <dp-date-picker [config]="{format: localFormat}"
                         [formControl]="max"
-                        [config]="{format: localFormat}"
                         [mode]="pickerMode.startsWith('daytime') ? 'daytime' : 'day'"
+                        id="maxSelectable"
                         placeholder="Select a max date"
                         theme="dp-material">
         </dp-date-picker>
@@ -227,9 +227,9 @@
           Min Selectable Time (minTime):
         </span>
       <div class="dp-option-playground">
-        <dp-date-picker id="minTimeSelectable"
+        <dp-date-picker [config]="{format: 'HH:mm:ss'}"
                         [formControl]="minTime"
-                        [config]="{format: 'HH:mm:ss'}"
+                        id="minTimeSelectable"
                         mode="time"
                         placeholder="Select a min time"
                         theme="dp-material">
@@ -242,9 +242,9 @@
           Max Selectable Time (maxTime):
         </span>
       <div class="dp-option-playground">
-        <dp-date-picker id="maxTimeSelectable"
+        <dp-date-picker [config]="{format: 'HH:mm:ss'}"
                         [formControl]="maxTime"
-                        [config]="{format: 'HH:mm:ss'}"
+                        id="maxTimeSelectable"
                         mode="time"
                         placeholder="Select a max time"
                         theme="dp-material">
@@ -258,16 +258,16 @@
         </span>
       <div class="dp-option-playground">
         <label>Single
-          <input id="disableMultiselect"
-                 [formControl]="allowMultiSelect"
+          <input [formControl]="allowMultiSelect"
                  [value]="false"
+                 id="disableMultiselect"
                  name="allowMultiSelect"
                  type="radio">
         </label>
         <label>Multiple
-          <input id="enableMultiselect"
-                 [formControl]="allowMultiSelect"
+          <input [formControl]="allowMultiSelect"
                  [value]="true"
+                 id="enableMultiselect"
                  name="allowMultiSelect"
                  type="radio">
         </label>
@@ -280,9 +280,9 @@
         </span>
       <div class="dp-option-playground">
         <label>Close
-          <input id="closeOnSelect"
-                 [formControl]="closeOnSelect"
+          <input [formControl]="closeOnSelect"
                  [value]="true"
+                 id="closeOnSelect"
                  name="closeOnSelect"
                  type="radio">
         </label>
@@ -300,8 +300,8 @@
           Closing Delay in ms (closeOnSelectDelay):
         </span>
       <div class="dp-option-playground">
-        <input id="closeDelay"
-               [formControl]="closeOnSelectDelay"
+        <input [formControl]="closeOnSelectDelay"
+               id="closeDelay"
                type="number">
       </div>
     </div>
@@ -312,16 +312,16 @@
         </span>
       <div class="dp-option-playground">
         <label>No
-          <input id="noOpenOnFocus"
-                 [formControl]="openOnFocus"
+          <input [formControl]="openOnFocus"
                  [value]="false"
+                 id="noOpenOnFocus"
                  name="openOnFocus"
                  type="radio">
         </label>
         <label>Yes
-          <input id="yesOpenOnFocus"
-                 [formControl]="openOnFocus"
+          <input [formControl]="openOnFocus"
                  [value]="true"
+                 id="yesOpenOnFocus"
                  name="openOnFocus"
                  type="radio">
         </label>
@@ -334,16 +334,16 @@
         </span>
       <div class="dp-option-playground">
         <label>No
-          <input id="noOpenOnClick"
-                 [formControl]="openOnClick"
+          <input [formControl]="openOnClick"
                  [value]="false"
+                 id="noOpenOnClick"
                  name="openOnClick"
                  type="radio">
         </label>
         <label>Yes
-          <input id="yesOpenOnClick"
-                 [formControl]="openOnClick"
+          <input [formControl]="openOnClick"
                  [value]="true"
+                 id="yesOpenOnClick"
                  name="openOnClick"
                  type="radio">
         </label>
@@ -355,8 +355,8 @@
           Open Delay in ms (onOpenDelay):
         </span>
       <div class="dp-option-playground">
-        <input id="onOpenDelay"
-               [formControl]="onOpenDelay"
+        <input [formControl]="onOpenDelay"
+               id="onOpenDelay"
                type="number">
       </div>
     </div>
@@ -366,8 +366,8 @@
           Weekday Format (weekDayFormat):
         </span>
       <div class="dp-option-playground">
-        <input id="weekDaysFormat"
-               [formControl]="weekDayFormat"
+        <input [formControl]="weekDayFormat"
+               id="weekDaysFormat"
                type="text">
       </div>
     </div>
@@ -450,16 +450,16 @@
         </span>
       <div class="dp-option-playground">
         <label>Hidden
-          <input id="hideInputRadio"
-                 [formControl]="hideInputContainer"
+          <input [formControl]="hideInputContainer"
                  [value]="true"
+                 id="hideInputRadio"
                  name="hideInputContainer"
                  type="radio">
         </label>
         <label>Shown
-          <input id="showInputRadio"
-                 [formControl]="hideInputContainer"
+          <input [formControl]="hideInputContainer"
                  [value]="false"
+                 id="showInputRadio"
                  name="hideInputContainer"
                  type="radio">
         </label>
@@ -493,16 +493,16 @@
         </span>
       <div class="dp-option-playground">
         <label>Show
-          <input id="showWeekNumbersRadio"
-                 [formControl]="showWeekNumbers"
+          <input [formControl]="showWeekNumbers"
                  [value]="true"
+                 id="showWeekNumbersRadio"
                  name="showWeekNumbers"
                  type="radio">
         </label>
         <label>Hide
-          <input id="hideWeekNumbersRadio"
-                 [formControl]="showWeekNumbers"
+          <input [formControl]="showWeekNumbers"
                  [value]="false"
+                 id="hideWeekNumbersRadio"
                  name="showWeekNumbers"
                  type="radio">
         </label>
@@ -515,16 +515,16 @@
         </span>
       <div class="dp-option-playground">
         <label>Enabled
-          <input id="enableMonthSelector"
-                 [formControl]="enableMonthSelector"
+          <input [formControl]="enableMonthSelector"
                  [value]="true"
+                 id="enableMonthSelector"
                  name="enableMonthSelector"
                  type="radio">
         </label>
         <label>Disabled
-          <input id="disableMonthSelector"
-                 [formControl]="enableMonthSelector"
+          <input [formControl]="enableMonthSelector"
                  [value]="false"
+                 id="disableMonthSelector"
                  name="enableMonthSelector"
                  type="radio">
         </label>
@@ -536,8 +536,8 @@
           Year Format (yearFormat):
         </span>
       <div class="dp-option-playground">
-        <input id="yearFormat"
-               [formControl]="yearFormat"
+        <input [formControl]="yearFormat"
+               id="yearFormat"
                type="text">
       </div>
     </div>
@@ -548,16 +548,16 @@
         </span>
       <div class="dp-option-playground">
         <label>Enabled
-          <input id="showGoToCurrent"
-                 [formControl]="showGoToCurrent"
+          <input [formControl]="showGoToCurrent"
                  [value]="true"
+                 id="showGoToCurrent"
                  name="showGoToCurrent"
                  type="radio">
         </label>
         <label>Disabled
-          <input id="hideGoToCurrent"
-                 [formControl]="showGoToCurrent"
+          <input [formControl]="showGoToCurrent"
                  [value]="false"
+                 id="hideGoToCurrent"
                  name="showGoToCurrent"
                  type="radio">
         </label>
@@ -570,16 +570,16 @@
         </span>
       <div class="dp-option-playground">
         <label>Enabled
-          <input id="hideOnOutsideClick"
-                 [formControl]="hideOnOutsideClick"
+          <input [formControl]="hideOnOutsideClick"
                  [value]="true"
+                 id="hideOnOutsideClick"
                  name="hideOnOutsideClick"
                  type="radio">
         </label>
         <label>Disabled
-          <input id="showOnOutsideClick"
-                 [formControl]="hideOnOutsideClick"
+          <input [formControl]="hideOnOutsideClick"
                  [value]="false"
+                 id="showOnOutsideClick"
                  name="hideOnOutsideClick"
                  type="radio">
         </label>
@@ -592,16 +592,16 @@
         </span>
       <div class="dp-option-playground">
         <label>Enabled
-          <input id="enableUnSelect"
-                 [formControl]="unSelectOnClick"
+          <input [formControl]="unSelectOnClick"
                  [value]="true"
+                 id="enableUnSelect"
                  name="unSelectOnClick"
                  type="radio">
         </label>
         <label>Disabled
-          <input id="disableUnSelect"
-                 [formControl]="unSelectOnClick"
+          <input [formControl]="unSelectOnClick"
                  [value]="false"
+                 id="disableUnSelect"
                  name="unSelectOnClick"
                  type="radio">
         </label>
@@ -613,7 +613,7 @@
           Day Button Format (dayBtnFormat):
         </span>
       <div class="dp-option-playground">
-        <input id="dayBtnFormat" [formControl]="dayBtnFormat">
+        <input [formControl]="dayBtnFormat" id="dayBtnFormat">
       </div>
     </div>
 
@@ -622,8 +622,8 @@
           Month Button Format (monthBtnFormat):
         </span>
       <div class="dp-option-playground">
-        <input id="monthBtnFormat"
-               [formControl]="monthBtnFormat">
+        <input [formControl]="monthBtnFormat"
+               id="monthBtnFormat">
       </div>
     </div>
 
@@ -632,8 +632,8 @@
           12 Hour Format (hours12Format):
         </span>
       <div class="dp-option-playground">
-        <input id="hours12Format"
-               [formControl]="hours12Format">
+        <input [formControl]="hours12Format"
+               id="hours12Format">
       </div>
     </div>
 
@@ -642,8 +642,8 @@
           24 Hour Format (hours24Format):
         </span>
       <div class="dp-option-playground">
-        <input id="hours24Format"
-               [formControl]="hours24Format">
+        <input [formControl]="hours24Format"
+               id="hours24Format">
       </div>
     </div>
 
@@ -652,8 +652,8 @@
           Meridiem Format (meridiemFormat):
         </span>
       <div class="dp-option-playground">
-        <input id="meridiemFormat"
-               [formControl]="meridiemFormat">
+        <input [formControl]="meridiemFormat"
+               id="meridiemFormat">
       </div>
     </div>
 
@@ -662,8 +662,8 @@
           Minutes Format (minutesFormat):
         </span>
       <div class="dp-option-playground">
-        <input id="minutesFormat"
-               [formControl]="minutesFormat">
+        <input [formControl]="minutesFormat"
+               id="minutesFormat">
       </div>
     </div>
 
@@ -672,8 +672,8 @@
           Minutes Interval (minutesInterval):
         </span>
       <div class="dp-option-playground">
-        <input id="minutesInterval"
-               [formControl]="minutesInterval"
+        <input [formControl]="minutesInterval"
+               id="minutesInterval"
                type="number">
       </div>
     </div>
@@ -683,8 +683,8 @@
           Seconds Format (secondsFormat):
         </span>
       <div class="dp-option-playground">
-        <input id="secondsFormat"
-               [formControl]="secondsFormat">
+        <input [formControl]="secondsFormat"
+               id="secondsFormat">
       </div>
     </div>
 
@@ -693,8 +693,8 @@
           Seconds Interval (secondsInterval):
         </span>
       <div class="dp-option-playground">
-        <input id="secondsInterval"
-               [formControl]="secondsInterval"
+        <input [formControl]="secondsInterval"
+               id="secondsInterval"
                type="number">
       </div>
     </div>
@@ -705,16 +705,16 @@
         </span>
       <div class="dp-option-playground">
         <label>Enabled
-          <input id="showSeconds"
-                 [formControl]="showSeconds"
+          <input [formControl]="showSeconds"
                  [value]="true"
+                 id="showSeconds"
                  name="showSeconds"
                  type="radio">
         </label>
         <label>Disabled
-          <input id="hideSeconds"
-                 [formControl]="showSeconds"
+          <input [formControl]="showSeconds"
                  [value]="false"
+                 id="hideSeconds"
                  name="showSeconds"
                  type="radio">
         </label>
@@ -727,16 +727,16 @@
         </span>
       <div class="dp-option-playground">
         <label>Enabled
-          <input id="showTwentyFourHours"
-                 [formControl]="showTwentyFourHours"
+          <input [formControl]="showTwentyFourHours"
                  [value]="true"
+                 id="showTwentyFourHours"
                  name="showTwentyFourHours"
                  type="radio">
         </label>
         <label>Disabled
-          <input id="hideTwentyFourHours"
-                 [formControl]="showTwentyFourHours"
+          <input [formControl]="showTwentyFourHours"
                  [value]="false"
+                 id="hideTwentyFourHours"
                  name="showTwentyFourHours"
                  type="radio">
         </label>
@@ -748,8 +748,8 @@
           Time Separator (timeSeparator):
         </span>
       <div class="dp-option-playground">
-        <input id="timeSeparator"
-               [formControl]="timeSeparator">
+        <input [formControl]="timeSeparator"
+               id="timeSeparator">
       </div>
     </div>
 
@@ -759,16 +759,16 @@
         </span>
       <div class="dp-option-playground">
         <label>Enabled
-          <input id="showMultipleYearsNavigation"
-                 [formControl]="showMultipleYearsNavigation"
+          <input [formControl]="showMultipleYearsNavigation"
                  [value]="true"
+                 id="showMultipleYearsNavigation"
                  name="showMultipleYearsNavigation"
                  type="radio">
         </label>
         <label>Disabled
-          <input id="hideMultipleYearsNavigation"
-                 [formControl]="showMultipleYearsNavigation"
+          <input [formControl]="showMultipleYearsNavigation"
                  [value]="false"
+                 id="hideMultipleYearsNavigation"
                  name="showMultipleYearsNavigation"
                  type="radio">
         </label>
@@ -780,8 +780,8 @@
           Multiple years navigate by (multipleYearsNavigateBy):
         </span>
       <div class="dp-option-playground">
-        <input id="multipleYearsNavigateBy"
-               [formControl]="multipleYearsNavigateBy">
+        <input [formControl]="multipleYearsNavigateBy"
+               id="multipleYearsNavigateBy">
       </div>
     </div>
 
@@ -791,8 +791,8 @@
           Returned Value Type (returnedValueType):
         </span>
       <div class="dp-option-playground">
-        <select id="returnedValueType"
-                [formControl]="returnedValueType">
+        <select [formControl]="returnedValueType"
+                id="returnedValueType">
           <option *ngFor="let type of dateTypes" [value]="type.value">{{type.name}}</option>
         </select>
       </div>
@@ -804,16 +804,16 @@
         </span>
       <div class="dp-option-playground">
         <label>Enabled
-          <input id="enableCloseOnEnter"
-                 [formControl]="closeOnEnter"
+          <input [formControl]="closeOnEnter"
                  [value]="true"
+                 id="enableCloseOnEnter"
                  name="closeOnEnter"
                  type="radio">
         </label>
         <label>Disabled
-          <input id="disableCloseOnEnter"
-                 [formControl]="closeOnEnter"
+          <input [formControl]="closeOnEnter"
                  [value]="false"
+                 id="disableCloseOnEnter"
                  name="closeOnEnter"
                  type="radio">
         </label>
@@ -826,44 +826,44 @@
         </span>
       <div class="dp-option-playground">
         <label>1
-          <input id="numOfMonthRows1"
-                 [formControl]="numOfMonthRows"
+          <input [formControl]="numOfMonthRows"
                  [value]="1"
+                 id="numOfMonthRows1"
                  name="numOfMonthRows"
                  type="radio">
         </label>
         <label>2
-          <input id="numOfMonthRows2"
-                 [formControl]="numOfMonthRows"
+          <input [formControl]="numOfMonthRows"
                  [value]="2"
+                 id="numOfMonthRows2"
                  name="numOfMonthRows"
                  type="radio">
         </label>
         <label>3
-          <input id="numOfMonthRows3"
-                 [formControl]="numOfMonthRows"
+          <input [formControl]="numOfMonthRows"
                  [value]="3"
+                 id="numOfMonthRows3"
                  name="numOfMonthRows"
                  type="radio">
         </label>
         <label>4
-          <input id="numOfMonthRows4"
-                 [formControl]="numOfMonthRows"
+          <input [formControl]="numOfMonthRows"
                  [value]="4"
+                 id="numOfMonthRows4"
                  name="numOfMonthRows"
                  type="radio">
         </label>
         <label>6
-          <input id="numOfMonthRows6"
-                 [formControl]="numOfMonthRows"
+          <input [formControl]="numOfMonthRows"
                  [value]="6"
+                 id="numOfMonthRows6"
                  name="numOfMonthRows"
                  type="radio">
         </label>
         <label>12
-          <input id="numOfMonthRows12"
-                 [formControl]="numOfMonthRows"
+          <input [formControl]="numOfMonthRows"
                  [value]="12"
+                 id="numOfMonthRows12"
                  name="numOfMonthRows"
                  type="radio">
         </label>

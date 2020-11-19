@@ -41,8 +41,6 @@ This project exists thanks to all the people who contribute. [[Contribute]](CONT
 ## Backers  
   
 Thank you to all our backers! 🙏 [[Become a backer](https://opencollective.com/angular-datepicker#backer)]  
-<a href="https://opencollective.com/angular-datepicker/baker/0/website" target="_blank"><img src="https://opencollective.com/angular-datepicker/baker/0/avatar.svg"></a>
-
 <a href="https://opencollective.com/angular-datepicker#backers" target="_blank"><img src="https://opencollective.com/angular-datepicker/backers.svg?width=890"></a>  
 
   

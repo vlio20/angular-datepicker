@@ -6,52 +6,51 @@ import {Key} from 'selenium-webdriver';
 describe('dpDayPicker directive', () => {
   let page: DemoPage;
 
-  beforeEach(() => {
+  beforeEach(async () => {
     page = new DemoPage();
     page.navigateTo();
 
-    page.dayDirectiveMenu.click();
+    await page.dayDirectiveMenu.click();
   });
 
-  xit('should check that the popup appended to body', async () => {
-    page.dayDirectiveInput.click();
+  it('should check that the popup appended to body', async () => {
+    await page.dayDirectiveInput.click();
     expect(await page.datePickerPopup.isDisplayed()).toBe(true);
-    page.clickOnBody();
+    await page.clickOnBody();
     expect(await page.datePickerPopup.isDisplayed()).toBe(false);
   });
 
   it('should make sure that day directive keeps the prev state of the calendar', async () => {
-    page.dayDirectiveInput.click();
-    page.dayCalendarLeftNavBtn.click();
-    page.clickOnBody();
+    await page.dayDirectiveInput.click();
+    await page.dayCalendarLeftNavBtn.click();
+    await page.clickOnBody();
 
-    page.dayDirectiveInput.click();
+    await page.dayDirectiveInput.click();
     expect(await page.dayCalendarNavHeaderBtn.getText())
       .toEqual(moment().subtract(1, 'month').format('MMM, YYYY'));
   });
 
   it('should check that the theme is added and removed', async () => {
-    page.themeOnRadio.click();
+    await page.themeOnRadio.click();
     expect(await page.datePickerPopup.getAttribute('class')).toContain('dp-material');
-    page.themeOffRadio.click();
+    await page.themeOffRadio.click();
     expect(await page.datePickerPopup.getAttribute('class')).not.toContain('dp-material');
-    page.themeOnRadio.click();
+    await page.themeOnRadio.click();
     expect(await page.datePickerPopup.getAttribute('class')).toContain('dp-material');
   });
 
   it('should check that the onOpenDelay is working', async () => {
-    page.onOpenDelayInput.clear();
-    page.onOpenDelayInput.sendKeys(1000);
-    page.scrollIntoView(page.openBtn);
-    page.openBtn.click();
+    await page.scrollIntoView(page.openBtn, true);
+    await page.setInputValue(page.onOpenDelayInput, '1000');
+    await page.openBtn.click();
     expect(await page.datePickerPopup.isDisplayed()).toBe(true);
-    page.clickOnBody();
-    browser.sleep(200);
-    browser.waitForAngularEnabled(false);
-    page.dayDirectiveInput.click();
+    await page.clickOnBody();
+    await browser.sleep(200);
+    await browser.waitForAngularEnabled(false);
+    await page.dayDirectiveInput.click();
     expect(await page.datePickerPopup.isDisplayed()).toBe(false);
-    browser.waitForAngularEnabled(true);
-    browser.sleep(1000);
+    await browser.waitForAngularEnabled(true);
+    await browser.sleep(1000);
     expect(await page.datePickerPopup.isDisplayed()).toBe(true);
   });
 

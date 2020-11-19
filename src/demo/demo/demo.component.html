@@ -3,61 +3,61 @@
     <h3 class="dp-menu-header">Components</h3>
     <ul>
       <li>
-        <a id="daytimePickerMenu" [routerLink]="['/daytimePicker']" routerLinkActive="dp-active-item">
+        <a [routerLink]="['/daytimePicker']" id="daytimePickerMenu" routerLinkActive="dp-active-item">
           Day Time Picker
         </a>
       </li>
       <li>
-        <a id="daytimeInlineMenu" [routerLink]="['/daytimeInline']" routerLinkActive="dp-active-item">
+        <a [routerLink]="['/daytimeInline']" id="daytimeInlineMenu" routerLinkActive="dp-active-item">
           Day Time Picker inline
         </a>
       </li>
       <li>
-        <a id="daytimeDirectiveMenu" [routerLink]="['/daytimeDirective']" routerLinkActive="dp-active-item">
+        <a [routerLink]="['/daytimeDirective']" id="daytimeDirectiveMenu" routerLinkActive="dp-active-item">
           Day Time Picker directive
         </a>
       </li>
       <li>
-        <a id="dayPickerMenu" [routerLink]="['/dayPicker']" routerLinkActive="dp-active-item">
+        <a [routerLink]="['/dayPicker']" id="dayPickerMenu" routerLinkActive="dp-active-item">
           Day Picker
         </a>
       </li>
       <li>
-        <a id="dayInlineMenu" [routerLink]="['/dayInline']" routerLinkActive="dp-active-item">
+        <a [routerLink]="['/dayInline']" id="dayInlineMenu" routerLinkActive="dp-active-item">
           Day Picker inline
         </a>
       </li>
       <li>
-        <a id="dayDirectiveMenu" [routerLink]="['/dayDirective']" routerLinkActive="dp-active-item">
+        <a [routerLink]="['/dayDirective']" id="dayDirectiveMenu" routerLinkActive="dp-active-item">
           Day Picker directive</a>
       </li>
       <li>
-        <a id="monthPickerMenu" [routerLink]="['/monthPicker']" routerLinkActive="dp-active-item">
+        <a [routerLink]="['/monthPicker']" id="monthPickerMenu" routerLinkActive="dp-active-item">
           Month Picker
         </a>
       </li>
       <li>
-        <a id="monthInlineMenu" [routerLink]="['/monthInline']" routerLinkActive="dp-active-item">
+        <a [routerLink]="['/monthInline']" id="monthInlineMenu" routerLinkActive="dp-active-item">
           Month Picker inline
         </a>
       </li>
       <li>
-        <a id="monthDirectiveMenu" [routerLink]="['/monthDirective']" routerLinkActive="dp-active-item">
+        <a [routerLink]="['/monthDirective']" id="monthDirectiveMenu" routerLinkActive="dp-active-item">
           Month Picker directive
         </a>
       </li>
       <li>
-        <a id="timePickerMenu" [routerLink]="['/timePicker']" routerLinkActive="dp-active-item">
+        <a [routerLink]="['/timePicker']" id="timePickerMenu" routerLinkActive="dp-active-item">
           Time Picker
         </a>
       </li>
       <li>
-        <a id="timeInlineMenu" [routerLink]="['/timeInline']" routerLinkActive="dp-active-item">
+        <a [routerLink]="['/timeInline']" id="timeInlineMenu" routerLinkActive="dp-active-item">
           Time Picker inline
         </a>
       </li>
       <li>
-        <a id="timeDirectiveMenu" [routerLink]="['/timeDirective']" routerLinkActive="dp-active-item">
+        <a [routerLink]="['/timeDirective']" id="timeDirectiveMenu" routerLinkActive="dp-active-item">
           Time Picker directive
         </a>
       </li>
@@ -68,18 +68,6 @@
   <div class="dp-main-content">
 
     <div class="dp-toolbar">
-      <form #donateForm
-            action="https://www.paypal.com/cgi-bin/webscr"
-            class="dp-donate-btn"
-            method="post"
-            target="_blank">
-        <input name="cmd" type="hidden" value="_s-xclick">
-        <input name="hosted_button_id" type="hidden" value="8ZR2S5XYJ6WLJ">
-        <input (click)="donateClicked()" alt="PayPal - The safer, easier way to pay online!" border="0"
-               name="submit" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" type="image">
-        <img alt="" border="0" height="1" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1">
-      </form>
-
       <span class="dp-header">ng2-date-picker</span>
 
       <div class="dp-github-container">
@@ -94,7 +82,25 @@
     </div>
 
     <div class="dp-component-wrapper">
-      <router-outlet></router-outlet>
+      <div class="dp-donation-bar">
+        <form #donateForm
+              action="https://www.paypal.com/cgi-bin/webscr"
+              class="dp-donate-btn"
+              method="post"
+              target="_blank">
+          <input name="cmd" type="hidden" value="_s-xclick">
+          <input name="hosted_button_id" type="hidden" value="8ZR2S5XYJ6WLJ">
+          <input (click)="donateClicked()" alt="PayPal - The safer, easier way to pay online!" border="0"
+                 name="submit" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" type="image">
+          <img alt="" border="0" height="1" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1">
+        </form>
+        <a href="https://opencollective.com/angular-datepicker#backers" target="_blank"
+           (click)="becomeABackerClicked()"><img src="https://opencollective.com/angular-datepicker/backers.svg?"></a>
+      </div>
+
+      <div class="dp-router-wrapper">
+        <router-outlet></router-outlet>
+      </div>
     </div>
   </div>
 

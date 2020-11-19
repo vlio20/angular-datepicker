@@ -1,8 +1,7 @@
 <div class="dp-date-wrapper">
   <div class="dp-date-input-container">
     <div class="dp-form-item">
-      <dp-date-picker id="picker"
-                      #dateComponent
+      <dp-date-picker #dateComponent
                       (close)="closed()"
                       (onChange)="log($event)"
                       (onLeftNav)="onLeftNav($event)"
@@ -11,13 +10,14 @@
                       (open)="opened()"
                       [config]="config"
                       [displayDate]="displayDate"
+                      [formControl]="control"
                       [maxDate]="validationMaxDate"
                       [minDate]="validationMinDate"
                       [mode]="'day'"
                       [placeholder]="placeholder"
                       [required]="required"
                       [theme]="material ? 'dp-material dp-main' : 'dp-main'"
-                      [formControl]="control">
+                      id="picker">
       </dp-date-picker>
 
       <div class="dp-validations">
@@ -30,20 +30,20 @@
   </div>
 
   <dp-config-form #component
-                  pickerMode="dayPicker"
-                  [config]="config"
+                  (closeCalendar)="closeCalendar()"
+                  (moveCalendarTo)="moveCalendarTo($event)"
+                  (onConfigChange)="onConfigChange($event)"
+                  (onDisabledChange)="onDisabledChange($event)"
                   (onDisplayDateChange)="onDisplayDateChange($event)"
                   (onMaterialThemeChange)="onMaterialThemeChange($event)"
-                  (onDisabledChange)="onDisabledChange($event)"
-                  (onRequireValidationChange)="onRequireValidationChange($event)"
-                  (onMinValidationChange)="onMinValidationChange($event)"
+                  (onMaxTimeValidationChange)="onMaxTimeValidationChange($event)"
                   (onMaxValidationChange)="onMaxValidationChange($event)"
                   (onMinTimeValidationChange)="onMinTimeValidationChange($event)"
-                  (onMaxTimeValidationChange)="onMaxTimeValidationChange($event)"
+                  (onMinValidationChange)="onMinValidationChange($event)"
                   (onPlaceholderChange)="onPlaceholderChange($event)"
-                  (onConfigChange)="onConfigChange($event)"
+                  (onRequireValidationChange)="onRequireValidationChange($event)"
                   (openCalendar)="openCalendar()"
-                  (closeCalendar)="closeCalendar()"
-                  (moveCalendarTo)="moveCalendarTo($event)">
+                  [config]="config"
+                  pickerMode="dayPicker">
   </dp-config-form>
 </div>
