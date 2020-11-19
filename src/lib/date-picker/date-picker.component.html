@@ -4,8 +4,8 @@
        class="dp-input-container">
     <input (blur)="inputBlurred()"
            (focus)="inputFocused()"
-           (ngModelChange)="onViewDateChange($event)"
            (keydown.enter)="componentConfig.closeOnEnter && hideCalendar()"
+           (ngModelChange)="onViewDateChange($event)"
            [disabled]="disabled"
            [ngModel]="inputElementValue"
            [placeholder]="placeholder"

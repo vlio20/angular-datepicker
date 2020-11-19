@@ -1,4 +1,4 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 import {MonthCalendarComponent} from './month-calendar.component';
 import {UtilsService} from '../common/services/utils/utils.service';
 import {CalendarNavComponent} from '../calendar-nav/calendar-nav.component';
@@ -10,7 +10,7 @@ describe('Component: MonthCalendarComponent', () => {
   let component: MonthCalendarComponent;
   let fixture: ComponentFixture<MonthCalendarComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [MonthCalendarComponent, CalendarNavComponent],
       providers: [MonthCalendarService, UtilsService]

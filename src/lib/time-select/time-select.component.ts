@@ -57,27 +57,6 @@ const moment = momentNs;
 })
 export class TimeSelectComponent implements OnInit, OnChanges, ControlValueAccessor, Validator {
 
-  get selected(): Moment {
-    return this._selected;
-  }
-
-  set selected(selected: Moment) {
-    this._selected = selected;
-    this.calculateTimeParts(this.selected);
-
-    this.showDecHour = this.timeSelectService.shouldShowDecrease(this.componentConfig, this._selected, 'hour');
-    this.showDecMinute = this.timeSelectService.shouldShowDecrease(this.componentConfig, this._selected, 'minute');
-    this.showDecSecond = this.timeSelectService.shouldShowDecrease(this.componentConfig, this._selected, 'second');
-
-    this.showIncHour = this.timeSelectService.shouldShowIncrease(this.componentConfig, this._selected, 'hour');
-    this.showIncMinute = this.timeSelectService.shouldShowIncrease(this.componentConfig, this._selected, 'minute');
-    this.showIncSecond = this.timeSelectService.shouldShowIncrease(this.componentConfig, this._selected, 'second');
-
-    this.showToggleMeridiem = this.timeSelectService.shouldShowToggleMeridiem(this.componentConfig, this._selected);
-
-    this.onChangeCallback(this.processOnChangeCallback(selected));
-  }
-
   @Input() config: ITimeSelectConfig;
   @Input() displayDate: SingleCalendarValue;
   @Input() minDate: SingleCalendarValue;
@@ -106,11 +85,32 @@ export class TimeSelectComponent implements OnInit, OnChanges, ControlValueAcces
     triggerChange: this.emitChange.bind(this)
   };
 
-  _selected: Moment;
-
   constructor(public timeSelectService: TimeSelectService,
               public utilsService: UtilsService,
               public cd: ChangeDetectorRef) {
+  }
+
+  _selected: Moment;
+
+  get selected(): Moment {
+    return this._selected;
+  }
+
+  set selected(selected: Moment) {
+    this._selected = selected;
+    this.calculateTimeParts(this.selected);
+
+    this.showDecHour = this.timeSelectService.shouldShowDecrease(this.componentConfig, this._selected, 'hour');
+    this.showDecMinute = this.timeSelectService.shouldShowDecrease(this.componentConfig, this._selected, 'minute');
+    this.showDecSecond = this.timeSelectService.shouldShowDecrease(this.componentConfig, this._selected, 'second');
+
+    this.showIncHour = this.timeSelectService.shouldShowIncrease(this.componentConfig, this._selected, 'hour');
+    this.showIncMinute = this.timeSelectService.shouldShowIncrease(this.componentConfig, this._selected, 'minute');
+    this.showIncSecond = this.timeSelectService.shouldShowIncrease(this.componentConfig, this._selected, 'second');
+
+    this.showToggleMeridiem = this.timeSelectService.shouldShowToggleMeridiem(this.componentConfig, this._selected);
+
+    this.onChangeCallback(this.processOnChangeCallback(selected));
   }
 
   ngOnInit() {

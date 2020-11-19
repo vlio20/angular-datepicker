@@ -91,7 +91,7 @@ import {TimeDirectiveDemoComponent} from './demo/date-pickers/time/time-directiv
         path: '**',
         redirectTo: ''
       }
-    ])
+    ], {relativeLinkResolution: 'legacy'})
   ],
   declarations: [
     DemoRootComponent,
