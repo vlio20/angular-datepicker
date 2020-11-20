@@ -1,6 +1,9 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+### Improvements
+- Update to Angular 11 ([???](https://github.com/vlio20/angular-datepicker/commit/???)) closes [#525](https://github.com/vlio20/angular-datepicker/issues/525)
+
 <a name="10.11.10"></a>
 # [10.0.1] (2020-11-10)
 
