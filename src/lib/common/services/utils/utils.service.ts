@@ -98,7 +98,7 @@ export class UtilsService {
 
   // todo:: add unit test
   convertToMomentArray(value: CalendarValue,
-                       config: {allowMultiSelect?: boolean, format?: string}): Moment[] {
+                       config: { allowMultiSelect?: boolean, format?: string }): Moment[] {
     let retVal: Moment[];
     switch (this.getInputType(value, config.allowMultiSelect)) {
       case (ECalendarValue.String):
@@ -179,7 +179,7 @@ export class UtilsService {
         ? currentlySelected.concat([date.date])
         : currentlySelected.filter(d => !d.isSame(date.date, granularity));
     } else {
-      return !date.selected ? [date.date] : [];
+      return [date.date];
     }
   }
 
@@ -315,7 +315,7 @@ export class UtilsService {
     return date.isBetween(from, to, 'day', '[]');
   }
 
-  convertPropsToMoment(obj: {[key: string]: any}, format: string, props: string[]) {
+  convertPropsToMoment(obj: { [key: string]: any }, format: string, props: string[]) {
     props.forEach((prop) => {
       if (obj.hasOwnProperty(prop)) {
         obj[prop] = this.convertToMoment(obj[prop], format);
