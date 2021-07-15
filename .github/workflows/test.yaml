@@ -36,7 +36,7 @@ jobs:
         run: npm run lint
 
       - name: run unit tests
-        run: npm test:ci
+        run: npm run test:ci
 
       - name: run tests
         run: npm run e2e:headless
