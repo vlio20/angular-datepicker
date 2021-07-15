@@ -76,6 +76,7 @@
     "typescript": "4.3.5",
     "uglify-js": "^3.7.2",
     "web-animations-js": "^2.3.2",
+    "webdriver-manager": "^12.1.8",
     "zone.js": "~0.11.4"
   },
   "angularCompilerOptions": {

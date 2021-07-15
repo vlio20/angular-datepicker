@@ -43,6 +43,7 @@ describe('dpDayPicker dayPicker', () => {
     await page.clickOnBody();
     browser.sleep(200);
     await browser.waitForAngularEnabled(false);
+    await page.scrollIntoView(page.dayPickerInput, true);
     await page.dayPickerInput.click();
     expect(await page.datePickerPopup.isDisplayed()).toBe(false);
     await browser.waitForAngularEnabled(true);

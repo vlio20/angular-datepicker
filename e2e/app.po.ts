@@ -168,7 +168,7 @@ export class DemoPage {
 
   async clearInput(elem: ElementFinder): Promise<void> {
     await elem.click();
-    const keys = (await elem.getAttribute('value')).length;
+    const keys = (await elem.getAttribute('value'))?.length || 20;
     const tmpArr = [...Array(keys)].map(() => 0);
     await elem.click();
 

@@ -11,6 +11,7 @@ describe('dpDayPicker configuration', () => {
   });
 
   it('openOnClick = false, should not open picker when clicked', async () => {
+    await page.scrollIntoView(page.openOnClickRadioOff);
     await page.openOnClickRadioOff.click();
     await page.openOnFocusRadioOff.click();
     await page.daytimePickerInput.click();
@@ -18,6 +19,7 @@ describe('dpDayPicker configuration', () => {
   });
 
   it('openOnClick = true, should open picker when clicked', async () => {
+    await page.scrollIntoView(page.openOnClickRadioOn);
     await page.openOnClickRadioOn.click();
     await page.openOnFocusRadioOff.click();
     await page.daytimePickerInput.click();

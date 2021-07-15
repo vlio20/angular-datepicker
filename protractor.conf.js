@@ -16,11 +16,16 @@ exports.config = {
     maxInstances: headless ? 5 : 1,
     chromeOptions: {
       args: headless ? [
+        '--no-sandbox',
         '--headless',
         '--disable-gpu',
-        '--window-size=1280,1024'] : []
+        '--window-size=1280,1024'] :
+        [
+          '--no-sandbox'
+        ]
     }
   },
+  chromeOnly:true,
   directConnect: true,
   baseUrl: 'http://localhost:4200/',
   framework: 'jasmine',
