@@ -1,0 +1,37 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: nanasess/setup-chromedriver@master
+      - run: |
+          export DISPLAY=:99
+          chromedriver --url-base=/wd/hub &
+          sudo Xvfb -ac :99 -screen 0 1280x1024x16 > /dev/null 2>&1 & # optional
+
+      - name: install deps
+        run: npm install
+
+      - name: run lint
+        run: npm run lint
+
+      - name: run tests
+        run: npm test -- --watch=false
+
+      - name: run tests
+        run: npm run e2e:headless
+
+      - name: run build test
+        run: npm run build:demo
+
+      - name: run build prod
+        run: npm run build:prod
