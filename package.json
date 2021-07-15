@@ -68,6 +68,7 @@
     "ncp": "^2.0.0",
     "ng-packagr": "^12.1.2",
     "protractor": "~7.0.0",
+    "puppeteer": "^10.1.0",
     "rimraf": "^2.7.1",
     "rxjs": "^6.5.3",
     "ts-node": "^8.5.4",
