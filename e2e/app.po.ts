@@ -168,7 +168,7 @@ export class DemoPage {
 
   async clearInput(elem: ElementFinder): Promise<void> {
     await elem.click();
-    const keys = (await elem.getAttribute('value'))?.length || 20;
+    const keys = (await this.getInputVal(elem))?.length || 20;
     const tmpArr = [...Array(keys)].map(() => 0);
     await elem.click();
 
@@ -184,5 +184,14 @@ export class DemoPage {
   async setInputValue(input: ElementFinder, val: string): Promise<void> {
     await this.clearInput(input);
     await input.sendKeys(val);
+  }
+
+  async getInputVal(input): Promise<string> {
+    const value = await input.getAttribute('value')
+    if (value !== null) {
+      return value;
+    }
+
+    return  browser.executeScript(`return arguments[0].value`, input);
   }
 }
