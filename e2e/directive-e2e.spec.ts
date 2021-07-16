@@ -66,7 +66,7 @@ describe('dpDayPicker directive', () => {
 
     await page.dayDirectiveInput.sendKeys(Key.DELETE);
     await page.dayDirectiveInput.sendKeys('2');
-    expect(await page.dayDirectiveInput.getAttribute('value')).toBe('20-04-2017');
+    expect(await page.getInputVal(page.dayDirectiveInput)).toBe('20-04-2017');
     expect(await page.selectedDays.count()).toBe(1);
     expect(await page.selectedDays.first().getText()).toBe('20');
     expect(await page.dayCalendarNavHeaderBtn.getText()).toBe('Apr, 2017');

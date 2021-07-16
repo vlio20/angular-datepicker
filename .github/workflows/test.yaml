@@ -1,0 +1,48 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Cache node modules
+        uses: actions/cache@v1
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - uses: nanasess/setup-chromedriver@master
+      - run: |
+          export DISPLAY=:99
+          chromedriver --url-base=/wd/hub &
+          sudo Xvfb -ac :99 -screen 0 1280x1024x16 > /dev/null 2>&1 & # optional
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14
+
+      - name: install deps
+        run: npm install
+
+      - name: run lint
+        run: npm run lint
+
+      - name: run unit tests
+        run: npm run test:ci
+
+      - name: run tests
+        run: npm run e2e:headless
+
+      - name: run build test
+        run: npm run build:demo
+
+      - name: run build prod
+        run: npm run build:prod
