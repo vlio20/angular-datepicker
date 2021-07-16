@@ -251,7 +251,7 @@ describe('dpDayPicker dayPicker', () => {
   });
 
   it('should check dateFormat is working', async () => {
-    await page.setInputValue(page.dateFormatInput,'DD');
+    await page.setInputValue(page.dateFormatInput, 'DD');
     await page.dayPickerInput.click();
     await page.clickOnDayButton('15');
     expect(await page.getInputVal(page.dayPickerInput)).toEqual('15');
