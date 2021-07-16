@@ -43,6 +43,7 @@ describe('dpDayPicker dayPicker', () => {
     await page.clickOnBody();
     browser.sleep(200);
     await browser.waitForAngularEnabled(false);
+    await page.scrollIntoView(page.dayPickerInput, true);
     await page.dayPickerInput.click();
     expect(await page.datePickerPopup.isDisplayed()).toBe(false);
     await browser.waitForAngularEnabled(true);
@@ -237,7 +238,7 @@ describe('dpDayPicker dayPicker', () => {
     expect(await page.datePickerPopup.isDisplayed()).toBe(true);
     await browser.sleep(200);
     expect(await page.datePickerPopup.isDisplayed()).toBe(true);
-    await browser.sleep(900);
+    await browser.sleep(1000);
     expect(await page.datePickerPopup.isDisplayed()).toBe(false);
   });
 
@@ -250,11 +251,10 @@ describe('dpDayPicker dayPicker', () => {
   });
 
   it('should check dateFormat is working', async () => {
-    await page.dateFormatInput.clear();
-    await page.dateFormatInput.sendKeys('DD');
+    await page.setInputValue(page.dateFormatInput, 'DD');
     await page.dayPickerInput.click();
     await page.clickOnDayButton('15');
-    expect(await page.dayPickerInput.getAttribute('value')).toEqual('15');
+    expect(await page.getInputVal(page.dayPickerInput)).toEqual('15');
   });
 
   it('should check allow multiselect is working', async () => {
@@ -266,14 +266,14 @@ describe('dpDayPicker dayPicker', () => {
     await page.clickOnDayButton('16');
     expect(await page.selectedDays.count()).toBe(3);
     expect(await page.datePickerPopup.isDisplayed()).toBe(true);
-    expect(await page.dayPickerInput.getAttribute('value')).toEqual(
+    expect(await page.getInputVal(page.dayPickerInput)).toEqual(
       `${moment().date(18).format('DD-MM-YYYY')} | ${moment().date(15).format('DD-MM-YYYY')} | ${moment().date(16)
         .format('DD-MM-YYYY')}`
     );
 
     await page.clickOnDayButton('18');
     expect(await page.selectedDays.count()).toBe(2);
-    expect(await page.dayPickerInput.getAttribute('value')).toEqual(
+    expect(await page.getInputVal(page.dayPickerInput)).toEqual(
       `${moment().date(15).format('DD-MM-YYYY')} | ${moment().date(16).format('DD-MM-YYYY')}`
     );
   });
