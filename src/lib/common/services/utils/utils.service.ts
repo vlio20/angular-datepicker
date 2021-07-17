@@ -179,7 +179,7 @@ export class UtilsService {
         ? currentlySelected.concat([date.date])
         : currentlySelected.filter(d => !d.isSame(date.date, granularity));
     } else {
-      return !date.selected ? [date.date] : [];
+      return [date.date];
     }
   }
 
