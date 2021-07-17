@@ -2,7 +2,7 @@
 All notable changes to this project will be documented in this file.
 
 <a name="12.0.0"></a>
-# [12.0.0] (2021-07-16)
+# [12.0.0] (2021-07-17)
 
 ### Improvements
 - Update to Angular 12 ([e7e0e63](https://github.com/vlio20/angular-datepicker/commit/e7e0e63)) closes [#548](https://github.com/vlio20/angular-datepicker/issues/548) and [#550](https://github.com/vlio20/angular-datepicker/issues/550)
