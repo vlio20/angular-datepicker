@@ -1,7 +1,7 @@
 {
   "name": "ng2-date-picker",
   "author": "Vlad Ioffe",
-  "version": "12.0.1",
+  "version": "12.0.2",
   "license": "MIT",
   "main": "index.js",
   "scripts": {
@@ -17,7 +17,7 @@
     "build:index": "node build.js",
     "build:demo": "rm -rf dist/ && ng build --configuration production --base-href /angular-datepicker/ && npm run build:index",
     "build:prod": "ng-packagr -p package.json",
-    "release": "npm run build:prod && cd bin && npm publish bin",
+    "release": "npm run build:prod && cd bin && npm publish",
     "fullrelease": "git checkout release && git merge master && npm run release && npm run build:demo && git add -A && git commit -am \"demo\" && git subtree push --prefix dist origin gh-pages && git checkout master",
     "pack": "cd bin && npm pack"
   },
