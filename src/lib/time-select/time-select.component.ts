@@ -16,7 +16,7 @@ import {
   ViewEncapsulation
 } from '@angular/core';
 import {TimeSelectService, TimeUnit} from './time-select.service';
-import * as momentNs from 'moment';
+import * as moment from 'moment';
 import {Moment} from 'moment';
 import {ITimeSelectConfig, ITimeSelectConfigInternal} from './time-select-config.model';
 import {
@@ -33,7 +33,7 @@ import {IDate} from '../common/models/date.model';
 import {DateValidator} from '../common/types/validator.type';
 import {IDayCalendarConfigInternal} from '../day-calendar/day-calendar-config.model';
 
-const moment = momentNs;
+
 
 @Component({
   selector: 'dp-time-select',
