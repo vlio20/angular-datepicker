@@ -1,10 +1,10 @@
 import {inject, TestBed} from '@angular/core/testing';
 import {TimeSelectService} from './time-select.service';
-import * as momentNs from 'moment';
+import * as moment from 'moment';
 import {UtilsService} from '../common/services/utils/utils.service';
 import {ITimeSelectConfigInternal} from './time-select-config.model';
 
-const moment = momentNs;
+
 
 describe('Service: TimeSelectService', () => {
   beforeEach(() => {

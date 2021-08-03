@@ -1,9 +1,7 @@
 import {inject, TestBed} from '@angular/core/testing';
 import {UtilsService} from './utils.service';
-import * as momentNs from 'moment';
+import * as moment from 'moment';
 import {IDate} from '../../models/date.model';
-
-const moment = momentNs;
 
 describe('Service: ObUtilsService', () => {
   beforeEach(() => {

@@ -4,14 +4,12 @@ import {DatePickerComponent} from '../../lib/date-picker/date-picker.component';
 import {DatePickerDirective} from '../../lib/date-picker/date-picker.directive';
 import {Component, HostListener, OnInit, ViewChild} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import * as momentNs from 'moment';
+import * as moment from 'moment';
 import {Moment} from 'moment';
 import {GaService} from '../services/ga/ga.service';
 import {ECalendarValue} from '../../lib/common/types/calendar-value-enum';
 import {INavEvent} from '../../lib/common/models/navigation-event.model';
 import {ISelectionEvent} from '../../lib/common/types/selection-event.model';
-
-const moment = momentNs;
 
 const GLOBAL_OPTION_KEYS = [
   'theme',
