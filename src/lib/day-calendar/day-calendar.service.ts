@@ -92,7 +92,7 @@ export class DayCalendarService {
     });
 
     if (!config.showNearMonthDays) {
-      monthArray = this.removeNearMonthWeeks(month, monthArray);
+      monthArray = this.removeNearMonthWeeks(parsedMonth, monthArray);
     }
 
     return monthArray;
