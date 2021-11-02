@@ -9,6 +9,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - uses: browser-actions/setup-chrome@latest
+      - run: chrome --version
+
       - name: Cache node modules
         uses: actions/cache@v1
         with:
