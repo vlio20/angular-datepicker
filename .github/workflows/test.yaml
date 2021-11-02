@@ -12,7 +12,7 @@ jobs:
       - name: update chrome
         run: |
           sudo apt-get update
-          sudo apt-get install google-chrome-stable
+          sudo apt-get --only-upgrade install google-chrome-stable
           google-chrome --version
 
       - name: Cache node modules
@@ -24,6 +24,8 @@ jobs:
             ${{ runner.os }}-node-
 
       - uses: nanasess/setup-chromedriver@master
+          with:
+            chromedriver-version: '94.0.4606.61'
       - run: |
           export DISPLAY=:99
           chromedriver --url-base=/wd/hub &
