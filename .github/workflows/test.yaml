@@ -9,8 +9,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - uses: browser-actions/setup-chrome@latest
-      - run: chrome --version
+      - name: update chrome
+        run: |
+          sudo apt-get update
+          sudo apt-get --only-upgrade install google-chrome-stable
+          google-chrome --version
 
       - name: Cache node modules
         uses: actions/cache@v1
