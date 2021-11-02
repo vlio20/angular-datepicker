@@ -11,7 +11,7 @@
     "test": "ng test",
     "test:ci": "ng test --watch=false --browsers=ChromeHeadlessCustom",
     "lint": "ng lint",
-    "e2e": "ng e2e --port 3200",
+    "e2e": "ng e2e --port 3200 --webdriverUpdate=false",
     "e2e:quick": "ng e2e --dev-server-target --webdriverUpdate=false",
     "e2e:headless": "HEADLESS=true ng e2e",
     "build:index": "node build.js",
