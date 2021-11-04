@@ -97,6 +97,21 @@ describe('Service: Calendar', () => {
       expect(monthWeeks[5][6].date.format('DD-MM-YYYY')).toBe('06-11-2016');
       expect(monthWeeks[2][1].selected).toBe(false);
       expect(monthWeeks[2][3].selected).toBe(false);
+
+
+      const today = moment('11-10-2016', 'DD-MM-YYYY').toDate();
+      jasmine.clock().mockDate(today);
+      monthWeeks = service.generateMonthArray(
+        {
+          firstDayOfWeek: 'mo'
+        },
+        moment('test', 'DD-MM-YYYY'),
+        []
+      );
+      expect(monthWeeks[0][0].date.format('DD-MM-YYYY')).toBe('26-09-2016');
+      expect(monthWeeks[5][6].date.format('DD-MM-YYYY')).toBe('06-11-2016');
+      expect(monthWeeks[2][1].selected).toBe(false);
+      expect(monthWeeks[2][3].selected).toBe(false);
     }));
 
   it('should check the generateWeekdays method', inject([DayCalendarService],

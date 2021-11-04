@@ -1,6 +1,13 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+<a name="12.0.4"></a>
+# [12.0.4] (2021-11-04)
+
+### Bug fixes
+- Manual input crashes the application ([7afd292](https://github.com/vlio20/angular-datepicker/commit/7afd292)) closes [#561](https://github.com/vlio20/angular-datepicker/issues/561) and [#550](https://github.com/vlio20/angular-datepicker/issues/550)
+- Month picker button size changed ([c746af4](https://github.com/vlio20/angular-datepicker/commit/c746af4)) closes [#558](https://github.com/vlio20/angular-datepicker/issues/558) and [#550](https://github.com/vlio20/angular-datepicker/issues/550)
+
 <a name="12.0.0"></a>
 # [12.0.0] (2021-07-17)
 
