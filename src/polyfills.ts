@@ -29,7 +29,7 @@ import 'core-js/es6/date';
 import 'core-js/es6/array';
 import 'core-js/es6/regexp';
 import 'core-js/es6/map';
-import 'core-js/es6/set'; // Run `npm install --save classlist.js`. // Run `npm install --save web-animations-js`.
+import 'core-js/es6/set';
 /** Evergreen browsers require these. **/
 import 'core-js/es6/reflect';
 import 'core-js/es7/reflect';
