@@ -37,7 +37,6 @@
     "picker",
     "angular-datepicker"
   ],
-  "peerDependencies": {},
   "devDependencies": {
     "@angular-devkit/build-angular": "^13.0.3",
     "@angular-devkit/core": "^13.0.3",
@@ -60,7 +59,6 @@
     "@types/node": "14.14.31",
     "@typescript-eslint/eslint-plugin": "^5.4.0",
     "@typescript-eslint/parser": "^5.4.0",
-    "core-js": "^2.6.12",
     "eslint": "^8.3.0",
     "jasmine-core": "^3.10.1",
     "jasmine-spec-reporter": "^7.0.0",
