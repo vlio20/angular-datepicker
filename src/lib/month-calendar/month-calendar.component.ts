@@ -139,9 +139,7 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
   init(): void {
     this.componentConfig = this.monthCalendarService.getConfig(this.config);
     this.selected = this.selected || [];
-    this.currentDateView = this.displayDate
-      ? this.displayDate
-      : this.utilsService
+    this.currentDateView = this.displayDate ?? this.utilsService
         .getDefaultDisplayDate(
           this.currentDateView,
           this.selected,

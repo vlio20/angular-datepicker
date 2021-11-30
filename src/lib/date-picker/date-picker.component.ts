@@ -88,7 +88,7 @@ export class DatePickerComponent implements OnChanges,
   @Input() mode: CalendarMode = 'day';
   @Input() placeholder: string = '';
   @Input() disabled: boolean = false;
-  @Input() displayDate: SingleCalendarValue;
+  @Input() displayDate: Moment;
   @HostBinding('class') @Input() theme: string;
   @Input() minDate: SingleCalendarValue;
   @Input() maxDate: SingleCalendarValue;
