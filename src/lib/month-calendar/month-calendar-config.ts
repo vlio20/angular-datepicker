@@ -1,6 +1,6 @@
 import {Moment} from 'moment';
 import {ICalendar, ICalendarInternal} from '../common/models/calendar.model';
-import {ECalendarValue} from '..';
+import {ECalendarValue} from '../common/types/calendar-value-enum';
 
 export interface IConfig {
   isMonthDisabledCallback?: (date: Moment) => boolean;

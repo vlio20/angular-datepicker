@@ -16,7 +16,7 @@
     "e2e:headless": "HEADLESS=true ng e2e",
     "build:index": "node build.js",
     "build:demo": "rm -rf dist/ && ng build --configuration production --base-href /angular-datepicker/ && npm run build:index",
-    "build:prod": "ng-packagr -p package.json",
+    "build:prod": "ng-packagr",
     "release": "npm run build:prod && cd bin && npm publish",
     "fullrelease": "git checkout release && git merge master && npm run release && npm run build:demo && git add -A && git commit -am \"demo\" && git subtree push --prefix dist origin demo && git checkout master",
     "pack": "cd bin && npm pack"
@@ -81,18 +81,6 @@
   "angularCompilerOptions": {
     "skipTemplateCodegen": true,
     "strictMetadataEmit": true
-  },
-  "ngPackage": {
-    "lib": {
-      "entryFile": "src/lib/index.ts",
-      "umdModuleIds": {
-        "moment": "moment"
-      }
-    },
-    "dest": "bin",
-    "allowedNonPeerDependencies": [
-      "moment"
-    ]
   },
   "dependencies": {
     "moment": "^2.29.1"

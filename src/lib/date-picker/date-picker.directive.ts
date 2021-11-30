@@ -16,9 +16,11 @@ import {
   ViewContainerRef
 } from '@angular/core';
 import {NgControl} from '@angular/forms';
-import {CalendarValue, ISelectionEvent, SingleCalendarValue} from '..';
 import {INavEvent} from '../common/models/navigation-event.model';
 import {UtilsService} from '../common/services/utils/utils.service'
+import {CalendarValue} from '../common/types/calendar-value';
+import {ISelectionEvent} from '../common/types/selection-event.model';
+import {SingleCalendarValue} from '../common/types/single-calendar-value';
 
 @Directive({
   exportAs: 'dpDayPicker',
