@@ -10,7 +10,7 @@
     "build": "ng build",
     "build:lib": "ng build ng2-date-picker",
     "test": "ng test",
-    "test:ci": "ng test --watch=false --browsers=ChromeHeadlessCustom",
+    "test:ci": "ng test --watch=false --browsers=ChromeHeadless",
     "lint": "ng lint",
     "e2e": "ng e2e --port 3200",
     "e2e:quick": "ng e2e --dev-server-target --webdriverUpdate=false",
