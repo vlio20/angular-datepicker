@@ -1,9 +1,0 @@
-{
-  "lib": {
-    "entryFile": "./src/lib/index.ts",
-  },
-  "dest": "bin",
-  "allowedNonPeerDependencies": [
-    "moment"
-  ]
-}

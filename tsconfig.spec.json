@@ -8,18 +8,18 @@
       "es2016",
       "dom"
     ],
-    "outDir": "../out-tsc/spec",
+    "outDir": "./out-tsc/spec",
     "module": "es2020",
     "target": "es6",
-    "baseUrl": "",
+    "baseUrl": "tsconfig.spec",
     "types": [
       "jasmine",
       "node"
     ]
   },
   "files": [
-    "test.ts",
-    "polyfills.ts"
+    "src/test.ts",
+    "src/polyfills.ts"
   ],
   "include": [
     "**/*.spec.ts"
