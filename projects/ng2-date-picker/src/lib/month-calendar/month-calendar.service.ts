@@ -40,7 +40,7 @@ export class MonthCalendarService {
   }
 
   generateYear(config: IMonthCalendarConfig, year: Dayjs, selected: Dayjs[] = null): IMonth[][] {
-    const index = year.clone().startOf('year');
+    let index = year.clone().startOf('year');
 
     return this.utilsService.createArray(config.numOfMonthRows).map(() => {
       return this.utilsService.createArray(12 / config.numOfMonthRows).map(() => {
@@ -53,7 +53,7 @@ export class MonthCalendarService {
           text: this.getMonthBtnText(config, date)
         };
 
-        index.add(1, 'month');
+        index = index.add(1, 'month');
 
         return month;
       });
