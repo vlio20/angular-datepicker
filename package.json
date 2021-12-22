@@ -18,7 +18,8 @@
     "build:index": "node build.js",
     "build:demo": "rm -rf dist/ && ng build --configuration production --base-href /angular-datepicker/ && npm run build:index",
     "release": "npm run build:lib && cd dist/ng2-date-picker && npm publish",
-    "fullrelease": "git checkout release && git merge master && npm run release && npm run build:demo && git add -A && git commit -am \"demo\" && git subtree push --prefix dist origin demo && git checkout master",
+    "release:demo": "build:demo && git add -A && git commit -am \"demo\" && git subtree push --prefix dist origin demo",
+    "fullrelease": "git checkout release && git merge master && npm run release:demo && npm run release && git checkout master",
     "pack": "cd bin && npm pack"
   },
   "repository": {
