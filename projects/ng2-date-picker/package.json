@@ -1,0 +1,28 @@
+{
+  "name": "ng2-date-picker",
+  "version": "13.0.0",
+  "author": "Vlad Ioffe",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vlio20/angular-datepicker.git"
+  },
+  "keywords": [
+    "angular2",
+    "date",
+    "datepicker",
+    "date-picker",
+    "ng2-datepicker",
+    "ng-datepicker",
+    "angular",
+    "picker",
+    "angular-datepicker"
+  ],
+  "peerDependencies": {
+    "@angular/common": "^13.1.1",
+    "@angular/core": "^13.1.1",
+    "moment": "^2.29.1"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  }
+}

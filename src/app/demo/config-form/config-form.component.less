@@ -1,0 +1,21 @@
+@import '../common/styles/variables';
+
+.dp-page-content {
+  display: flex;
+}
+
+.dp-attributes, .dp-configs, .dp-api {
+  flex: 1;
+}
+
+.dp-configs, .dp-api {
+  margin-left: 10px;
+}
+
+.dp-option {
+  padding: 10px;
+
+  &:nth-child(odd) {
+    background: fade(@c-light-gray, 30);
+  }
+}
