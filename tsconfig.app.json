@@ -1,16 +1,8 @@
+/* To learn more about this file see: https://angular.io/config/tsconfig. */
 {
+  "extends": "./tsconfig.json",
   "compilerOptions": {
-    "sourceMap": true,
-    "declaration": false,
-    "moduleResolution": "node",
-    "experimentalDecorators": true,
-    "lib": [
-      "es2016",
-      "dom"
-    ],
     "outDir": "./out-tsc/app",
-    "target": "es5",
-    "module": "es2020",
     "baseUrl": "tsconfig.app",
     "types": []
   },

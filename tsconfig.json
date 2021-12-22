@@ -1,36 +1,36 @@
+/* To learn more about this file see: https://angular.io/config/tsconfig. */
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "target": "es2017",
-    "module": "es2020",
-    "outDir": "bin",
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "allowSyntheticDefaultImports": true,
     "sourceMap": true,
-    "declaration": true,
     "paths": {
-      "ng2-datepicker": [
+      "ng2-date-picker": [
         "dist/ng2-date-picker/ng2-date-picker",
         "dist/ng2-date-picker"
       ]
     },
-    "moduleResolution": "node",
-    "experimentalDecorators": true,
     "skipLibCheck": true,
-    "types": [
-      "node",
-      "jasmine"
-    ],
+    "declaration": true,
+    "downlevelIteration": true,
+    "experimentalDecorators": true,
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "target": "es2017",
+    "module": "es2020",
     "lib": [
-      "es2015",
+      "es2020",
       "dom"
     ]
   },
-  "exclude": [
-    "node_modules",
-    "**/*.spec.ts"
-  ],
   "angularCompilerOptions": {
-    "debug": true,
-    "skipTemplateCodegen": true,
-    "strictMetadataEmit": true,
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true
   }
 }

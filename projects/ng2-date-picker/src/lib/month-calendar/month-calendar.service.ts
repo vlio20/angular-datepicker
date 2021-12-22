@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import * as moment from 'moment';
+import moment from 'moment';
 import {Moment} from 'moment';
 import {UtilsService} from '../common/services/utils/utils.service';
 import {IMonth} from './month.model';

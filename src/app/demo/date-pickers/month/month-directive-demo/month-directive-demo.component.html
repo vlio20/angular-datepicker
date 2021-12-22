@@ -9,7 +9,7 @@
              (onSelect)="onSelect($event)"
              (open)="opened()"
              [displayDate]="displayDate"
-             [dpDayPicker]="config"
+             [dpDayPicker]="$any(config)"
              [formControl]="control"
              [maxDate]="validationMaxDate"
              [minDate]="validationMinDate"

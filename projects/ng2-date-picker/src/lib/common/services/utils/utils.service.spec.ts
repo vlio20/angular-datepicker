@@ -1,6 +1,6 @@
 import {inject, TestBed} from '@angular/core/testing';
 import {UtilsService} from './utils.service';
-import * as moment from 'moment';
+import moment from 'moment';
 import {IDate} from '../../models/date.model';
 
 describe('Service: ObUtilsService', () => {

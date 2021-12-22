@@ -1,6 +1,6 @@
 import {inject, TestBed} from '@angular/core/testing';
 import {TimeSelectService} from './time-select.service';
-import * as moment from 'moment';
+import moment from 'moment';
 import {UtilsService} from '../common/services/utils/utils.service';
 import {ITimeSelectConfigInternal} from './time-select-config.model';
 

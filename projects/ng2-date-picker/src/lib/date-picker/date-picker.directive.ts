@@ -167,13 +167,13 @@ export class DatePickerDirective implements OnInit {
     this.markForCheck();
   }
 
-  private _displayDate: Moment;
+  private _displayDate: Moment | string;
 
-  get displayDate(): Moment {
+  get displayDate(): Moment | string {
     return this._displayDate;
   }
 
-  @Input() set displayDate(displayDate: Moment) {
+  @Input() set displayDate(displayDate: Moment | string) {
     this._displayDate = displayDate;
     this.updateDatepickerConfig();
 

@@ -1,5 +1,5 @@
 import {inject, TestBed} from '@angular/core/testing';
-import * as moment from 'moment';
+import moment from 'moment';
 import {Moment} from 'moment';
 import {UtilsService} from '../common/services/utils/utils.service';
 import {MonthCalendarService} from './month-calendar.service';

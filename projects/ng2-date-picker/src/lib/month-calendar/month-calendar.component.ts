@@ -16,7 +16,7 @@ import {
 } from '@angular/core';
 import {IMonth} from './month.model';
 import {MonthCalendarService} from './month-calendar.service';
-import * as moment from 'moment';
+import moment from 'moment';
 import {Moment} from 'moment';
 import {IMonthCalendarConfig, IMonthCalendarConfigInternal} from './month-calendar-config';
 import {
@@ -56,7 +56,7 @@ import {INavEvent} from '../common/models/navigation-event.model';
 export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAccessor, Validator {
 
   @Input() config: IMonthCalendarConfig;
-  @Input() displayDate: Moment;
+  @Input() displayDate: Moment | string;
   @Input() minDate: Moment;
   @Input() maxDate: Moment;
   @HostBinding('class') @Input() theme: string;
@@ -139,7 +139,7 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
   init(): void {
     this.componentConfig = this.monthCalendarService.getConfig(this.config);
     this.selected = this.selected || [];
-    this.currentDateView = this.displayDate ?? this.utilsService
+    this.currentDateView = (this.displayDate as Moment) ?? this.utilsService
         .getDefaultDisplayDate(
           this.currentDateView,
           this.selected,

@@ -1,7 +1,12 @@
 import {INavEvent} from '../../../../projects/ng2-date-picker/src/lib/common/models/navigation-event.model';
 import * as moment from 'moment';
 import {Moment} from 'moment';
-import {DatePickerComponent, DatePickerDirective, ISelectionEvent} from '../../../../projects/ng2-date-picker/src/public-api';
+import {
+  DatePickerComponent,
+  DatePickerDirective,
+  IDay,
+  ISelectionEvent
+} from '../../../../projects/ng2-date-picker/src/public-api';
 import {Directive, ViewChild} from '@angular/core';
 import {FormControl, ValidatorFn, Validators} from '@angular/forms';
 
@@ -110,7 +115,7 @@ export abstract class DateComponent {
     console.log('closed');
   }
 
-  onSelect(data: ISelectionEvent) {
+  onSelect(data: any) {
     console.log(data);
   }
 
