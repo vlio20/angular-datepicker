@@ -4,6 +4,7 @@
     "declaration": false,
     "moduleResolution": "node",
     "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
     "lib": [
       "es2016",
       "dom"
