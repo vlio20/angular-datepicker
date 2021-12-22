@@ -60,7 +60,7 @@ export class DayCalendarService {
       firstDayOfBoard = firstDayOfBoard.subtract(1, 'day');
     }
 
-    const current = firstDayOfBoard.clone();
+    let current = firstDayOfBoard.clone();
     const prevMonth = parsedMonth.clone().subtract(1, 'month');
     const nextMonth = parsedMonth.clone().add(1, 'month');
     const today = dayjs();
@@ -76,7 +76,7 @@ export class DayCalendarService {
           currentDay: current.isSame(today, 'day'),
           disabled: this.isDateDisabled(current, config)
         });
-        current.add(1, 'day');
+        current = current.add(1, 'day');
 
         return array;
       }, []);
