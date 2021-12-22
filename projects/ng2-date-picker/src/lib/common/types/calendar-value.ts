@@ -1,3 +1,3 @@
-import {Moment} from 'moment';
+import {Dayjs} from 'dayjs';
 
-export type CalendarValue = Moment | Moment[] | string | string[];
+export type CalendarValue = Dayjs | Dayjs[] | string | string[];

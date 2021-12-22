@@ -1,7 +1,7 @@
 import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 import {UtilsService} from '../common/services/utils/utils.service';
 import {CalendarNavComponent} from '../calendar-nav/calendar-nav.component';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import {TimeSelectComponent} from './time-select.component';
 import {TimeSelectService} from './time-select.service';
 import {MonthCalendarComponent} from '../month-calendar/month-calendar.component';
@@ -31,7 +31,7 @@ describe('Component: TimeSelectComponent', () => {
   });
 
   it('should calculate time parts', () => {
-    component.selected = moment('5:33:44', 'H:mm:ss');
+    component.selected = dayjs('5:33:44', 'H:mm:ss');
     expect(component.hours).toEqual('05');
     expect(component.minutes).toEqual('33');
     expect(component.seconds).toEqual('44');

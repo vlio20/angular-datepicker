@@ -27,7 +27,7 @@ All notable changes to this project will be documented in this file.
 - Update to Angular 11 ([7be883b](https://github.com/vlio20/angular-datepicker/commit/7be883b)) closes [#525](https://github.com/vlio20/angular-datepicker/issues/525)
 
 ### Breaking changes
-- Moved Moment to be a pear dependency
+- Moved Dayjs to be a pear dependency
 
 <a name="10.11.10"></a>
 # [10.0.1] (2020-11-10)

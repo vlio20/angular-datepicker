@@ -1,10 +1,11 @@
 import {Injectable} from '@angular/core';
-import moment, {Moment} from 'moment';
+import * as dayjs from 'dayjs';
 import {WeekDays} from '../common/types/week-days.type';
 import {UtilsService} from '../common/services/utils/utils.service';
 import {IDay} from './day.model';
 import {IDayCalendarConfig, IDayCalendarConfigInternal} from './day-calendar-config.model';
 import {IMonthCalendarConfig} from '../month-calendar/month-calendar-config';
+import {Dayjs} from 'dayjs';
 
 @Injectable()
 export class DayCalendarService {
@@ -17,7 +18,7 @@ export class DayCalendarService {
     allowMultiSelect: false,
     monthFormat: 'MMM, YYYY',
     enableMonthSelector: true,
-    locale: moment.locale(),
+    locale: dayjs.locale(),
     dayBtnFormat: 'DD',
     unSelectOnClick: true
   };
@@ -32,9 +33,9 @@ export class DayCalendarService {
       ...this.utilsService.clearUndefined(config)
     };
 
-    this.utilsService.convertPropsToMoment(_config, _config.format, ['min', 'max']);
+    this.utilsService.convertPropsToDayjs(_config, _config.format, ['min', 'max']);
 
-    moment.locale(_config.locale);
+    dayjs.locale(_config.locale);
 
     return _config;
   }
@@ -49,8 +50,8 @@ export class DayCalendarService {
     }, <{[key: string]: number}>{});
   }
 
-  generateMonthArray(config: IDayCalendarConfigInternal, month: Moment, selected: Moment[]): IDay[][] {
-    const parsedMonth = month.isValid() ? month.clone() : moment();
+  generateMonthArray(config: IDayCalendarConfigInternal, month: Dayjs, selected: Dayjs[]): IDay[][] {
+    const parsedMonth = month.isValid() ? month.clone() : dayjs();
     let monthArray: IDay[][] = [];
     const firstDayOfWeekIndex = this.DAYS.indexOf(config.firstDayOfWeek);
     const firstDayOfBoard = parsedMonth.clone().startOf('month');
@@ -62,7 +63,7 @@ export class DayCalendarService {
     const current = firstDayOfBoard.clone();
     const prevMonth = parsedMonth.clone().subtract(1, 'month');
     const nextMonth = parsedMonth.clone().add(1, 'month');
-    const today = moment();
+    const today = dayjs();
 
     const daysOfCalendar: IDay[] = this.utilsService.createArray(42)
       .reduce((array: IDay[]) => {
@@ -97,17 +98,17 @@ export class DayCalendarService {
     return monthArray;
   }
 
-  generateWeekdays(firstDayOfWeek: WeekDays): Moment[] {
-    const weekdayNames: {[key: string]: Moment} = {
-      su: moment().day(0),
-      mo: moment().day(1),
-      tu: moment().day(2),
-      we: moment().day(3),
-      th: moment().day(4),
-      fr: moment().day(5),
-      sa: moment().day(6)
+  generateWeekdays(firstDayOfWeek: WeekDays): Dayjs[] {
+    const weekdayNames: {[key: string]: Dayjs} = {
+      su: dayjs().day(0),
+      mo: dayjs().day(1),
+      tu: dayjs().day(2),
+      we: dayjs().day(3),
+      th: dayjs().day(4),
+      fr: dayjs().day(5),
+      sa: dayjs().day(6)
     };
-    const weekdays: Moment[] = [];
+    const weekdays: Dayjs[] = [];
     const daysMap = this.generateDaysMap(firstDayOfWeek);
 
     for (const dayKey in daysMap) {
@@ -119,7 +120,7 @@ export class DayCalendarService {
     return weekdays;
   }
 
-  isDateDisabled(date: Moment, config: IDayCalendarConfigInternal): boolean {
+  isDateDisabled(date: Dayjs, config: IDayCalendarConfigInternal): boolean {
     if (config.isDayDisabledCallback) {
       return config.isDayDisabledCallback(date);
     }
@@ -132,7 +133,7 @@ export class DayCalendarService {
   }
 
   // todo:: add unit tests
-  getHeaderLabel(config: IDayCalendarConfigInternal, month: Moment): string {
+  getHeaderLabel(config: IDayCalendarConfigInternal, month: Dayjs): string {
     if (config.monthFormatter) {
       return config.monthFormatter(month);
     }
@@ -141,12 +142,12 @@ export class DayCalendarService {
   }
 
   // todo:: add unit tests
-  shouldShowLeft(min: Moment, currentMonthView: Moment): boolean {
+  shouldShowLeft(min: Dayjs, currentMonthView: Dayjs): boolean {
     return min ? min.isBefore(currentMonthView, 'month') : true;
   }
 
   // todo:: add unit tests
-  shouldShowRight(max: Moment, currentMonthView: Moment): boolean {
+  shouldShowRight(max: Dayjs, currentMonthView: Dayjs): boolean {
     return max ? max.isAfter(currentMonthView, 'month') : true;
   }
 
@@ -181,7 +182,7 @@ export class DayCalendarService {
     });
   }
 
-  getDayBtnText(config: IDayCalendarConfigInternal, day: Moment): string {
+  getDayBtnText(config: IDayCalendarConfigInternal, day: Dayjs): string {
     if (config.dayBtnFormatter) {
       return config.dayBtnFormatter(day);
     }
@@ -189,7 +190,7 @@ export class DayCalendarService {
     return day.format(config.dayBtnFormat);
   }
 
-  getDayBtnCssClass(config: IDayCalendarConfigInternal, day: Moment): string {
+  getDayBtnCssClass(config: IDayCalendarConfigInternal, day: Dayjs): string {
     if (config.dayBtnCssClassCallback) {
       return config.dayBtnCssClassCallback(day);
     }
@@ -197,7 +198,7 @@ export class DayCalendarService {
     return '';
   }
 
-  private removeNearMonthWeeks(currentMonth: Moment, monthArray: IDay[][]): IDay[][] {
+  private removeNearMonthWeeks(currentMonth: Dayjs, monthArray: IDay[][]): IDay[][] {
     if (monthArray[monthArray.length - 1].find((day) => day.date.isSame(currentMonth, 'month'))) {
       return monthArray;
     } else {

@@ -1,12 +1,13 @@
 import {EventEmitter, Injectable} from '@angular/core';
 import {IDatePickerConfig, IDatePickerConfigInternal} from './date-picker-config.model';
-import moment, {Moment} from 'moment';
+import * as dayjs from 'dayjs';
 import {UtilsService} from '../common/services/utils/utils.service';
 import {IDayCalendarConfig} from '../day-calendar/day-calendar-config.model';
 import {TimeSelectService} from '../time-select/time-select.service';
 import {DayTimeCalendarService} from '../day-time-calendar/day-time-calendar.service';
 import {ITimeSelectConfig} from '../time-select/time-select-config.model';
 import {CalendarMode} from '../common/types/calendar-mode';
+import {Dayjs} from 'dayjs';
 
 @Injectable()
 export class DatePickerService {
@@ -24,7 +25,7 @@ export class DatePickerService {
     showWeekNumbers: false,
     enableMonthSelector: true,
     showGoToCurrent: true,
-    locale: moment.locale(),
+    locale: dayjs.locale(),
     hideOnOutsideClick: true
   };
 
@@ -37,17 +38,17 @@ export class DatePickerService {
   getConfig(config: IDatePickerConfig, mode: CalendarMode = 'daytime'): IDatePickerConfigInternal {
     const _config = <IDatePickerConfigInternal>{
       ...this.defaultConfig,
-      format: this.getDefaultFormatByMode(mode),
+      format: DatePickerService.getDefaultFormatByMode(mode),
       ...this.utilsService.clearUndefined(config)
     };
 
-    this.utilsService.convertPropsToMoment(_config, _config.format, ['min', 'max']);
+    this.utilsService.convertPropsToDayjs(_config, _config.format, ['min', 'max']);
 
     if (config && config.allowMultiSelect && config.closeOnSelect === undefined) {
       _config.closeOnSelect = false;
     }
 
-    moment.locale(_config.locale);
+    dayjs.locale(_config.locale);
 
     return _config;
   }
@@ -107,14 +108,14 @@ export class DatePickerService {
   }
 
   // todo:: add unit tests
-  convertInputValueToMomentArray(value: string, config: IDatePickerConfig): Moment[] {
+  convertInputValueToDayjsArray(value: string, config: IDatePickerConfig): Dayjs[] {
     value = value ? value : '';
     const datesStrArr: string[] = this.utilsService.datesStringToStringArray(value);
 
-    return this.utilsService.convertToMomentArray(datesStrArr, config);
+    return this.utilsService.convertToDayjsArray(datesStrArr, config);
   }
 
-  private getDefaultFormatByMode(mode: CalendarMode): string {
+  private static getDefaultFormatByMode(mode: CalendarMode): string {
     switch (mode) {
       case 'day':
         return 'DD-MM-YYYY';

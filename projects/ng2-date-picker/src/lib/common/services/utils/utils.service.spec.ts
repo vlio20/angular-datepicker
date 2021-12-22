@@ -1,6 +1,6 @@
 import {inject, TestBed} from '@angular/core/testing';
 import {UtilsService} from './utils.service';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import {IDate} from '../../models/date.model';
 
 describe('Service: ObUtilsService', () => {
@@ -22,12 +22,12 @@ describe('Service: ObUtilsService', () => {
 
   it('should check updateSelected method for day', inject([UtilsService], (service: UtilsService) => {
     const date1: IDate = {
-      date: moment('21-04-2017', 'DD-MM-YYYY'),
+      date: dayjs('21-04-2017', 'DD-MM-YYYY'),
       selected: false
     };
 
     const date2: IDate = {
-      date: moment('22-04-2017', 'DD-MM-YYYY'),
+      date: dayjs('22-04-2017', 'DD-MM-YYYY'),
       selected: false
     };
 
@@ -52,17 +52,17 @@ describe('Service: ObUtilsService', () => {
 
   it('should check updateSelected method for month', inject([UtilsService], (service: UtilsService) => {
     const date1: IDate = {
-      date: moment('21-04-2017', 'DD-MM-YYYY'),
+      date: dayjs('21-04-2017', 'DD-MM-YYYY'),
       selected: false
     };
 
     const date2: IDate = {
-      date: moment('22-04-2017', 'DD-MM-YYYY'),
+      date: dayjs('22-04-2017', 'DD-MM-YYYY'),
       selected: false
     };
 
     const date3: IDate = {
-      date: moment('22-05-2017', 'DD-MM-YYYY'),
+      date: dayjs('22-05-2017', 'DD-MM-YYYY'),
       selected: false
     };
 
@@ -86,20 +86,20 @@ describe('Service: ObUtilsService', () => {
   }));
 
   it('should check if date is in range', inject([UtilsService], (service: UtilsService) => {
-    expect(service.isDateInRange(moment(), moment().subtract(1, 'd'), moment().add(1, 'd'))).toBeTruthy();
-    expect(service.isDateInRange(moment(), moment().subtract(1, 'd'), null)).toBeFalsy();
+    expect(service.isDateInRange(dayjs(), dayjs().subtract(1, 'd'), dayjs().add(1, 'd'))).toBeTruthy();
+    expect(service.isDateInRange(dayjs(), dayjs().subtract(1, 'd'), null)).toBeFalsy();
     expect(service.isDateInRange(
-      moment().subtract(2, 'd'),
-      moment().subtract(1, 'd'),
-      moment().add(1, 'd'))
+      dayjs().subtract(2, 'd'),
+      dayjs().subtract(1, 'd'),
+      dayjs().add(1, 'd'))
     ).toBeFalsy();
   }));
 
-  it('should convertPropsToMoment method', inject([UtilsService], (service: UtilsService) => {
+  it('should convertPropsToDayjs method', inject([UtilsService], (service: UtilsService) => {
     const obj = {min: '14-01-1987', max: '14-01-1987'};
-    service.convertPropsToMoment(obj, 'DD-MM-YYYY', ['min', 'max']);
-    expect(moment.isMoment(obj.min)).toBeTruthy();
-    expect(moment.isMoment(obj.max)).toBeTruthy();
+    service.convertPropsToDayjs(obj, 'DD-MM-YYYY', ['min', 'max']);
+    expect(dayjs.isDayjs(obj.min)).toBeTruthy();
+    expect(dayjs.isDayjs(obj.max)).toBeTruthy();
   }));
 
   it('should test datesStringToStringArray', inject([UtilsService], (service: UtilsService) => {
@@ -120,11 +120,11 @@ describe('Service: ObUtilsService', () => {
     const format = 'MM/DD/YYYY';
     expect(service.convertToString(null, format)).toEqual('');
     expect(service.convertToString('', format)).toEqual('');
-    expect(service.convertToString(moment(), format)).toEqual(moment().format(format));
-    expect(service.convertToString([moment()], format)).toEqual(moment().format(format));
-    expect(service.convertToString([moment(), moment().add(1, 'd')], format))
-      .toEqual(moment().format(format) + ' | ' + moment().add(1, 'd').format(format));
-    expect(service.convertToString([moment().format(format), moment().add(1, 'd').format(format)], format))
-      .toEqual(moment().format(format) + ' | ' + moment().add(1, 'd').format(format));
+    expect(service.convertToString(dayjs(), format)).toEqual(dayjs().format(format));
+    expect(service.convertToString([dayjs()], format)).toEqual(dayjs().format(format));
+    expect(service.convertToString([dayjs(), dayjs().add(1, 'd')], format))
+      .toEqual(dayjs().format(format) + ' | ' + dayjs().add(1, 'd').format(format));
+    expect(service.convertToString([dayjs().format(format), dayjs().add(1, 'd').format(format)], format))
+      .toEqual(dayjs().format(format) + ' | ' + dayjs().add(1, 'd').format(format));
   }));
 });

@@ -1,11 +1,11 @@
 import {ICalendar, ICalendarInternal} from '../common/models/calendar.model';
 import {WeekDays} from '../common/types/week-days.type';
-import {Moment} from 'moment';
+import {Dayjs} from 'dayjs';
 import {ECalendarValue} from '../common/types/calendar-value-enum';
 
 export interface IConfig {
-  isDayDisabledCallback?: (date: Moment) => boolean;
-  isMonthDisabledCallback?: (date: Moment) => boolean;
+  isDayDisabledCallback?: (date: Dayjs) => boolean;
+  isMonthDisabledCallback?: (date: Dayjs) => boolean;
   weekDayFormat?: string;
   weekDayFormatter?: (dayIndex: number) => string;
   showNearMonthDays?: boolean;
@@ -14,16 +14,16 @@ export interface IConfig {
   format?: string;
   allowMultiSelect?: boolean;
   monthFormat?: string;
-  monthFormatter?: (month: Moment) => string;
+  monthFormatter?: (month: Dayjs) => string;
   enableMonthSelector?: boolean;
   yearFormat?: string;
-  yearFormatter?: (year: Moment) => string;
+  yearFormatter?: (year: Dayjs) => string;
   dayBtnFormat?: string;
-  dayBtnFormatter?: (day: Moment) => string;
-  dayBtnCssClassCallback?: (day: Moment) => string;
+  dayBtnFormatter?: (day: Dayjs) => string;
+  dayBtnCssClassCallback?: (day: Dayjs) => string;
   monthBtnFormat?: string;
-  monthBtnFormatter?: (day: Moment) => string;
-  monthBtnCssClassCallback?: (day: Moment) => string;
+  monthBtnFormatter?: (day: Dayjs) => string;
+  monthBtnCssClassCallback?: (day: Dayjs) => string;
   multipleYearsNavigateBy?: number;
   showMultipleYearsNavigation?: boolean;
   returnedValueType?: ECalendarValue;

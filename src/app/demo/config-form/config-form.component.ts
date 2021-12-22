@@ -1,8 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import * as moment from 'moment';
-import {Moment} from 'moment';
 import {FormControl} from '@angular/forms';
 import {ECalendarValue, IDatePickerConfig} from '../../../../projects/ng2-date-picker/src/public-api';
+import dayjs, {Dayjs} from 'dayjs';
 
 const GLOBAL_OPTION_KEYS = [
   'theme',
@@ -127,18 +126,18 @@ export class ConfigFormComponent implements OnInit {
     'ss', 'sv', 'sw', 'ta', 'te', 'tet', 'th', 'tl-ph', 'tlh', 'tr', 'tzl',
     'tzm-latn', 'tzm', 'uk', 'ur', 'uz-latn', 'uz', 'vi', 'x-pseudo', 'yo', 'zh-cn', 'zh-hk', 'zh-tw'
   ];
-  readonly dateTypes: {name: string, value: ECalendarValue}[] = [
+  readonly dateTypes: { name: string, value: ECalendarValue }[] = [
     {
       name: 'Guess',
       value: null
     },
     {
-      name: ECalendarValue[ECalendarValue.Moment],
-      value: ECalendarValue.Moment
+      name: ECalendarValue[ECalendarValue.Dayjs],
+      value: ECalendarValue.Dayjs
     },
     {
-      name: ECalendarValue[ECalendarValue.MomentArr],
-      value: ECalendarValue.MomentArr
+      name: ECalendarValue[ECalendarValue.DayjsArr],
+      value: ECalendarValue.DayjsArr
     },
     {
       name: ECalendarValue[ECalendarValue.String],
@@ -155,20 +154,20 @@ export class ConfigFormComponent implements OnInit {
   @Input() pickerMode: string;
   @Input() config: IDatePickerConfig;
 
-  @Output() onDisplayDateChange = new EventEmitter<Moment | string>();
+  @Output() onDisplayDateChange = new EventEmitter<Dayjs | string>();
   @Output() onMaterialThemeChange = new EventEmitter<boolean>();
   @Output() onDisabledChange = new EventEmitter<boolean>();
   @Output() onRequireValidationChange = new EventEmitter<boolean>();
-  @Output() onMinValidationChange = new EventEmitter<Moment>();
-  @Output() onMaxValidationChange = new EventEmitter<Moment>();
-  @Output() onMinTimeValidationChange = new EventEmitter<Moment>();
-  @Output() onMaxTimeValidationChange = new EventEmitter<Moment>();
+  @Output() onMinValidationChange = new EventEmitter<Dayjs>();
+  @Output() onMaxValidationChange = new EventEmitter<Dayjs>();
+  @Output() onMinTimeValidationChange = new EventEmitter<Dayjs>();
+  @Output() onMaxTimeValidationChange = new EventEmitter<Dayjs>();
   @Output() onPlaceholderChange = new EventEmitter<string>();
   @Output() onConfigChange = new EventEmitter<Partial<IDatePickerConfig>>();
 
   @Output() openCalendar = new EventEmitter<void>();
   @Output() closeCalendar = new EventEmitter<void>();
-  @Output() moveCalendarTo = new EventEmitter<Moment>();
+  @Output() moveCalendarTo = new EventEmitter<Dayjs>();
 
   displayDate = new FormControl(null);
   material = new FormControl(true);
@@ -225,9 +224,9 @@ export class ConfigFormComponent implements OnInit {
   numOfMonthRows: FormControl;
 
   ngOnInit() {
-    this.localFormat = this.getDefaultFormatByMode(this.pickerMode);
+    this.localFormat = ConfigFormComponent.getDefaultFormatByMode(this.pickerMode);
 
-    this.format = new FormControl(this.getDefaultFormatByMode(this.pickerMode));
+    this.format = new FormControl(ConfigFormComponent.getDefaultFormatByMode(this.pickerMode));
     this.locale = new FormControl(this.config.locale);
     this.firstDayOfWeek = new FormControl(this.config.firstDayOfWeek);
     this.monthFormat = new FormControl(this.config.monthFormat);
@@ -330,7 +329,7 @@ export class ConfigFormComponent implements OnInit {
   }
 
   moveCalendar(): void {
-    this.moveCalendarTo.emit(moment('14-01-1987', 'DD-MM-YYYY'));
+    this.moveCalendarTo.emit(dayjs('14-01-1987', 'DD-MM-YYYY'));
   }
 
   private initListeners(): void {
@@ -629,7 +628,7 @@ export class ConfigFormComponent implements OnInit {
     });
   }
 
-  private getDefaultFormatByMode(mode: string): string {
+  private static getDefaultFormatByMode(mode: string): string {
     switch (mode) {
       case 'daytimePicker':
       case 'daytimeInline':

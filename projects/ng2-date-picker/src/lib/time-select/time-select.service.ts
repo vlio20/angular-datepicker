@@ -1,7 +1,8 @@
 import {Injectable} from '@angular/core';
-import moment, {Moment} from 'moment';
+import * as dayjs from 'dayjs';
 import {UtilsService} from '../common/services/utils/utils.service';
 import {ITimeSelectConfig, ITimeSelectConfigInternal} from './time-select-config.model';
+import {Dayjs} from 'dayjs';
 
 
 
@@ -21,7 +22,7 @@ export class TimeSelectService {
     showSeconds: false,
     showTwentyFourHours: false,
     timeSeparator: ':',
-    locale: moment.locale()
+    locale: dayjs.locale()
   };
 
   constructor(private readonly utilsService: UtilsService) {
@@ -39,7 +40,7 @@ export class TimeSelectService {
       ...timeConfigs
     };
 
-    moment.locale(_config.locale);
+    dayjs.locale(_config.locale);
 
     return _config;
   }
@@ -51,26 +52,26 @@ export class TimeSelectService {
       + (config.showTwentyFourHours ? '' : ' ' + config.meridiemFormat);
   }
 
-  getHours(config: ITimeSelectConfigInternal, t: Moment | null): string {
-    const time = t || moment();
+  getHours(config: ITimeSelectConfigInternal, t: Dayjs | null): string {
+    const time = t || dayjs();
     return time && time.format(config.showTwentyFourHours ? config.hours24Format : config.hours12Format);
   }
 
-  getMinutes(config: ITimeSelectConfigInternal, t: Moment | null): string {
-    const time = t || moment();
+  getMinutes(config: ITimeSelectConfigInternal, t: Dayjs | null): string {
+    const time = t || dayjs();
     return time && time.format(config.minutesFormat);
   }
 
-  getSeconds(config: ITimeSelectConfigInternal, t: Moment | null): string {
-    const time = t || moment();
+  getSeconds(config: ITimeSelectConfigInternal, t: Dayjs | null): string {
+    const time = t || dayjs();
     return time && time.format(config.secondsFormat);
   }
 
-  getMeridiem(config: ITimeSelectConfigInternal, time: Moment): string {
+  getMeridiem(config: ITimeSelectConfigInternal, time: Dayjs): string {
     return time && time.format(config.meridiemFormat);
   }
 
-  decrease(config: ITimeSelectConfigInternal, time: Moment, unit: TimeUnit): Moment {
+  decrease(config: ITimeSelectConfigInternal, time: Dayjs, unit: TimeUnit): Dayjs {
     let amount: number = 1;
     switch (unit) {
       case 'minute':
@@ -83,7 +84,7 @@ export class TimeSelectService {
     return time.clone().subtract(amount, unit);
   }
 
-  increase(config: ITimeSelectConfigInternal, time: Moment, unit: TimeUnit): Moment {
+  increase(config: ITimeSelectConfigInternal, time: Dayjs, unit: TimeUnit): Dayjs {
     let amount: number = 1;
     switch (unit) {
       case 'minute':
@@ -96,15 +97,15 @@ export class TimeSelectService {
     return time.clone().add(amount, unit);
   }
 
-  toggleMeridiem(time: Moment): Moment {
-    if (time.hours() < FIRST_PM_HOUR) {
+  toggleMeridiem(time: Dayjs): Dayjs {
+    if (time.hour() < FIRST_PM_HOUR) {
       return time.clone().add(12, 'hour');
     } else {
       return time.clone().subtract(12, 'hour');
     }
   }
 
-  shouldShowDecrease(config: ITimeSelectConfigInternal, time: Moment, unit: TimeUnit): boolean {
+  shouldShowDecrease(config: ITimeSelectConfigInternal, time: Dayjs, unit: TimeUnit): boolean {
     if (!config.min && !config.minTime) {
       return true;
     }
@@ -114,7 +115,7 @@ export class TimeSelectService {
       && (!config.minTime || config.minTime.isSameOrBefore(this.utilsService.onlyTime(newTime)));
   }
 
-  shouldShowIncrease(config: ITimeSelectConfigInternal, time: Moment, unit: TimeUnit): boolean {
+  shouldShowIncrease(config: ITimeSelectConfigInternal, time: Dayjs, unit: TimeUnit): boolean {
     if (!config.max && !config.maxTime) {
       return true;
     }
@@ -124,7 +125,7 @@ export class TimeSelectService {
       && (!config.maxTime || config.maxTime.isSameOrAfter(this.utilsService.onlyTime(newTime)));
   }
 
-  shouldShowToggleMeridiem(config: ITimeSelectConfigInternal, time: Moment): boolean {
+  shouldShowToggleMeridiem(config: ITimeSelectConfigInternal, time: Dayjs): boolean {
     if (!config.min && !config.max && !config.minTime && !config.maxTime) {
       return true;
     }

@@ -1,6 +1,6 @@
-import {Moment} from 'moment';
+import {Dayjs} from 'dayjs';
 
 export interface IDate {
-  date: Moment;
+  date: Dayjs;
   selected: boolean;
 }
