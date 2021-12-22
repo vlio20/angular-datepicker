@@ -17,7 +17,7 @@ import {
   ViewEncapsulation
 } from '@angular/core';
 import {DayCalendarService} from './day-calendar.service';
-import * as dayjs from 'dayjs';
+
 import {Dayjs, UnitType} from 'dayjs';
 import {IDayCalendarConfig, IDayCalendarConfigInternal} from './day-calendar-config.model';
 import {IDay} from './day.model';
@@ -35,7 +35,7 @@ import {IMonthCalendarConfig} from '../month-calendar/month-calendar-config';
 import {IMonth} from '../month-calendar/month.model';
 import {DateValidator} from '../common/types/validator.type';
 import {INavEvent} from '../common/models/navigation-event.model';
-
+import {dayjsRef} from "../common/dayjs/dayjs.ref";
 
 @Component({
   selector: 'dp-day-calendar',
@@ -322,7 +322,7 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
   }
 
   goToCurrent() {
-    this.currentDateView = dayjs();
+    this.currentDateView = dayjsRef();
     this.onGoToCurrent.emit();
   }
 

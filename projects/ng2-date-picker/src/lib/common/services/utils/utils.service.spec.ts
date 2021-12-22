@@ -1,7 +1,7 @@
 import {inject, TestBed} from '@angular/core/testing';
 import {UtilsService} from './utils.service';
-import dayjs from 'dayjs';
 import {IDate} from '../../models/date.model';
+import {dayjsRef} from "../../dayjs/dayjs.ref";
 
 describe('Service: ObUtilsService', () => {
   beforeEach(() => {
@@ -22,12 +22,12 @@ describe('Service: ObUtilsService', () => {
 
   it('should check updateSelected method for day', inject([UtilsService], (service: UtilsService) => {
     const date1: IDate = {
-      date: dayjs('21-04-2017', 'DD-MM-YYYY'),
+      date: dayjsRef('21-04-2017', 'DD-MM-YYYY'),
       selected: false
     };
 
     const date2: IDate = {
-      date: dayjs('22-04-2017', 'DD-MM-YYYY'),
+      date: dayjsRef('22-04-2017', 'DD-MM-YYYY'),
       selected: false
     };
 
@@ -52,17 +52,17 @@ describe('Service: ObUtilsService', () => {
 
   it('should check updateSelected method for month', inject([UtilsService], (service: UtilsService) => {
     const date1: IDate = {
-      date: dayjs('21-04-2017', 'DD-MM-YYYY'),
+      date: dayjsRef('21-04-2017', 'DD-MM-YYYY'),
       selected: false
     };
 
     const date2: IDate = {
-      date: dayjs('22-04-2017', 'DD-MM-YYYY'),
+      date: dayjsRef('22-04-2017', 'DD-MM-YYYY'),
       selected: false
     };
 
     const date3: IDate = {
-      date: dayjs('22-05-2017', 'DD-MM-YYYY'),
+      date: dayjsRef('22-05-2017', 'DD-MM-YYYY'),
       selected: false
     };
 
@@ -86,20 +86,17 @@ describe('Service: ObUtilsService', () => {
   }));
 
   it('should check if date is in range', inject([UtilsService], (service: UtilsService) => {
-    expect(service.isDateInRange(dayjs(), dayjs().subtract(1, 'd'), dayjs().add(1, 'd'))).toBeTruthy();
-    expect(service.isDateInRange(dayjs(), dayjs().subtract(1, 'd'), null)).toBeFalsy();
-    expect(service.isDateInRange(
-      dayjs().subtract(2, 'd'),
-      dayjs().subtract(1, 'd'),
-      dayjs().add(1, 'd'))
-    ).toBeFalsy();
+    expect(service.isDateInRange(dayjsRef(), dayjsRef().subtract(1, 'd'), dayjsRef().add(1, 'd'))).toBeTruthy();
+    expect(service.isDateInRange(dayjsRef(), dayjsRef().subtract(1, 'd'), null)).toBeFalsy();
+    expect(service.isDateInRange(dayjsRef().subtract(2, 'd'), dayjsRef().subtract(1, 'd'), dayjsRef().add(1, 'd')))
+      .toBeFalsy();
   }));
 
   it('should convertPropsToDayjs method', inject([UtilsService], (service: UtilsService) => {
     const obj = {min: '14-01-1987', max: '14-01-1987'};
     service.convertPropsToDayjs(obj, 'DD-MM-YYYY', ['min', 'max']);
-    expect(dayjs.isDayjs(obj.min)).toBeTruthy();
-    expect(dayjs.isDayjs(obj.max)).toBeTruthy();
+    expect(dayjsRef.isDayjs(obj.min)).toBeTruthy();
+    expect(dayjsRef.isDayjs(obj.max)).toBeTruthy();
   }));
 
   it('should test datesStringToStringArray', inject([UtilsService], (service: UtilsService) => {
@@ -120,11 +117,11 @@ describe('Service: ObUtilsService', () => {
     const format = 'MM/DD/YYYY';
     expect(service.convertToString(null, format)).toEqual('');
     expect(service.convertToString('', format)).toEqual('');
-    expect(service.convertToString(dayjs(), format)).toEqual(dayjs().format(format));
-    expect(service.convertToString([dayjs()], format)).toEqual(dayjs().format(format));
-    expect(service.convertToString([dayjs(), dayjs().add(1, 'd')], format))
-      .toEqual(dayjs().format(format) + ' | ' + dayjs().add(1, 'd').format(format));
-    expect(service.convertToString([dayjs().format(format), dayjs().add(1, 'd').format(format)], format))
-      .toEqual(dayjs().format(format) + ' | ' + dayjs().add(1, 'd').format(format));
+    expect(service.convertToString(dayjsRef(), format)).toEqual(dayjsRef().format(format));
+    expect(service.convertToString([dayjsRef()], format)).toEqual(dayjsRef().format(format));
+    expect(service.convertToString([dayjsRef(), dayjsRef().add(1, 'd')], format))
+      .toEqual(dayjsRef().format(format) + ' | ' + dayjsRef().add(1, 'd').format(format));
+    expect(service.convertToString([dayjsRef().format(format), dayjsRef().add(1, 'd').format(format)], format))
+      .toEqual(dayjsRef().format(format) + ' | ' + dayjsRef().add(1, 'd').format(format));
   }));
 });

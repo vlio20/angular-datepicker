@@ -1,8 +1,8 @@
 import {inject, TestBed} from '@angular/core/testing';
 import {TimeSelectService} from './time-select.service';
-import dayjs from 'dayjs';
 import {UtilsService} from '../common/services/utils/utils.service';
 import {ITimeSelectConfigInternal} from './time-select-config.model';
+import { dayjsRef } from '../common/dayjs/dayjs.ref';
 
 
 
@@ -50,7 +50,7 @@ describe('Service: TimeSelectService', () => {
 
   it('should check the getHours method', inject([TimeSelectService],
     (service: TimeSelectService) => {
-      const time = dayjs('13:12:11', 'HH:mm:ss');
+      const time = dayjsRef('13:12:11', 'HH:mm:ss');
       expect(service.getHours(configBase, time))
         .toEqual('1');
       expect(service.getHours({
@@ -62,7 +62,7 @@ describe('Service: TimeSelectService', () => {
 
   it('should check the decrease method', inject([TimeSelectService],
     (service: TimeSelectService) => {
-      const time = dayjs('13:12:11', 'HH:mm:ss');
+      const time = dayjsRef('13:12:11', 'HH:mm:ss');
       expect(service.decrease(configBase, time, 'hour').hour()).toEqual(12);
       expect(service.decrease(configBase, time, 'minute').minute()).toEqual(9);
       expect(service.decrease(configBase, time, 'second').second()).toEqual(7);
@@ -70,7 +70,7 @@ describe('Service: TimeSelectService', () => {
 
   it('should check the increase method', inject([TimeSelectService],
     (service: TimeSelectService) => {
-      const time = dayjs('13:12:11', 'HH:mm:ss');
+      const time = dayjsRef('13:12:11', 'HH:mm:ss');
       expect(service.increase(configBase, time, 'hour').hour()).toEqual(14);
       expect(service.increase(configBase, time, 'minute').minute()).toEqual(15);
       expect(service.increase(configBase, time, 'second').second()).toEqual(15);
@@ -78,31 +78,31 @@ describe('Service: TimeSelectService', () => {
 
   it('should check the toggleMeridiem method', inject([TimeSelectService],
     (service: TimeSelectService) => {
-      const time = dayjs('13:12:11', 'HH:mm:ss');
+      const time = dayjsRef('13:12:11', 'HH:mm:ss');
       expect(service.toggleMeridiem(time).hour()).toEqual(1);
       expect(service.toggleMeridiem(service.toggleMeridiem(time)).isSame(time)).toEqual(true);
     }));
 
   it('should check the shouldShowDecrease method', inject([TimeSelectService],
     (service: TimeSelectService) => {
-      const time = dayjs('13:12:11', 'HH:mm:ss');
+      const time = dayjsRef('13:12:11', 'HH:mm:ss');
       const minConfig = {
         ...configBase,
-        min: dayjs('13:12:11', 'HH:mm:ss')
+        min: dayjsRef('13:12:11', 'HH:mm:ss')
       };
       const minTimeConfig = {
         ...configBase,
-        minTime: dayjs('13:12:11', 'HH:mm:ss')
+        minTime: dayjsRef('13:12:11', 'HH:mm:ss')
       };
       const minAndMinTimeConfig = {
         ...configBase,
-        min: dayjs('11:11:11', 'HH:mm:ss'),
-        minTime: dayjs('13:12:11', 'HH:mm:ss')
+        min: dayjsRef('11:11:11', 'HH:mm:ss'),
+        minTime: dayjsRef('13:12:11', 'HH:mm:ss')
       };
       const minAndMinTimeConfig2 = {
         ...configBase,
-        min: dayjs('13:12:11', 'HH:mm:ss'),
-        minTime: dayjs('11:11:11', 'HH:mm:ss')
+        min: dayjsRef('13:12:11', 'HH:mm:ss'),
+        minTime: dayjsRef('11:11:11', 'HH:mm:ss')
       };
       expect(service.shouldShowDecrease(minConfig, time, 'hour')).toEqual(false);
       expect(service.shouldShowDecrease(minConfig, time, 'minute')).toEqual(false);
@@ -140,24 +140,24 @@ describe('Service: TimeSelectService', () => {
 
   it('should check the shouldShowIncrease method', inject([TimeSelectService],
     (service: TimeSelectService) => {
-      const time = dayjs('13:12:11', 'HH:mm:ss');
+      const time = dayjsRef('13:12:11', 'HH:mm:ss');
       const maxConfig = {
         ...configBase,
-        max: dayjs('13:12:11', 'HH:mm:ss')
+        max: dayjsRef('13:12:11', 'HH:mm:ss')
       };
       const maxTimeConfig = {
         ...configBase,
-        maxTime: dayjs('13:12:11', 'HH:mm:ss')
+        maxTime: dayjsRef('13:12:11', 'HH:mm:ss')
       };
       const maxAndMaxTimeConfig = {
         ...configBase,
-        max: dayjs('15:11:11', 'HH:mm:ss'),
-        maxTime: dayjs('13:12:11', 'HH:mm:ss')
+        max: dayjsRef('15:11:11', 'HH:mm:ss'),
+        maxTime: dayjsRef('13:12:11', 'HH:mm:ss')
       };
       const maxAndMaxTimeConfig2 = {
         ...configBase,
-        max: dayjs('13:12:11', 'HH:mm:ss'),
-        maxTime: dayjs('15:11:11', 'HH:mm:ss')
+        max: dayjsRef('13:12:11', 'HH:mm:ss'),
+        maxTime: dayjsRef('15:11:11', 'HH:mm:ss')
       };
       expect(service.shouldShowIncrease(maxConfig, time, 'hour')).toEqual(false);
       expect(service.shouldShowIncrease(maxConfig, time, 'minute')).toEqual(false);
@@ -203,20 +203,20 @@ describe('Service: TimeSelectService', () => {
 
   it('should check the shouldShowToggleMeridiem method', inject([TimeSelectService],
     (service: TimeSelectService) => {
-      const afternoonTime = dayjs('13:12:11', 'HH:mm:ss');
-      const morningTime = dayjs('10:12:11', 'HH:mm:ss');
+      const afternoonTime = dayjsRef('13:12:11', 'HH:mm:ss');
+      const morningTime = dayjsRef('10:12:11', 'HH:mm:ss');
       const minConfig = {
         ...configBase,
-        min: dayjs('13:12:11', 'HH:mm:ss')
+        min: dayjsRef('13:12:11', 'HH:mm:ss')
       };
       const maxConfig = {
         ...configBase,
-        max: dayjs('13:12:11', 'HH:mm:ss')
+        max: dayjsRef('13:12:11', 'HH:mm:ss')
       };
       const minMaxConfig = {
         ...configBase,
-        min: dayjs('11:12:11', 'HH:mm:ss'),
-        max: dayjs('15:12:11', 'HH:mm:ss')
+        min: dayjsRef('11:12:11', 'HH:mm:ss'),
+        max: dayjsRef('15:12:11', 'HH:mm:ss')
       };
       expect(service.shouldShowToggleMeridiem(configBase, morningTime)).toEqual(true);
       expect(service.shouldShowToggleMeridiem(configBase, afternoonTime)).toEqual(true);

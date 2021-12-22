@@ -45,7 +45,7 @@ import {
   ValidationErrors,
   Validator
 } from '@angular/forms';
-import * as dayjs from 'dayjs';
+
 import {DateValidator} from '../common/types/validator.type';
 import {MonthCalendarComponent} from '../month-calendar/month-calendar.component';
 import {DayTimeCalendarComponent} from '../day-time-calendar/day-time-calendar.component';

@@ -1,13 +1,14 @@
 import {ECalendarValue} from '../../types/calendar-value-enum';
 import {SingleCalendarValue} from '../../types/single-calendar-value';
 import {Injectable} from '@angular/core';
-import * as dayjs from 'dayjs';
+
 import {Dayjs, UnitType} from 'dayjs';
 import {CalendarValue} from '../../types/calendar-value';
 import {IDate} from '../../models/date.model';
 import {CalendarMode} from '../../types/calendar-mode';
 import {DateValidator} from '../../types/validator.type';
 import {ICalendarInternal} from '../../models/calendar.model';
+import {dayjsRef} from "../../dayjs/dayjs.ref";
 
 export interface DateLimits {
   minDate?: SingleCalendarValue;
@@ -39,7 +40,7 @@ export class UtilsService {
     if (!date) {
       return null;
     } else if (typeof date === 'string') {
-      return dayjs(date, format);
+      return dayjsRef(date, format);
     } else {
       return date.clone();
     }
@@ -50,7 +51,7 @@ export class UtilsService {
       return true;
     }
 
-    return dayjs(date, format, true).isValid();
+    return dayjsRef(date, format, true).isValid();
   }
 
   // todo:: add unit test
@@ -60,7 +61,7 @@ export class UtilsService {
                         minDate: Dayjs): Dayjs {
     if (current) {
       return current.clone();
-    } else if (minDate && minDate.isAfter(dayjs())) {
+    } else if (minDate && minDate.isAfter(dayjsRef())) {
       return minDate.clone();
     } else if (allowMultiSelect) {
       if (selected && selected[selected.length]) {
@@ -70,7 +71,7 @@ export class UtilsService {
       return selected[0].clone();
     }
 
-    return dayjs();
+    return dayjsRef();
   }
 
   // todo:: add unit test
@@ -80,13 +81,13 @@ export class UtilsService {
         return ECalendarValue.DayjsArr;
       } else if (typeof value[0] === 'string') {
         return ECalendarValue.StringArr;
-      } else if (dayjs.isDayjs(value[0])) {
+      } else if (dayjsRef.isDayjs(value[0])) {
         return ECalendarValue.DayjsArr;
       }
     } else {
       if (typeof value === 'string') {
         return ECalendarValue.String;
-      } else if (dayjs.isDayjs(value)) {
+      } else if (dayjsRef.isDayjs(value)) {
         return ECalendarValue.Dayjs;
       }
     }
@@ -100,10 +101,10 @@ export class UtilsService {
     let retVal: Dayjs[];
     switch (this.getInputType(value, config.allowMultiSelect)) {
       case (ECalendarValue.String):
-        retVal = value ? [dayjs(<string>value, config.format, true)] : [];
+        retVal = value ? [dayjsRef(<string>value, config.format, true)] : [];
         break;
       case (ECalendarValue.StringArr):
-        retVal = (<string[]>value).map(v => v ? dayjs(v, config.format, true) : null).filter(Boolean);
+        retVal = (<string[]>value).map(v => v ? dayjsRef(v, config.format, true) : null).filter(Boolean);
         break;
       case (ECalendarValue.Dayjs):
         retVal = value ? [(<Dayjs>value).clone()] : [];
@@ -149,7 +150,7 @@ export class UtilsService {
       } else {
         tmpVal = <string[]>value;
       }
-    } else if (dayjs.isDayjs(value)) {
+    } else if (dayjsRef.isDayjs(value)) {
       tmpVal = [value.format(format)];
     } else {
       return '';
@@ -190,7 +191,7 @@ export class UtilsService {
   }
 
   onlyTime(m: Dayjs): Dayjs {
-    return m && dayjs.isDayjs(m) && dayjs(m.format('HH:mm:ss'), 'HH:mm:ss');
+    return m && dayjsRef.isDayjs(m) && dayjsRef(m.format('HH:mm:ss'), 'HH:mm:ss');
   }
 
   granularityFromType(calendarType: CalendarMode): UnitType {
@@ -297,7 +298,7 @@ export class UtilsService {
   getValidDayjsArray(value: string, format: string): Dayjs[] {
     return this.datesStringToStringArray(value)
       .filter(d => this.isDateValid(d, format))
-      .map(d => dayjs(d, format));
+      .map(d => dayjsRef(d, format));
   }
 
   shouldShowCurrent(showGoToCurrent: boolean,
@@ -306,10 +307,14 @@ export class UtilsService {
                     max: Dayjs): boolean {
     return showGoToCurrent &&
       mode !== 'time' &&
-      this.isDateInRange(dayjs(), min, max);
+      this.isDateInRange(dayjsRef(), min, max);
   }
 
   isDateInRange(date: Dayjs, from: Dayjs, to: Dayjs): boolean {
+    if (!date || !from || !to) {
+      return false;
+    }
+
     return date.isBetween(from, to, 'day', '[]');
   }
 

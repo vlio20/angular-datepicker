@@ -1,8 +1,9 @@
 import {Injectable} from '@angular/core';
-import * as dayjs from 'dayjs';
+
 import {UtilsService} from '../common/services/utils/utils.service';
 import {ITimeSelectConfig, ITimeSelectConfigInternal} from './time-select-config.model';
 import {Dayjs} from 'dayjs';
+import {dayjsRef} from "../common/dayjs/dayjs.ref";
 
 
 
@@ -22,7 +23,7 @@ export class TimeSelectService {
     showSeconds: false,
     showTwentyFourHours: false,
     timeSeparator: ':',
-    locale: dayjs.locale()
+    locale: dayjsRef.locale()
   };
 
   constructor(private readonly utilsService: UtilsService) {
@@ -40,7 +41,7 @@ export class TimeSelectService {
       ...timeConfigs
     };
 
-    dayjs.locale(_config.locale);
+    dayjsRef.locale(_config.locale);
 
     return _config;
   }
@@ -53,17 +54,17 @@ export class TimeSelectService {
   }
 
   getHours(config: ITimeSelectConfigInternal, t: Dayjs | null): string {
-    const time = t || dayjs();
+    const time = t || dayjsRef();
     return time && time.format(config.showTwentyFourHours ? config.hours24Format : config.hours12Format);
   }
 
   getMinutes(config: ITimeSelectConfigInternal, t: Dayjs | null): string {
-    const time = t || dayjs();
+    const time = t || dayjsRef();
     return time && time.format(config.minutesFormat);
   }
 
   getSeconds(config: ITimeSelectConfigInternal, t: Dayjs | null): string {
-    const time = t || dayjs();
+    const time = t || dayjsRef();
     return time && time.format(config.secondsFormat);
   }
 

@@ -1,11 +1,12 @@
 import {Injectable} from '@angular/core';
-import * as dayjs from 'dayjs';
+
 import {WeekDays} from '../common/types/week-days.type';
 import {UtilsService} from '../common/services/utils/utils.service';
 import {IDay} from './day.model';
 import {IDayCalendarConfig, IDayCalendarConfigInternal} from './day-calendar-config.model';
 import {IMonthCalendarConfig} from '../month-calendar/month-calendar-config';
 import {Dayjs} from 'dayjs';
+import {dayjsRef} from "../common/dayjs/dayjs.ref";
 
 @Injectable()
 export class DayCalendarService {
@@ -18,7 +19,7 @@ export class DayCalendarService {
     allowMultiSelect: false,
     monthFormat: 'MMM, YYYY',
     enableMonthSelector: true,
-    locale: dayjs.locale(),
+    locale: dayjsRef.locale(),
     dayBtnFormat: 'DD',
     unSelectOnClick: true
   };
@@ -35,7 +36,7 @@ export class DayCalendarService {
 
     this.utilsService.convertPropsToDayjs(_config, _config.format, ['min', 'max']);
 
-    dayjs.locale(_config.locale);
+    dayjsRef.locale(_config.locale);
 
     return _config;
   }
@@ -51,7 +52,7 @@ export class DayCalendarService {
   }
 
   generateMonthArray(config: IDayCalendarConfigInternal, month: Dayjs, selected: Dayjs[]): IDay[][] {
-    const parsedMonth = month.isValid() ? month.clone() : dayjs();
+    const parsedMonth = month.isValid() ? month.clone() : dayjsRef();
     let monthArray: IDay[][] = [];
     const firstDayOfWeekIndex = this.DAYS.indexOf(config.firstDayOfWeek);
     let firstDayOfBoard = parsedMonth.clone().startOf('month');
@@ -63,7 +64,7 @@ export class DayCalendarService {
     let current = firstDayOfBoard.clone();
     const prevMonth = parsedMonth.clone().subtract(1, 'month');
     const nextMonth = parsedMonth.clone().add(1, 'month');
-    const today = dayjs();
+    const today = dayjsRef();
 
     const daysOfCalendar: IDay[] = this.utilsService.createArray(42)
       .reduce((array: IDay[]) => {
@@ -100,13 +101,13 @@ export class DayCalendarService {
 
   generateWeekdays(firstDayOfWeek: WeekDays): Dayjs[] {
     const weekdayNames: {[key: string]: Dayjs} = {
-      su: dayjs().day(0),
-      mo: dayjs().day(1),
-      tu: dayjs().day(2),
-      we: dayjs().day(3),
-      th: dayjs().day(4),
-      fr: dayjs().day(5),
-      sa: dayjs().day(6)
+      su: dayjsRef().day(0),
+      mo: dayjsRef().day(1),
+      tu: dayjsRef().day(2),
+      we: dayjsRef().day(3),
+      th: dayjsRef().day(4),
+      fr: dayjsRef().day(5),
+      sa: dayjsRef().day(6)
     };
     const weekdays: Dayjs[] = [];
     const daysMap = this.generateDaysMap(firstDayOfWeek);

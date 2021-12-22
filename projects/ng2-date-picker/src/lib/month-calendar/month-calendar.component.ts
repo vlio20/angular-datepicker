@@ -16,7 +16,7 @@ import {
 } from '@angular/core';
 import {IMonth} from './month.model';
 import {MonthCalendarService} from './month-calendar.service';
-import * as dayjs from 'dayjs';
+
 import {IMonthCalendarConfig, IMonthCalendarConfigInternal} from './month-calendar-config';
 import {
   ControlValueAccessor,
@@ -32,6 +32,7 @@ import {DateValidator} from '../common/types/validator.type';
 import {SingleCalendarValue} from '../common/types/single-calendar-value';
 import {INavEvent} from '../common/models/navigation-event.model';
 import {Dayjs} from 'dayjs';
+import {dayjsRef} from "../common/dayjs/dayjs.ref";
 
 @Component({
   selector: 'dp-month-calendar',
@@ -289,7 +290,7 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
   }
 
   goToCurrent(): void {
-    this.currentDateView = dayjs();
+    this.currentDateView = dayjsRef();
     this.onGoToCurrent.emit();
   }
 

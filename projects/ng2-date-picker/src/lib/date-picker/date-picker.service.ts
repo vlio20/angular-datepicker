@@ -1,6 +1,6 @@
 import {EventEmitter, Injectable} from '@angular/core';
 import {IDatePickerConfig, IDatePickerConfigInternal} from './date-picker-config.model';
-import * as dayjs from 'dayjs';
+
 import {UtilsService} from '../common/services/utils/utils.service';
 import {IDayCalendarConfig} from '../day-calendar/day-calendar-config.model';
 import {TimeSelectService} from '../time-select/time-select.service';
@@ -8,6 +8,7 @@ import {DayTimeCalendarService} from '../day-time-calendar/day-time-calendar.ser
 import {ITimeSelectConfig} from '../time-select/time-select-config.model';
 import {CalendarMode} from '../common/types/calendar-mode';
 import {Dayjs} from 'dayjs';
+import {dayjsRef} from "../common/dayjs/dayjs.ref";
 
 @Injectable()
 export class DatePickerService {
@@ -25,7 +26,7 @@ export class DatePickerService {
     showWeekNumbers: false,
     enableMonthSelector: true,
     showGoToCurrent: true,
-    locale: dayjs.locale(),
+    locale: dayjsRef.locale(),
     hideOnOutsideClick: true
   };
 
@@ -48,7 +49,7 @@ export class DatePickerService {
       _config.closeOnSelect = false;
     }
 
-    dayjs.locale(_config.locale);
+    dayjsRef.locale(_config.locale);
 
     return _config;
   }

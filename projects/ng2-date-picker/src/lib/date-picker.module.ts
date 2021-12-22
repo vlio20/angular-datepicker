@@ -14,20 +14,6 @@ export {DayCalendarComponent} from './day-calendar/day-calendar.component';
 export {DayTimeCalendarComponent} from './day-time-calendar/day-time-calendar.component';
 export {TimeSelectComponent} from './time-select/time-select.component';
 export {MonthCalendarComponent} from './month-calendar/month-calendar.component';
-import 'dayjs/plugin/isSameOrAfter';
-import 'dayjs/plugin/isSameOrBefore';
-import 'dayjs/plugin/isBetween';
-import 'dayjs/plugin/isoWeek';
-
-import * as dayjs from 'dayjs';
-// @ts-ignore
-dayjs.extend(require('dayjs/plugin/isSameOrAfter'));
-// @ts-ignore
-dayjs.extend(require('dayjs/plugin/isSameOrBefore'));
-// @ts-ignore
-dayjs.extend(require('dayjs/plugin/isBetween'));
-// @ts-ignore
-dayjs.extend(require('dayjs/plugin/isoWeek'));
 
 @NgModule({
   declarations: [

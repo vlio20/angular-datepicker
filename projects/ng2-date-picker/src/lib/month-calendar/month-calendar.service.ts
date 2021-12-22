@@ -1,9 +1,10 @@
 import {Injectable} from '@angular/core';
-import * as dayjs from 'dayjs';
+
 import {UtilsService} from '../common/services/utils/utils.service';
 import {IMonth} from './month.model';
 import {IMonthCalendarConfig, IMonthCalendarConfigInternal} from './month-calendar-config';
 import {Dayjs} from 'dayjs';
+import {dayjsRef} from "../common/dayjs/dayjs.ref";
 
 
 
@@ -15,7 +16,7 @@ export class MonthCalendarService {
     format: 'MM-YYYY',
     isNavHeaderBtnClickable: false,
     monthBtnFormat: 'MMM',
-    locale: dayjs.locale(),
+    locale: dayjsRef.locale(),
     multipleYearsNavigateBy: 10,
     showMultipleYearsNavigation: false,
     unSelectOnClick: true,
@@ -34,7 +35,7 @@ export class MonthCalendarService {
     MonthCalendarService.validateConfig(_config);
 
     this.utilsService.convertPropsToDayjs(_config, _config.format, ['min', 'max']);
-    dayjs.locale(_config.locale);
+    dayjsRef.locale(_config.locale);
 
     return _config;
   }
@@ -48,7 +49,7 @@ export class MonthCalendarService {
         const month = {
           date,
           selected: !!selected.find(s => index.isSame(s, 'month')),
-          currentMonth: index.isSame(dayjs(), 'month'),
+          currentMonth: index.isSame(dayjsRef(), 'month'),
           disabled: this.isMonthDisabled(date, config),
           text: this.getMonthBtnText(config, date)
         };

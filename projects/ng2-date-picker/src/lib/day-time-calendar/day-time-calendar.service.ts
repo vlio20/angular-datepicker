@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
-import * as dayjs from 'dayjs';
 
 import {UtilsService} from '../common/services/utils/utils.service';
 import {DayCalendarService} from '../day-calendar/day-calendar.service';
 import {TimeSelectService} from '../time-select/time-select.service';
 import {IDayTimeCalendarConfig} from './day-time-calendar-config.model';
 import {Dayjs} from 'dayjs';
+import {dayjsRef} from "../common/dayjs/dayjs.ref";
 
 const DAY_FORMAT = 'YYYYMMDD';
 const TIME_FORMAT = 'HH:mm:ss';
@@ -14,7 +14,7 @@ const COMBINED_FORMAT = DAY_FORMAT + TIME_FORMAT;
 @Injectable()
 export class DayTimeCalendarService {
   readonly DEFAULT_CONFIG: IDayTimeCalendarConfig = {
-    locale: dayjs.locale()
+    locale: dayjsRef.locale()
   };
 
   constructor(private utilsService: UtilsService,
@@ -29,14 +29,14 @@ export class DayTimeCalendarService {
       ...this.dayCalendarService.getConfig(config)
     };
 
-    dayjs.locale(config.locale);
+    dayjsRef.locale(config.locale);
 
     return _config;
   }
 
   updateDay(current: Dayjs, day: Dayjs, config: IDayTimeCalendarConfig): Dayjs {
-    const time = current ? current : dayjs();
-    let updated = dayjs(day.format(DAY_FORMAT) + time.format(TIME_FORMAT), COMBINED_FORMAT);
+    const time = current ? current : dayjsRef();
+    let updated = dayjsRef(day.format(DAY_FORMAT) + time.format(TIME_FORMAT), COMBINED_FORMAT);
 
     if (config.min) {
       const min = <Dayjs>config.min;
@@ -52,8 +52,8 @@ export class DayTimeCalendarService {
   }
 
   updateTime(current: Dayjs, time: Dayjs): Dayjs {
-    const day = current ? current : dayjs();
+    const day = current ? current : dayjsRef();
 
-    return dayjs(day.format(DAY_FORMAT) + time.format(TIME_FORMAT), COMBINED_FORMAT);
+    return dayjsRef(day.format(DAY_FORMAT) + time.format(TIME_FORMAT), COMBINED_FORMAT);
   }
 }

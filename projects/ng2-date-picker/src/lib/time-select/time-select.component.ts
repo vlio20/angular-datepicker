@@ -16,7 +16,7 @@ import {
   ViewEncapsulation
 } from '@angular/core';
 import {TimeSelectService, TimeUnit} from './time-select.service';
-import * as dayjs from 'dayjs';
+
 import {ITimeSelectConfig, ITimeSelectConfigInternal} from './time-select-config.model';
 import {
   ControlValueAccessor,
@@ -32,6 +32,7 @@ import {IDate} from '../common/models/date.model';
 import {DateValidator} from '../common/types/validator.type';
 import {IDayCalendarConfigInternal} from '../day-calendar/day-calendar-config.model';
 import {Dayjs} from 'dayjs';
+import {dayjsRef} from "../common/dayjs/dayjs.ref";
 
 @Component({
   selector: 'dp-time-select',
@@ -119,7 +120,7 @@ export class TimeSelectComponent implements OnInit, OnChanges, ControlValueAcces
 
   init() {
     this.componentConfig = this.timeSelectService.getConfig(this.config);
-    this.selected = this.selected || dayjs();
+    this.selected = this.selected || dayjsRef();
     this.inputValueType = this.utilsService.getInputType(this.inputValue, false);
   }
 
