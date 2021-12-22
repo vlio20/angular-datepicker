@@ -1,7 +1,7 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-# [13.0.0] (2021-11-30)
+# [13.0.0] (2021-12-22)
 
 ### Improvements
 - Update to Angular 13 ([565](https://github.com/vlio20/angular-datepicker/pull/565)) closes [#564](https://github.com/vlio20/angular-datepicker/issues/564)
@@ -25,6 +25,9 @@ All notable changes to this project will be documented in this file.
 
 ### Improvements
 - Update to Angular 11 ([7be883b](https://github.com/vlio20/angular-datepicker/commit/7be883b)) closes [#525](https://github.com/vlio20/angular-datepicker/issues/525)
+
+### Breaking changes
+- Moved Moment to be a pear dependency
 
 <a name="10.11.10"></a>
 # [10.0.1] (2020-11-10)
