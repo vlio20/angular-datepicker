@@ -54,10 +54,10 @@ export class DayCalendarService {
     const parsedMonth = month.isValid() ? month.clone() : dayjs();
     let monthArray: IDay[][] = [];
     const firstDayOfWeekIndex = this.DAYS.indexOf(config.firstDayOfWeek);
-    const firstDayOfBoard = parsedMonth.clone().startOf('month');
+    let firstDayOfBoard = parsedMonth.clone().startOf('month');
 
     while (firstDayOfBoard.day() !== firstDayOfWeekIndex) {
-      firstDayOfBoard.subtract(1, 'day');
+      firstDayOfBoard = firstDayOfBoard.subtract(1, 'day');
     }
 
     const current = firstDayOfBoard.clone();
