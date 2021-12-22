@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
-import moment from 'moment';
-import {Moment} from 'moment';
+import moment, {Moment} from 'moment';
 import {WeekDays} from '../common/types/week-days.type';
 import {UtilsService} from '../common/services/utils/utils.service';
 import {IDay} from './day.model';

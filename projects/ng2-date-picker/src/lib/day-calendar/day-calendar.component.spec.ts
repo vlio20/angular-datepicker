@@ -1,8 +1,7 @@
 import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 import {UtilsService} from '../common/services/utils/utils.service';
 import {CalendarNavComponent} from '../calendar-nav/calendar-nav.component';
-import moment from 'moment';
-import {Moment} from 'moment';
+import moment, {Moment} from 'moment';
 import {DayCalendarComponent} from './day-calendar.component';
 import {DayCalendarService} from './day-calendar.service';
 import {MonthCalendarComponent} from '../month-calendar/month-calendar.component';

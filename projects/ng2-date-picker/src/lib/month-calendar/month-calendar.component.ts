@@ -16,8 +16,7 @@ import {
 } from '@angular/core';
 import {IMonth} from './month.model';
 import {MonthCalendarService} from './month-calendar.service';
-import moment from 'moment';
-import {Moment} from 'moment';
+import moment, {Moment} from 'moment';
 import {IMonthCalendarConfig, IMonthCalendarConfigInternal} from './month-calendar-config';
 import {
   ControlValueAccessor,

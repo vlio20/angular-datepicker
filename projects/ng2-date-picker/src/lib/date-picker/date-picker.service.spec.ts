@@ -1,7 +1,6 @@
 import {inject, TestBed} from '@angular/core/testing';
 import {DatePickerService} from './date-picker.service';
-import moment from 'moment';
-import {Moment} from 'moment';
+import moment, {Moment} from 'moment';
 import {UtilsService} from '../common/services/utils/utils.service';
 import {DayTimeCalendarService} from '../day-time-calendar/day-time-calendar.service';
 import {DayCalendarService} from '../day-calendar/day-calendar.service';
