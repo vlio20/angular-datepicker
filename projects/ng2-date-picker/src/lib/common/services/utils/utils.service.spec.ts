@@ -87,7 +87,8 @@ describe('Service: ObUtilsService', () => {
 
   it('should check if date is in range', inject([UtilsService], (service: UtilsService) => {
     expect(service.isDateInRange(dayjsRef(), dayjsRef().subtract(1, 'd'), dayjsRef().add(1, 'd'))).toBeTruthy();
-    expect(service.isDateInRange(dayjsRef(), dayjsRef().subtract(1, 'd'), null)).toBeFalsy();
+    expect(service.isDateInRange(dayjsRef(), dayjsRef().subtract(1, 'd'), null)).toBeTruthy();
+    expect(service.isDateInRange(dayjsRef(), null, dayjsRef().add(1, 'd'))).toBeTruthy();
     expect(service.isDateInRange(dayjsRef().subtract(2, 'd'), dayjsRef().subtract(1, 'd'), dayjsRef().add(1, 'd')))
       .toBeFalsy();
   }));
