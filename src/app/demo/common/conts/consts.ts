@@ -1,5 +1,4 @@
 import {ECalendarValue, IDatePickerConfig} from '../../../../../projects/ng2-date-picker/src/public-api';
-import * as dayjs from 'dayjs';
 
 export const DEF_CONF: IDatePickerConfig = {
   firstDayOfWeek: 'su',
@@ -33,7 +32,6 @@ export const DEF_CONF: IDatePickerConfig = {
   timeSeparator: ':',
   multipleYearsNavigateBy: 10,
   showMultipleYearsNavigation: false,
-  locale: dayjs.locale(),
   hideInputContainer: false,
   returnedValueType: ECalendarValue.String,
   unSelectOnClick: true,

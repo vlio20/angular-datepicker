@@ -153,6 +153,7 @@ export class ConfigFormComponent implements OnInit {
 
   @Input() pickerMode: string;
   @Input() config: IDatePickerConfig;
+  @Input() localeVal: string = 'en';
 
   @Output() onDisplayDateChange = new EventEmitter<Dayjs | string>();
   @Output() onMaterialThemeChange = new EventEmitter<boolean>();
@@ -164,6 +165,7 @@ export class ConfigFormComponent implements OnInit {
   @Output() onMaxTimeValidationChange = new EventEmitter<Dayjs>();
   @Output() onPlaceholderChange = new EventEmitter<string>();
   @Output() onConfigChange = new EventEmitter<Partial<IDatePickerConfig>>();
+  @Output() onLocaleChange = new EventEmitter<string>();
 
   @Output() openCalendar = new EventEmitter<void>();
   @Output() closeCalendar = new EventEmitter<void>();
@@ -227,7 +229,7 @@ export class ConfigFormComponent implements OnInit {
     this.localFormat = ConfigFormComponent.getDefaultFormatByMode(this.pickerMode);
 
     this.format = new FormControl(ConfigFormComponent.getDefaultFormatByMode(this.pickerMode));
-    this.locale = new FormControl(this.config.locale);
+    this.locale = new FormControl(this.localeVal);
     this.firstDayOfWeek = new FormControl(this.config.firstDayOfWeek);
     this.monthFormat = new FormControl(this.config.monthFormat);
     this.min = new FormControl(this.config.min);
@@ -369,10 +371,8 @@ export class ConfigFormComponent implements OnInit {
       this.onPlaceholderChange.emit(val);
     });
 
-    this.locale.valueChanges.subscribe((val) => {
-      this.onConfigChange.emit({
-        locale: val
-      });
+    this.locale.valueChanges.subscribe((locale) => {
+      this.onLocaleChange.emit(locale);
     });
 
     this.format.valueChanges.subscribe((val) => {

@@ -357,10 +357,10 @@ export class DatePickerComponent implements OnChanges,
     );
   }
 
-  init() {
+  async init() {
     this.componentConfig = this.dayPickerService.getConfig(this.config, this.mode);
     this.currentDateView = this.displayDate
-      ? this.utilsService.convertToDayjs(this.displayDate, this.componentConfig.format).clone()
+      ? this.utilsService.convertToDayjs(this.displayDate, this.componentConfig.format)
       : this.utilsService
         .getDefaultDisplayDate(
           this.currentDateView,
@@ -476,8 +476,7 @@ export class DatePickerComponent implements OnChanges,
   }
 
   moveCalendarTo(date: SingleCalendarValue) {
-    const dayjsDate = this.utilsService.convertToDayjs(date, this.componentConfig.format);
-    this.currentDateView = dayjsDate;
+    this.currentDateView = this.utilsService.convertToDayjs(date, this.componentConfig.format);
   }
 
   onLeftNavClick(change: INavEvent) {

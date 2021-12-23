@@ -84,9 +84,9 @@ export class TimeSelectComponent implements OnInit, OnChanges, ControlValueAcces
     triggerChange: this.emitChange.bind(this)
   };
 
-  constructor(public timeSelectService: TimeSelectService,
-              public utilsService: UtilsService,
-              public cd: ChangeDetectorRef) {
+  constructor(public readonly timeSelectService: TimeSelectService,
+              public readonly utilsService: UtilsService,
+              public readonly cd: ChangeDetectorRef) {
   }
 
   _selected: Dayjs;
@@ -118,22 +118,21 @@ export class TimeSelectComponent implements OnInit, OnChanges, ControlValueAcces
     this.initValidators();
   }
 
-  init() {
+  init(): void {
     this.componentConfig = this.timeSelectService.getConfig(this.config);
     this.selected = this.selected || dayjsRef();
     this.inputValueType = this.utilsService.getInputType(this.inputValue, false);
   }
 
-  ngOnChanges(changes: SimpleChanges) {
+  ngOnChanges(changes: SimpleChanges): void {
     if (this.isInited) {
       const {minDate, maxDate, minTime, maxTime} = changes;
-      this.init();
 
       if (minDate || maxDate || minTime || maxTime) {
         this.initValidators();
       }
 
-      this.handleConfigChange(changes.config);
+      this.init();
     }
   }
 
@@ -204,31 +203,27 @@ export class TimeSelectComponent implements OnInit, OnChanges, ControlValueAcces
     this.emitChange();
   }
 
-  toggleMeridiem() {
+  toggleMeridiem(): void {
     this.selected = this.timeSelectService.toggleMeridiem(this.selected);
     this.emitChange();
   }
 
-  emitChange() {
+  emitChange(): void {
     this.onChange.emit({date: this.selected, selected: false});
     this.cd.markForCheck();
   }
 
-  calculateTimeParts(time: Dayjs) {
+  calculateTimeParts(time: Dayjs): void {
     this.hours = this.timeSelectService.getHours(this.componentConfig, time);
     this.minutes = this.timeSelectService.getMinutes(this.componentConfig, time);
     this.seconds = this.timeSelectService.getSeconds(this.componentConfig, time);
     this.meridiem = this.timeSelectService.getMeridiem(this.componentConfig, time);
   }
 
-  private handleConfigChange(config: SimpleChange) {
+  private handleConfigChange(config: SimpleChange): void {
     if (config) {
       const prevConf: IDayCalendarConfigInternal = this.timeSelectService.getConfig(config.previousValue);
       const currentConf: IDayCalendarConfigInternal = this.timeSelectService.getConfig(config.currentValue);
-
-      if (prevConf.locale !== currentConf.locale) {
-        this.selected = this.selected.clone().locale(currentConf.locale);
-      }
     }
   }
 }

@@ -19,7 +19,6 @@ export class DayCalendarService {
     allowMultiSelect: false,
     monthFormat: 'MMM, YYYY',
     enableMonthSelector: true,
-    locale: dayjsRef.locale(),
     dayBtnFormat: 'DD',
     unSelectOnClick: true
   };
@@ -36,8 +35,6 @@ export class DayCalendarService {
 
     this.utilsService.convertPropsToDayjs(_config, _config.format, ['min', 'max']);
 
-    dayjsRef.locale(_config.locale);
-
     return _config;
   }
 
@@ -52,24 +49,24 @@ export class DayCalendarService {
   }
 
   generateMonthArray(config: IDayCalendarConfigInternal, month: Dayjs, selected: Dayjs[]): IDay[][] {
-    const parsedMonth = month.isValid() ? month.clone() : dayjsRef();
+    const parsedMonth = month.isValid() ? dayjsRef(month.toDate()) : dayjsRef();
     let monthArray: IDay[][] = [];
     const firstDayOfWeekIndex = this.DAYS.indexOf(config.firstDayOfWeek);
-    let firstDayOfBoard = parsedMonth.clone().startOf('month');
+    let firstDayOfBoard = parsedMonth.startOf('month');
 
     while (firstDayOfBoard.day() !== firstDayOfWeekIndex) {
       firstDayOfBoard = firstDayOfBoard.subtract(1, 'day');
     }
 
-    let current = firstDayOfBoard.clone();
-    const prevMonth = parsedMonth.clone().subtract(1, 'month');
-    const nextMonth = parsedMonth.clone().add(1, 'month');
+    let current = dayjsRef(firstDayOfBoard.toDate());
+    const prevMonth = parsedMonth.subtract(1, 'month');
+    const nextMonth = parsedMonth.add(1, 'month');
     const today = dayjsRef();
 
     const daysOfCalendar: IDay[] = this.utilsService.createArray(42)
       .reduce((array: IDay[]) => {
         array.push({
-          date: current.clone(),
+          date: dayjsRef(current.toDate()),
           selected: !!selected.find(selectedDay => current.isSame(selectedDay, 'day')),
           currentMonth: current.isSame(parsedMonth, 'month'),
           prevMonth: current.isSame(prevMonth, 'month'),
@@ -169,7 +166,6 @@ export class DayCalendarService {
       format: componentConfig.format,
       isNavHeaderBtnClickable: true,
       allowMultiSelect: false,
-      locale: componentConfig.locale,
       yearFormat: componentConfig.yearFormat,
       yearFormatter: componentConfig.yearFormatter,
       monthBtnFormat: componentConfig.monthBtnFormat,

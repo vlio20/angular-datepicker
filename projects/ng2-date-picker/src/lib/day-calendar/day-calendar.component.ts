@@ -113,7 +113,7 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
   }
 
   set currentDateView(current: Dayjs) {
-    this._currentDateView = current.clone();
+    this._currentDateView = dayjsRef(current.toDate());
     this.weeks = this.dayCalendarService
       .generateMonthArray(this.componentConfig, this._currentDateView, this.selected);
     this.navLabel = this.dayCalendarService.getHeaderLabel(this.componentConfig, this._currentDateView);
@@ -132,7 +132,7 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
     this.componentConfig = this.dayCalendarService.getConfig(this.config);
     this.selected = this.selected || [];
     this.currentDateView = this.displayDate
-      ? this.utilsService.convertToDayjs(this.displayDate, this.componentConfig.format).clone()
+      ? this.utilsService.convertToDayjs(this.displayDate, this.componentConfig.format)
       : this.utilsService
         .getDefaultDisplayDate(
           this.currentDateView,
@@ -147,7 +147,7 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
     this._shouldShowCurrent = this.shouldShowCurrent();
   }
 
-  ngOnChanges(changes: SimpleChanges) {
+  ngOnChanges(changes: SimpleChanges): void {
     if (this.isInited) {
       const {minDate, maxDate, config} = changes;
 
@@ -247,16 +247,16 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
   }
 
   onLeftNavClick() {
-    const from = this.currentDateView.clone();
+    const from = dayjsRef(this.currentDateView.toDate());
     this.moveCalendarsBy(this.currentDateView, -1, 'month');
-    const to = this.currentDateView.clone();
+    const to = dayjsRef(this.currentDateView.toDate());
     this.onLeftNav.emit({from, to});
   }
 
   onRightNavClick() {
-    const from = this.currentDateView.clone();
+    const from = dayjsRef(this.currentDateView.toDate());
     this.moveCalendarsBy(this.currentDateView, 1, 'month');
-    const to = this.currentDateView.clone();
+    const to = dayjsRef(this.currentDateView.toDate());
     this.onRightNav.emit({from, to});
   }
 
@@ -294,13 +294,13 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
   }
 
   monthSelected(month: IMonth) {
-    this.currentDateView = month.date.clone();
+    this.currentDateView = dayjsRef(month.date.toDate());
     this.currentCalendarMode = ECalendarMode.Day;
     this.onMonthSelect.emit(month);
   }
 
   moveCalendarsBy(current: Dayjs, amount: number, granularity: UnitType = 'month') {
-    this.currentDateView = current.clone().add(amount, granularity);
+    this.currentDateView = dayjsRef(current.toDate()).add(amount, granularity);
     this.cd.markForCheck();
   }
 
@@ -326,21 +326,13 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
     this.onGoToCurrent.emit();
   }
 
-  handleConfigChange(config: SimpleChange) {
+  handleConfigChange(config: SimpleChange): void {
     if (config) {
       const prevConf: IDayCalendarConfigInternal = this.dayCalendarService.getConfig(config.previousValue);
       const currentConf: IDayCalendarConfigInternal = this.dayCalendarService.getConfig(config.currentValue);
 
       if (this.utilsService.shouldResetCurrentView(prevConf, currentConf)) {
         this._currentDateView = null;
-      }
-
-      if (prevConf.locale !== currentConf.locale) {
-        if (this.currentDateView) {
-          this.currentDateView.locale(currentConf.locale);
-        }
-
-        this.selected.forEach(m => m.locale(currentConf.locale));
       }
     }
   }

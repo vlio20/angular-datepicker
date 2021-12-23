@@ -5,8 +5,6 @@ import {ITimeSelectConfig, ITimeSelectConfigInternal} from './time-select-config
 import {Dayjs} from 'dayjs';
 import {dayjsRef} from "../common/dayjs/dayjs.ref";
 
-
-
 export type TimeUnit = 'hour' | 'minute' | 'second';
 export const FIRST_PM_HOUR = 12;
 
@@ -23,7 +21,6 @@ export class TimeSelectService {
     showSeconds: false,
     showTwentyFourHours: false,
     timeSeparator: ':',
-    locale: dayjsRef.locale()
   };
 
   constructor(private readonly utilsService: UtilsService) {
@@ -35,15 +32,11 @@ export class TimeSelectService {
       minTime: this.utilsService.onlyTime(config && config.minTime)
     };
 
-    const _config = <ITimeSelectConfigInternal>{
+    return <ITimeSelectConfigInternal>{
       ...this.DEFAULT_CONFIG,
       ...this.utilsService.clearUndefined(config),
       ...timeConfigs
     };
-
-    dayjsRef.locale(_config.locale);
-
-    return _config;
   }
 
   getTimeFormat(config: ITimeSelectConfigInternal): string {
@@ -82,7 +75,7 @@ export class TimeSelectService {
         amount = config.secondsInterval;
         break;
     }
-    return time.clone().subtract(amount, unit);
+    return time.subtract(amount, unit);
   }
 
   increase(config: ITimeSelectConfigInternal, time: Dayjs, unit: TimeUnit): Dayjs {
@@ -95,14 +88,14 @@ export class TimeSelectService {
         amount = config.secondsInterval;
         break;
     }
-    return time.clone().add(amount, unit);
+    return time.add(amount, unit);
   }
 
   toggleMeridiem(time: Dayjs): Dayjs {
     if (time.hour() < FIRST_PM_HOUR) {
-      return time.clone().add(12, 'hour');
+      return time.add(12, 'hour');
     } else {
-      return time.clone().subtract(12, 'hour');
+      return time.subtract(12, 'hour');
     }
   }
 

@@ -16,7 +16,6 @@ export class MonthCalendarService {
     format: 'MM-YYYY',
     isNavHeaderBtnClickable: false,
     monthBtnFormat: 'MMM',
-    locale: dayjsRef.locale(),
     multipleYearsNavigateBy: 10,
     showMultipleYearsNavigation: false,
     unSelectOnClick: true,
@@ -35,17 +34,16 @@ export class MonthCalendarService {
     MonthCalendarService.validateConfig(_config);
 
     this.utilsService.convertPropsToDayjs(_config, _config.format, ['min', 'max']);
-    dayjsRef.locale(_config.locale);
 
     return _config;
   }
 
   generateYear(config: IMonthCalendarConfig, year: Dayjs, selected: Dayjs[] = null): IMonth[][] {
-    let index = year.clone().startOf('year');
+    let index = year.startOf('year');
 
     return this.utilsService.createArray(config.numOfMonthRows).map(() => {
       return this.utilsService.createArray(12 / config.numOfMonthRows).map(() => {
-        const date = index.clone();
+        const date = dayjsRef(index);
         const month = {
           date,
           selected: !!selected.find(s => index.isSame(s, 'month')),

@@ -29,13 +29,13 @@ describe('Service: DayTimeCalendarService', () => {
     (service: DayTimeCalendarService) => {
       const daytime = dayjsRef('2011091313:12:11', COMBINED_FORMAT);
       const config: IDayCalendarConfigInternal = {
-        min: daytime.clone().add(10, 'm'),
-        max: daytime.clone().add(50, 'm')
+        min: daytime.add(10, 'm'),
+        max: daytime.add(50, 'm')
       };
 
       const time = daytime.clone();
       expect(service.updateDay(daytime, time, config).format(COMBINED_FORMAT))
-        .toEqual(daytime.clone().add(10, 'm').format(COMBINED_FORMAT));
+        .toEqual(daytime.add(10, 'm').format(COMBINED_FORMAT));
 
       expect(service.updateDay(daytime, time, {}).format(COMBINED_FORMAT))
         .toEqual(daytime.format(COMBINED_FORMAT));
@@ -46,13 +46,13 @@ describe('Service: DayTimeCalendarService', () => {
     (service: DayTimeCalendarService) => {
       const daytime = dayjsRef('2011091313:12:11', COMBINED_FORMAT);
       const config: IDayCalendarConfigInternal = {
-        min: daytime.clone().subtract(50, 'm'),
-        max: daytime.clone().subtract(10, 'm')
+        min: daytime.subtract(50, 'm'),
+        max: daytime.subtract(10, 'm')
       };
 
       const time = daytime.clone();
       expect(service.updateDay(daytime, time, config).format(COMBINED_FORMAT))
-        .toEqual(daytime.clone().subtract(10, 'm').format(COMBINED_FORMAT));
+        .toEqual(daytime.subtract(10, 'm').format(COMBINED_FORMAT));
 
       expect(service.updateDay(daytime, time, {}).format(COMBINED_FORMAT))
         .toEqual(daytime.format(COMBINED_FORMAT));

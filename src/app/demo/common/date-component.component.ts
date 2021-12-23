@@ -14,6 +14,7 @@ export abstract class DateComponent {
   @ViewChild('dateComponent') dateComponent: DatePickerComponent;
   @ViewChild(DatePickerDirective) dateDirective: DatePickerDirective;
 
+  ready: boolean = true;
   control: FormControl;
 
   abstract config;
@@ -27,6 +28,7 @@ export abstract class DateComponent {
   validationMaxTime: Dayjs;
   placeholder: string = 'Choose a date...';
   displayDate: Dayjs | string;
+  locale: string = dayjs.locale();
 
   displayDateChanged(displayDate: Dayjs | string): void {
     this.displayDate = displayDate;
@@ -120,6 +122,15 @@ export abstract class DateComponent {
 
   log(item) {
     // console.log(item);
+  }
+
+  onLocaleChange(locale: string): void {
+    this.ready = false;
+    import(`dayjs/locale/${locale}`).then(() => {
+      this.locale = locale;
+      dayjs.locale(locale);
+      this.ready = true;
+    });
   }
 
   protected buildForm(): FormControl {

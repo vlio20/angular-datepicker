@@ -8,7 +8,7 @@ import {DayTimeCalendarService} from '../day-time-calendar/day-time-calendar.ser
 import {ITimeSelectConfig} from '../time-select/time-select-config.model';
 import {CalendarMode} from '../common/types/calendar-mode';
 import {Dayjs} from 'dayjs';
-import {dayjsRef} from "../common/dayjs/dayjs.ref";
+import {IDayTimeCalendarConfig} from "../day-time-calendar/day-time-calendar-config.model";
 
 @Injectable()
 export class DatePickerService {
@@ -26,7 +26,6 @@ export class DatePickerService {
     showWeekNumbers: false,
     enableMonthSelector: true,
     showGoToCurrent: true,
-    locale: dayjsRef.locale(),
     hideOnOutsideClick: true
   };
 
@@ -48,8 +47,6 @@ export class DatePickerService {
     if (config && config.allowMultiSelect && config.closeOnSelect === undefined) {
       _config.closeOnSelect = false;
     }
-
-    dayjsRef.locale(_config.locale);
 
     return _config;
   }
@@ -80,7 +77,6 @@ export class DatePickerService {
       isMonthDisabledCallback: pickerConfig.isMonthDisabledCallback,
       multipleYearsNavigateBy: pickerConfig.multipleYearsNavigateBy,
       showMultipleYearsNavigation: pickerConfig.showMultipleYearsNavigation,
-      locale: pickerConfig.locale,
       returnedValueType: pickerConfig.returnedValueType,
       showGoToCurrent: pickerConfig.showGoToCurrent,
       unSelectOnClick: pickerConfig.unSelectOnClick,
@@ -88,7 +84,7 @@ export class DatePickerService {
     };
   }
 
-  getDayTimeConfigService(pickerConfig: IDatePickerConfig): ITimeSelectConfig {
+  getDayTimeConfigService(pickerConfig: IDatePickerConfig): IDayTimeCalendarConfig {
     return this.daytimeCalendarService.getConfig(pickerConfig);
   }
 

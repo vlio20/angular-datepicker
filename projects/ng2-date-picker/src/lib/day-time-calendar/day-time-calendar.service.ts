@@ -4,8 +4,8 @@ import {UtilsService} from '../common/services/utils/utils.service';
 import {DayCalendarService} from '../day-calendar/day-calendar.service';
 import {TimeSelectService} from '../time-select/time-select.service';
 import {IDayTimeCalendarConfig} from './day-time-calendar-config.model';
-import {Dayjs} from 'dayjs';
 import {dayjsRef} from "../common/dayjs/dayjs.ref";
+import {Dayjs} from 'dayjs';
 
 const DAY_FORMAT = 'YYYYMMDD';
 const TIME_FORMAT = 'HH:mm:ss';
@@ -13,9 +13,7 @@ const COMBINED_FORMAT = DAY_FORMAT + TIME_FORMAT;
 
 @Injectable()
 export class DayTimeCalendarService {
-  readonly DEFAULT_CONFIG: IDayTimeCalendarConfig = {
-    locale: dayjsRef.locale()
-  };
+  readonly DEFAULT_CONFIG: IDayTimeCalendarConfig = {};
 
   constructor(private utilsService: UtilsService,
               private dayCalendarService: DayCalendarService,
@@ -23,15 +21,11 @@ export class DayTimeCalendarService {
   }
 
   getConfig(config: IDayTimeCalendarConfig): IDayTimeCalendarConfig {
-    const _config = {
+    return {
       ...this.DEFAULT_CONFIG,
       ...this.timeSelectService.getConfig(config),
       ...this.dayCalendarService.getConfig(config)
     };
-
-    dayjsRef.locale(config.locale);
-
-    return _config;
   }
 
   updateDay(current: Dayjs, day: Dayjs, config: IDayTimeCalendarConfig): Dayjs {

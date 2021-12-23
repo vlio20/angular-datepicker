@@ -202,7 +202,6 @@ export class DemoComponent implements OnInit {
     timeSeparator: ':',
     multipleYearsNavigateBy: 10,
     showMultipleYearsNavigation: false,
-    locale: dayjs.locale(),
     hideInputContainer: false,
     returnedValueType: ECalendarValue.String,
     unSelectOnClick: true,

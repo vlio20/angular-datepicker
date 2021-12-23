@@ -21,7 +21,7 @@ describe('Service: MonthCalendarService', () => {
       const selected = dayjsRef('14-01-1987', 'DD-MM-YYYY');
       const genYear = service.generateYear({numOfMonthRows: 4}, year, [selected]);
 
-      let current = year.clone().startOf('year');
+      let current = year.startOf('year');
       genYear.forEach((row) => {
         row.forEach((month) => {
           expect(month.date.isSame(current, 'month')).toBe(true);
@@ -58,8 +58,8 @@ describe('Service: MonthCalendarService', () => {
         text: dayjsRef('09-04-2017', 'DD-MM-YYYY').format('MMM')
       };
       const config1: any = {
-        min: month.date.clone().subtract(1, 'month'),
-        max: month.date.clone().add(1, 'month')
+        min: month.date.subtract(1, 'month'),
+        max: month.date.add(1, 'month')
       };
 
       expect(service.isMonthDisabled(month.date, config1)).toBe(false);

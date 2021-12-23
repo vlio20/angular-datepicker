@@ -8,7 +8,7 @@ import {IDate} from '../../models/date.model';
 import {CalendarMode} from '../../types/calendar-mode';
 import {DateValidator} from '../../types/validator.type';
 import {ICalendarInternal} from '../../models/calendar.model';
-import {dayjsRef} from "../../dayjs/dayjs.ref";
+import {dayjsRef} from '../../dayjs/dayjs.ref';
 
 export interface DateLimits {
   minDate?: SingleCalendarValue;
@@ -42,7 +42,7 @@ export class UtilsService {
     } else if (typeof date === 'string') {
       return dayjsRef(date, format);
     } else {
-      return date.clone();
+      return dayjsRef(date.toDate());
     }
   }
 
@@ -60,15 +60,15 @@ export class UtilsService {
                         allowMultiSelect: boolean,
                         minDate: Dayjs): Dayjs {
     if (current) {
-      return current.clone();
+      return dayjsRef(current.toDate());
     } else if (minDate && minDate.isAfter(dayjsRef())) {
-      return minDate.clone();
+      return dayjsRef(minDate.toDate());
     } else if (allowMultiSelect) {
       if (selected && selected[selected.length]) {
-        return selected[selected.length].clone();
+        return dayjsRef(selected[selected.length].toDate());
       }
     } else if (selected && selected[0]) {
-      return selected[0].clone();
+      return dayjsRef(selected[0].toDate());
     }
 
     return dayjsRef();
@@ -107,10 +107,10 @@ export class UtilsService {
         retVal = (<string[]>value).map(v => v ? dayjsRef(v, config.format, true) : null).filter(Boolean);
         break;
       case (ECalendarValue.Dayjs):
-        retVal = value ? [(<Dayjs>value).clone()] : [];
+        retVal = value ? [dayjsRef((<Dayjs>value).toDate())] : [];
         break;
       case (ECalendarValue.DayjsArr):
-        retVal = (<Dayjs[]>value || []).map(v => v.clone());
+        retVal = (<Dayjs[]>value || []).map(v => dayjsRef(v.toDate()));
         break;
       default:
         retVal = [];
@@ -129,9 +129,9 @@ export class UtilsService {
       case (ECalendarValue.StringArr):
         return value.filter(Boolean).map(v => v.format(format));
       case (ECalendarValue.Dayjs):
-        return value[0] ? value[0].clone() : value[0];
+        return value[0] ? dayjsRef(value[0].toDate()) : value[0];
       case (ECalendarValue.DayjsArr):
-        return value ? value.map(v => v.clone()) : value;
+        return value ? value.map(v => dayjsRef(v.toDate())) : value;
       default:
         return value;
     }
@@ -268,6 +268,11 @@ export class UtilsService {
         format,
         allowMultiSelect: true
       }).filter(Boolean);
+      value.forEach((v) => {
+        if (!v.isValid()) {
+          console.log(v);
+        }
+      });
 
       if (!value.every(val => val.isValid())) {
         return {
