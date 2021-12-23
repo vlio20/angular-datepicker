@@ -316,8 +316,20 @@ export class UtilsService {
   }
 
   isDateInRange(date: Dayjs, from: Dayjs, to: Dayjs): boolean {
-    if (!date || !from || !to) {
+    if (!date) {
       return false;
+    }
+
+    if (!from || !to) {
+      return true;
+    }
+
+    if (!from && to) {
+      return date.isSameOrBefore(to);
+    }
+
+    if (from && !to) {
+      return date.isSameOrAfter(from);
     }
 
     return date.isBetween(from, to, 'day', '[]');

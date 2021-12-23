@@ -1,6 +1,6 @@
 import {DemoPage} from '../app.po';
 
-describe('Locales', () => {
+xdescribe('Locales', () => {
   let page: DemoPage;
 
   beforeEach(async () => {

@@ -32,7 +32,6 @@ export class MonthCalendarService {
     };
 
     MonthCalendarService.validateConfig(_config);
-
     this.utilsService.convertPropsToDayjs(_config, _config.format, ['min', 'max']);
 
     return _config;
