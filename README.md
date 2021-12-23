@@ -46,6 +46,10 @@ Thank you to all our backers! 🙏 [[Become a backer](https://opencollective.com
   
 ## Usage  
 Put the dp-date-picker component wherever you need it.  
+
+## Locale  
+In order to change the locale you will need first to import the locale you want to work with and apply it to the Dayjs object. More information about this can be found in the dayjs documentation [here](https://day.js.org/docs/en/i18n/changing-locale).  
+**Note:** The locale is set to `en` by default. If you change the locale after the first initialization of the date-picker then you will need to reinitialize the date-picker.  
   
   
 ### Attributes (Input):   
@@ -84,8 +88,7 @@ Here are the available configurations:
   
 | Name                        | Type                  | Default                                                                   | Applies To                | Description                                                                                                                                                                                                                                                                   |  
 |-----------------------------|:---------------------:|:-------------------------------------------------------------------------:|:-------------------------:|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|  
-| appendTo                    | `String\|HTMLElement` | `undefined`                                                               | All                       | The selector/element to which the calendar popup will append to (this is useful for `overflow: hidden` container issues). Please note that the `appendTo` element will be set with position `absolute` if it has position `static` (the default position).                    |  
-| locale                      | `String`              | [`moment.locale()`](https://momentjs.com/docs/#/i18n/getting-locale/)     | All                       | Localisation of language (see in the demo all supported locales)                                                                                                                                                                                                              |  
+| appendTo                    | `String\|HTMLElement` | `undefined`                                                               | All                       | The selector/element to which the calendar popup will append to (this is useful for `overflow: hidden` container issues). Please note that the `appendTo` element will be set with position `absolute` if it has position `static` (the default position).                    |   
 | disableKeypress             | `Boolean`             | `false`                                                                   | All                       | Disables the possibility to change the date value by typing it - changing the date would be possible only from the picker                                                                                                                                                     |  
 | format                      | `String`              | `"DD-MM-YYYY"`                                                            | All                       | If ngModel provided as `String` the format is required, this format also will be used as the input format style.                                                                                                                                                              |  
 | onOpenDelay                 | `Number`              | `0`                                                                       | All                       | The delay (in ms) between the date picker focusing and the date-picker popup apparel                                                                                                                                                                                          |  
@@ -290,11 +293,11 @@ Here are the available configurations:
   
 Here is the list of APIs:    
   
-| Name                 | Signature                                                                           | Description                      |  
-|----------------------|:-----------------------------------------------------------------------------------:|----------------------------------|  
-| moveCalendarsBy      | `(current: Dayjs, amount: number, granularity: moment.unitOfTime.Base) => void`    | Moves calendar by given amount   |  
-| moveCalendarTo       | `(to: Dayjs \| String) => void`                                                    | Moves calendar to specific date  |  
-| toggleCalendarMode   | `(mode: day \| month) => void`                                                      | Changes clander mode day/month   |  
+| Name                 |                                Signature                                | Description                      |  
+|----------------------|:-----------------------------------------------------------------------:|----------------------------------|  
+| moveCalendarsBy      | `(current: Dayjs, amount: number, granularity: dayjs.TimeUnit) => void` | Moves calendar by given amount   |  
+| moveCalendarTo       |                              `(to: Dayjs \                              | String) => void`                 | Moves calendar to specific date  |  
+| toggleCalendarMode   |                              `(mode: day \                              | month) => void`                  | Changes clander mode day/month   |  
   
   
 ## Inline - Time Select  

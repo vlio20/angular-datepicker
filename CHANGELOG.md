@@ -1,6 +1,13 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+# [13.1.0] (???)
+
+# Breaking changes
+- Replace deprecated `Moment` with Dayjs  ([573](https://github.com/vlio20/angular-datepicker/pull/573)) closes [#530](https://github.com/vlio20/angular-datepicker/issues/530)  
+Locale was removed from the library configuration, changing the locale should be done outside the component. More information can be found in the readme.md file under the Locale section.  
+Some formats also might be change due to the way Dayjs is implemented.
+
 # [13.0.0] (2021-12-22)
 
 ### Improvements
