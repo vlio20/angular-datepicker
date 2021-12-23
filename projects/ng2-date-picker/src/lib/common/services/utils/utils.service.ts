@@ -320,7 +320,7 @@ export class UtilsService {
       return false;
     }
 
-    if (!from || !to) {
+    if (!from && !to) {
       return true;
     }
 

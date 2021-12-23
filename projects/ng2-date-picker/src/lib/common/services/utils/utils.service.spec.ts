@@ -91,6 +91,10 @@ describe('Service: ObUtilsService', () => {
     expect(service.isDateInRange(dayjsRef(), null, dayjsRef().add(1, 'd'))).toBeTruthy();
     expect(service.isDateInRange(dayjsRef().subtract(2, 'd'), dayjsRef().subtract(1, 'd'), dayjsRef().add(1, 'd')))
       .toBeFalsy();
+    expect(service.isDateInRange(dayjsRef(), dayjsRef().add(3, 'd'), null)).toBeFalsy();
+    expect(service.isDateInRange(dayjsRef(), null, dayjsRef().subtract(3, 'd'))).toBeFalsy();
+    expect(service.isDateInRange(dayjsRef(), null, null)).toBeTruthy();
+
   }));
 
   it('should convertPropsToDayjs method', inject([UtilsService], (service: UtilsService) => {
