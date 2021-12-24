@@ -16,7 +16,7 @@ import {
 } from '@angular/core';
 import {IMonth} from './month.model';
 import {MonthCalendarService} from './month-calendar.service';
-import moment, {Moment} from 'moment';
+
 import {IMonthCalendarConfig, IMonthCalendarConfigInternal} from './month-calendar-config';
 import {
   ControlValueAccessor,
@@ -31,6 +31,8 @@ import {UtilsService} from '../common/services/utils/utils.service';
 import {DateValidator} from '../common/types/validator.type';
 import {SingleCalendarValue} from '../common/types/single-calendar-value';
 import {INavEvent} from '../common/models/navigation-event.model';
+import {Dayjs} from 'dayjs';
+import {dayjsRef} from "../common/dayjs/dayjs.ref";
 
 @Component({
   selector: 'dp-month-calendar',
@@ -55,9 +57,9 @@ import {INavEvent} from '../common/models/navigation-event.model';
 export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAccessor, Validator {
 
   @Input() config: IMonthCalendarConfig;
-  @Input() displayDate: Moment | string;
-  @Input() minDate: Moment;
-  @Input() maxDate: Moment;
+  @Input() displayDate: Dayjs | string;
+  @Input() minDate: Dayjs;
+  @Input() maxDate: Dayjs;
   @HostBinding('class') @Input() theme: string;
   @Output() onSelect: EventEmitter<IMonth> = new EventEmitter();
   @Output() onNavHeaderBtnClick: EventEmitter<null> = new EventEmitter();
@@ -88,25 +90,25 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
               public readonly cd: ChangeDetectorRef) {
   }
 
-  _selected: Moment[];
+  _selected: Dayjs[];
 
-  get selected(): Moment[] {
+  get selected(): Dayjs[] {
     return this._selected;
   }
 
-  set selected(selected: Moment[]) {
+  set selected(selected: Dayjs[]) {
     this._selected = selected;
     this.onChangeCallback(this.processOnChangeCallback(selected));
   }
 
-  _currentDateView: Moment;
+  _currentDateView: Dayjs;
 
-  get currentDateView(): Moment {
+  get currentDateView(): Dayjs {
     return this._currentDateView;
   }
 
-  set currentDateView(current: Moment) {
-    this._currentDateView = current.clone();
+  set currentDateView(current: Dayjs) {
+    this._currentDateView = dayjsRef(current.toDate());
     this.yearMonths = this.monthCalendarService
       .generateYear(this.componentConfig, this._currentDateView, this.selected);
     this.navLabel = this.monthCalendarService.getHeaderLabel(this.componentConfig, this.currentDateView);
@@ -132,19 +134,20 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
       if (minDate || maxDate) {
         this.initValidators();
       }
+      this.cd.markForCheck()
     }
   }
 
   init(): void {
     this.componentConfig = this.monthCalendarService.getConfig(this.config);
     this.selected = this.selected || [];
-    this.currentDateView = (this.displayDate as Moment) ?? this.utilsService
-        .getDefaultDisplayDate(
-          this.currentDateView,
-          this.selected,
-          this.componentConfig.allowMultiSelect,
-          this.componentConfig.min
-        );
+    this.currentDateView = (this.displayDate as Dayjs) ?? this.utilsService
+      .getDefaultDisplayDate(
+        this.currentDateView,
+        this.selected,
+        this.componentConfig.allowMultiSelect,
+        this.componentConfig.min
+      );
     this.inputValueType = this.utilsService.getInputType(this.inputValue, this.componentConfig.allowMultiSelect);
     this._shouldShowCurrent = this.shouldShowCurrent();
   }
@@ -154,7 +157,7 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
 
     if (value) {
       this.selected = this.utilsService
-        .convertToMomentArray(value, this.componentConfig);
+        .convertToDayjsArray(value, this.componentConfig);
       this.yearMonths = this.monthCalendarService
         .generateYear(this.componentConfig, this.currentDateView, this.selected);
       this.inputValueType = this.utilsService.getInputType(this.inputValue, this.componentConfig.allowMultiSelect);
@@ -185,8 +188,8 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
     }
   }
 
-  processOnChangeCallback(value: Moment[]): CalendarValue {
-    return this.utilsService.convertFromMomentArray(
+  processOnChangeCallback(value: Dayjs[]): CalendarValue {
+    return this.utilsService.convertFromDayjsArray(
       this.componentConfig.format,
       value,
       this.componentConfig.returnedValueType || this.inputValueType
@@ -216,9 +219,9 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
   }
 
   onLeftNavClick() {
-    const from = this.currentDateView.clone();
-    this.currentDateView = this.currentDateView.clone().subtract(1, 'year');
-    const to = this.currentDateView.clone();
+    const from = dayjsRef(this.currentDateView.toDate());
+    this.currentDateView = this.currentDateView.subtract(1, 'year');
+    const to = dayjsRef(this.currentDateView.toDate());
     this.yearMonths = this.monthCalendarService.generateYear(this.componentConfig, this.currentDateView, this.selected);
     this.onLeftNav.emit({from, to});
   }
@@ -232,16 +235,16 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
       navigateBy = this.currentDateView.year() - this.componentConfig.min.year();
     }
 
-    const from = this.currentDateView.clone();
-    this.currentDateView = this.currentDateView.clone().subtract(navigateBy, 'year');
-    const to = this.currentDateView.clone();
+    const from = dayjsRef(this.currentDateView.toDate());
+    this.currentDateView = this.currentDateView.subtract(navigateBy, 'year');
+    const to = dayjsRef(this.currentDateView.toDate());
     this.onLeftSecondaryNav.emit({from, to});
   }
 
   onRightNavClick(): void {
-    const from = this.currentDateView.clone();
-    this.currentDateView = this.currentDateView.clone().add(1, 'year');
-    const to = this.currentDateView.clone();
+    const from = dayjsRef(this.currentDateView.toDate());
+    this.currentDateView = this.currentDateView.add(1, 'year');
+    const to = dayjsRef(this.currentDateView.toDate());
     this.onRightNav.emit({from, to});
   }
 
@@ -254,9 +257,9 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
       navigateBy = this.componentConfig.max.year() - this.currentDateView.year();
     }
 
-    const from = this.currentDateView.clone();
-    this.currentDateView = this.currentDateView.clone().add(navigateBy, 'year');
-    const to = this.currentDateView.clone();
+    const from = dayjsRef(this.currentDateView.toDate());
+    this.currentDateView = this.currentDateView.add(navigateBy, 'year');
+    const to = dayjsRef(this.currentDateView.toDate());
     this.onRightSecondaryNav.emit({from, to});
   }
 
@@ -264,8 +267,8 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
     this.onNavHeaderBtnClick.emit();
   }
 
-  getMonthBtnCssClass(month: IMonth): {[klass: string]: boolean} {
-    const cssClass: {[klass: string]: boolean} = {
+  getMonthBtnCssClass(month: IMonth): { [klass: string]: boolean } {
+    const cssClass: { [klass: string]: boolean } = {
       'dp-selected': month.selected,
       'dp-current-month': month.currentMonth
     };
@@ -288,13 +291,13 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
   }
 
   goToCurrent(): void {
-    this.currentDateView = moment();
+    this.currentDateView = dayjsRef();
     this.onGoToCurrent.emit();
   }
 
   moveCalendarTo(to: SingleCalendarValue): void {
     if (to) {
-      this.currentDateView = this.utilsService.convertToMoment(to, this.componentConfig.format);
+      this.currentDateView = this.utilsService.convertToDayjs(to, this.componentConfig.format);
       this.cd.markForCheck();
     }
   }
@@ -306,14 +309,6 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
 
       if (this.utilsService.shouldResetCurrentView(prevConf, currentConf)) {
         this._currentDateView = null;
-      }
-
-      if (prevConf.locale !== currentConf.locale) {
-        if (this.currentDateView) {
-          this.currentDateView.locale(currentConf.locale)
-        }
-
-        (this.selected || []).forEach((m) => m.locale(currentConf.locale));
       }
     }
   }

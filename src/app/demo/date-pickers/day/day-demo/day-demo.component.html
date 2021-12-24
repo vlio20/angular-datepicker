@@ -1,5 +1,5 @@
 <div class="dp-date-wrapper">
-  <div class="dp-date-input-container">
+  <div class="dp-date-input-container" *ngIf="ready">
     <div class="dp-form-item">
       <dp-date-picker #dateComponent
                       (close)="closed()"
@@ -43,7 +43,9 @@
                   (onPlaceholderChange)="onPlaceholderChange($event)"
                   (onRequireValidationChange)="onRequireValidationChange($event)"
                   (openCalendar)="openCalendar()"
+                  (onLocaleChange)="onLocaleChange($event)"
                   [config]="config"
+                  [localeVal]="locale"
                   pickerMode="dayPicker">
   </dp-config-form>
 </div>

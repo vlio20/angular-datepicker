@@ -1,3 +1,3 @@
-import {Moment} from 'moment';
+import {Dayjs} from 'dayjs';
 
-export type SingleCalendarValue = Moment | string;
+export type SingleCalendarValue = Dayjs | string;

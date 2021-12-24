@@ -1,6 +1,6 @@
 import {DemoPage} from './app.po';
 import {browser, protractor} from 'protractor';
-import * as moment from 'moment';
+import * as dayjs from 'dayjs';
 
 describe('dpDayPicker dayPicker', () => {
 
@@ -196,12 +196,12 @@ describe('dpDayPicker dayPicker', () => {
 
   it('should check month format', async () => {
     await page.dayPickerInput.click();
-    expect(await page.dayCalendarNavHeaderBtn.getText()).toEqual(moment().format('MMM, YYYY'));
+    expect(await page.dayCalendarNavHeaderBtn.getText()).toEqual(dayjs().format('MMM, YYYY'));
     await page.clickOnBody();
     await page.monthFormatInput.clear();
     await page.monthFormatInput.sendKeys('MM-YYYY');
     await page.dayPickerInput.click();
-    expect(await page.dayCalendarNavHeaderBtn.getText()).toEqual(moment().format('MM-YYYY'));
+    expect(await page.dayCalendarNavHeaderBtn.getText()).toEqual(dayjs().format('MM-YYYY'));
   });
 
   it('should check that the min selectable option is working', async () => {
@@ -260,21 +260,21 @@ describe('dpDayPicker dayPicker', () => {
   it('should check allow multiselect is working', async () => {
     await page.enableMultiselect.click();
     await page.dayPickerInput.click();
-    await page.setInputValue(page.dayPickerInput, moment().date(18).format('DD-MM-YYYY'));
+    await page.setInputValue(page.dayPickerInput, dayjs().date(18).format('DD-MM-YYYY'));
 
     await page.clickOnDayButton('15');
     await page.clickOnDayButton('16');
     expect(await page.selectedDays.count()).toBe(3);
     expect(await page.datePickerPopup.isDisplayed()).toBe(true);
     expect(await page.getInputVal(page.dayPickerInput)).toEqual(
-      `${moment().date(18).format('DD-MM-YYYY')} | ${moment().date(15).format('DD-MM-YYYY')} | ${moment().date(16)
+      `${dayjs().date(18).format('DD-MM-YYYY')} | ${dayjs().date(15).format('DD-MM-YYYY')} | ${dayjs().date(16)
         .format('DD-MM-YYYY')}`
     );
 
     await page.clickOnDayButton('18');
     expect(await page.selectedDays.count()).toBe(2);
     expect(await page.getInputVal(page.dayPickerInput)).toEqual(
-      `${moment().date(15).format('DD-MM-YYYY')} | ${moment().date(16).format('DD-MM-YYYY')}`
+      `${dayjs().date(15).format('DD-MM-YYYY')} | ${dayjs().date(16).format('DD-MM-YYYY')}`
     );
   });
 
@@ -306,10 +306,10 @@ describe('dpDayPicker dayPicker', () => {
     await page.dayPickerInput.click();
     await page.dayCalendarNavHeaderBtn.click();
     await page.dayCalendarLeftSecondaryNavBtn.click();
-    expect(await page.dayCalendarNavMonthHeaderBtn.getText()).toEqual(moment().subtract(20, 'year').format('YYYY'));
+    expect(await page.dayCalendarNavMonthHeaderBtn.getText()).toEqual(dayjs().subtract(20, 'year').format('YYYY'));
 
     await page.dayCalendarRightSecondaryNavBtn.click();
     await page.dayCalendarRightSecondaryNavBtn.click();
-    expect(await page.dayCalendarNavMonthHeaderBtn.getText()).toEqual(moment().add(20, 'year').format('YYYY'));
+    expect(await page.dayCalendarNavMonthHeaderBtn.getText()).toEqual(dayjs().add(20, 'year').format('YYYY'));
   });
 });

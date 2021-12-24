@@ -1,5 +1,5 @@
 <div class="dp-date-wrapper">
-  <div class="dp-date-input-container dp-inline">
+  <div class="dp-date-input-container dp-inline" *ngIf="ready">
     <div class="dp-form-item">
       <dp-month-calendar #dateComponent
                          (close)="closed()"
@@ -38,7 +38,9 @@
                   (onPlaceholderChange)="onPlaceholderChange($event)"
                   (onRequireValidationChange)="onRequireValidationChange($event)"
                   (openCalendar)="openCalendar()"
+                  (onLocaleChange)="onLocaleChange($event)"
                   [config]="config"
+                  [localeVal]="locale"
                   pickerMode="monthInline">
   </dp-config-form>
 </div>

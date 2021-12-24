@@ -1,8 +1,10 @@
 import {inject, TestBed} from '@angular/core/testing';
 import {DayCalendarService} from './day-calendar.service';
-import moment, {Moment} from 'moment';
+
 import {UtilsService} from '../common/services/utils/utils.service';
 import {IDayCalendarConfigInternal} from './day-calendar-config.model';
+import {Dayjs} from 'dayjs';
+import {dayjsRef} from "../common/dayjs/dayjs.ref";
 
 describe('Service: Calendar', () => {
   beforeEach(() => {
@@ -38,8 +40,8 @@ describe('Service: Calendar', () => {
         {
           firstDayOfWeek: 'su'
         },
-        moment('11-10-2016', 'DD-MM-YYYY'),
-        [moment('11-10-2016', 'DD-MM-YYYY')]);
+        dayjsRef('11-10-2016', 'DD-MM-YYYY'),
+        [dayjsRef('11-10-2016', 'DD-MM-YYYY')]);
       expect(monthWeeks[0][0].date.format('DD-MM-YYYY')).toBe('25-09-2016');
       expect(monthWeeks[0][0].prevMonth).toBe(true);
       expect(monthWeeks[0][0].currentMonth).toBe(false);
@@ -54,8 +56,8 @@ describe('Service: Calendar', () => {
         {
           firstDayOfWeek: 'mo'
         },
-        moment('11-10-2016', 'DD-MM-YYYY'),
-        [moment('11-10-2016', 'DD-MM-YYYY'), moment('13-10-2016', 'DD-MM-YYYY')]
+        dayjsRef('11-10-2016', 'DD-MM-YYYY'),
+        [dayjsRef('11-10-2016', 'DD-MM-YYYY'), dayjsRef('13-10-2016', 'DD-MM-YYYY')]
       );
       expect(monthWeeks[0][0].date.format('DD-MM-YYYY')).toBe('26-09-2016');
       expect(monthWeeks[5][6].date.format('DD-MM-YYYY')).toBe('06-11-2016');
@@ -66,8 +68,8 @@ describe('Service: Calendar', () => {
         {
           firstDayOfWeek: 'mo'
         },
-        moment('11-10-2016', 'DD-MM-YYYY'),
-        [moment('11-10-2016', 'DD-MM-YYYY')]);
+        dayjsRef('11-10-2016', 'DD-MM-YYYY'),
+        [dayjsRef('11-10-2016', 'DD-MM-YYYY')]);
       expect(monthWeeks[0][0].date.format('DD-MM-YYYY')).toBe('26-09-2016');
       expect(monthWeeks[5][6].date.format('DD-MM-YYYY')).toBe('06-11-2016');
       expect(monthWeeks[2][1].selected).toBe(true);
@@ -77,7 +79,7 @@ describe('Service: Calendar', () => {
         {
           firstDayOfWeek: 'mo'
         },
-        moment('11-10-2016', 'DD-MM-YYYY'),
+        dayjsRef('11-10-2016', 'DD-MM-YYYY'),
         []
       );
       expect(monthWeeks[0][0].date.format('DD-MM-YYYY')).toBe('26-09-2016');
@@ -89,7 +91,7 @@ describe('Service: Calendar', () => {
         {
           firstDayOfWeek: 'mo'
         },
-        moment('11-10-2016', 'DD-MM-YYYY'),
+        dayjsRef('11-10-2016', 'DD-MM-YYYY'),
         []
       );
       expect(monthWeeks[0][0].date.format('DD-MM-YYYY')).toBe('26-09-2016');
@@ -97,14 +99,13 @@ describe('Service: Calendar', () => {
       expect(monthWeeks[2][1].selected).toBe(false);
       expect(monthWeeks[2][3].selected).toBe(false);
 
-
-      const today = moment('11-10-2016', 'DD-MM-YYYY').toDate();
+      const today = dayjsRef('11-10-2016', 'DD-MM-YYYY').toDate();
       jasmine.clock().mockDate(today);
       monthWeeks = service.generateMonthArray(
         {
           firstDayOfWeek: 'mo'
         },
-        moment('test', 'DD-MM-YYYY'),
+        dayjsRef('test', 'DD-MM-YYYY'),
         []
       );
       expect(monthWeeks[0][0].date.format('DD-MM-YYYY')).toBe('26-09-2016');
@@ -128,22 +129,22 @@ describe('Service: Calendar', () => {
     (service: DayCalendarService) => {
       const config: IDayCalendarConfigInternal = {
         firstDayOfWeek: 'su',
-        min: moment('13-10-2016', 'DD-MM-YYYY').subtract(1, 'day'),
-        max: moment('13-10-2016', 'DD-MM-YYYY').add(1, 'day')
+        min: dayjsRef('13-10-2016', 'DD-MM-YYYY').subtract(1, 'day'),
+        max: dayjsRef('13-10-2016', 'DD-MM-YYYY').add(1, 'day')
       };
 
-      expect(service.isDateDisabled(moment('11-10-2016', 'DD-MM-YYYY'), config)).toBe(true);
-      expect(service.isDateDisabled(moment('12-10-2016', 'DD-MM-YYYY'), config)).toBe(false);
-      expect(service.isDateDisabled(moment('13-10-2016', 'DD-MM-YYYY'), config)).toBe(false);
-      expect(service.isDateDisabled(moment('14-10-2016', 'DD-MM-YYYY'), config)).toBe(false);
-      expect(service.isDateDisabled(moment('15-10-2016', 'DD-MM-YYYY'), config)).toBe(true);
+      expect(service.isDateDisabled(dayjsRef('11-10-2016', 'DD-MM-YYYY'), config)).toBe(true);
+      expect(service.isDateDisabled(dayjsRef('12-10-2016', 'DD-MM-YYYY'), config)).toBe(false);
+      expect(service.isDateDisabled(dayjsRef('13-10-2016', 'DD-MM-YYYY'), config)).toBe(false);
+      expect(service.isDateDisabled(dayjsRef('14-10-2016', 'DD-MM-YYYY'), config)).toBe(false);
+      expect(service.isDateDisabled(dayjsRef('15-10-2016', 'DD-MM-YYYY'), config)).toBe(true);
 
-      config.isDayDisabledCallback = (date: Moment) => {
-        return date.isSame(moment('13-10-2016', 'DD-MM-YYYY'), 'day');
+      config.isDayDisabledCallback = (date: Dayjs) => {
+        return date.isSame(dayjsRef('13-10-2016', 'DD-MM-YYYY'), 'day');
       };
 
-      expect(service.isDateDisabled(moment('13-10-2016', 'DD-MM-YYYY'), config)).toBe(true);
-      expect(service.isDateDisabled(moment('11-10-2016', 'DD-MM-YYYY'), config)).toBe(false);
+      expect(service.isDateDisabled(dayjsRef('13-10-2016', 'DD-MM-YYYY'), config)).toBe(true);
+      expect(service.isDateDisabled(dayjsRef('11-10-2016', 'DD-MM-YYYY'), config)).toBe(false);
     }));
 
   it('should show/hide near month according to showNearMonthDays configuration', inject([DayCalendarService],
@@ -153,9 +154,9 @@ describe('Service: Calendar', () => {
         showNearMonthDays: true
       };
 
-      expect(service.generateMonthArray(config, moment('27-03-2017', 'DD-MM-YYYY'), []).length).toBe(6);
+      expect(service.generateMonthArray(config, dayjsRef('27-03-2017', 'DD-MM-YYYY'), []).length).toBe(6);
       config.showNearMonthDays = false;
-      expect(service.generateMonthArray(config, moment('27-03-2017', 'DD-MM-YYYY'), []).length).toBe(5);
+      expect(service.generateMonthArray(config, dayjsRef('27-03-2017', 'DD-MM-YYYY'), []).length).toBe(5);
     }));
 
   it('should not effect the calendar when no full near weeks even if showNearMonthDays is false',
@@ -166,16 +167,16 @@ describe('Service: Calendar', () => {
           showNearMonthDays: false
         };
 
-        expect(service.generateMonthArray(config, moment('27-04-2017', 'DD-MM-YYYY'), []).length).toBe(6);
+        expect(service.generateMonthArray(config, dayjsRef('27-04-2017', 'DD-MM-YYYY'), []).length).toBe(6);
       }));
 
   it('should check getDayBtnText method',
     inject([DayCalendarService],
       (service: DayCalendarService) => {
-        const date = moment('05-04-2017', 'DD-MM-YYYY');
+        const date = dayjsRef('05-04-2017', 'DD-MM-YYYY');
         expect(service.getDayBtnText({dayBtnFormat: 'DD'}, date)).toEqual('05');
         expect(service.getDayBtnText({dayBtnFormat: 'D'}, date)).toEqual('5');
-        expect(service.getDayBtnText({dayBtnFormatter: (m => 'bla')}, date)).toEqual('bla');
+        expect(service.getDayBtnText({dayBtnFormatter: (() => 'bla')}, date)).toEqual('bla');
         expect(service.getDayBtnText({dayBtnFormat: 'DD', dayBtnFormatter: (m => m.format('D'))}, date))
           .toEqual('5');
       }));
@@ -183,9 +184,9 @@ describe('Service: Calendar', () => {
   it('should check getDayBtnCssClass method',
     inject([DayCalendarService],
       (service: DayCalendarService) => {
-        const date = moment('05-04-2017', 'DD-MM-YYYY');
+        const date = dayjsRef('05-04-2017', 'DD-MM-YYYY');
         expect(service.getDayBtnCssClass({}, date)).toEqual('');
-        expect(service.getDayBtnCssClass({dayBtnCssClassCallback: (m => 'class1 class2')}, date))
+        expect(service.getDayBtnCssClass({dayBtnCssClassCallback: (() => 'class1 class2')}, date))
           .toEqual('class1 class2');
       }));
 });

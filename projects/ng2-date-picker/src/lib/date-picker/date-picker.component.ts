@@ -45,13 +45,14 @@ import {
   ValidationErrors,
   Validator
 } from '@angular/forms';
-import {Moment, unitOfTime} from 'moment';
+
 import {DateValidator} from '../common/types/validator.type';
 import {MonthCalendarComponent} from '../month-calendar/month-calendar.component';
 import {DayTimeCalendarComponent} from '../day-time-calendar/day-time-calendar.component';
 import {INavEvent} from '../common/models/navigation-event.model';
 import {SelectEvent} from '../common/types/selection-event.enum';
 import {ISelectionEvent} from '../common/types/selection-event.model';
+import {Dayjs, UnitType} from 'dayjs';
 
 @Component({
   selector: 'dp-date-picker',
@@ -88,7 +89,7 @@ export class DatePickerComponent implements OnChanges,
   @Input() mode: CalendarMode = 'day';
   @Input() placeholder: string = '';
   @Input() disabled: boolean = false;
-  @Input() displayDate: Moment | string;
+  @Input() displayDate: Dayjs | string;
   @HostBinding('class') @Input() theme: string;
   @Input() minDate: SingleCalendarValue;
   @Input() maxDate: SingleCalendarValue;
@@ -170,29 +171,29 @@ export class DatePickerComponent implements OnChanges,
     this._areCalendarsShown = value;
   }
 
-  _selected: Moment[] = [];
+  _selected: Dayjs[] = [];
 
-  get selected(): Moment[] {
+  get selected(): Dayjs[] {
     return this._selected;
   }
 
-  set selected(selected: Moment[]) {
+  set selected(selected: Dayjs[]) {
     this._selected = selected;
     this.inputElementValue = (<string[]>this.utilsService
-      .convertFromMomentArray(this.componentConfig.format, selected, ECalendarValue.StringArr))
+      .convertFromDayjsArray(this.componentConfig.format, selected, ECalendarValue.StringArr))
       .join(' | ');
     const val = this.processOnChangeCallback(selected);
     this.onChangeCallback(val, false);
     this.onChange.emit(val);
   }
 
-  _currentDateView: Moment;
+  _currentDateView: Dayjs;
 
-  get currentDateView(): Moment {
+  get currentDateView(): Dayjs {
     return this._currentDateView;
   }
 
-  set currentDateView(date: Moment) {
+  set currentDateView(date: Dayjs) {
     this._currentDateView = date;
 
     if (this.dayCalendarRef) {
@@ -251,7 +252,7 @@ export class DatePickerComponent implements OnChanges,
 
     if (value || value === '') {
       this.selected = this.utilsService
-        .convertToMomentArray(value, this.componentConfig);
+        .convertToDayjsArray(value, this.componentConfig);
       this.init();
     } else {
       this.selected = [];
@@ -278,11 +279,11 @@ export class DatePickerComponent implements OnChanges,
     return this.validateFn(formControl.value);
   }
 
-  processOnChangeCallback(selected: Moment[] | string): CalendarValue {
+  processOnChangeCallback(selected: Dayjs[] | string): CalendarValue {
     if (typeof selected === 'string') {
       return selected;
     } else {
-      return this.utilsService.convertFromMomentArray(
+      return this.utilsService.convertFromDayjsArray(
         this.componentConfig.format,
         selected,
         this.componentConfig.returnedValueType || this.utilsService.getInputType(this.inputValue, this.componentConfig.allowMultiSelect)
@@ -356,10 +357,10 @@ export class DatePickerComponent implements OnChanges,
     );
   }
 
-  init() {
+  async init() {
     this.componentConfig = this.dayPickerService.getConfig(this.config, this.mode);
     this.currentDateView = this.displayDate
-      ? this.utilsService.convertToMoment(this.displayDate, this.componentConfig.format).clone()
+      ? this.utilsService.convertToDayjs(this.displayDate, this.componentConfig.format)
       : this.utilsService
         .getDefaultDisplayDate(
           this.currentDateView,
@@ -423,7 +424,7 @@ export class DatePickerComponent implements OnChanges,
   onViewDateChange(value: CalendarValue) {
     const strVal = value ? this.utilsService.convertToString(value, this.componentConfig.format) : '';
     if (this.dayPickerService.isValidInputDateValue(strVal, this.componentConfig)) {
-      this.selected = this.dayPickerService.convertInputValueToMomentArray(strVal, this.componentConfig);
+      this.selected = this.dayPickerService.convertInputValueToDayjsArray(strVal, this.componentConfig);
       this.currentDateView = this.selected.length
         ? this.utilsService.getDefaultDisplayDate(
           null,
@@ -440,12 +441,12 @@ export class DatePickerComponent implements OnChanges,
       })
     } else {
       this._selected = this.utilsService
-        .getValidMomentArray(strVal, this.componentConfig.format);
+        .getValidDayjsArray(strVal, this.componentConfig.format);
       this.onChangeCallback(this.processOnChangeCallback(strVal), true);
     }
   }
 
-  dateSelected(date: IDate, granularity: unitOfTime.Base, type: SelectEvent, ignoreClose?: boolean) {
+  dateSelected(date: IDate, granularity: UnitType, type: SelectEvent, ignoreClose?: boolean) {
     this.selected = this.utilsService
       .updateSelected(this.componentConfig.allowMultiSelect, this.selected, date, granularity);
     if (!ignoreClose) {
@@ -475,8 +476,7 @@ export class DatePickerComponent implements OnChanges,
   }
 
   moveCalendarTo(date: SingleCalendarValue) {
-    const momentDate = this.utilsService.convertToMoment(date, this.componentConfig.format);
-    this.currentDateView = momentDate;
+    this.currentDateView = this.utilsService.convertToDayjs(date, this.componentConfig.format);
   }
 
   onLeftNavClick(change: INavEvent) {

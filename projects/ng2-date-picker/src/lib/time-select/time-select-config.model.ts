@@ -1,13 +1,13 @@
-import {Moment} from 'moment';
+import {Dayjs} from 'dayjs';
 import {ICalendar, ICalendarInternal} from '../common/models/calendar.model';
 import {ECalendarValue} from '../common/types/calendar-value-enum';
 
 export interface IConfig {
   hours12Format?: string;
   hours24Format?: string;
-  maxTime?: Moment;
+  maxTime?: Dayjs;
   meridiemFormat?: string;
-  minTime?: Moment;
+  minTime?: Dayjs;
   minutesFormat?: string;
   minutesInterval?: number;
   secondsFormat?: string;

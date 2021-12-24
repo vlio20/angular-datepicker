@@ -1,10 +1,11 @@
 import {Injectable} from '@angular/core';
-import moment, {Moment} from 'moment';
 
 import {UtilsService} from '../common/services/utils/utils.service';
 import {DayCalendarService} from '../day-calendar/day-calendar.service';
 import {TimeSelectService} from '../time-select/time-select.service';
 import {IDayTimeCalendarConfig} from './day-time-calendar-config.model';
+import {dayjsRef} from "../common/dayjs/dayjs.ref";
+import {Dayjs} from 'dayjs';
 
 const DAY_FORMAT = 'YYYYMMDD';
 const TIME_FORMAT = 'HH:mm:ss';
@@ -12,9 +13,7 @@ const COMBINED_FORMAT = DAY_FORMAT + TIME_FORMAT;
 
 @Injectable()
 export class DayTimeCalendarService {
-  readonly DEFAULT_CONFIG: IDayTimeCalendarConfig = {
-    locale: moment.locale()
-  };
+  readonly DEFAULT_CONFIG: IDayTimeCalendarConfig = {};
 
   constructor(private utilsService: UtilsService,
               private dayCalendarService: DayCalendarService,
@@ -22,37 +21,33 @@ export class DayTimeCalendarService {
   }
 
   getConfig(config: IDayTimeCalendarConfig): IDayTimeCalendarConfig {
-    const _config = {
+    return {
       ...this.DEFAULT_CONFIG,
       ...this.timeSelectService.getConfig(config),
       ...this.dayCalendarService.getConfig(config)
     };
-
-    moment.locale(config.locale);
-
-    return _config;
   }
 
-  updateDay(current: Moment, day: Moment, config: IDayTimeCalendarConfig): Moment {
-    const time = current ? current : moment();
-    let updated = moment(day.format(DAY_FORMAT) + time.format(TIME_FORMAT), COMBINED_FORMAT);
+  updateDay(current: Dayjs, day: Dayjs, config: IDayTimeCalendarConfig): Dayjs {
+    const time = current ? current : dayjsRef();
+    let updated = dayjsRef(day.format(DAY_FORMAT) + time.format(TIME_FORMAT), COMBINED_FORMAT);
 
     if (config.min) {
-      const min = <Moment>config.min;
+      const min = <Dayjs>config.min;
       updated = min.isAfter(updated) ? min : updated;
     }
 
     if (config.max) {
-      const max = <Moment>config.max;
+      const max = <Dayjs>config.max;
       updated = max.isBefore(updated) ? max : updated;
     }
 
     return updated;
   }
 
-  updateTime(current: Moment, time: Moment): Moment {
-    const day = current ? current : moment();
+  updateTime(current: Dayjs, time: Dayjs): Dayjs {
+    const day = current ? current : dayjsRef();
 
-    return moment(day.format(DAY_FORMAT) + time.format(TIME_FORMAT), COMBINED_FORMAT);
+    return dayjsRef(day.format(DAY_FORMAT) + time.format(TIME_FORMAT), COMBINED_FORMAT);
   }
 }

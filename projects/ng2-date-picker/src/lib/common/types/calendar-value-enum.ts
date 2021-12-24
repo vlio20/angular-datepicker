@@ -1,6 +1,6 @@
 export enum ECalendarValue {
-  Moment = 1,
-  MomentArr,
+  Dayjs = 1,
+  DayjsArr,
   String,
   StringArr
 }

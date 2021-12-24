@@ -11,6 +11,7 @@
     "build:lib": "ng build ng2-date-picker",
     "test": "ng test",
     "test:ci": "ng test --watch=false --browsers=ChromeHeadless",
+    "test:ci:lib": "ng test ng2-date-picker --watch=true --browsers=ChromeHeadless",
     "lint": "ng lint",
     "e2e": "ng e2e --port 3200",
     "e2e:quick": "ng e2e --dev-server-target --webdriverUpdate=false",
@@ -85,7 +86,7 @@
     "strictMetadataEmit": true
   },
   "dependencies": {
-    "moment": "^2.29.1",
+    "dayjs": "^1.10.7",
     "tslib": "^2.3.0"
   }
 }

@@ -21,7 +21,7 @@ import {UtilsService} from '../common/services/utils/utils.service'
 import {CalendarValue} from '../common/types/calendar-value';
 import {ISelectionEvent} from '../common/types/selection-event.model';
 import {SingleCalendarValue} from '../common/types/single-calendar-value';
-import {Moment} from "moment";
+import {Dayjs} from 'dayjs';
 
 @Directive({
   exportAs: 'dpDayPicker',
@@ -167,13 +167,13 @@ export class DatePickerDirective implements OnInit {
     this.markForCheck();
   }
 
-  private _displayDate: Moment | string;
+  private _displayDate: Dayjs | string;
 
-  get displayDate(): Moment | string {
+  get displayDate(): Dayjs | string {
     return this._displayDate;
   }
 
-  @Input() set displayDate(displayDate: Moment | string) {
+  @Input() set displayDate(displayDate: Dayjs | string) {
     this._displayDate = displayDate;
     this.updateDatepickerConfig();
 

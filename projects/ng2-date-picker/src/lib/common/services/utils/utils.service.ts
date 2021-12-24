@@ -1,13 +1,14 @@
 import {ECalendarValue} from '../../types/calendar-value-enum';
 import {SingleCalendarValue} from '../../types/single-calendar-value';
 import {Injectable} from '@angular/core';
-import moment from 'moment';
-import {Moment, unitOfTime} from 'moment';
+
+import {Dayjs, UnitType} from 'dayjs';
 import {CalendarValue} from '../../types/calendar-value';
 import {IDate} from '../../models/date.model';
 import {CalendarMode} from '../../types/calendar-mode';
 import {DateValidator} from '../../types/validator.type';
 import {ICalendarInternal} from '../../models/calendar.model';
+import {dayjsRef} from '../../dayjs/dayjs.ref';
 
 export interface DateLimits {
   minDate?: SingleCalendarValue;
@@ -35,13 +36,13 @@ export class UtilsService {
     return new Array(size).fill(1);
   }
 
-  convertToMoment(date: SingleCalendarValue, format: string): Moment {
+  convertToDayjs(date: SingleCalendarValue, format: string): Dayjs {
     if (!date) {
       return null;
     } else if (typeof date === 'string') {
-      return moment(date, format);
+      return dayjsRef(date, format);
     } else {
-      return date.clone();
+      return dayjsRef(date.toDate());
     }
   }
 
@@ -50,66 +51,66 @@ export class UtilsService {
       return true;
     }
 
-    return moment(date, format, true).isValid();
+    return dayjsRef(date, format, true).isValid();
   }
 
   // todo:: add unit test
-  getDefaultDisplayDate(current: Moment,
-                        selected: Moment[],
+  getDefaultDisplayDate(current: Dayjs,
+                        selected: Dayjs[],
                         allowMultiSelect: boolean,
-                        minDate: Moment): Moment {
+                        minDate: Dayjs): Dayjs {
     if (current) {
-      return current.clone();
-    } else if (minDate && minDate.isAfter(moment())) {
-      return minDate.clone();
+      return dayjsRef(current.toDate());
+    } else if (minDate && minDate.isAfter(dayjsRef())) {
+      return dayjsRef(minDate.toDate());
     } else if (allowMultiSelect) {
       if (selected && selected[selected.length]) {
-        return selected[selected.length].clone();
+        return dayjsRef(selected[selected.length].toDate());
       }
     } else if (selected && selected[0]) {
-      return selected[0].clone();
+      return dayjsRef(selected[0].toDate());
     }
 
-    return moment();
+    return dayjsRef();
   }
 
   // todo:: add unit test
   getInputType(value: CalendarValue, allowMultiSelect: boolean): ECalendarValue {
     if (Array.isArray(value)) {
       if (!value.length) {
-        return ECalendarValue.MomentArr;
+        return ECalendarValue.DayjsArr;
       } else if (typeof value[0] === 'string') {
         return ECalendarValue.StringArr;
-      } else if (moment.isMoment(value[0])) {
-        return ECalendarValue.MomentArr;
+      } else if (dayjsRef.isDayjs(value[0])) {
+        return ECalendarValue.DayjsArr;
       }
     } else {
       if (typeof value === 'string') {
         return ECalendarValue.String;
-      } else if (moment.isMoment(value)) {
-        return ECalendarValue.Moment;
+      } else if (dayjsRef.isDayjs(value)) {
+        return ECalendarValue.Dayjs;
       }
     }
 
-    return allowMultiSelect ? ECalendarValue.MomentArr : ECalendarValue.Moment;
+    return allowMultiSelect ? ECalendarValue.DayjsArr : ECalendarValue.Dayjs;
   }
 
   // todo:: add unit test
-  convertToMomentArray(value: CalendarValue,
-                       config: {allowMultiSelect?: boolean, format?: string}): Moment[] {
-    let retVal: Moment[];
+  convertToDayjsArray(value: CalendarValue,
+                      config: { allowMultiSelect?: boolean, format?: string }): Dayjs[] {
+    let retVal: Dayjs[];
     switch (this.getInputType(value, config.allowMultiSelect)) {
       case (ECalendarValue.String):
-        retVal = value ? [moment(<string>value, config.format, true)] : [];
+        retVal = value ? [dayjsRef(<string>value, config.format, true)] : [];
         break;
       case (ECalendarValue.StringArr):
-        retVal = (<string[]>value).map(v => v ? moment(v, config.format, true) : null).filter(Boolean);
+        retVal = (<string[]>value).map(v => v ? dayjsRef(v, config.format, true) : null).filter(Boolean);
         break;
-      case (ECalendarValue.Moment):
-        retVal = value ? [(<Moment>value).clone()] : [];
+      case (ECalendarValue.Dayjs):
+        retVal = value ? [dayjsRef((<Dayjs>value).toDate())] : [];
         break;
-      case (ECalendarValue.MomentArr):
-        retVal = (<Moment[]>value || []).map(v => v.clone());
+      case (ECalendarValue.DayjsArr):
+        retVal = (<Dayjs[]>value || []).map(v => dayjsRef(v.toDate()));
         break;
       default:
         retVal = [];
@@ -119,18 +120,18 @@ export class UtilsService {
   }
 
   // todo:: add unit test
-  convertFromMomentArray(format: string,
-                         value: Moment[],
-                         convertTo: ECalendarValue): CalendarValue {
+  convertFromDayjsArray(format: string,
+                        value: Dayjs[],
+                        convertTo: ECalendarValue): CalendarValue {
     switch (convertTo) {
       case (ECalendarValue.String):
         return value[0] && value[0].format(format);
       case (ECalendarValue.StringArr):
         return value.filter(Boolean).map(v => v.format(format));
-      case (ECalendarValue.Moment):
-        return value[0] ? value[0].clone() : value[0];
-      case (ECalendarValue.MomentArr):
-        return value ? value.map(v => v.clone()) : value;
+      case (ECalendarValue.Dayjs):
+        return value[0] ? dayjsRef(value[0].toDate()) : value[0];
+      case (ECalendarValue.DayjsArr):
+        return value ? value.map(v => dayjsRef(v.toDate())) : value;
       default:
         return value;
     }
@@ -144,12 +145,12 @@ export class UtilsService {
     } else if (Array.isArray(value)) {
       if (value.length) {
         tmpVal = (<SingleCalendarValue[]>value).map((v) => {
-          return this.convertToMoment(v, format).format(format);
+          return this.convertToDayjs(v, format).format(format);
         });
       } else {
         tmpVal = <string[]>value;
       }
-    } else if (moment.isMoment(value)) {
+    } else if (dayjsRef.isDayjs(value)) {
       tmpVal = [value.format(format)];
     } else {
       return '';
@@ -169,9 +170,9 @@ export class UtilsService {
   }
 
   updateSelected(isMultiple: boolean,
-                 currentlySelected: Moment[],
+                 currentlySelected: Dayjs[],
                  date: IDate,
-                 granularity: unitOfTime.Base = 'day'): Moment[] {
+                 granularity: UnitType = 'day'): Dayjs[] {
     if (isMultiple) {
       return !date.selected
         ? currentlySelected.concat([date.date])
@@ -189,11 +190,11 @@ export class UtilsService {
     return match || this.closestParent(element.parentElement, selector);
   }
 
-  onlyTime(m: Moment): Moment {
-    return m && moment.isMoment(m) && moment(m.format('HH:mm:ss'), 'HH:mm:ss');
+  onlyTime(m: Dayjs): Dayjs {
+    return m && dayjsRef.isDayjs(m) && dayjsRef(m.format('HH:mm:ss'), 'HH:mm:ss');
   }
 
-  granularityFromType(calendarType: CalendarMode): unitOfTime.Base {
+  granularityFromType(calendarType: CalendarMode): UnitType {
     switch (calendarType) {
       case 'time':
         return 'second';
@@ -208,12 +209,12 @@ export class UtilsService {
                   format: string,
                   calendarType: CalendarMode): DateValidator {
     let isValid: boolean;
-    let value: Moment[];
+    let value: Dayjs[];
     const validators = [];
     const granularity = this.granularityFromType(calendarType);
 
     if (minDate) {
-      const md = this.convertToMoment(minDate, format);
+      const md = this.convertToDayjs(minDate, format);
       validators.push({
         key: 'minDate',
         isValid: () => {
@@ -225,7 +226,7 @@ export class UtilsService {
     }
 
     if (maxDate) {
-      const md = this.convertToMoment(maxDate, format);
+      const md = this.convertToDayjs(maxDate, format);
       validators.push({
         key: 'maxDate',
         isValid: () => {
@@ -237,7 +238,7 @@ export class UtilsService {
     }
 
     if (minTime) {
-      const md = this.onlyTime(this.convertToMoment(minTime, format));
+      const md = this.onlyTime(this.convertToDayjs(minTime, format));
       validators.push({
         key: 'minTime',
         isValid: () => {
@@ -249,7 +250,7 @@ export class UtilsService {
     }
 
     if (maxTime) {
-      const md = this.onlyTime(this.convertToMoment(maxTime, format));
+      const md = this.onlyTime(this.convertToDayjs(maxTime, format));
       validators.push({
         key: 'maxTime',
         isValid: () => {
@@ -263,10 +264,15 @@ export class UtilsService {
     return (inputVal: CalendarValue) => {
       isValid = true;
 
-      value = this.convertToMomentArray(inputVal, {
+      value = this.convertToDayjsArray(inputVal, {
         format,
         allowMultiSelect: true
       }).filter(Boolean);
+      value.forEach((v) => {
+        if (!v.isValid()) {
+          console.log(v);
+        }
+      });
 
       if (!value.every(val => val.isValid())) {
         return {
@@ -294,29 +300,45 @@ export class UtilsService {
     return (value || '').split('|').map(m => m.trim()).filter(Boolean);
   }
 
-  getValidMomentArray(value: string, format: string): Moment[] {
+  getValidDayjsArray(value: string, format: string): Dayjs[] {
     return this.datesStringToStringArray(value)
       .filter(d => this.isDateValid(d, format))
-      .map(d => moment(d, format));
+      .map(d => dayjsRef(d, format));
   }
 
   shouldShowCurrent(showGoToCurrent: boolean,
                     mode: CalendarMode,
-                    min: Moment,
-                    max: Moment): boolean {
+                    min: Dayjs,
+                    max: Dayjs): boolean {
     return showGoToCurrent &&
       mode !== 'time' &&
-      this.isDateInRange(moment(), min, max);
+      this.isDateInRange(dayjsRef(), min, max);
   }
 
-  isDateInRange(date: Moment, from: Moment, to: Moment): boolean {
+  isDateInRange(date: Dayjs, from: Dayjs, to: Dayjs): boolean {
+    if (!date) {
+      return false;
+    }
+
+    if (!from && !to) {
+      return true;
+    }
+
+    if (!from && to) {
+      return date.isSameOrBefore(to);
+    }
+
+    if (from && !to) {
+      return date.isSameOrAfter(from);
+    }
+
     return date.isBetween(from, to, 'day', '[]');
   }
 
-  convertPropsToMoment(obj: {[key: string]: any}, format: string, props: string[]) {
+  convertPropsToDayjs(obj: { [key: string]: any }, format: string, props: string[]) {
     props.forEach((prop) => {
       if (obj.hasOwnProperty(prop)) {
-        obj[prop] = this.convertToMoment(obj[prop], format);
+        obj[prop] = this.convertToDayjs(obj[prop], format);
       }
     });
   }

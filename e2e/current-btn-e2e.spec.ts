@@ -1,5 +1,5 @@
 import {DemoPage} from './app.po';
-import * as moment from 'moment';
+import * as dayjs from 'dayjs';
 import {ElementFinder} from 'protractor';
 
 describe('dpDayPicker dayPicker', () => {
@@ -12,10 +12,10 @@ describe('dpDayPicker dayPicker', () => {
   });
 
   it('should check if go to current location btn is working as expected', async () => {
-    const currentMonth = moment().format('MMM, YYYY');
-    const currentYear = moment().format('YYYY');
-    const prevMonth = moment().subtract(1, 'month').format('MMM, YYYY');
-    const prevYear = moment().subtract(1, 'year').format('YYYY');
+    const currentMonth = dayjs().format('MMM, YYYY');
+    const currentYear = dayjs().format('YYYY');
+    const prevMonth = dayjs().subtract(1, 'month').format('MMM, YYYY');
+    const prevYear = dayjs().subtract(1, 'year').format('YYYY');
 
     const commonDayCalendar = async (menu: ElementFinder, input: ElementFinder) => {
       await menu.click();
@@ -71,7 +71,7 @@ describe('dpDayPicker dayPicker', () => {
 
   it('should hide current date button when not between min and max', async () => {
     await page.dayPickerMenu.click();
-    await page.minSelectableInput.sendKeys(moment().add(3, 'month').format('DD-MM-YYYY'));
+    await page.minSelectableInput.sendKeys(dayjs().add(3, 'month').format('DD-MM-YYYY'));
     await page.dayPickerInput.click();
     expect(await page.currentLocationBtn.isPresent()).toBe(false);
   });

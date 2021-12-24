@@ -8,7 +8,6 @@ import {MonthCalendarComponent} from './month-calendar/month-calendar.component'
 import {TimeSelectComponent} from './time-select/time-select.component';
 import {CalendarNavComponent} from './calendar-nav/calendar-nav.component';
 import {DayTimeCalendarComponent} from './day-time-calendar/day-time-calendar.component';
-
 export {DatePickerComponent} from './date-picker/date-picker.component';
 export {DatePickerDirective} from './date-picker/date-picker.directive';
 export {DayCalendarComponent} from './day-calendar/day-calendar.component';
