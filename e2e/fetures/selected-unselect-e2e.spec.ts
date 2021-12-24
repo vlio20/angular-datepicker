@@ -1,5 +1,5 @@
 import {DemoPage} from '../app.po';
-import * as moment from 'moment';
+import * as dayjs from 'dayjs';
 
 describe('dpDayPicker timePicker', () => {
 
@@ -12,7 +12,7 @@ describe('dpDayPicker timePicker', () => {
 
   it('should make sure unSelectOnClick feature works as expected for day calendar', async () => {
     const dayRunner = async (menuItem, input, isPicker) => {
-      const date = moment();
+      const date = dayjs();
       const dayClick = async () => {
         if (isPicker) {
           await page.clickOnDayButton(date.format('DD'));
@@ -70,7 +70,7 @@ describe('dpDayPicker timePicker', () => {
 
   it('should make sure unSelectOnClick feature works as expected for month calendar', async () => {
     const monthRunner = async (menuItem, input, isPicker) => {
-      const date = moment();
+      const date = dayjs();
       const monthClick = async () => {
         if (isPicker) {
           await page.clickOnMonthButton(date.format('MMM'));

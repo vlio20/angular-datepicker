@@ -1,14 +1,12 @@
-import {Moment} from 'moment';
+import {Dayjs} from 'dayjs';
 import {SingleCalendarValue} from '../types/single-calendar-value';
 
 export interface ICalendar {
-  locale?: string;
   min?: SingleCalendarValue;
-  max?: Moment | string;
+  max?: Dayjs | string;
 }
 
 export interface ICalendarInternal {
-  locale?: string;
-  min?: Moment;
-  max?: Moment;
+  min?: Dayjs;
+  max?: Dayjs;
 }

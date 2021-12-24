@@ -40,29 +40,15 @@ describe('Locales', () => {
     await page.monthPickerMenu.click();
     await page.hebrewLocale.click();
     await page.monthPickerInput.click();
-    expect(await page.calendarFirstMonthOfYear.getText()).toEqual('ינו׳');
+    expect(await page.calendarFirstMonthOfYear.getText()).toEqual('ינו');
 
     await page.monthInlineMenu.click();
     await page.hebrewLocale.click();
-    expect(await page.calendarFirstMonthOfYearInline.getText()).toEqual('ינו׳');
+    expect(await page.calendarFirstMonthOfYearInline.getText()).toEqual('ינו');
 
     await page.monthDirectiveMenu.click();
     await page.hebrewLocale.click();
     await page.monthDirectiveInput.click();
-    expect(await page.calendarFirstMonthOfYear.getText()).toEqual('ינו׳');
-
-    await page.timePickerMenu.click();
-    await page.hebrewLocale.click();
-    await page.timePickerInput.click();
-    expect(await page.meridiemDisplay.getText()).toMatch(/(בערב|בבוקר|לפני הצהריים|אחרי הצהריים|לפנות בוקר)/);
-
-    await page.timeDirectiveMenu.click();
-    await page.hebrewLocale.click();
-    await page.timeSelectDirectiveInput.click();
-    expect(await page.meridiemDisplay.getText()).toMatch(/(בערב|בבוקר|לפני הצהריים|אחרי הצהריים|לפנות בוקר)/);
-
-    await page.timeInlineMenu.click();
-    await page.hebrewLocale.click();
-    expect(await page.meridiemDisplayInline.getText()).toMatch(/(בערב|בבוקר|לפני הצהריים|אחרי הצהריים|לפנות בוקר)/);
+    expect(await page.calendarFirstMonthOfYear.getText()).toEqual('ינו');
   });
 });

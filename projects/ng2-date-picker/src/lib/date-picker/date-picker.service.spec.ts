@@ -1,10 +1,12 @@
 import {inject, TestBed} from '@angular/core/testing';
 import {DatePickerService} from './date-picker.service';
-import moment, {Moment} from 'moment';
+
 import {UtilsService} from '../common/services/utils/utils.service';
 import {DayTimeCalendarService} from '../day-time-calendar/day-time-calendar.service';
 import {DayCalendarService} from '../day-calendar/day-calendar.service';
 import {TimeSelectService} from '../time-select/time-select.service';
+import {Dayjs} from 'dayjs';
+import {dayjsRef} from "../common/dayjs/dayjs.ref";
 
 describe('Service: DatePicker', () => {
   beforeEach(() => {
@@ -27,16 +29,16 @@ describe('Service: DatePicker', () => {
         format: 'YYYY-MM-DD'
       });
 
-      expect((<Moment>config1.min).isSame(moment('2016-10-25', 'YYYY-MM-DD'), 'day')).toBe(true);
-      expect((<Moment>config1.max).isSame(moment('2017-10-25', 'YYYY-MM-DD'), 'day')).toBe(true);
+      expect((<Dayjs>config1.min).isSame(dayjsRef('2016-10-25', 'YYYY-MM-DD'), 'day')).toBe(true);
+      expect((<Dayjs>config1.max).isSame(dayjsRef('2017-10-25', 'YYYY-MM-DD'), 'day')).toBe(true);
 
       const config2 = service.getConfig({
-        min: moment('2016-10-25', 'YYYY-MM-DD'),
-        max: moment('2017-10-25', 'YYYY-MM-DD')
+        min: dayjsRef('2016-10-25', 'YYYY-MM-DD'),
+        max: dayjsRef('2017-10-25', 'YYYY-MM-DD')
       });
 
-      expect((<Moment>config2.min).isSame(moment('2016-10-25', 'YYYY-MM-DD'), 'day')).toBe(true);
-      expect((<Moment>config2.max).isSame(moment('2017-10-25', 'YYYY-MM-DD'), 'day')).toBe(true);
+      expect((<Dayjs>config2.min).isSame(dayjsRef('2016-10-25', 'YYYY-MM-DD'), 'day')).toBe(true);
+      expect((<Dayjs>config2.max).isSame(dayjsRef('2017-10-25', 'YYYY-MM-DD'), 'day')).toBe(true);
 
       expect(service.getConfig({}, 'time').format).toEqual('HH:mm:ss');
       expect(service.getConfig({}, 'daytime').format).toEqual('DD-MM-YYYY HH:mm:ss');

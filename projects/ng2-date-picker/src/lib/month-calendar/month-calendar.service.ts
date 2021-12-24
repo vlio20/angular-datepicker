@@ -1,8 +1,10 @@
 import {Injectable} from '@angular/core';
-import moment, {Moment} from 'moment';
+
 import {UtilsService} from '../common/services/utils/utils.service';
 import {IMonth} from './month.model';
 import {IMonthCalendarConfig, IMonthCalendarConfigInternal} from './month-calendar-config';
+import {Dayjs} from 'dayjs';
+import {dayjsRef} from "../common/dayjs/dayjs.ref";
 
 
 
@@ -14,7 +16,6 @@ export class MonthCalendarService {
     format: 'MM-YYYY',
     isNavHeaderBtnClickable: false,
     monthBtnFormat: 'MMM',
-    locale: moment.locale(),
     multipleYearsNavigateBy: 10,
     showMultipleYearsNavigation: false,
     unSelectOnClick: true,
@@ -30,36 +31,34 @@ export class MonthCalendarService {
       ...this.utilsService.clearUndefined(config)
     };
 
-    this.validateConfig(_config);
-
-    this.utilsService.convertPropsToMoment(_config, _config.format, ['min', 'max']);
-    moment.locale(_config.locale);
+    MonthCalendarService.validateConfig(_config);
+    this.utilsService.convertPropsToDayjs(_config, _config.format, ['min', 'max']);
 
     return _config;
   }
 
-  generateYear(config: IMonthCalendarConfig, year: Moment, selected: Moment[] = null): IMonth[][] {
-    const index = year.clone().startOf('year');
+  generateYear(config: IMonthCalendarConfig, year: Dayjs, selected: Dayjs[] = null): IMonth[][] {
+    let index = year.startOf('year');
 
     return this.utilsService.createArray(config.numOfMonthRows).map(() => {
       return this.utilsService.createArray(12 / config.numOfMonthRows).map(() => {
-        const date = index.clone();
+        const date = dayjsRef(index);
         const month = {
           date,
           selected: !!selected.find(s => index.isSame(s, 'month')),
-          currentMonth: index.isSame(moment(), 'month'),
+          currentMonth: index.isSame(dayjsRef(), 'month'),
           disabled: this.isMonthDisabled(date, config),
           text: this.getMonthBtnText(config, date)
         };
 
-        index.add(1, 'month');
+        index = index.add(1, 'month');
 
         return month;
       });
     });
   }
 
-  isMonthDisabled(date: Moment, config: IMonthCalendarConfig) {
+  isMonthDisabled(date: Dayjs, config: IMonthCalendarConfig) {
     if (config.isMonthDisabledCallback) {
       return config.isMonthDisabledCallback(date);
     }
@@ -71,15 +70,15 @@ export class MonthCalendarService {
     return !!(config.max && date.isAfter(config.max, 'month'));
   }
 
-  shouldShowLeft(min: Moment, currentMonthView: Moment): boolean {
+  shouldShowLeft(min: Dayjs, currentMonthView: Dayjs): boolean {
     return min ? min.isBefore(currentMonthView, 'year') : true;
   }
 
-  shouldShowRight(max: Moment, currentMonthView: Moment): boolean {
+  shouldShowRight(max: Dayjs, currentMonthView: Dayjs): boolean {
     return max ? max.isAfter(currentMonthView, 'year') : true;
   }
 
-  getHeaderLabel(config: IMonthCalendarConfig, year: Moment): string {
+  getHeaderLabel(config: IMonthCalendarConfig, year: Dayjs): string {
     if (config.yearFormatter) {
       return config.yearFormatter(year);
     }
@@ -87,7 +86,7 @@ export class MonthCalendarService {
     return year.format(config.yearFormat);
   }
 
-  getMonthBtnText(config: IMonthCalendarConfig, month: Moment): string {
+  getMonthBtnText(config: IMonthCalendarConfig, month: Dayjs): string {
     if (config.monthBtnFormatter) {
       return config.monthBtnFormatter(month);
     }
@@ -95,7 +94,7 @@ export class MonthCalendarService {
     return month.format(config.monthBtnFormat);
   }
 
-  getMonthBtnCssClass(config: IMonthCalendarConfig, month: Moment): string {
+  getMonthBtnCssClass(config: IMonthCalendarConfig, month: Dayjs): string {
     if (config.monthBtnCssClassCallback) {
       return config.monthBtnCssClassCallback(month);
     }
@@ -103,7 +102,7 @@ export class MonthCalendarService {
     return '';
   }
 
-  private validateConfig(config: IMonthCalendarConfigInternal): void {
+  private static validateConfig(config: IMonthCalendarConfigInternal): void {
     if (config.numOfMonthRows < 1 || config.numOfMonthRows > 12 || !Number.isInteger(12 / config.numOfMonthRows)) {
       throw new Error('numOfMonthRows has to be between 1 - 12 and divide 12 to integer');
     }

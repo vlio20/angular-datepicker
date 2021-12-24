@@ -1,6 +1,6 @@
-import {Moment} from 'moment';
+import {Dayjs} from 'dayjs';
 
 export interface INavEvent {
-  from: Moment;
-  to: Moment;
+  from: Dayjs;
+  to: Dayjs;
 }

@@ -16,7 +16,7 @@ import {
   ViewEncapsulation
 } from '@angular/core';
 import {TimeSelectService, TimeUnit} from './time-select.service';
-import moment, {Moment} from 'moment';
+
 import {ITimeSelectConfig, ITimeSelectConfigInternal} from './time-select-config.model';
 import {
   ControlValueAccessor,
@@ -31,6 +31,8 @@ import {UtilsService} from '../common/services/utils/utils.service';
 import {IDate} from '../common/models/date.model';
 import {DateValidator} from '../common/types/validator.type';
 import {IDayCalendarConfigInternal} from '../day-calendar/day-calendar-config.model';
+import {Dayjs} from 'dayjs';
+import {dayjsRef} from "../common/dayjs/dayjs.ref";
 
 @Component({
   selector: 'dp-time-select',
@@ -82,18 +84,18 @@ export class TimeSelectComponent implements OnInit, OnChanges, ControlValueAcces
     triggerChange: this.emitChange.bind(this)
   };
 
-  constructor(public timeSelectService: TimeSelectService,
-              public utilsService: UtilsService,
-              public cd: ChangeDetectorRef) {
+  constructor(public readonly timeSelectService: TimeSelectService,
+              public readonly utilsService: UtilsService,
+              public readonly cd: ChangeDetectorRef) {
   }
 
-  _selected: Moment;
+  _selected: Dayjs;
 
-  get selected(): Moment {
+  get selected(): Dayjs {
     return this._selected;
   }
 
-  set selected(selected: Moment) {
+  set selected(selected: Dayjs) {
     this._selected = selected;
     this.calculateTimeParts(this.selected);
 
@@ -116,22 +118,21 @@ export class TimeSelectComponent implements OnInit, OnChanges, ControlValueAcces
     this.initValidators();
   }
 
-  init() {
+  init(): void {
     this.componentConfig = this.timeSelectService.getConfig(this.config);
-    this.selected = this.selected || moment();
+    this.selected = this.selected || dayjsRef();
     this.inputValueType = this.utilsService.getInputType(this.inputValue, false);
   }
 
-  ngOnChanges(changes: SimpleChanges) {
+  ngOnChanges(changes: SimpleChanges): void {
     if (this.isInited) {
       const {minDate, maxDate, minTime, maxTime} = changes;
-      this.init();
 
       if (minDate || maxDate || minTime || maxTime) {
         this.initValidators();
       }
 
-      this.handleConfigChange(changes.config);
+      this.init();
     }
   }
 
@@ -139,13 +140,13 @@ export class TimeSelectComponent implements OnInit, OnChanges, ControlValueAcces
     this.inputValue = value;
 
     if (value) {
-      const momentValue = this.utilsService
-        .convertToMomentArray(value, {
+      const dayjsValue = this.utilsService
+        .convertToDayjsArray(value, {
           allowMultiSelect: false,
           format: this.timeSelectService.getTimeFormat(this.componentConfig)
         })[0];
-      if (momentValue.isValid()) {
-        this.selected = momentValue;
+      if (dayjsValue.isValid()) {
+        this.selected = dayjsValue;
         this.inputValueType = this.utilsService
           .getInputType(this.inputValue, false);
       }
@@ -172,8 +173,8 @@ export class TimeSelectComponent implements OnInit, OnChanges, ControlValueAcces
     }
   }
 
-  processOnChangeCallback(value: Moment): CalendarValue {
-    return this.utilsService.convertFromMomentArray(
+  processOnChangeCallback(value: Dayjs): CalendarValue {
+    return this.utilsService.convertFromDayjsArray(
       this.timeSelectService.getTimeFormat(this.componentConfig),
       [value],
       this.componentConfig.returnedValueType || this.inputValueType
@@ -202,31 +203,27 @@ export class TimeSelectComponent implements OnInit, OnChanges, ControlValueAcces
     this.emitChange();
   }
 
-  toggleMeridiem() {
+  toggleMeridiem(): void {
     this.selected = this.timeSelectService.toggleMeridiem(this.selected);
     this.emitChange();
   }
 
-  emitChange() {
+  emitChange(): void {
     this.onChange.emit({date: this.selected, selected: false});
     this.cd.markForCheck();
   }
 
-  calculateTimeParts(time: Moment) {
+  calculateTimeParts(time: Dayjs): void {
     this.hours = this.timeSelectService.getHours(this.componentConfig, time);
     this.minutes = this.timeSelectService.getMinutes(this.componentConfig, time);
     this.seconds = this.timeSelectService.getSeconds(this.componentConfig, time);
     this.meridiem = this.timeSelectService.getMeridiem(this.componentConfig, time);
   }
 
-  private handleConfigChange(config: SimpleChange) {
+  private handleConfigChange(config: SimpleChange): void {
     if (config) {
       const prevConf: IDayCalendarConfigInternal = this.timeSelectService.getConfig(config.previousValue);
       const currentConf: IDayCalendarConfigInternal = this.timeSelectService.getConfig(config.currentValue);
-
-      if (prevConf.locale !== currentConf.locale) {
-        this.selected = this.selected.clone().locale(currentConf.locale);
-      }
     }
   }
 }

@@ -4,8 +4,7 @@ import {DatePickerComponent} from '../../../projects/ng2-date-picker/src/lib/dat
 import {DatePickerDirective} from '../../../projects/ng2-date-picker/src/lib/date-picker/date-picker.directive';
 import {Component, HostListener, OnInit, ViewChild} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import * as moment from 'moment';
-import {Moment} from 'moment';
+import dayjs, {Dayjs} from 'dayjs';
 import {GaService} from './common/services/ga/ga.service';
 import {ECalendarValue} from '../../../projects/ng2-date-picker/src/lib/common/types/calendar-value-enum';
 import {INavEvent} from '../../../projects/ng2-date-picker/src/lib/common/models/navigation-event.model';
@@ -139,29 +138,29 @@ export class DemoComponent implements OnInit {
   ];
   pickerMode = 'daytimePicker';
 
-  date: Moment;
-  dates: Moment[] = [];
+  date: Dayjs;
+  dates: Dayjs[] = [];
   material: boolean = true;
   required: boolean = false;
   disabled: boolean = false;
-  validationMinDate: Moment;
-  validationMaxDate: Moment;
-  validationMinTime: Moment;
-  validationMaxTime: Moment;
+  validationMinDate: Dayjs;
+  validationMaxDate: Dayjs;
+  validationMinTime: Dayjs;
+  validationMaxTime: Dayjs;
   placeholder: string = 'Choose a date...';
-  displayDate: Moment | string;
-  dateTypes: {name: string, value: ECalendarValue}[] = [
+  displayDate: Dayjs | string;
+  dateTypes: { name: string, value: ECalendarValue }[] = [
     {
       name: 'Guess',
       value: null
     },
     {
-      name: ECalendarValue[ECalendarValue.Moment],
-      value: ECalendarValue.Moment
+      name: ECalendarValue[ECalendarValue.Dayjs],
+      value: ECalendarValue.Dayjs
     },
     {
-      name: ECalendarValue[ECalendarValue.MomentArr],
-      value: ECalendarValue.MomentArr
+      name: ECalendarValue[ECalendarValue.DayjsArr],
+      value: ECalendarValue.DayjsArr
     },
     {
       name: ECalendarValue[ECalendarValue.String],
@@ -203,7 +202,6 @@ export class DemoComponent implements OnInit {
     timeSeparator: ':',
     multipleYearsNavigateBy: 10,
     showMultipleYearsNavigation: false,
-    locale: moment.locale(),
     hideInputContainer: false,
     returnedValueType: ECalendarValue.String,
     unSelectOnClick: true,
@@ -350,7 +348,7 @@ export class DemoComponent implements OnInit {
   }
 
   moveCalendarTo() {
-    this.dateComponent.api.moveCalendarTo(moment('14-01-1987', this.demoFormat));
+    this.dateComponent.api.moveCalendarTo(dayjs('14-01-1987', this.demoFormat));
   }
 
   donateClicked() {
@@ -372,19 +370,19 @@ export class DemoComponent implements OnInit {
         this.required ? Validators.required : () => undefined,
         (control) => {
           return this.validationMinDate && this.config &&
-          moment(control.value, this.config.format || this.getDefaultFormatByMode(this.pickerMode))
+          dayjs(control.value, this.config.format || DemoComponent.getDefaultFormatByMode(this.pickerMode))
             .isBefore(this.validationMinDate)
             ? {minDate: 'minDate Invalid'} : undefined
         },
         control => this.validationMaxDate && this.config &&
-        moment(control.value, this.config.format || this.getDefaultFormatByMode(this.pickerMode))
+        dayjs(control.value, this.config.format || DemoComponent.getDefaultFormatByMode(this.pickerMode))
           .isAfter(this.validationMaxDate)
           ? {maxDate: 'maxDate Invalid'} : undefined
       ])
     });
   }
 
-  private getDefaultFormatByMode(mode: string): string {
+  private static getDefaultFormatByMode(mode: string): string {
     switch (mode) {
       case 'daytimePicker':
       case 'daytimeInline':
