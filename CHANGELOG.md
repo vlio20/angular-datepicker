@@ -3,6 +3,9 @@ All notable changes to this project will be documented in this file.
 
 # [13.1.0] (???)
 
+# Bug Fixes
+- Working with RTL ([575](https://github.com/vlio20/angular-datepicker/pull/575)) closes [#504](https://github.com/vlio20/angular-datepicker/issues/504) 
+
 # Breaking changes
 - Replace deprecated `Moment` with Dayjs  ([573](https://github.com/vlio20/angular-datepicker/pull/573)) closes [#530](https://github.com/vlio20/angular-datepicker/issues/530)  
 Locale was removed from the library configuration, changing the locale should be done outside the component. More information can be found in the readme.md file under the Locale section.  
