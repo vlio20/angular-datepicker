@@ -389,7 +389,7 @@ export class DatePickerComponent implements OnChanges,
     switch (event.key) {
       case ('Escape'):
       case ('Esc'):
-      case ('Enter'):
+      case ('Tab'):
         this.hideCalendar();
         break;
     }

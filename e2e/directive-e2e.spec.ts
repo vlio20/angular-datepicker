@@ -32,10 +32,13 @@ describe('dpDayPicker directive', () => {
 
   it('should check that the theme is added and removed', async () => {
     await page.themeOnRadio.click();
+    await page.dayDirectiveInput.click();
     expect(await page.datePickerPopup.getAttribute('class')).toContain('dp-material');
     await page.themeOffRadio.click();
+    await page.dayDirectiveInput.click();
     expect(await page.datePickerPopup.getAttribute('class')).not.toContain('dp-material');
     await page.themeOnRadio.click();
+    await page.dayDirectiveInput.click();
     expect(await page.datePickerPopup.getAttribute('class')).toContain('dp-material');
   });
 

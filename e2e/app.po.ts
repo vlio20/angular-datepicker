@@ -116,7 +116,7 @@ export class DemoPage {
   meridiemDisplayInline = $(`.dp-inline .dp-time-select-display-meridiem`);
   timeSeparatorDisplay = $(`${this.popupSelector} .dp-time-select-separator:nth-child(2)`);
   monthRows = $$('.dp-months-row');
-  numOfMonthRowsToggle2 = $('#numOfMonthRows2');
+  numOfMonthRowsToggle = $('#numOfMonthRows2');
 
   daytimePickerMenu = $('#daytimePickerMenu');
   daytimeInlineMenu = $('#daytimeInlineMenu');
