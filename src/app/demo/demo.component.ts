@@ -272,11 +272,11 @@ export class DemoComponent implements OnInit {
   }
 
   opened() {
-    console.log('opened');
+    console.info('opened');
   }
 
   closed() {
-    console.log('closed');
+    console.info('closed');
   }
 
   isValidConfig(key: string): boolean {
@@ -336,15 +336,15 @@ export class DemoComponent implements OnInit {
   }
 
   log(item) {
-    // console.log(item);
+    // console.info(item);
   }
 
   onLeftNav(change: INavEvent) {
-    console.log('left nav', change);
+    console.info('left nav', change);
   }
 
   onRightNav(change: INavEvent) {
-    console.log('right nav', change);
+    console.info('right nav', change);
   }
 
   moveCalendarTo() {
@@ -361,7 +361,7 @@ export class DemoComponent implements OnInit {
   }
 
   onSelect(data: ISelectionEvent) {
-    console.log(data);
+    console.info(data);
   }
 
   private buildForm(): FormGroup {

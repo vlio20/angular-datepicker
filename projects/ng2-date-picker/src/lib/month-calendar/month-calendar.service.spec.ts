@@ -89,8 +89,6 @@ describe('Service: MonthCalendarService', () => {
       };
 
       for (let i = 0; i < 12; i++) {
-        console.log(month.date.get('M'), i % 2, service.isMonthDisabled(month.date, config1));
-
         if (i % 2 === 0) {
           expect(service.isMonthDisabled(month.date, config1)).toBe(true);
         } else {

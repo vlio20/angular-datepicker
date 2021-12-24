@@ -35,8 +35,21 @@
             "type": "attribute"
           }
         ],
-        "@angular-eslint/no-output-native": ["off"],
-        "@angular-eslint/no-output-on-prefix": ["off"]
+        "@angular-eslint/no-output-native": [
+          "off"
+        ],
+        "@angular-eslint/no-output-on-prefix": [
+          "off"
+        ],
+        "no-console": [
+          "error",
+          {
+            "allow": [
+              "info",
+              "error"
+            ]
+          }
+        ]
       }
     },
     {
