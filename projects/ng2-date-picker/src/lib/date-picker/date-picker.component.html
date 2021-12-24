@@ -1,7 +1,6 @@
-<div [ngClass]="{'dp-open': areCalendarsShown}" dir="ltr">
+<div [ngClass]="{'dp-open': areCalendarsShown}" dir="ltr" #trigger>
   <div [attr.data-hidden]="componentConfig.hideInputContainer"
        [hidden]="componentConfig.hideInputContainer"
-       #trigger
        class="dp-input-container">
     <input #inputElement
            (blur)="inputBlurred()"
@@ -25,7 +24,7 @@
            [ngSwitch]="mode"
            class="dp-popup {{theme}}">
         <dp-day-calendar #dayCalendar
-                         (onGoToCurrent)="onGoToCurrent.emit()"
+                         (onGoToCurrent)="goToCurrent()"
                          (onLeftNav)="onLeftNavClick($event)"
                          (onRightNav)="onRightNavClick($event)"
                          (onSelect)="dateSelected($event, 'day', selectEvent.SELECTION, false)"
@@ -37,7 +36,7 @@
         </dp-day-calendar>
 
         <dp-month-calendar #monthCalendar
-                           (onGoToCurrent)="onGoToCurrent.emit()"
+                           (onGoToCurrent)="goToCurrent()"
                            (onLeftNav)="onLeftNavClick($event)"
                            (onRightNav)="onRightNavClick($event)"
                            (onSelect)="dateSelected($event, 'month', selectEvent.SELECTION, false)"
@@ -58,7 +57,7 @@
 
         <dp-day-time-calendar #daytimeCalendar
                               (onChange)="dateSelected($event, 'second', selectEvent.SELECTION, true)"
-                              (onGoToCurrent)="onGoToCurrent.emit()"
+                              (onGoToCurrent)="goToCurrent()"
                               (onLeftNav)="onLeftNavClick($event)"
                               (onRightNav)="onRightNavClick($event)"
                               *ngSwitchCase="'daytime'"

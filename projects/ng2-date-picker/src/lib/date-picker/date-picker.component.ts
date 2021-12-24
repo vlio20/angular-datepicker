@@ -51,6 +51,7 @@ import {INavEvent} from '../common/models/navigation-event.model';
 import {SelectEvent} from '../common/types/selection-event.enum';
 import {ISelectionEvent} from '../common/types/selection-event.model';
 import {Dayjs, UnitType} from 'dayjs';
+import {dayjsRef} from "../common/dayjs/dayjs.ref";
 
 @Component({
   selector: 'dp-date-picker',
@@ -427,5 +428,10 @@ export class DatePickerComponent implements OnChanges,
     if (this.appendToElement) {
       this.appendToElement.removeChild(this.calendarWrapper);
     }
+  }
+
+  goToCurrent(): void {
+    this.currentDateView = dayjsRef();
+    this.onGoToCurrent.emit()
   }
 }

@@ -82,6 +82,14 @@ describe('dpDayPicker dayPicker', () => {
     expect(await page.weekNumbers.getText()).toEqual(['8', '9', '10', '11', '12', '13']);
   });
 
+  it('should remember last position', async () => {
+    await page.setInputValue(page.dayPickerInput, '28-03-2017');
+    await page.dayPickerInput.click();
+    expect(await page.dayCalendarNavHeaderBtn.getText()).toEqual('Mar, 2017');
+    await page.currentLocationBtn.click();
+    expect(await page.dayCalendarNavHeaderBtn.getText()).toEqual(dayjs().format('MMM, YYYY'));
+  });
+
   it('should hide calendar on tab (blur)', async () => {
     await page.dayPickerInput.click();
     expect(await page.datePickerPopup.isDisplayed()).toBe(true);
