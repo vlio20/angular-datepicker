@@ -52,6 +52,7 @@ import {SelectEvent} from '../common/types/selection-event.enum';
 import {ISelectionEvent} from '../common/types/selection-event.model';
 import {Dayjs, UnitType} from 'dayjs';
 import {dayjsRef} from "../common/dayjs/dayjs.ref";
+import {ConnectionPositionPair} from "@angular/cdk/overlay";
 
 @Component({
   selector: 'dp-date-picker',
@@ -123,6 +124,7 @@ export class DatePickerComponent implements OnChanges,
     moveCalendarTo: this.moveCalendarTo.bind(this)
   };
   selectEvent = SelectEvent;
+  origin: ElementRef | HTMLElement;
   private onOpenDelayTimeoutHandler;
 
   constructor(private readonly dayPickerService: DatePickerService,
@@ -159,6 +161,7 @@ export class DatePickerComponent implements OnChanges,
   }
 
   _currentDateView: Dayjs;
+  overlayPosition: ConnectionPositionPair[];
 
   get currentDateView(): Dayjs {
     return this._currentDateView;
@@ -277,7 +280,7 @@ export class DatePickerComponent implements OnChanges,
     this.cd.markForCheck();
   }
 
-  init() {
+  init(): void {
     this.componentConfig = this.dayPickerService.getConfig(this.config, this.mode);
     this.currentDateView = this.displayDate
       ? this.utilsService.convertToDayjs(this.displayDate, this.componentConfig.format)
@@ -292,6 +295,8 @@ export class DatePickerComponent implements OnChanges,
     this.dayTimeCalendarConfig = this.dayPickerService.getDayTimeConfigService(this.componentConfig);
     this.timeSelectConfig = this.dayPickerService.getTimeConfigService(this.componentConfig);
     this.initValidators();
+    this.overlayPosition = this.dayPickerService.getOverlayPosition(this.componentConfig);
+    this.origin = this.utilsService.getNativeElement(this.componentConfig.inputElementContainer);
   }
 
   inputFocused() {

@@ -9,6 +9,7 @@ import {ITimeSelectConfig} from '../time-select/time-select-config.model';
 import {CalendarMode} from '../common/types/calendar-mode';
 import {Dayjs} from 'dayjs';
 import {IDayTimeCalendarConfig} from "../day-time-calendar/day-time-calendar-config.model";
+import {ConnectionPositionPair} from "@angular/cdk/overlay";
 
 @Injectable()
 export class DatePickerService {
@@ -26,7 +27,7 @@ export class DatePickerService {
     showWeekNumbers: false,
     enableMonthSelector: true,
     showGoToCurrent: true,
-    hideOnOutsideClick: true
+    hideOnOutsideClick: true,
   };
 
   constructor(private utilsService: UtilsService,
@@ -110,6 +111,19 @@ export class DatePickerService {
     const datesStrArr: string[] = this.utilsService.datesStringToStringArray(value);
 
     return this.utilsService.convertToDayjsArray(datesStrArr, config);
+  }
+
+  getOverlayPosition({drops, opens}: IDatePickerConfig):  ConnectionPositionPair[] {
+    if (!drops && !opens) {
+      return [];
+    }
+
+    return [{
+      originX: opens ? opens === 'left' ? 'start' : 'end' : 'start',
+      originY:  drops ? drops === 'up' ? 'top' : 'bottom' : 'bottom',
+      overlayX: opens ? opens === 'left' ? 'start' : 'end' : 'start',
+      overlayY: drops ? drops === 'up' ? 'bottom' : 'top' : 'top',
+    }];
   }
 
   private static getDefaultFormatByMode(mode: CalendarMode): string {

@@ -15,7 +15,8 @@
            type="text"/>
   </div>
   <ng-template cdkConnectedOverlay
-               [cdkConnectedOverlayOrigin]="trigger"
+               [cdkConnectedOverlayPositions]="overlayPosition"
+               [cdkConnectedOverlayOrigin]="origin || trigger"
                [cdkConnectedOverlayOpen]="areCalendarsShown"
                [cdkConnectedOverlayHasBackdrop]="false"
                (overlayOutsideClick)="onBodyClick($event)">
