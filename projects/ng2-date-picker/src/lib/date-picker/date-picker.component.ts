@@ -1,5 +1,4 @@
 import {IDate} from '../common/models/date.model';
-import {DomHelper} from '../common/services/dom-appender/dom-appender.service';
 import {UtilsService} from '../common/services/utils/utils.service';
 import {CalendarMode} from '../common/types/calendar-mode';
 import {ECalendarMode} from '../common/types/calendar-mode-enum';
@@ -18,7 +17,6 @@ import {IDatePickerConfig, IDatePickerConfigInternal} from './date-picker-config
 import {IDpDayPickerApi} from './date-picker.api';
 import {DatePickerService} from './date-picker.service';
 import {
-  AfterViewInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
@@ -79,7 +77,6 @@ import {Dayjs, UnitType} from 'dayjs';
 })
 export class DatePickerComponent implements OnChanges,
                                             OnInit,
-                                            AfterViewInit,
                                             ControlValueAccessor,
                                             Validator,
                                             OnDestroy {
@@ -131,7 +128,6 @@ export class DatePickerComponent implements OnChanges,
   private onOpenDelayTimeoutHandler;
 
   constructor(private readonly dayPickerService: DatePickerService,
-              private readonly domHelper: DomHelper,
               private readonly elemRef: ElementRef,
               private readonly renderer: Renderer2,
               private readonly utilsService: UtilsService,
@@ -155,14 +151,6 @@ export class DatePickerComponent implements OnChanges,
   set areCalendarsShown(value: boolean) {
     if (value) {
       this.startGlobalListeners();
-      this.domHelper.appendElementToPosition({
-        container: this.appendToElement,
-        element: this.calendarWrapper,
-        anchor: this.inputElementContainer,
-        dimElem: this.popupElem,
-        drops: this.componentConfig.drops,
-        opens: this.componentConfig.opens
-      });
     } else {
       this.stopGlobalListeners();
       this.dayPickerService.pickerClosed();
@@ -233,20 +221,6 @@ export class DatePickerComponent implements OnChanges,
     }
   }
 
-  @HostListener('window:resize')
-  onScroll() {
-    if (this.areCalendarsShown) {
-      this.domHelper.setElementPosition({
-        container: this.appendToElement,
-        element: this.calendarWrapper,
-        anchor: this.inputElementContainer,
-        dimElem: this.popupElem,
-        drops: this.componentConfig.drops,
-        opens: this.componentConfig.opens
-      });
-    }
-  }
-
   writeValue(value: CalendarValue): void {
     this.inputValue = value;
 
@@ -265,7 +239,7 @@ export class DatePickerComponent implements OnChanges,
     this.onChangeCallback = fn;
   }
 
-  onChangeCallback(_: any, changedByInput: boolean) {
+  onChangeCallback(_: any, __: boolean) {
   }
 
   registerOnTouched(fn: any): void {
@@ -314,10 +288,6 @@ export class DatePickerComponent implements OnChanges,
     }
   }
 
-  ngAfterViewInit(): void {
-    this.setElementPositionInDom();
-  }
-
   setDisabledState(isDisabled: boolean): void {
     this.disabled = isDisabled;
     this.cd.markForCheck();
@@ -357,7 +327,7 @@ export class DatePickerComponent implements OnChanges,
     );
   }
 
-  async init() {
+  init() {
     this.componentConfig = this.dayPickerService.getConfig(this.config, this.mode);
     this.currentDateView = this.displayDate
       ? this.utilsService.convertToDayjs(this.displayDate, this.componentConfig.format)
@@ -491,9 +461,6 @@ export class DatePickerComponent implements OnChanges,
     this.globalListenersUnlisteners.push(
       this.renderer.listen(document, 'keydown', (e: KeyboardEvent) => {
         this.onKeyPress(e);
-      }),
-      this.renderer.listen(document, 'scroll', () => {
-        this.onScroll();
       }),
       this.renderer.listen(document, 'click', () => {
         this.onBodyClick();

@@ -2,7 +2,6 @@ import {FormsModule} from '@angular/forms';
 import {DatePickerComponent} from './date-picker.component';
 import {DayTimeCalendarComponent} from '../day-time-calendar/day-time-calendar.component';
 import {DayTimeCalendarService} from '../day-time-calendar/day-time-calendar.service';
-import {DomHelper} from '../common/services/dom-appender/dom-appender.service';
 import {CalendarMode} from '../common/types/calendar-mode';
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {DayCalendarComponent} from '../day-calendar/day-calendar.component';
@@ -40,7 +39,6 @@ describe('Component: DatePickerComponent', () => {
         DayCalendarService,
         TimeSelectService,
         UtilsService,
-        DomHelper
       ]
     }).compileComponents();
   });
