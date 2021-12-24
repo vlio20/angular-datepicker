@@ -3,7 +3,8 @@
        [hidden]="componentConfig.hideInputContainer"
        #trigger
        class="dp-input-container">
-    <input (blur)="inputBlurred()"
+    <input #inputElement
+           (blur)="inputBlurred()"
            (focus)="inputFocused()"
            (keydown.enter)="componentConfig.closeOnEnter && hideCalendar()"
            (ngModelChange)="onViewDateChange($event)"
@@ -16,9 +17,11 @@
   </div>
   <ng-template cdkConnectedOverlay
                [cdkConnectedOverlayOrigin]="trigger"
-               [cdkConnectedOverlayOpen]="_areCalendarsShown">
+               [cdkConnectedOverlayOpen]="areCalendarsShown"
+               [cdkConnectedOverlayHasBackdrop]="false"
+               (overlayOutsideClick)="onBodyClick($event)">
     <div #container>
-      <div [attr.data-hidden]="!_areCalendarsShown"
+      <div [attr.data-hidden]="!areCalendarsShown"
            [ngSwitch]="mode"
            class="dp-popup {{theme}}">
         <dp-day-calendar #dayCalendar

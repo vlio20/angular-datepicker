@@ -80,7 +80,6 @@ export class DatePickerComponent implements OnChanges,
                                             ControlValueAccessor,
                                             Validator,
                                             OnDestroy {
-
   isInitialized: boolean = false;
   @Input() config: IDatePickerConfig;
   @Input() mode: CalendarMode = 'day';
@@ -95,27 +94,25 @@ export class DatePickerComponent implements OnChanges,
   @Output() open = new EventEmitter<void>();
   @Output() close = new EventEmitter<void>();
   @Output() onChange = new EventEmitter<CalendarValue>();
-  @Output() onGoToCurrent: EventEmitter<void> = new EventEmitter();
-  @Output() onLeftNav: EventEmitter<INavEvent> = new EventEmitter();
-  @Output() onRightNav: EventEmitter<INavEvent> = new EventEmitter();
-  @Output() onSelect: EventEmitter<ISelectionEvent> = new EventEmitter();
+  @Output() onGoToCurrent = new EventEmitter<void>();
+  @Output() onLeftNav = new EventEmitter<INavEvent>();
+  @Output() onRightNav = new EventEmitter<INavEvent>();
+  @Output() onSelect = new EventEmitter<ISelectionEvent>();
   @ViewChild('container') calendarContainer: ElementRef;
   @ViewChild('dayCalendar') dayCalendarRef: DayCalendarComponent;
   @ViewChild('monthCalendar') monthCalendarRef: MonthCalendarComponent;
   @ViewChild('daytimeCalendar') dayTimeCalendarRef: DayTimeCalendarComponent;
   @ViewChild('timeSelect') timeSelectRef: TimeSelectComponent;
+  @ViewChild('inputElement') inputElement: ElementRef<HTMLInputElement>;
   componentConfig: IDatePickerConfigInternal;
   dayCalendarConfig: IDayCalendarConfig;
   dayTimeCalendarConfig: IDayTimeCalendarConfig;
   timeSelectConfig: ITimeSelectConfig;
-  hideStateHelper: boolean = false;
   inputValue: CalendarValue;
   isFocusedTrigger: boolean = false;
   inputElementValue: string;
   calendarWrapper: HTMLElement;
   appendToElement: HTMLElement;
-  inputElementContainer: HTMLElement;
-  popupElem: HTMLElement;
   handleInnerElementClickUnlisteners: Function[] = [];
   globalListenersUnlisteners: Function[] = [];
   validateFn: DateValidator;
@@ -142,22 +139,7 @@ export class DatePickerComponent implements OnChanges,
     return this.componentConfig.openOnClick;
   }
 
-  _areCalendarsShown: boolean = false;
-
-  get areCalendarsShown(): boolean {
-    return this._areCalendarsShown;
-  }
-
-  set areCalendarsShown(value: boolean) {
-    if (value) {
-      this.startGlobalListeners();
-    } else {
-      this.stopGlobalListeners();
-      this.dayPickerService.pickerClosed();
-    }
-
-    this._areCalendarsShown = value;
-  }
+  areCalendarsShown: boolean = false;
 
   _selected: Dayjs[] = [];
 
@@ -204,20 +186,19 @@ export class DatePickerComponent implements OnChanges,
     }
 
     if (!this.isFocusedTrigger && !this.disabled) {
-      this.hideStateHelper = true;
       if (!this.areCalendarsShown) {
         this.showCalendars();
       }
     }
   }
 
-  onBodyClick() {
-    if (this.componentConfig.hideOnOutsideClick) {
-      if (!this.hideStateHelper && this.areCalendarsShown) {
-        this.hideCalendar();
-      }
+  onBodyClick(event: MouseEvent) {
+    if (this.inputElement.nativeElement === event.target) {
+      return;
+    }
 
-      this.hideStateHelper = false;
+    if (this.componentConfig.hideOnOutsideClick) {
+      this.hideCalendar();
     }
   }
 
@@ -293,40 +274,6 @@ export class DatePickerComponent implements OnChanges,
     this.cd.markForCheck();
   }
 
-  setElementPositionInDom(): void {
-    this.calendarWrapper = <HTMLElement>this.calendarContainer.nativeElement;
-    this.setInputElementContainer();
-    this.popupElem = this.elemRef.nativeElement.querySelector('.dp-popup');
-    this.handleInnerElementClick(this.popupElem);
-
-    const {appendTo} = this.componentConfig;
-    if (appendTo) {
-      if (typeof appendTo === 'string') {
-        this.appendToElement = <HTMLElement>document.querySelector(<string>appendTo);
-      } else {
-        this.appendToElement = <HTMLElement>appendTo;
-      }
-    } else {
-      this.appendToElement = this.elemRef.nativeElement;
-    }
-
-    this.appendToElement.appendChild(this.calendarWrapper);
-  }
-
-  setInputElementContainer() {
-    this.inputElementContainer = this.utilsService.getNativeElement(this.componentConfig.inputElementContainer)
-      || this.elemRef.nativeElement.querySelector('.dp-input-container')
-      || document.body;
-  }
-
-  handleInnerElementClick(element: HTMLElement) {
-    this.handleInnerElementClickUnlisteners.push(
-      this.renderer.listen(element, 'click', () => {
-        this.hideStateHelper = true;
-      })
-    );
-  }
-
   init() {
     this.componentConfig = this.dayPickerService.getConfig(this.config, this.mode);
     this.currentDateView = this.displayDate
@@ -356,8 +303,6 @@ export class DatePickerComponent implements OnChanges,
         this.showCalendars();
       }
 
-      this.hideStateHelper = false;
-
       this.isFocusedTrigger = false;
       this.cd.markForCheck();
     }, this.componentConfig.onOpenDelay);
@@ -369,8 +314,8 @@ export class DatePickerComponent implements OnChanges,
   }
 
   showCalendars() {
-    this.hideStateHelper = true;
     this.areCalendarsShown = true;
+    this.startGlobalListeners();
 
     if (this.timeSelectRef) {
       this.timeSelectRef.api.triggerChange();
@@ -386,6 +331,7 @@ export class DatePickerComponent implements OnChanges,
     if (this.dayCalendarRef) {
       this.dayCalendarRef.api.toggleCalendarMode(ECalendarMode.Day);
     }
+    this.stopGlobalListeners();
 
     this.close.emit();
     this.cd.markForCheck();
@@ -437,9 +383,10 @@ export class DatePickerComponent implements OnChanges,
   }
 
   onKeyPress(event: KeyboardEvent) {
-    switch (event.keyCode) {
-      case (9):
-      case (27):
+    switch (event.key) {
+      case ('Escape'):
+      case ('Esc'):
+      case ('Enter'):
         this.hideCalendar();
         break;
     }
@@ -461,9 +408,6 @@ export class DatePickerComponent implements OnChanges,
     this.globalListenersUnlisteners.push(
       this.renderer.listen(document, 'keydown', (e: KeyboardEvent) => {
         this.onKeyPress(e);
-      }),
-      this.renderer.listen(document, 'click', () => {
-        this.onBodyClick();
       })
     );
   }
