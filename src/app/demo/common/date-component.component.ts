@@ -101,27 +101,27 @@ export abstract class DateComponent {
   }
 
   onLeftNav(change: INavEvent) {
-    console.log('left nav', change);
+    console.info('left nav', change);
   }
 
   onRightNav(change: INavEvent) {
-    console.log('right nav', change);
+    console.info('right nav', change);
   }
 
   opened() {
-    console.log('opened');
+    console.info('opened');
   }
 
   closed() {
-    console.log('closed');
+    console.info('closed');
   }
 
   onSelect(data: any) {
-    console.log(data);
+    console.info(data);
   }
 
   log(item) {
-    // console.log(item);
+    // console.info(item);
   }
 
   onLocaleChange(locale: string): void {

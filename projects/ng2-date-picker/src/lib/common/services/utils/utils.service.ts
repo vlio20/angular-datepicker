@@ -268,11 +268,6 @@ export class UtilsService {
         format,
         allowMultiSelect: true
       }).filter(Boolean);
-      value.forEach((v) => {
-        if (!v.isValid()) {
-          console.log(v);
-        }
-      });
 
       if (!value.every(val => val.isValid())) {
         return {
