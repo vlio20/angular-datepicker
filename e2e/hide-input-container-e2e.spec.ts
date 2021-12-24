@@ -11,6 +11,6 @@ describe('hideInputContainer', () => {
   it('should hide/show InputContainer datetimepicker', async () => {
     expect(await page.daytimePickerInput.isDisplayed()).toBe(true);
     await page.hideInputRadio.click();
-    expect(await page.daytimePickerInput.isDisplayed()).toBe(false);
+    expect(await page.daytimePickerInput.isPresent()).toBe(false);
   });
 });

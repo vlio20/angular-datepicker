@@ -17,7 +17,7 @@ describe('dpDayPicker directive', () => {
     await page.dayDirectiveInput.click();
     expect(await page.datePickerPopup.isDisplayed()).toBe(true);
     await page.clickOnBody();
-    expect(await page.datePickerPopup.isDisplayed()).toBe(false);
+    expect(await page.datePickerPopup.isPresent()).toBe(false);
   });
 
   it('should make sure that day directive keeps the prev state of the calendar', async () => {
@@ -48,7 +48,7 @@ describe('dpDayPicker directive', () => {
     await browser.sleep(200);
     await browser.waitForAngularEnabled(false);
     await page.dayDirectiveInput.click();
-    expect(await page.datePickerPopup.isDisplayed()).toBe(false);
+    expect(await page.datePickerPopup.isPresent()).toBe(false);
     await browser.waitForAngularEnabled(true);
     await browser.sleep(1000);
     expect(await page.datePickerPopup.isDisplayed()).toBe(true);

@@ -15,7 +15,7 @@ describe('dpDayPicker configuration', () => {
     await page.openOnClickRadioOff.click();
     await page.openOnFocusRadioOff.click();
     await page.daytimePickerInput.click();
-    expect(await page.datePickerPopup.isDisplayed()).toBe(false);
+    expect(await page.datePickerPopup.isPresent()).toBe(false);
   });
 
   it('openOnClick = true, should open picker when clicked', async () => {

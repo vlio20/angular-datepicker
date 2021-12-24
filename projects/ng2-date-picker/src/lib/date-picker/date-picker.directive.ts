@@ -40,12 +40,12 @@ export class DatePickerDirective implements OnInit {
   datePicker: DatePickerComponent;
   api: IDpDayPickerApi;
 
-  constructor(public viewContainerRef: ViewContainerRef,
-              public elemRef: ElementRef,
-              public componentFactoryResolver: ComponentFactoryResolver,
-              public service: DatePickerDirectiveService,
-              @Optional() public formControl: NgControl,
-              public utilsService: UtilsService) {
+  constructor(public readonly viewContainerRef: ViewContainerRef,
+              public readonly elemRef: ElementRef,
+              public readonly componentFactoryResolver: ComponentFactoryResolver,
+              public readonly service: DatePickerDirectiveService,
+              @Optional() public readonly formControl: NgControl,
+              public readonly utilsService: UtilsService) {
   }
 
   private _config: IDatePickerDirectiveConfig;

@@ -109,7 +109,7 @@ export class DatePickerComponent implements OnChanges,
   dayTimeCalendarConfig: IDayTimeCalendarConfig;
   timeSelectConfig: ITimeSelectConfig;
   inputValue: CalendarValue;
-  isFocusedTrigger: boolean = false;
+  isFocusedTrigger = false;
   inputElementValue: string;
   calendarWrapper: HTMLElement;
   appendToElement: HTMLElement;
@@ -177,6 +177,8 @@ export class DatePickerComponent implements OnChanges,
     if (this.dayTimeCalendarRef) {
       this.dayTimeCalendarRef.moveCalendarTo(date);
     }
+
+    this.displayDate = date;
   }
 
   @HostListener('click')
@@ -397,10 +399,12 @@ export class DatePickerComponent implements OnChanges,
   }
 
   onLeftNavClick(change: INavEvent) {
+    this.displayDate = change.to;
     this.onLeftNav.emit(change);
   }
 
   onRightNavClick(change: INavEvent) {
+    this.displayDate = change.to;
     this.onRightNav.emit(change);
   }
 

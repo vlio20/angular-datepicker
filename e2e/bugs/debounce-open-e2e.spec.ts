@@ -14,7 +14,7 @@ describe('debounce open delay', () => {
     await page.dayPickerInput.click();
     await browser.waitForAngularEnabled(false);
     await browser.sleep(500);
-    expect(await page.datePickerPopup.isDisplayed()).toBe(false);
+    expect(await page.datePickerPopup.isPresent()).toBe(false);
     await browser.sleep(600);
     await browser.waitForAngularEnabled(true);
     expect(await page.datePickerPopup.isDisplayed()).toBe(true);
@@ -25,10 +25,10 @@ describe('debounce open delay', () => {
     await page.dayPickerInput.click();
     await browser.waitForAngularEnabled(false);
     await browser.sleep(500);
-    expect(await page.datePickerPopup.isDisplayed()).toBe(false);
+    expect(await page.datePickerPopup.isPresent()).toBe(false);
     await page.clickOnBody();
     await browser.sleep(600);
     await browser.waitForAngularEnabled(true);
-    expect(await page.datePickerPopup.isDisplayed()).toBe(false);
+    expect(await page.datePickerPopup.isPresent()).toBe(false);
   });
 });
