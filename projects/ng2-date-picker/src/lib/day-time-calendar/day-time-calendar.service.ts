@@ -4,14 +4,16 @@ import {UtilsService} from '../common/services/utils/utils.service';
 import {DayCalendarService} from '../day-calendar/day-calendar.service';
 import {TimeSelectService} from '../time-select/time-select.service';
 import {IDayTimeCalendarConfig} from './day-time-calendar-config.model';
-import {dayjsRef} from "../common/dayjs/dayjs.ref";
+import {dayjsRef} from '../common/dayjs/dayjs.ref';
 import {Dayjs} from 'dayjs';
 
 const DAY_FORMAT = 'YYYYMMDD';
 const TIME_FORMAT = 'HH:mm:ss';
 const COMBINED_FORMAT = DAY_FORMAT + TIME_FORMAT;
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class DayTimeCalendarService {
   readonly DEFAULT_CONFIG: IDayTimeCalendarConfig = {};
 

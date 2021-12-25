@@ -12,7 +12,6 @@ export const DEF_CONF: IDatePickerConfig = {
   onOpenDelay: 0,
   closeOnEnter: true,
   weekDayFormat: 'ddd',
-  appendTo: document.body,
   showNearMonthDays: true,
   showWeekNumbers: false,
   enableMonthSelector: true,

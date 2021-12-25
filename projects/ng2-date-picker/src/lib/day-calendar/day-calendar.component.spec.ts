@@ -8,7 +8,7 @@ import {MonthCalendarComponent} from '../month-calendar/month-calendar.component
 import {IDay} from './day.model';
 import {FormsModule} from '@angular/forms';
 import {Dayjs} from 'dayjs';
-import {dayjsRef} from "../common/dayjs/dayjs.ref";
+import {dayjsRef} from '../common/dayjs/dayjs.ref';
 
 describe('Component: DayCalendarComponent', () => {
   let component: DayCalendarComponent;

@@ -2,7 +2,6 @@ import {FormsModule} from '@angular/forms';
 import {DatePickerComponent} from './date-picker.component';
 import {DayTimeCalendarComponent} from '../day-time-calendar/day-time-calendar.component';
 import {DayTimeCalendarService} from '../day-time-calendar/day-time-calendar.service';
-import {DomHelper} from '../common/services/dom-appender/dom-appender.service';
 import {CalendarMode} from '../common/types/calendar-mode';
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {DayCalendarComponent} from '../day-calendar/day-calendar.component';
@@ -13,6 +12,7 @@ import {DayCalendarService} from '../day-calendar/day-calendar.service';
 import {TimeSelectService} from '../time-select/time-select.service';
 import {UtilsService} from '../common/services/utils/utils.service';
 import {By} from '@angular/platform-browser';
+import {OverlayModule} from '@angular/cdk/overlay';
 
 describe('Component: DatePickerComponent', () => {
   let component: DatePickerComponent;
@@ -26,7 +26,7 @@ describe('Component: DatePickerComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [FormsModule],
+      imports: [FormsModule, OverlayModule],
       declarations: [
         DatePickerComponent,
         DayTimeCalendarComponent,
@@ -40,7 +40,6 @@ describe('Component: DatePickerComponent', () => {
         DayCalendarService,
         TimeSelectService,
         UtilsService,
-        DomHelper
       ]
     }).compileComponents();
   });
@@ -57,6 +56,8 @@ describe('Component: DatePickerComponent', () => {
 
   it('should emit event goToCurrent when day calendar emit', () => {
     setComponentMode('day');
+    component.showCalendars();
+    fixture.detectChanges();
 
     spyOn(component.onGoToCurrent, 'emit');
     component.dayCalendarRef.onGoToCurrent.emit();
@@ -65,6 +66,8 @@ describe('Component: DatePickerComponent', () => {
 
   it('should emit event goToCurrent when month calendar emit', () => {
     setComponentMode('month');
+    component.showCalendars();
+    fixture.detectChanges();
 
     spyOn(component.onGoToCurrent, 'emit');
     component.monthCalendarRef.onGoToCurrent.emit();
@@ -73,6 +76,8 @@ describe('Component: DatePickerComponent', () => {
 
   it('should emit event goToCurrent when daytime calendar emit', () => {
     setComponentMode('daytime');
+    component.showCalendars();
+    fixture.detectChanges();
 
     spyOn(component.onGoToCurrent, 'emit');
     component.dayTimeCalendarRef.onGoToCurrent.emit();

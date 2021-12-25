@@ -4,7 +4,7 @@ import {CalendarNavComponent} from '../calendar-nav/calendar-nav.component';
 import {TimeSelectComponent} from './time-select.component';
 import {TimeSelectService} from './time-select.service';
 import {MonthCalendarComponent} from '../month-calendar/month-calendar.component';
-import {dayjsRef} from "../common/dayjs/dayjs.ref";
+import {dayjsRef} from '../common/dayjs/dayjs.ref';
 
 
 

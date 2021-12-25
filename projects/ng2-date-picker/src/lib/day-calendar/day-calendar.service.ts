@@ -6,9 +6,11 @@ import {IDay} from './day.model';
 import {IDayCalendarConfig, IDayCalendarConfigInternal} from './day-calendar-config.model';
 import {IMonthCalendarConfig} from '../month-calendar/month-calendar-config';
 import {Dayjs} from 'dayjs';
-import {dayjsRef} from "../common/dayjs/dayjs.ref";
+import {dayjsRef} from '../common/dayjs/dayjs.ref';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class DayCalendarService {
   readonly DEFAULT_CONFIG: IDayCalendarConfig = {
     showNearMonthDays: true,

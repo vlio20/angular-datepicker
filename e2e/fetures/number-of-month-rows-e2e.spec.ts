@@ -15,8 +15,9 @@ describe('number of month rows', () => {
     await page.dayCalendarNavHeaderBtn.click();
     expect(await page.monthRows.count()).toEqual(3);
 
-    await page.numOfMonthRowsToggle2.click();
+    await page.numOfMonthRowsToggle.click();
     await page.dayPickerInput.click();
+    await page.dayCalendarNavHeaderBtn.click();
     expect(await page.monthRows.count()).toEqual(2);
   });
 
@@ -25,7 +26,7 @@ describe('number of month rows', () => {
     await page.monthPickerInput.click();
     expect(await page.monthRows.count()).toEqual(3);
 
-    await page.numOfMonthRowsToggle2.click();
+    await page.numOfMonthRowsToggle.click();
     await page.dayPickerInput.click();
     expect(await page.monthRows.count()).toEqual(2);
   });
@@ -34,7 +35,7 @@ describe('number of month rows', () => {
     await page.monthInlineMenu.click();
     expect(await page.monthRows.count()).toEqual(3);
 
-    await page.numOfMonthRowsToggle2.click();
+    await page.numOfMonthRowsToggle.click();
     expect(await page.monthRows.count()).toEqual(2);
   });
 });

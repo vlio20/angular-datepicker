@@ -7,9 +7,13 @@ All notable changes to this project will be documented in this file.
 - Working with RTL ([575](https://github.com/vlio20/angular-datepicker/pull/575)) closes [#504](https://github.com/vlio20/angular-datepicker/issues/504) 
 
 # Breaking changes
-- Replace deprecated `Moment` with Dayjs  ([573](https://github.com/vlio20/angular-datepicker/pull/573)) closes [#530](https://github.com/vlio20/angular-datepicker/issues/530)  
+- Replace deprecated `Moment` with Dayjs ([573](https://github.com/vlio20/angular-datepicker/pull/573)) closes [#530](https://github.com/vlio20/angular-datepicker/issues/530)  
 Locale was removed from the library configuration, changing the locale should be done outside the component. More information can be found in the readme.md file under the Locale section.  
 Some formats also might be change due to the way Dayjs is implemented.
+- Replace internal position resolving with Angular material cdk library ([576](https://github.com/vlio20/angular-datepicker/pull/576)) closes [#570 ](https://github.com/vlio20/angular-datepicker/issues/570 )  
+This removal will drop the `attachTo` option from the library configuration.  
+*Note:* You will also need to add the cdk styles to your project. You can do so by adding `@import '~@angular/cdk/overlay-prebuilt.css';` to your global styles or by adding it to the styles attribute in your angular.json file.
+
 
 # [13.0.0] (2021-12-22)
 

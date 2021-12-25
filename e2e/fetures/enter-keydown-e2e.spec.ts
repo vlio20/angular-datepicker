@@ -14,7 +14,7 @@ describe('enter keypress', () => {
     await page.dayPickerInput.click();
     expect(await page.datePickerPopup.isDisplayed()).toBe(true);
     page.dayPickerInput.sendKeys(protractor.Key.ENTER);
-    expect(await page.datePickerPopup.isDisplayed()).toBe(false);
+    expect(await page.datePickerPopup.isPresent()).toBe(false);
 
     await page.disableCloseOnEnter.click();
     await page.dayPickerInput.click();
