@@ -51,8 +51,8 @@ import {INavEvent} from '../common/models/navigation-event.model';
 import {SelectEvent} from '../common/types/selection-event.enum';
 import {ISelectionEvent} from '../common/types/selection-event.model';
 import {Dayjs, UnitType} from 'dayjs';
-import {dayjsRef} from "../common/dayjs/dayjs.ref";
-import {ConnectionPositionPair} from "@angular/cdk/overlay";
+import {dayjsRef} from '../common/dayjs/dayjs.ref';
+import {ConnectionPositionPair} from '@angular/cdk/overlay';
 
 @Component({
   selector: 'dp-date-picker',
@@ -161,7 +161,7 @@ export class DatePickerComponent implements OnChanges,
   }
 
   _currentDateView: Dayjs;
-  overlayPosition: ConnectionPositionPair[];
+  overlayPosition: ConnectionPositionPair[] | undefined;
 
   get currentDateView(): Dayjs {
     return this._currentDateView;

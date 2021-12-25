@@ -1,7 +1,7 @@
 import {inject, TestBed} from '@angular/core/testing';
 import {UtilsService} from './utils.service';
 import {IDate} from '../../models/date.model';
-import {dayjsRef} from "../../dayjs/dayjs.ref";
+import {dayjsRef} from '../../dayjs/dayjs.ref';
 
 describe('Service: ObUtilsService', () => {
   beforeEach(() => {

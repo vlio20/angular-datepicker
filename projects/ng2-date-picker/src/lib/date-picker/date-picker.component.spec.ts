@@ -12,7 +12,7 @@ import {DayCalendarService} from '../day-calendar/day-calendar.service';
 import {TimeSelectService} from '../time-select/time-select.service';
 import {UtilsService} from '../common/services/utils/utils.service';
 import {By} from '@angular/platform-browser';
-import {OverlayModule} from "@angular/cdk/overlay";
+import {OverlayModule} from '@angular/cdk/overlay';
 
 describe('Component: DatePickerComponent', () => {
   let component: DatePickerComponent;

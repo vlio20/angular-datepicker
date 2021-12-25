@@ -8,10 +8,12 @@ import {DayTimeCalendarService} from '../day-time-calendar/day-time-calendar.ser
 import {ITimeSelectConfig} from '../time-select/time-select-config.model';
 import {CalendarMode} from '../common/types/calendar-mode';
 import {Dayjs} from 'dayjs';
-import {IDayTimeCalendarConfig} from "../day-time-calendar/day-time-calendar-config.model";
-import {ConnectionPositionPair} from "@angular/cdk/overlay";
+import {IDayTimeCalendarConfig} from '../day-time-calendar/day-time-calendar-config.model';
+import {ConnectionPositionPair} from '@angular/cdk/overlay';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class DatePickerService {
   readonly onPickerClosed: EventEmitter<null> = new EventEmitter();
   private defaultConfig: IDatePickerConfigInternal = {
@@ -113,9 +115,9 @@ export class DatePickerService {
     return this.utilsService.convertToDayjsArray(datesStrArr, config);
   }
 
-  getOverlayPosition({drops, opens}: IDatePickerConfig):  ConnectionPositionPair[] {
+  getOverlayPosition({drops, opens}: IDatePickerConfig):  ConnectionPositionPair[] | undefined {
     if (!drops && !opens) {
-      return [];
+      return undefined;
     }
 
     return [{

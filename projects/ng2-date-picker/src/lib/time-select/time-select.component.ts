@@ -32,7 +32,7 @@ import {IDate} from '../common/models/date.model';
 import {DateValidator} from '../common/types/validator.type';
 import {IDayCalendarConfigInternal} from '../day-calendar/day-calendar-config.model';
 import {Dayjs} from 'dayjs';
-import {dayjsRef} from "../common/dayjs/dayjs.ref";
+import {dayjsRef} from '../common/dayjs/dayjs.ref';
 
 @Component({
   selector: 'dp-time-select',
