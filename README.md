@@ -26,11 +26,27 @@ Supports latest (Angular 13) version. For older versions please checkout the CHA
 `npm install ng2-date-picker --save` 
 2. Import the `DpDatePickerModule` module:    
  `import {DpDatePickerModule} from 'ng2-date-picker';` 
- 3. Add `DpDatePickerModule` to your module imports:    
+3. Add `DpDatePickerModule` to your module imports:    
 
 ```ts  
  @NgModule({ ... imports: [ ... DpDatePickerModule ] })
  ```  
+4. Add `@import '~@angular/cdk/overlay-prebuilt.css';` to your global styles (usually styles.(scss/sass/css/less). You could also add it via the angular.json file under the styles attribute:
+```
+ "projects": {
+    "your-project": {
+      ...
+      "architect": {
+        "build": {
+          ...
+          "options": {
+            ...
+            "styles": [
+              ...
+              "node_modules/@angular/cdk/overlay-prebuilt.css"
+            ],
+   ...    
+```
 
 ## Contributors  
   
