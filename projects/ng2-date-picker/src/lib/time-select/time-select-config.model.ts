@@ -2,7 +2,7 @@ import {Dayjs} from 'dayjs';
 import {ICalendar, ICalendarInternal} from '../common/models/calendar.model';
 import {ECalendarValue} from '../common/types/calendar-value-enum';
 
-export interface IConfig {
+interface IConfig {
   hours12Format?: string;
   hours24Format?: string;
   maxTime?: Dayjs;

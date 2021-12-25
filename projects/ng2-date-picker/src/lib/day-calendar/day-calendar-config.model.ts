@@ -3,7 +3,7 @@ import {WeekDays} from '../common/types/week-days.type';
 import {Dayjs} from 'dayjs';
 import {ECalendarValue} from '../common/types/calendar-value-enum';
 
-export interface IConfig {
+interface IConfig {
   isDayDisabledCallback?: (date: Dayjs) => boolean;
   isMonthDisabledCallback?: (date: Dayjs) => boolean;
   weekDayFormat?: string;
