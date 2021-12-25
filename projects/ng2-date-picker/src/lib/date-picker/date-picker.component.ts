@@ -186,7 +186,7 @@ export class DatePickerComponent implements OnChanges,
   }
 
   @HostListener('click')
-  onClick() {
+  onClick(): void {
     if (!this.openOnClick) {
       return;
     }
@@ -299,7 +299,7 @@ export class DatePickerComponent implements OnChanges,
     this.origin = this.utilsService.getNativeElement(this.componentConfig.inputElementContainer);
   }
 
-  inputFocused() {
+  inputFocused(): void {
     if (!this.openOnFocus) {
       return;
     }
@@ -316,12 +316,12 @@ export class DatePickerComponent implements OnChanges,
     }, this.componentConfig.onOpenDelay);
   }
 
-  inputBlurred() {
+  inputBlurred(): void {
     clearTimeout(this.onOpenDelayTimeoutHandler);
     this.onTouchedCallback();
   }
 
-  showCalendars() {
+  showCalendars(): void {
     this.areCalendarsShown = true;
     this.startGlobalListeners();
 
@@ -333,7 +333,7 @@ export class DatePickerComponent implements OnChanges,
     this.cd.markForCheck();
   }
 
-  hideCalendar() {
+  hideCalendar(): void {
     this.areCalendarsShown = false;
 
     if (this.dayCalendarRef) {
@@ -345,7 +345,7 @@ export class DatePickerComponent implements OnChanges,
     this.cd.markForCheck();
   }
 
-  onViewDateChange(value: CalendarValue) {
+  onViewDateChange(value: CalendarValue): void {
     const strVal = value ? this.utilsService.convertToString(value, this.componentConfig.format) : '';
     if (this.dayPickerService.isValidInputDateValue(strVal, this.componentConfig)) {
       this.selected = this.dayPickerService.convertInputValueToDayjsArray(strVal, this.componentConfig);
@@ -370,7 +370,7 @@ export class DatePickerComponent implements OnChanges,
     }
   }
 
-  dateSelected(date: IDate, granularity: UnitType, type: SelectEvent, ignoreClose?: boolean) {
+  dateSelected(date: IDate, granularity: UnitType, type: SelectEvent, ignoreClose?: boolean): void {
     this.selected = this.utilsService
       .updateSelected(this.componentConfig.allowMultiSelect, this.selected, date, granularity);
     if (!ignoreClose) {
@@ -384,13 +384,13 @@ export class DatePickerComponent implements OnChanges,
     });
   }
 
-  onDateClick() {
+  onDateClick(): void {
     if (this.componentConfig.closeOnSelect) {
       setTimeout(this.hideCalendar.bind(this), this.componentConfig.closeOnSelectDelay);
     }
   }
 
-  onKeyPress(event: KeyboardEvent) {
+  onKeyPress(event: KeyboardEvent): void {
     switch (event.key) {
       case ('Escape'):
       case ('Esc'):
@@ -400,21 +400,21 @@ export class DatePickerComponent implements OnChanges,
     }
   }
 
-  moveCalendarTo(date: SingleCalendarValue) {
+  moveCalendarTo(date: SingleCalendarValue): void {
     this.currentDateView = this.utilsService.convertToDayjs(date, this.componentConfig.format);
   }
 
-  onLeftNavClick(change: INavEvent) {
+  onLeftNavClick(change: INavEvent): void {
     this.displayDate = change.to;
     this.onLeftNav.emit(change);
   }
 
-  onRightNavClick(change: INavEvent) {
+  onRightNavClick(change: INavEvent): void {
     this.displayDate = change.to;
     this.onRightNav.emit(change);
   }
 
-  startGlobalListeners() {
+  startGlobalListeners(): void {
     this.globalListenersUnlisteners.push(
       this.renderer.listen(document, 'keydown', (e: KeyboardEvent) => {
         this.onKeyPress(e);
@@ -422,12 +422,12 @@ export class DatePickerComponent implements OnChanges,
     );
   }
 
-  stopGlobalListeners() {
+  stopGlobalListeners(): void {
     this.globalListenersUnlisteners.forEach((ul) => ul());
     this.globalListenersUnlisteners = [];
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.handleInnerElementClickUnlisteners.forEach(ul => ul());
 
     if (this.appendToElement) {
