@@ -4,7 +4,7 @@ import {UtilsService} from '../common/services/utils/utils.service';
 import {MonthCalendarService} from './month-calendar.service';
 import {IMonth} from './month.model';
 import {Dayjs} from 'dayjs';
-import {dayjsRef} from "../common/dayjs/dayjs.ref";
+import {dayjsRef} from '../common/dayjs/dayjs.ref';
 
 
 

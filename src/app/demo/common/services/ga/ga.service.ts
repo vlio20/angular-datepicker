@@ -3,7 +3,9 @@ import {environment} from '../../../../../environments/environment';
 
 declare const gtag: Function;
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class GaService {
 
   public emitEvent(eventCategory: string,

@@ -16,7 +16,7 @@ describe('dpDayPicker dayPicker', () => {
     await page.dayPickerInput.click();
     expect(await page.datePickerPopup.isDisplayed()).toBe(true);
     await page.clickOnBody();
-    expect(await page.datePickerPopup.isDisplayed()).toBe(false);
+    expect(await page.datePickerPopup.isPresent()).toBe(false);
 
     await page.showOnOutsideClick.click();
     await page.dayPickerInput.click();
@@ -26,15 +26,18 @@ describe('dpDayPicker dayPicker', () => {
 
   it('should check that the theme is added and removed', async () => {
     await page.themeOnRadio.click();
+    await page.dayPickerInput.click();
     expect(await page.datePickerPopup.getAttribute('class')).toContain('dp-material');
     await page.themeOffRadio.click();
+    await page.dayPickerInput.click();
     expect(await page.datePickerPopup.getAttribute('class')).not.toContain('dp-material');
     await page.themeOnRadio.click();
+    await page.dayPickerInput.click();
     expect(await page.datePickerPopup.getAttribute('class')).toContain('dp-material');
   });
 
   it('should check that the onOpenDelay is working', async () => {
-    expect(await page.datePickerPopup.isDisplayed()).toBe(false);
+    expect(await page.datePickerPopup.isPresent()).toBe(false);
 
     await page.scrollIntoView(page.onOpenDelayInput, true);
     await page.setInputValue(page.onOpenDelayInput, '1000');
@@ -45,7 +48,7 @@ describe('dpDayPicker dayPicker', () => {
     await browser.waitForAngularEnabled(false);
     await page.scrollIntoView(page.dayPickerInput, true);
     await page.dayPickerInput.click();
-    expect(await page.datePickerPopup.isDisplayed()).toBe(false);
+    expect(await page.datePickerPopup.isPresent()).toBe(false);
     await browser.waitForAngularEnabled(true);
     browser.sleep(1000);
     expect(await page.datePickerPopup.isDisplayed()).toBe(true);
@@ -79,11 +82,19 @@ describe('dpDayPicker dayPicker', () => {
     expect(await page.weekNumbers.getText()).toEqual(['8', '9', '10', '11', '12', '13']);
   });
 
+  it('should remember last position', async () => {
+    await page.setInputValue(page.dayPickerInput, '28-03-2017');
+    await page.dayPickerInput.click();
+    expect(await page.dayCalendarNavHeaderBtn.getText()).toEqual('Mar, 2017');
+    await page.currentLocationBtn.click();
+    expect(await page.dayCalendarNavHeaderBtn.getText()).toEqual(dayjs().format('MMM, YYYY'));
+  });
+
   it('should hide calendar on tab (blur)', async () => {
     await page.dayPickerInput.click();
     expect(await page.datePickerPopup.isDisplayed()).toBe(true);
     await page.dayPickerInput.sendKeys(protractor.Key.TAB);
-    expect(await page.datePickerPopup.isDisplayed()).toBe(false);
+    expect(await page.datePickerPopup.isPresent()).toBe(false);
   });
 
   it('should disable/enable month selection', async () => {
@@ -141,7 +152,7 @@ describe('dpDayPicker dayPicker', () => {
     await page.pickerDisabledRadio.click();
     expect(await page.dayPickerInput.getAttribute('disabled')).toEqual('true');
     await page.dayPickerInput.click();
-    expect(await page.datePickerPopup.isDisplayed()).toBe(false);
+    expect(await page.datePickerPopup.isPresent()).toBe(false);
     await page.pickerEnabledRadio.click();
     expect(await page.dayPickerInput.getAttribute('disabled')).toBe(null);
   });
@@ -221,7 +232,7 @@ describe('dpDayPicker dayPicker', () => {
   it('should check that the date picker popup closes/opened after selection ', async () => {
     await page.dayPickerInput.click();
     await page.clickOnDayButton('15');
-    expect(await page.datePickerPopup.isDisplayed()).toBe(false);
+    expect(await page.datePickerPopup.isPresent()).toBe(false);
     await page.scrollIntoView(page.noCloseOnSelect, true);
     await page.noCloseOnSelect.click();
     await page.dayPickerInput.click();
@@ -238,8 +249,8 @@ describe('dpDayPicker dayPicker', () => {
     expect(await page.datePickerPopup.isDisplayed()).toBe(true);
     await browser.sleep(200);
     expect(await page.datePickerPopup.isDisplayed()).toBe(true);
-    await browser.sleep(1000);
-    expect(await page.datePickerPopup.isDisplayed()).toBe(false);
+    await browser.sleep(1100);
+    expect(await page.datePickerPopup.isPresent()).toBe(false);
   });
 
   it('should check weekday names', async () => {

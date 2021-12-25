@@ -6,7 +6,7 @@ import {DayTimeCalendarService} from '../day-time-calendar/day-time-calendar.ser
 import {DayCalendarService} from '../day-calendar/day-calendar.service';
 import {TimeSelectService} from '../time-select/time-select.service';
 import {Dayjs} from 'dayjs';
-import {dayjsRef} from "../common/dayjs/dayjs.ref";
+import {dayjsRef} from '../common/dayjs/dayjs.ref';
 
 describe('Service: DatePicker', () => {
   beforeEach(() => {

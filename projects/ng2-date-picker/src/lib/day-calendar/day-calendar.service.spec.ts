@@ -4,7 +4,7 @@ import {DayCalendarService} from './day-calendar.service';
 import {UtilsService} from '../common/services/utils/utils.service';
 import {IDayCalendarConfigInternal} from './day-calendar-config.model';
 import {Dayjs} from 'dayjs';
-import {dayjsRef} from "../common/dayjs/dayjs.ref";
+import {dayjsRef} from '../common/dayjs/dayjs.ref';
 
 describe('Service: Calendar', () => {
   beforeEach(() => {

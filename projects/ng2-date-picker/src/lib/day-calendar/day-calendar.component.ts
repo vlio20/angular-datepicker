@@ -35,7 +35,7 @@ import {IMonthCalendarConfig} from '../month-calendar/month-calendar-config';
 import {IMonth} from '../month-calendar/month.model';
 import {DateValidator} from '../common/types/validator.type';
 import {INavEvent} from '../common/models/navigation-event.model';
-import {dayjsRef} from "../common/dayjs/dayjs.ref";
+import {dayjsRef} from '../common/dayjs/dayjs.ref';
 
 @Component({
   selector: 'dp-day-calendar',

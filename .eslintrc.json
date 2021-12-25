@@ -49,6 +49,16 @@
               "error"
             ]
           }
+        ],
+        "no-debugger": [
+          "error"
+        ],
+        "quotes": [
+          "error",
+          "single",
+          {
+            "allowTemplateLiterals": true
+          }
         ]
       }
     },

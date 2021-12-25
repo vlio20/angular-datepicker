@@ -2,6 +2,7 @@ import {TDrops, TOpens} from '../common/types/poistions.type';
 import {IDayCalendarConfig, IDayCalendarConfigInternal} from '../day-calendar/day-calendar-config.model';
 import {IMonthCalendarConfig, IMonthCalendarConfigInternal} from '../month-calendar/month-calendar-config';
 import {ITimeSelectConfig, ITimeSelectConfigInternal} from '../time-select/time-select-config.model';
+import {ElementRef} from '@angular/core';
 
 export interface IConfig {
   closeOnSelect?: boolean;
@@ -11,8 +12,7 @@ export interface IConfig {
   onOpenDelay?: number;
   closeOnEnter?: boolean;
   disableKeypress?: boolean;
-  appendTo?: string | HTMLElement;
-  inputElementContainer?: HTMLElement | string;
+  inputElementContainer?: HTMLElement | string | ElementRef;
   drops?: TDrops;
   opens?: TOpens;
   hideInputContainer?: boolean;

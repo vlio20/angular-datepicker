@@ -3,12 +3,14 @@ import {Injectable} from '@angular/core';
 import {UtilsService} from '../common/services/utils/utils.service';
 import {ITimeSelectConfig, ITimeSelectConfigInternal} from './time-select-config.model';
 import {Dayjs} from 'dayjs';
-import {dayjsRef} from "../common/dayjs/dayjs.ref";
+import {dayjsRef} from '../common/dayjs/dayjs.ref';
 
 export type TimeUnit = 'hour' | 'minute' | 'second';
 export const FIRST_PM_HOUR = 12;
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class TimeSelectService {
   readonly DEFAULT_CONFIG: ITimeSelectConfigInternal = {
     hours12Format: 'hh',

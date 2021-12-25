@@ -1,5 +1,4 @@
 import {IDate} from '../common/models/date.model';
-import {DomHelper} from '../common/services/dom-appender/dom-appender.service';
 import {UtilsService} from '../common/services/utils/utils.service';
 import {CalendarMode} from '../common/types/calendar-mode';
 import {ECalendarMode} from '../common/types/calendar-mode-enum';
@@ -18,7 +17,6 @@ import {IDatePickerConfig, IDatePickerConfigInternal} from './date-picker-config
 import {IDpDayPickerApi} from './date-picker.api';
 import {DatePickerService} from './date-picker.service';
 import {
-  AfterViewInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
@@ -53,6 +51,8 @@ import {INavEvent} from '../common/models/navigation-event.model';
 import {SelectEvent} from '../common/types/selection-event.enum';
 import {ISelectionEvent} from '../common/types/selection-event.model';
 import {Dayjs, UnitType} from 'dayjs';
+import {dayjsRef} from '../common/dayjs/dayjs.ref';
+import {ConnectionPositionPair} from '@angular/cdk/overlay';
 
 @Component({
   selector: 'dp-date-picker',
@@ -79,11 +79,9 @@ import {Dayjs, UnitType} from 'dayjs';
 })
 export class DatePickerComponent implements OnChanges,
                                             OnInit,
-                                            AfterViewInit,
                                             ControlValueAccessor,
                                             Validator,
                                             OnDestroy {
-
   isInitialized: boolean = false;
   @Input() config: IDatePickerConfig;
   @Input() mode: CalendarMode = 'day';
@@ -98,27 +96,25 @@ export class DatePickerComponent implements OnChanges,
   @Output() open = new EventEmitter<void>();
   @Output() close = new EventEmitter<void>();
   @Output() onChange = new EventEmitter<CalendarValue>();
-  @Output() onGoToCurrent: EventEmitter<void> = new EventEmitter();
-  @Output() onLeftNav: EventEmitter<INavEvent> = new EventEmitter();
-  @Output() onRightNav: EventEmitter<INavEvent> = new EventEmitter();
-  @Output() onSelect: EventEmitter<ISelectionEvent> = new EventEmitter();
+  @Output() onGoToCurrent = new EventEmitter<void>();
+  @Output() onLeftNav = new EventEmitter<INavEvent>();
+  @Output() onRightNav = new EventEmitter<INavEvent>();
+  @Output() onSelect = new EventEmitter<ISelectionEvent>();
   @ViewChild('container') calendarContainer: ElementRef;
   @ViewChild('dayCalendar') dayCalendarRef: DayCalendarComponent;
   @ViewChild('monthCalendar') monthCalendarRef: MonthCalendarComponent;
   @ViewChild('daytimeCalendar') dayTimeCalendarRef: DayTimeCalendarComponent;
   @ViewChild('timeSelect') timeSelectRef: TimeSelectComponent;
+  @ViewChild('inputElement') inputElement: ElementRef<HTMLInputElement>;
   componentConfig: IDatePickerConfigInternal;
   dayCalendarConfig: IDayCalendarConfig;
   dayTimeCalendarConfig: IDayTimeCalendarConfig;
   timeSelectConfig: ITimeSelectConfig;
-  hideStateHelper: boolean = false;
   inputValue: CalendarValue;
-  isFocusedTrigger: boolean = false;
+  isFocusedTrigger = false;
   inputElementValue: string;
   calendarWrapper: HTMLElement;
   appendToElement: HTMLElement;
-  inputElementContainer: HTMLElement;
-  popupElem: HTMLElement;
   handleInnerElementClickUnlisteners: Function[] = [];
   globalListenersUnlisteners: Function[] = [];
   validateFn: DateValidator;
@@ -128,10 +124,10 @@ export class DatePickerComponent implements OnChanges,
     moveCalendarTo: this.moveCalendarTo.bind(this)
   };
   selectEvent = SelectEvent;
+  origin: ElementRef | HTMLElement;
   private onOpenDelayTimeoutHandler;
 
   constructor(private readonly dayPickerService: DatePickerService,
-              private readonly domHelper: DomHelper,
               private readonly elemRef: ElementRef,
               private readonly renderer: Renderer2,
               private readonly utilsService: UtilsService,
@@ -146,30 +142,7 @@ export class DatePickerComponent implements OnChanges,
     return this.componentConfig.openOnClick;
   }
 
-  _areCalendarsShown: boolean = false;
-
-  get areCalendarsShown(): boolean {
-    return this._areCalendarsShown;
-  }
-
-  set areCalendarsShown(value: boolean) {
-    if (value) {
-      this.startGlobalListeners();
-      this.domHelper.appendElementToPosition({
-        container: this.appendToElement,
-        element: this.calendarWrapper,
-        anchor: this.inputElementContainer,
-        dimElem: this.popupElem,
-        drops: this.componentConfig.drops,
-        opens: this.componentConfig.opens
-      });
-    } else {
-      this.stopGlobalListeners();
-      this.dayPickerService.pickerClosed();
-    }
-
-    this._areCalendarsShown = value;
-  }
+  areCalendarsShown: boolean = false;
 
   _selected: Dayjs[] = [];
 
@@ -188,6 +161,7 @@ export class DatePickerComponent implements OnChanges,
   }
 
   _currentDateView: Dayjs;
+  overlayPosition: ConnectionPositionPair[] | undefined;
 
   get currentDateView(): Dayjs {
     return this._currentDateView;
@@ -207,43 +181,30 @@ export class DatePickerComponent implements OnChanges,
     if (this.dayTimeCalendarRef) {
       this.dayTimeCalendarRef.moveCalendarTo(date);
     }
+
+    this.displayDate = date;
   }
 
   @HostListener('click')
-  onClick() {
+  onClick(): void {
     if (!this.openOnClick) {
       return;
     }
 
     if (!this.isFocusedTrigger && !this.disabled) {
-      this.hideStateHelper = true;
       if (!this.areCalendarsShown) {
         this.showCalendars();
       }
     }
   }
 
-  onBodyClick() {
-    if (this.componentConfig.hideOnOutsideClick) {
-      if (!this.hideStateHelper && this.areCalendarsShown) {
-        this.hideCalendar();
-      }
-
-      this.hideStateHelper = false;
+  onBodyClick(event: MouseEvent) {
+    if (this.inputElement.nativeElement === event.target) {
+      return;
     }
-  }
 
-  @HostListener('window:resize')
-  onScroll() {
-    if (this.areCalendarsShown) {
-      this.domHelper.setElementPosition({
-        container: this.appendToElement,
-        element: this.calendarWrapper,
-        anchor: this.inputElementContainer,
-        dimElem: this.popupElem,
-        drops: this.componentConfig.drops,
-        opens: this.componentConfig.opens
-      });
+    if (this.componentConfig.hideOnOutsideClick) {
+      this.hideCalendar();
     }
   }
 
@@ -265,7 +226,7 @@ export class DatePickerComponent implements OnChanges,
     this.onChangeCallback = fn;
   }
 
-  onChangeCallback(_: any, changedByInput: boolean) {
+  onChangeCallback(_: any, __: boolean) {
   }
 
   registerOnTouched(fn: any): void {
@@ -314,50 +275,12 @@ export class DatePickerComponent implements OnChanges,
     }
   }
 
-  ngAfterViewInit(): void {
-    this.setElementPositionInDom();
-  }
-
   setDisabledState(isDisabled: boolean): void {
     this.disabled = isDisabled;
     this.cd.markForCheck();
   }
 
-  setElementPositionInDom(): void {
-    this.calendarWrapper = <HTMLElement>this.calendarContainer.nativeElement;
-    this.setInputElementContainer();
-    this.popupElem = this.elemRef.nativeElement.querySelector('.dp-popup');
-    this.handleInnerElementClick(this.popupElem);
-
-    const {appendTo} = this.componentConfig;
-    if (appendTo) {
-      if (typeof appendTo === 'string') {
-        this.appendToElement = <HTMLElement>document.querySelector(<string>appendTo);
-      } else {
-        this.appendToElement = <HTMLElement>appendTo;
-      }
-    } else {
-      this.appendToElement = this.elemRef.nativeElement;
-    }
-
-    this.appendToElement.appendChild(this.calendarWrapper);
-  }
-
-  setInputElementContainer() {
-    this.inputElementContainer = this.utilsService.getNativeElement(this.componentConfig.inputElementContainer)
-      || this.elemRef.nativeElement.querySelector('.dp-input-container')
-      || document.body;
-  }
-
-  handleInnerElementClick(element: HTMLElement) {
-    this.handleInnerElementClickUnlisteners.push(
-      this.renderer.listen(element, 'click', () => {
-        this.hideStateHelper = true;
-      })
-    );
-  }
-
-  async init() {
+  init(): void {
     this.componentConfig = this.dayPickerService.getConfig(this.config, this.mode);
     this.currentDateView = this.displayDate
       ? this.utilsService.convertToDayjs(this.displayDate, this.componentConfig.format)
@@ -372,9 +295,11 @@ export class DatePickerComponent implements OnChanges,
     this.dayTimeCalendarConfig = this.dayPickerService.getDayTimeConfigService(this.componentConfig);
     this.timeSelectConfig = this.dayPickerService.getTimeConfigService(this.componentConfig);
     this.initValidators();
+    this.overlayPosition = this.dayPickerService.getOverlayPosition(this.componentConfig);
+    this.origin = this.utilsService.getNativeElement(this.componentConfig.inputElementContainer);
   }
 
-  inputFocused() {
+  inputFocused(): void {
     if (!this.openOnFocus) {
       return;
     }
@@ -386,21 +311,19 @@ export class DatePickerComponent implements OnChanges,
         this.showCalendars();
       }
 
-      this.hideStateHelper = false;
-
       this.isFocusedTrigger = false;
       this.cd.markForCheck();
     }, this.componentConfig.onOpenDelay);
   }
 
-  inputBlurred() {
+  inputBlurred(): void {
     clearTimeout(this.onOpenDelayTimeoutHandler);
     this.onTouchedCallback();
   }
 
-  showCalendars() {
-    this.hideStateHelper = true;
+  showCalendars(): void {
     this.areCalendarsShown = true;
+    this.startGlobalListeners();
 
     if (this.timeSelectRef) {
       this.timeSelectRef.api.triggerChange();
@@ -410,18 +333,19 @@ export class DatePickerComponent implements OnChanges,
     this.cd.markForCheck();
   }
 
-  hideCalendar() {
+  hideCalendar(): void {
     this.areCalendarsShown = false;
 
     if (this.dayCalendarRef) {
       this.dayCalendarRef.api.toggleCalendarMode(ECalendarMode.Day);
     }
+    this.stopGlobalListeners();
 
     this.close.emit();
     this.cd.markForCheck();
   }
 
-  onViewDateChange(value: CalendarValue) {
+  onViewDateChange(value: CalendarValue): void {
     const strVal = value ? this.utilsService.convertToString(value, this.componentConfig.format) : '';
     if (this.dayPickerService.isValidInputDateValue(strVal, this.componentConfig)) {
       this.selected = this.dayPickerService.convertInputValueToDayjsArray(strVal, this.componentConfig);
@@ -446,7 +370,7 @@ export class DatePickerComponent implements OnChanges,
     }
   }
 
-  dateSelected(date: IDate, granularity: UnitType, type: SelectEvent, ignoreClose?: boolean) {
+  dateSelected(date: IDate, granularity: UnitType, type: SelectEvent, ignoreClose?: boolean): void {
     this.selected = this.utilsService
       .updateSelected(this.componentConfig.allowMultiSelect, this.selected, date, granularity);
     if (!ignoreClose) {
@@ -460,57 +384,59 @@ export class DatePickerComponent implements OnChanges,
     });
   }
 
-  onDateClick() {
+  onDateClick(): void {
     if (this.componentConfig.closeOnSelect) {
       setTimeout(this.hideCalendar.bind(this), this.componentConfig.closeOnSelectDelay);
     }
   }
 
-  onKeyPress(event: KeyboardEvent) {
-    switch (event.keyCode) {
-      case (9):
-      case (27):
+  onKeyPress(event: KeyboardEvent): void {
+    switch (event.key) {
+      case ('Escape'):
+      case ('Esc'):
+      case ('Tab'):
         this.hideCalendar();
         break;
     }
   }
 
-  moveCalendarTo(date: SingleCalendarValue) {
+  moveCalendarTo(date: SingleCalendarValue): void {
     this.currentDateView = this.utilsService.convertToDayjs(date, this.componentConfig.format);
   }
 
-  onLeftNavClick(change: INavEvent) {
+  onLeftNavClick(change: INavEvent): void {
+    this.displayDate = change.to;
     this.onLeftNav.emit(change);
   }
 
-  onRightNavClick(change: INavEvent) {
+  onRightNavClick(change: INavEvent): void {
+    this.displayDate = change.to;
     this.onRightNav.emit(change);
   }
 
-  startGlobalListeners() {
+  startGlobalListeners(): void {
     this.globalListenersUnlisteners.push(
       this.renderer.listen(document, 'keydown', (e: KeyboardEvent) => {
         this.onKeyPress(e);
-      }),
-      this.renderer.listen(document, 'scroll', () => {
-        this.onScroll();
-      }),
-      this.renderer.listen(document, 'click', () => {
-        this.onBodyClick();
       })
     );
   }
 
-  stopGlobalListeners() {
+  stopGlobalListeners(): void {
     this.globalListenersUnlisteners.forEach((ul) => ul());
     this.globalListenersUnlisteners = [];
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.handleInnerElementClickUnlisteners.forEach(ul => ul());
 
     if (this.appendToElement) {
       this.appendToElement.removeChild(this.calendarWrapper);
     }
+  }
+
+  goToCurrent(): void {
+    this.currentDateView = dayjsRef();
+    this.onGoToCurrent.emit()
   }
 }

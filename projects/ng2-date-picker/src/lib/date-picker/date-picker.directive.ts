@@ -1,6 +1,5 @@
 import {CalendarMode} from '../common/types/calendar-mode';
 import {IDatePickerDirectiveConfig} from './date-picker-directive-config.model';
-import {DatePickerDirectiveService} from './date-picker-directive.service';
 import {IDpDayPickerApi} from './date-picker.api';
 import {DatePickerComponent} from './date-picker.component';
 import {
@@ -25,7 +24,6 @@ import {Dayjs} from 'dayjs';
 
 @Directive({
   exportAs: 'dpDayPicker',
-  providers: [DatePickerDirectiveService],
   selector: '[dpDayPicker]'
 })
 export class DatePickerDirective implements OnInit {
@@ -40,12 +38,11 @@ export class DatePickerDirective implements OnInit {
   datePicker: DatePickerComponent;
   api: IDpDayPickerApi;
 
-  constructor(public viewContainerRef: ViewContainerRef,
-              public elemRef: ElementRef,
-              public componentFactoryResolver: ComponentFactoryResolver,
-              public service: DatePickerDirectiveService,
-              @Optional() public formControl: NgControl,
-              public utilsService: UtilsService) {
+  constructor(public readonly viewContainerRef: ViewContainerRef,
+              public readonly elemRef: ElementRef,
+              public readonly componentFactoryResolver: ComponentFactoryResolver,
+              @Optional() public readonly formControl: NgControl,
+              public readonly utilsService: UtilsService) {
   }
 
   private _config: IDatePickerDirectiveConfig;
@@ -55,20 +52,11 @@ export class DatePickerDirective implements OnInit {
   }
 
   @Input('dpDayPicker') set config(config: IDatePickerDirectiveConfig) {
-    this._config = this.service.getConfig(config, this.viewContainerRef.element, this.attachTo);
-    this.updateDatepickerConfig();
-    this.markForCheck();
-  }
-
-  private _attachTo: ElementRef | string;
-
-  get attachTo(): ElementRef | string {
-    return this._attachTo;
-  }
-
-  @Input() set attachTo(attachTo: ElementRef | string) {
-    this._attachTo = attachTo;
-    this._config = this.service.getConfig(this.config, this.viewContainerRef.element, this.attachTo);
+    this._config = {
+      ...config,
+      hideInputContainer: true,
+      inputElementContainer: config.inputElementContainer ?? this.elemRef,
+    };
     this.updateDatepickerConfig();
     this.markForCheck();
   }

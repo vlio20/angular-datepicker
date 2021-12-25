@@ -1,6 +1,6 @@
 import {ECalendarValue} from '../../types/calendar-value-enum';
 import {SingleCalendarValue} from '../../types/single-calendar-value';
-import {Injectable} from '@angular/core';
+import {ElementRef, Injectable} from '@angular/core';
 
 import {Dayjs, UnitType} from 'dayjs';
 import {CalendarValue} from '../../types/calendar-value';
@@ -356,11 +356,13 @@ export class UtilsService {
     return false;
   }
 
-  getNativeElement(elem: HTMLElement | string): HTMLElement {
+  getNativeElement(elem: HTMLElement | string | ElementRef): HTMLElement {
     if (!elem) {
       return null;
     } else if (typeof elem === 'string') {
-      return <HTMLElement>document.querySelector(elem);
+      return document.querySelector(elem);
+    } else if (elem instanceof ElementRef) {
+      return elem.nativeElement;
     } else {
       return elem;
     }

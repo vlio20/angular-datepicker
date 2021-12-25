@@ -182,7 +182,6 @@ export class DemoComponent implements OnInit {
     openOnClick: true,
     onOpenDelay: 0,
     weekDayFormat: 'ddd',
-    appendTo: document.body,
     showNearMonthDays: true,
     showWeekNumbers: false,
     enableMonthSelector: true,

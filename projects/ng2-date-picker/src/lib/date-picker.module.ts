@@ -1,6 +1,7 @@
 import {NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {CommonModule} from '@angular/common';
+import {OverlayModule} from '@angular/cdk/overlay';
 import {DatePickerComponent} from './date-picker/date-picker.component';
 import {DatePickerDirective} from './date-picker/date-picker.directive';
 import {DayCalendarComponent} from './day-calendar/day-calendar.component';
@@ -30,7 +31,8 @@ export {MonthCalendarComponent} from './month-calendar/month-calendar.component'
   ],
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    OverlayModule
   ],
   exports: [
     DatePickerComponent,
