@@ -10,105 +10,6 @@ import {ECalendarValue} from '../../../projects/ng2-date-picker/src/lib/common/t
 import {INavEvent} from '../../../projects/ng2-date-picker/src/lib/common/models/navigation-event.model';
 import {ISelectionEvent} from '../../../projects/ng2-date-picker/src/lib/common/types/selection-event.model';
 
-const GLOBAL_OPTION_KEYS = [
-  'theme',
-  'locale',
-  'returnedValueType',
-  'displayDate'
-];
-const PICKER_OPTION_KEYS = [
-  'apiclose',
-  'apiopen',
-  'appendTo',
-  'disabled',
-  'disableKeypress',
-  'drops',
-  'format',
-  'openOnFocus',
-  'openOnClick',
-  'onOpenDelay',
-  'opens',
-  'placeholder',
-  'required',
-  'hideInputContainer',
-  'hideOnOutsideClick'
-];
-const DAY_PICKER_DIRECTIVE_OPTION_KEYS = [
-  'allowMultiSelect',
-  'closeOnSelect',
-  'closeOnSelectDelay',
-  'showGoToCurrent',
-  'moveCalendarTo',
-  ...PICKER_OPTION_KEYS
-];
-const DAY_PICKER_OPTION_KEYS = [
-  ...DAY_PICKER_DIRECTIVE_OPTION_KEYS
-];
-const DAY_TIME_PICKER_OPTION_KEYS = [
-  'moveCalendarTo',
-  ...PICKER_OPTION_KEYS
-];
-const TIME_PICKER_OPTION_KEYS = [
-  ...PICKER_OPTION_KEYS
-];
-const MONTH_CALENDAR_OPTION_KEYS = [
-  'minValidation',
-  'maxValidation',
-  'required',
-  'max',
-  'min',
-  'monthBtnFormat',
-  'multipleYearsNavigateBy',
-  'showMultipleYearsNavigation',
-  'yearFormat',
-  'showGoToCurrent',
-  'unSelectOnClick',
-  'moveCalendarTo',
-  ...GLOBAL_OPTION_KEYS
-];
-const DAY_CALENDAR_OPTION_KEYS = [
-  'firstDayOfWeek',
-  'max',
-  'maxValidation',
-  'min',
-  'minValidation',
-  'monthFormat',
-  'weekdayNames',
-  'showNearMonthDays',
-  'showWeekNumbers',
-  'enableMonthSelector',
-  'dayBtnFormat',
-  'weekdayFormat',
-  'showGoToCurrent',
-  'unSelectOnClick',
-  'moveCalendarTo',
-  ...MONTH_CALENDAR_OPTION_KEYS
-];
-const TIME_SELECT_SHARED_OPTION_KEYS = [
-  'hours12Format',
-  'hours24Format',
-  'meridiemFormat',
-  'minutesFormat',
-  'minutesInterval',
-  'secondsFormat',
-  'secondsInterval',
-  'showSeconds',
-  'showTwentyFourHours',
-  'timeSeparator',
-  ...GLOBAL_OPTION_KEYS
-];
-const TIME_SELECT_OPTION_KEYS = [
-  'maxTime',
-  'maxTimeValidation',
-  'minTime',
-  'minTimeValidation',
-  ...TIME_SELECT_SHARED_OPTION_KEYS
-];
-const DAY_TIME_CALENDAR_OPTION_KEYS = [
-  ...DAY_CALENDAR_OPTION_KEYS,
-  ...TIME_SELECT_SHARED_OPTION_KEYS
-];
-
 @Component({
   selector: 'dp-demo',
   templateUrl: './demo.component.html',
@@ -116,26 +17,10 @@ const DAY_TIME_CALENDAR_OPTION_KEYS = [
   styleUrls: ['./demo.component.less']
 })
 export class DemoComponent implements OnInit {
-  showDemo: boolean = true;
   @ViewChild('dateComponent') dateComponent: DatePickerComponent;
   @ViewChild('donateForm') donateForm: any;
   @ViewChild('dateDirectivePicker') datePickerDirective: DatePickerDirective;
   demoFormat = 'DD-MM-YYYY';
-  readonly DAYS = ['su', 'mo', 'tu', 'we', 'th', 'fr', 'sa'];
-  readonly LANGS = [
-    'en', 'af', 'ar-dz', 'ar-kw', 'ar-ly',
-    'ar-ma', 'ar-sa', 'ar-tn', 'ar', 'az', 'be', 'bg', 'bn', 'bo',
-    'br', 'bs', 'ca', 'cs', 'cv', 'cy', 'da', 'de-at', 'de-ch',
-    'de', 'dv', 'el', 'en-au', 'en-ca', 'en-gb', 'en-ie', 'en-nz',
-    'eo', 'es-do', 'es', 'et', 'eu', 'fa', 'fi', 'fo', 'fr-ca',
-    'fr-ch', 'fr', 'fy', 'gd', 'gl', 'gom-latn', 'he', 'hi', 'hr',
-    'hu', 'hy-am', 'id', 'is', 'it', 'ja', 'jv', 'ka', 'kk', 'km', 'kn',
-    'ko', 'ky', 'lb', 'lo', 'lt', 'lv', 'me', 'mi', 'mk', 'ml', 'mr', 'ms-my',
-    'ms', 'my', 'nb', 'ne', 'nl-be', 'nl', 'nn', 'pa-in', 'pl', 'pt-br',
-    'pt', 'ro', 'ru', 'sd', 'se', 'si', 'sk', 'sl', 'sq', 'sr-cyrl', 'sr',
-    'ss', 'sv', 'sw', 'ta', 'te', 'tet', 'th', 'tl-ph', 'tlh', 'tr', 'tzl',
-    'tzm-latn', 'tzm', 'uk', 'ur', 'uz-latn', 'uz', 'vi', 'x-pseudo', 'yo', 'zh-cn', 'zh-hk', 'zh-tw'
-  ];
   pickerMode = 'daytimePicker';
 
   date: Dayjs;
@@ -223,36 +108,9 @@ export class DemoComponent implements OnInit {
     this.isAtTop = document.body.scrollTop === 0;
   }
 
-  modeChanged(mode) {
-    this.pickerMode = mode;
-    this.config.hideInputContainer = false;
-    this.config.inputElementContainer = undefined;
-    this.formGroup = this.buildForm();
-    this.formGroup.get('datePicker').setValue(this.date);
-
-    this.gaService.emitEvent('Navigation', mode);
-  }
-
   validatorsChanged() {
     this.formGroup.get('datePicker').updateValueAndValidity();
   }
-
-  refreshDemo() {
-    this.showDemo = false;
-    setTimeout(() => {
-      this.showDemo = true;
-    });
-  }
-
-  configChanged(change: string = 'N/A', value: any = 'N/A') {
-    this.config = {...this.config};
-
-    this.gaService.emitEvent('ConfigChange', change, value);
-
-    if (change === 'locale') {
-      this.refreshDemo();
-    }
-  };
 
   openCalendar() {
     if (this.dateComponent) {
@@ -278,63 +136,7 @@ export class DemoComponent implements OnInit {
     console.info('closed');
   }
 
-  isValidConfig(key: string): boolean {
-    switch (this.pickerMode) {
-      case 'dayInline':
-        return [
-          ...DAY_CALENDAR_OPTION_KEYS
-        ].indexOf(key) > -1;
-      case 'monthInline':
-        return [
-          ...MONTH_CALENDAR_OPTION_KEYS
-        ].indexOf(key) > -1;
-      case 'timeInline':
-        return [
-          ...TIME_SELECT_OPTION_KEYS
-        ].indexOf(key) > -1;
-      case 'daytimeInline':
-        return [
-          ...DAY_TIME_CALENDAR_OPTION_KEYS
-        ].indexOf(key) > -1;
-      case 'dayPicker':
-        return [
-          ...DAY_PICKER_OPTION_KEYS,
-          ...DAY_CALENDAR_OPTION_KEYS
-        ].indexOf(key) > -1;
-      case 'dayDirective':
-      case 'dayDirectiveReactiveMenu':
-        return [
-          ...DAY_PICKER_DIRECTIVE_OPTION_KEYS,
-          ...DAY_CALENDAR_OPTION_KEYS
-        ].indexOf(key) > -1;
-      case 'monthPicker':
-        return [
-          ...DAY_PICKER_OPTION_KEYS,
-          ...MONTH_CALENDAR_OPTION_KEYS
-        ].indexOf(key) > -1;
-      case 'monthDirective':
-        return [
-          ...DAY_PICKER_DIRECTIVE_OPTION_KEYS,
-          ...MONTH_CALENDAR_OPTION_KEYS
-        ].indexOf(key) > -1;
-      case 'timePicker':
-      case 'timeDirective':
-        return [
-          ...TIME_PICKER_OPTION_KEYS,
-          ...TIME_SELECT_OPTION_KEYS
-        ].indexOf(key) > -1;
-      case 'daytimePicker':
-      case 'daytimeDirective':
-        return [
-          ...DAY_TIME_PICKER_OPTION_KEYS,
-          ...DAY_TIME_CALENDAR_OPTION_KEYS
-        ].indexOf(key) > -1;
-      default:
-        return true;
-    }
-  }
-
-  log(item) {
+  log(_) {
     // console.info(item);
   }
 

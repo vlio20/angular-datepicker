@@ -32,9 +32,9 @@ export class DatePickerService {
     hideOnOutsideClick: true,
   };
 
-  constructor(private utilsService: UtilsService,
-              private timeSelectService: TimeSelectService,
-              private daytimeCalendarService: DayTimeCalendarService) {
+  constructor(private readonly utilsService: UtilsService,
+              private readonly timeSelectService: TimeSelectService,
+              private readonly daytimeCalendarService: DayTimeCalendarService) {
   }
 
   // todo:: add unit tests
