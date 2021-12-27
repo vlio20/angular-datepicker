@@ -61,7 +61,7 @@ const MONTH_CALENDAR_OPTION_KEYS = [
   'numOfMonthRows',
   ...GLOBAL_OPTION_KEYS
 ];
-const DAY_CALENDAR_OPTION_KEYS = [
+const DAY_CALENDAR_OPTION_KEYS = new Set([
   'firstDayOfWeek',
   'max',
   'maxValidation',
@@ -78,7 +78,7 @@ const DAY_CALENDAR_OPTION_KEYS = [
   'unSelectOnClick',
   'moveCalendarTo',
   ...MONTH_CALENDAR_OPTION_KEYS
-];
+]);
 const TIME_SELECT_SHARED_OPTION_KEYS = [
   'hours12Format',
   'hours24Format',
@@ -100,6 +100,7 @@ const TIME_SELECT_OPTION_KEYS = [
   ...TIME_SELECT_SHARED_OPTION_KEYS
 ];
 const DAY_TIME_CALENDAR_OPTION_KEYS = [
+  ...DAY_TIME_PICKER_OPTION_KEYS,
   ...DAY_CALENDAR_OPTION_KEYS,
   ...TIME_SELECT_SHARED_OPTION_KEYS
 ];
