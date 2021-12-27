@@ -110,9 +110,6 @@ import {TimeDirectiveDemoComponent} from './demo/date-pickers/time/time-directiv
     TimeInlineDemoComponent,
     TimeDirectiveDemoComponent
   ],
-  entryComponents: [
-    DatePickerComponent
-  ],
   providers: [GaService],
   bootstrap: [DemoRootComponent]
 })

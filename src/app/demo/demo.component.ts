@@ -13,7 +13,6 @@ import {ISelectionEvent} from '../../../projects/ng2-date-picker/src/lib/common/
 @Component({
   selector: 'dp-demo',
   templateUrl: './demo.component.html',
-  entryComponents: [DatePickerComponent],
   styleUrls: ['./demo.component.less']
 })
 export class DemoComponent implements OnInit {
