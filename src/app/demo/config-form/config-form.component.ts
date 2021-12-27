@@ -61,7 +61,7 @@ const MONTH_CALENDAR_OPTION_KEYS = [
   'numOfMonthRows',
   ...GLOBAL_OPTION_KEYS
 ];
-const DAY_CALENDAR_OPTION_KEYS = [
+const DAY_CALENDAR_OPTION_KEYS = new Set([
   'firstDayOfWeek',
   'max',
   'maxValidation',
@@ -78,7 +78,7 @@ const DAY_CALENDAR_OPTION_KEYS = [
   'unSelectOnClick',
   'moveCalendarTo',
   ...MONTH_CALENDAR_OPTION_KEYS
-];
+]);
 const TIME_SELECT_SHARED_OPTION_KEYS = [
   'hours12Format',
   'hours24Format',
@@ -100,6 +100,7 @@ const TIME_SELECT_OPTION_KEYS = [
   ...TIME_SELECT_SHARED_OPTION_KEYS
 ];
 const DAY_TIME_CALENDAR_OPTION_KEYS = [
+  ...DAY_TIME_PICKER_OPTION_KEYS,
   ...DAY_CALENDAR_OPTION_KEYS,
   ...TIME_SELECT_SHARED_OPTION_KEYS
 ];
@@ -279,52 +280,52 @@ export class ConfigFormComponent implements OnInit {
       case 'dayInline':
         return [
           ...DAY_CALENDAR_OPTION_KEYS
-        ].indexOf(key) > -1;
+        ].includes(key);
       case 'monthInline':
         return [
           ...MONTH_CALENDAR_OPTION_KEYS
-        ].indexOf(key) > -1;
+        ].includes(key);
       case 'timeInline':
         return [
           ...TIME_SELECT_OPTION_KEYS
-        ].indexOf(key) > -1;
+        ].includes(key);
       case 'daytimeInline':
         return [
           ...DAY_TIME_CALENDAR_OPTION_KEYS
-        ].indexOf(key) > -1;
+        ].includes(key);
       case 'dayPicker':
         return [
           ...DAY_PICKER_OPTION_KEYS,
           ...DAY_CALENDAR_OPTION_KEYS
-        ].indexOf(key) > -1;
+        ].includes(key);
       case 'dayDirective':
       case 'dayDirectiveReactiveMenu':
         return [
           ...DAY_PICKER_DIRECTIVE_OPTION_KEYS,
           ...DAY_CALENDAR_OPTION_KEYS
-        ].indexOf(key) > -1;
+        ].includes(key);
       case 'monthPicker':
         return [
           ...DAY_PICKER_OPTION_KEYS,
           ...MONTH_CALENDAR_OPTION_KEYS
-        ].indexOf(key) > -1;
+        ].includes(key);
       case 'monthDirective':
         return [
           ...DAY_PICKER_DIRECTIVE_OPTION_KEYS,
           ...MONTH_CALENDAR_OPTION_KEYS
-        ].indexOf(key) > -1;
+        ].includes(key);
       case 'timePicker':
       case 'timeDirective':
         return [
           ...TIME_PICKER_OPTION_KEYS,
           ...TIME_SELECT_OPTION_KEYS
-        ].indexOf(key) > -1;
+        ].includes(key);
+      case 'daytime':
       case 'daytimePicker':
       case 'daytimeDirective':
         return [
-          ...DAY_TIME_PICKER_OPTION_KEYS,
           ...DAY_TIME_CALENDAR_OPTION_KEYS
-        ].indexOf(key) > -1;
+        ].includes(key);
       default:
         return true;
     }

@@ -4,7 +4,9 @@ import {IMonthCalendarConfig} from '../month-calendar/month-calendar-config';
 import {ITimeSelectConfig} from '../time-select/time-select-config.model';
 import {ElementRef} from '@angular/core';
 
-export interface IDatePickerDirectiveConfig extends IDayCalendarConfig, IMonthCalendarConfig, ITimeSelectConfig {
+export interface IDatePickerDirectiveConfig extends Omit<IDayCalendarConfig, 'allowMultiSelect'>,
+                                                    Omit<IMonthCalendarConfig, 'allowMultiSelect'>,
+                                                    ITimeSelectConfig {
   closeOnSelect?: boolean;
   closeOnSelectDelay?: number;
   onOpenDelay?: number;

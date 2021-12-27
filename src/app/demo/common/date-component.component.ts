@@ -2,8 +2,6 @@ import {INavEvent} from '../../../../projects/ng2-date-picker/src/lib/common/mod
 import {
   DatePickerComponent,
   DatePickerDirective,
-  IDay,
-  ISelectionEvent
 } from '../../../../projects/ng2-date-picker/src/public-api';
 import {Directive, ViewChild} from '@angular/core';
 import {FormControl, ValidatorFn, Validators} from '@angular/forms';
