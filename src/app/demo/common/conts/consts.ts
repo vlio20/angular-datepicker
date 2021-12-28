@@ -4,7 +4,6 @@ export const DEF_CONF: IDatePickerConfig = {
   firstDayOfWeek: 'su',
   monthFormat: 'MMM, YYYY',
   disableKeypress: false,
-  allowMultiSelect: false,
   closeOnSelect: undefined,
   closeOnSelectDelay: 100,
   openOnFocus: true,

@@ -21,7 +21,8 @@
               "src/favicon.ico"
             ],
             "styles": [
-              "src/styles.less"
+              "src/styles.less",
+              "node_modules/@angular/cdk/overlay-prebuilt.css"
             ],
             "scripts": [],
             "vendorChunk": true,
