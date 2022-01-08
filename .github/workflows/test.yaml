@@ -18,7 +18,7 @@ jobs:
             ${{ runner.os }}-node-
 
       - uses: browser-actions/setup-chrome@latest
-      - run: chrome --versio
+      - run: chrome --version
 
       - uses: nanasess/setup-chromedriver@master
       - run: |
