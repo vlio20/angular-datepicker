@@ -20,6 +20,7 @@ jobs:
       - uses: browser-actions/setup-chrome@latest
         with:
           chrome-version: stable
+        run: chrome --version
 
       - uses: nanasess/setup-chromedriver@master
       - run: |
