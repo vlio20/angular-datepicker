@@ -17,6 +17,9 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
 
+      - uses: browser-actions/setup-chrome@latest
+      - run: chrome --versio
+
       - uses: nanasess/setup-chromedriver@master
       - run: |
           export DISPLAY=:99
