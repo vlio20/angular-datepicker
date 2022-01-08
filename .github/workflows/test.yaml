@@ -18,7 +18,6 @@ jobs:
             ${{ runner.os }}-node-
 
       - uses: browser-actions/setup-chrome@latest
-      - run: chrome --version
         with:
           chrome-version: stable
 
