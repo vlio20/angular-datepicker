@@ -19,6 +19,8 @@ jobs:
 
       - uses: browser-actions/setup-chrome@latest
       - run: chrome --version
+        with:
+          chrome-version: stable
 
       - uses: nanasess/setup-chromedriver@master
       - run: |
