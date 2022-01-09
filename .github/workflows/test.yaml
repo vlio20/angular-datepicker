@@ -22,11 +22,11 @@ jobs:
           chrome-version: stable
       - run: chrome --version
 
-#      - uses: nanasess/setup-chromedriver@master
-#      - run: |
-#          export DISPLAY=:99
-#          chromedriver --url-base=/wd/hub &
-#          sudo Xvfb -ac :99 -screen 0 1280x1024x16 > /dev/null 2>&1 & # optional
+      - uses: nanasess/setup-chromedriver@master
+      - run: |
+          export DISPLAY=:99
+          chromedriver --url-base=/wd/hub &
+          sudo Xvfb -ac :99 -screen 0 1280x1024x16 > /dev/null 2>&1 & # optional
       - name: Use Node.js
         uses: actions/setup-node@v1
         with:

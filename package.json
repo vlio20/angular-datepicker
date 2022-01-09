@@ -14,7 +14,7 @@
     "test:ci:lib": "ng test ng2-date-picker --watch=true --browsers=ChromeHeadless",
     "lint": "ng lint",
     "lint:fix": "ng lint --fix",
-    "e2e": "ng e2e --port 3200 --webdriverUpdate=false",
+    "e2e": "ng e2e --port 3200",
     "e2e:quick": "ng e2e --dev-server-target --webdriverUpdate=false",
     "e2e:headless": "HEADLESS=true ng e2e",
     "build:index": "node build.js",
