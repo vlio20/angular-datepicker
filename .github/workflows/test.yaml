@@ -17,24 +17,14 @@ jobs:
 
       - uses: actions/checkout@v2
 
-#      - name: Cache node modules
-#        uses: actions/cache@v1
-#        with:
-#          path: ~/.npm
-#          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-#          restore-keys: |
-#            ${{ runner.os }}-node-
-#
-#      - uses: browser-actions/setup-chrome@latest
-#        with:
-#          chrome-version: stable
-#      - run: chrome --version
+      - name: Cache node modules
+        uses: actions/cache@v1
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
 
-#      - uses: nanasess/setup-chromedriver@master
-#      - run: |
-#          export DISPLAY=:99
-#          chromedriver --url-base=/wd/hub &
-#          sudo Xvfb -ac :99 -screen 0 1280x1024x16 > /dev/null 2>&1 & # optional
       - name: Use Node.js
         uses: actions/setup-node@v1
         with:
