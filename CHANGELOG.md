@@ -1,7 +1,7 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-# [13.1.1] (2022-01-08)
+# [13.1.1] (2022-01-09)
 
 # Bug Fixes
 - Error "require is not defined" ([581](https://github.com/vlio20/angular-datepicker/pull/581)) closes [#580](https://github.com/vlio20/angular-datepicker/issues/580)
