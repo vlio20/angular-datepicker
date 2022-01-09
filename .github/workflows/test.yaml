@@ -9,8 +9,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: testing chrome version
-        run: chrome --version
 
       - name: Cache node modules
         uses: actions/cache@v1
@@ -34,6 +32,10 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 14
+
+
+      - name: testing chrome version
+        run: chrome --version
 
       - name: install deps
         run: npm install
