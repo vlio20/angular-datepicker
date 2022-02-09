@@ -2,6 +2,7 @@
   "name": "ng2-date-picker",
   "version": "13.1.1",
   "author": "Vlad Ioffe",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/vlio20/angular-datepicker.git"
