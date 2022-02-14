@@ -10,8 +10,8 @@
       ],
       "parserOptions": {
         "project": [
-          "projects/ng2-datepicker/tsconfig.lib.json",
-          "projects/ng2-datepicker/tsconfig.spec.json"
+          "projects/ng2-date-picker/tsconfig.lib.json",
+          "projects/ng2-date-picker/tsconfig.spec.json"
         ],
         "createDefaultProgram": true
       },
