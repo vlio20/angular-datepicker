@@ -36,7 +36,7 @@ const DAY_PICKER_DIRECTIVE_OPTION_KEYS = [
   ...PICKER_OPTION_KEYS
 ];
 const DAY_PICKER_OPTION_KEYS = [
-  ...DAY_PICKER_DIRECTIVE_OPTION_KEYS
+  ...DAY_PICKER_DIRECTIVE_OPTION_KEYS,
 ];
 const DAY_TIME_PICKER_OPTION_KEYS = [
   'moveCalendarTo',
@@ -68,6 +68,7 @@ const DAY_CALENDAR_OPTION_KEYS = new Set([
   'min',
   'minValidation',
   'monthFormat',
+  'dateRange',
   'weekdayNames',
   'showNearMonthDays',
   'showWeekNumbers',
@@ -159,6 +160,7 @@ export class ConfigFormComponent implements OnInit {
   @Output() onDisplayDateChange = new EventEmitter<Dayjs | string>();
   @Output() onMaterialThemeChange = new EventEmitter<boolean>();
   @Output() onDisabledChange = new EventEmitter<boolean>();
+  @Output() onDateRangePickerChange = new EventEmitter<boolean>();
   @Output() onRequireValidationChange = new EventEmitter<boolean>();
   @Output() onMinValidationChange = new EventEmitter<Dayjs>();
   @Output() onMaxValidationChange = new EventEmitter<Dayjs>();
@@ -175,6 +177,7 @@ export class ConfigFormComponent implements OnInit {
   displayDate = new FormControl(null);
   material = new FormControl(true);
   disabled = new FormControl(false);
+  dateRangePicker = new FormControl(false);
   requireValidation = new FormControl(false);
   minValidation = new FormControl();
   maxValidation = new FormControl();
@@ -326,6 +329,10 @@ export class ConfigFormComponent implements OnInit {
         return [
           ...DAY_TIME_CALENDAR_OPTION_KEYS
         ].includes(key);
+      case 'dateRange':
+        return [
+          ...DAY_PICKER_OPTION_KEYS
+        ].includes(key);
       default:
         return true;
     }
@@ -346,6 +353,10 @@ export class ConfigFormComponent implements OnInit {
 
     this.disabled.valueChanges.subscribe((val) => {
       this.onDisabledChange.emit(val);
+    });
+
+    this.dateRangePicker.valueChanges.subscribe((val) => {
+      this.onDateRangePickerChange.emit(val);
     });
 
     this.requireValidation.valueChanges.subscribe((val) => {

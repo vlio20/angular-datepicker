@@ -37,6 +37,28 @@
       </div>
     </div>
 
+    <div *ngIf="isValidConfig('dateRange')" class="dp-option">
+      <span class="dp-option-header">
+        Date Range Picker (dateRangePicker):
+      </span>
+      <div class="dp-option-playground">
+        <label>Enabled
+          <input [formControl]="dateRangePicker"
+                 [value]="true"
+                 id="inputNotDateRangePickerRadio"
+                 name="dateRange"
+                 type="radio">
+        </label>
+        <label>Disabled
+          <input [formControl]="dateRangePicker"
+                 [value]="false"
+                 id="inputDateRangePickerRadio"
+                 name="dateRange"
+                 type="radio">
+        </label>
+      </div>
+    </div>
+
     <div *ngIf="isValidConfig('required')" class="dp-option">
       <span class="dp-option-header">
         Required Validation (required):
