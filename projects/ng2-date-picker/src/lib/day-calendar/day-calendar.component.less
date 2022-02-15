@@ -1,4 +1,4 @@
-@import '../common/styles/variables';
+@import "../common/styles/variables";
 
 & {
   dp-day-calendar {
@@ -43,12 +43,32 @@
       color: @c-white;
     }
 
-    .dp-prev-month, .dp-next-month {
+    .dp-start-date {
+      background: @c-primary !important;
+      color: @c-white !important;
+      border-radius: 100% 0 0 100% !important;
+    }
+
+    .dp-end-date {
+      background: @c-primary !important;
+      color: @c-white !important;
+      border-radius: 0 100% 100% 0 !important;
+    }
+
+    .dp-between-dates {
+      background: @c-primary !important;
+      color: @c-white !important;
+      border-radius: 0 !important;
+    }
+
+    .dp-prev-month,
+    .dp-next-month {
       opacity: 0.5;
     }
 
     .dp-hide-near-month {
-      .dp-prev-month, .dp-next-month {
+      .dp-prev-month,
+      .dp-next-month {
         visibility: hidden;
       }
     }
@@ -59,7 +79,6 @@
     }
 
     &.dp-material {
-
       .dp-calendar-weekday {
         height: @basic-height - 5px;
         width: @basic-height;

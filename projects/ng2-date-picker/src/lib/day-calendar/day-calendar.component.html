@@ -30,7 +30,7 @@
               [attr.data-date]="day.date.format(componentConfig.format)"
               [disabled]="day.disabled"
               [innerText]="getDayBtnText(day)"
-              [ngClass]="getDayBtnCssClass(day)"
+              [ngClass]="getDayBtnCssClass(day, day.date)"
               class="dp-calendar-day"
               type="button">
       </button>
