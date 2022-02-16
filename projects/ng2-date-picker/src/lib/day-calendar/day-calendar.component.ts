@@ -1,6 +1,6 @@
-import {ECalendarValue} from '../common/types/calendar-value-enum';
-import {SingleCalendarValue} from '../common/types/single-calendar-value';
-import {ECalendarMode} from '../common/types/calendar-mode-enum';
+import { ECalendarValue } from '../common/types/calendar-value-enum';
+import { SingleCalendarValue } from '../common/types/single-calendar-value';
+import { ECalendarMode } from '../common/types/calendar-mode-enum';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -16,11 +16,11 @@ import {
   SimpleChanges,
   ViewEncapsulation
 } from '@angular/core';
-import {DayCalendarService} from './day-calendar.service';
+import { DayCalendarService } from './day-calendar.service';
 
-import {Dayjs, UnitType} from 'dayjs';
-import {IDayCalendarConfig, IDayCalendarConfigInternal} from './day-calendar-config.model';
-import {IDay} from './day.model';
+import { Dayjs, UnitType } from 'dayjs';
+import { IDayCalendarConfig, IDayCalendarConfigInternal } from './day-calendar-config.model';
+import { IDay } from './day.model';
 import {
   ControlValueAccessor,
   FormControl,
@@ -29,13 +29,13 @@ import {
   ValidationErrors,
   Validator
 } from '@angular/forms';
-import {CalendarValue} from '../common/types/calendar-value';
-import {UtilsService} from '../common/services/utils/utils.service';
-import {IMonthCalendarConfig} from '../month-calendar/month-calendar-config';
-import {IMonth} from '../month-calendar/month.model';
-import {DateValidator} from '../common/types/validator.type';
-import {INavEvent} from '../common/models/navigation-event.model';
-import {dayjsRef} from '../common/dayjs/dayjs.ref';
+import { CalendarValue } from '../common/types/calendar-value';
+import { UtilsService } from '../common/services/utils/utils.service';
+import { IMonthCalendarConfig } from '../month-calendar/month-calendar-config';
+import { IMonth } from '../month-calendar/month.model';
+import { DateValidator } from '../common/types/validator.type';
+import { INavEvent } from '../common/models/navigation-event.model';
+import { dayjsRef } from '../common/dayjs/dayjs.ref';
 import { IDateRange } from '../common/models/date.model';
 
 
@@ -94,6 +94,7 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
     moveCalendarTo: this.moveCalendarTo.bind(this),
     toggleCalendarMode: this.toggleCalendarMode.bind(this)
   };
+  hoveredEndDate: IDay = null;
 
   constructor(
     public readonly dayCalendarService: DayCalendarService,
@@ -244,6 +245,7 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
       }
 
       this.dateRange.to = day.date;
+      this.hoveredEndDate = null;
       this.onDateRangeSelect.emit(this.dateRange);
 
       return;
@@ -267,9 +269,10 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
       'dp-prev-month': day.prevMonth,
       'dp-next-month': day.nextMonth,
       'dp-current-day': day.currentDay,
-      'dp-start-date': this.dateRangePicker && Boolean(this.dateRange) && Boolean(this.dateRange.from) && date.isSame(this.dateRange.from, 'day'),
-      'dp-end-date': this.dateRangePicker && Boolean(this.dateRange) && Boolean(this.dateRange.to) && date.isSame(this.dateRange.to, 'day'),
-      'dp-between-dates': this.dateRangePicker && Boolean(this.dateRange) && Boolean(this.dateRange.from) && Boolean(this.dateRange.to) && date.isBetween(this.dateRange.from, this.dateRange.to, 'days', '()'),
+      'dp-start-date': this.dateRangePicker && Boolean(this.dateRange?.from) && date.isSame(this.dateRange.from, 'day'),
+      'dp-end-date': this.dateRangePicker && (this.dateRange?.to || this.hoveredEndDate) && date.isSame((this.dateRange.to || this.hoveredEndDate.date), 'day'),
+      'dp-between-dates': this.dateRangePicker && (this.dateRange?.from && (this.dateRange?.to || this.hoveredEndDate)) && date.isBetween(this.dateRange.from, (this.dateRange?.to || this.hoveredEndDate.date), 'days', '()'),
+      'dp-hover': Boolean(this.hoveredEndDate)
     };
     const customCssClass: string = this.dayCalendarService.getDayBtnCssClass(this.componentConfig, day.date);
     if (customCssClass) {
@@ -277,6 +280,12 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
     }
 
     return cssClasses;
+  }
+
+  dayHovered(day: IDay): void {
+    if (this.dateRange?.from) {
+      this.hoveredEndDate = day;
+    }
   }
 
   onLeftNavClick() {

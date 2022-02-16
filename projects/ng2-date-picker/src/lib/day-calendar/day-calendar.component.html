@@ -31,6 +31,7 @@
               [disabled]="day.disabled"
               [innerText]="getDayBtnText(day)"
               [ngClass]="getDayBtnCssClass(day, day.date)"
+              (mouseenter)="dayHovered(day)"
               class="dp-calendar-day"
               type="button">
       </button>
