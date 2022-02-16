@@ -283,7 +283,7 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
   }
 
   dayHovered(day: IDay): void {
-    if (this.dateRange?.from) {
+    if (this.dateRange?.from && !this.dateRange.to) {
       this.hoveredEndDate = day;
     }
   }

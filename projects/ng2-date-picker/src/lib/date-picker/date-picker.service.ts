@@ -1,15 +1,15 @@
-import {EventEmitter, Injectable} from '@angular/core';
-import {IDatePickerConfig, IDatePickerConfigInternal} from './date-picker-config.model';
+import { EventEmitter, Injectable } from '@angular/core';
+import { IDatePickerConfig, IDatePickerConfigInternal } from './date-picker-config.model';
 
-import {UtilsService} from '../common/services/utils/utils.service';
-import {IDayCalendarConfig} from '../day-calendar/day-calendar-config.model';
-import {TimeSelectService} from '../time-select/time-select.service';
-import {DayTimeCalendarService} from '../day-time-calendar/day-time-calendar.service';
-import {ITimeSelectConfig} from '../time-select/time-select-config.model';
-import {CalendarMode} from '../common/types/calendar-mode';
-import {Dayjs} from 'dayjs';
-import {IDayTimeCalendarConfig} from '../day-time-calendar/day-time-calendar-config.model';
-import {ConnectionPositionPair} from '@angular/cdk/overlay';
+import { UtilsService } from '../common/services/utils/utils.service';
+import { IDayCalendarConfig } from '../day-calendar/day-calendar-config.model';
+import { TimeSelectService } from '../time-select/time-select.service';
+import { DayTimeCalendarService } from '../day-time-calendar/day-time-calendar.service';
+import { ITimeSelectConfig } from '../time-select/time-select-config.model';
+import { CalendarMode } from '../common/types/calendar-mode';
+import { Dayjs } from 'dayjs';
+import { IDayTimeCalendarConfig } from '../day-time-calendar/day-time-calendar-config.model';
+import { ConnectionPositionPair } from '@angular/cdk/overlay';
 
 @Injectable({
   providedIn: 'root'
@@ -33,8 +33,8 @@ export class DatePickerService {
   };
 
   constructor(private readonly utilsService: UtilsService,
-              private readonly timeSelectService: TimeSelectService,
-              private readonly daytimeCalendarService: DayTimeCalendarService) {
+    private readonly timeSelectService: TimeSelectService,
+    private readonly daytimeCalendarService: DayTimeCalendarService) {
   }
 
   // todo:: add unit tests
@@ -107,6 +107,28 @@ export class DatePickerService {
     return datesStrArr.every(date => this.utilsService.isDateValid(date, config.format));
   }
 
+  isValidRange(value: string, config: IDatePickerConfig): { from: boolean, fromDate: string, to: boolean, toDate: string } {
+    const DATES: string[] = [];
+
+    if (!config.format.includes(' - ')) {
+      DATES.push(...value.split(' - '));
+    } else {
+      DATES.push(value.slice(0, config.format.length));
+      DATES.push(value.slice(config.format.length + 3));
+    }
+
+
+    const RESULT = {
+      from: this.isValidInputDateValue(DATES[0], config),
+      fromDate: DATES[0],
+      to: this.isValidInputDateValue(DATES[1], config),
+      toDate: DATES[1]
+    }
+
+    return RESULT;
+  }
+
+
   // todo:: add unit tests
   convertInputValueToDayjsArray(value: string, config: IDatePickerConfig): Dayjs[] {
     value = value ? value : '';
@@ -115,14 +137,14 @@ export class DatePickerService {
     return this.utilsService.convertToDayjsArray(datesStrArr, config);
   }
 
-  getOverlayPosition({drops, opens}: IDatePickerConfig):  ConnectionPositionPair[] | undefined {
+  getOverlayPosition({ drops, opens }: IDatePickerConfig): ConnectionPositionPair[] | undefined {
     if (!drops && !opens) {
       return undefined;
     }
 
     return [{
       originX: opens ? opens === 'left' ? 'start' : 'end' : 'start',
-      originY:  drops ? drops === 'up' ? 'top' : 'bottom' : 'bottom',
+      originY: drops ? drops === 'up' ? 'top' : 'bottom' : 'bottom',
       overlayX: opens ? opens === 'left' ? 'start' : 'end' : 'start',
       overlayY: drops ? drops === 'up' ? 'bottom' : 'top' : 'top',
     }];
