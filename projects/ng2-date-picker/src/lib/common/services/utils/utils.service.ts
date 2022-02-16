@@ -1,14 +1,14 @@
-import {ECalendarValue} from '../../types/calendar-value-enum';
-import {SingleCalendarValue} from '../../types/single-calendar-value';
-import {ElementRef, Injectable} from '@angular/core';
+import { ECalendarValue } from '../../types/calendar-value-enum';
+import { SingleCalendarValue } from '../../types/single-calendar-value';
+import { ElementRef, Injectable } from '@angular/core';
 
-import {Dayjs, UnitType} from 'dayjs';
-import {CalendarValue} from '../../types/calendar-value';
-import {IDate} from '../../models/date.model';
-import {CalendarMode} from '../../types/calendar-mode';
-import {DateValidator} from '../../types/validator.type';
-import {ICalendarInternal} from '../../models/calendar.model';
-import {dayjsRef} from '../../dayjs/dayjs.ref';
+import { Dayjs, UnitType } from 'dayjs';
+import { CalendarValue } from '../../types/calendar-value';
+import { IDate, IDateRange } from '../../models/date.model';
+import { CalendarMode } from '../../types/calendar-mode';
+import { DateValidator } from '../../types/validator.type';
+import { ICalendarInternal } from '../../models/calendar.model';
+import { dayjsRef } from '../../dayjs/dayjs.ref';
 
 export interface DateLimits {
   minDate?: SingleCalendarValue;
@@ -56,9 +56,9 @@ export class UtilsService {
 
   // todo:: add unit test
   getDefaultDisplayDate(current: Dayjs,
-                        selected: Dayjs[],
-                        allowMultiSelect: boolean,
-                        minDate: Dayjs): Dayjs {
+    selected: Dayjs[],
+    allowMultiSelect: boolean,
+    minDate: Dayjs): Dayjs {
     if (current) {
       return dayjsRef(current.toDate());
     } else if (minDate && minDate.isAfter(dayjsRef())) {
@@ -97,7 +97,7 @@ export class UtilsService {
 
   // todo:: add unit test
   convertToDayjsArray(value: CalendarValue,
-                      config: { allowMultiSelect?: boolean, format?: string }): Dayjs[] {
+    config: { allowMultiSelect?: boolean, format?: string }): Dayjs[] {
     let retVal: Dayjs[];
     switch (this.getInputType(value, config.allowMultiSelect)) {
       case (ECalendarValue.String):
@@ -121,8 +121,8 @@ export class UtilsService {
 
   // todo:: add unit test
   convertFromDayjsArray(format: string,
-                        value: Dayjs[],
-                        convertTo: ECalendarValue): CalendarValue {
+    value: Dayjs[],
+    convertTo: ECalendarValue): CalendarValue {
     switch (convertTo) {
       case (ECalendarValue.String):
         return value[0] && value[0].format(format);
@@ -159,6 +159,22 @@ export class UtilsService {
     return tmpVal.filter(Boolean).join(' | ');
   }
 
+  convertRangeToString(range: IDateRange, format: string): string {
+    if (range) {
+      let result = '';
+
+      if (range.from) {
+        result += this.convertToString(range.from, format);
+      }
+
+      if (range.to) {
+        result += ` - ${this.convertToString(range.to, format)}`;
+      }
+
+      return result;
+    }
+  }
+
   // todo:: add unit test
   clearUndefined<T>(obj: T): T {
     if (!obj) {
@@ -170,9 +186,9 @@ export class UtilsService {
   }
 
   updateSelected(isMultiple: boolean,
-                 currentlySelected: Dayjs[],
-                 date: IDate,
-                 granularity: UnitType = 'day'): Dayjs[] {
+    currentlySelected: Dayjs[],
+    date: IDate,
+    granularity: UnitType = 'day'): Dayjs[] {
     if (isMultiple) {
       return !date.selected
         ? currentlySelected.concat([date.date])
@@ -205,9 +221,9 @@ export class UtilsService {
     }
   }
 
-  createValidator({minDate, maxDate, minTime, maxTime}: DateLimits,
-                  format: string,
-                  calendarType: CalendarMode): DateValidator {
+  createValidator({ minDate, maxDate, minTime, maxTime }: DateLimits,
+    format: string,
+    calendarType: CalendarMode): DateValidator {
     let isValid: boolean;
     let value: Dayjs[];
     const validators = [];
@@ -302,9 +318,9 @@ export class UtilsService {
   }
 
   shouldShowCurrent(showGoToCurrent: boolean,
-                    mode: CalendarMode,
-                    min: Dayjs,
-                    max: Dayjs): boolean {
+    mode: CalendarMode,
+    min: Dayjs,
+    max: Dayjs): boolean {
     return showGoToCurrent &&
       mode !== 'time' &&
       this.isDateInRange(dayjsRef(), min, max);

@@ -397,9 +397,7 @@ export class DatePickerComponent implements OnChanges,
       this.onDateClick();
     }
 
-    this.inputElementValue = (this.utilsService.convertToString(range.from, this.componentConfig.format))
-      + ' <> ' + (this.utilsService.convertToString(range.to, this.componentConfig.format));
-    this.onRangeSelect.emit(range);
+    this.inputElementValue = this.utilsService.convertRangeToString(range, this.componentConfig.format);
   }
 
   onDateClick(): void {
