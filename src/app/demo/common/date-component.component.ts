@@ -1,11 +1,11 @@
-import { INavEvent } from '../../../../projects/ng2-date-picker/src/lib/common/models/navigation-event.model';
+import {INavEvent} from '../../../../projects/ng2-date-picker/src/lib/common/models/navigation-event.model';
 import {
   DatePickerComponent,
   DatePickerDirective,
 } from '../../../../projects/ng2-date-picker/src/public-api';
-import { Directive, ViewChild } from '@angular/core';
-import { FormControl, ValidatorFn, Validators } from '@angular/forms';
-import dayjs, { Dayjs } from 'dayjs';
+import {Directive, ViewChild} from '@angular/core';
+import {FormControl, ValidatorFn, Validators} from '@angular/forms';
+import dayjs, {Dayjs} from 'dayjs';
 
 @Directive()
 export abstract class DateComponent {
