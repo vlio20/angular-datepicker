@@ -1,3 +1,6 @@
+import {ECalendarValue} from '../common/types/calendar-value-enum';
+import {SingleCalendarValue} from '../common/types/single-calendar-value';
+import {ECalendarMode} from '../common/types/calendar-mode-enum';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -13,6 +16,11 @@ import {
   SimpleChanges,
   ViewEncapsulation
 } from '@angular/core';
+import {DayCalendarService} from './day-calendar.service';
+
+import {Dayjs, UnitType} from 'dayjs';
+import {IDayCalendarConfig, IDayCalendarConfigInternal} from './day-calendar-config.model';
+import {IDay} from './day.model';
 import {
   ControlValueAccessor,
   FormControl,
@@ -21,21 +29,14 @@ import {
   ValidationErrors,
   Validator
 } from '@angular/forms';
-import { Dayjs, UnitType } from 'dayjs';
-import { dayjsRef } from '../common/dayjs/dayjs.ref';
+import {CalendarValue} from '../common/types/calendar-value';
+import {UtilsService} from '../common/services/utils/utils.service';
+import {IMonthCalendarConfig} from '../month-calendar/month-calendar-config';
+import {IMonth} from '../month-calendar/month.model';
+import {DateValidator} from '../common/types/validator.type';
+import {INavEvent} from '../common/models/navigation-event.model';
+import {dayjsRef} from '../common/dayjs/dayjs.ref';
 import { IDateRange } from '../common/models/date.model';
-import { INavEvent } from '../common/models/navigation-event.model';
-import { UtilsService } from '../common/services/utils/utils.service';
-import { ECalendarMode } from '../common/types/calendar-mode-enum';
-import { CalendarValue } from '../common/types/calendar-value';
-import { ECalendarValue } from '../common/types/calendar-value-enum';
-import { SingleCalendarValue } from '../common/types/single-calendar-value';
-import { DateValidator } from '../common/types/validator.type';
-import { IMonthCalendarConfig } from '../month-calendar/month-calendar-config';
-import { IMonth } from '../month-calendar/month.model';
-import { IDayCalendarConfig, IDayCalendarConfigInternal } from './day-calendar-config.model';
-import { DayCalendarService } from './day-calendar.service';
-import { IDay } from './day.model';
 
 
 @Component({
@@ -244,8 +245,6 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
 
       this.dateRange.to = day.date;
       this.onDateRangeSelect.emit(this.dateRange);
-      // eslint-disable-next-line no-console
-      console.log(this.dateRange);
 
       return;
     }
