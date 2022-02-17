@@ -1,4 +1,4 @@
-import {IDate} from '../common/models/date.model';
+import {IDate, IDateRange} from '../common/models/date.model';
 import {UtilsService} from '../common/services/utils/utils.service';
 import {CalendarMode} from '../common/types/calendar-mode';
 import {ECalendarMode} from '../common/types/calendar-mode-enum';
@@ -93,6 +93,8 @@ export class DatePickerComponent implements OnChanges,
   @Input() maxDate: SingleCalendarValue;
   @Input() minTime: SingleCalendarValue;
   @Input() maxTime: SingleCalendarValue;
+  @Input() dateRangePicker: boolean = false;
+  @Input() dateRange: IDateRange;
   @Output() open = new EventEmitter<void>();
   @Output() close = new EventEmitter<void>();
   @Output() onChange = new EventEmitter<CalendarValue>();
@@ -100,6 +102,7 @@ export class DatePickerComponent implements OnChanges,
   @Output() onLeftNav = new EventEmitter<INavEvent>();
   @Output() onRightNav = new EventEmitter<INavEvent>();
   @Output() onSelect = new EventEmitter<ISelectionEvent>();
+  @Output() onRangeSelect: EventEmitter<IDateRange> = new EventEmitter<IDateRange>();
   @ViewChild('container') calendarContainer: ElementRef;
   @ViewChild('dayCalendar') dayCalendarRef: DayCalendarComponent;
   @ViewChild('monthCalendar') monthCalendarRef: MonthCalendarComponent;
@@ -280,6 +283,11 @@ export class DatePickerComponent implements OnChanges,
     this.cd.markForCheck();
   }
 
+  setDateRangePickerState(dateRangePicker: boolean): void {
+    this.dateRangePicker = dateRangePicker;
+    this.cd.markForCheck();
+  }
+
   init(): void {
     this.componentConfig = this.dayPickerService.getConfig(this.config, this.mode);
     this.currentDateView = this.displayDate
@@ -347,26 +355,35 @@ export class DatePickerComponent implements OnChanges,
 
   onViewDateChange(value: CalendarValue): void {
     const strVal = value ? this.utilsService.convertToString(value, this.componentConfig.format) : '';
-    if (this.dayPickerService.isValidInputDateValue(strVal, this.componentConfig)) {
-      this.selected = this.dayPickerService.convertInputValueToDayjsArray(strVal, this.componentConfig);
-      this.currentDateView = this.selected.length
-        ? this.utilsService.getDefaultDisplayDate(
-          null,
-          this.selected,
-          this.componentConfig.allowMultiSelect,
-          this.componentConfig.min
-        )
-        : this.currentDateView;
+    if (this.dateRangePicker) {
+      const VALIDATION = this.dayPickerService.isValidRange(value.toString(), this.componentConfig);
 
-      this.onSelect.emit({
-        date: strVal,
-        type: SelectEvent.INPUT,
-        granularity: null
-      })
+      this.dateRange = {
+        from: VALIDATION.from ? this.utilsService.convertToDayjs(VALIDATION.fromDate, this.componentConfig.format) : null,
+        to: VALIDATION.from && VALIDATION.to ? this.utilsService.convertToDayjs(VALIDATION.toDate, this.componentConfig.format) : null
+      }
     } else {
-      this._selected = this.utilsService
-        .getValidDayjsArray(strVal, this.componentConfig.format);
-      this.onChangeCallback(this.processOnChangeCallback(strVal), true);
+      if (this.dayPickerService.isValidInputDateValue(strVal, this.componentConfig)) {
+        this.selected = this.dayPickerService.convertInputValueToDayjsArray(strVal, this.componentConfig);
+        this.currentDateView = this.selected.length
+          ? this.utilsService.getDefaultDisplayDate(
+            null,
+            this.selected,
+            this.componentConfig.allowMultiSelect,
+            this.componentConfig.min
+          )
+          : this.currentDateView;
+
+        this.onSelect.emit({
+          date: strVal,
+          type: SelectEvent.INPUT,
+          granularity: null
+        })
+      } else {
+        this._selected = this.utilsService
+          .getValidDayjsArray(strVal, this.componentConfig.format);
+        this.onChangeCallback(this.processOnChangeCallback(strVal), true);
+      }
     }
   }
 
@@ -382,6 +399,14 @@ export class DatePickerComponent implements OnChanges,
       granularity,
       type
     });
+  }
+
+  rangeSelected(range: IDateRange, ignoreClose?: boolean) {
+    if (!ignoreClose) {
+      this.onDateClick();
+    }
+
+    this.inputElementValue = this.utilsService.convertRangeToString(range, this.componentConfig.format);
   }
 
   onDateClick(): void {

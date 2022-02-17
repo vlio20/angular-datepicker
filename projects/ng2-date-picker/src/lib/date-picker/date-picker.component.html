@@ -29,9 +29,12 @@
                          (onLeftNav)="onLeftNavClick($event)"
                          (onRightNav)="onRightNavClick($event)"
                          (onSelect)="dateSelected($event, 'day', selectEvent.SELECTION, false)"
+                         (onDateRangeSelect)="rangeSelected($event, false)"
                          *ngSwitchCase="'day'"
                          [config]="dayCalendarConfig"
                          [displayDate]="displayDate"
+                         [dateRangePicker]="dateRangePicker"
+                         [dateRange]="dateRange"
                          [ngModel]="_selected"
                          [theme]="theme">
         </dp-day-calendar>

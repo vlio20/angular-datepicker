@@ -4,7 +4,7 @@ import {ElementRef, Injectable} from '@angular/core';
 
 import {Dayjs, UnitType} from 'dayjs';
 import {CalendarValue} from '../../types/calendar-value';
-import {IDate} from '../../models/date.model';
+import {IDate, IDateRange} from '../../models/date.model';
 import {CalendarMode} from '../../types/calendar-mode';
 import {DateValidator} from '../../types/validator.type';
 import {ICalendarInternal} from '../../models/calendar.model';
@@ -121,8 +121,8 @@ export class UtilsService {
 
   // todo:: add unit test
   convertFromDayjsArray(format: string,
-                        value: Dayjs[],
-                        convertTo: ECalendarValue): CalendarValue {
+    value: Dayjs[],
+    convertTo: ECalendarValue): CalendarValue {
     switch (convertTo) {
       case (ECalendarValue.String):
         return value[0] && value[0].format(format);
@@ -157,6 +157,22 @@ export class UtilsService {
     }
 
     return tmpVal.filter(Boolean).join(' | ');
+  }
+
+  convertRangeToString(range: IDateRange, format: string): string {
+    if (range) {
+      let result = '';
+
+      if (range.from) {
+        result += this.convertToString(range.from, format);
+      }
+
+      if (range.to) {
+        result += ` - ${this.convertToString(range.to, format)}`;
+      }
+
+      return result;
+    }
   }
 
   // todo:: add unit test

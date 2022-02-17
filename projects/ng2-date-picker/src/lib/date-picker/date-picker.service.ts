@@ -107,6 +107,28 @@ export class DatePickerService {
     return datesStrArr.every(date => this.utilsService.isDateValid(date, config.format));
   }
 
+  isValidRange(value: string, config: IDatePickerConfig): { from: boolean, fromDate: string, to: boolean, toDate: string } {
+    const DATES: string[] = [];
+
+    if (!config.format.includes(' - ')) {
+      DATES.push(...value.split(' - '));
+    } else {
+      DATES.push(value.slice(0, config.format.length));
+      DATES.push(value.slice(config.format.length + 3));
+    }
+
+
+    const RESULT = {
+      from: this.isValidInputDateValue(DATES[0], config),
+      fromDate: DATES[0],
+      to: this.isValidInputDateValue(DATES[1], config),
+      toDate: DATES[1]
+    }
+
+    return RESULT;
+  }
+
+
   // todo:: add unit tests
   convertInputValueToDayjsArray(value: string, config: IDatePickerConfig): Dayjs[] {
     value = value ? value : '';
@@ -115,14 +137,14 @@ export class DatePickerService {
     return this.utilsService.convertToDayjsArray(datesStrArr, config);
   }
 
-  getOverlayPosition({drops, opens}: IDatePickerConfig):  ConnectionPositionPair[] | undefined {
+  getOverlayPosition({drops, opens}: IDatePickerConfig): ConnectionPositionPair[] | undefined {
     if (!drops && !opens) {
       return undefined;
     }
 
     return [{
       originX: opens ? opens === 'left' ? 'start' : 'end' : 'start',
-      originY:  drops ? drops === 'up' ? 'top' : 'bottom' : 'bottom',
+      originY: drops ? drops === 'up' ? 'top' : 'bottom' : 'bottom',
       overlayX: opens ? opens === 'left' ? 'start' : 'end' : 'start',
       overlayY: drops ? drops === 'up' ? 'bottom' : 'top' : 'top',
     }];
