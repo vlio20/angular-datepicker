@@ -131,10 +131,10 @@ export class DatePickerComponent implements OnChanges,
   private onOpenDelayTimeoutHandler;
 
   constructor(private readonly dayPickerService: DatePickerService,
-    private readonly elemRef: ElementRef,
-    private readonly renderer: Renderer2,
-    private readonly utilsService: UtilsService,
-    public readonly cd: ChangeDetectorRef) {
+              private readonly elemRef: ElementRef,
+              private readonly renderer: Renderer2,
+              private readonly utilsService: UtilsService,
+              public readonly cd: ChangeDetectorRef) {
   }
 
   get openOnFocus(): boolean {
