@@ -23,7 +23,7 @@ import {IDayCalendarConfig, IDayCalendarConfigInternal} from './day-calendar-con
 import {IDay} from './day.model';
 import {
   ControlValueAccessor,
-  FormControl,
+  UntypedFormControl,
   NG_VALIDATORS,
   NG_VALUE_ACCESSOR,
   ValidationErrors,
@@ -188,7 +188,7 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
   registerOnTouched(fn: any): void {
   }
 
-  validate(formControl: FormControl): ValidationErrors | any {
+  validate(formControl: UntypedFormControl): ValidationErrors | any {
     if (this.minDate || this.maxDate) {
       return this.validateFn(formControl.value);
     } else {

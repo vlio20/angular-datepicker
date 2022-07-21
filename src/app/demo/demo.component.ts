@@ -3,7 +3,7 @@ import {IDatePickerConfig} from '../../../projects/ng2-date-picker/src/lib/date-
 import {DatePickerComponent} from '../../../projects/ng2-date-picker/src/lib/date-picker/date-picker.component';
 import {DatePickerDirective} from '../../../projects/ng2-date-picker/src/lib/date-picker/date-picker.directive';
 import {Component, HostListener, OnInit, ViewChild} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormControl, UntypedFormGroup, Validators} from '@angular/forms';
 import dayjs, {Dayjs} from 'dayjs';
 import {GaService} from './common/services/ga/ga.service';
 import {ECalendarValue} from '../../../projects/ng2-date-picker/src/lib/common/types/calendar-value-enum';
@@ -91,7 +91,7 @@ export class DemoComponent implements OnInit {
     hideOnOutsideClick: true
   };
 
-  formGroup: FormGroup;
+  formGroup: UntypedFormGroup;
   isAtTop: boolean = true;
 
   constructor(private readonly gaService: GaService) {
@@ -164,9 +164,9 @@ export class DemoComponent implements OnInit {
     console.info(data);
   }
 
-  private buildForm(): FormGroup {
-    return new FormGroup({
-      datePicker: new FormControl({value: this.date, disabled: this.disabled}, [
+  private buildForm(): UntypedFormGroup {
+    return new UntypedFormGroup({
+      datePicker: new UntypedFormControl({value: this.date, disabled: this.disabled}, [
         this.required ? Validators.required : () => undefined,
         (control) => {
           return this.validationMinDate && this.config &&

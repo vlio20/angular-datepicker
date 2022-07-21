@@ -20,7 +20,7 @@ import {MonthCalendarService} from './month-calendar.service';
 import {IMonthCalendarConfig, IMonthCalendarConfigInternal} from './month-calendar-config';
 import {
   ControlValueAccessor,
-  FormControl,
+  UntypedFormControl,
   NG_VALIDATORS,
   NG_VALUE_ACCESSOR,
   ValidationErrors,
@@ -180,7 +180,7 @@ export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAc
   registerOnTouched(fn: any): void {
   }
 
-  validate(formControl: FormControl): ValidationErrors | any {
+  validate(formControl: UntypedFormControl): ValidationErrors | any {
     if (this.minDate || this.maxDate) {
       return this.validateFn(formControl.value);
     } else {

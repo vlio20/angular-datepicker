@@ -166,7 +166,6 @@
       }
     }
   },
-  "defaultProject": "ng2-date-picker-demo",
   "schematics": {
     "@schematics/angular:component": {
       "prefix": "dp",
@@ -177,6 +176,8 @@
     }
   },
   "cli": {
-    "defaultCollection": "@angular-eslint/schematics"
+    "schematicCollections": [
+      "@angular-eslint/schematics"
+    ]
   }
 }
