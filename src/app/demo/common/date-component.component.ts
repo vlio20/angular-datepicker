@@ -4,7 +4,7 @@ import {
   DatePickerDirective,
 } from '../../../../projects/ng2-date-picker/src/public-api';
 import {Directive, ViewChild} from '@angular/core';
-import {FormControl, ValidatorFn, Validators} from '@angular/forms';
+import {UntypedFormControl, ValidatorFn, Validators} from '@angular/forms';
 import dayjs, {Dayjs} from 'dayjs';
 
 @Directive()
@@ -13,7 +13,7 @@ export abstract class DateComponent {
   @ViewChild(DatePickerDirective) dateDirective: DatePickerDirective;
 
   ready: boolean = true;
-  control: FormControl;
+  control: UntypedFormControl;
 
   abstract config;
   date = dayjs();
@@ -131,8 +131,8 @@ export abstract class DateComponent {
     });
   }
 
-  protected buildForm(): FormControl {
-    return new FormControl({value: this.date, disabled: this.disabled}, this.getValidations());
+  protected buildForm(): UntypedFormControl {
+    return new UntypedFormControl({value: this.date, disabled: this.disabled}, this.getValidations());
   }
 
   private getValidations(): ValidatorFn[] {

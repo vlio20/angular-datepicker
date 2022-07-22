@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {DateComponent} from '../../../common/date-component.component';
-import {FormControl} from '@angular/forms';
+import {UntypedFormControl} from '@angular/forms';
 import {DEF_CONF} from '../../../common/conts/consts';
 import {IDatePickerConfig} from '../../../../../../projects/ng2-date-picker/src/public-api';
 
@@ -10,7 +10,7 @@ import {IDatePickerConfig} from '../../../../../../projects/ng2-date-picker/src/
   styleUrls: ['./day-time-directive-demo.component.less']
 })
 export class DayTimeDirectiveDemoComponent extends DateComponent implements OnInit {
-  control: FormControl;
+  control: UntypedFormControl;
   config: IDatePickerConfig = {
     ...DEF_CONF,
     format: 'DD-MM-YYYY HH:mm:ss'

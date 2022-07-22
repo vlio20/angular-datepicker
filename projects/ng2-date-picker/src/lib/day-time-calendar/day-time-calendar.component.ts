@@ -17,7 +17,7 @@ import {
 } from '@angular/core';
 import {
   ControlValueAccessor,
-  FormControl,
+  UntypedFormControl,
   NG_VALIDATORS,
   NG_VALUE_ACCESSOR,
   ValidationErrors,
@@ -145,7 +145,7 @@ export class DayTimeCalendarComponent implements OnInit, OnChanges, ControlValue
   registerOnTouched(fn: any): void {
   }
 
-  validate(formControl: FormControl): ValidationErrors | any {
+  validate(formControl: UntypedFormControl): ValidationErrors | any {
     if (this.minDate || this.maxDate) {
       return this.validateFn(formControl.value);
     } else {
