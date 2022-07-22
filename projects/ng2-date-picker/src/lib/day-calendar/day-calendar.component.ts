@@ -18,7 +18,7 @@ import {
 } from '@angular/core';
 import {DayCalendarService} from './day-calendar.service';
 
-import {Dayjs, UnitType} from 'dayjs';
+import {Dayjs, ManipulateType} from 'dayjs';
 import {IDayCalendarConfig, IDayCalendarConfigInternal} from './day-calendar-config.model';
 import {IDay} from './day.model';
 import {
@@ -299,7 +299,7 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
     this.onMonthSelect.emit(month);
   }
 
-  moveCalendarsBy(current: Dayjs, amount: number, granularity: UnitType = 'month') {
+  moveCalendarsBy(current: Dayjs, amount: number, granularity: ManipulateType = 'month') {
     this.currentDateView = dayjsRef(current.toDate()).add(amount, granularity);
     this.cd.markForCheck();
   }
