@@ -30,14 +30,14 @@ export class DayCalendarService {
   }
 
   getConfig(config: IDayCalendarConfig): IDayCalendarConfigInternal {
-    const _config = <IDayCalendarConfigInternal>{
+    const _config = {
       ...this.DEFAULT_CONFIG,
       ...this.utilsService.clearUndefined(config)
     };
 
     this.utilsService.convertPropsToDayjs(_config, _config.format, ['min', 'max']);
 
-    return _config;
+    return _config as IDayCalendarConfigInternal;
   }
 
   generateDaysMap(firstDayOfWeek: WeekDays) {
