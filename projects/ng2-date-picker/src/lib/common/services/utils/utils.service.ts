@@ -330,7 +330,7 @@ export class UtilsService {
     return date.isBetween(from, to, 'day', '[]');
   }
 
-  convertPropsToDayjs(obj: { [key: string]: any }, format: string, props: string[]) {
+  convertPropsToDayjs(obj: { [key: string]: any }, format: string, props: string[]): void {
     props.forEach((prop) => {
       if (obj.hasOwnProperty(prop)) {
         obj[prop] = this.convertToDayjs(obj[prop], format);

@@ -87,11 +87,11 @@ export class DatePickerService {
     };
   }
 
-  getDayTimeConfigService(pickerConfig: IDatePickerConfig): IDayTimeCalendarConfig {
+  getDayTimeConfig(pickerConfig: IDatePickerConfig): IDayTimeCalendarConfig {
     return this.daytimeCalendarService.getConfig(pickerConfig);
   }
 
-  getTimeConfigService(pickerConfig: IDatePickerConfig): ITimeSelectConfig {
+  getTimeConfig(pickerConfig: IDatePickerConfig): ITimeSelectConfig {
     return this.timeSelectService.getConfig(pickerConfig);
   }
 

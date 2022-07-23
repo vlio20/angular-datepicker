@@ -10,6 +10,7 @@ export {IDayEvent} from './lib/day-calendar/day.model';
 export {IDatePickerConfig} from './lib/date-picker/date-picker-config.model';
 export {IDatePickerDirectiveConfig} from './lib/date-picker/date-picker-directive-config.model';
 export {IMonthCalendarConfig} from './lib/month-calendar/month-calendar-config';
+export {IDayTimeCalendarConfig} from './lib/day-time-calendar/day-time-calendar-config.model';
 export {ISelectionEvent} from './lib/common/types/selection-event.model';
 export {SelectEvent} from './lib/common/types/selection-event.enum';
 

@@ -29,7 +29,7 @@ import {UtilsService} from '../common/services/utils/utils.service';
 import {IDate} from '../common/models/date.model';
 import {DayCalendarService} from '../day-calendar/day-calendar.service';
 import {TimeSelectService} from '../time-select/time-select.service';
-import {IDayTimeCalendarConfig} from './day-time-calendar-config.model';
+import {IDayTimeCalendarConfig, IDayTimeCalendarConfigInternal} from './day-time-calendar-config.model';
 import {DayTimeCalendarService} from './day-time-calendar.service';
 import {DateValidator} from '../common/types/validator.type';
 import {DayCalendarComponent} from '../day-calendar/day-calendar.component';
@@ -70,7 +70,7 @@ export class DayTimeCalendarComponent implements OnInit, OnChanges, ControlValue
   @Output() onRightNav: EventEmitter<INavEvent> = new EventEmitter();
   @ViewChild('dayCalendar') dayCalendarRef: DayCalendarComponent;
   isInited: boolean = false;
-  componentConfig: IDayTimeCalendarConfig;
+  componentConfig: IDayTimeCalendarConfigInternal;
   inputValue: CalendarValue;
   inputValueType: ECalendarValue;
   validateFn: DateValidator;
@@ -172,7 +172,7 @@ export class DayTimeCalendarComponent implements OnInit, OnChanges, ControlValue
   }
 
   dateSelected(day: IDate) {
-    this.selected = this.dayTimeCalendarService.updateDay(this.selected, day.date, this.config);
+    this.selected = this.dayTimeCalendarService.updateDay(this.selected, day.date, this.componentConfig);
     this.emitChange();
   }
 
