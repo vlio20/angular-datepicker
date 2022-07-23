@@ -1,6 +1,6 @@
 # Date Picker  
 This is a configurable date-picker build for Angular applications.  
-Supports latest (Angular 13) version. For older versions please checkout the CHANGELOG.md file.
+Supports latest (Angular 14) version. For older versions please checkout the CHANGELOG.md file.
 
 [DEMO](https://vlio20.github.io/angular-datepicker/)  
 
