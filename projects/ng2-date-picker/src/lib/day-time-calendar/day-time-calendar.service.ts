@@ -6,7 +6,7 @@ import {TimeSelectService} from '../time-select/time-select.service';
 import {IDayTimeCalendarConfig, IDayTimeCalendarConfigInternal} from './day-time-calendar-config.model';
 import {dayjsRef} from '../common/dayjs/dayjs.ref';
 import {Dayjs} from 'dayjs';
-import {IDayCalendarConfigInternal} from "../day-calendar/day-calendar-config.model";
+import {IDayCalendarConfigInternal} from '../day-calendar/day-calendar-config.model';
 
 const DAY_FORMAT = 'YYYYMMDD';
 const TIME_FORMAT = 'HH:mm:ss';
