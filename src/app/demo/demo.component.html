@@ -1,6 +1,107 @@
-<div>
-  <dp-day-time-calendar [(ngModel)]="date" [config]="config">
-  </dp-day-time-calendar>
+<div class="dp-demo-page">
+  <div class="dp-menu">
+    <h3 class="dp-menu-header">Components</h3>
+    <ul>
+      <li>
+        <a [routerLink]="['/daytimePicker']" id="daytimePickerMenu" routerLinkActive="dp-active-item">
+          Day Time Picker
+        </a>
+      </li>
+      <li>
+        <a [routerLink]="['/daytimeInline']" id="daytimeInlineMenu" routerLinkActive="dp-active-item">
+          Day Time Picker inline
+        </a>
+      </li>
+      <li>
+        <a [routerLink]="['/daytimeDirective']" id="daytimeDirectiveMenu" routerLinkActive="dp-active-item">
+          Day Time Picker directive
+        </a>
+      </li>
+      <li>
+        <a [routerLink]="['/dayPicker']" id="dayPickerMenu" routerLinkActive="dp-active-item">
+          Day Picker
+        </a>
+      </li>
+      <li>
+        <a [routerLink]="['/dayInline']" id="dayInlineMenu" routerLinkActive="dp-active-item">
+          Day Picker inline
+        </a>
+      </li>
+      <li>
+        <a [routerLink]="['/dayDirective']" id="dayDirectiveMenu" routerLinkActive="dp-active-item">
+          Day Picker directive</a>
+      </li>
+      <li>
+        <a [routerLink]="['/monthPicker']" id="monthPickerMenu" routerLinkActive="dp-active-item">
+          Month Picker
+        </a>
+      </li>
+      <li>
+        <a [routerLink]="['/monthInline']" id="monthInlineMenu" routerLinkActive="dp-active-item">
+          Month Picker inline
+        </a>
+      </li>
+      <li>
+        <a [routerLink]="['/monthDirective']" id="monthDirectiveMenu" routerLinkActive="dp-active-item">
+          Month Picker directive
+        </a>
+      </li>
+      <li>
+        <a [routerLink]="['/timePicker']" id="timePickerMenu" routerLinkActive="dp-active-item">
+          Time Picker
+        </a>
+      </li>
+      <li>
+        <a [routerLink]="['/timeInline']" id="timeInlineMenu" routerLinkActive="dp-active-item">
+          Time Picker inline
+        </a>
+      </li>
+      <li>
+        <a [routerLink]="['/timeDirective']" id="timeDirectiveMenu" routerLinkActive="dp-active-item">
+          Time Picker directive
+        </a>
+      </li>
+    </ul>
+    <div class="dp-place-holder"></div>
+  </div>
+
+  <div class="dp-main-content">
+
+    <div class="dp-toolbar">
+      <span class="dp-header">ng2-date-picker</span>
+
+      <div class="dp-github-container">
+        <a aria-label="Star vlio20/angular-datepicker on GitHub"
+           class="github-button"
+           data-show-count="true"
+           data-size="large"
+           href="https://github.com/vlio20/angular-datepicker">
+          Star
+        </a>
+      </div>
+    </div>
+
+    <div class="dp-component-wrapper">
+      <div class="dp-donation-bar">
+        <form #donateForm
+              action="https://www.paypal.com/cgi-bin/webscr"
+              class="dp-donate-btn"
+              method="post"
+              target="_blank">
+          <input name="cmd" type="hidden" value="_s-xclick">
+          <input name="hosted_button_id" type="hidden" value="8ZR2S5XYJ6WLJ">
+          <input (click)="donateClicked()" alt="PayPal - The safer, easier way to pay online!" border="0"
+                 name="submit" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" type="image">
+          <img alt="" border="0" height="1" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1">
+        </form>
+        <a href="https://opencollective.com/angular-datepicker#backers" target="_blank"
+           (click)="becomeABackerClicked()"><img src="https://opencollective.com/angular-datepicker/backers.svg?"></a>
+      </div>
+
+      <div class="dp-router-wrapper">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+
 </div>
-<p>Ng model : {{ date }}</p>
-<p>Config : {{ config | json }}</p>
