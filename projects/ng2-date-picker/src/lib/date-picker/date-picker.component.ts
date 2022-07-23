@@ -292,8 +292,8 @@ export class DatePickerComponent implements OnChanges,
           this.componentConfig.min
         );
     this.dayCalendarConfig = this.dayPickerService.getDayConfigService(this.componentConfig);
-    this.dayTimeCalendarConfig = this.dayPickerService.getDayTimeConfigService(this.componentConfig);
-    this.timeSelectConfig = this.dayPickerService.getTimeConfigService(this.componentConfig);
+    this.dayTimeCalendarConfig = this.dayPickerService.getDayTimeConfig(this.componentConfig);
+    this.timeSelectConfig = this.dayPickerService.getTimeConfig(this.componentConfig);
     this.initValidators();
     this.overlayPosition = this.dayPickerService.getOverlayPosition(this.componentConfig);
     this.origin = this.utilsService.getNativeElement(this.componentConfig.inputElementContainer);
