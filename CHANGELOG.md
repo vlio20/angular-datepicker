@@ -1,6 +1,11 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+# [14.0.1] (2022-07-23)
+
+### Bug Fixes
+- Error when min config is used as string([601](https://github.com/vlio20/angular-datepicker/pull/601)) closes [#595](https://github.com/vlio20/angular-datepicker/issues/595) - Reported by [@tomulticolaure](https://github.com/slickam)
+
 # [14.0.0] (2022-07-23) 
 
 ### Improvements
