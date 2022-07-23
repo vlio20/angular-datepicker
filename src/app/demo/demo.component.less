@@ -14,6 +14,8 @@
   }
 
   .dp-menu {
+    display: flex;
+    flex-direction: column;
     height: 100vh;
     width: @menuWidth;
     background: @c-primary;
@@ -21,6 +23,7 @@
     overflow: auto;
 
     .dp-menu-header {
+      flex-direction: column;
       padding-left: 10px;
       padding-bottom: 10px;
       color: @c-white;
@@ -174,5 +177,31 @@
     margin: 0 -20px;
     padding: 0 20px;
     box-shadow: 0px 2px 6px -4px black;
+  }
+}
+
+.rest-of-menu {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  color: white;
+
+  .host-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+    a {
+      display: flex;
+      align-items: center;
+      color: white;
+      text-decoration: none;
+
+      img {
+        width: 30px;
+        height: 30px;
+      }
+    }
   }
 }

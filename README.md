@@ -2,7 +2,7 @@
 This is a configurable date-picker build for Angular applications.  
 Supports latest (Angular 14) version. For older versions please checkout the CHANGELOG.md file.
 
-[DEMO](https://vlio20.github.io/angular-datepicker/)  
+[DEMO](https://wondrous-crostata-172891.netlify.app/)  
 
 [![npm version](https://badge.fury.io/js/ng2-date-picker.svg)](https://badge.fury.io/js/ng2-date-picker) [![Build Status](https://travis-ci.org/vlio20/angular-datepicker.svg?branch=master)](https://travis-ci.org/vlio20/angular-datepicker) [![Package Quality](http://npm.packagequality.com/shield/ng2-date-picker.svg)](http://packagequality.com/#?package=ng2-date-picker)
   
