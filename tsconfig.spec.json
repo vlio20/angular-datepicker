@@ -11,12 +11,13 @@
     ],
     "outDir": "./out-tsc/spec",
     "module": "es2020",
-    "target": "es2020",
+    "target": "ES2022",
     "baseUrl": "tsconfig.spec",
     "types": [
       "jasmine",
       "node"
-    ]
+    ],
+    "useDefineForClassFields": false
   },
   "files": [
     "src/test.ts",
