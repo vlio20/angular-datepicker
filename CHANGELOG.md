@@ -1,6 +1,16 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+# [15.0.0] (2022-12-01)
+
+### Improvements
+- Fix Lose dependency on @angular/common ([613](https://github.com/vlio20/angular-datepicker/pull/613)) closes [#615](https://github.com/vlio20/angular-datepicker/issues/615)
+
+# [15.0.0] (2022-11-25)
+
+### Improvements
+- Update to Angular 15 ([613](https://github.com/vlio20/angular-datepicker/pull/613)) closes [#610](https://github.com/vlio20/angular-datepicker/issues/610) - PR by [@HimanshuAgrahari07](https://github.com/HimanshuAgrahari07)
+
 # [14.0.1] (2022-07-23)
 
 ### Bug Fixes
