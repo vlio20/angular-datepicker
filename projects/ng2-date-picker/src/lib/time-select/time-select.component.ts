@@ -120,7 +120,16 @@ export class TimeSelectComponent implements OnInit, OnChanges, ControlValueAcces
 
   init(): void {
     this.componentConfig = this.timeSelectService.getConfig(this.config);
-    this.selected = this.selected || dayjsRef();
+
+    if (!this.selected) {
+      this.selected = dayjsRef();
+
+      if (this.componentConfig.defaultTime) {
+        const defaultTime = this.componentConfig.defaultTime;
+        this.selected = this.selected.set('hour', defaultTime.hour()).set('minute', defaultTime.minute()).set('second', defaultTime.second());
+      }
+    }
+
     this.inputValueType = this.utilsService.getInputType(this.inputValue, false);
   }
 

@@ -16,6 +16,7 @@ interface IConfig {
   showTwentyFourHours?: boolean;
   timeSeparator?: string;
   returnedValueType?: ECalendarValue;
+  defaultTime?: Dayjs
 }
 
 export interface ITimeSelectConfig extends IConfig, ICalendar {
