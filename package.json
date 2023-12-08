@@ -14,8 +14,8 @@
     "test:ci:lib": "ng test ng2-date-picker --watch=true --browsers=ChromeHeadless",
     "lint": "ng lint",
     "lint:fix": "ng lint --fix",
-    "e2e": "ng e2e --port 3200 --webdriverUpdate=false",
-    "e2e:quick": "ng e2e --dev-server-target --webdriverUpdate=false",
+    "e2e": "ng e2e --port 3200",
+    "e2e:quick": "ng e2e --dev-server-target",
     "e2e:headless": "HEADLESS=true ng e2e",
     "build:index": "node build.js",
     "build:demo": "rm -rf dist/ && ng build ng2-date-picker-demo --configuration production && npm run build:index",
@@ -77,6 +77,7 @@
     "rxjs": "^6.5.3",
     "ts-node": "^10.9.1",
     "typescript": "~5.2.2",
+    "webdriver-manager": "^12.1.9",
     "zone.js": "~0.14.2"
   },
   "angularCompilerOptions": {
