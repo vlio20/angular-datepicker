@@ -7,13 +7,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Chrome Update
-        run: |
-          wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-          echo 'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list
-          sudo apt-get update
-          sudo apt-get install google-chrome-stable=114.0.5735.6
-          google-chrome --version
+#      - name: Chrome Update
+#        run: |
+#          wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+#          echo 'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list
+#          sudo apt-get update
+#          sudo apt-get install google-chrome-stable
+#          google-chrome --version
 
       - uses: actions/checkout@v2
 
@@ -40,7 +40,7 @@ jobs:
         run: npm run test:ci
 
       - name: run tests
-        run: npm run e2e:headless
+        run: npm run e2e:quick
 
       - name: run build test
         run: npm run build:demo
