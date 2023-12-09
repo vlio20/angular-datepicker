@@ -5,8 +5,8 @@
   "license": "MIT",
   "main": "index.js",
   "scripts": {
-    "ng": "ng",
-    "start": "ng serve --o",
+    "start": "ng serve",
+    "start:open": "ng serve --o",
     "build": "ng build",
     "build:lib": "ng build ng2-date-picker",
     "test": "ng test",
