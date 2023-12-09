@@ -1,7 +1,7 @@
 import {Locator, Page} from '@playwright/test';
 
 export class DemoPage {
-    private popupSelector = '.dp-popup.dp-main';
+  private popupSelector = '.dp-popup.dp-main';
 
   dayPickerInput(): Locator {
     return this.page.locator('#picker input');
@@ -511,8 +511,8 @@ export class DemoPage {
     await this.page.locator(el).scrollIntoViewIfNeeded();
   }
 
-  clickOnDayButton(text: string) {
-    // return element(by.cssContainingText(`${this.popupSelector} .dp-calendar-day`, text)).click();
+  async clickOnDayButton(text: string): Promise<void> {
+    await this.page.locator(`${this.popupSelector} .dp-calendar-day:has-text("${text}")`).click();
   }
 
   clickOnDayButtonInline(text: string) {
@@ -525,6 +525,10 @@ export class DemoPage {
 
   clickOnMonthButtonInline(text: string) {
     // return element(by.cssContainingText(`.dp-calendar-month`, text)).click();
+  }
+
+  firstDayOfWeekSelect(): Locator {
+    return this.page.locator('#firstDayOfWeekSelect');
   }
 
   // waitUntilPresent(elem: ElementFinder) {
@@ -565,5 +569,13 @@ export class DemoPage {
     await this.page.keyboard.press('Meta+A');
     await this.page.keyboard.press('Backspace');
     await elem.fill(text);
+  }
+
+  async clearInput(elem: Locator): Promise<void> {
+    await this.setText(elem, '');
+  }
+
+  async sleep(ms: number): Promise<void> {
+    await this.page.waitForTimeout(ms);
   }
 }
