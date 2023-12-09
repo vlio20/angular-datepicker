@@ -12,11 +12,6 @@ test.describe('dpDayPicker dayPicker', () => {
   test.beforeEach(async () => {
     po = new DemoPage(page);
     await po.navigateTo();
-  });
-
-  test.beforeEach(async () => {
-    po = new DemoPage(page);
-    await po.navigateTo();
 
     await po.setText(po.dateFormatInput(), 'DD-MM-YYYY HH:mm:ss');
     await po.daytimePickerMenu().click();

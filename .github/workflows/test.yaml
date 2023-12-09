@@ -7,14 +7,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Chrome Update
-        run: |
-          wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-          echo 'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list
-          sudo apt-get update
-          sudo apt-get install google-chrome-stable
-          google-chrome --version
-
       - uses: actions/checkout@v2
 
       - name: Cache node modules
@@ -32,6 +24,9 @@ jobs:
 
       - name: install deps
         run: npm ci
+
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
 
       - name: run lint
         run: npm run lint
