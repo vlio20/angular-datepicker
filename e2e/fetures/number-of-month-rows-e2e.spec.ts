@@ -1,41 +1,46 @@
 import {DemoPage} from '../app.po';
+import {expect, Page, test} from '@playwright/test';
 
-describe('number of month rows', () => {
+test.describe('number of month rows', () => {
+  let po: DemoPage;
+  let page: Page;
 
-  let page: DemoPage;
-
-  beforeEach(async () => {
-    page = new DemoPage();
-    await page.navigateTo();
+  test.beforeAll(async ({browser}) => {
+    page = await browser.newPage();
   });
 
-  it('should make sure number of rows are changing on date-picker', async () => {
-    await page.daytimePickerMenu.click();
-    await page.dayPickerInput.click();
-    await page.dayCalendarNavHeaderBtn.click();
-    expect(await page.monthRows.count()).toEqual(3);
-
-    await page.numOfMonthRowsToggle.click();
-    await page.dayPickerInput.click();
-    await page.dayCalendarNavHeaderBtn.click();
-    expect(await page.monthRows.count()).toEqual(2);
+  test.beforeEach(async () => {
+    po = new DemoPage(page);
+    await po.navigateTo();
   });
 
-  it('should make sure number of rows are changing on month-picker', async () => {
-    await page.monthPickerMenu.click();
-    await page.monthPickerInput.click();
-    expect(await page.monthRows.count()).toEqual(3);
+  test('should make sure number of rows are changing on date-picker', async () => {
+    await po.daytimePickerMenu().click();
+    await po.dayPickerInput().click();
+    await po.dayCalendarNavHeaderBtn().click();
+    expect(await po.monthRows().count()).toEqual(3);
 
-    await page.numOfMonthRowsToggle.click();
-    await page.dayPickerInput.click();
-    expect(await page.monthRows.count()).toEqual(2);
+    await po.numOfMonthRowsToggle().click();
+    await po.dayPickerInput().click();
+    await po.dayCalendarNavHeaderBtn().click();
+    expect(await po.monthRows().count()).toEqual(2);
   });
 
-  it('should make sure number of rows are changing on month inline', async () => {
-    await page.monthInlineMenu.click();
-    expect(await page.monthRows.count()).toEqual(3);
+  test('should make sure number of rows are changing on month-picker', async () => {
+    await po.monthPickerMenu().click();
+    await po.monthPickerInput().click();
+    expect(await po.monthRows().count()).toEqual(3);
 
-    await page.numOfMonthRowsToggle.click();
-    expect(await page.monthRows.count()).toEqual(2);
+    await po.numOfMonthRowsToggle().click();
+    await po.dayPickerInput().click();
+    expect(await po.monthRows().count()).toEqual(2);
+  });
+
+  test('should make sure number of rows are changing on month inline', async () => {
+    await po.monthInlineMenu().click();
+    expect(await po.monthRows().count()).toEqual(3);
+
+    await po.numOfMonthRowsToggle().click();
+    expect(await po.monthRows().count()).toEqual(2);
   });
 });

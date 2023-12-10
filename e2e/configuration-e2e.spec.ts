@@ -1,28 +1,32 @@
 import {DemoPage} from './app.po';
+import {expect, Page, test} from '@playwright/test';
 
-describe('dpDayPicker configuration', () => {
-  let page: DemoPage;
 
-  beforeEach(async () => {
-    page = new DemoPage();
-    page.navigateTo();
+test.describe('dpDayPicker configuration', () => {
+  let po: DemoPage;
+  let page: Page;
 
-    await page.daytimePickerMenu.click();
+  test.beforeAll(async ({ browser }) => {
+    page = await browser.newPage();
   });
 
-  it('openOnClick = false, should not open picker when clicked', async () => {
-    await page.scrollIntoView(page.openOnClickRadioOff);
-    await page.openOnClickRadioOff.click();
-    await page.openOnFocusRadioOff.click();
-    await page.daytimePickerInput.click();
-    expect(await page.datePickerPopup.isPresent()).toBe(false);
+  test.beforeEach(async () => {
+    po = new DemoPage(page);
+    await po.navigateTo();
+    await po.daytimePickerMenu().click();
   });
 
-  it('openOnClick = true, should open picker when clicked', async () => {
-    await page.scrollIntoView(page.openOnClickRadioOn);
-    await page.openOnClickRadioOn.click();
-    await page.openOnFocusRadioOff.click();
-    await page.daytimePickerInput.click();
-    expect(await page.datePickerPopup.isDisplayed()).toBe(true);
+  test('openOnClick = false, should not open picker when clicked', async () => {
+    await po.openOnClickRadioOff().click();
+    await po.openOnFocusRadioOff().click();
+    await po.daytimePickerInput().click();
+    await expect(await po.datePickerPopup()).toBeHidden()
+  });
+
+  test('openOnClick = true, should open picker when clicked', async () => {
+    await po.openOnClickRadioOn().click();
+    await po.openOnFocusRadioOff().click();
+    await po.daytimePickerInput().click();
+    await expect(await po.datePickerPopup()).toBeVisible()
   });
 });

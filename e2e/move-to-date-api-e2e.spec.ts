@@ -1,36 +1,41 @@
 import {DemoPage} from './app.po';
+import {expect, Locator, Page, test} from '@playwright/test';
 
-describe('Move to date api', () => {
+test.describe('Move to date api', () => {
+  let po: DemoPage;
+  let page: Page;
 
-  let page: DemoPage;
-
-  beforeEach(async () => {
-    page = new DemoPage();
-    await page.navigateTo();
+  test.beforeAll(async ({browser}) => {
+    page = await browser.newPage();
   });
 
-  it('should move to date API on day', async () => {
-    const runner = async (menuItem, input, isPicker, cont) => {
+  test.beforeEach(async () => {
+    po = new DemoPage(page);
+    await po.navigateTo();
+  });
+
+  test('should move to date API on day', async () => {
+    const runner = async (menuItem: Locator, input: Locator | null, isPicker: boolean, cont: Locator) => {
       await menuItem.click();
-      await page.moveCalendarTo.click();
+      await po.moveCalendarTo().click();
 
       if (isPicker) {
-        input.click();
+        await input.click();
       }
 
-      expect(await cont.getText()).toContain('1987');
+      await expect(await cont.textContent()).toContain('1987');
     };
 
-    await runner(page.dayPickerMenu, page.dayPickerInput, true, page.dayCalendarNavHeaderBtn);
-    await runner(page.dayDirectiveMenu, page.dayDirectiveInput, true, page.dayCalendarNavHeaderBtn);
-    await runner(page.dayInlineMenu, null, false, page.dayCalendarNavHeaderBtnInline);
+    await runner(po.dayPickerMenu(), po.dayPickerInput(), true, po.dayCalendarNavHeaderBtn());
+    await runner(po.dayDirectiveMenu(), po.dayDirectiveInput(), true, po.dayCalendarNavHeaderBtn());
+    await runner(po.dayInlineMenu(), null, false, po.dayCalendarNavHeaderBtnInline());
 
-    await runner(page.daytimePickerMenu, page.daytimePickerInput, true, page.dayCalendarNavHeaderBtn);
-    await runner(page.daytimeDirectiveMenu, page.daytimeDirectiveInput, true, page.dayCalendarNavHeaderBtn);
-    await runner(page.daytimeInlineMenu, null, false, page.dayTimeCalendarNavHeaderBtnInline);
+    await runner(po.daytimePickerMenu(), po.daytimePickerInput(), true, po.dayCalendarNavHeaderBtn());
+    await runner(po.daytimeDirectiveMenu(), po.daytimeDirectiveInput(), true, po.dayCalendarNavHeaderBtn());
+    await runner(po.daytimeInlineMenu(), null, false, po.dayTimeCalendarNavHeaderBtnInline());
 
-    await runner(page.monthPickerMenu, page.monthPickerInput, true, page.navHeader);
-    await runner(page.monthDirectiveMenu, page.monthDirectiveInput, true, page.navHeader);
-    await runner(page.monthInlineMenu, null, false, page.monthCalendarNavHeaderInline);
+    await runner(po.monthPickerMenu(), po.monthPickerInput(), true, po.navHeader());
+    await runner(po.monthDirectiveMenu(), po.monthDirectiveInput(), true, po.navHeader());
+    await runner(po.monthInlineMenu(), null, false, po.monthCalendarNavHeaderInline());
   });
 });

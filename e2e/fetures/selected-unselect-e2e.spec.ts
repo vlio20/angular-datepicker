@@ -1,33 +1,37 @@
-import {DemoPage} from '../app.po';
-import * as dayjs from 'dayjs';
+import { DemoPage } from '../app.po';
+import { expect, Locator, Page, test } from '@playwright/test';
+import dayjs from 'dayjs';
 
-describe('dpDayPicker timePicker', () => {
+test.describe('dpDayPicker timePicker', () => {
+  let po: DemoPage;
+  let page: Page;
 
-  let page: DemoPage;
-
-  beforeEach(() => {
-    page = new DemoPage();
-    page.navigateTo();
+  test.beforeAll(async ({ browser }) => {
+    page = await browser.newPage();
   });
 
-  it('should make sure unSelectOnClick feature works as expected for day calendar', async () => {
-    const dayRunner = async (menuItem, input, isPicker) => {
+  test.beforeEach(async () => {
+    po = new DemoPage(page);
+    await po.navigateTo();
+  });
+
+  test('should make sure unSelectOnClick feature works as expected for day calendar', async () => {
+    const dayRunner = async (menuItem: Locator, input: Locator, isPicker: boolean) => {
       const date = dayjs().date(15);
       const dayClick = async () => {
         if (isPicker) {
-          await page.clickOnDayButton(date.format('DD'));
+          await po.clickOnDayButton(date.format('DD'));
         } else {
-          await page.clickOnDayButtonInline(date.format('DD'));
+          await po.clickOnDayButtonInline(date.format('DD'));
         }
       };
 
       await menuItem.click();
-      await page.enableUnselectSelected.click();
+      await po.enableUnselectSelected().click();
 
       if (isPicker) {
-        await page.scrollIntoView(page.noCloseOnSelect);
-        await page.noCloseOnSelect.click();
-        await page.clearInput(input);
+        await po.noCloseOnSelect().click();
+        await po.clearInput(input);
         await input.click();
       } else {
         await dayClick();
@@ -35,13 +39,13 @@ describe('dpDayPicker timePicker', () => {
       }
 
       await dayClick();
-      expect(await page.selectedDay.isPresent()).toEqual(true);
+      expect(await po.selectedDay()).toBeVisible();
       await dayClick();
-      expect(await page.selectedDay.isPresent()).toEqual(false);
+      expect(await po.selectedDay()).toBeHidden();
 
-      await page.clickOnBody();
+      await po.clickOnBody();
 
-      await page.disableUnselectSelected.click();
+      await po.disableUnselectSelected().click();
 
       if (isPicker) {
         await input.click();
@@ -49,57 +53,55 @@ describe('dpDayPicker timePicker', () => {
 
       await dayClick();
 
-      expect(await page.selectedDay.isPresent()).toEqual(true);
+      expect(await po.selectedDay()).toBeVisible();
 
       await dayClick();
-      expect(await page.selectedDay.isPresent()).toEqual(true);
+      expect(await po.selectedDay()).toBeVisible();
 
-      await page.enableUnselectSelected.click();
+      await po.enableUnselectSelected().click();
 
       if (isPicker) {
         await input.click();
       }
 
       await dayClick();
-      expect(await page.selectedDay.isPresent()).toEqual(false);
+      expect(await po.selectedDay()).toBeHidden();
     };
 
-    // await dayRunner(page.dayPickerMenu, page.dayPickerInput, true);
-    // await dayRunner(page.dayDirectiveMenu, page.dayDirectiveInput, true);
-    await dayRunner(page.dayInlineMenu, null, false);
+    await dayRunner(po.dayPickerMenu(), po.dayPickerInput(), true);
+    await dayRunner(po.dayDirectiveMenu(), po.dayDirectiveInput(), true);
+    await dayRunner(po.dayInlineMenu(), null, false);
   });
 
-  it('should make sure unSelectOnClick feature works as expected for month calendar', async () => {
-    const monthRunner = async (menuItem, input, isPicker) => {
+  test('should make sure unSelectOnClick feature works as expected for month calendar', async () => {
+    const monthRunner = async (menuItem: Locator, input: Locator, isPicker: boolean) => {
       const date = dayjs();
       const monthClick = async () => {
         if (isPicker) {
-          await page.clickOnMonthButton(date.format('MMM'));
+          await po.clickOnMonthButton(date.format('MMM'));
         } else {
-          await page.clickOnMonthButtonInline(date.format('MMM'));
+          await po.clickOnMonthButtonInline(date.format('MMM'));
         }
       };
 
       await menuItem.click();
-      await page.enableUnselectSelected.click();
+      await po.enableUnselectSelected().click();
 
       if (isPicker) {
-        await page.scrollIntoView(page.noCloseOnSelect);
-        await page.noCloseOnSelect.click();
-        await page.clearInput(input);
+        await po.noCloseOnSelect().click();
+        await po.clearInput(input);
         await input.click();
       } else {
-        await page.clickOnMonthButtonInline(date.format('MMM'));
+        await po.clickOnMonthButtonInline(date.format('MMM'));
       }
 
       await monthClick();
-      expect(await page.selectedMonth.isPresent()).toEqual(true);
+      expect(po.selectedMonth()).toBeVisible();
       await monthClick();
-      expect(await page.selectedMonth.isPresent()).toEqual(false);
+      expect(po.selectedMonth()).toBeHidden();
 
-      await page.clickOnBody();
-      await page.scrollIntoView(page.disableUnselectSelected);
-      await page.disableUnselectSelected.click();
+      await po.clickOnBody();
+      await po.disableUnselectSelected().click();
 
       if (isPicker) {
         await input.click();
@@ -107,23 +109,23 @@ describe('dpDayPicker timePicker', () => {
 
       await monthClick();
 
-      expect(await page.selectedMonth.isPresent()).toEqual(true);
+      expect(po.selectedMonth()).toBeVisible();
 
       await monthClick();
-      expect(await page.selectedMonth.isPresent()).toEqual(true);
+      expect(po.selectedMonth()).toBeVisible();
 
-      await page.enableUnselectSelected.click();
+      await po.enableUnselectSelected().click();
 
       if (isPicker) {
         await input.click();
       }
 
       await monthClick();
-      expect(await page.selectedMonth.isPresent()).toEqual(false);
+      expect(po.selectedMonth()).toBeHidden();
     };
 
-    await monthRunner(page.monthPickerMenu, page.monthPickerInput, true);
-    await monthRunner(page.monthDirectiveMenu, page.monthDirectiveInput, true);
-    await monthRunner(page.monthInlineMenu, null, false);
+    await monthRunner(po.monthPickerMenu(), po.monthPickerInput(), true);
+    await monthRunner(po.monthDirectiveMenu(), po.monthDirectiveInput(), true);
+    await monthRunner(po.monthInlineMenu(), null, false);
   });
 });

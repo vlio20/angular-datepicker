@@ -1,32 +1,37 @@
 import {DemoPage} from '../app.po';
+import {expect, Page, test} from '@playwright/test';
 
-describe('selected-month', () => {
-  let page: DemoPage;
+test.describe('selected-month', () => {
+  let po: DemoPage;
+  let page: Page;
 
-  beforeEach(async () => {
-    page = new DemoPage();
-    await page.navigateTo();
-
-    await page.dateFormatInput.clear();
-    await page.dateFormatInput.sendKeys('DD-MM-YYYY');
+  test.beforeAll(async ({browser}) => {
+    page = await browser.newPage();
   });
 
-  it('should work on date time picker', async () => {
-    await page.daytimePickerMenu.click();
-    await page.setInputValue(page.dateFormatInput, 'DD-MM-YYYY HH:mm:ss');
-    await page.setInputValue(page.daytimePickerInput, '10-04-2017 09:08:07');
+  test.beforeEach(async () => {
+    po = new DemoPage(page);
+    await po.navigateTo();
 
-    await page.dayCalendarNavHeaderBtn.click();
-    expect(await page.selectedMonth.getText()).toEqual('Apr');
+    await po.setText(po.dateFormatInput(), 'DD-MM-YYYY');
   });
 
-  it('should work on day picker', async () => {
-    await page.dayPickerMenu.click();
-    await page.dayPickerInput.click();
-    await page.dayPickerInput.clear();
-    await page.dayPickerInput.sendKeys('10-04-2017');
+  test('should work on date time picker', async () => {
+    await po.daytimePickerMenu().click();
+    await po.setText(po.dateFormatInput(), 'DD-MM-YYYY HH:mm:ss');
+    await po.setText(po.daytimePickerInput(), '10-04-2017 09:08:07');
 
-    await page.dayCalendarNavHeaderBtn.click();
-    expect(await page.selectedMonth.getText()).toEqual('Apr');
+    await po.dayCalendarNavHeaderBtn().click();
+    expect(await po.selectedMonth().textContent()).toEqual('Apr');
+  });
+
+  test('should work on day picker', async () => {
+    await po.dayPickerMenu().click();
+    await po.dayPickerInput().click();
+    await po.dayPickerInput().clear();
+    await po.setText(po.dayPickerInput(), '10-04-2017');
+
+    await po.dayCalendarNavHeaderBtn().click();
+    expect(await po.selectedMonth().textContent()).toEqual('Apr');
   });
 });

@@ -1,77 +1,76 @@
 import {DemoPage} from './app.po';
-import {browser} from 'protractor';
-import {Key} from 'selenium-webdriver';
-import * as dayjs from 'dayjs';
+import {expect, Page, test} from '@playwright/test';
+import dayjs from 'dayjs';
 
-describe('dpDayPicker directive', () => {
-  let page: DemoPage;
+test.describe('dpDayPicker directive', () => {
+  let po: DemoPage;
+  let page: Page;
 
-  beforeEach(async () => {
-    page = new DemoPage();
-    page.navigateTo();
-
-    await page.dayDirectiveMenu.click();
+  test.beforeAll(async ({browser}) => {
+    page = await browser.newPage();
   });
 
-  it('should check that the popup appended to body', async () => {
-    await page.dayDirectiveInput.click();
-    expect(await page.datePickerPopup.isDisplayed()).toBe(true);
-    await page.clickOnBody();
-    expect(await page.datePickerPopup.isPresent()).toBe(false);
+  test.beforeEach(async () => {
+    po = new DemoPage(page);
+    await po.navigateTo();
+    await po.dayDirectiveMenu().click();
   });
 
-  it('should make sure that day directive keeps the prev state of the calendar', async () => {
-    await page.dayDirectiveInput.click();
-    await page.dayCalendarLeftNavBtn.click();
-    await page.clickOnBody();
+  test('should check that the popup appended to body', async () => {
+    await po.dayDirectiveInput().click();
+    await expect(po.datePickerPopup()).toBeVisible();
+    await po.clickOnBody();
+    await expect(po.datePickerPopup()).toBeHidden();
+  });
 
-    await page.dayDirectiveInput.click();
-    expect(await page.dayCalendarNavHeaderBtn.getText())
+  test('should make sure that day directive keeps the prev state of the calendar', async () => {
+    await po.dayDirectiveInput().click();
+    await po.dayCalendarLeftNavBtn().click();
+    await po.clickOnBody();
+
+    await po.dayDirectiveInput().click();
+    await expect(await po.dayCalendarNavHeaderBtn().textContent())
       .toEqual(dayjs().subtract(1, 'month').format('MMM, YYYY'));
   });
 
-  it('should check that the theme is added and removed', async () => {
-    await page.themeOnRadio.click();
-    await page.dayDirectiveInput.click();
-    expect(await page.datePickerPopup.getAttribute('class')).toContain('dp-material');
-    await page.themeOffRadio.click();
-    await page.dayDirectiveInput.click();
-    expect(await page.datePickerPopup.getAttribute('class')).not.toContain('dp-material');
-    await page.themeOnRadio.click();
-    await page.dayDirectiveInput.click();
-    expect(await page.datePickerPopup.getAttribute('class')).toContain('dp-material');
+  test('should check that the theme is added and removed', async () => {
+    await po.themeOnRadio().click();
+    await po.dayDirectiveInput().click();
+    await expect(await po.datePickerPopup().getAttribute('class')).toContain('dp-material');
+    await po.themeOffRadio().click();
+    await po.dayDirectiveInput().click();
+    await expect(await po.datePickerPopup().getAttribute('class')).not.toContain('dp-material');
+    await po.themeOnRadio().click();
+    await po.dayDirectiveInput().click();
+    await expect(await po.datePickerPopup().getAttribute('class')).toContain('dp-material');
   });
 
-  it('should check that the onOpenDelay is working', async () => {
-    await page.scrollIntoView(page.openBtn, true);
-    await page.setInputValue(page.onOpenDelayInput, '1000');
-    await page.openBtn.click();
-    expect(await page.datePickerPopup.isDisplayed()).toBe(true);
-    await page.clickOnBody();
-    await browser.sleep(200);
-    await browser.waitForAngularEnabled(false);
-    await page.dayDirectiveInput.click();
-    expect(await page.datePickerPopup.isPresent()).toBe(false);
-    await browser.waitForAngularEnabled(true);
-    await browser.sleep(1000);
-    expect(await page.datePickerPopup.isDisplayed()).toBe(true);
+  test('should check that the onOpenDelay is working', async () => {
+    await po.setText(po.onOpenDelayInput(), '1000');
+    await po.openBtn().click();
+    await expect(po.datePickerPopup()).toBeVisible();
+    await po.clickOnBody();
+    await po.sleep(200);
+    await po.dayDirectiveInput().click();
+    await expect(po.datePickerPopup()).toBeHidden();
+    await po.sleep(1000);
+    await expect(po.datePickerPopup()).toBeVisible();
   });
 
-  it('should allow input to be modified from beginning', async () => {
-    await page.setInputValue(page.dayDirectiveInput, '10-04-2017')
-    const proms = [];
+  test('should allow input to be modified from beginning', async () => {
+    await po.setText(po.dayDirectiveInput(), '10-04-2017')
+    await po.dayDirectiveInput().focus();
 
     for (let i = 0; i < 11; i++) {
-      proms.push(page.dayDirectiveInput.sendKeys(Key.LEFT));
+      await page.keyboard.press('ArrowLeft');
     }
 
-    await Promise.all(proms);
-
-    await page.dayDirectiveInput.sendKeys(Key.DELETE);
-    await page.dayDirectiveInput.sendKeys('2');
-    expect(await page.getInputVal(page.dayDirectiveInput)).toBe('20-04-2017');
-    expect(await page.selectedDays.count()).toBe(1);
-    expect(await page.selectedDays.first().getText()).toBe('20');
-    expect(await page.dayCalendarNavHeaderBtn.getText()).toBe('Apr, 2017');
+    await po.dayDirectiveInput().focus();
+    await page.keyboard.press('Delete');
+    await page.keyboard.press('2');
+    await expect(po.dayDirectiveInput()).toHaveValue('20-04-2017');
+    await expect(await po.selectedDays().count()).toBe(1);
+    await expect(await po.selectedDays().first().textContent()).toBe('20');
+    await expect(await po.dayCalendarNavHeaderBtn().textContent()).toBe('Apr, 2017');
   });
 });
