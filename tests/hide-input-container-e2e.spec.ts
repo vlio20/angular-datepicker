@@ -1,5 +1,5 @@
 import {DemoPage} from './app.po';
-import {expect, Locator, Page, test} from '@playwright/test';
+import {expect, Page, test} from '@playwright/test';
 
 test.describe('hideInputContainer', () => {
   let po: DemoPage;
