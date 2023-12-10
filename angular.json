@@ -60,18 +60,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "ng2-date-picker-demo:build"
+            "buildTarget": "ng2-date-picker-demo:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "ng2-date-picker-demo:build:production"
+              "buildTarget": "ng2-date-picker-demo:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ng2-date-picker-demo:build"
+            "buildTarget": "ng2-date-picker-demo:build"
           }
         },
         "test": {

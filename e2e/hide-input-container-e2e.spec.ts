@@ -1,16 +1,22 @@
 import {DemoPage} from './app.po';
+import {expect, Page, test} from '@playwright/test';
 
-describe('hideInputContainer', () => {
-  let page: DemoPage;
+test.describe('hideInputContainer', () => {
+  let po: DemoPage;
+  let page: Page;
 
-  beforeEach(async () => {
-    page = new DemoPage();
-    await page.navigateTo();
+  test.beforeAll(async ({browser}) => {
+    page = await browser.newPage();
   });
 
-  it('should hide/show InputContainer datetimepicker', async () => {
-    expect(await page.daytimePickerInput.isDisplayed()).toBe(true);
-    await page.hideInputRadio.click();
-    expect(await page.daytimePickerInput.isDisplayed()).toBe(false);
+  test.beforeEach(async () => {
+    po = new DemoPage(page);
+    await po.navigateTo();
+  });
+
+  test('should hide/show InputContainer datetimepicker', async () => {
+    await expect(po.daytimePickerInput()).toBeVisible();
+    await po.hideInputRadio().click();
+    await expect(po.daytimePickerInput()).toBeHidden();
   });
 });

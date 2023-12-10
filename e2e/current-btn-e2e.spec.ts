@@ -1,78 +1,82 @@
 import {DemoPage} from './app.po';
-import * as dayjs from 'dayjs';
-import {ElementFinder} from 'protractor';
+import dayjs from 'dayjs'
+import {expect, Locator, Page, test} from '@playwright/test';
 
-describe('dpDayPicker dayPicker', () => {
+test.describe('dpDayPicker dayPicker', () => {
+  let po: DemoPage;
+  let page: Page;
 
-  let page: DemoPage;
-
-  beforeEach(() => {
-    page = new DemoPage();
-    page.navigateTo();
+  test.beforeAll(async ({browser}) => {
+    page = await browser.newPage();
   });
 
-  it('should check if go to current location btn is working as expected', async () => {
+  test.beforeEach(async () => {
+    po = new DemoPage(page);
+    await po.navigateTo();
+  });
+
+  test('should check if go to current location btn is working as expected', async () => {
     const currentMonth = dayjs().format('MMM, YYYY');
     const currentYear = dayjs().format('YYYY');
     const prevMonth = dayjs().subtract(1, 'month').format('MMM, YYYY');
     const prevYear = dayjs().subtract(1, 'year').format('YYYY');
 
-    const commonDayCalendar = async (menu: ElementFinder, input: ElementFinder) => {
+    const commonDayCalendar = async (menu: Locator, input: Locator) => {
       await menu.click();
-      await page.showGoToCurrentRadio.click();
+      await po.showGoToCurrentRadio().click();
       await input.click();
-      expect(await page.currentLocationBtn.isPresent()).toBe(true);
-      expect(await page.dayCalendarNavHeaderBtn.getText()).toEqual(currentMonth);
-      await page.dayCalendarLeftNavBtn.click();
-      expect(await page.dayCalendarNavHeaderBtn.getText()).toEqual(prevMonth);
-      await page.currentLocationBtn.click();
-      expect(await page.dayCalendarNavHeaderBtn.getText()).toEqual(currentMonth);
-      await page.dayCalendarNavHeaderBtn.click();
-      expect(await page.dayCalendarNavMonthHeaderBtn.getText()).toEqual(currentYear);
-      await page.monthCalendarLeftNavBtn.click();
-      expect(await page.dayCalendarNavMonthHeaderBtn.getText()).toEqual(prevYear);
-      await page.dayCalendarNavMonthHeaderBtn.click();
+      await expect(await po.currentLocationBtn()).toBeVisible();
+      await expect(await po.dayCalendarNavHeaderBtn().textContent()).toEqual(currentMonth);
+      await po.dayCalendarLeftNavBtn().click();
+      await expect(await po.dayCalendarNavHeaderBtn().textContent()).toEqual(prevMonth);
+      await po.currentLocationBtn().click();
+      await expect(await po.dayCalendarNavHeaderBtn().textContent()).toEqual(currentMonth);
+      await po.dayCalendarNavHeaderBtn().click();
+      await expect(await po.dayCalendarNavMonthHeaderBtn().textContent()).toEqual(currentYear);
+      await po.monthCalendarLeftNavBtn().click();
+      await expect(await po.dayCalendarNavMonthHeaderBtn().textContent()).toEqual(prevYear);
+      await po.dayCalendarNavMonthHeaderBtn().click();
 
-      await page.currentLocationBtn.click();
-      expect(await page.dayCalendarNavHeaderBtn.getText()).toEqual(currentMonth);
+      await po.currentLocationBtn().click();
+      await expect(await po.dayCalendarNavHeaderBtn().textContent()).toEqual(currentMonth);
 
-      await page.hideGoToCurrentRadio.click();
+      await po.hideGoToCurrentRadio().click();
       await input.click();
-      expect(await page.currentLocationBtn.isPresent()).toBe(false);
-      await page.dayCalendarNavHeaderBtn.click();
-      expect(await page.currentLocationBtn.isPresent()).toBe(false);
+      await expect(await po.currentLocationBtn()).toBeHidden();
+      await po.dayCalendarNavHeaderBtn().click();
+      await expect(await po.currentLocationBtn()).toBeHidden();
     };
 
-    const commonMonth = async (menu: ElementFinder, input?: ElementFinder) => {
+    const commonMonth = async (menu: Locator, input: Locator) => {
       await menu.click();
-      await page.showGoToCurrentRadio.click();
+      await po.showGoToCurrentRadio().click();
       await input.click();
-      expect(await page.currentLocationBtn.isPresent()).toBe(true);
-      expect(await page.deyCalendarMonthNavHeader.getText()).toEqual(currentYear);
-      await page.monthCalendarLeftNavBtn.click();
-      expect(await page.deyCalendarMonthNavHeader.getText()).toEqual(prevYear);
-      await page.currentLocationBtn.click();
-      expect(await page.deyCalendarMonthNavHeader.getText()).toEqual(currentYear);
+      await expect(await po.currentLocationBtn()).toBeVisible();
+      await expect(await po.deyCalendarMonthNavHeader().textContent()).toEqual(currentYear);
+      await po.monthCalendarLeftNavBtn().click();
+      await expect(await po.deyCalendarMonthNavHeader().textContent()).toEqual(prevYear);
+      await po.currentLocationBtn().click();
+      await expect(await po.deyCalendarMonthNavHeader().textContent()).toEqual(currentYear);
 
-      await page.hideGoToCurrentRadio.click();
+      await po.hideGoToCurrentRadio().click();
       await input.click();
-      expect(await page.currentLocationBtn.isPresent()).toBe(false);
+      await expect(await po.currentLocationBtn()).toBeHidden();
     };
 
-    await commonDayCalendar(page.daytimePickerMenu, page.daytimePickerInput);
-    await commonDayCalendar(page.daytimeDirectiveMenu, page.daytimeDirectiveInput);
+    await commonDayCalendar(po.daytimePickerMenu(), po.daytimePickerInput());
+    await commonDayCalendar(po.daytimeDirectiveMenu(), po.daytimeDirectiveInput());
 
-    await commonDayCalendar(page.dayPickerMenu, page.dayPickerInput);
-    await commonDayCalendar(page.dayDirectiveMenu, page.dayDirectiveInput);
+    await commonDayCalendar(po.dayPickerMenu(), po.dayPickerInput());
+    await commonDayCalendar(po.dayDirectiveMenu(), po.dayDirectiveInput());
 
-    await commonMonth(page.monthPickerMenu, page.monthPickerInput);
-    await commonMonth(page.monthDirectiveMenu, page.monthDirectiveInput);
+    await commonMonth(po.monthPickerMenu(), po.monthPickerInput());
+    await commonMonth(po.monthDirectiveMenu(), po.monthDirectiveInput());
   });
 
-  it('should hide current date button when not between min and max', async () => {
-    await page.dayPickerMenu.click();
-    await page.minSelectableInput.sendKeys(dayjs().add(3, 'month').format('DD-MM-YYYY'));
-    await page.dayPickerInput.click();
-    expect(await page.currentLocationBtn.isPresent()).toBe(false);
+  test('should hide current date button when not between min and max', async () => {
+    await po.dayPickerMenu().click();
+    await po.setText(po.minSelectableInput(), dayjs().add(3, 'month').format('DD-MM-YYYY'));
+    await po.dayPickerInput().click();
+    await expect(await po.currentLocationBtn()).toBeHidden();
   });
 });

@@ -1,6 +1,13 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+# [17.0.0] (2023-12-10)
+
+### Improvements
+- Update to Angular 17 ([640](https://github.com/vlio20/angular-datepicker/pull/640)) closes [#638](https://github.com/vlio20/angular-datepicker/issues/638) - PR by [@henrikgrubbe](https://github.com/henrikgrubbe)
+- Move from protractor to Playwrite ([640](https://github.com/vlio20/angular-datepicker/pull/640)) closes [#554](https://github.com/vlio20/angular-datepicker/issues/554)
+
+
 # [16.0.0] (2023-05-20)
 
 ### Improvements

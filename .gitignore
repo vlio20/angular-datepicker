@@ -38,3 +38,7 @@ Thumbs.db
 
 dist
 bin.tgz
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/

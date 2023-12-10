@@ -1,32 +1,38 @@
 import {DemoPage} from './app.po';
+import {expect, Locator, Page, test} from '@playwright/test';
 
-describe('format validation', () => {
-  let page: DemoPage;
+test.describe('format validation', () => {
+  let po: DemoPage;
+  let page: Page;
 
-  beforeEach(async () => {
-    page = new DemoPage();
-    await page.navigateTo();
+  test.beforeAll(async ({browser}) => {
+    page = await browser.newPage();
   });
 
-  it('should check that the format validation is working', async () => {
-    const common = async (menu, input) => {
+  test.beforeEach(async () => {
+    po = new DemoPage(page);
+    await po.navigateTo();
+  });
+
+  test('should check that the format validation is working', async () => {
+    const common = async (menu: Locator, input: Locator) => {
       await menu.click();
       await input.click();
       await input.clear();
-      await input.sendKeys('lmaldlad');
-      await page.clickOnBody();
+      await po.setText(input, 'lmaldlad');
+      await po.clickOnBody();
 
-      expect(await page.formatValidationMsg.getText()).toBe('invalid format');
+      expect(await po.formatValidationMsg().textContent()).toBe('invalid format');
       await input.clear();
     };
 
-    await common(page.daytimePickerMenu, page.daytimePickerInput);
-    await common(page.daytimeDirectiveMenu, page.daytimeDirectiveInput);
-    await common(page.dayPickerMenu, page.dayPickerInput);
-    await common(page.dayDirectiveMenu, page.dayDirectiveInput);
-    await common(page.monthPickerMenu, page.monthPickerInput);
-    await common(page.monthDirectiveMenu, page.monthDirectiveInput);
-    await common(page.timePickerMenu, page.timePickerInput);
-    await common(page.timeDirectiveMenu, page.timeSelectDirectiveInput);
+    await common(po.daytimePickerMenu(), po.daytimePickerInput());
+    await common(po.daytimeDirectiveMenu(), po.daytimeDirectiveInput());
+    await common(po.dayPickerMenu(), po.dayPickerInput());
+    await common(po.dayDirectiveMenu(), po.dayDirectiveInput());
+    await common(po.monthPickerMenu(), po.monthPickerInput());
+    await common(po.monthDirectiveMenu(), po.monthDirectiveInput());
+    await common(po.timePickerMenu(), po.timePickerInput());
+    await common(po.timeDirectiveMenu(), po.timeSelectDirectiveInput());
   });
 });

@@ -1,25 +1,31 @@
 import {DemoPage} from '../app.po';
-import {protractor} from 'protractor';
+import {expect, Page, test} from '@playwright/test';
 
-describe('enter keypress', () => {
-  let page: DemoPage;
+test.describe('enter keypress', () => {
+  let po: DemoPage;
+  let page: Page;
 
-  beforeEach(async () => {
-    page = new DemoPage();
-    await page.navigateTo();
-    await page.daytimePickerMenu.click();
+  test.beforeAll(async ({browser}) => {
+    page = await browser.newPage();
   });
 
-  it('should close the picker on enter keypress', async () => {
-    await page.dayPickerInput.click();
-    expect(await page.datePickerPopup.isDisplayed()).toBe(true);
-    page.dayPickerInput.sendKeys(protractor.Key.ENTER);
-    expect(await page.datePickerPopup.isPresent()).toBe(false);
+  test.beforeEach(async () => {
+    po = new DemoPage(page);
+    await po.navigateTo();
+    await po.daytimePickerMenu().click();
+  });
 
-    await page.disableCloseOnEnter.click();
-    await page.dayPickerInput.click();
-    expect(await page.datePickerPopup.isDisplayed()).toBe(true);
-    page.dayPickerInput.sendKeys(protractor.Key.ENTER);
-    expect(await page.datePickerPopup.isDisplayed()).toBe(true);
+  test('should close the picker on enter keypress', async () => {
+    await po.dayPickerInput().click();
+    await expect(po.datePickerPopup()).toBeVisible();
+    await po.dayPickerInput().focus();
+    await page.keyboard.press('Enter');
+    await expect(po.datePickerPopup()).toBeHidden();
+
+    await po.disableCloseOnEnter().click();
+    await po.dayPickerInput().click();
+    await expect(po.datePickerPopup()).toBeVisible();
+    await page.keyboard.press('Enter');
+    await expect(po.datePickerPopup()).toBeVisible();
   });
 });
