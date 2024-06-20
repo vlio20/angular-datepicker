@@ -1,6 +1,11 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+# [18.0.0] (2024-05-31)
+
+### Improvements
+- Update to Angular 18 
+
 # [17.0.0] (2023-12-10)
 
 ### Improvements
