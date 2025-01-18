@@ -57,7 +57,7 @@
     "@playwright/test": "^1.49.0",
     "@types/google.analytics": "^0.0.42",
     "@types/jasmine": "^4.3.1",
-    "@types/node": "^18.15.3",
+    "@types/node": "^18.19.71",
     "@typescript-eslint/eslint-plugin": "^7.11.0",
     "@typescript-eslint/parser": "^7.11.0",
     "eslint": "^8.57.0",
