@@ -59,6 +59,9 @@
           {
             "allowTemplateLiterals": true
           }
+        ],
+        "@angular-eslint/prefer-standalone": [
+          "off"
         ]
       }
     },
