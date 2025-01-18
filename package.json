@@ -84,7 +84,7 @@
     "strictMetadataEmit": true
   },
   "dependencies": {
-    "@angular/cdk": "^19.1.1",
+    "@angular/cdk": "^19.1.0",
     "dayjs": "^1.11.7",
     "tslib": "^2.4.0"
   }
