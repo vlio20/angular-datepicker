@@ -13,7 +13,8 @@ import {
   templateUrl: './calendar-nav.component.html',
   styleUrls: ['./calendar-nav.component.less'],
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class CalendarNavComponent {
   @Input() label: string;

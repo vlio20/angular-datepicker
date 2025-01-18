@@ -1,6 +1,11 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+# [19.0.0] (2024-06-20)
+
+### Improvements
+- Update to Angular 19
+
 # [18.0.0] (2024-06-20)
 
 ### Improvements

@@ -4,7 +4,8 @@ import {Component} from '@angular/core';
 import {inject, TestBed} from '@angular/core/testing';
 
 @Component({
-  template: ''
+  template: '',
+  standalone: false
 })
 class TestComponent {
 }

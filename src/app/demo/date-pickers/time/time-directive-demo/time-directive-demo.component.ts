@@ -7,7 +7,8 @@ import {DEF_CONF} from '../../../common/conts/consts';
 @Component({
   selector: 'dp-time-directive-demo',
   templateUrl: './time-directive-demo.component.html',
-  styleUrls: ['./time-directive-demo.component.less']
+  styleUrls: ['./time-directive-demo.component.less'],
+  standalone: false
 })
 export class TimeDirectiveDemoComponent extends DateComponent implements OnInit {
   control: UntypedFormControl;

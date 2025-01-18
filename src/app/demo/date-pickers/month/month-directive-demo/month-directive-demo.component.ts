@@ -7,7 +7,8 @@ import {DEF_CONF} from '../../../common/conts/consts';
 @Component({
   selector: 'dp-month-directive-demo',
   templateUrl: './month-directive-demo.component.html',
-  styleUrls: ['./month-directive-demo.component.less']
+  styleUrls: ['./month-directive-demo.component.less'],
+  standalone: false
 })
 export class MonthDirectiveDemoComponent extends DateComponent implements OnInit {
   control: UntypedFormControl;

@@ -55,7 +55,8 @@ import {dayjsRef} from '../common/dayjs/dayjs.ref';
       useExisting: forwardRef(() => DayCalendarComponent),
       multi: true
     }
-  ]
+  ],
+  standalone: false
 })
 export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAccessor, Validator {
 

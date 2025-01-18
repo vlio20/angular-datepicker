@@ -13,7 +13,8 @@ import {ISelectionEvent} from '../../../projects/ng2-date-picker/src/lib/common/
 @Component({
   selector: 'dp-demo',
   templateUrl: './demo.component.html',
-  styleUrls: ['./demo.component.less']
+  styleUrls: ['./demo.component.less'],
+  standalone: false
 })
 export class DemoComponent implements OnInit {
   @ViewChild('dateComponent') dateComponent: DatePickerComponent;

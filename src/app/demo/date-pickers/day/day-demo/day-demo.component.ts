@@ -7,7 +7,8 @@ import {DEF_CONF} from '../../../common/conts/consts';
 @Component({
   selector: 'dp-day-demo',
   templateUrl: './day-demo.component.html',
-  styleUrls: ['./day-demo.component.less']
+  styleUrls: ['./day-demo.component.less'],
+  standalone: false
 })
 export class DayDemoComponent extends DateComponent implements OnInit {
   control: UntypedFormControl;

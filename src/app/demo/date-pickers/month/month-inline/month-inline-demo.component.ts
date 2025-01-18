@@ -7,7 +7,8 @@ import {DEF_CONF} from '../../../common/conts/consts';
 @Component({
   selector: 'dp-month-inline',
   templateUrl: './month-inline-demo.component.html',
-  styleUrls: ['./month-inline-demo.component.less']
+  styleUrls: ['./month-inline-demo.component.less'],
+  standalone: false
 })
 export class MonthInlineDemoComponent extends DateComponent implements OnInit {
   control: UntypedFormControl;

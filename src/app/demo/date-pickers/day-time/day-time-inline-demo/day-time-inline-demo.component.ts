@@ -7,7 +7,8 @@ import {DEF_CONF} from '../../../common/conts/consts';
 @Component({
   selector: 'dp-day-time-inline-demo',
   templateUrl: './day-time-inline-demo.component.html',
-  styleUrls: ['./day-time-inline-demo.component.less']
+  styleUrls: ['./day-time-inline-demo.component.less'],
+  standalone: false
 })
 export class DayTimeInlineDemoComponent extends DateComponent implements OnInit {
   control: UntypedFormControl;
