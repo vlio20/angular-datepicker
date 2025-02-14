@@ -38,24 +38,25 @@ import {INavEvent} from '../common/models/navigation-event.model';
 import {dayjsRef} from '../common/dayjs/dayjs.ref';
 
 @Component({
-  selector: 'dp-day-calendar',
-  templateUrl: 'day-calendar.component.html',
-  styleUrls: ['day-calendar.component.less'],
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    DayCalendarService,
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => DayCalendarComponent),
-      multi: true
-    },
-    {
-      provide: NG_VALIDATORS,
-      useExisting: forwardRef(() => DayCalendarComponent),
-      multi: true
-    }
-  ]
+    selector: 'dp-day-calendar',
+    templateUrl: 'day-calendar.component.html',
+    styleUrls: ['day-calendar.component.less'],
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        DayCalendarService,
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => DayCalendarComponent),
+            multi: true
+        },
+        {
+            provide: NG_VALIDATORS,
+            useExisting: forwardRef(() => DayCalendarComponent),
+            multi: true
+        }
+    ],
+    standalone: false
 })
 export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAccessor, Validator {
 

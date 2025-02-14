@@ -23,8 +23,9 @@ import {SingleCalendarValue} from '../common/types/single-calendar-value';
 import {Dayjs} from 'dayjs';
 
 @Directive({
-  exportAs: 'dpDayPicker',
-  selector: '[dpDayPicker]'
+    exportAs: 'dpDayPicker',
+    selector: '[dpDayPicker]',
+    standalone: false
 })
 export class DatePickerDirective implements OnInit {
 

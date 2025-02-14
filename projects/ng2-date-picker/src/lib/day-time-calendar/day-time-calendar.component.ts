@@ -36,26 +36,27 @@ import {DayCalendarComponent} from '../day-calendar/day-calendar.component';
 import {INavEvent} from '../common/models/navigation-event.model';
 
 @Component({
-  selector: 'dp-day-time-calendar',
-  templateUrl: 'day-time-calendar.component.html',
-  styleUrls: ['day-time-calendar.component.less'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None,
-  providers: [
-    DayTimeCalendarService,
-    DayCalendarService,
-    TimeSelectService,
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => DayTimeCalendarComponent),
-      multi: true
-    },
-    {
-      provide: NG_VALIDATORS,
-      useExisting: forwardRef(() => DayTimeCalendarComponent),
-      multi: true
-    }
-  ]
+    selector: 'dp-day-time-calendar',
+    templateUrl: 'day-time-calendar.component.html',
+    styleUrls: ['day-time-calendar.component.less'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
+    providers: [
+        DayTimeCalendarService,
+        DayCalendarService,
+        TimeSelectService,
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => DayTimeCalendarComponent),
+            multi: true
+        },
+        {
+            provide: NG_VALIDATORS,
+            useExisting: forwardRef(() => DayTimeCalendarComponent),
+            multi: true
+        }
+    ],
+    standalone: false
 })
 export class DayTimeCalendarComponent implements OnInit, OnChanges, ControlValueAccessor, Validator {
 

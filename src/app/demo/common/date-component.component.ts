@@ -124,11 +124,9 @@ export abstract class DateComponent {
 
   onLocaleChange(locale: string): void {
     this.ready = false;
-    import(`dayjs/locale/${locale}`).then(() => {
-      this.locale = locale;
-      dayjs.locale(locale);
-      this.ready = true;
-    });
+    this.locale = locale;
+    dayjs.locale(locale);
+    this.ready = true;
   }
 
   protected buildForm(): UntypedFormControl {

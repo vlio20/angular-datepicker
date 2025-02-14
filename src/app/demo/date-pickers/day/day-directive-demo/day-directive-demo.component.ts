@@ -5,9 +5,10 @@ import {IDatePickerConfig} from '../../../../../../projects/ng2-date-picker/src/
 import {DEF_CONF} from '../../../common/conts/consts';
 
 @Component({
-  selector: 'dp-day-directive-demo',
-  templateUrl: './day-directive-demo.component.html',
-  styleUrls: ['./day-directive-demo.component.less']
+    selector: 'dp-day-directive-demo',
+    templateUrl: './day-directive-demo.component.html',
+    styleUrls: ['./day-directive-demo.component.less'],
+    standalone: false
 })
 export class DayDirectiveDemoComponent extends DateComponent implements OnInit {
   control: UntypedFormControl;

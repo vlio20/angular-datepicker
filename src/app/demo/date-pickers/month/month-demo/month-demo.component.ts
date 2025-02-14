@@ -5,9 +5,10 @@ import {IDatePickerConfig} from '../../../../../../projects/ng2-date-picker/src/
 import {DEF_CONF} from '../../../common/conts/consts';
 
 @Component({
-  selector: 'dp-month-demo',
-  templateUrl: './month-demo.component.html',
-  styleUrls: ['./month-demo.component.less']
+    selector: 'dp-month-demo',
+    templateUrl: './month-demo.component.html',
+    styleUrls: ['./month-demo.component.less'],
+    standalone: false
 })
 export class MonthDemoComponent extends DateComponent implements OnInit {
   control: UntypedFormControl;

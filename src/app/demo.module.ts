@@ -1,4 +1,4 @@
-import {DatePickerComponent} from '../../projects/ng2-date-picker/src/lib/date-picker/date-picker.component';
+import './locale.import';
 import {RouterModule} from '@angular/router';
 import {NgModule} from '@angular/core';
 import {DemoComponent} from './demo/demo.component';

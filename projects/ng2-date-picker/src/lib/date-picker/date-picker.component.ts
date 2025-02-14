@@ -55,27 +55,28 @@ import {dayjsRef} from '../common/dayjs/dayjs.ref';
 import {ConnectionPositionPair} from '@angular/cdk/overlay';
 
 @Component({
-  selector: 'dp-date-picker',
-  templateUrl: 'date-picker.component.html',
-  styleUrls: ['date-picker.component.less'],
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    DatePickerService,
-    DayTimeCalendarService,
-    DayCalendarService,
-    TimeSelectService,
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => DatePickerComponent),
-      multi: true
-    },
-    {
-      provide: NG_VALIDATORS,
-      useExisting: forwardRef(() => DatePickerComponent),
-      multi: true
-    }
-  ]
+    selector: 'dp-date-picker',
+    templateUrl: 'date-picker.component.html',
+    styleUrls: ['date-picker.component.less'],
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        DatePickerService,
+        DayTimeCalendarService,
+        DayCalendarService,
+        TimeSelectService,
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => DatePickerComponent),
+            multi: true
+        },
+        {
+            provide: NG_VALIDATORS,
+            useExisting: forwardRef(() => DatePickerComponent),
+            multi: true
+        }
+    ],
+    standalone: false
 })
 export class DatePickerComponent implements OnChanges,
                                             OnInit,

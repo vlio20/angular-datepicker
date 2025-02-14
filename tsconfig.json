@@ -6,7 +6,7 @@
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
-    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
     "sourceMap": true,
     "paths": {
       "ng2-date-picker": [
@@ -16,7 +16,6 @@
     },
     "skipLibCheck": true,
     "declaration": true,
-    "downlevelIteration": true,
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,

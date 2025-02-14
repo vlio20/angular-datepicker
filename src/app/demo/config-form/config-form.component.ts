@@ -106,9 +106,10 @@ const DAY_TIME_CALENDAR_OPTION_KEYS = [
 ];
 
 @Component({
-  selector: 'dp-config-form',
-  templateUrl: './config-form.component.html',
-  styleUrls: ['./config-form.component.less']
+    selector: 'dp-config-form',
+    templateUrl: './config-form.component.html',
+    styleUrls: ['./config-form.component.less'],
+    standalone: false
 })
 export class ConfigFormComponent implements OnInit {
 
