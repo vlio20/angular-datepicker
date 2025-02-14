@@ -35,24 +35,25 @@ import {Dayjs} from 'dayjs';
 import {dayjsRef} from '../common/dayjs/dayjs.ref';
 
 @Component({
-  selector: 'dp-month-calendar',
-  templateUrl: 'month-calendar.component.html',
-  styleUrls: ['month-calendar.component.less'],
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    MonthCalendarService,
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => MonthCalendarComponent),
-      multi: true
-    },
-    {
-      provide: NG_VALIDATORS,
-      useExisting: forwardRef(() => MonthCalendarComponent),
-      multi: true
-    }
-  ]
+    selector: 'dp-month-calendar',
+    templateUrl: 'month-calendar.component.html',
+    styleUrls: ['month-calendar.component.less'],
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        MonthCalendarService,
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => MonthCalendarComponent),
+            multi: true
+        },
+        {
+            provide: NG_VALIDATORS,
+            useExisting: forwardRef(() => MonthCalendarComponent),
+            multi: true
+        }
+    ],
+    standalone: false
 })
 export class MonthCalendarComponent implements OnInit, OnChanges, ControlValueAccessor, Validator {
 

@@ -41,6 +41,9 @@
         "@angular-eslint/no-output-on-prefix": [
           "off"
         ],
+        "@angular-eslint/prefer-standalone": [
+          "warn"
+        ],
         "no-console": [
           "error",
           {

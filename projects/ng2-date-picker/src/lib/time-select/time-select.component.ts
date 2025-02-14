@@ -35,24 +35,25 @@ import {Dayjs} from 'dayjs';
 import {dayjsRef} from '../common/dayjs/dayjs.ref';
 
 @Component({
-  selector: 'dp-time-select',
-  templateUrl: 'time-select.component.html',
-  styleUrls: ['time-select.component.less'],
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    TimeSelectService,
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => TimeSelectComponent),
-      multi: true
-    },
-    {
-      provide: NG_VALIDATORS,
-      useExisting: forwardRef(() => TimeSelectComponent),
-      multi: true
-    }
-  ]
+    selector: 'dp-time-select',
+    templateUrl: 'time-select.component.html',
+    styleUrls: ['time-select.component.less'],
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        TimeSelectService,
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => TimeSelectComponent),
+            multi: true
+        },
+        {
+            provide: NG_VALIDATORS,
+            useExisting: forwardRef(() => TimeSelectComponent),
+            multi: true
+        }
+    ],
+    standalone: false
 })
 export class TimeSelectComponent implements OnInit, OnChanges, ControlValueAccessor, Validator {
 

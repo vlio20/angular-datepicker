@@ -1,6 +1,11 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+[18.0.0] (2025-02-14)
+
+### Improvements
+- Update to Angular 19 ([643](https://github.com/vlio20/angular-datepicker/pull/653)) closes [#638](https://github.com/vlio20/angular-datepicker/issues/650) 
+ 
 # [18.0.0] (2024-06-20)
 
 ### Improvements
