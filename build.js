@@ -1,7 +1,7 @@
 const fs = require('fs').promises;
 
 async function setGa() {
-  const html = await fs.readFile('./dist/index.html', 'utf-8');
+  const html = await fs.readFile('./dist/browser/index.html', 'utf-8');
   const newHtml = html.replace('<!--GA-->', `
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-86826463-1"></script>
     <script>
