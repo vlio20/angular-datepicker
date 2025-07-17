@@ -1,6 +1,6 @@
 # Date Picker  
 This is a configurable date-picker build for Angular applications.  
-Supports latest (Angular 15) version. For older versions please checkout the CHANGELOG.md file.
+Supports latest (Angular 20) version. For older versions please checkout the CHANGELOG.md file.
 
 [DEMO](https://wondrous-crostata-172891.netlify.app/)  
 
