@@ -1,7 +1,8 @@
 import {UtilsService} from '../common/services/utils/utils.service';
 import {DatePickerDirective} from './date-picker.directive';
-import {Component} from '@angular/core';
+import {Component, ComponentFactoryResolver, ElementRef, ViewContainerRef} from '@angular/core';
 import {inject, TestBed} from '@angular/core/testing';
+import {NgControl} from '@angular/forms';
 
 @Component({
     template: '',
@@ -11,14 +12,23 @@ class TestComponent {
 }
 
 describe('Directive: DpDayPicker', () => {
+  let directive: DatePickerDirective;
+
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [TestComponent],
-      providers: [UtilsService]
+      providers: [
+        DatePickerDirective,
+        UtilsService,
+        { provide: ViewContainerRef, useValue: null },
+        { provide: ElementRef, useValue: null },
+        { provide: ComponentFactoryResolver, useValue: null },
+        { provide: NgControl, useValue: null },
+      ]
     });
-  });
 
-  const directive = new DatePickerDirective(null, null, null, null, null);
+    directive = TestBed.inject(DatePickerDirective)
+  });
 
   it('should create an instance', () => {
     expect(directive).toBeTruthy();

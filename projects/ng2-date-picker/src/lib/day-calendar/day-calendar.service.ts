@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 
 import {WeekDays} from '../common/types/week-days.type';
 import {UtilsService} from '../common/services/utils/utils.service';
@@ -12,6 +12,8 @@ import {dayjsRef} from '../common/dayjs/dayjs.ref';
   providedIn: 'root'
 })
 export class DayCalendarService {
+  private utilsService = inject(UtilsService);
+
   readonly DEFAULT_CONFIG: IDayCalendarConfig = {
     showNearMonthDays: true,
     showWeekNumbers: false,
@@ -25,9 +27,6 @@ export class DayCalendarService {
     unSelectOnClick: true
   };
   private readonly DAYS = ['su', 'mo', 'tu', 'we', 'th', 'fr', 'sa'];
-
-  constructor(private utilsService: UtilsService) {
-  }
 
   getConfig(config: IDayCalendarConfig): IDayCalendarConfigInternal {
     const _config = {

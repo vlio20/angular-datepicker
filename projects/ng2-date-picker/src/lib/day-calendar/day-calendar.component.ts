@@ -14,7 +14,8 @@ import {
   Output,
   SimpleChange,
   SimpleChanges,
-  ViewEncapsulation
+  ViewEncapsulation,
+  inject
 } from '@angular/core';
 import {DayCalendarService} from './day-calendar.service';
 
@@ -59,6 +60,10 @@ import {dayjsRef} from '../common/dayjs/dayjs.ref';
     standalone: false
 })
 export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAccessor, Validator {
+  readonly dayCalendarService = inject(DayCalendarService);
+  readonly utilsService = inject(UtilsService);
+  readonly cd = inject(ChangeDetectorRef);
+
 
   @Input() config: IDayCalendarConfig;
   @Input() displayDate: SingleCalendarValue;
@@ -90,11 +95,6 @@ export class DayCalendarComponent implements OnInit, OnChanges, ControlValueAcce
     moveCalendarTo: this.moveCalendarTo.bind(this),
     toggleCalendarMode: this.toggleCalendarMode.bind(this)
   };
-
-  constructor(public readonly dayCalendarService: DayCalendarService,
-              public readonly utilsService: UtilsService,
-              public readonly cd: ChangeDetectorRef) {
-  }
 
   _selected: Dayjs[];
 

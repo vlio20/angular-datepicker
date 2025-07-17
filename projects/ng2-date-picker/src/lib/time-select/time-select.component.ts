@@ -13,7 +13,8 @@ import {
   Output,
   SimpleChange,
   SimpleChanges,
-  ViewEncapsulation
+  ViewEncapsulation,
+  inject
 } from '@angular/core';
 import {TimeSelectService, TimeUnit} from './time-select.service';
 
@@ -56,6 +57,10 @@ import {dayjsRef} from '../common/dayjs/dayjs.ref';
     standalone: false
 })
 export class TimeSelectComponent implements OnInit, OnChanges, ControlValueAccessor, Validator {
+  readonly timeSelectService = inject(TimeSelectService);
+  readonly utilsService = inject(UtilsService);
+  readonly cd = inject(ChangeDetectorRef);
+
 
   @Input() config: ITimeSelectConfig;
   @Input() displayDate: SingleCalendarValue;
@@ -84,11 +89,6 @@ export class TimeSelectComponent implements OnInit, OnChanges, ControlValueAcces
   api = {
     triggerChange: this.emitChange.bind(this)
   };
-
-  constructor(public readonly timeSelectService: TimeSelectService,
-              public readonly utilsService: UtilsService,
-              public readonly cd: ChangeDetectorRef) {
-  }
 
   _selected: Dayjs;
 

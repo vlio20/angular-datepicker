@@ -1,4 +1,4 @@
-import {EventEmitter, Injectable} from '@angular/core';
+import { EventEmitter, Injectable, inject } from '@angular/core';
 import {IDatePickerConfig, IDatePickerConfigInternal} from './date-picker-config.model';
 
 import {UtilsService} from '../common/services/utils/utils.service';
@@ -15,6 +15,10 @@ import {ConnectionPositionPair} from '@angular/cdk/overlay';
   providedIn: 'root'
 })
 export class DatePickerService {
+  private readonly utilsService = inject(UtilsService);
+  private readonly timeSelectService = inject(TimeSelectService);
+  private readonly daytimeCalendarService = inject(DayTimeCalendarService);
+
   readonly onPickerClosed: EventEmitter<null> = new EventEmitter();
   private defaultConfig: IDatePickerConfigInternal = {
     closeOnSelect: true,
@@ -31,11 +35,6 @@ export class DatePickerService {
     showGoToCurrent: true,
     hideOnOutsideClick: true,
   };
-
-  constructor(private readonly utilsService: UtilsService,
-              private readonly timeSelectService: TimeSelectService,
-              private readonly daytimeCalendarService: DayTimeCalendarService) {
-  }
 
   // todo:: add unit tests
   getConfig(config: IDatePickerConfig, mode: CalendarMode = 'daytime'): IDatePickerConfigInternal {

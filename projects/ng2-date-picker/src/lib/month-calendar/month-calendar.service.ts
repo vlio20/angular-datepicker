@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 
 import {UtilsService} from '../common/services/utils/utils.service';
 import {IMonth} from './month.model';
@@ -12,6 +12,8 @@ import {dayjsRef} from '../common/dayjs/dayjs.ref';
   providedIn: 'root'
 })
 export class MonthCalendarService {
+  private utilsService = inject(UtilsService);
+
   readonly DEFAULT_CONFIG: IMonthCalendarConfigInternal = {
     allowMultiSelect: false,
     yearFormat: 'YYYY',
@@ -23,9 +25,6 @@ export class MonthCalendarService {
     unSelectOnClick: true,
     numOfMonthRows: 3
   };
-
-  constructor(private utilsService: UtilsService) {
-  }
 
   getConfig(config: IMonthCalendarConfig): IMonthCalendarConfigInternal {
     const _config = <IMonthCalendarConfigInternal>{

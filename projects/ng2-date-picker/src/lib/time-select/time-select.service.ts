@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 
 import {UtilsService} from '../common/services/utils/utils.service';
 import {ITimeSelectConfig, ITimeSelectConfigInternal} from './time-select-config.model';
@@ -12,6 +12,8 @@ export const FIRST_PM_HOUR = 12;
   providedIn: 'root'
 })
 export class TimeSelectService {
+  private readonly utilsService = inject(UtilsService);
+
   readonly DEFAULT_CONFIG: ITimeSelectConfigInternal = {
     hours12Format: 'hh',
     hours24Format: 'HH',
@@ -24,9 +26,6 @@ export class TimeSelectService {
     showTwentyFourHours: false,
     timeSeparator: ':',
   };
-
-  constructor(private readonly utilsService: UtilsService) {
-  }
 
   getConfig(config: ITimeSelectConfig): ITimeSelectConfigInternal {
     const timeConfigs = {

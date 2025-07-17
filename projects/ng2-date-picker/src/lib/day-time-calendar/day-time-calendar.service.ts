@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 
 import {UtilsService} from '../common/services/utils/utils.service';
 import {DayCalendarService} from '../day-calendar/day-calendar.service';
@@ -16,12 +16,11 @@ const COMBINED_FORMAT = DAY_FORMAT + TIME_FORMAT;
     providedIn: 'root'
 })
 export class DayTimeCalendarService {
-  readonly DEFAULT_CONFIG: IDayTimeCalendarConfig = {};
+  private utilsService = inject(UtilsService);
+  private dayCalendarService = inject(DayCalendarService);
+  private timeSelectService = inject(TimeSelectService);
 
-  constructor(private utilsService: UtilsService,
-              private dayCalendarService: DayCalendarService,
-              private timeSelectService: TimeSelectService) {
-  }
+  readonly DEFAULT_CONFIG: IDayTimeCalendarConfig = {};
 
   getConfig(config: IDayTimeCalendarConfig): IDayTimeCalendarConfigInternal {
     const _config =  {

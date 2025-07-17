@@ -33,7 +33,8 @@ import {
   Renderer2,
   SimpleChanges,
   ViewChild,
-  ViewEncapsulation
+  ViewEncapsulation,
+  inject
 } from '@angular/core';
 import {
   ControlValueAccessor,
@@ -83,6 +84,11 @@ export class DatePickerComponent implements OnChanges,
                                             ControlValueAccessor,
                                             Validator,
                                             OnDestroy {
+  private readonly dayPickerService = inject(DatePickerService);
+  private readonly renderer = inject(Renderer2);
+  private readonly utilsService = inject(UtilsService);
+  readonly cd = inject(ChangeDetectorRef);
+
   isInitialized: boolean = false;
   @Input() config: IDatePickerConfig;
   @Input() mode: CalendarMode = 'day';
@@ -127,13 +133,6 @@ export class DatePickerComponent implements OnChanges,
   selectEvent = SelectEvent;
   origin: ElementRef | HTMLElement;
   private onOpenDelayTimeoutHandler;
-
-  constructor(private readonly dayPickerService: DatePickerService,
-              private readonly elemRef: ElementRef,
-              private readonly renderer: Renderer2,
-              private readonly utilsService: UtilsService,
-              public readonly cd: ChangeDetectorRef) {
-  }
 
   get openOnFocus(): boolean {
     return this.componentConfig.openOnFocus;
