@@ -20,10 +20,6 @@
     "build:demo": "rm -rf dist/ && ng build ng2-date-picker-demo --configuration production && npm run build:index",
     "release": "npm run build:lib && cd dist/ng2-date-picker && npm publish"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/vlio20/angular-datepicker.git"
-  },
   "private": false,
   "keywords": [
     "angular2",
