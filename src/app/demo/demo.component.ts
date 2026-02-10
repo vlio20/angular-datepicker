@@ -2,7 +2,7 @@ import debounce from '../../../projects/ng2-date-picker/src/lib/common/decorator
 import {IDatePickerConfig} from '../../../projects/ng2-date-picker/src/lib/date-picker/date-picker-config.model';
 import {DatePickerComponent} from '../../../projects/ng2-date-picker/src/lib/date-picker/date-picker.component';
 import {DatePickerDirective} from '../../../projects/ng2-date-picker/src/lib/date-picker/date-picker.directive';
-import {Component, HostListener, OnInit, ViewChild} from '@angular/core';
+import {Component, HostListener, inject, OnInit, ViewChild} from '@angular/core';
 import {UntypedFormControl, UntypedFormGroup, Validators} from '@angular/forms';
 import dayjs, {Dayjs} from 'dayjs';
 import {GaService} from './common/services/ga/ga.service';
@@ -95,8 +95,7 @@ export class DemoComponent implements OnInit {
   formGroup: UntypedFormGroup;
   isAtTop: boolean = true;
 
-  constructor(private readonly gaService: GaService) {
-  }
+  private readonly gaService = inject(GaService);
 
   ngOnInit(): void {
     this.formGroup = this.buildForm();

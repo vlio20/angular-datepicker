@@ -1,904 +1,1020 @@
 <div class="dp-page-content">
   <div class="dp-attributes">
     <h3 class="dp-options-section">Attribute options</h3>
-    <div *ngIf="isValidConfig('theme')" class="dp-option">
-      <span class="dp-option-header">
-        Theme (theme | for example the built in material theme - dp-material):
-      </span>
-      <div class="dp-option-playground">
-        <label>Material Theme
-          <input [formControl]="material" [value]="true" id="themeOn" name="style" type="radio">
-        </label>
-        <label>No Theme
-          <input [formControl]="material" [value]="false" id="themeOff" name="style" type="radio">
-        </label>
+    @if (isValidConfig('theme')) {
+      <div class="dp-option">
+        <span class="dp-option-header">
+          Theme (theme | for example the built in material theme - dp-material):
+        </span>
+        <div class="dp-option-playground">
+          <label>Material Theme
+            <input [formControl]="material" [value]="true" id="themeOn" name="style" type="radio">
+          </label>
+          <label>No Theme
+            <input [formControl]="material" [value]="false" id="themeOff" name="style" type="radio">
+          </label>
+        </div>
       </div>
-    </div>
+    }
 
-    <div *ngIf="isValidConfig('disabled')" class="dp-option">
-      <span class="dp-option-header">
-        Disabled (disabled):
-      </span>
-      <div class="dp-option-playground">
-        <label>Enabled
-          <input [formControl]="disabled"
-                 [value]="false"
-                 id="inputEnabledRadio"
-                 name="disabled"
-                 type="radio">
-        </label>
-        <label>Disabled
-          <input [formControl]="disabled"
-                 [value]="true"
-                 id="inputDisabledRadio"
-                 name="disabled"
-                 type="radio">
-        </label>
+    @if (isValidConfig('disabled')) {
+      <div class="dp-option">
+        <span class="dp-option-header">
+          Disabled (disabled):
+        </span>
+        <div class="dp-option-playground">
+          <label>Enabled
+            <input [formControl]="disabled"
+              [value]="false"
+              id="inputEnabledRadio"
+              name="disabled"
+              type="radio">
+          </label>
+          <label>Disabled
+            <input [formControl]="disabled"
+              [value]="true"
+              id="inputDisabledRadio"
+              name="disabled"
+              type="radio">
+          </label>
+        </div>
       </div>
-    </div>
+    }
 
-    <div *ngIf="isValidConfig('required')" class="dp-option">
-      <span class="dp-option-header">
-        Required Validation (required):
-      </span>
-      <div class="dp-option-playground">
-        <label>Required
-          <input [formControl]="requireValidation"
-                 [value]="true"
-                 id="enableRequiredRadio"
-                 name="required"
-                 type="radio">
-        </label>
-        <label>Not Required
-          <input [formControl]="requireValidation"
-                 [value]="false"
-                 id="disableRequiredRadio"
-                 name="required"
-                 type="radio">
-        </label>
+    @if (isValidConfig('required')) {
+      <div class="dp-option">
+        <span class="dp-option-header">
+          Required Validation (required):
+        </span>
+        <div class="dp-option-playground">
+          <label>Required
+            <input [formControl]="requireValidation"
+              [value]="true"
+              id="enableRequiredRadio"
+              name="required"
+              type="radio">
+          </label>
+          <label>Not Required
+            <input [formControl]="requireValidation"
+              [value]="false"
+              id="disableRequiredRadio"
+              name="required"
+              type="radio">
+          </label>
+        </div>
       </div>
-    </div>
+    }
 
-    <div *ngIf="isValidConfig('minValidation')" class="dp-option">
+    @if (isValidConfig('minValidation')) {
+      <div class="dp-option">
         <span class="dp-option-header">
           Min-Date Validation (minDate):
         </span>
-      <div class="dp-option-playground">
-        {{pickerMode}}
-        <dp-date-picker [config]="{format: localFormat}"
-                        [formControl]="minValidation"
-                        [mode]="pickerMode.startsWith('daytime') ? 'daytime' : 'day'"
-                        id="minDatePicker"
-                        placeholder="Select a min date"
-                        theme="dp-material">
-        </dp-date-picker>
+        <div class="dp-option-playground">
+          {{pickerMode}}
+          <dp-date-picker [config]="{format: localFormat}"
+            [formControl]="minValidation"
+            [mode]="pickerMode.startsWith('daytime') ? 'daytime' : 'day'"
+            id="minDatePicker"
+            placeholder="Select a min date"
+            theme="dp-material">
+          </dp-date-picker>
+        </div>
       </div>
-    </div>
+    }
 
-    <div *ngIf="isValidConfig('maxValidation')" class="dp-option">
+    @if (isValidConfig('maxValidation')) {
+      <div class="dp-option">
         <span class="dp-option-header">
           Max-Date Validation (maxDate):
         </span>
-      <div class="dp-option-playground">
-        <dp-date-picker [config]="{format: localFormat}"
-                        [formControl]="maxValidation"
-                        [mode]="pickerMode.startsWith('daytime') ? 'daytime' : 'day'"
-                        id="maxDatePicker"
-                        placeholder="Select a max date"
-                        theme="dp-material">
-        </dp-date-picker>
+        <div class="dp-option-playground">
+          <dp-date-picker [config]="{format: localFormat}"
+            [formControl]="maxValidation"
+            [mode]="pickerMode.startsWith('daytime') ? 'daytime' : 'day'"
+            id="maxDatePicker"
+            placeholder="Select a max date"
+            theme="dp-material">
+          </dp-date-picker>
+        </div>
       </div>
-    </div>
+    }
 
-    <div *ngIf="isValidConfig('displayDate')" class="dp-option">
+    @if (isValidConfig('displayDate')) {
+      <div class="dp-option">
         <span class="dp-option-header">
           Display Date (displayDate):
         </span>
-      <div class="dp-option-playground">
-        <dp-date-picker [formControl]="displayDate"
-                        id="displayDate"
-                        mode="day"
-                        placeholder="Select a display date"
-                        theme="dp-material">
-        </dp-date-picker>
+        <div class="dp-option-playground">
+          <dp-date-picker [formControl]="displayDate"
+            id="displayDate"
+            mode="day"
+            placeholder="Select a display date"
+            theme="dp-material">
+          </dp-date-picker>
+        </div>
       </div>
-    </div>
+    }
 
-    <div *ngIf="isValidConfig('minTimeValidation')" class="dp-option">
-      <span class="dp-option-header">
-        Min-Time Validation (minTime):
-      </span>
-      <div class="dp-option-playground">
-        <dp-date-picker [config]="{format: 'HH:mm:ss'}"
-                        [formControl]="minTimeValidation"
-                        id="minTimeValidation"
-                        mode="time"
-                        placeholder="Select a min time"
-                        theme="dp-material">
-        </dp-date-picker>
+    @if (isValidConfig('minTimeValidation')) {
+      <div class="dp-option">
+        <span class="dp-option-header">
+          Min-Time Validation (minTime):
+        </span>
+        <div class="dp-option-playground">
+          <dp-date-picker [config]="{format: 'HH:mm:ss'}"
+            [formControl]="minTimeValidation"
+            id="minTimeValidation"
+            mode="time"
+            placeholder="Select a min time"
+            theme="dp-material">
+          </dp-date-picker>
+        </div>
       </div>
-    </div>
+    }
 
-    <div *ngIf="isValidConfig('maxTimeValidation')" class="dp-option">
-      <span class="dp-option-header">
-        Max-Time Validation (maxTime):
-      </span>
-      <div class="dp-option-playground">
-        <dp-date-picker [config]="{format: 'HH:mm:ss'}"
-                        [formControl]="maxTimeValidation"
-                        id="maxTimeValidation"
-                        mode="time"
-                        placeholder="Select a max time"
-                        theme="dp-material">
-        </dp-date-picker>
+    @if (isValidConfig('maxTimeValidation')) {
+      <div class="dp-option">
+        <span class="dp-option-header">
+          Max-Time Validation (maxTime):
+        </span>
+        <div class="dp-option-playground">
+          <dp-date-picker [config]="{format: 'HH:mm:ss'}"
+            [formControl]="maxTimeValidation"
+            id="maxTimeValidation"
+            mode="time"
+            placeholder="Select a max time"
+            theme="dp-material">
+          </dp-date-picker>
+        </div>
       </div>
-    </div>
+    }
 
-    <div *ngIf="isValidConfig('placeholder')" class="dp-option">
-      <span class="dp-option-header">
-        Placeholder (placeholder):
-      </span>
-      <div class="dp-option-playground">
-        <input [formControl]="placeholder" id="placeholderInput" placeholder="Put a placeholder" type="text"/>
+    @if (isValidConfig('placeholder')) {
+      <div class="dp-option">
+        <span class="dp-option-header">
+          Placeholder (placeholder):
+        </span>
+        <div class="dp-option-playground">
+          <input [formControl]="placeholder" id="placeholderInput" placeholder="Put a placeholder" type="text"/>
+        </div>
       </div>
-    </div>
+    }
 
   </div>
 
   <div class="dp-configs">
     <h3 class="dp-options-section">Config options</h3>
 
-    <div *ngIf="isValidConfig('locale')" class="dp-option">
+    @if (isValidConfig('locale')) {
+      <div class="dp-option">
         <span class="dp-option-header">
           Locale (locale):
         </span>
-      <div class="dp-option-playground">
-        <select [formControl]="locale"
-                id="locale">
-          <option *ngFor="let lang of LANGS" [value]="lang">{{lang}}</option>
-        </select>
+        <div class="dp-option-playground">
+          <select [formControl]="locale"
+            id="locale">
+            @for (lang of LANGS; track lang) {
+              <option [value]="lang">{{lang}}</option>
+            }
+          </select>
+        </div>
       </div>
-    </div>
+    }
 
-    <div *ngIf="isValidConfig('firstDayOfWeek')" class="dp-option">
+    @if (isValidConfig('firstDayOfWeek')) {
+      <div class="dp-option">
         <span class="dp-option-header">
           First Day of The week (firstDayOfWeek):
         </span>
-      <div class="dp-option-playground">
-        <select [formControl]="firstDayOfWeek"
-                id="firstDayOfWeekSelect">
-          <option *ngFor="let day of DAYS" [value]="day"> {{day}}</option>
-        </select>
+        <div class="dp-option-playground">
+          <select [formControl]="firstDayOfWeek"
+            id="firstDayOfWeekSelect">
+            @for (day of DAYS; track day) {
+              <option [value]="day"> {{day}}</option>
+            }
+          </select>
+        </div>
       </div>
-    </div>
+    }
 
-    <div *ngIf="isValidConfig('format')" class="dp-option">
+    @if (isValidConfig('format')) {
+      <div class="dp-option">
         <span class="dp-option-header">
           Date Format (format):
         </span>
-      <div class="dp-option-playground">
-        <input [formControl]="format"
-               id="dateFormat">
+        <div class="dp-option-playground">
+          <input [formControl]="format"
+            id="dateFormat">
+        </div>
       </div>
-    </div>
+    }
 
-    <div *ngIf="isValidConfig('monthFormat')" class="dp-option">
+    @if (isValidConfig('monthFormat')) {
+      <div class="dp-option">
         <span class="dp-option-header">
           Month Format (monthFormat):
         </span>
-      <div class="dp-option-playground">
-        <input [formControl]="monthFormat"
-               id="monthFormatInput">
+        <div class="dp-option-playground">
+          <input [formControl]="monthFormat"
+            id="monthFormatInput">
+        </div>
       </div>
-    </div>
+    }
 
-    <div *ngIf="isValidConfig('min')" class="dp-option">
+    @if (isValidConfig('min')) {
+      <div class="dp-option">
         <span class="dp-option-header">
           Min Selectable Date (min):
         </span>
-      <div class="dp-option-playground">
-        <dp-date-picker [config]="{format: localFormat}"
-                        [formControl]="min"
-                        [mode]="pickerMode.startsWith('daytime') ? 'daytime' : 'day'"
-                        id="minSelectable"
-                        placeholder="Select a min date"
-                        theme="dp-material">
-        </dp-date-picker>
+        <div class="dp-option-playground">
+          <dp-date-picker [config]="{format: localFormat}"
+            [formControl]="min"
+            [mode]="pickerMode.startsWith('daytime') ? 'daytime' : 'day'"
+            id="minSelectable"
+            placeholder="Select a min date"
+            theme="dp-material">
+          </dp-date-picker>
+        </div>
       </div>
-    </div>
+    }
 
-    <div *ngIf="isValidConfig('max')" class="dp-option">
+    @if (isValidConfig('max')) {
+      <div class="dp-option">
         <span class="dp-option-header">
           Max Selectable Date (max):
         </span>
-      <div class="dp-option-playground">
-        <dp-date-picker [config]="{format: localFormat}"
-                        [formControl]="max"
-                        [mode]="pickerMode.startsWith('daytime') ? 'daytime' : 'day'"
-                        id="maxSelectable"
-                        placeholder="Select a max date"
-                        theme="dp-material">
-        </dp-date-picker>
+        <div class="dp-option-playground">
+          <dp-date-picker [config]="{format: localFormat}"
+            [formControl]="max"
+            [mode]="pickerMode.startsWith('daytime') ? 'daytime' : 'day'"
+            id="maxSelectable"
+            placeholder="Select a max date"
+            theme="dp-material">
+          </dp-date-picker>
+        </div>
       </div>
-    </div>
+    }
 
-    <div *ngIf="isValidConfig('minTime')" class="dp-option">
+    @if (isValidConfig('minTime')) {
+      <div class="dp-option">
         <span class="dp-option-header">
           Min Selectable Time (minTime):
         </span>
-      <div class="dp-option-playground">
-        <dp-date-picker [config]="{format: 'HH:mm:ss'}"
-                        [formControl]="minTime"
-                        id="minTimeSelectable"
-                        mode="time"
-                        placeholder="Select a min time"
-                        theme="dp-material">
-        </dp-date-picker>
+        <div class="dp-option-playground">
+          <dp-date-picker [config]="{format: 'HH:mm:ss'}"
+            [formControl]="minTime"
+            id="minTimeSelectable"
+            mode="time"
+            placeholder="Select a min time"
+            theme="dp-material">
+          </dp-date-picker>
+        </div>
       </div>
-    </div>
+    }
 
-    <div *ngIf="isValidConfig('maxTime')" class="dp-option">
+    @if (isValidConfig('maxTime')) {
+      <div class="dp-option">
         <span class="dp-option-header">
           Max Selectable Time (maxTime):
         </span>
-      <div class="dp-option-playground">
-        <dp-date-picker [config]="{format: 'HH:mm:ss'}"
-                        [formControl]="maxTime"
-                        id="maxTimeSelectable"
-                        mode="time"
-                        placeholder="Select a max time"
-                        theme="dp-material">
-        </dp-date-picker>
+        <div class="dp-option-playground">
+          <dp-date-picker [config]="{format: 'HH:mm:ss'}"
+            [formControl]="maxTime"
+            id="maxTimeSelectable"
+            mode="time"
+            placeholder="Select a max time"
+            theme="dp-material">
+          </dp-date-picker>
+        </div>
       </div>
-    </div>
+    }
 
-    <div *ngIf="isValidConfig('allowMultiSelect')" class="dp-option">
+    @if (isValidConfig('allowMultiSelect')) {
+      <div class="dp-option">
         <span class="dp-option-header">
           Allow Multiple Selection (allowMultiSelect):
         </span>
-      <div class="dp-option-playground">
-        <label>Single
-          <input [formControl]="allowMultiSelect"
-                 [value]="false"
-                 id="disableMultiselect"
-                 name="allowMultiSelect"
-                 type="radio">
-        </label>
-        <label>Multiple
-          <input [formControl]="allowMultiSelect"
-                 [value]="true"
-                 id="enableMultiselect"
-                 name="allowMultiSelect"
-                 type="radio">
-        </label>
+        <div class="dp-option-playground">
+          <label>Single
+            <input [formControl]="allowMultiSelect"
+              [value]="false"
+              id="disableMultiselect"
+              name="allowMultiSelect"
+              type="radio">
+          </label>
+          <label>Multiple
+            <input [formControl]="allowMultiSelect"
+              [value]="true"
+              id="enableMultiselect"
+              name="allowMultiSelect"
+              type="radio">
+          </label>
+        </div>
       </div>
-    </div>
+    }
 
-    <div *ngIf="isValidConfig('closeOnSelect')" class="dp-option">
+    @if (isValidConfig('closeOnSelect')) {
+      <div class="dp-option">
         <span class="dp-option-header">
           Close after selection (closeOnSelect):
         </span>
-      <div class="dp-option-playground">
-        <label>Close
-          <input [formControl]="closeOnSelect"
-                 [value]="true"
-                 id="closeOnSelect"
-                 name="closeOnSelect"
-                 type="radio">
-        </label>
-        <label>Don't Close
-          <input [formControl]="closeOnSelect"
-                 [value]="false" id="noCloseOnSelect"
-                 name="closeOnSelect"
-                 type="radio">
-        </label>
+        <div class="dp-option-playground">
+          <label>Close
+            <input [formControl]="closeOnSelect"
+              [value]="true"
+              id="closeOnSelect"
+              name="closeOnSelect"
+              type="radio">
+          </label>
+          <label>Don't Close
+            <input [formControl]="closeOnSelect"
+              [value]="false" id="noCloseOnSelect"
+              name="closeOnSelect"
+              type="radio">
+          </label>
+        </div>
       </div>
-    </div>
+    }
 
-    <div *ngIf="isValidConfig('closeOnSelectDelay')" class="dp-option">
+    @if (isValidConfig('closeOnSelectDelay')) {
+      <div class="dp-option">
         <span class="dp-option-header">
           Closing Delay in ms (closeOnSelectDelay):
         </span>
-      <div class="dp-option-playground">
-        <input [formControl]="closeOnSelectDelay"
-               id="closeDelay"
-               type="number">
+        <div class="dp-option-playground">
+          <input [formControl]="closeOnSelectDelay"
+            id="closeDelay"
+            type="number">
+        </div>
       </div>
-    </div>
+    }
 
-    <div *ngIf="isValidConfig('openOnFocus')" class="dp-option">
+    @if (isValidConfig('openOnFocus')) {
+      <div class="dp-option">
         <span class="dp-option-header">
           Show picker when input receives focus (openOnFocus):
         </span>
-      <div class="dp-option-playground">
-        <label>No
-          <input [formControl]="openOnFocus"
-                 [value]="false"
-                 id="noOpenOnFocus"
-                 name="openOnFocus"
-                 type="radio">
-        </label>
-        <label>Yes
-          <input [formControl]="openOnFocus"
-                 [value]="true"
-                 id="yesOpenOnFocus"
-                 name="openOnFocus"
-                 type="radio">
-        </label>
+        <div class="dp-option-playground">
+          <label>No
+            <input [formControl]="openOnFocus"
+              [value]="false"
+              id="noOpenOnFocus"
+              name="openOnFocus"
+              type="radio">
+          </label>
+          <label>Yes
+            <input [formControl]="openOnFocus"
+              [value]="true"
+              id="yesOpenOnFocus"
+              name="openOnFocus"
+              type="radio">
+          </label>
+        </div>
       </div>
-    </div>
+    }
 
-    <div *ngIf="isValidConfig('openOnClick')" class="dp-option">
+    @if (isValidConfig('openOnClick')) {
+      <div class="dp-option">
         <span class="dp-option-header">
           Show picker when input is clicked (openOnClick):
         </span>
-      <div class="dp-option-playground">
-        <label>No
-          <input [formControl]="openOnClick"
-                 [value]="false"
-                 id="noOpenOnClick"
-                 name="openOnClick"
-                 type="radio">
-        </label>
-        <label>Yes
-          <input [formControl]="openOnClick"
-                 [value]="true"
-                 id="yesOpenOnClick"
-                 name="openOnClick"
-                 type="radio">
-        </label>
+        <div class="dp-option-playground">
+          <label>No
+            <input [formControl]="openOnClick"
+              [value]="false"
+              id="noOpenOnClick"
+              name="openOnClick"
+              type="radio">
+          </label>
+          <label>Yes
+            <input [formControl]="openOnClick"
+              [value]="true"
+              id="yesOpenOnClick"
+              name="openOnClick"
+              type="radio">
+          </label>
+        </div>
       </div>
-    </div>
+    }
 
-    <div *ngIf="isValidConfig('onOpenDelay')" class="dp-option">
+    @if (isValidConfig('onOpenDelay')) {
+      <div class="dp-option">
         <span class="dp-option-header">
           Open Delay in ms (onOpenDelay):
         </span>
-      <div class="dp-option-playground">
-        <input [formControl]="onOpenDelay"
-               id="onOpenDelay"
-               type="number">
+        <div class="dp-option-playground">
+          <input [formControl]="onOpenDelay"
+            id="onOpenDelay"
+            type="number">
+        </div>
       </div>
-    </div>
+    }
 
-    <div *ngIf="isValidConfig('weekdayFormat')" class="dp-option">
+    @if (isValidConfig('weekdayFormat')) {
+      <div class="dp-option">
         <span class="dp-option-header">
           Weekday Format (weekDayFormat):
         </span>
-      <div class="dp-option-playground">
-        <input [formControl]="weekDayFormat"
-               id="weekDaysFormat"
-               type="text">
+        <div class="dp-option-playground">
+          <input [formControl]="weekDayFormat"
+            id="weekDaysFormat"
+            type="text">
+        </div>
       </div>
-    </div>
+    }
 
-    <div *ngIf="isValidConfig('disableKeypress')" class="dp-option">
+    @if (isValidConfig('disableKeypress')) {
+      <div class="dp-option">
         <span class="dp-option-header">
           Disable keyboard on input (disableKeypress):
         </span>
-      <div class="dp-option-playground">
-        <label>Disabled
-          <input [formControl]="disableKeypress"
-                 [value]="true"
-                 name="disableKeypress"
-                 type="radio">
-        </label>
-        <label>Enabled
-          <input [formControl]="disableKeypress"
-                 [value]="false"
-                 name="disableKeypress"
-                 type="radio">
-        </label>
+        <div class="dp-option-playground">
+          <label>Disabled
+            <input [formControl]="disableKeypress"
+              [value]="true"
+              name="disableKeypress"
+              type="radio">
+          </label>
+          <label>Enabled
+            <input [formControl]="disableKeypress"
+              [value]="false"
+              name="disableKeypress"
+              type="radio">
+          </label>
+        </div>
       </div>
-    </div>
+    }
 
-    <div *ngIf="isValidConfig('drops')" class="dp-option">
+    @if (isValidConfig('drops')) {
+      <div class="dp-option">
         <span class="dp-option-header">
           Drops (drops):
         </span>
-      <div class="dp-option-playground">
-        <label>Down
-          <input [formControl]="drops"
-                 name="drops"
-                 type="radio"
-                 value="down">
-        </label>
-        <label>Up
-          <input [formControl]="drops"
-                 name="drops"
-                 type="radio"
-                 value="up">
-        </label>
-        <label>Auto
-          <input [formControl]="drops"
-                 name="drops"
-                 type="radio"
-                 value="null">
-        </label>
+        <div class="dp-option-playground">
+          <label>Down
+            <input [formControl]="drops"
+              name="drops"
+              type="radio"
+              value="down">
+          </label>
+          <label>Up
+            <input [formControl]="drops"
+              name="drops"
+              type="radio"
+              value="up">
+          </label>
+          <label>Auto
+            <input [formControl]="drops"
+              name="drops"
+              type="radio"
+              value="null">
+          </label>
+        </div>
       </div>
-    </div>
+    }
 
-    <div *ngIf="isValidConfig('opens')" class="dp-option">
+    @if (isValidConfig('opens')) {
+      <div class="dp-option">
         <span class="dp-option-header">
           Opens (opens):
         </span>
-      <div class="dp-option-playground">
-        <label>Right
-          <input [formControl]="opens"
-                 name="opens"
-                 type="radio"
-                 value="right">
-        </label>
-        <label>Left
-          <input [formControl]="opens"
-                 name="opens"
-                 type="radio"
-                 value="left">
-        </label>
-        <label>Auto
-          <input [formControl]="opens"
-                 name="opens"
-                 type="radio"
-                 value="null">
-        </label>
+        <div class="dp-option-playground">
+          <label>Right
+            <input [formControl]="opens"
+              name="opens"
+              type="radio"
+              value="right">
+          </label>
+          <label>Left
+            <input [formControl]="opens"
+              name="opens"
+              type="radio"
+              value="left">
+          </label>
+          <label>Auto
+            <input [formControl]="opens"
+              name="opens"
+              type="radio"
+              value="null">
+          </label>
+        </div>
       </div>
-    </div>
+    }
 
-    <div *ngIf="isValidConfig('hideInputContainer')" class="dp-option">
+    @if (isValidConfig('hideInputContainer')) {
+      <div class="dp-option">
         <span class="dp-option-header">
           Hide Input Container (hideInputContainer):
         </span>
-      <div class="dp-option-playground">
-        <label>Hidden
-          <input [formControl]="hideInputContainer"
-                 [value]="true"
-                 id="hideInputRadio"
-                 name="hideInputContainer"
-                 type="radio">
-        </label>
-        <label>Shown
-          <input [formControl]="hideInputContainer"
-                 [value]="false"
-                 id="showInputRadio"
-                 name="hideInputContainer"
-                 type="radio">
-        </label>
+        <div class="dp-option-playground">
+          <label>Hidden
+            <input [formControl]="hideInputContainer"
+              [value]="true"
+              id="hideInputRadio"
+              name="hideInputContainer"
+              type="radio">
+          </label>
+          <label>Shown
+            <input [formControl]="hideInputContainer"
+              [value]="false"
+              id="showInputRadio"
+              name="hideInputContainer"
+              type="radio">
+          </label>
+        </div>
       </div>
-    </div>
+    }
 
-    <div *ngIf="isValidConfig('showNearMonthDays')" class="dp-option">
+    @if (isValidConfig('showNearMonthDays')) {
+      <div class="dp-option">
         <span class="dp-option-header">
           Show near month days (showNearMonthDays):
         </span>
-      <div class="dp-option-playground">
-        <label>Show
-          <input [formControl]="showNearMonthDays"
-                 [value]="true"
-                 id="showNearMonthDaysRadio"
-                 name="showNearMonthDays"
-                 type="radio">
-        </label>
-        <label>Hide
-          <input [formControl]="showNearMonthDays"
-                 [value]="false"
-                 id="hideNearMonthDaysRadio" name="showNearMonthDays"
-                 type="radio">
-        </label>
+        <div class="dp-option-playground">
+          <label>Show
+            <input [formControl]="showNearMonthDays"
+              [value]="true"
+              id="showNearMonthDaysRadio"
+              name="showNearMonthDays"
+              type="radio">
+          </label>
+          <label>Hide
+            <input [formControl]="showNearMonthDays"
+              [value]="false"
+              id="hideNearMonthDaysRadio" name="showNearMonthDays"
+              type="radio">
+          </label>
+        </div>
       </div>
-    </div>
+    }
 
-    <div *ngIf="isValidConfig('showWeekNumbers')" class="dp-option">
+    @if (isValidConfig('showWeekNumbers')) {
+      <div class="dp-option">
         <span class="dp-option-header">
           Show week numbers (showWeekNumbers):
         </span>
-      <div class="dp-option-playground">
-        <label>Show
-          <input [formControl]="showWeekNumbers"
-                 [value]="true"
-                 id="showWeekNumbersRadio"
-                 name="showWeekNumbers"
-                 type="radio">
-        </label>
-        <label>Hide
-          <input [formControl]="showWeekNumbers"
-                 [value]="false"
-                 id="hideWeekNumbersRadio"
-                 name="showWeekNumbers"
-                 type="radio">
-        </label>
+        <div class="dp-option-playground">
+          <label>Show
+            <input [formControl]="showWeekNumbers"
+              [value]="true"
+              id="showWeekNumbersRadio"
+              name="showWeekNumbers"
+              type="radio">
+          </label>
+          <label>Hide
+            <input [formControl]="showWeekNumbers"
+              [value]="false"
+              id="hideWeekNumbersRadio"
+              name="showWeekNumbers"
+              type="radio">
+          </label>
+        </div>
       </div>
-    </div>
+    }
 
-    <div *ngIf="isValidConfig('enableMonthSelector')" class="dp-option">
+    @if (isValidConfig('enableMonthSelector')) {
+      <div class="dp-option">
         <span class="dp-option-header">
           Enable month selector (enableMonthSelector):
         </span>
-      <div class="dp-option-playground">
-        <label>Enabled
-          <input [formControl]="enableMonthSelector"
-                 [value]="true"
-                 id="enableMonthSelector"
-                 name="enableMonthSelector"
-                 type="radio">
-        </label>
-        <label>Disabled
-          <input [formControl]="enableMonthSelector"
-                 [value]="false"
-                 id="disableMonthSelector"
-                 name="enableMonthSelector"
-                 type="radio">
-        </label>
+        <div class="dp-option-playground">
+          <label>Enabled
+            <input [formControl]="enableMonthSelector"
+              [value]="true"
+              id="enableMonthSelector"
+              name="enableMonthSelector"
+              type="radio">
+          </label>
+          <label>Disabled
+            <input [formControl]="enableMonthSelector"
+              [value]="false"
+              id="disableMonthSelector"
+              name="enableMonthSelector"
+              type="radio">
+          </label>
+        </div>
       </div>
-    </div>
+    }
 
-    <div *ngIf="isValidConfig('yearFormat')" class="dp-option">
+    @if (isValidConfig('yearFormat')) {
+      <div class="dp-option">
         <span class="dp-option-header">
           Year Format (yearFormat):
         </span>
-      <div class="dp-option-playground">
-        <input [formControl]="yearFormat"
-               id="yearFormat"
-               type="text">
+        <div class="dp-option-playground">
+          <input [formControl]="yearFormat"
+            id="yearFormat"
+            type="text">
+        </div>
       </div>
-    </div>
+    }
 
-    <div *ngIf="isValidConfig('showGoToCurrent')" class="dp-option">
+    @if (isValidConfig('showGoToCurrent')) {
+      <div class="dp-option">
         <span class="dp-option-header">
           Show go to current button (showGoToCurrent):
         </span>
-      <div class="dp-option-playground">
-        <label>Enabled
-          <input [formControl]="showGoToCurrent"
-                 [value]="true"
-                 id="showGoToCurrent"
-                 name="showGoToCurrent"
-                 type="radio">
-        </label>
-        <label>Disabled
-          <input [formControl]="showGoToCurrent"
-                 [value]="false"
-                 id="hideGoToCurrent"
-                 name="showGoToCurrent"
-                 type="radio">
-        </label>
+        <div class="dp-option-playground">
+          <label>Enabled
+            <input [formControl]="showGoToCurrent"
+              [value]="true"
+              id="showGoToCurrent"
+              name="showGoToCurrent"
+              type="radio">
+          </label>
+          <label>Disabled
+            <input [formControl]="showGoToCurrent"
+              [value]="false"
+              id="hideGoToCurrent"
+              name="showGoToCurrent"
+              type="radio">
+          </label>
+        </div>
       </div>
-    </div>
+    }
 
-    <div *ngIf="isValidConfig('hideOnOutsideClick')" class="dp-option">
+    @if (isValidConfig('hideOnOutsideClick')) {
+      <div class="dp-option">
         <span class="dp-option-header">
           Hide on outside click (hideOnOutsideClick):
         </span>
-      <div class="dp-option-playground">
-        <label>Enabled
-          <input [formControl]="hideOnOutsideClick"
-                 [value]="true"
-                 id="hideOnOutsideClick"
-                 name="hideOnOutsideClick"
-                 type="radio">
-        </label>
-        <label>Disabled
-          <input [formControl]="hideOnOutsideClick"
-                 [value]="false"
-                 id="showOnOutsideClick"
-                 name="hideOnOutsideClick"
-                 type="radio">
-        </label>
+        <div class="dp-option-playground">
+          <label>Enabled
+            <input [formControl]="hideOnOutsideClick"
+              [value]="true"
+              id="hideOnOutsideClick"
+              name="hideOnOutsideClick"
+              type="radio">
+          </label>
+          <label>Disabled
+            <input [formControl]="hideOnOutsideClick"
+              [value]="false"
+              id="showOnOutsideClick"
+              name="hideOnOutsideClick"
+              type="radio">
+          </label>
+        </div>
       </div>
-    </div>
+    }
 
-    <div *ngIf="isValidConfig('unSelectOnClick')" class="dp-option">
+    @if (isValidConfig('unSelectOnClick')) {
+      <div class="dp-option">
         <span class="dp-option-header">
           Allow un select selected date (unSelectOnClick):
         </span>
-      <div class="dp-option-playground">
-        <label>Enabled
-          <input [formControl]="unSelectOnClick"
-                 [value]="true"
-                 id="enableUnSelect"
-                 name="unSelectOnClick"
-                 type="radio">
-        </label>
-        <label>Disabled
-          <input [formControl]="unSelectOnClick"
-                 [value]="false"
-                 id="disableUnSelect"
-                 name="unSelectOnClick"
-                 type="radio">
-        </label>
+        <div class="dp-option-playground">
+          <label>Enabled
+            <input [formControl]="unSelectOnClick"
+              [value]="true"
+              id="enableUnSelect"
+              name="unSelectOnClick"
+              type="radio">
+          </label>
+          <label>Disabled
+            <input [formControl]="unSelectOnClick"
+              [value]="false"
+              id="disableUnSelect"
+              name="unSelectOnClick"
+              type="radio">
+          </label>
+        </div>
       </div>
-    </div>
+    }
 
-    <div *ngIf="isValidConfig('dayBtnFormat')" class="dp-option">
+    @if (isValidConfig('dayBtnFormat')) {
+      <div class="dp-option">
         <span class="dp-option-header">
           Day Button Format (dayBtnFormat):
         </span>
-      <div class="dp-option-playground">
-        <input [formControl]="dayBtnFormat" id="dayBtnFormat">
+        <div class="dp-option-playground">
+          <input [formControl]="dayBtnFormat" id="dayBtnFormat">
+        </div>
       </div>
-    </div>
+    }
 
-    <div *ngIf="isValidConfig('monthBtnFormat')" class="dp-option">
+    @if (isValidConfig('monthBtnFormat')) {
+      <div class="dp-option">
         <span class="dp-option-header">
           Month Button Format (monthBtnFormat):
         </span>
-      <div class="dp-option-playground">
-        <input [formControl]="monthBtnFormat"
-               id="monthBtnFormat">
+        <div class="dp-option-playground">
+          <input [formControl]="monthBtnFormat"
+            id="monthBtnFormat">
+        </div>
       </div>
-    </div>
+    }
 
-    <div *ngIf="isValidConfig('hours12Format')" class="dp-option">
+    @if (isValidConfig('hours12Format')) {
+      <div class="dp-option">
         <span class="dp-option-header">
           12 Hour Format (hours12Format):
         </span>
-      <div class="dp-option-playground">
-        <input [formControl]="hours12Format"
-               id="hours12Format">
+        <div class="dp-option-playground">
+          <input [formControl]="hours12Format"
+            id="hours12Format">
+        </div>
       </div>
-    </div>
+    }
 
-    <div *ngIf="isValidConfig('hours24Format')" class="dp-option">
+    @if (isValidConfig('hours24Format')) {
+      <div class="dp-option">
         <span class="dp-option-header">
           24 Hour Format (hours24Format):
         </span>
-      <div class="dp-option-playground">
-        <input [formControl]="hours24Format"
-               id="hours24Format">
+        <div class="dp-option-playground">
+          <input [formControl]="hours24Format"
+            id="hours24Format">
+        </div>
       </div>
-    </div>
+    }
 
-    <div *ngIf="isValidConfig('meridiemFormat')" class="dp-option">
+    @if (isValidConfig('meridiemFormat')) {
+      <div class="dp-option">
         <span class="dp-option-header">
           Meridiem Format (meridiemFormat):
         </span>
-      <div class="dp-option-playground">
-        <input [formControl]="meridiemFormat"
-               id="meridiemFormat">
+        <div class="dp-option-playground">
+          <input [formControl]="meridiemFormat"
+            id="meridiemFormat">
+        </div>
       </div>
-    </div>
+    }
 
-    <div *ngIf="isValidConfig('minutesFormat')" class="dp-option">
+    @if (isValidConfig('minutesFormat')) {
+      <div class="dp-option">
         <span class="dp-option-header">
           Minutes Format (minutesFormat):
         </span>
-      <div class="dp-option-playground">
-        <input [formControl]="minutesFormat"
-               id="minutesFormat">
+        <div class="dp-option-playground">
+          <input [formControl]="minutesFormat"
+            id="minutesFormat">
+        </div>
       </div>
-    </div>
+    }
 
-    <div *ngIf="isValidConfig('minutesInterval')" class="dp-option">
+    @if (isValidConfig('minutesInterval')) {
+      <div class="dp-option">
         <span class="dp-option-header">
           Minutes Interval (minutesInterval):
         </span>
-      <div class="dp-option-playground">
-        <input [formControl]="minutesInterval"
-               id="minutesInterval"
-               type="number">
+        <div class="dp-option-playground">
+          <input [formControl]="minutesInterval"
+            id="minutesInterval"
+            type="number">
+        </div>
       </div>
-    </div>
+    }
 
-    <div *ngIf="isValidConfig('secondsFormat')" class="dp-option">
+    @if (isValidConfig('secondsFormat')) {
+      <div class="dp-option">
         <span class="dp-option-header">
           Seconds Format (secondsFormat):
         </span>
-      <div class="dp-option-playground">
-        <input [formControl]="secondsFormat"
-               id="secondsFormat">
+        <div class="dp-option-playground">
+          <input [formControl]="secondsFormat"
+            id="secondsFormat">
+        </div>
       </div>
-    </div>
+    }
 
-    <div *ngIf="isValidConfig('secondsInterval')" class="dp-option">
+    @if (isValidConfig('secondsInterval')) {
+      <div class="dp-option">
         <span class="dp-option-header">
           Seconds Interval (secondsInterval):
         </span>
-      <div class="dp-option-playground">
-        <input [formControl]="secondsInterval"
-               id="secondsInterval"
-               type="number">
+        <div class="dp-option-playground">
+          <input [formControl]="secondsInterval"
+            id="secondsInterval"
+            type="number">
+        </div>
       </div>
-    </div>
+    }
 
-    <div *ngIf="isValidConfig('showSeconds')" class="dp-option">
+    @if (isValidConfig('showSeconds')) {
+      <div class="dp-option">
         <span class="dp-option-header">
           Show seconds (showSeconds):
         </span>
-      <div class="dp-option-playground">
-        <label>Enabled
-          <input [formControl]="showSeconds"
-                 [value]="true"
-                 id="showSeconds"
-                 name="showSeconds"
-                 type="radio">
-        </label>
-        <label>Disabled
-          <input [formControl]="showSeconds"
-                 [value]="false"
-                 id="hideSeconds"
-                 name="showSeconds"
-                 type="radio">
-        </label>
+        <div class="dp-option-playground">
+          <label>Enabled
+            <input [formControl]="showSeconds"
+              [value]="true"
+              id="showSeconds"
+              name="showSeconds"
+              type="radio">
+          </label>
+          <label>Disabled
+            <input [formControl]="showSeconds"
+              [value]="false"
+              id="hideSeconds"
+              name="showSeconds"
+              type="radio">
+          </label>
+        </div>
       </div>
-    </div>
+    }
 
-    <div *ngIf="isValidConfig('showTwentyFourHours')" class="dp-option">
+    @if (isValidConfig('showTwentyFourHours')) {
+      <div class="dp-option">
         <span class="dp-option-header">
           Show twenty four hours (showTwentyFourHours):
         </span>
-      <div class="dp-option-playground">
-        <label>Enabled
-          <input [formControl]="showTwentyFourHours"
-                 [value]="true"
-                 id="showTwentyFourHours"
-                 name="showTwentyFourHours"
-                 type="radio">
-        </label>
-        <label>Disabled
-          <input [formControl]="showTwentyFourHours"
-                 [value]="false"
-                 id="hideTwentyFourHours"
-                 name="showTwentyFourHours"
-                 type="radio">
-        </label>
+        <div class="dp-option-playground">
+          <label>Enabled
+            <input [formControl]="showTwentyFourHours"
+              [value]="true"
+              id="showTwentyFourHours"
+              name="showTwentyFourHours"
+              type="radio">
+          </label>
+          <label>Disabled
+            <input [formControl]="showTwentyFourHours"
+              [value]="false"
+              id="hideTwentyFourHours"
+              name="showTwentyFourHours"
+              type="radio">
+          </label>
+        </div>
       </div>
-    </div>
+    }
 
-    <div *ngIf="isValidConfig('timeSeparator')" class="dp-option">
+    @if (isValidConfig('timeSeparator')) {
+      <div class="dp-option">
         <span class="dp-option-header">
           Time Separator (timeSeparator):
         </span>
-      <div class="dp-option-playground">
-        <input [formControl]="timeSeparator"
-               id="timeSeparator">
+        <div class="dp-option-playground">
+          <input [formControl]="timeSeparator"
+            id="timeSeparator">
+        </div>
       </div>
-    </div>
+    }
 
-    <div *ngIf="isValidConfig('showMultipleYearsNavigation')" class="dp-option">
+    @if (isValidConfig('showMultipleYearsNavigation')) {
+      <div class="dp-option">
         <span class="dp-option-header">
           Show multiple years navigation buttons (showMultipleYearsNavigation):
         </span>
-      <div class="dp-option-playground">
-        <label>Enabled
-          <input [formControl]="showMultipleYearsNavigation"
-                 [value]="true"
-                 id="showMultipleYearsNavigation"
-                 name="showMultipleYearsNavigation"
-                 type="radio">
-        </label>
-        <label>Disabled
-          <input [formControl]="showMultipleYearsNavigation"
-                 [value]="false"
-                 id="hideMultipleYearsNavigation"
-                 name="showMultipleYearsNavigation"
-                 type="radio">
-        </label>
+        <div class="dp-option-playground">
+          <label>Enabled
+            <input [formControl]="showMultipleYearsNavigation"
+              [value]="true"
+              id="showMultipleYearsNavigation"
+              name="showMultipleYearsNavigation"
+              type="radio">
+          </label>
+          <label>Disabled
+            <input [formControl]="showMultipleYearsNavigation"
+              [value]="false"
+              id="hideMultipleYearsNavigation"
+              name="showMultipleYearsNavigation"
+              type="radio">
+          </label>
+        </div>
       </div>
-    </div>
+    }
 
-    <div *ngIf="isValidConfig('showMultipleYearsNavigation')" class="dp-option">
+    @if (isValidConfig('showMultipleYearsNavigation')) {
+      <div class="dp-option">
         <span class="dp-option-header">
           Multiple years navigate by (multipleYearsNavigateBy):
         </span>
-      <div class="dp-option-playground">
-        <input [formControl]="multipleYearsNavigateBy"
-               id="multipleYearsNavigateBy">
+        <div class="dp-option-playground">
+          <input [formControl]="multipleYearsNavigateBy"
+            id="multipleYearsNavigateBy">
+        </div>
       </div>
-    </div>
+    }
 
 
-    <div *ngIf="isValidConfig('returnedValueType')" class="dp-option">
+    @if (isValidConfig('returnedValueType')) {
+      <div class="dp-option">
         <span class="dp-option-header">
           Returned Value Type (returnedValueType):
         </span>
-      <div class="dp-option-playground">
-        <select [formControl]="returnedValueType"
-                id="returnedValueType">
-          <option *ngFor="let type of dateTypes" [value]="type.value">{{type.name}}</option>
-        </select>
+        <div class="dp-option-playground">
+          <select [formControl]="returnedValueType"
+            id="returnedValueType">
+            @for (type of dateTypes; track type) {
+              <option [value]="type.value">{{type.name}}</option>
+            }
+          </select>
+        </div>
       </div>
-    </div>
+    }
 
-    <div *ngIf="isValidConfig('closeOnEnter')" class="dp-option">
+    @if (isValidConfig('closeOnEnter')) {
+      <div class="dp-option">
         <span class="dp-option-header">
           Close On Enter (closeOnEnter):
         </span>
-      <div class="dp-option-playground">
-        <label>Enabled
-          <input [formControl]="closeOnEnter"
-                 [value]="true"
-                 id="enableCloseOnEnter"
-                 name="closeOnEnter"
-                 type="radio">
-        </label>
-        <label>Disabled
-          <input [formControl]="closeOnEnter"
-                 [value]="false"
-                 id="disableCloseOnEnter"
-                 name="closeOnEnter"
-                 type="radio">
-        </label>
+        <div class="dp-option-playground">
+          <label>Enabled
+            <input [formControl]="closeOnEnter"
+              [value]="true"
+              id="enableCloseOnEnter"
+              name="closeOnEnter"
+              type="radio">
+          </label>
+          <label>Disabled
+            <input [formControl]="closeOnEnter"
+              [value]="false"
+              id="disableCloseOnEnter"
+              name="closeOnEnter"
+              type="radio">
+          </label>
+        </div>
       </div>
-    </div>
+    }
 
-    <div *ngIf="isValidConfig('numOfMonthRows')" class="dp-option">
+    @if (isValidConfig('numOfMonthRows')) {
+      <div class="dp-option">
         <span class="dp-option-header">
           Number of Month rows (numOfMonthRows):
         </span>
-      <div class="dp-option-playground">
-        <label>1
-          <input [formControl]="numOfMonthRows"
-                 [value]="1"
-                 id="numOfMonthRows1"
-                 name="numOfMonthRows"
-                 type="radio">
-        </label>
-        <label>2
-          <input [formControl]="numOfMonthRows"
-                 [value]="2"
-                 id="numOfMonthRows2"
-                 name="numOfMonthRows"
-                 type="radio">
-        </label>
-        <label>3
-          <input [formControl]="numOfMonthRows"
-                 [value]="3"
-                 id="numOfMonthRows3"
-                 name="numOfMonthRows"
-                 type="radio">
-        </label>
-        <label>4
-          <input [formControl]="numOfMonthRows"
-                 [value]="4"
-                 id="numOfMonthRows4"
-                 name="numOfMonthRows"
-                 type="radio">
-        </label>
-        <label>6
-          <input [formControl]="numOfMonthRows"
-                 [value]="6"
-                 id="numOfMonthRows6"
-                 name="numOfMonthRows"
-                 type="radio">
-        </label>
-        <label>12
-          <input [formControl]="numOfMonthRows"
-                 [value]="12"
-                 id="numOfMonthRows12"
-                 name="numOfMonthRows"
-                 type="radio">
-        </label>
+        <div class="dp-option-playground">
+          <label>1
+            <input [formControl]="numOfMonthRows"
+              [value]="1"
+              id="numOfMonthRows1"
+              name="numOfMonthRows"
+              type="radio">
+          </label>
+          <label>2
+            <input [formControl]="numOfMonthRows"
+              [value]="2"
+              id="numOfMonthRows2"
+              name="numOfMonthRows"
+              type="radio">
+          </label>
+          <label>3
+            <input [formControl]="numOfMonthRows"
+              [value]="3"
+              id="numOfMonthRows3"
+              name="numOfMonthRows"
+              type="radio">
+          </label>
+          <label>4
+            <input [formControl]="numOfMonthRows"
+              [value]="4"
+              id="numOfMonthRows4"
+              name="numOfMonthRows"
+              type="radio">
+          </label>
+          <label>6
+            <input [formControl]="numOfMonthRows"
+              [value]="6"
+              id="numOfMonthRows6"
+              name="numOfMonthRows"
+              type="radio">
+          </label>
+          <label>12
+            <input [formControl]="numOfMonthRows"
+              [value]="12"
+              id="numOfMonthRows12"
+              name="numOfMonthRows"
+              type="radio">
+          </label>
+        </div>
       </div>
-    </div>
+    }
   </div>
 
   <div class="dp-api">
     <h3 class="dp-options-section">API</h3>
 
-    <div *ngIf="isValidConfig('apiopen')" class="dp-option">
+    @if (isValidConfig('apiopen')) {
+      <div class="dp-option">
         <span class="dp-option-header">
           Open (api.open()):
         </span>
-      <div class="dp-option-playground">
-        <button (click)="openCalendar.emit()" id="openBtn">Open</button>
+        <div class="dp-option-playground">
+          <button (click)="openCalendar.emit()" id="openBtn">Open</button>
+        </div>
       </div>
-    </div>
+    }
 
-    <div *ngIf="isValidConfig('apiclose')" class="dp-option">
+    @if (isValidConfig('apiclose')) {
+      <div class="dp-option">
         <span class="dp-option-header">
           Close (api.close()):
         </span>
-      <div class="dp-option-playground">
-        <button (click)="closeCalendar.emit()">Close</button>
+        <div class="dp-option-playground">
+          <button (click)="closeCalendar.emit()">Close</button>
+        </div>
       </div>
-    </div>
+    }
 
-    <div *ngIf="isValidConfig('moveCalendarTo')" class="dp-option">
+    @if (isValidConfig('moveCalendarTo')) {
+      <div class="dp-option">
         <span class="dp-option-header">
           Move (api.moveCalendarTo('14-01-1987')):
         </span>
-      <div class="dp-option-playground">
-        <button (click)="moveCalendar()" id="moveCalendarTo">Move</button>
+        <div class="dp-option-playground">
+          <button (click)="moveCalendar()" id="moveCalendarTo">Move</button>
+        </div>
       </div>
-    </div>
+    }
   </div>
 </div>

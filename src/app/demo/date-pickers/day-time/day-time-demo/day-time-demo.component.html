@@ -1,51 +1,60 @@
 <div class="dp-date-wrapper">
-  <div class="dp-date-input-container" *ngIf="ready">
-    <div class="dp-form-item">
-      <dp-date-picker #dateComponent
-                      (close)="closed()"
-                      (onChange)="log($event)"
-                      (onLeftNav)="onLeftNav($event)"
-                      (onRightNav)="onRightNav($event)"
-                      (onSelect)="onSelect($event)"
-                      (open)="opened()"
-                      [config]="config"
-                      [displayDate]="displayDate"
-                      [formControl]="control"
-                      [maxDate]="validationMaxDate"
-                      [minDate]="validationMinDate"
-                      [mode]="'daytime'"
-                      [placeholder]="placeholder"
-                      [required]="required"
-                      [theme]="material ? 'dp-material dp-main' : 'dp-main'"
-                      id="picker">
-      </dp-date-picker>
-
-      <div class="dp-validations">
-        <div *ngIf="control.errors?.required" id="requiredValidation">required</div>
-        <div *ngIf="control.errors?.format" id="formatValidation">invalid format</div>
-        <div *ngIf="control.errors?.minDate" id="minDateValidation">minDate invalid</div>
-        <div *ngIf="control.errors?.maxDate" id="maxDateValidation">maxDate invalid</div>
+  @if (ready) {
+    <div class="dp-date-input-container">
+      <div class="dp-form-item">
+        <dp-date-picker #dateComponent
+          (close)="closed()"
+          (onChange)="log($event)"
+          (onLeftNav)="onLeftNav($event)"
+          (onRightNav)="onRightNav($event)"
+          (onSelect)="onSelect($event)"
+          (open)="opened()"
+          [config]="config"
+          [displayDate]="displayDate"
+          [formControl]="control"
+          [maxDate]="validationMaxDate"
+          [minDate]="validationMinDate"
+          [mode]="'daytime'"
+          [placeholder]="placeholder"
+          [required]="required"
+          [theme]="material ? 'dp-material dp-main' : 'dp-main'"
+          id="picker">
+        </dp-date-picker>
+        <div class="dp-validations">
+          @if (control.errors?.required) {
+            <div id="requiredValidation">required</div>
+          }
+          @if (control.errors?.format) {
+            <div id="formatValidation">invalid format</div>
+          }
+          @if (control.errors?.minDate) {
+            <div id="minDateValidation">minDate invalid</div>
+          }
+          @if (control.errors?.maxDate) {
+            <div id="maxDateValidation">maxDate invalid</div>
+          }
+        </div>
       </div>
     </div>
-  </div>
+  }
 
   <dp-config-form #component
-                  (closeCalendar)="closeCalendar()"
-                  (moveCalendarTo)="moveCalendarTo($event)"
-                  (onConfigChange)="onConfigChange($event)"
-                  (onDisabledChange)="onDisabledChange($event)"
-                  (onDisplayDateChange)="onDisplayDateChange($event)"
-                  (onMaterialThemeChange)="onMaterialThemeChange($event)"
-                  (onMaxTimeValidationChange)="onMaxTimeValidationChange($event)"
-                  (onMaxValidationChange)="onMaxValidationChange($event)"
-                  (onMinTimeValidationChange)="onMinTimeValidationChange($event)"
-                  (onMinValidationChange)="onMinValidationChange($event)"
-                  (onPlaceholderChange)="onPlaceholderChange($event)"
-                  (onRequireValidationChange)="onRequireValidationChange($event)"
-                  (openCalendar)="openCalendar()"
-                  (onLocaleChange)="onLocaleChange($event)"
-                  [config]="config"
-                  [localeVal]="locale"
-                  pickerMode="daytime">
+    (closeCalendar)="closeCalendar()"
+    (moveCalendarTo)="moveCalendarTo($event)"
+    (onConfigChange)="onConfigChange($event)"
+    (onDisabledChange)="onDisabledChange($event)"
+    (onDisplayDateChange)="onDisplayDateChange($event)"
+    (onMaterialThemeChange)="onMaterialThemeChange($event)"
+    (onMaxTimeValidationChange)="onMaxTimeValidationChange($event)"
+    (onMaxValidationChange)="onMaxValidationChange($event)"
+    (onMinTimeValidationChange)="onMinTimeValidationChange($event)"
+    (onMinValidationChange)="onMinValidationChange($event)"
+    (onPlaceholderChange)="onPlaceholderChange($event)"
+    (onRequireValidationChange)="onRequireValidationChange($event)"
+    (openCalendar)="openCalendar()"
+    (onLocaleChange)="onLocaleChange($event)"
+    [config]="config"
+    [localeVal]="locale"
+    pickerMode="daytime">
   </dp-config-form>
 </div>
