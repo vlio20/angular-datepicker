@@ -5,10 +5,6 @@
     "moduleResolution": "bundler",
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
-    "lib": [
-      "es2016",
-      "dom"
-    ],
     "outDir": "./out-tsc/spec",
     "module": "es2020",
     "target": "ES2022",
