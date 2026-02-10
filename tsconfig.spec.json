@@ -2,7 +2,7 @@
   "compilerOptions": {
     "sourceMap": true,
     "declaration": false,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
     "lib": [
