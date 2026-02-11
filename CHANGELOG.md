@@ -1,6 +1,11 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+# [21.0.1] (2026-02-11)
+
+### Improvements
+- Update peer dependencies to Angular 21
+
 # [21.0.0] (2026-02-10)
 
 ### Improvements
