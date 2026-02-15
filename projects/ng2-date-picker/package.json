@@ -1,1 +1,30 @@
-{"name":"ng2-date-picker","version":"21.0.1","author":"Vlad Ioffe","license":"MIT","repository":{"type":"git","url":"https://github.com/vlio20/angular-datepicker.git"},"keywords":["angular2","date","datepicker","date-picker","ng2-datepicker","ng-datepicker","angular","picker","angular-datepicker"],"peerDependencies":{"@angular/common":"^21.1.3","@angular/core":"^21.1.3","@angular/cdk":"^21.1.3","dayjs":"^1.11.13"},"dependencies":{"tslib":"^2.4.0"}}
+{
+    "name": "ng2-date-picker",
+    "version": "21.0.1",
+    "author": "Vlad Ioffe",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/vlio20/angular-datepicker.git"
+    },
+    "keywords": [
+        "angular2",
+        "date",
+        "datepicker",
+        "date-picker",
+        "ng2-datepicker",
+        "ng-datepicker",
+        "angular",
+        "picker",
+        "angular-datepicker"
+    ],
+    "peerDependencies": {
+        "@angular/common": "^21.1.3",
+        "@angular/core": "^21.1.3",
+        "@angular/cdk": "^21.1.3",
+        "dayjs": "^1.11.13"
+    },
+    "dependencies": {
+        "tslib": "^2.4.0"
+    }
+}
