@@ -11,7 +11,7 @@
     "build:lib": "ng build ng2-date-picker",
     "test": "ng test",
     "test:ci": "ng test --watch=false --browsers=ChromeHeadless",
-    "test:ci:lib": "ng test ng2-date-picker --watch=true --browsers=ChromeHeadless",
+    "test:ci:lib": "ng test ng2-date-picker --watch=false --browsers=ChromeHeadless",
     "lint": "ng lint",
     "lint:fix": "ng lint --fix",
     "e2e": "playwright test",
