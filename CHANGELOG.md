@@ -1,6 +1,11 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+# [22.0.0] (2026-09-17)
+
+### Improvements
+- Update to Angular 22
+
 # [21.0.1] (2026-02-11)
 
 ### Improvements
