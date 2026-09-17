@@ -8,12 +8,15 @@
     "outDir": "./out-tsc/spec",
     "module": "es2020",
     "target": "ES2022",
+    "ignoreDeprecations": "6.0",
+    "strict": false,
     "baseUrl": "tsconfig.spec",
     "types": [
       "jasmine",
       "node"
     ],
-    "useDefineForClassFields": false
+    "useDefineForClassFields": false,
+    "skipLibCheck": true
   },
   "files": [
     "src/test.ts",
@@ -21,6 +24,9 @@
   ],
   "include": [
     "**/*.spec.ts"
+  ],
+  "exclude": [
+    "e2e/**"
   ],
   "angularCompilerOptions": {
     "extendedDiagnostics": {
