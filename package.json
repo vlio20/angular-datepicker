@@ -57,9 +57,9 @@
     "@types/google.analytics": "^0.0.42",
     "@types/jasmine": "^4.3.1",
     "@types/node": "^18.15.3",
-    "@typescript-eslint/eslint-plugin": "^8.54.0",
-    "@typescript-eslint/parser": "^8.54.0",
-    "eslint": "^8.57.0",
+    "@typescript-eslint/eslint-plugin": "^8.70.0",
+    "@typescript-eslint/parser": "^8.70.0",
+    "eslint": "^9.39.0",
     "jasmine-core": "^4.6.0",
     "jasmine-spec-reporter": "^7.0.0",
     "karma": "^6.4.2",
@@ -75,7 +75,7 @@
     "rimraf": "^5.0.1",
     "rxjs": "^6.5.3",
     "ts-node": "^10.9.1",
-    "typescript": "~5.9.3",
+    "typescript": "~6.0.3",
     "zone.js": "~0.15.0"
   },
   "angularCompilerOptions": {
