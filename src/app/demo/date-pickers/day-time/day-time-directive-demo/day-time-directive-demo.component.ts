@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {DateComponent} from '../../../common/date-component.component';
 import {UntypedFormControl} from '@angular/forms';
 import {DEF_CONF} from '../../../common/conts/consts';
@@ -8,6 +8,7 @@ import {IDatePickerConfig} from '../../../../../../projects/ng2-date-picker/src/
     selector: 'dp-day-time-directive-demo',
     templateUrl: './day-time-directive-demo.component.html',
     styleUrls: ['./day-time-directive-demo.component.less'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class DayTimeDirectiveDemoComponent extends DateComponent implements OnInit {

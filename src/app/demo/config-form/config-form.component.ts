@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ChangeDetectionStrategy} from '@angular/core';
 import {UntypedFormControl} from '@angular/forms';
 import {ECalendarValue, IDatePickerConfig} from '../../../../projects/ng2-date-picker/src/public-api';
 import dayjs, {Dayjs} from 'dayjs';
@@ -109,6 +109,7 @@ const DAY_TIME_CALENDAR_OPTION_KEYS = [
     selector: 'dp-config-form',
     templateUrl: './config-form.component.html',
     styleUrls: ['./config-form.component.less'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class ConfigFormComponent implements OnInit {

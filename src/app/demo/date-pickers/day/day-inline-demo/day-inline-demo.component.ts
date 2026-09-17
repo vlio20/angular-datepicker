@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {DateComponent} from '../../../common/date-component.component';
 import {UntypedFormControl} from '@angular/forms';
 import {IDatePickerConfig} from '../../../../../../projects/ng2-date-picker/src/public-api';
@@ -8,6 +8,7 @@ import {DEF_CONF} from '../../../common/conts/consts';
     selector: 'dp-day-inline-demo',
     templateUrl: './day-inline-demo.component.html',
     styleUrls: ['./day-inline-demo.component.less'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class DayInlineDemoComponent extends DateComponent implements OnInit {
