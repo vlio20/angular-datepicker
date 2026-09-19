@@ -18,30 +18,30 @@ test.describe('Locales', () => {
     await po.daytimePickerMenu().click();
     await po.localeSelect().selectOption('he');
     await po.daytimePickerInput().click();
-    expect(await po.weekDayNames().allTextContents()).toEqual(['א׳ב׳ג׳ד׳ה׳ו׳ש׳']);
+    await expect(po.weekDayNames()).toHaveText('א׳ב׳ג׳ד׳ה׳ו׳ש׳');
 
     await po.daytimeInlineMenu().click();
     await po.localeSelect().selectOption('he');
-    expect(await po.weekDayInline().allTextContents()).toEqual(['א׳ב׳ג׳ד׳ה׳ו׳ש׳']);
+    await expect(po.weekDayInline()).toHaveText('א׳ב׳ג׳ד׳ה׳ו׳ש׳');
 
     await po.daytimeDirectiveMenu().click();
     await po.localeSelect().selectOption('he');
     await po.daytimeDirectiveInput().click();
-    expect(await po.weekDayNames().allTextContents()).toEqual(['א׳ב׳ג׳ד׳ה׳ו׳ש׳']);
+    await expect(po.weekDayNames()).toHaveText('א׳ב׳ג׳ד׳ה׳ו׳ש׳');
 
     await po.dayPickerMenu().click();
     await po.localeSelect().selectOption('he');
     await po.dayPickerInput().click();
-    expect(await po.weekDayNames().allTextContents()).toEqual(['א׳ב׳ג׳ד׳ה׳ו׳ש׳']);
+    await expect(po.weekDayNames()).toHaveText('א׳ב׳ג׳ד׳ה׳ו׳ש׳');
 
     await po.dayInlineMenu().click();
     await po.localeSelect().selectOption('he');
-    expect(await po.weekDayInline().allTextContents()).toEqual(['א׳ב׳ג׳ד׳ה׳ו׳ש׳']);
+    await expect(po.weekDayInline()).toHaveText('א׳ב׳ג׳ד׳ה׳ו׳ש׳');
 
     await po.dayDirectiveMenu().click();
     await po.localeSelect().selectOption('he');
     await po.dayDirectiveInput().click();
-    expect(await po.weekDayNames().allTextContents()).toEqual(['א׳ב׳ג׳ד׳ה׳ו׳ש׳']);
+    await expect(po.weekDayNames()).toHaveText('א׳ב׳ג׳ד׳ה׳ו׳ש׳');
 
     await po.monthPickerMenu().click();
     await po.localeSelect().selectOption('he');

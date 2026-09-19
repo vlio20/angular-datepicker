@@ -57,29 +57,29 @@ test.describe('dpDayPicker dayPicker', () => {
   test('should check that the showNearMonthDays is working as expected', async () => {
     await po.setText(po.dayPickerInput(), '27-03-2017');
     await po.dayPickerInput().click();
-    await expect(await po.monthWeeks().count()).toBe(6);
+    await expect(po.monthWeeks()).toHaveCount(6);
     await po.hideNearMonthDaysRadio().click();
     await po.dayPickerInput().click();
-    await expect(await po.monthWeeks().count()).toBe(5);
+    await expect(po.monthWeeks()).toHaveCount(5);
 
     await po.showNearMonthDaysRadio().click();
     await po.dayPickerInput().click();
-    await expect(await po.monthWeeks().count()).toBe(6);
+    await expect(po.monthWeeks()).toHaveCount(6);
 
     await po.setText(po.dayPickerInput(), '27-04-2017');
     await po.hideNearMonthDaysRadio().click();
     await po.dayPickerInput().click();
-    await expect(await po.monthWeeks().count()).toBe(6);
+    await expect(po.monthWeeks()).toHaveCount(6);
   });
 
   test('should show/hide week number according to configuration', async () => {
     await po.setText(po.dayPickerInput(), '28-03-2017');
     await po.dayPickerInput().click();
-    await expect(await po.weekNumbers().count()).toBe(0);
+    await expect(po.weekNumbers()).toHaveCount(0);
     await po.showWeekNumbersRadio().click();
     await po.dayPickerInput().click();
-    await expect(await po.weekNumbers().count()).toBe(6);
-    await expect(await po.weekNumbers().allInnerTexts()).toEqual(['8', '9', '10', '11', '12', '13']);
+    await expect(po.weekNumbers()).toHaveCount(6);
+    await expect(po.weekNumbers()).toHaveText(['8', '9', '10', '11', '12', '13']);
   });
 
   test('should remember last position', async () => {

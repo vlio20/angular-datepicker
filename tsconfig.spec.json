@@ -1,5 +1,7 @@
 {
   "compilerOptions": {
+    "strict": false,
+    "ignoreDeprecations": "6.0",
     "sourceMap": true,
     "declaration": false,
     "moduleResolution": "bundler",
@@ -21,5 +23,14 @@
   ],
   "include": [
     "**/*.spec.ts"
-  ]
+  ],
+  "angularCompilerOptions": {
+    "extendedDiagnostics": {
+      "checks": {
+        "nullishCoalescingNotNullable": "suppress",
+        "optionalChainNotNullable": "suppress"
+      }
+    },
+    "strictTemplates": false
+  }
 }
