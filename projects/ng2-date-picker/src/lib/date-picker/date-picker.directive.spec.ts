@@ -19,7 +19,7 @@ describe('Directive: DpDayPicker', () => {
     });
   });
 
-  const directive = new DatePickerDirective(null, null, null, null, null);
+  const directive = new DatePickerDirective(null, null, null, null);
 
   it('should create an instance', () => {
     expect(directive).toBeTruthy();
