@@ -1,10 +1,11 @@
 import {UtilsService} from '../common/services/utils/utils.service';
 import {DatePickerDirective} from './date-picker.directive';
-import {Component} from '@angular/core';
+import {Component, ChangeDetectionStrategy} from '@angular/core';
 import {inject, TestBed} from '@angular/core/testing';
 
 @Component({
     template: '',
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 class TestComponent {

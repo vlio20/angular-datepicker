@@ -3,7 +3,6 @@ import {IDatePickerDirectiveConfig} from './date-picker-directive-config.model';
 import {IDpDayPickerApi} from './date-picker.api';
 import {DatePickerComponent} from './date-picker.component';
 import {
-  ComponentFactoryResolver,
   Directive,
   ElementRef,
   EventEmitter,
@@ -41,7 +40,6 @@ export class DatePickerDirective implements OnInit {
 
   constructor(public readonly viewContainerRef: ViewContainerRef,
               public readonly elemRef: ElementRef,
-              public readonly componentFactoryResolver: ComponentFactoryResolver,
               @Optional() public readonly formControl: NgControl,
               public readonly utilsService: UtilsService) {
   }
@@ -178,8 +176,7 @@ export class DatePickerDirective implements OnInit {
   }
 
   createDatePicker(): DatePickerComponent {
-    const factory = this.componentFactoryResolver.resolveComponentFactory(DatePickerComponent);
-    return this.viewContainerRef.createComponent(factory).instance;
+    return this.viewContainerRef.createComponent(DatePickerComponent).instance;
   }
 
   attachModelToDatePicker() {
