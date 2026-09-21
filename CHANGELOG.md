@@ -1,6 +1,11 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+# [22.1.0] (2026-09-21)
+
+### Bug Fixes
+- Support initial values and validator updates when the picker is used with Angular Signal Forms.
+
 # [22.0.0] (2026-09-19)
 
 ### Improvements
