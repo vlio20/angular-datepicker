@@ -1,4 +1,6 @@
+import {Component, signal} from '@angular/core';
 import {FormsModule} from '@angular/forms';
+import {form, FormField} from '@angular/forms/signals';
 import {DatePickerComponent} from './date-picker.component';
 import {DayTimeCalendarComponent} from '../day-time-calendar/day-time-calendar.component';
 import {DayTimeCalendarService} from '../day-time-calendar/day-time-calendar.service';
@@ -14,6 +16,16 @@ import {UtilsService} from '../common/services/utils/utils.service';
 import {By} from '@angular/platform-browser';
 import {OverlayModule} from '@angular/cdk/overlay';
 
+@Component({
+  standalone: false,
+  template: '<dp-date-picker [config]="config" [formField]="dateForm.date"></dp-date-picker>'
+})
+class SignalFormDatePickerHostComponent {
+  readonly config = {format: 'YYYY-MM-DD'};
+  readonly model = signal({date: '2026-09-21'});
+  readonly dateForm = form(this.model);
+}
+
 describe('Component: DatePickerComponent', () => {
   let component: DatePickerComponent;
   let fixture: ComponentFixture<DatePickerComponent>;
@@ -26,8 +38,9 @@ describe('Component: DatePickerComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [FormsModule, OverlayModule],
+      imports: [FormsModule, OverlayModule, FormField],
       declarations: [
+        SignalFormDatePickerHostComponent,
         DatePickerComponent,
         DayTimeCalendarComponent,
         DayCalendarComponent,
@@ -52,6 +65,17 @@ describe('Component: DatePickerComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should render an initial value when bound through Signal Forms', () => {
+    const signalFormFixture = TestBed.createComponent(SignalFormDatePickerHostComponent);
+
+    expect(() => signalFormFixture.detectChanges()).not.toThrow();
+
+    const datePicker = signalFormFixture.debugElement.query(By.directive(DatePickerComponent))
+      .componentInstance as DatePickerComponent;
+    expect(datePicker.selected[0].format('YYYY-MM-DD')).toBe('2026-09-21');
+    expect(signalFormFixture.componentInstance.model().date).toBe('2026-09-21');
   });
 
   it('should emit event goToCurrent when day calendar emit', () => {

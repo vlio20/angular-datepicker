@@ -119,6 +119,8 @@ export class DatePickerComponent implements OnChanges,
   handleInnerElementClickUnlisteners: Function[] = [];
   globalListenersUnlisteners: Function[] = [];
   validateFn: DateValidator;
+  private isWritingValue = false;
+  private onValidatorChange: () => void;
   api: IDpDayPickerApi = {
     open: this.showCalendars.bind(this),
     close: this.hideCalendar.bind(this),
@@ -157,7 +159,9 @@ export class DatePickerComponent implements OnChanges,
       .convertFromDayjsArray(this.componentConfig.format, selected, ECalendarValue.StringArr))
       .join(' | ');
     const val = this.processOnChangeCallback(selected);
-    this.onChangeCallback(val, false);
+    if (!this.isWritingValue) {
+      this.onChangeCallback(val, false);
+    }
     this.onChange.emit(val);
   }
 
@@ -212,12 +216,19 @@ export class DatePickerComponent implements OnChanges,
   writeValue(value: CalendarValue): void {
     this.inputValue = value;
 
-    if (value || value === '') {
-      this.selected = this.utilsService
-        .convertToDayjsArray(value, this.componentConfig);
-      this.init();
-    } else {
-      this.selected = [];
+    this.isWritingValue = true;
+    try {
+      this.componentConfig ??= this.dayPickerService.getConfig(this.config, this.mode);
+
+      if (value || value === '') {
+        this.selected = this.utilsService
+          .convertToDayjsArray(value, this.componentConfig);
+        this.init();
+      } else {
+        this.selected = [];
+      }
+    } finally {
+      this.isWritingValue = false;
     }
 
     this.cd.markForCheck();
@@ -235,6 +246,10 @@ export class DatePickerComponent implements OnChanges,
   }
 
   onTouchedCallback() {
+  }
+
+  registerOnValidatorChange(fn: () => void): void {
+    this.onValidatorChange = fn;
   }
 
   validate(formControl: UntypedFormControl): ValidationErrors {
@@ -262,7 +277,7 @@ export class DatePickerComponent implements OnChanges,
         maxTime: this.maxTime
       }, this.componentConfig.format, this.mode);
 
-    this.onChangeCallback(this.processOnChangeCallback(this.selected), false);
+    this.onValidatorChange?.();
   }
 
   ngOnInit(): void {
