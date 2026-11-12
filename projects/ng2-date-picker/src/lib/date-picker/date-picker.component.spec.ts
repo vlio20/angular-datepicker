@@ -15,6 +15,7 @@ import {TimeSelectService} from '../time-select/time-select.service';
 import {UtilsService} from '../common/services/utils/utils.service';
 import {By} from '@angular/platform-browser';
 import {OverlayModule} from '@angular/cdk/overlay';
+import dayjs from 'dayjs';
 
 @Component({
   standalone: false,
@@ -65,6 +66,22 @@ describe('Component: DatePickerComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should close the calendar and ignore selection when disabled while open', () => {
+    component.config = {format: 'YYYY-MM-DD'};
+    component.init();
+    component.writeValue('2026-11-09');
+    component.showCalendars();
+    fixture.detectChanges();
+    expect(component.areCalendarsShown).toBeTrue();
+
+    component.setDisabledState(true);
+    component.dateSelected({date: dayjs('2026-11-10'), selected: false}, 'day', component.selectEvent.SELECTION);
+    fixture.detectChanges();
+
+    expect(component.areCalendarsShown).toBeFalse();
+    expect(component.selected[0].format('YYYY-MM-DD')).toBe('2026-11-09');
   });
 
   it('should render an initial value when bound through Signal Forms', () => {
