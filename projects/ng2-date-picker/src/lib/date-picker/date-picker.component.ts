@@ -87,7 +87,18 @@ export class DatePickerComponent implements OnChanges,
   @Input() config: IDatePickerConfig;
   @Input() mode: CalendarMode = 'day';
   @Input() placeholder: string = '';
-  @Input() disabled: boolean = false;
+  private isDisabled = false;
+  @Input()
+  get disabled(): boolean {
+    return this.isDisabled;
+  }
+
+  set disabled(value: boolean) {
+    this.isDisabled = value;
+    if (value && this.areCalendarsShown) {
+      this.hideCalendar();
+    }
+  }
   @Input() displayDate: Dayjs | string;
   @HostBinding('class') @Input() theme: string;
   @Input() minDate: SingleCalendarValue;
@@ -338,6 +349,8 @@ export class DatePickerComponent implements OnChanges,
   }
 
   showCalendars(): void {
+    if (this.disabled) return;
+
     this.areCalendarsShown = true;
     this.startGlobalListeners();
 
@@ -387,6 +400,8 @@ export class DatePickerComponent implements OnChanges,
   }
 
   dateSelected(date: IDate, granularity: UnitType, type: SelectEvent, ignoreClose?: boolean): void {
+    if (this.disabled) return;
+
     this.selected = this.utilsService
       .updateSelected(this.componentConfig.allowMultiSelect, this.selected, date, granularity);
     if (!ignoreClose) {
